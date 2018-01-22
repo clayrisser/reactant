@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import Button from '../components/Button';
+import React, { Component } from "react";
+import Button from "../components/Button";
 
 export default class App extends Component {
-
   state = {
-    buttonText: 'Push Me'
-  }
+    buttonText: "Push Me"
+  };
 
   render() {
     return (
@@ -19,6 +18,6 @@ export default class App extends Component {
   }
 
   handleClick(e) {
-    this.setState({ buttonText: 'I\'ve been pushed' });
+    this.setState({ buttonText: "I've been pushed" });
   }
 }
