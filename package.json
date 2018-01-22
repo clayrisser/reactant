@@ -5,9 +5,10 @@
   "main": "src/index.js",
   "scripts": {
     "build": "npm run build:client && npm run build:server",
-    "build:client": "node node_modules/parcel-bundler/bin/cli build src/core/client.js",
+    "build:client": "node node_modules/parcel-bundler/bin/cli build -d dist/public src/core/index.html",
     "build:server": "node node_modules/cross-env/dist/bin/cross-env BABEL_ENV=node node node_modules/babel-cli/bin/babel src -d dist/server",
-    "start": "npm run build && node dist/server/core/server"
+    "serve": "npm run build && node dist/server/core/server",
+    "start": "node node_modules/parcel-bundler/bin/cli -p 8888 -d dist/public src/core/index.html"
   },
   "repository": {
     "type": "git",
@@ -43,6 +44,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

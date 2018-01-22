@@ -8,4 +8,4 @@ const context = { config };
 
 ReactDOM.render((
   <App context={context} />
-));
+), document.getElementById('app'));
