@@ -50,7 +50,6 @@
     ]
   },
   "dependencies": {
-    "@storybook/cli": "^3.3.10",
     "babel-polyfill": "^6.26.0",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.2",
