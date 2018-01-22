@@ -10,7 +10,7 @@
     "serve": "npm run build && node dist/server/core/server",
     "start": "node node_modules/parcel-bundler/bin/cli -p 8888 -d dist/public src/core/index.html",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook:build": "build-storybook"
   },
   "repository": {
     "type": "git",
