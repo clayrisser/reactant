@@ -1,11 +1,16 @@
-import 'babel-polyfill';
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import config from '../config';
+import { AppRegistry } from 'react-native';
+import App from '../App';
 
-const context = { config };
+AppRegistry.registerComponent('App', () => App);
 
-ReactDOM.render((
-  <App context={context} />
-), document.getElementById('app'));
+AppRegistry.runApplication('App', {
+  initialProps: {},
+  // eslint-disable-next-line no-undef
+  rootTag: document.getElementById('root')
+});
+
+if (module.hot) {
+  module.hot.accept();
+}

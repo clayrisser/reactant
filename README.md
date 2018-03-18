@@ -1,3 +1,0 @@
-# Reaction
-
-A react framework

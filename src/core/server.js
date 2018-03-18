@@ -1,28 +1,36 @@
-import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import cheerio from 'cheerio';
 import express from 'express';
-import fs from 'fs';
-import path from 'path';
-import App from './App';
-import config from '../config';
+import { AppRegistry } from 'react-native';
+import App from '../App';
 
-const context = { config };
-const scripts = ['client.js'];
+const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 const app = express();
 
-app.use('/public', express.static(path.resolve(__dirname, '../../public')));
-
-app.get('/', (req, res) => {
-  const markup = ReactDOMServer.renderToString(<App context={context} />);
-  const template = cheerio.load(
-    fs.readFileSync(path.resolve(__dirname, '../../public/index.html')).toString()
-  );
-  template('#app').html(markup);
-  return res.send(template.html());
+app.disable('x-powered-by');
+app.use(express.static(process.env.RAZZLE_PUBLIC_DIR));
+app.get('/*', (req, res) => {
+  AppRegistry.registerComponent('App', () => App);
+  const { element, getStyleElement } = AppRegistry.getApplication('App', {});
+  const html = ReactDOMServer.renderToString(element);
+  const css = ReactDOMServer.renderToStaticMarkup(getStyleElement());
+  res.send(`<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charSet='utf-8' />
+  <title>Welcome to Razzle</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  ${css}
+  ${
+    process.env.NODE_ENV === 'production'
+      ? `<script src="${assets.client.js}" defer></script>`
+      : `<script src="${assets.client.js}" defer crossorigin></script>`
+  }
+  </head>
+  <body>
+    <div id="root">${html}</div>
+  </body>
+</html>`);
 });
 
-app.listen(config.port, (err) => {
-  if (err) throw err;
-  console.log(`listening on port ${config.port}`);
-});
+export default app;
