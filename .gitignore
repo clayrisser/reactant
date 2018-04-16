@@ -47,5 +47,4 @@ idea/
 .idea/
 
 # Application
-lib/
-build/
+/dist

@@ -9,9 +9,7 @@
     "url": "https://jamrizzi.com"
   },
   "main": "lib/index.js",
-  "files": [
-    "lib"
-  ],
+  "files": ["lib"],
   "scripts": {
     "reaction": "babel-node tools/bin/reaction",
     "lint": "eslint ./",
@@ -76,7 +74,5 @@
   "engines": {
     "node": ">= 4.0.0"
   },
-  "eslintIgnore": [
-    "lib"
-  ]
+  "eslintIgnore": ["lib", "build"]
 }
