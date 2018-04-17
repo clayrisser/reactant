@@ -17,6 +17,7 @@ const { env } = process;
 
 export default async function build() {
   const config = createConfig();
+  log.info('config', config);
   const { paths } = config;
   await clean();
   fs.copySync(paths.srcPublic, paths.distPublic, {
@@ -37,8 +38,8 @@ export default async function build() {
 }
 
 async function runBuild(config, previousFileSizes) {
-  const webpackWebConfig = createWebpackConfig('web', 'production', config);
-  const webpackNodeConfig = createWebpackConfig('node', 'production', config);
+  const webpackWebConfig = createWebpackConfig('web', config);
+  const webpackNodeConfig = createWebpackConfig('node', config);
   process.noDeprecation = true;
   log.info('compiling web . . .');
   const webStats = await compile(webpackWebConfig);

@@ -11,8 +11,7 @@ const { env } = process;
 
 export default function createNodeConfig(
   webpackConfig,
-  environment,
-  { envs, paths, host, port }
+  { envs, paths, host, port, environment }
 ) {
   webpackConfig = {
     ...webpackConfig,
@@ -39,8 +38,6 @@ export default function createNodeConfig(
     plugins: [
       new NamedModulesPlugin(),
       new DefinePlugin({
-        NODE_ENV: environment,
-        __DEV__: environment === 'development',
         ...envs
       }),
       new LimitChunkCountPlugin({

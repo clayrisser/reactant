@@ -10,8 +10,7 @@ import {
 
 export default function createWebConfig(
   webpackConfig,
-  environment,
-  { paths, host, port, envs }
+  { paths, host, port, envs, environment }
 ) {
   webpackConfig = {
     ...webpackConfig,
@@ -25,8 +24,6 @@ export default function createWebConfig(
         filename: 'assets.json'
       }),
       new DefinePlugin({
-        NODE_ENV: environment,
-        __DEV__: environment === 'development',
         ...envs
       })
     ]

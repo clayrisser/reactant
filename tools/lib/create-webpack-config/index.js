@@ -4,8 +4,7 @@ import createWebConfig from './createWebConfig';
 
 export default function createWebpackConfig(
   target = 'web',
-  environment = 'development',
-  { envs, host, port, paths, eslintOptions, babelOptions }
+  { envs, host, port, paths, eslintOptions, babelOptions, environment }
 ) {
   const webpackConfig = {
     context: paths.src,
@@ -68,14 +67,16 @@ export default function createWebpackConfig(
     }
   };
   if (target === 'web') {
-    return createWebConfig(webpackConfig, environment, {
+    return createWebConfig(webpackConfig, {
+      environment,
       envs,
       host,
       port,
       paths
     });
   }
-  return createNodeConfig(webpackConfig, environment, {
+  return createNodeConfig(webpackConfig, {
+    environment,
     envs,
     host,
     port,
