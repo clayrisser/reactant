@@ -2,11 +2,17 @@ import path from 'path';
 import createNodeConfig from './createNodeConfig';
 import createWebConfig from './createWebConfig';
 
-export default function createWebpackConfig(
-  target = 'web',
-  action,
-  { envs, host, port, paths, eslintOptions, babelOptions, environment }
-) {
+export default function createWebpackConfig(target = 'web', action, config) {
+  const {
+    envs,
+    host,
+    port,
+    paths,
+    eslint,
+    babel,
+    environment,
+    webpack
+  } = config;
   const webpackConfig = {
     context: paths.src,
     target,
@@ -26,14 +32,14 @@ export default function createWebpackConfig(
         {
           test: /\.(js|jsx|mjs)$/,
           loader: require.resolve('eslint-loader'),
-          options: eslintOptions,
+          options: eslint,
           include: paths.src,
           enforce: 'pre'
         },
         {
           test: /\.(js|jsx|mjs)$/,
           loader: require.resolve('babel-loader'),
-          options: babelOptions,
+          options: babel,
           include: paths.src
         },
         {
@@ -68,19 +74,7 @@ export default function createWebpackConfig(
     }
   };
   if (target === 'web') {
-    return createWebConfig(webpackConfig, action, {
-      environment,
-      envs,
-      host,
-      port,
-      paths
-    });
+    return webpack(config, createWebConfig(webpackConfig, action, config));
   }
-  return createNodeConfig(webpackConfig, action, {
-    environment,
-    envs,
-    host,
-    port,
-    paths
-  });
+  return webpack(config, createNodeConfig(webpackConfig, action, config));
 }

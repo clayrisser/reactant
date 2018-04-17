@@ -1,21 +1,22 @@
 import _ from 'lodash';
-import path from 'path';
 import defaultConfig from './config';
+import fs from 'fs-extra';
+import path from 'path';
 import { getEnv, setEnvironment } from 'cross-environment';
 
 const pkg = require(path.resolve('package.json'));
 
-export default function createConfig({
-  userConfig = {},
-  defaultEnv = 'development'
-}) {
+export default function createConfig({ defaultEnv = 'development' }) {
   setEnvironment({
     defaults: {
       env: defaultEnv
     }
   });
   const environment = getEnv();
-  const config = { ...defaultConfig, ...userConfig };
+  const userConfig = safeReadJsonSync(path.resolve('.reactionrc'));
+  const babel = safeReadJsonSync(path.resolve('.babelrc'));
+  const eslint = safeReadJsonSync(path.resolve('.eslintrc'));
+  const config = _.merge(defaultConfig, userConfig);
   return {
     ...config,
     envs: {
@@ -26,15 +27,16 @@ export default function createConfig({
       PORT: config.port
     },
     environment,
-    babelOptions: {
-      ...pkg.babel,
-      presets: [...pkg.babel.presets, 'react', 'react-native'],
-      plugins: ['react-native-web']
-    },
-    eslintOptions: {},
+    babel: _.merge(babel, pkg.babel, config.babel),
+    eslint: _.merge(eslint, pkg.eslint, config.eslint),
     paths: _.zipObject(
       _.keys(config.paths),
       _.map(config.paths, configPath => path.resolve(configPath))
     )
   };
+}
+
+function safeReadJsonSync(path) {
+  if (!fs.existsSync(path)) return {};
+  return fs.readJsonSync(path);
 }
