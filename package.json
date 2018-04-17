@@ -49,7 +49,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "boom": "^7.2.0",
     "commander": "^2.15.0",
-    "cross-environment": "0.0.3",
+    "cross-environment": "0.0.8",
     "easy-joi": "0.0.2",
     "eslint": "^4.18.1",
     "eslint-config-airbnb": "^16.1.0",
@@ -80,6 +80,6 @@
   },
   "eslintIgnore": [
     "lib",
-    "build"
+    "dist"
   ]
 }

@@ -1,6 +1,6 @@
 import winston from 'winston';
 
-export default new winston.Logger({
+const log = new winston.Logger({
   level: 'info',
   exitOnError: false,
   transports: [
@@ -11,3 +11,9 @@ export default new winston.Logger({
     })
   ]
 });
+
+export function setLevel(level) {
+  log.level = level;
+}
+
+export default log;

@@ -10,6 +10,7 @@ let isAction = false;
 
 commander.version(version);
 commander.command('build');
+commander.option('-v --verbose', 'verbose logging');
 commander.action((cmd, options) => {
   isAction = true;
   action(cmd, options).catch(error);

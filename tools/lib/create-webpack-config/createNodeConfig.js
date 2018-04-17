@@ -11,6 +11,7 @@ const { env } = process;
 
 export default function createNodeConfig(
   webpackConfig,
+  action,
   { envs, paths, host, port, environment }
 ) {
   webpackConfig = {
@@ -52,14 +53,18 @@ export default function createNodeConfig(
       entry: [...webpackConfig.entry, 'webpack/hot/poll?300'],
       plugins: [
         ...webpackConfig.plugins,
-        new HotModuleReplacementPlugin(),
-        StartServerPlugin({
-          name: 'server.js',
-          nodeArgs: [
-            ...[env.INSPECT_BRK_ENABLED ? '--inspect-brk' : undefined],
-            ...[env.INSPECT_ENABLED ? '--inspect' : undefined]
-          ]
-        })
+        ...(action === 'start'
+          ? [
+              new HotModuleReplacementPlugin(),
+              StartServerPlugin({
+                name: 'server.js',
+                nodeArgs: [
+                  ...[env.INSPECT_BRK_ENABLED ? '--inspect-brk' : undefined],
+                  ...[env.INSPECT_ENABLED ? '--inspect' : undefined]
+                ]
+              })
+            ]
+          : [])
       ]
     };
   }

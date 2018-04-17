@@ -5,7 +5,7 @@ import log from './log';
 export default function clean(config) {
   log.info('cleaning . . .');
   if (!config) {
-    config = createConfig();
+    config = createConfig({});
   }
   const { paths } = config;
   fs.emptyDirSync(paths.dist);

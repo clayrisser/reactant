@@ -4,10 +4,10 @@ import chalk from 'chalk';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import fs from 'fs-extra';
 import webpack from 'webpack';
+import clean from './clean';
 import createConfig from './createConfig';
 import createWebpackConfig from './create-webpack-config';
 import log from './log';
-import clean from './clean';
 
 const {
   measureFileSizesBeforeBuild,
@@ -16,8 +16,8 @@ const {
 const { env } = process;
 
 export default async function build() {
-  const config = createConfig();
-  log.info('config', config);
+  const config = createConfig({ defaultEnv: 'production' });
+  log.verbose('config', config);
   const { paths } = config;
   await clean();
   fs.copySync(paths.srcPublic, paths.distPublic, {
@@ -38,8 +38,10 @@ export default async function build() {
 }
 
 async function runBuild(config, previousFileSizes) {
-  const webpackWebConfig = createWebpackConfig('web', config);
-  const webpackNodeConfig = createWebpackConfig('node', config);
+  const webpackWebConfig = createWebpackConfig('web', 'build', config);
+  log.verbose('webpackWebConfig', webpackWebConfig);
+  const webpackNodeConfig = createWebpackConfig('node', 'build', config);
+  log.verbose('webpackNodeConfig', webpackNodeConfig);
   process.noDeprecation = true;
   log.info('compiling web . . .');
   const webStats = await compile(webpackWebConfig);

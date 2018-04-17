@@ -10,6 +10,7 @@ import {
 
 export default function createWebConfig(
   webpackConfig,
+  action,
   { paths, host, port, envs, environment }
 ) {
   webpackConfig = {
@@ -41,28 +42,31 @@ export default function createWebConfig(
           return path.resolve(info.resourcePath).replace(/\\/g, '/');
         }
       },
-      devServer: {
-        disableHostCheck: true,
-        compress: true,
-        headers: {
-          'Access-Control-Allow-Origin': '*'
-        },
-        historyApiFallback: {
-          disableDotRule: true
-        },
-        host,
-        hot: true,
-        noInfo: true,
-        overlay: false,
-        port,
-        quiet: true,
-        watchOptions: {
-          ignored: /node_modules/
-        },
-        setup(app) {
-          app.use(errorOverlayMiddleware());
-        }
-      },
+      devServer:
+        action === 'start'
+          ? {
+              disableHostCheck: true,
+              compress: true,
+              headers: {
+                'Access-Control-Allow-Origin': '*'
+              },
+              historyApiFallback: {
+                disableDotRule: true
+              },
+              host,
+              hot: true,
+              noInfo: true,
+              overlay: false,
+              port,
+              quiet: true,
+              watchOptions: {
+                ignored: /node_modules/
+              },
+              setup(app) {
+                app.use(errorOverlayMiddleware());
+              }
+            }
+          : undefined,
       plugins: [...webpackConfig.plugins, new HotModuleReplacementPlugin()]
     };
   } else {
