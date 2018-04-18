@@ -43,6 +43,11 @@ export default function createWebpackConfig(target = 'web', action, config) {
           }
         },
         {
+          test: /\.html?$/,
+          loader: require.resolve('html-loader'),
+          include: paths.src
+        },
+        {
           exclude: [
             /\.html$/,
             /\.(js|jsx|mjs)$/,

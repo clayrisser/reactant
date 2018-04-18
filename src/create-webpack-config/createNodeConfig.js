@@ -1,4 +1,5 @@
 import webpackNodeExternals from 'webpack-node-externals';
+import _ from 'lodash';
 import webpack, {
   DefinePlugin,
   HotModuleReplacementPlugin,
@@ -9,13 +10,9 @@ import webpack, {
 const { LimitChunkCountPlugin } = webpack.optimize;
 const { env } = process;
 
-export default function createNodeConfig(
-  webpackConfig,
-  action,
-  { envs, paths, host, port, environment }
-) {
-  webpackConfig = {
-    ...webpackConfig,
+export default function createNodeConfig(webpackConfig, action, config) {
+  const { envs, paths, host, port, environment } = config;
+  webpackConfig = _.merge(webpackConfig, {
     entry: [paths.server],
     output: {
       path: paths.dist,
@@ -28,14 +25,20 @@ export default function createNodeConfig(
       __filename: true,
       __dirname: true
     },
-    externals: webpackNodeExternals({
-      whitelist: [
-        ...[environment === 'development' ? 'webpack/hot/poll?300' : undefined],
-        /\.(eot|woff|woff2|ttf|otf)$/,
-        /\.(svg|png|jpg|jpeg|gif|ico)$/,
-        /\.(mp4|mp3|ogg|swf|webp)$/
-      ]
-    }),
+    externals: {
+      ...webpackNodeExternals({
+        whitelist: [
+          ...[
+            environment === 'development' ? 'webpack/hot/poll?300' : undefined
+          ],
+          /\.(eot|woff|woff2|ttf|otf)$/,
+          /\.(svg|png|jpg|jpeg|gif|ico)$/,
+          /\.(mp4|mp3|ogg|swf|webp)$/
+        ]
+      }),
+      'reaction/assets': "require('./assets.json')",
+      'reaction/config': JSON.stringify(config)
+    },
     plugins: [
       new NamedModulesPlugin(),
       new DefinePlugin({
@@ -45,10 +48,9 @@ export default function createNodeConfig(
         maxChunks: 1
       })
     ]
-  };
+  });
   if (environment === 'development') {
-    webpackConfig = {
-      ...webpackConfig,
+    webpackConfig = _.merge(webpackConfig, {
       watch: true,
       entry: [...webpackConfig.entry, 'webpack/hot/poll?300'],
       plugins: [
@@ -66,7 +68,7 @@ export default function createNodeConfig(
             ]
           : [])
       ]
-    };
+    });
   }
   return webpackConfig;
 }

@@ -1,4 +1,5 @@
 import AssetsWebpackPlugin from 'assets-webpack-plugin';
+import _ from 'lodash';
 import UglifyWebpackPlugin from 'uglifyjs-webpack-plugin';
 import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
 import path from 'path';
@@ -8,13 +9,9 @@ import {
   NamedModulesPlugin
 } from 'webpack';
 
-export default function createWebConfig(
-  webpackConfig,
-  action,
-  { paths, host, port, envs, environment }
-) {
-  webpackConfig = {
-    ...webpackConfig,
+export default function createWebConfig(webpackConfig, action, config) {
+  const { paths, host, port, envs, environment } = config;
+  webpackConfig = _.merge(webpackConfig, {
     entry: {
       client: paths.client
     },
@@ -28,10 +25,9 @@ export default function createWebConfig(
         ...envs
       })
     ]
-  };
+  });
   if (environment === 'development') {
-    webpackConfig = {
-      ...webpackConfig,
+    webpackConfig = _.merge(webpackConfig, {
       output: {
         path: paths.distPublic,
         publicPath: `http://${host}:${port}/`,
@@ -68,10 +64,9 @@ export default function createWebConfig(
             }
           : undefined,
       plugins: [...webpackConfig.plugins, new HotModuleReplacementPlugin()]
-    };
+    });
   } else {
-    webpackConfig = {
-      ...webpackConfig,
+    webpackConfig = _.merge(webpackConfig, {
       output: {
         path: paths.distPublic,
         publicPath: '/',
@@ -93,7 +88,7 @@ export default function createWebConfig(
           sourceMap: true
         })
       ]
-    };
+    });
   }
   return webpackConfig;
 }
