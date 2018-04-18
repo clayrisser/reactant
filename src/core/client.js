@@ -1,14 +1,10 @@
-import { AppRegistry } from 'react-native';
+import 'babel-polyfill';
+import React from 'react';
+import { hydrate } from 'react-dom';
 import App from '../App';
 
-AppRegistry.registerComponent('App', () => App);
-
-AppRegistry.runApplication('App', {
-  initialProps: {},
+hydrate(
+  <App />,
   // eslint-disable-next-line no-undef
-  rootTag: document.getElementById('root')
-});
-
-if (module.hot) {
-  module.hot.accept();
-}
+  document.getElementById('app')
+);

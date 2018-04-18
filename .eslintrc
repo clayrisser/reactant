@@ -19,10 +19,10 @@
     "no-unused-vars": [
       "warn",
       {
-        "vars": "all",
         "args": "after-used",
+        "argsIgnorePattern": "^_",
         "ignoreRestSiblings": true,
-        "argsIgnorePattern": "^_"
+        "vars": "all"
       }
     ],
     "comma-dangle": ["error", "never"]

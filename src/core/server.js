@@ -16,7 +16,6 @@ app.get('/*', async (req, res, next) => {
   const appHtml = renderToString(<App />);
   try {
     const $ = cheerio.load(indexHtml);
-    console.log(config.title);
     $('title').text(config.title);
     $('#app').append(appHtml);
     $('body').append(

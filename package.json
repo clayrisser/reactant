@@ -8,7 +8,7 @@
     "email": "jam@codejam.ninja",
     "url": "https://codejam.ninja"
   },
-  "main": "lib/index.js",
+  "main": "dist/server.js",
   "files": [
     "lib"
   ],
@@ -20,17 +20,16 @@
     "clean": "reaction clean && rimraf dist"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.3",
-    "idempotent-babel-polyfill": "^0.1.1",
     "lodash": "^4.17.5",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-native-web": "^0.6.0",
-    "require-first": "^1.0.0"
+    "react-native-web": "^0.6.0"
   },
   "devDependencies": {
-    "reaction-build": "0.0.5",
+    "reaction-build": "0.0.6",
     "rimraf": "^2.6.2"
   },
   "license": "MIT",
