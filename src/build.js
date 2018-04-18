@@ -35,6 +35,7 @@ export default async function build(options) {
   }
   log.info('file sizes after gzip:\n');
   printFileSizesAfterBuild(stats, previousFileSizes, paths.dist);
+  log.info('');
 }
 
 async function runBuild(config, previousFileSizes) {

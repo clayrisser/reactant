@@ -15,6 +15,9 @@ export default function createWebConfig(webpackConfig, action, config) {
     entry: {
       client: paths.client
     },
+    externals: {
+      'reaction/config': JSON.stringify(config)
+    },
     plugins: [
       new NamedModulesPlugin(),
       new AssetsWebpackPlugin({

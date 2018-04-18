@@ -1,6 +1,7 @@
 const { env } = process;
 
 export default {
+  title: 'Reaction',
   host: env.REACTION_HOST || 'localhost',
   port: env.REACTION_PORT || 3333,
   envs: {},
@@ -20,7 +21,13 @@ export default {
       'react-native-web'
     ]
   },
-  eslint: {},
+  eslint: {
+    extends: ['airbnb', 'prettier'],
+    parser: 'babel-eslint',
+    rules: {
+      'comma-dangle': ['error', 'never']
+    }
+  },
   webpack: (config, webpack) => {
     return webpack;
   }
