@@ -1,36 +1,31 @@
-import ReactDOMServer from 'react-dom/server';
+import React from 'react';
+import assets from 'reaction/assets';
+import cheerio from 'cheerio';
+import config from 'reaction/config';
 import express from 'express';
-import { AppRegistry } from 'react-native';
+import { renderToString } from 'react-dom/server';
 import App from '../App';
+import indexHtml from './index.html';
 
-const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 const app = express();
 
 app.disable('x-powered-by');
-app.use(express.static(process.env.RAZZLE_PUBLIC_DIR));
-app.get('/*', (req, res) => {
-  AppRegistry.registerComponent('App', () => App);
-  const { element, getStyleElement } = AppRegistry.getApplication('App', {});
-  const html = ReactDOMServer.renderToString(element);
-  const css = ReactDOMServer.renderToStaticMarkup(getStyleElement());
-  res.send(`<!doctype html>
-<html lang="">
-<head>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta charSet='utf-8' />
-  <title>Welcome to Razzle</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  ${css}
-  ${
-    process.env.NODE_ENV === 'production'
-      ? `<script src="${assets.client.js}" defer></script>`
-      : `<script src="${assets.client.js}" defer crossorigin></script>`
+app.use(express.static(config.paths.distPublic));
+
+app.get('/*', async (req, res, next) => {
+  const appHtml = renderToString(<App />);
+  try {
+    const $ = cheerio.load(indexHtml);
+    console.log(config.title);
+    $('title').text(config.title);
+    $('#app').append(appHtml);
+    $('body').append(
+      `<script src="${assets.client.js}" defer crossorigin></script>`
+    );
+    return res.send($.html());
+  } catch (err) {
+    return next(err);
   }
-  </head>
-  <body>
-    <div id="root">${html}</div>
-  </body>
-</html>`);
 });
 
 export default app;
