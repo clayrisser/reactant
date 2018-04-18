@@ -1,9 +1,9 @@
-import React from 'react';
 import assets from 'reaction/assets';
 import cheerio from 'cheerio';
 import config from 'reaction/config';
 import express from 'express';
-import { renderToString } from 'react-dom/server';
+import { AppRegistry } from 'react-native';
+import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import App from '../App';
 import indexHtml from './index.html';
 
@@ -13,13 +13,19 @@ app.disable('x-powered-by');
 app.use(express.static(config.paths.distPublic));
 
 app.get('/*', async (req, res, next) => {
-  const appHtml = renderToString(<App />);
+  AppRegistry.registerComponent('App', () => App);
+  const { element, getStyleElement } = AppRegistry.getApplication('App', {});
+  const appHtml = renderToString(element);
+  const appCss = renderToStaticMarkup(getStyleElement());
   try {
     const $ = cheerio.load(indexHtml);
     $('title').text(config.title);
+    $('head').append(appCss);
     $('#app').append(appHtml);
     $('body').append(
-      `<script src="${assets.client.js}" defer crossorigin></script>`
+      `<script src="${assets.client.js}" defer${
+        config.environment === 'production' ? ' crossorigin' : ''
+      }></script>`
     );
     return res.send($.html());
   } catch (err) {

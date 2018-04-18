@@ -9,15 +9,14 @@
     "url": "https://codejam.ninja"
   },
   "main": "dist/server.js",
-  "files": [
-    "lib"
-  ],
+  "files": ["lib"],
   "scripts": {
-    "reaction": "reaction",
     "build": "reaction build",
+    "clean": "reaction clean && rimraf dist",
     "lint": "eslint ./",
     "lint:fix": "eslint --fix ./",
-    "clean": "reaction clean && rimraf dist"
+    "reaction": "reaction",
+    "start": "reaction start"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
@@ -37,8 +36,5 @@
   "engines": {
     "node": ">= 4.0.0"
   },
-  "eslintIgnore": [
-    "lib",
-    "dist"
-  ]
+  "eslintIgnore": ["lib", "dist"]
 }

@@ -4,6 +4,13 @@ import { createServer } from 'http';
 import { log } from 'reaction-build';
 import app from './server';
 
+if (module.hot) {
+  module.hot.accept('./server', () => {
+    console.log('🔁  HMR Reloading `./server`...');
+  });
+  console.info('✅  Server-side HMR Enabled!');
+}
+
 const server = createServer(app);
 
 server.listen(config.port, err => {
