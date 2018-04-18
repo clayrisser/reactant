@@ -1,8 +1,8 @@
 import _ from 'lodash';
-import defaultConfig from './config';
-import fs from 'fs-extra';
 import path from 'path';
+import rcConfig from 'rc-config';
 import { getEnv, setEnvironment } from 'cross-environment';
+import defaultConfig from './config';
 
 const pkg = require(path.resolve('package.json'));
 
@@ -13,9 +13,9 @@ export default function createConfig({ defaultEnv = 'development' }) {
     }
   });
   const environment = getEnv();
-  const userConfig = safeReadJsonSync(path.resolve('.reactionrc'));
-  const babel = safeReadJsonSync(path.resolve('.babelrc'));
-  const eslint = safeReadJsonSync(path.resolve('.eslintrc'));
+  const userConfig = rcConfig('reaction');
+  const babel = rcConfig('babel');
+  const eslint = rcConfig('eslint');
   const config = _.merge(defaultConfig, userConfig);
   return {
     ...config,
@@ -34,9 +34,4 @@ export default function createConfig({ defaultEnv = 'development' }) {
       _.map(config.paths, configPath => path.resolve(configPath))
     )
   };
-}
-
-function safeReadJsonSync(path) {
-  if (!fs.existsSync(path)) return {};
-  return fs.readJsonSync(path);
 }
