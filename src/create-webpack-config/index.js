@@ -3,20 +3,12 @@ import createNodeConfig from './createNodeConfig';
 import createWebConfig from './createWebConfig';
 
 export default function createWebpackConfig(target = 'web', action, config) {
-  const {
-    envs,
-    host,
-    port,
-    paths,
-    eslint,
-    babel,
-    environment,
-    webpack
-  } = config;
+  const { paths, eslint, babel, environment, webpack } = config;
   const webpackConfig = {
     context: paths.src,
     target,
     devtool: 'cheap-module-eval-source-map',
+    mode: environment,
     resolve: {
       modules: [path.resolve('node_modules')],
       extensions: ['.js', '.json', '.jsx', '.mjs'],

@@ -15,11 +15,11 @@ const {
 } = FileSizeReporter;
 const { env } = process;
 
-export default async function build() {
+export default async function build(options) {
   const config = createConfig({ defaultEnv: 'production' });
   log.verbose('config', config);
   const { paths } = config;
-  await clean();
+  await clean(options, config);
   fs.copySync(paths.srcPublic, paths.distPublic, {
     dereference: true
   });

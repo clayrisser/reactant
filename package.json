@@ -1,6 +1,6 @@
 {
   "name": "reaction-build",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "Build tool for reaction",
   "homepage": "reaction.codejam.ninja",
   "author": {
@@ -26,31 +26,41 @@
     "test:reset": "jest --clearCache && npm run test"
   },
   "bin": {
-    "reaction": "bin/reaction"
+    "reaction": "bin/reaction.js"
   },
   "dependencies": {
     "assets-webpack-plugin": "^3.5.1",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-react-native-web": "^0.6.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "boom": "^7.2.0",
     "cross-environment": "0.0.8",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "file-loader": "^1.1.11",
     "fs-extra": "^5.0.0",
     "rc-config": "0.0.2",
     "react-dev-utils": "^5.0.1",
+    "url-loader": "^1.0.1",
     "webpack": "^4.6.0",
     "webpack-node-externals": "^1.7.2",
     "winston": "^2.4.1"
   },
   "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.2.3",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jest": "^21.15.0",
     "jest": "^22.4.3",
+    "react-native-web": "^0.6.0",
     "rimraf": "^2.6.2"
   },
   "license": "MIT",

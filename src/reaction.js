@@ -8,6 +8,7 @@ let isAction = false;
 
 commander.version(version);
 commander.command('build');
+commander.command('clean');
 commander.option('-v --verbose', 'verbose logging');
 commander.action((cmd, options) => {
   isAction = true;
