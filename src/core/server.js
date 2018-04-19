@@ -1,11 +1,11 @@
+import App from '~/App';
 import assets from 'reaction/assets';
 import cheerio from 'cheerio';
 import config from 'reaction/config';
 import express from 'express';
+import indexHtml from '~/core/index.html';
 import { AppRegistry } from 'react-native';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
-import App from '../App';
-import indexHtml from './index.html';
 
 const app = express();
 

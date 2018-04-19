@@ -1,15 +1,9 @@
 import 'babel-polyfill';
+import app from '~/core/server';
 import config from 'reaction/config';
+import hotModule from '~/core/hotModule';
 import { createServer } from 'http';
 import { log } from 'reaction-build';
-import app from './server';
-
-if (module.hot) {
-  module.hot.accept('./server', () => {
-    console.log('🔁  HMR Reloading `./server`...');
-  });
-  console.info('✅  Server-side HMR Enabled!');
-}
 
 const server = createServer(app);
 
@@ -18,6 +12,7 @@ server.listen(config.port, err => {
     log.error(err);
     return false;
   }
+  hotModule();
   log.info(`listening on port ${config.port}`);
   return true;
 });
