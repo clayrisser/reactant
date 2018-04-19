@@ -11,7 +11,6 @@ const app = express();
 
 app.disable('x-powered-by');
 app.use(express.static(config.paths.distPublic));
-
 app.get('/*', async (req, res, next) => {
   AppRegistry.registerComponent('App', () => App);
   const { element, getStyleElement } = AppRegistry.getApplication('App', {});
