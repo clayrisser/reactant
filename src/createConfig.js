@@ -19,6 +19,7 @@ export default function createConfig({ defaultEnv = 'development' }) {
   const config = _.merge(defaultConfig, userConfig);
   return {
     ...config,
+    devPort: config.port + 1,
     envs: {
       ...config.envs,
       NODE_ENV: environment,

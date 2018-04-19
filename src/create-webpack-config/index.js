@@ -1,11 +1,16 @@
 import path from 'path';
+import {
+  DefinePlugin,
+  NamedModulesPlugin,
+  HotModuleReplacementPlugin
+} from 'webpack';
 import createNodeConfig from './createNodeConfig';
 import createWebConfig from './createWebConfig';
 
 export default function createWebpackConfig(target = 'web', action, config) {
-  const { paths, eslint, babel, environment, webpack } = config;
+  const { envs, paths, eslint, babel, environment, webpack } = config;
   const webpackConfig = {
-    context: paths.src,
+    context: process.cwd(),
     target,
     devtool: 'cheap-module-eval-source-map',
     mode: environment,
@@ -18,6 +23,7 @@ export default function createWebpackConfig(target = 'web', action, config) {
         '~': paths.src
       }
     },
+    externals: {},
     module: {
       strictExportPresence: true,
       rules: [
@@ -48,8 +54,25 @@ export default function createWebpackConfig(target = 'web', action, config) {
           include: paths.src
         },
         {
+          test: /\.md$/,
+          use: [
+            {
+              loader: require.resolve('html-loader')
+            },
+            {
+              loader: require.resolve('markdown-loader'),
+              options: {
+                pedantic: true,
+                gfm: true,
+                breaks: true
+              }
+            }
+          ]
+        },
+        {
           exclude: [
-            /\.html$/,
+            /\.html?$/,
+            /\.md$/,
             /\.(js|jsx|mjs)$/,
             /\.(ts|tsx)$/,
             /\.(vue)$/,
@@ -68,7 +91,14 @@ export default function createWebpackConfig(target = 'web', action, config) {
           }
         }
       ]
-    }
+    },
+    plugins: [
+      new DefinePlugin({
+        ...envs
+      }),
+      ...(environment !== 'production' ? [new NamedModulesPlugin()] : []),
+      ...(action === 'start' ? [new HotModuleReplacementPlugin()] : [])
+    ]
   };
   if (target === 'web') {
     return webpack(config, createWebConfig(webpackConfig, action, config));

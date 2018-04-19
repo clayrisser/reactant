@@ -1,75 +1,43 @@
 import AssetsWebpackPlugin from 'assets-webpack-plugin';
-import _ from 'lodash';
 import UglifyWebpackPlugin from 'uglifyjs-webpack-plugin';
 import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
 import path from 'path';
-import {
-  DefinePlugin,
-  HotModuleReplacementPlugin,
-  NamedModulesPlugin
-} from 'webpack';
 
 export default function createWebConfig(webpackConfig, action, config) {
-  const { paths, host, port, envs, environment } = config;
-  webpackConfig = _.merge(webpackConfig, {
+  const { paths, host, port, devPort, environment } = config;
+  webpackConfig = {
+    ...webpackConfig,
     entry: {
-      client: paths.client
+      client: [paths.client]
     },
     externals: {
       'reaction/config': JSON.stringify(config)
     },
     plugins: [
-      new NamedModulesPlugin(),
+      ...webpackConfig.plugins,
       new AssetsWebpackPlugin({
         path: paths.dist,
         filename: 'assets.json'
-      }),
-      new DefinePlugin({
-        ...envs
       })
     ]
-  });
+  };
   if (environment === 'development') {
-    webpackConfig = _.merge(webpackConfig, {
+    webpackConfig = {
+      ...webpackConfig,
       output: {
         path: paths.distPublic,
-        publicPath: `http://${host}:${port}/`,
+        publicPath: action === 'start' ? `http://${host}:${devPort}/` : '/',
         pathinfo: true,
         filename: 'scripts/bundle.js',
         chunkFilename: 'scripts/[name].chunk.js',
         devtoolModuleFilenameTemplate: info => {
           return path.resolve(info.resourcePath).replace(/\\/g, '/');
         }
-      },
-      devServer:
-        action === 'start'
-          ? {
-              disableHostCheck: true,
-              compress: true,
-              headers: {
-                'Access-Control-Allow-Origin': '*'
-              },
-              historyApiFallback: {
-                disableDotRule: true
-              },
-              host,
-              hot: true,
-              noInfo: true,
-              overlay: false,
-              port,
-              quiet: true,
-              watchOptions: {
-                ignored: /node_modules/
-              },
-              setup(app) {
-                app.use(errorOverlayMiddleware());
-              }
-            }
-          : undefined,
-      plugins: [...webpackConfig.plugins, new HotModuleReplacementPlugin()]
-    });
+      }
+    };
   } else {
-    webpackConfig = _.merge(webpackConfig, {
+    webpackConfig = {
+      ...webpackConfig,
       output: {
         path: paths.distPublic,
         publicPath: '/',
@@ -91,7 +59,40 @@ export default function createWebConfig(webpackConfig, action, config) {
           sourceMap: true
         })
       ]
-    });
+    };
+  }
+  if (action === 'start') {
+    webpackConfig = {
+      ...webpackConfig,
+      entry: {
+        client: [
+          ...webpackConfig.entry.client,
+          require.resolve('../webpackHotDevClient')
+        ]
+      },
+      devServer: {
+        disableHostCheck: true,
+        compress: true,
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        },
+        historyApiFallback: {
+          disableDotRule: true
+        },
+        host,
+        hot: true,
+        noInfo: true,
+        overlay: false,
+        port,
+        quiet: true,
+        watchOptions: {
+          ignored: /node_modules/
+        },
+        before(app) {
+          app.use(errorOverlayMiddleware());
+        }
+      }
+    };
   }
   return webpackConfig;
 }
