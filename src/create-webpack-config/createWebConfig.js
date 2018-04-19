@@ -4,7 +4,7 @@ import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
 import path from 'path';
 
 export default function createWebConfig(webpackConfig, action, config) {
-  const { paths, host, port, devPort, environment } = config;
+  const { paths, host, devPort, environment } = config;
   webpackConfig = {
     ...webpackConfig,
     entry: {
@@ -83,7 +83,7 @@ export default function createWebConfig(webpackConfig, action, config) {
         hot: true,
         noInfo: true,
         overlay: false,
-        port,
+        port: devPort,
         quiet: true,
         watchOptions: {
           ignored: /node_modules/

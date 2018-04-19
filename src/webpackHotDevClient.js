@@ -13,6 +13,7 @@ const url = require('url');
 const launchEditorEndpoint = require('react-dev-utils/launchEditorEndpoint');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const ErrorOverlay = require('react-error-overlay');
+const config = require('reaction/config');
 
 // We need to keep track of if there has been a runtime error.
 // Essentially, we cannot guarantee application state was not corrupted by the
@@ -28,7 +29,7 @@ ErrorOverlay.startReportingRuntimeErrors({
     // eslint-disable-next-line no-undef
     hostname: window.location.hostname,
     // eslint-disable-next-line no-undef
-    port: parseInt(process.env.PORT, 10) + 1 || window.location.port,
+    port: config.devPort,
     pathname: launchEditorEndpoint
   }),
   onError() {
@@ -52,7 +53,7 @@ const connection = new SockJS(
     // eslint-disable-next-line no-undef
     hostname: window.location.hostname,
     // eslint-disable-next-line no-undef
-    port: parseInt(process.env.PORT, 10) + 1 || window.location.port,
+    port: config.devPort,
     // Hardcoded in WebpackDevServer
     pathname: '/sockjs-node'
   })
