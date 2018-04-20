@@ -1,40 +1,35 @@
 {
   "name": "reaction",
-  "version": "0.0.1",
-  "description": "A React framework",
-  "homepage": "https://github.com/codejamninja/reaction",
-  "author": {
-    "name": "Jam Risser",
-    "email": "jam@codejam.ninja",
-    "url": "https://codejam.ninja"
-  },
-  "main": "dist/server.js",
-  "files": ["lib"],
-  "scripts": {
-    "build": "reaction build",
-    "clean": "reaction clean && rimraf dist",
-    "lint": "eslint ./",
-    "lint:fix": "eslint --fix ./",
-    "reaction": "reaction",
-    "start": "reaction start"
-  },
-  "dependencies": {
-    "babel-polyfill": "^6.26.0",
-    "cheerio": "^1.0.0-rc.2",
-    "express": "^4.16.3",
-    "lodash": "^4.17.5",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "react-native-web": "^0.6.0"
-  },
+  "version": "0.1.0",
+  "private": true,
+  "main": "expo/index.js",
   "devDependencies": {
-    "reaction-build": "0.0.6",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "flow-bin": "^0.70.0",
+    "jest": "^22.4.3",
+    "jest-react-native": "^18.0.0",
+    "react-test-renderer": "^16.3.2",
     "rimraf": "^2.6.2"
   },
-  "license": "MIT",
-  "repository": "https://github.com/codejamninja/reaction",
-  "engines": {
-    "node": ">= 4.0.0"
+  "scripts": {
+    "start": "react-native start",
+    "android":
+      "npm run clean && adb reverse tcp:8081 tcp:8081 && react-native run-android",
+    "expo": "npm run clean && exp start",
+    "ios": "react-native run-ios",
+    "test": "jest",
+    "lint:flow": "flow",
+    "clean:watchman": "watchman watch-del-all",
+    "clean:react": "rimraf $TMPDIR/react-*",
+    "clean": "npm run clean:watchman && npm run clean:react"
   },
-  "eslintIgnore": ["lib", "dist"]
+  "jest": {
+    "preset": "react-native"
+  },
+  "dependencies": {
+    "expo": "^26.0.0",
+    "react": "^16.3.2",
+    "react-native": "^0.54.2"
+  }
 }
