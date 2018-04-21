@@ -1,20 +1,20 @@
 import boom from 'boom';
 import commander from 'commander';
-import buildAndroid from './actions/build/android';
-import buildExpo from './actions/build/expo';
-import buildIos from './actions/build/ios';
-import buildWeb from './actions/build/web';
-import clean from './actions/clean';
-import publishAndroid from './actions/publish/android';
-import publishExpo from './actions/publish/expo';
-import publishIos from './actions/publish/ios';
-import publishWeb from './actions/publish/web';
-import startAndroid from './actions/start/android';
-import startExpo from './actions/start/expo';
-import startIos from './actions/start/ios';
-import startWeb from './actions/start/web';
-import validate from './validate';
-import { setLevel } from './log';
+import buildAndroid from '~/actions/build/android';
+import buildExpo from '~/actions/build/expo';
+import buildIos from '~/actions/build/ios';
+import buildWeb from '~/actions/build/web';
+import clean from '~/actions/clean';
+import publishAndroid from '~/actions/publish/android';
+import publishExpo from '~/actions/publish/expo';
+import publishIos from '~/actions/publish/ios';
+import publishWeb from '~/actions/publish/web';
+import startAndroid from '~/actions/start/android';
+import startExpo from '~/actions/start/expo';
+import startIos from '~/actions/start/ios';
+import startWeb from '~/actions/start/web';
+import validate from '~/validate';
+import { setLevel } from '~/log';
 
 export default async function action(cmd, options) {
   if (options.verbose) setLevel('verbose');

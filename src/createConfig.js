@@ -2,7 +2,7 @@ import _ from 'lodash';
 import path from 'path';
 import rcConfig from 'rc-config';
 import { getEnv, setEnvironment } from 'cross-environment';
-import defaultConfig from './config';
+import defaultConfig from '~/config';
 
 const pkg = require(path.resolve('package.json'));
 
@@ -19,6 +19,17 @@ export default function createConfig({ defaultEnv = 'development' }) {
   const config = _.merge(defaultConfig, userConfig);
   return {
     ...config,
+    publish: {
+      android: _.isArray(_.get(config, 'publish.android'))
+        ? config.publish.android
+        : [config.publish.android],
+      web: _.isArray(_.get(config, 'publish.web', []))
+        ? config.publish.web
+        : [config.publish.web],
+      ios: _.isArray(_.get(config, 'publish.ios', []))
+        ? config.publish.ios
+        : [config.publish.ios]
+    },
     devPort: config.port + 1,
     envs: {
       ...config.envs,

@@ -1,13 +1,13 @@
 import FileSizeReporter from 'react-dev-utils/FileSizeReporter';
 import _ from 'lodash';
 import chalk from 'chalk';
+import clean from '~/actions/clean';
+import createConfig from '~/createConfig';
+import createWebpackConfig from '~/create-webpack-config';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import fs from 'fs-extra';
+import log from '~/log';
 import webpack from 'webpack';
-import clean from '../clean';
-import createConfig from '../../createConfig';
-import createWebpackConfig from '../../create-webpack-config';
-import log from '../../log';
 
 const {
   measureFileSizesBeforeBuild,
@@ -15,8 +15,8 @@ const {
 } = FileSizeReporter;
 const { env } = process;
 
-export default async function buildWeb(options) {
-  const config = createConfig({ defaultEnv: 'production' });
+export default async function buildWeb(options, config) {
+  if (!config) config = createConfig({ defaultEnv: 'production' });
   log.debug('config', config);
   const { paths } = config;
   await clean(options, config);

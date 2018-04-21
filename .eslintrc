@@ -4,10 +4,8 @@
   "rules": {
     "arrow-body-style": "off",
     "class-methods-use-this": "off",
-    "import/extensions": "off",
     "import/no-dynamic-require": "off",
     "import/no-extraneous-dependencies": "off",
-    "import/no-unresolved": "off",
     "no-param-reassign": "off",
     "no-plusplus": "off",
     "no-shadow": "off",
@@ -23,6 +21,8 @@
         "argsIgnorePattern": "^_"
       }
     ],
-    "comma-dangle": ["error", "never"]
+    "comma-dangle": ["error", "never"],
+    "import/extensions": ["error", "ignorePackages"],
+    "import/no-unresolved": ["error", { "ignore": ["^~"] }]
   }
 }

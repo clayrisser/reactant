@@ -8,8 +8,8 @@ export default {
   paths: {
     dist: 'dist',
     src: 'src',
-    client: 'src/core/client.js',
-    server: 'src/core/index.js',
+    client: 'web/client.js',
+    server: 'web/index.js',
     distPublic: 'dist/public',
     srcPublic: 'src/public'
   },

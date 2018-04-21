@@ -1,17 +1,17 @@
 import DevServer from 'webpack-dev-server';
+import createConfig from '~/createConfig';
+import createWebpackConfig from '~/create-webpack-config';
 import fs from 'fs-extra';
+import log from '~/log';
 import path from 'path';
 import webpack from 'webpack';
-import createConfig from '../../createConfig';
-import createWebpackConfig from '../../create-webpack-config';
-import log from '../../log';
 
 const { env } = process;
 
-export default async function startWeb(options) {
+export default async function startWeb(options, config) {
+  if (!config) config = createConfig({ defaultEnv: 'development' });
   if (options.inspectBrk) env.INSPECT_BRK_ENABLED = true;
   if (options.inspect) env.INSPECT_ENABLED = true;
-  const config = createConfig({ defaultEnv: 'development' });
   log.debug('config', config);
   const { paths } = config;
   fs.removeSync(path.resolve(paths.dist, 'assets.json'));
