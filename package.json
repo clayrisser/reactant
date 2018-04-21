@@ -52,7 +52,7 @@
     "fs-extra": "^5.0.0",
     "html-loader": "^0.5.5",
     "markdown-loader": "^2.0.2",
-    "rc-config": "0.0.4",
+    "rc-config": "0.0.5",
     "react-dev-utils": "^5.0.1",
     "start-server-webpack-plugin": "^2.2.5",
     "url-loader": "^1.0.1",

@@ -2,13 +2,13 @@ import DevServer from 'webpack-dev-server';
 import fs from 'fs-extra';
 import path from 'path';
 import webpack from 'webpack';
-import createConfig from './createConfig';
-import createWebpackConfig from './create-webpack-config';
-import log from './log';
+import createConfig from '../../createConfig';
+import createWebpackConfig from '../../create-webpack-config';
+import log from '../../log';
 
 const { env } = process;
 
-export default async function start(options) {
+export default async function startWeb(options) {
   if (options.inspectBrk) env.INSPECT_BRK_ENABLED = true;
   if (options.inspect) env.INSPECT_ENABLED = true;
   const config = createConfig({ defaultEnv: 'development' });
