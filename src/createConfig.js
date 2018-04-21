@@ -13,9 +13,9 @@ export default function createConfig({ defaultEnv = 'development' }) {
     }
   });
   const environment = getEnv();
-  const userConfig = rcConfig('reaction');
-  const babel = rcConfig('babel');
-  const eslint = rcConfig('eslint');
+  const userConfig = rcConfig({ name: 'reaction' });
+  const babel = rcConfig({ name: 'babel' });
+  const eslint = rcConfig({ name: 'eslint' });
   const config = _.merge(defaultConfig, userConfig);
   return {
     ...config,
