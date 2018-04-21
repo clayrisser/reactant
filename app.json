@@ -3,6 +3,5 @@
     "sdkVersion": "26.0.0"
   },
   "name": "reaction",
-  "displayName": "reaction",
-  "entryPoint": "expo/index.js"
+  "displayName": "reaction"
 }

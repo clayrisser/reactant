@@ -1,8 +1,14 @@
 {
   "name": "reaction",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.0.1",
+  "description": "A React framework",
   "main": "expo/index.js",
+  "homepage": "https://github.com/codejamninja/reaction",
+  "author": {
+    "name": "Jam Risser",
+    "email": "jam@codejam.ninja",
+    "url": "https://codejam.ninja"
+  },
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-preset-react-native-stage-0": "^1.0.1",
@@ -10,26 +16,49 @@
     "jest": "^22.4.3",
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "^16.3.2",
+    "reaction-build": "0.0.6",
     "rimraf": "^2.6.2"
   },
   "scripts": {
-    "start": "react-native start",
-    "android":
-      "npm run clean && adb reverse tcp:8081 tcp:8081 && react-native run-android",
-    "expo": "npm run clean && exp start",
-    "ios": "react-native run-ios",
-    "test": "jest",
+    "build": "npm run build:web",
+    "build:android": "reaction build -p android",
+    "build:expo": "reaction build -p expo",
+    "build:ios": "reaction build -p ios",
+    "build:web": "reaction build -p web",
+    "clean": "reaction clean",
+    "lint": "npm run lint:flow && eslint ./",
+    "lint:fix": "eslint --fix ./",
     "lint:flow": "flow",
-    "clean:watchman": "watchman watch-del-all",
-    "clean:react": "rimraf $TMPDIR/react-*",
-    "clean": "npm run clean:watchman && npm run clean:react"
-  },
-  "jest": {
-    "preset": "react-native"
+    "publish": "npm run publish:web",
+    "publish:android": "reaction publish -p android",
+    "publish:expo": "reaction publish -p expo",
+    "publish:ios": "reaction publish -p ios",
+    "publish:web": "reaction publish -p web",
+    "start": "npm run start:web",
+    "start:android": "reaction start -p android",
+    "start:expo": "reaction start -p expo",
+    "start:ios": "reaction start -p ios",
+    "start:web": "reaction start -p web",
+    "test": "npm run lint && jest"
   },
   "dependencies": {
     "expo": "^26.0.0",
     "react": "^16.3.2",
-    "react-native": "^0.54.2"
+    "react-native": "^0.54.2",
+    "babel-polyfill": "^6.26.0",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.3",
+    "lodash": "^4.17.5",
+    "react-dom": "^16.3.2",
+    "react-native-web": "^0.6.0"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/codejamninja/reaction",
+  "engines": {
+    "node": ">= 4.0.0"
+  },
+  "eslintIgnore": ["lib", "dist"],
+  "jest": {
+    "preset": "react-native"
   }
 }
