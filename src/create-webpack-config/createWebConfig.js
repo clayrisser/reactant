@@ -11,7 +11,9 @@ export default function createWebConfig(webpackConfig, action, config) {
       client: [paths.client]
     },
     externals: {
-      'reaction/config': JSON.stringify(config)
+      ...webpackConfig.externals,
+      'reaction/config': JSON.stringify(config),
+      winston: '{Logger:()=>{},transports:{Console:()=>{}}}'
     },
     plugins: [
       ...webpackConfig.plugins,
@@ -67,7 +69,7 @@ export default function createWebConfig(webpackConfig, action, config) {
       entry: {
         client: [
           ...webpackConfig.entry.client,
-          require.resolve('../webpackHotDevClient')
+          require.resolve('~/hotDevClient')
         ]
       },
       devServer: {

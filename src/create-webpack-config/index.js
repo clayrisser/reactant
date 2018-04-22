@@ -29,19 +29,20 @@ export default function createWebpackConfig(target = 'web', action, config) {
       rules: [
         {
           test: /\.(js|jsx|mjs)$/,
+          include: [paths.src, paths.web],
           loader: require.resolve('eslint-loader'),
           options: eslint,
-          include: paths.src,
           enforce: 'pre'
         },
         {
           test: /\.(js|jsx|mjs)$/,
+          include: [paths.src, paths.web],
           loader: require.resolve('babel-loader'),
-          options: babel,
-          include: paths.src
+          options: babel
         },
         {
           test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+          include: [paths.src, paths.web],
           loader: require.resolve('url-loader'),
           options: {
             limit: 10000,
@@ -50,11 +51,12 @@ export default function createWebpackConfig(target = 'web', action, config) {
         },
         {
           test: /\.html?$/,
-          loader: require.resolve('html-loader'),
-          include: paths.src
+          include: [paths.src, paths.web],
+          loader: require.resolve('html-loader')
         },
         {
           test: /\.md$/,
+          include: [paths.src, paths.web],
           use: [
             {
               loader: require.resolve('html-loader')
@@ -71,18 +73,18 @@ export default function createWebpackConfig(target = 'web', action, config) {
         },
         {
           exclude: [
-            /\.html?$/,
-            /\.md$/,
             /\.(js|jsx|mjs)$/,
-            /\.(ts|tsx)$/,
-            /\.(vue)$/,
             /\.(less)$/,
             /\.(re)$/,
             /\.(s?css|sass)$/,
-            /\.json$/,
+            /\.(ts|tsx)$/,
+            /\.(vue)$/,
             /\.bmp$/,
             /\.gif$/,
+            /\.html?$/,
             /\.jpe?g$/,
+            /\.json$/,
+            /\.md$/,
             /\.png$/
           ],
           loader: require.resolve('file-loader'),

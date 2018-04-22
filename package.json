@@ -1,6 +1,6 @@
 {
   "name": "reaction-build",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "Build tool for reaction",
   "homepage": "reaction.codejam.ninja",
   "author": {
@@ -9,12 +9,10 @@
     "url": "https://codejam.ninja"
   },
   "main": "lib/index.js",
-  "files": [
-    "lib",
-    "bin"
-  ],
+  "files": ["lib", "bin"],
   "scripts": {
-    "build": "npm run clean && npm run test && npm run build:lib && npm run build:bin",
+    "build":
+      "npm run clean && npm run test && npm run build:lib && npm run build:bin",
     "build:bin": "mkdir bin && babel src/bin.js -o bin/reaction.js",
     "build:lib": "babel src --ignore bin.js -d lib",
     "clean": "rimraf lib bin",
@@ -39,6 +37,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "bluebird": "^3.5.1",
     "boom": "^7.2.0",
     "cross-environment": "0.0.8",
     "easycp": "0.1.1",
@@ -52,8 +51,11 @@
     "file-loader": "^1.1.11",
     "fs-extra": "^5.0.0",
     "html-loader": "^0.5.5",
+    "localstorage-polyfill": "^1.0.1",
+    "loglevel": "^1.6.1",
     "markdown-loader": "^2.0.2",
     "rc-config": "0.0.5",
+    "react-art": "^16.3.2",
     "react-dev-utils": "^5.0.1",
     "start-server-webpack-plugin": "^2.2.5",
     "url-loader": "^1.0.1",
@@ -66,7 +68,7 @@
     "babel-plugin-module-resolver": "^3.1.1",
     "eslint-plugin-jest": "^21.15.0",
     "jest": "^22.4.3",
-    "react-native-web": "^0.6.0",
+    "react-native-web": "^0.6.1",
     "rimraf": "^2.6.2"
   },
   "license": "MIT",
@@ -74,14 +76,9 @@
   "engines": {
     "node": ">= 4.0.0"
   },
-  "eslintIgnore": [
-    "lib",
-    "bin"
-  ],
+  "eslintIgnore": ["lib", "bin"],
   "jest": {
-    "testMatch": [
-      "**/tests/**/[^_]*.js"
-    ],
+    "testMatch": ["**/tests/**/[^_]*.js"],
     "verbose": true
   }
 }

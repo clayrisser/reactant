@@ -6,12 +6,18 @@ export default {
   port: env.REACTION_PORT || 3333,
   envs: {},
   paths: {
-    dist: 'dist',
-    src: 'src',
     client: 'web/client.js',
-    server: 'web/index.js',
+    dist: 'dist',
     distPublic: 'dist/public',
-    srcPublic: 'src/public'
+    server: 'web/index.js',
+    src: 'src',
+    srcPublic: 'src/public',
+    web: 'web'
+  },
+  publish: {
+    android: 'echo',
+    ios: 'echo',
+    web: 'echo'
   },
   babel: {
     presets: [['env', { modules: false }], 'react', 'stage-2'],

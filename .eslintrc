@@ -2,6 +2,7 @@
   "extends": ["airbnb/base", "prettier"],
   "parser": "babel-eslint",
   "rules": {
+    "default-case": "off",
     "arrow-body-style": "off",
     "class-methods-use-this": "off",
     "import/no-dynamic-require": "off",

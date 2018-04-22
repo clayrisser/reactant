@@ -14,19 +14,18 @@ export default function createConfig({ defaultEnv = 'development' }) {
   });
   const environment = getEnv();
   const userConfig = rcConfig({ name: 'reaction' });
-  const babel = rcConfig({ name: 'babel' });
   const eslint = rcConfig({ name: 'eslint' });
   const config = _.merge(defaultConfig, userConfig);
   return {
     ...config,
     publish: {
-      android: _.isArray(_.get(config, 'publish.android'))
+      android: _.isArray(config.publish.android)
         ? config.publish.android
         : [config.publish.android],
-      web: _.isArray(_.get(config, 'publish.web', []))
+      web: _.isArray(config.publish.web)
         ? config.publish.web
-        : [config.publish.web],
-      ios: _.isArray(_.get(config, 'publish.ios', []))
+        : config.publish.web,
+      ios: _.isArray(config.publish.ios)
         ? config.publish.ios
         : [config.publish.ios]
     },
@@ -39,7 +38,7 @@ export default function createConfig({ defaultEnv = 'development' }) {
       PORT: config.port
     },
     environment,
-    babel: _.merge(babel, pkg.babel, config.babel),
+    babel: _.merge(pkg.babel, config.babel),
     eslint: _.merge(eslint, pkg.eslint, config.eslint),
     paths: _.zipObject(
       _.keys(config.paths),
