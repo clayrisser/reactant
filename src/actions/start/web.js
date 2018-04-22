@@ -1,10 +1,10 @@
 import DevServer from 'webpack-dev-server';
-import createConfig from '~/createConfig';
-import createWebpackConfig from '~/create-webpack-config';
 import fs from 'fs-extra';
-import log from '~/log';
 import path from 'path';
 import webpack from 'webpack';
+import log from '../../log';
+import createConfig from '../../createConfig';
+import createWebpackConfig from '../../create-webpack-config';
 
 const { env } = process;
 

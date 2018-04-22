@@ -1,5 +1,5 @@
 import easycp from 'easycp';
-import log from '~/log';
+import log from '../../log';
 
 export default async function startExpo(options) {
   log.debug('options', options);

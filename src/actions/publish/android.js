@@ -1,9 +1,9 @@
 import _ from 'lodash';
-import buildAndroid from '~/actions/build/android';
-import createConfig from '~/createConfig';
 import easycp from 'easycp';
-import log from '~/log';
 import Promise from 'bluebird';
+import buildAndroid from '../build/android';
+import createConfig from '../../createConfig';
+import log from '../../log';
 
 export default async function publishAndroid(options, config) {
   log.debug('options', options);

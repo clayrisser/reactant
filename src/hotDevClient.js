@@ -1,11 +1,13 @@
-import SockjsClient from 'sockjs-client';
+import _ from 'lodash';
 // eslint-disable-next-line import/no-unresolved
 import config from 'reaction/config';
+import stripAnsi from 'strip-ansi';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import launchEditorEndpoint from 'react-dev-utils/launchEditorEndpoint';
-import log from '~/log';
-import stripAnsi from 'strip-ansi';
-import { format } from 'url';
+// eslint-disable-next-line import/no-unresolved
+import log from 'reaction/log';
+import SockjsClient from 'sockjs-client';
+import { format as urlFormat } from 'url';
 import {
   dismissBuildError,
   reportBuildError,
@@ -17,155 +19,215 @@ import {
 const browserWindow = window;
 
 let hadRuntimeError = false;
-let hasCompileErrors = false;
 let isFirstCompilation = true;
-let mostRecentCompilationHash = null;
+let hash = null;
+let hasCompileErrors = false;
 
 startReportingRuntimeErrors({
-  launchEditorEndpoint: format({
+  launchEditorEndpoint: urlFormat({
     protocol: browserWindow.location.protocol,
     hostname: browserWindow.location.hostname,
     port: config.devPort,
     pathname: launchEditorEndpoint
   }),
-  onError() {
+  onError: () => {
     hadRuntimeError = true;
+    return true;
   },
-  filename:
-    `${config.paths.distPublic}/scripts/bundle.js` || '/scripts/bundle.js'
+  filename: `${config.paths.distPublic}/scripts/bundle.js`
 });
 
-if (module.hot && typeof module.hot.dispose === 'function') {
+if (module.hot && _.isFunction(module.hot.dispose)) {
   module.hot.dispose(() => stopReportingRuntimeErrors());
 }
 
-const connection = new SockjsClient(
-  format({
-    protocol: browserWindow.location.protocol,
-    hostname: browserWindow.location.hostname,
-    port: config.devPort,
-    pathname: '/sockjs-node'
-  })
-);
+createConnection(config.devPort, {
+  async hash(message) {
+    hash = message.data;
+    log.debug('hash', hash);
+  },
+  async stillOk() {
+    log.debug('still-ok');
+  },
+  async ok() {
+    log.debug('applying updates . . .');
+    try {
+      await handleSuccess();
+      log.debug('updates applied');
+    } catch (err) {
+      log.error(err);
+    }
+  },
+  async contentChanged() {
+    log.debug('content-changed');
+    browserWindow.location.reload();
+  },
+  async warnings(message) {
+    handleWarnings(message.data);
+  },
+  async errors(message) {
+    handleErrors(message.data);
+  }
+});
 
-connection.onclose = () => {
-  log.info(
-    'The development server has disconnected.\nRefresh the page if necessary.'
-  );
-};
-
-function clearOutdatedErrors() {
-  // eslint-disable-next-line no-console
-  if (hasCompileErrors) console.clear();
-}
-
-function handleSuccess() {
+async function handleSuccess() {
   clearOutdatedErrors();
   const isHotUpdate = !isFirstCompilation;
   isFirstCompilation = false;
   hasCompileErrors = false;
   if (isHotUpdate) {
-    tryApplyUpdates(() => dismissBuildError());
+    await applyUpdates();
+    dismissBuildError();
   }
 }
 
-function handleWarnings(warnings) {
+async function handleErrors(errors) {
+  clearOutdatedErrors();
+  isFirstCompilation = false;
+  hasCompileErrors = true;
+  const formatted = formatWebpackMessages({ errors, warnings: [] });
+  reportBuildError(formatted.errors[0]);
+  _.each(formatted.errors, (error, index) => {
+    if (index < formatted.errors.length) {
+      if (index === 5) {
+        log.error(
+          'There were more errors in other files.\n' +
+            'You can find a complete log in the terminal.'
+        );
+      }
+      log.error(stripAnsi(error));
+      return true;
+    }
+    return false;
+  });
+}
+
+async function handleWarnings(warnings) {
   clearOutdatedErrors();
   const isHotUpdate = !isFirstCompilation;
   isFirstCompilation = false;
   hasCompileErrors = false;
   function printWarnings() {
-    const formatted = formatWebpackMessages({
-      warnings,
-      errors: []
-    });
-    for (let i = 0; i < formatted.warnings.length; i++) {
-      if (i === 5) {
-        log.warn(
-          'There were more warnings in other files.\n' +
-            'You can find a complete log in the terminal.'
-        );
-        break;
+    const formatted = formatWebpackMessages({ warnings, errors: [] });
+    _.each(formatted.warnings, (warning, index) => {
+      if (index < formatted.warnings.length) {
+        if (index === 5) {
+          log.warn(
+            'There were more warnings in other files.\n' +
+              'You can find a complete log in the terminal.'
+          );
+        }
+        log.warn(stripAnsi(warning));
       }
-      log.warn(stripAnsi(formatted.warnings[i]));
-    }
+    });
   }
   if (isHotUpdate) {
-    tryApplyUpdates(() => {
-      printWarnings();
-      dismissBuildError();
-    });
+    await applyUpdates();
+    printWarnings();
+    dismissBuildError();
   } else {
     printWarnings();
   }
 }
 
-function handleErrors(errors) {
-  clearOutdatedErrors();
-  isFirstCompilation = false;
-  hasCompileErrors = true;
-  const formatted = formatWebpackMessages({
-    errors,
-    warnings: []
+async function applyUpdates() {
+  if (!module.hot) return browserWindow.location.reload();
+  if (!isUpdateAvailable() || !canApplyUpdates()) return false;
+  return new Promise((resolve, reject) => {
+    function handleApplyUpdates(err, updatedModules) {
+      if (err) {
+        if (!/Aborted\sbecause.+\sis\snot\saccepted/.test(err.message)) {
+          browserWindow.location.reload();
+        }
+        return reject(err);
+      }
+      if (!updatedModules || hadRuntimeError) {
+        browserWindow.location.reload();
+        return reject(new Error('runtime error'));
+      }
+      // eslint-disable-next-line no-undef
+      if (_.isFunction(onHotUpdateSuccess)) onHotUpdateSuccess();
+      if (isUpdateAvailable()) {
+        return applyUpdates().then(() => {
+          return resolve();
+        });
+      }
+      return resolve();
+    }
+    const result = module.hot.check(true, handleApplyUpdates);
+    if (result && result.then) {
+      return result
+        .then(updatedModules => {
+          handleApplyUpdates(null, updatedModules);
+        })
+        .catch(err => {
+          handleApplyUpdates(err, null);
+        });
+    }
+    return result;
   });
-  reportBuildError(formatted.errors[0]);
-  for (let i = 0; i < formatted.errors.length; i++) {
-    log.error(stripAnsi(formatted.errors[i]));
-  }
 }
-
-function handleAvailableHash(hash) {
-  mostRecentCompilationHash = hash;
-}
-
-connection.onmessage = e => {
-  const message = JSON.parse(e.data);
-  switch (message.type) {
-    case 'hash':
-      handleAvailableHash(message.data);
-      break;
-    case 'still-ok':
-    case 'ok':
-      handleSuccess();
-      break;
-    case 'content-changed':
-      browserWindow.location.reload();
-      break;
-    case 'warnings':
-      handleWarnings(message.data);
-      break;
-    case 'errors':
-      handleErrors(message.data);
-      break;
-  }
-};
 
 function isUpdateAvailable() {
   // eslint-disable-next-line camelcase,no-undef
-  return mostRecentCompilationHash !== __webpack_hash__;
+  return hash !== __webpack_hash__;
 }
 
 function canApplyUpdates() {
   return module.hot.status() === 'idle';
 }
 
-function tryApplyUpdates(onHotUpdateSuccess) {
-  if (!module.hot) return browserWindow.location.reload();
-  if (!isUpdateAvailable() || !canApplyUpdates()) return null;
-  function handleApplyUpdates(err, updatedModules) {
-    if (err || !updatedModules || hadRuntimeError) {
-      return browserWindow.location.reload();
-    }
-    if (typeof onHotUpdateSuccess === 'function') onHotUpdateSuccess();
-    if (isUpdateAvailable()) tryApplyUpdates();
-    return null;
+function clearOutdatedErrors() {
+  if (hasCompileErrors) log.clear();
+}
+
+function createConnection(
+  port,
+  {
+    hash = () => {},
+    stillOk = () => {},
+    ok = () => {},
+    contentChanged = () => {},
+    warnings = () => {},
+    errors = () => {}
   }
-  const result = module.hot.check(true, handleApplyUpdates);
-  if (result && result.then) {
-    result.then(
-      updatedModules => handleApplyUpdates(null, updatedModules),
-      err => handleApplyUpdates(err, null)
+) {
+  const connection = new SockjsClient(
+    urlFormat({
+      protocol: browserWindow.location.protocol,
+      hostname: browserWindow.location.hostname,
+      port,
+      pathname: '/sockjs-node'
+    })
+  );
+  connection.onclose = () => {
+    return log.info(
+      'The development server has disconnected.\n' +
+        'Refresh the page if necessary.'
     );
-  }
-  return null;
+  };
+  connection.onmessage = e => {
+    const message = JSON.parse(e.data);
+    switch (message.type) {
+      case 'hash':
+        hash(message);
+        break;
+      case 'still-ok':
+        stillOk(message);
+        break;
+      case 'ok':
+        ok(message);
+        break;
+      case 'content-changed':
+        contentChanged(message);
+        break;
+      case 'warnings':
+        warnings(message);
+        break;
+      case 'errors':
+        errors(message);
+        break;
+    }
+  };
+  return connection;
 }

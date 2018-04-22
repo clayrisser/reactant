@@ -18,12 +18,15 @@ export default function createWebpackConfig(target = 'web', action, config) {
       modules: [path.resolve('node_modules')],
       extensions: ['.js', '.json', '.jsx', '.mjs'],
       alias: {
-        'webpack/hot/poll': require.resolve('webpack/hot/poll'),
         'react-native': require.resolve('react-native-web'),
+        'webpack/hot/poll': require.resolve('webpack/hot/poll'),
+        reaction: 'reaction-build/lib',
         '~': paths.src
       }
     },
-    externals: {},
+    externals: {
+      'reaction/config': JSON.stringify(config)
+    },
     module: {
       strictExportPresence: true,
       rules: [

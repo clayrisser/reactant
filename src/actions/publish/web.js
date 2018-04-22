@@ -1,9 +1,9 @@
 import _ from 'lodash';
-import buildWeb from '~/actions/build/web';
-import createConfig from '~/createConfig';
 import easycp from 'easycp';
-import log from '~/log';
 import Promise from 'bluebird';
+import buildWeb from '../build/web';
+import createConfig from '../../createConfig';
+import log from '../../log';
 
 export default async function publishWeb(options, config) {
   log.debug('options', options);

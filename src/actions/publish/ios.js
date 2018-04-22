@@ -1,9 +1,9 @@
 import _ from 'lodash';
-import buildIos from '~/actions/build/ios';
-import createConfig from '~/createConfig';
 import easycp from 'easycp';
-import log from '~/log';
 import Promise from 'bluebird';
+import buildIos from '../build/ios';
+import createConfig from '../../createConfig';
+import log from '../../log';
 
 export default async function publishIos(options, config) {
   log.debug('options', options);

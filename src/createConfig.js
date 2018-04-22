@@ -2,7 +2,7 @@ import _ from 'lodash';
 import path from 'path';
 import rcConfig from 'rc-config';
 import { getEnv, setEnvironment } from 'cross-environment';
-import defaultConfig from '~/config';
+import defaultConfig from './config';
 
 const pkg = require(path.resolve('package.json'));
 

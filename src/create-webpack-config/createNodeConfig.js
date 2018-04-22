@@ -30,8 +30,7 @@ export default function createNodeConfig(webpackConfig, action, config) {
           /\.(mp4|mp3|ogg|swf|webp)$/
         ]
       }),
-      'reaction/assets': "require('./assets.json')",
-      'reaction/config': JSON.stringify(config)
+      'reaction/assets': "require('./assets.json')"
     },
     plugins: [
       ...webpackConfig.plugins,
