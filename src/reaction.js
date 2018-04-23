@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import commander from 'commander';
 import action from './action';
 import error from './error';

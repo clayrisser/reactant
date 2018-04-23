@@ -145,8 +145,6 @@ async function applyUpdates() {
         browserWindow.location.reload();
         return reject(new Error('runtime error'));
       }
-      // eslint-disable-next-line no-undef
-      if (_.isFunction(onHotUpdateSuccess)) onHotUpdateSuccess();
       if (isUpdateAvailable()) {
         return applyUpdates().then(() => {
           return resolve();

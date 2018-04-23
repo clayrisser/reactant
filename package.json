@@ -53,6 +53,7 @@
     "file-loader": "^1.1.11",
     "fs-extra": "^5.0.0",
     "html-loader": "^0.5.5",
+    "idempotent-babel-polyfill": "^0.1.1",
     "localstorage-polyfill": "^1.0.1",
     "loglevel": "^1.6.1",
     "markdown-loader": "^2.0.2",
