@@ -10,6 +10,4 @@ AppRegistry.runApplication('App', {
   rootTag: document.getElementById('app')
 });
 
-if (module.hot) {
-  module.hot.accept();
-}
+if (module.hot) module.hot.accept();
