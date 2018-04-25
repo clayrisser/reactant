@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <View style={styles.box}>
-        <Text style={styles.text}>Hello, world!</Text>
+        <Text style={styles.text}>Hello, worldz!</Text>
       </View>
     );
   }
