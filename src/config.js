@@ -9,7 +9,7 @@ export default {
     client: 'web/client.js',
     dist: 'dist',
     distPublic: 'dist/public',
-    server: 'web/index.js',
+    server: 'node_modules/reaction-build/lib/server.js',
     src: 'src',
     srcPublic: 'src/public',
     web: 'web'

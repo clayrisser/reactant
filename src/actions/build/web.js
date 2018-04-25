@@ -16,8 +16,12 @@ const {
 const { env } = process;
 
 export default async function buildWeb(options, config) {
-  if (!config) config = createConfig({ defaultEnv: 'production' });
-  log.debug('config', config);
+  if (!config) {
+    config = createConfig({ defaultEnv: 'production' });
+    log.debug('options', options);
+    log.debug('config', config);
+  }
+  log.info('::: BUILD WEB :::');
   const { paths } = config;
   await clean(options, config);
   fs.copySync(paths.srcPublic, paths.distPublic, {

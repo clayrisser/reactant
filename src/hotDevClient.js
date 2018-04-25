@@ -176,7 +176,8 @@ function canApplyUpdates() {
 }
 
 function clearOutdatedErrors() {
-  if (hasCompileErrors) log.clear();
+  // eslint-disable-next-line no-console
+  if (hasCompileErrors) console.clear();
 }
 
 function createConnection(

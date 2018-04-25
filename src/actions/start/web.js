@@ -9,10 +9,14 @@ import createWebpackConfig from '../../create-webpack-config';
 const { env } = process;
 
 export default async function startWeb(options, config) {
-  if (!config) config = createConfig({ defaultEnv: 'development' });
+  if (!config) {
+    config = createConfig({ defaultEnv: 'development' });
+    log.debug('options', options);
+    log.debug('config', config);
+  }
+  log.info('::: START WEB :::');
   if (options.inspectBrk) env.INSPECT_BRK_ENABLED = true;
   if (options.inspect) env.INSPECT_ENABLED = true;
-  log.debug('config', config);
   const { paths } = config;
   fs.removeSync(path.resolve(paths.dist, 'assets.json'));
   const webpackWebConfig = createWebpackConfig('web', 'start', config);
