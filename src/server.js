@@ -6,6 +6,27 @@ import { createServer } from 'http';
 // eslint-disable-next-line import/no-unresolved
 import log from 'reaction/log';
 
+app.use((err, req, res, next) => {
+  if (err) {
+    log.error(err);
+    if (config.environment === 'production') {
+      return res.status(500).send('Server error');
+    }
+    const prettyError = JSON.stringify(err.stack)
+      .replace(/\s/g, '&nbsp;')
+      .replace(/\\n/g, '<br />');
+    return res
+      .status(500)
+      .send(
+        `Restart your sever after fixing the following error . . .<br /><br />${prettyError.substr(
+          1,
+          prettyError.length - 2
+        )}`
+      );
+  }
+  return next();
+});
+
 const server = createServer(app);
 
 server.listen(config.port, err => {
