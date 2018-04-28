@@ -3,7 +3,6 @@ import _ from 'lodash';
 import config from 'reaction/config';
 import stripAnsi from 'strip-ansi';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
-import launchEditorEndpoint from 'react-dev-utils/launchEditorEndpoint';
 // eslint-disable-next-line import/no-unresolved
 import log from 'reaction/log';
 import SockjsClient from 'sockjs-client';
@@ -24,12 +23,6 @@ let hash = null;
 let hasCompileErrors = false;
 
 startReportingRuntimeErrors({
-  launchEditorEndpoint: urlFormat({
-    protocol: browserWindow.location.protocol,
-    hostname: browserWindow.location.hostname,
-    port: config.devPort,
-    pathname: launchEditorEndpoint
-  }),
   onError: () => {
     hadRuntimeError = true;
     return true;
