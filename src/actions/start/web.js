@@ -2,11 +2,10 @@ import DevServer from 'webpack-dev-server';
 import fs from 'fs-extra';
 import path from 'path';
 import webpack from 'webpack';
-import log from '../../log';
+import clean from '../clean';
 import createConfig from '../../createConfig';
 import createWebpackConfig from '../../create-webpack-config';
-
-const { env } = process;
+import log from '../../log';
 
 export default async function startWeb(options, config) {
   if (!config) {
@@ -15,8 +14,7 @@ export default async function startWeb(options, config) {
     log.debug('config', config);
   }
   log.info('::: START WEB :::');
-  if (options.inspectBrk) env.INSPECT_BRK_ENABLED = true;
-  if (options.inspect) env.INSPECT_ENABLED = true;
+  await clean(options, config);
   const { paths } = config;
   fs.removeSync(path.resolve(paths.dist, 'assets.json'));
   const webpackWebConfig = createWebpackConfig('web', 'start', config);

@@ -18,5 +18,5 @@ export default async function clean(options, config) {
   } else {
     await silentcp('watchman watch-del-all');
   }
-  fs.emptyDirSync(paths.dist);
+  fs.removeSync(paths.dist);
 }

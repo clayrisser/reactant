@@ -1,4 +1,5 @@
 import easycp from 'easycp';
+import clean from '../clean';
 import createConfig from '../../createConfig';
 import log from '../../log';
 
@@ -8,6 +9,7 @@ export default async function buildExpo(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
+  await clean(options, config);
   await easycp('exp build:android');
   switch (options.expoPlatform) {
     case 'android':
