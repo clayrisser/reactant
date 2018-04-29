@@ -1,11 +1,11 @@
+import SockjsClient from 'sockjs-client';
 import _ from 'lodash';
 // eslint-disable-next-line import/no-unresolved
 import config from 'reaction/config';
-import stripAnsi from 'strip-ansi';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 // eslint-disable-next-line import/no-unresolved
 import log, { setLevel } from 'reaction/log';
-import SockjsClient from 'sockjs-client';
+import stripAnsi from 'strip-ansi';
 import { format as urlFormat } from 'url';
 import {
   dismissBuildError,

@@ -32,7 +32,8 @@ export default function createConfig({
         ? config.publish.ios
         : [config.publish.ios]
     },
-    devPort: config.port + 1,
+    devPort: config.port + 2,
+    analyzerPort: config.port + 1,
     envs: {
       ...config.envs,
       NODE_ENV: environment,

@@ -2,11 +2,10 @@ import StartServerPlugin from 'start-server-webpack-plugin';
 import webpackNodeExternals from 'webpack-node-externals';
 import webpack from 'webpack';
 
-const { env } = process;
 const { LimitChunkCountPlugin } = webpack.optimize;
 
 export default function createNodeConfig(webpackConfig, action, config) {
-  const { paths, host, devPort } = config;
+  const { paths, host, devPort, options } = config;
   webpackConfig = {
     ...webpackConfig,
     entry: [paths.server],
@@ -49,8 +48,8 @@ export default function createNodeConfig(webpackConfig, action, config) {
         new StartServerPlugin({
           name: 'server.js',
           nodeArgs: [
-            ...(env.INSPECT_BRK_ENABLED ? ['--inspect-brk'] : []),
-            ...(env.INSPECT_ENABLED ? ['--inspect'] : [])
+            ...(options.inspect ? ['--inspect'] : []),
+            ...(options.inspectBrk ? ['--inspect-brk'] : [])
           ]
         })
       ]

@@ -2,9 +2,10 @@ import AssetsWebpackPlugin from 'assets-webpack-plugin';
 import UglifyWebpackPlugin from 'uglifyjs-webpack-plugin';
 import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
 import path from 'path';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export default function createWebConfig(webpackConfig, action, config) {
-  const { paths, host, devPort, environment } = config;
+  const { analyzerPort, paths, host, devPort, environment } = config;
   webpackConfig = {
     ...webpackConfig,
     entry: {
@@ -72,27 +73,32 @@ export default function createWebConfig(webpackConfig, action, config) {
         ]
       },
       devServer: {
-        disableHostCheck: true,
+        before(app) {
+          app.use(errorOverlayMiddleware());
+        },
         compress: true,
-        headers: {
-          'Access-Control-Allow-Origin': '*'
-        },
-        historyApiFallback: {
-          disableDotRule: true
-        },
+        disableHostCheck: true,
+        headers: { 'Access-Control-Allow-Origin': '*' },
+        historyApiFallback: { disableDotRule: true },
         host,
         hot: true,
         noInfo: true,
         overlay: false,
         port: devPort,
         quiet: true,
-        watchOptions: {
-          ignored: /node_modules/
-        },
-        before(app) {
-          app.use(errorOverlayMiddleware());
-        }
+        watchOptions: { ignored: /node_modules/ }
       }
+    };
+  }
+  if (config.options.analyze) {
+    webpackConfig = {
+      ...webpackConfig,
+      plugins: [
+        ...webpackConfig.plugins,
+        new BundleAnalyzerPlugin({
+          analyzerPort
+        })
+      ]
     };
   }
   return webpackConfig;

@@ -74,7 +74,10 @@ function handleStats(stats) {
     'asset size limit: The following asset(s) exceed the recommended size limit',
     'entrypoint size limit: The following entrypoint(s)' +
       ' combined asset size exceeds the recommended limit',
-    'webpack performance recommendations'
+    'webpack performance recommendations',
+    './node_modules/colors/lib/colors.js',
+    './node_modules/parse5/lib/index.js',
+    './node_modules/express/lib/view.js'
   ];
   const warnings = filterMessages(messages.warnings, warningIgnoreList);
   if (warnings.length) {
