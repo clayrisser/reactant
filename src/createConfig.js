@@ -6,7 +6,10 @@ import defaultConfig from './config';
 
 const pkg = require(path.resolve('package.json'));
 
-export default function createConfig({ defaultEnv = 'development' }) {
+export default function createConfig({
+  defaultEnv = 'development',
+  options = {}
+}) {
   setEnvironment({
     defaults: {
       env: defaultEnv
@@ -40,6 +43,7 @@ export default function createConfig({ defaultEnv = 'development' }) {
     environment,
     babel: _.merge(pkg.babel, config.babel),
     eslint: _.merge(eslint, pkg.eslint, config.eslint),
+    options,
     paths: _.zipObject(
       _.keys(config.paths),
       _.map(config.paths, configPath => path.resolve(configPath))

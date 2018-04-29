@@ -1,3 +1,4 @@
+import CircularJSON from 'circular-json';
 import path from 'path';
 import {
   DefinePlugin,
@@ -25,7 +26,7 @@ export default function createWebpackConfig(target = 'web', action, config) {
       }
     },
     externals: {
-      'reaction/config': JSON.stringify(config)
+      'reaction/config': CircularJSON.stringify(config)
     },
     module: {
       strictExportPresence: true,

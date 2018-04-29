@@ -4,7 +4,7 @@ import log from '../../log';
 
 export default async function buildAndroid(options, config) {
   if (!config) {
-    config = createConfig({ defaultEnv: 'production' });
+    config = createConfig({ defaultEnv: 'production', options });
     log.debug('options', options);
     log.debug('config', config);
   }

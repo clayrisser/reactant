@@ -7,7 +7,7 @@ import log from '../../log';
 
 export default async function publishIos(options, config) {
   if (!config) {
-    config = createConfig({ defaultEnv: 'production' });
+    config = createConfig({ defaultEnv: 'production', options });
     log.debug('options', options);
     log.debug('config', config);
   }

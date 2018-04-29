@@ -4,7 +4,7 @@ import config from 'reaction/config';
 import stripAnsi from 'strip-ansi';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 // eslint-disable-next-line import/no-unresolved
-import log from 'reaction/log';
+import log, { setLevel } from 'reaction/log';
 import SockjsClient from 'sockjs-client';
 import { format as urlFormat } from 'url';
 import {
@@ -17,14 +17,21 @@ import {
 // eslint-disable-next-line no-undef
 const browserWindow = window;
 
-let hadRuntimeError = false;
-let isFirstCompilation = true;
+if (config.options.verbose) setLevel('verbose');
+if (config.options.debug) setLevel('debug');
+
+if (config !== 'production') {
+  browserWindow.reaction = { config };
+}
+
+let hadServerError = false;
+let hadError = false;
 let hash = null;
-let hasCompileErrors = false;
+let isFirstCompilation = true;
 
 startReportingRuntimeErrors({
   onError: () => {
-    hadRuntimeError = true;
+    hadError = true;
     return true;
   },
   filename: `${config.paths.distPublic}/scripts/bundle.js`
@@ -44,40 +51,41 @@ createConnection(config.devPort, {
   },
   async ok() {
     log.debug('applying updates . . .');
-    try {
-      await handleSuccess();
-      log.debug('updates applied');
-    } catch (err) {
-      log.error(err);
-    }
+    await handleSuccess();
+    log.debug('updates applied');
   },
   async contentChanged() {
     log.debug('content-changed');
     browserWindow.location.reload();
   },
   async warnings(message) {
+    log.debug('warnings');
     handleWarnings(message.data);
   },
   async errors(message) {
+    log.debug('errors');
     handleErrors(message.data);
   }
 });
 
 async function handleSuccess() {
-  clearOutdatedErrors();
+  clearErrors();
   const isHotUpdate = !isFirstCompilation;
-  isFirstCompilation = false;
-  hasCompileErrors = false;
-  if (isHotUpdate) {
-    await applyUpdates();
-    dismissBuildError();
+  try {
+    if (isHotUpdate) {
+      await applyUpdates();
+      dismissBuildError();
+    }
+  } catch (err) {
+    reportBuildError(err.stack);
+    log.error(err);
+    hadError = true;
   }
+  isFirstCompilation = false;
 }
 
 async function handleErrors(errors) {
-  clearOutdatedErrors();
-  isFirstCompilation = false;
-  hasCompileErrors = true;
+  clearErrors();
   const formatted = formatWebpackMessages({ errors, warnings: [] });
   reportBuildError(formatted.errors[0]);
   _.each(formatted.errors, (error, index) => {
@@ -93,13 +101,14 @@ async function handleErrors(errors) {
     }
     return false;
   });
+  hadServerError = true;
+  hadError = true;
+  isFirstCompilation = false;
 }
 
 async function handleWarnings(warnings) {
-  clearOutdatedErrors();
+  clearErrors();
   const isHotUpdate = !isFirstCompilation;
-  isFirstCompilation = false;
-  hasCompileErrors = false;
   function printWarnings() {
     const formatted = formatWebpackMessages({ warnings, errors: [] });
     _.each(formatted.warnings, (warning, index) => {
@@ -114,30 +123,29 @@ async function handleWarnings(warnings) {
       }
     });
   }
-  if (isHotUpdate) {
-    await applyUpdates();
-    printWarnings();
-    dismissBuildError();
-  } else {
-    printWarnings();
+  printWarnings();
+  try {
+    if (isHotUpdate) {
+      await applyUpdates();
+      dismissBuildError();
+    }
+  } catch (err) {
+    reportBuildError(err.stack);
+    log.error(err);
+    hadError = true;
   }
+  isFirstCompilation = false;
 }
+
+browserWindow.hothot = module.hot;
 
 async function applyUpdates() {
   if (!module.hot) return browserWindow.location.reload();
-  if (!isUpdateAvailable() || !canApplyUpdates()) return false;
+  if (!isUpdateAvailable() || module.hot.status() !== 'idle') return false;
   return new Promise((resolve, reject) => {
-    function handleApplyUpdates(err, updatedModules) {
-      if (err) {
-        if (!/Aborted\sbecause.+\sis\snot\saccepted/.test(err.message)) {
-          browserWindow.location.reload();
-        }
-        return reject(err);
-      }
-      if (!updatedModules || hadRuntimeError) {
-        browserWindow.location.reload();
-        return reject(new Error('runtime error'));
-      }
+    function handleApplyUpdates(err, _updatedModules) {
+      if (err && !hadServerError) return reject(err);
+      if (hadServerError) hadServerError = false;
       if (isUpdateAvailable()) {
         return applyUpdates().then(() => {
           return resolve();
@@ -164,13 +172,15 @@ function isUpdateAvailable() {
   return hash !== __webpack_hash__;
 }
 
-function canApplyUpdates() {
-  return module.hot.status() === 'idle';
-}
-
-function clearOutdatedErrors() {
-  // eslint-disable-next-line no-console
-  if (hasCompileErrors) console.clear();
+function clearErrors() {
+  if (module.hot.status() === 'fail') {
+    browserWindow.location.reload();
+  } else if (hadError) {
+    hadError = false;
+    // eslint-disable-next-line no-console
+    console.clear();
+    dismissBuildError();
+  }
 }
 
 function createConnection(

@@ -17,7 +17,7 @@ const { env } = process;
 
 export default async function buildWeb(options, config) {
   if (!config) {
-    config = createConfig({ defaultEnv: 'production' });
+    config = createConfig({ defaultEnv: 'production', options });
     log.debug('options', options);
     log.debug('config', config);
   }
