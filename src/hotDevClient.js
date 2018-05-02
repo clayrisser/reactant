@@ -19,7 +19,6 @@ const browserWindow = window;
 
 if (config.options.verbose) setLevel('verbose');
 if (config.options.debug) setLevel('debug');
-
 if (config !== 'production') {
   browserWindow.reaction = { config };
 }

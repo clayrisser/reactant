@@ -3,6 +3,7 @@ import _ from 'lodash';
 import chalk from 'chalk';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import fs from 'fs-extra';
+import ora from 'ora';
 import webpack from 'webpack';
 import clean from '../clean';
 import createConfig from '../../createConfig';
@@ -21,7 +22,7 @@ export default async function buildWeb(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  log.info('::: BUILD WEB :::');
+  const spinner = ora('Building web').start();
   const { paths } = config;
   await clean(options, config);
   fs.copySync(paths.srcPublic, paths.distPublic, {
@@ -32,10 +33,10 @@ export default async function buildWeb(options, config) {
     await measureFileSizesBeforeBuild(paths.distPublic)
   );
   if (warnings.length) {
-    log.info(chalk.yellow('compiled with warnings\n'));
+    spinner.warn('Built web');
     log.info(warnings.join('\n\n'));
   } else {
-    log.info(chalk.green('compiled successfully\n'));
+    spinner.succeed('Built web');
   }
   log.info('file sizes after gzip:\n');
   printFileSizesAfterBuild(stats, previousFileSizes, paths.dist);
@@ -48,14 +49,14 @@ async function runBuild(config, previousFileSizes) {
   const webpackNodeConfig = createWebpackConfig('node', 'build', config);
   log.debug('webpackNodeConfig', webpackNodeConfig);
   process.noDeprecation = true;
-  log.info('compiling web . . .');
+  const webSpinner = ora('Compiling web').start();
   const webStats = await compile(webpackWebConfig);
   const webMessages = handleStats(webStats);
-  log.info(chalk.green('compiled web successfully'));
-  log.info('compiling server . . .');
+  webSpinner.succeed('Compiled web');
+  const serverSpinner = ora('Compiling server').start();
   const nodeStats = await compile(webpackNodeConfig);
   const nodeMessages = handleStats(nodeStats);
-  log.info(chalk.green('compiled server successfully'));
+  serverSpinner.succeed('Compiled server');
   return {
     stats: webStats,
     previousFileSizes,

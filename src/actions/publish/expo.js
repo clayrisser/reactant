@@ -1,4 +1,5 @@
 import easycp from 'easycp';
+import ora from 'ora';
 import createConfig from '../../createConfig';
 import log from '../../log';
 
@@ -8,6 +9,7 @@ export default async function publishExpo(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  log.info('::: PUBLISH EXPO :::');
+  const spinner = ora('Publishing expo\n').start();
   await easycp('exp publish');
+  spinner.succeed('Published expo');
 }

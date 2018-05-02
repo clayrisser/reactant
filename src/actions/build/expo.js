@@ -1,4 +1,5 @@
 import easycp from 'easycp';
+import ora from 'ora';
 import clean from '../clean';
 import createConfig from '../../createConfig';
 import log from '../../log';
@@ -9,6 +10,7 @@ export default async function buildExpo(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
+  const spinner = ora('Building expo\n').start();
   await clean(options, config);
   await easycp('exp build:android');
   switch (options.expoPlatform) {
@@ -23,4 +25,5 @@ export default async function buildExpo(options, config) {
       await easycp('exp build:ios');
       break;
   }
+  spinner.succeed('Built expo');
 }

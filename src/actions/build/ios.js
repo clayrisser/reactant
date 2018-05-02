@@ -1,4 +1,5 @@
 import easycp from 'easycp';
+import ora from 'ora';
 import clean from '../clean';
 import createConfig from '../../createConfig';
 import log from '../../log';
@@ -9,7 +10,8 @@ export default async function buildIos(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  log.info('::: BUILD IOS :::');
+  const spinner = ora('Building ios\n').start();
   await clean(options, config);
   await easycp('react-native bundle');
+  spinner.succeed('Built ios');
 }

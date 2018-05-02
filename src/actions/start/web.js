@@ -1,5 +1,6 @@
 import DevServer from 'webpack-dev-server';
 import fs from 'fs-extra';
+import ora from 'ora';
 import path from 'path';
 import webpack from 'webpack';
 import clean from '../clean';
@@ -13,7 +14,7 @@ export default async function startWeb(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  log.info('::: START WEB :::');
+  const spinner = ora('Starting web').start();
   await clean(options, config);
   const { paths } = config;
   fs.removeSync(path.resolve(paths.dist, 'assets.json'));
@@ -35,5 +36,6 @@ export default async function startWeb(options, config) {
   const clientDevServer = new DevServer(webStats, webpackWebConfig.devServer);
   clientDevServer.listen(config.devPort, 'localhost', err => {
     if (err) log.error(err);
+    spinner.succeed('Started web');
   });
 }

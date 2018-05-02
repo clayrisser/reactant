@@ -1,4 +1,5 @@
 import easycp from 'easycp';
+import ora from 'ora';
 import clean from '../clean';
 import createConfig from '../../createConfig';
 import log from '../../log';
@@ -9,9 +10,12 @@ export default async function startAndroid(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  log.info('::: START ANDROID :::');
+  const spinner = ora('Starting android\n').start();
   await clean(options, config);
-  await easycp('adb reverse tcp:8081 tcp:8081');
-  setTimeout(async () => easycp('react-native run-android'), 5000);
+  await easycp('adb reverse tcp:8081 tcp:8081 || true');
+  setTimeout(async () => {
+    spinner.stop();
+    easycp('react-native run-android');
+  }, 5000);
   await easycp('react-native start --reset-cache');
 }

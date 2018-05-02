@@ -1,6 +1,6 @@
 {
   "name": "reaction-build",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "description": "Build tool for reaction",
   "homepage": "reaction.codejam.ninja",
   "author": {
@@ -56,6 +56,7 @@
     "html-loader": "^0.5.5",
     "loglevel": "^1.6.1",
     "markdown-loader": "^2.0.2",
+    "ora": "^2.1.0",
     "rc-config": "0.0.5",
     "react-art": "^16.3.2",
     "react-dev-utils": "^5.0.1",
