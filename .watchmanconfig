@@ -1,7 +1,1 @@
-{
-  "ignore_dirs": [
-    ".expo",
-    "dist",
-    "node_modules"
-  ]
-}
+{}
