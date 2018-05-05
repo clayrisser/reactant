@@ -9,16 +9,6 @@
     "email": "jam@codejam.ninja",
     "url": "https://codejam.ninja"
   },
-  "devDependencies": {
-    "babel-plugin-module-resolver": "^3.1.1",
-    "babel-preset-react-native-stage-0": "^1.0.1",
-    "flow-bin": "^0.70.0",
-    "jest": "^22.4.3",
-    "jest-react-native": "^18.0.0",
-    "react-test-renderer": "^16.3.2",
-    "reaction-build": "0.0.16",
-    "rimraf": "^2.6.2"
-  },
   "scripts": {
     "build": "npm run build:web",
     "build:android": "reaction build -p android",
@@ -47,6 +37,16 @@
     "start:ios": "reaction start -p ios",
     "start:web": "reaction start -p web",
     "test": "npm run lint && jest"
+  },
+  "devDependencies": {
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "flow-bin": "^0.70.0",
+    "jest": "^22.4.3",
+    "jest-react-native": "^18.0.0",
+    "react-test-renderer": "^16.3.2",
+    "reaction-build": "0.0.17",
+    "rimraf": "^2.6.2"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
