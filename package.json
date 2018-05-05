@@ -1,6 +1,6 @@
 {
   "name": "reaction-build",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Build tool for reaction",
   "homepage": "reaction.codejam.ninja",
   "author": {
@@ -61,7 +61,6 @@
     "react-art": "^16.3.2",
     "react-dev-utils": "^5.0.1",
     "react-error-overlay": "^4.0.0",
-    "react-hot-loader": "^4.1.2",
     "react-native-web": "^0.6.1",
     "sockjs-client": "^1.1.4",
     "start-server-webpack-plugin": "^2.2.5",
