@@ -3,7 +3,8 @@ import path from 'path';
 import {
   DefinePlugin,
   NamedModulesPlugin,
-  HotModuleReplacementPlugin
+  HotModuleReplacementPlugin,
+  NoEmitOnErrorsPlugin
 } from 'webpack';
 import createNodeConfig from './createNodeConfig';
 import createWebConfig from './createWebConfig';
@@ -103,7 +104,9 @@ export default function createWebpackConfig(target = 'web', action, config) {
         ...envs
       }),
       ...(environment !== 'production' ? [new NamedModulesPlugin()] : []),
-      ...(action === 'start' ? [new HotModuleReplacementPlugin()] : [])
+      ...(action === 'start'
+        ? [new HotModuleReplacementPlugin(), new NoEmitOnErrorsPlugin()]
+        : [])
     ]
   };
   if (target === 'web') {

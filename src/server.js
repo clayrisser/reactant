@@ -30,10 +30,7 @@ app.use((err, req, res, next) => {
 const server = createServer(app);
 
 server.listen(config.port, err => {
-  if (err) {
-    log.error(err);
-    return false;
-  }
+  if (err) throw err;
   log.info(`listening on port ${config.port}`);
   if (module.hot) {
     module.hot.accept('~/../web/server.js', () => {
@@ -41,7 +38,6 @@ server.listen(config.port, err => {
     });
     log.info('[HMR] server HMR enabled');
   }
-  return true;
 });
 
 export default app;

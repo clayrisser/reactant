@@ -18,10 +18,11 @@ import {
 const browserWindow = window;
 
 if (config.options.verbose) setLevel('verbose');
-if (config.options.debug) setLevel('debug');
-if (config !== 'production') {
-  browserWindow.reaction = { config };
+if (config.options.debug) {
+  browserWindow.module = module;
+  setLevel('debug');
 }
+if (config !== 'production') browserWindow.reaction = { config };
 
 let hadServerError = false;
 let hadError = false;
@@ -35,27 +36,25 @@ startReportingRuntimeErrors({
   },
   filename: `${config.paths.distPublic}/scripts/bundle.js`
 });
-
 if (module.hot && _.isFunction(module.hot.dispose)) {
   module.hot.dispose(() => stopReportingRuntimeErrors());
 }
 
 createConnection(config.devPort, {
   async hash(message) {
-    hash = message.data;
     log.debug('hash', hash);
+    hash = message.data;
   },
   async stillOk() {
     log.debug('still-ok');
   },
   async ok() {
-    log.debug('applying updates . . .');
+    log.debug('ok');
     await handleSuccess();
-    log.debug('updates applied');
   },
   async contentChanged() {
     log.debug('content-changed');
-    browserWindow.location.reload();
+    windowReload();
   },
   async warnings(message) {
     log.debug('warnings');
@@ -139,28 +138,20 @@ async function handleWarnings(warnings) {
 browserWindow.hothot = module.hot;
 
 async function applyUpdates() {
-  if (!module.hot) return browserWindow.location.reload();
+  if (!module.hot) return windowReload();
   if (!isUpdateAvailable() || module.hot.status() !== 'idle') return false;
   return new Promise((resolve, reject) => {
     function handleApplyUpdates(err, _updatedModules) {
       if (err && !hadServerError) return reject(err);
       if (hadServerError) hadServerError = false;
-      if (isUpdateAvailable()) {
-        return applyUpdates().then(() => {
-          return resolve();
-        });
-      }
+      if (isUpdateAvailable()) applyUpdates().then(() => resolve());
       return resolve();
     }
     const result = module.hot.check(true, handleApplyUpdates);
     if (result && result.then) {
       return result
-        .then(updatedModules => {
-          handleApplyUpdates(null, updatedModules);
-        })
-        .catch(err => {
-          handleApplyUpdates(err, null);
-        });
+        .then(updatedModules => handleApplyUpdates(null, updatedModules))
+        .catch(err => handleApplyUpdates(err, null));
     }
     return result;
   });
@@ -173,12 +164,28 @@ function isUpdateAvailable() {
 
 function clearErrors() {
   if (module.hot.status() === 'fail') {
-    browserWindow.location.reload();
+    windowReload();
   } else if (hadError) {
     hadError = false;
+    consoleClear();
+    dismissBuildError();
+  }
+}
+
+function windowReload() {
+  if (config.options.debug) {
+    log.debug('reloading window . . .');
+  } else {
+    browserWindow.location.reload();
+  }
+}
+
+function consoleClear() {
+  if (config.options.debug) {
+    log.debug('cleared console');
+  } else {
     // eslint-disable-next-line no-console
     console.clear();
-    dismissBuildError();
   }
 }
 

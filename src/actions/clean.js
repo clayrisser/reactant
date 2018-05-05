@@ -13,7 +13,7 @@ export default async function clean(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  const spinner = ora('Cleaning').start();
+  const spinner = ora('cleaning').start();
   const { paths } = config;
   await easycp(
     `rm -rf ${path.resolve(env.TMPDIR || '/tmp', 'react-*')} || true`
@@ -36,6 +36,6 @@ export default async function clean(options, config) {
     await silentcp('watchman watch-del-all');
   }
   fs.removeSync(paths.dist);
-  fs.removeSync(path.resolve('.exp'));
-  spinner.succeed('Cleaned');
+  fs.removeSync(path.resolve('.expo'));
+  spinner.succeed('cleaned');
 }

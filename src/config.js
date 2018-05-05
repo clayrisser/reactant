@@ -22,6 +22,7 @@ export default {
   babel: {
     presets: [['env', { modules: false }], 'react', 'stage-2'],
     plugins: [
+      // 'react-hot-loader/babel',
       'transform-decorators-legacy',
       'transform-class-properties',
       'react-native-web'
