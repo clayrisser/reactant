@@ -20,6 +20,7 @@ Please ★ this repo if you found it useful ★ ★ ★
 
 ## Demo
 
+[Watch on YouTube](http://img.youtube.com/vi/RHo6JZ7A8VY/0.jpg)
 [![Native iOS, Android and Web from Same Codebase with Live Hot Reload](http://img.youtube.com/vi/RHo6JZ7A8VY/0.jpg)](http://www.youtube.com/watch?v=RHo6JZ7A8VY "Native iOS, Android and Web from Same Codebase with Live Hot Reload")
 
 
