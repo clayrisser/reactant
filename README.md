@@ -41,25 +41,25 @@ git clone https://github.com/codejamninja/reaction
 
 ## Usage
 
-Web
+#### Web
 
 ```sh
 npm run start:web
 ```
 
-Expo
+#### Expo
 
 ```sh
 npm run start:expo
 ```
 
-Android
+#### Android
 
 ```sh
 npm run start:android
 ```
 
-iOS
+#### iOS
 
 ```sh
 npm run start:ios
