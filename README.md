@@ -6,7 +6,6 @@
 
 Please ★ this repo if you found it useful ★ ★ ★
 
-[![Native iOS, Android and Web from Same Codebase with Live Hot Reload](http://img.youtube.com/vi/RHo6JZ7A8VY/0.jpg)](http://www.youtube.com/watch?v=RHo6JZ7A8VY "Native iOS, Android and Web from Same Codebase with Live Hot Reload")
 
 ## Features
 
@@ -17,6 +16,11 @@ Please ★ this repo if you found it useful ★ ★ ★
 * Isomorphic (Universal)
 * Live Debugging
 * Compatible with Expo
+
+
+## Demo
+
+[![Native iOS, Android and Web from Same Codebase with Live Hot Reload](http://img.youtube.com/vi/RHo6JZ7A8VY/0.jpg)](http://www.youtube.com/watch?v=RHo6JZ7A8VY "Native iOS, Android and Web from Same Codebase with Live Hot Reload")
 
 
 ## Installation
