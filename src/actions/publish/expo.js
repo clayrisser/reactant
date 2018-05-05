@@ -9,7 +9,7 @@ export default async function publishExpo(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  const spinner = ora('Publishing expo\n').start();
+  const spinner = ora('publishing expo\n').start();
   await easycp('exp publish');
-  spinner.succeed('Published expo');
+  spinner.succeed('published expo');
 }

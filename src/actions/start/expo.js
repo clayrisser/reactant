@@ -10,7 +10,7 @@ export default async function startExpo(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  const spinner = ora('Starting expo\n').start();
+  const spinner = ora('starting expo\n').start();
   await clean(options, config);
   await easycp('adb reverse tcp:19000 tcp:19000 || true');
   setTimeout(() => {

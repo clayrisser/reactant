@@ -14,7 +14,7 @@ export default async function startWeb(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  const spinner = ora('Starting web').start();
+  const spinner = ora('starting web').start();
   await clean(options, config);
   const { paths } = config;
   fs.removeSync(path.resolve(paths.dist, 'assets.json'));
@@ -36,6 +36,6 @@ export default async function startWeb(options, config) {
   const clientDevServer = new DevServer(webStats, webpackWebConfig.devServer);
   clientDevServer.listen(config.devPort, 'localhost', err => {
     if (err) log.error(err);
-    spinner.succeed('Started web');
+    spinner.stop();
   });
 }

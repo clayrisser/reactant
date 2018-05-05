@@ -10,7 +10,7 @@ export default async function buildExpo(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  const spinner = ora('Building expo\n').start();
+  const spinner = ora('building expo\n').start();
   await clean(options, config);
   await easycp('exp build:android');
   switch (options.expoPlatform) {
@@ -25,5 +25,5 @@ export default async function buildExpo(options, config) {
       await easycp('exp build:ios');
       break;
   }
-  spinner.succeed('Built expo');
+  spinner.succeed('built expo');
 }

@@ -10,8 +10,8 @@ export default async function buildIos(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  const spinner = ora('Building ios\n').start();
+  const spinner = ora('building ios\n').start();
   await clean(options, config);
   await easycp('react-native bundle');
-  spinner.succeed('Built ios');
+  spinner.succeed('built ios');
 }

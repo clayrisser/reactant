@@ -12,12 +12,12 @@ export default async function publishWeb(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  const spinner = ora('Publishing web').start();
+  const spinner = ora('publishing web').start();
   await buildWeb(options, config);
   if (_.get(config, 'publish.web')) {
     await Promise.mapSeries(config.publish.web, async script => {
       await easycp(script);
     });
   }
-  spinner.succeed('Published web');
+  spinner.succeed('published web');
 }

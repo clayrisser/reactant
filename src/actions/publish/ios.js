@@ -12,12 +12,12 @@ export default async function publishIos(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  const spinner = ora('Publishing ios\n').start();
+  const spinner = ora('publishing ios\n').start();
   await buildIos(options, config);
   if (_.get(config, 'publish.ios')) {
     await Promise.mapSeries(config.publish.ios, async script => {
       await easycp(script);
     });
   }
-  spinner.succeed('Published ios');
+  spinner.succeed('published ios');
 }

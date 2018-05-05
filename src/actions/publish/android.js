@@ -12,12 +12,12 @@ export default async function publishAndroid(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  const spinner = ora('Publishing android\n').start();
+  const spinner = ora('publishing android\n').start();
   await buildAndroid(options, config);
   if (_.get(config, 'publish.android')) {
     await Promise.mapSeries(config.publish.android, async script => {
       await easycp(script);
     });
   }
-  spinner.succeed('Published android');
+  spinner.succeed('published android');
 }

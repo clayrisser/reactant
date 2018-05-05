@@ -10,7 +10,7 @@ export default async function startAndroid(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  const spinner = ora('Starting android\n').start();
+  const spinner = ora('starting android\n').start();
   await clean(options, config);
   await easycp('adb reverse tcp:8081 tcp:8081 || true');
   setTimeout(async () => {

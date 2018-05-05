@@ -22,7 +22,7 @@ export default async function buildWeb(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  const spinner = ora('Building web').start();
+  const spinner = ora('building web').start();
   const { paths } = config;
   await clean(options, config);
   fs.copySync(paths.srcPublic, paths.distPublic, {
@@ -33,10 +33,10 @@ export default async function buildWeb(options, config) {
     await measureFileSizesBeforeBuild(paths.distPublic)
   );
   if (warnings.length) {
-    spinner.warn('Built web');
+    spinner.warn('built web');
     log.info(warnings.join('\n\n'));
   } else {
-    spinner.succeed('Built web');
+    spinner.succeed('built web');
   }
   log.info('file sizes after gzip:\n');
   printFileSizesAfterBuild(stats, previousFileSizes, paths.dist);
@@ -49,14 +49,14 @@ async function runBuild(config, previousFileSizes) {
   const webpackNodeConfig = createWebpackConfig('node', 'build', config);
   log.debug('webpackNodeConfig', webpackNodeConfig);
   process.noDeprecation = true;
-  const webSpinner = ora('Compiling web').start();
+  const webSpinner = ora('compiling web').start();
   const webStats = await compile(webpackWebConfig);
   const webMessages = handleStats(webStats);
-  webSpinner.succeed('Compiled web');
-  const serverSpinner = ora('Compiling server').start();
+  webSpinner.succeed('compiled web');
+  const serverSpinner = ora('compiling server').start();
   const nodeStats = await compile(webpackNodeConfig);
   const nodeMessages = handleStats(nodeStats);
-  serverSpinner.succeed('Compiled server');
+  serverSpinner.succeed('compiled server');
   return {
     stats: webStats,
     previousFileSizes,

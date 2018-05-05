@@ -10,8 +10,8 @@ export default async function buildAndroid(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  const spinner = ora('Building android\n').start();
+  const spinner = ora('building android\n').start();
   await clean(options, config);
   await easycp('react-native bundle');
-  spinner.succeed('Built android');
+  spinner.succeed('built android');
 }
