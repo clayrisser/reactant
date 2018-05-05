@@ -11,7 +11,7 @@ export default async function startIos(options, config) {
     log.debug('config', config);
   }
   const spinner = ora('Starting ios\n').start();
-  await clean(options, config);
+  if (options.clean) await clean(options, config);
   await easycp('adb reverse tcp:8081 tcp:8081');
   setTimeout(async () => {
     spinner.stop();
