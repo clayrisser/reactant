@@ -6,7 +6,7 @@
 
 Please ★ this repo if you found it useful ★ ★ ★
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/RHo6JZ7A8VY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+[![Native iOS, Android and Web from Same Codebase with Live Hot Reload](http://img.youtube.com/vi/RHo6JZ7A8VY/0.jpg)](http://www.youtube.com/watch?v=RHo6JZ7A8VY "Native iOS, Android and Web from Same Codebase with Live Hot Reload")
 
 ## Features
 
