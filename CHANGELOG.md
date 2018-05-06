@@ -8,3 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.1.0] - 2018-05-05
 ### Added
 - Beta release
+
+## [0.1.1] - 2018-05-06
+### Changed
+- Updated reaction-build
+- Fixed web spinner

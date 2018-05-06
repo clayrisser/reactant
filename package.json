@@ -1,6 +1,6 @@
 {
   "name": "reaction",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A React framework",
   "main": "node_modules/reaction-build/lib/expo.js",
   "homepage": "https://github.com/codejamninja/reaction",
@@ -45,7 +45,7 @@
     "jest": "^22.4.3",
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "^16.3.2",
-    "reaction-build": "0.0.17",
+    "reaction-build": "0.1.1",
     "rimraf": "^2.6.2"
   },
   "dependencies": {
