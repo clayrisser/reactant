@@ -13,3 +13,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Updated reaction-build
 - Fixed web spinner
+
+## [0.2.0] - 2018-05-07
+### Added
+- Storybook
+- Inspector
