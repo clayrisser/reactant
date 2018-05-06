@@ -1,17 +1,17 @@
 import StartServerPlugin from 'start-server-webpack-plugin';
-import webpackNodeExternals from 'webpack-node-externals';
 import webpack from 'webpack';
+import webpackNodeExternals from 'webpack-node-externals';
 
 const { LimitChunkCountPlugin } = webpack.optimize;
 
 export default function createNodeConfig(webpackConfig, action, config) {
-  const { paths, host, devPort, options } = config;
+  const { paths, host, ports, options } = config;
   webpackConfig = {
     ...webpackConfig,
     entry: [paths.server],
     output: {
       path: paths.dist,
-      publicPath: action === 'start' ? `http://${host}:${devPort}/` : '/',
+      publicPath: action === 'start' ? `http://${host}:${ports.dev}/` : '/',
       filename: 'server.js'
     },
     node: {

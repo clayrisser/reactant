@@ -18,7 +18,7 @@ export default function createWebpackConfig(target = 'web', action, config) {
     mode: environment,
     resolve: {
       modules: [path.resolve('node_modules')],
-      extensions: ['.js', '.json', '.jsx', '.mjs'],
+      extensions: ['.web.js', '.js', '.json', '.jsx', '.mjs'],
       alias: {
         'react-native': require.resolve('react-native-web'),
         'webpack/hot/poll': require.resolve('webpack/hot/poll'),

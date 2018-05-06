@@ -12,6 +12,7 @@ export default {
     server: 'node_modules/reaction-build/lib/server.js',
     src: 'src',
     srcPublic: 'src/public',
+    stories: 'stories',
     web: 'web'
   },
   publish: {
@@ -20,9 +21,8 @@ export default {
     web: 'echo'
   },
   babel: {
-    presets: [['env', { modules: false }], 'react', 'stage-2'],
+    presets: [['env', { modules: false }], 'react-native', 'stage-2'],
     plugins: [
-      // 'react-hot-loader/babel',
       'transform-decorators-legacy',
       'transform-class-properties',
       'react-native-web'

@@ -35,7 +35,7 @@ export default async function startWeb(options, config) {
   );
   const webStats = webpack(webpackWebConfig);
   const clientDevServer = new DevServer(webStats, webpackWebConfig.devServer);
-  clientDevServer.listen(config.devPort, 'localhost', err => {
+  clientDevServer.listen(config.ports.dev, 'localhost', err => {
     if (err) log.error(err);
   });
 }

@@ -13,6 +13,7 @@ import startAndroid from './actions/start/android';
 import startExpo from './actions/start/expo';
 import startIos from './actions/start/ios';
 import startWeb from './actions/start/web';
+import storybook from './actions/storybook';
 import validate from './validate';
 import { setLevel } from './log';
 
@@ -35,6 +36,8 @@ export default async function action(cmd, options) {
       if (options.platform === 'ios') return startIos(options);
       if (options.platform === 'web') return startWeb(options);
       break;
+    case 'storybook':
+      return storybook(options);
     case 'publish':
       if (options.platform === 'android') return publishAndroid(options);
       if (options.platform === 'expo') return publishExpo(options);

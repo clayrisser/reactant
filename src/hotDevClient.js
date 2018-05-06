@@ -40,7 +40,7 @@ if (module.hot && _.isFunction(module.hot.dispose)) {
   module.hot.dispose(() => stopReportingRuntimeErrors());
 }
 
-createConnection(config.devPort, {
+createConnection(config.ports.dev, {
   async hash(message) {
     log.debug('hash', hash);
     hash = message.data;

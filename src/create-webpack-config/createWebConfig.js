@@ -5,7 +5,7 @@ import path from 'path';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export default function createWebConfig(webpackConfig, action, config) {
-  const { analyzerPort, paths, host, devPort, environment } = config;
+  const { ports, paths, host, environment } = config;
   webpackConfig = {
     ...webpackConfig,
     entry: {
@@ -13,7 +13,8 @@ export default function createWebConfig(webpackConfig, action, config) {
     },
     externals: {
       ...webpackConfig.externals,
-      winston: '{Logger:()=>{},transports:{Console:()=>{}}}'
+      winston: '{Logger:()=>{},transports:{Console:()=>{}}}',
+      'reaction/assets': '{}'
     },
     plugins: [
       ...webpackConfig.plugins,
@@ -28,7 +29,7 @@ export default function createWebConfig(webpackConfig, action, config) {
       ...webpackConfig,
       output: {
         path: paths.distPublic,
-        publicPath: action === 'start' ? `http://${host}:${devPort}/` : '/',
+        publicPath: action === 'start' ? `http://${host}:${ports.dev}/` : '/',
         pathinfo: true,
         filename: 'scripts/bundle.js',
         chunkFilename: 'scripts/[name].chunk.js',
@@ -84,7 +85,7 @@ export default function createWebConfig(webpackConfig, action, config) {
         hot: true,
         noInfo: true,
         overlay: false,
-        port: devPort,
+        port: ports.dev,
         quiet: true,
         watchOptions: { ignored: /node_modules/ }
       }
@@ -96,7 +97,7 @@ export default function createWebConfig(webpackConfig, action, config) {
       plugins: [
         ...webpackConfig.plugins,
         new BundleAnalyzerPlugin({
-          analyzerPort
+          analyzerPort: ports.analyzer
         })
       ]
     };
