@@ -1,6 +1,6 @@
 {
   "name": "reaction",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A React framework",
   "main": "node_modules/reaction-build/lib/expo.js",
   "homepage": "https://github.com/codejamninja/reaction",
@@ -36,6 +36,7 @@
     "start:expo:offline": "reaction start -p expo --offline",
     "start:ios": "reaction start -p ios",
     "start:web": "reaction start -p web",
+    "storybook": "reaction storybook",
     "test": "npm run lint && jest"
   },
   "devDependencies": {
@@ -45,10 +46,11 @@
     "jest": "^22.4.3",
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "^16.3.2",
-    "reaction-build": "0.1.1",
+    "reaction-build": "^0.2.0",
     "rimraf": "^2.6.2"
   },
   "dependencies": {
+    "autobind-decorator": "^2.1.0",
     "babel-polyfill": "^6.26.0",
     "cheerio": "^1.0.0-rc.2",
     "expo": "^26.0.0",

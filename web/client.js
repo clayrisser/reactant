@@ -1,26 +1,19 @@
 import 'babel-polyfill';
-import App from '~/App';
-import ignoreWarnings from 'ignore-warnings';
-import { AppRegistry } from 'react-native';
-import log from 'reaction/log';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ignoreWarnings from 'ignore-warnings';
+import { AppRegistry } from 'react-native';
+import { log } from 'reaction';
 
 ignoreWarnings([
   'Calling ReactDOM.render() to hydrate server-rendered markup will stop working in React v17'
 ]);
 
-AppRegistry.registerComponent('App', () => App);
+if (module.hot) module.hot.accept('~/App', () => renderApp());
 renderApp();
 
-if (module.hot) {
-  module.hot.accept('~/App', () => {
-    AppRegistry.registerComponent('App', () => require('~/App').default);
-    renderApp();
-  });
-}
-
 function renderApp() {
+  AppRegistry.registerComponent('App', () => require('~/App').default);
   AppRegistry.runApplication('App', {
     initialProps: {},
     // eslint-disable-next-line no-undef
