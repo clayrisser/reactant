@@ -30,12 +30,12 @@ export default async function startWeb(options, config) {
     },
     err => {
       if (err) log.error(err);
+      spinner.stop();
     }
   );
   const webStats = webpack(webpackWebConfig);
   const clientDevServer = new DevServer(webStats, webpackWebConfig.devServer);
   clientDevServer.listen(config.devPort, 'localhost', err => {
     if (err) log.error(err);
-    spinner.stop();
   });
 }
