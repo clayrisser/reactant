@@ -32,5 +32,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Storybook publish
 
 ## [0.2.4] - 2018-05-07
-### added
-- port detection
+### Added
+- Port detection
