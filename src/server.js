@@ -1,30 +1,38 @@
 import 'babel-polyfill';
 import app from '~/../web/server';
+import express from 'express';
+import path from 'path';
+import { __express as ejs } from 'ejs';
 // eslint-disable-next-line import/no-unresolved
-import config from 'reaction/config';
+import { config, log } from 'reaction';
 import { createServer } from 'http';
-// eslint-disable-next-line import/no-unresolved
-import log from 'reaction/log';
 
-app.use((err, req, res, next) => {
+app.disable('x-powered-by');
+
+let errorApp = null;
+
+if (module.hot) {
+  errorApp = express();
+  errorApp.disable('x-powered-by');
+  errorApp.set('views', path.resolve(__dirname, 'views'));
+  errorApp.set('view engine', 'ejs');
+  errorApp.engine('.ejs', ejs);
+  errorApp.use(express.static(path.resolve(__dirname, 'views')));
+  errorApp.use((req, res) => {
+    return res.render('error', { config, errStack: req.err.stack });
+  });
+}
+
+app.use((err, req, res, _next) => {
   if (err) {
     log.error(err);
-    if (config.environment === 'production') {
-      return res.status(500).send('Server error');
+    if (module.hot) {
+      req.err = err;
+      return errorApp.handle(req, res);
     }
-    const prettyError = JSON.stringify(err.stack)
-      .replace(/\s/g, '&nbsp;')
-      .replace(/\\n/g, '<br />');
-    return res
-      .status(500)
-      .send(
-        `Restart your sever after fixing the following error . . .<br /><br />${prettyError.substr(
-          1,
-          prettyError.length - 2
-        )}`
-      );
+    return res.status(500).send('Server error');
   }
-  return next();
+  return res.status(404).send('Page not found');
 });
 
 const server = createServer(app);

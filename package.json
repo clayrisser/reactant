@@ -1,6 +1,6 @@
 {
   "name": "reaction-build",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Build tool for reaction",
   "homepage": "reaction.codejam.ninja",
   "author": {
@@ -14,9 +14,10 @@
     "bin"
   ],
   "scripts": {
-    "build": "npm run clean && npm run test && npm run build:lib && npm run build:bin",
+    "build": "npm run clean && npm run test && npm run build:lib && npm run build:bin && npm run build:err",
     "build:bin": "mkdir bin && babel src/bin.js -o bin/reaction.js",
     "build:lib": "babel src --ignore bin.js -d lib",
+    "build:err": "parcel build src/views/error.html -d lib/views --out-file error.ejs",
     "clean": "rimraf lib bin",
     "lint": "eslint ./",
     "lint:fix": "eslint --fix ./",
@@ -45,6 +46,7 @@
     "circular-json": "^0.5.3",
     "cross-environment": "0.0.8",
     "easycp": "0.1.1",
+    "ejs": "^2.6.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
@@ -55,6 +57,7 @@
     "file-loader": "^1.1.11",
     "fs-extra": "^5.0.0",
     "html-loader": "^0.5.5",
+    "ignore-warnings": "^0.1.0",
     "loglevel": "^1.6.1",
     "markdown-loader": "^2.0.2",
     "ora": "^2.1.0",
@@ -77,6 +80,7 @@
   "devDependencies": {
     "eslint-plugin-jest": "^21.15.0",
     "jest": "^22.4.3",
+    "parcel-bundler": "^1.8.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-native": "^0.54.2",

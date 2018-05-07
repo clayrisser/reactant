@@ -49,3 +49,4 @@ idea/
 # Application
 /lib
 /bin
+/.cache
