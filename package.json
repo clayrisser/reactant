@@ -1,6 +1,6 @@
 {
   "name": "reaction",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A React framework",
   "main": "node_modules/reaction-build/lib/expo.js",
   "homepage": "https://github.com/codejamninja/reaction",
@@ -30,6 +30,7 @@
     "publish:ios": "reaction publish -p ios",
     "publish:web": "reaction publish -p web",
     "reaction": "reaction",
+    "setup:inotify": "reaction setup --inotify",
     "start": "npm run start:web",
     "start:android": "reaction start -p android",
     "start:expo": "reaction start -p expo",
