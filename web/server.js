@@ -8,7 +8,6 @@ import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 
 const app = express();
 
-app.disable('x-powered-by');
 app.use(express.static(config.paths.distPublic));
 app.get('/*', async (req, res, next) => {
   try {

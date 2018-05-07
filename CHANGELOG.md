@@ -18,3 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Storybook
 - Inspector
+
+## [0.2.1] - 2018-05-07
+### Changed
+- Use react-error-overlay for server errors
