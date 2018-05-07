@@ -1,15 +1,20 @@
 import 'babel-polyfill';
-import app from '~/../web/server';
 import express from 'express';
+// eslint-disable-next-line import/no-unresolved
+import { setLevel } from 'reaction/log';
+import ora from 'ora';
 import path from 'path';
 import { __express as ejs } from 'ejs';
 // eslint-disable-next-line import/no-unresolved
 import { config, log } from 'reaction';
 import { createServer } from 'http';
 
-app.disable('x-powered-by');
+if (config.options.verbose) setLevel('verbose');
+if (config.options.debug) setLevel('debug');
 
 let errorApp = null;
+let serverError = false;
+let serverSpinner = ora('starting server').start();
 
 if (module.hot) {
   errorApp = express();
@@ -23,29 +28,49 @@ if (module.hot) {
   });
 }
 
-app.use((err, req, res, _next) => {
-  if (err) {
-    log.error(err);
-    if (module.hot) {
-      req.err = err;
-      return errorApp.handle(req, res);
-    }
-    return res.status(500).send('Server error');
-  }
-  return res.status(404).send('Page not found');
-});
-
+const app = createApp();
 const server = createServer(app);
+startServer(server);
 
-server.listen(config.port, err => {
-  if (err) throw err;
-  log.info(`listening on port ${config.port}`);
-  if (module.hot) {
-    module.hot.accept('~/../web/server.js', () => {
-      log.info('[HMR] updating HMR . . .');
-    });
-    log.info('[HMR] server HMR enabled');
-  }
-});
+function createApp() {
+  // eslint-disable-next-line global-require
+  const app = require('~/../web/server').default;
+  app.disable('x-powered-by');
+  app.use((err, req, res, _next) => {
+    if (err) {
+      log.error(err);
+      if (module.hot) {
+        serverError = true;
+        req.err = err;
+        return errorApp.handle(req, res);
+      }
+      return res.status(500).send('Server error');
+    }
+    return res.status(404).send('Page not found');
+  });
+  return app;
+}
 
-export default app;
+function startServer(server) {
+  server.listen(config.port, err => {
+    if (err) throw err;
+    serverSpinner.succeed(`server listening on port ${config.port}`);
+    if (module.hot) {
+      module.hot.accept('~/../web/server.js', () => {
+        log.info('[HMR] updating HMR');
+        if (serverError) {
+          serverError = false;
+          serverSpinner = ora('restarting server');
+          server.close(() => {
+            const app = createApp();
+            const newServer = createServer(app);
+            startServer(newServer);
+          });
+        }
+      });
+      log.info('[HMR] server HMR enabled');
+    }
+  });
+}
+
+export default createApp();

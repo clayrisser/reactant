@@ -7,8 +7,12 @@
   <body>
     <script>
       window.reaction = {
-        config: JSON.parse('<%- JSON.stringify(config).replace(/"/g, \'\\"\') %>'),
-        errStack: '<%- errStack.replace(/\n/g, \'\\n\') %>'
+        config: JSON.parse(
+          '<%- JSON.stringify(config).replace(/\\/g, \'\\\\\')' +
+          '.replace(/"/g, \'\\"\').replace(/\n/g, \'\\n\') %>'
+        ),
+        errStack: '<%- errStack.replace(/\\/g, \'\\\\\')' +
+                  '.replace(/"/g, \'\\"\').replace(/\n/g, \'\\n\') %>'
       };
     </script>
     <script src="error.js"></script>

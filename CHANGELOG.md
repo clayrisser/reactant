@@ -34,3 +34,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.2.4] - 2018-05-07
 ### Added
 - Port detection
+
+## [0.2.5] - 2018-05-07
+### Added
+- Server auto heal
