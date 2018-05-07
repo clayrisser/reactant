@@ -1,6 +1,6 @@
 {
   "name": "reaction-build",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Build tool for reaction",
   "homepage": "reaction.codejam.ninja",
   "author": {
@@ -9,15 +9,14 @@
     "url": "https://codejam.ninja"
   },
   "main": "lib/index.js",
-  "files": [
-    "lib",
-    "bin"
-  ],
+  "files": ["lib", "bin"],
   "scripts": {
-    "build": "npm run clean && npm run test && npm run build:lib && npm run build:bin && npm run build:err",
+    "build":
+      "npm run clean && npm run test && npm run build:lib && npm run build:bin && npm run build:err",
     "build:bin": "mkdir bin && babel src/bin.js -o bin/reaction.js",
     "build:lib": "babel src --ignore bin.js -d lib",
-    "build:err": "parcel build src/views/error.html -d lib/views --out-file error.ejs",
+    "build:err":
+      "parcel build src/views/error.html -d lib/views --out-file error.ejs",
     "clean": "rimraf lib bin",
     "lint": "eslint ./",
     "lint:fix": "eslint --fix ./",
@@ -91,14 +90,9 @@
   "engines": {
     "node": ">= 4.0.0"
   },
-  "eslintIgnore": [
-    "lib",
-    "bin"
-  ],
+  "eslintIgnore": ["lib", "bin"],
   "jest": {
-    "testMatch": [
-      "**/tests/**/[^_]*.js"
-    ],
+    "testMatch": ["**/tests/**/[^_]*.js"],
     "verbose": true
   }
 }

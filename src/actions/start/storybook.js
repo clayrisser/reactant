@@ -1,15 +1,17 @@
 import easycp from 'easycp';
 import fs from 'fs-extra';
 import path from 'path';
-import createConfig from '../createConfig';
-import log from '../log';
+import clean from '../clean';
+import createConfig from '../../createConfig';
+import log from '../../log';
 
-export default async function storybook(options, config) {
+export default async function startStorybook(options, config) {
   if (!config) {
     config = createConfig({ options });
     log.debug('options', options);
     log.debug('config', config);
   }
+  if (options.clean) await clean(options, config);
   const storiesPath = fs.existsSync(
     path.resolve(config.paths.stories, '.storybook')
   )

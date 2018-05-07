@@ -9,7 +9,6 @@ commander.version(version);
 commander.command('build');
 commander.command('clean');
 commander.command('start');
-commander.command('storybook');
 commander.command('setup');
 commander.option('-a --analyze', 'analyze bundle');
 commander.option('-c --clean', 'clean');
