@@ -10,7 +10,7 @@ import log from '../../log';
 
 export default async function startWeb(options, config) {
   if (!config) {
-    config = createConfig({ defaultEnv: 'development', options });
+    config = await createConfig({ defaultEnv: 'development', options });
     log.debug('options', options);
     log.debug('config', config);
   }

@@ -7,7 +7,7 @@ import log from '../../log';
 
 export default async function buildExpo(options, config) {
   if (!config) {
-    config = createConfig({ defaultEnv: 'production', options });
+    config = await createConfig({ defaultEnv: 'production', options });
     log.debug('options', options);
     log.debug('config', config);
   }

@@ -9,9 +9,8 @@ if (_.includes(process.argv, '--debug')) {
   setLevel('debug');
 }
 
-const config = createConfig({});
-
-module.exports = webpackConfig => {
+module.exports = async webpackConfig => {
+  const config = await createConfig({});
   webpackConfig.resolve.extensions.unshift('.web.js');
   webpackConfig.resolve.alias = { '~': config.paths.src };
   const jsxRule = _.find(

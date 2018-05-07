@@ -9,7 +9,7 @@ const { env } = process;
 
 export default async function clean(options, config) {
   if (!config) {
-    config = createConfig({ options });
+    config = await createConfig({ options });
     log.debug('options', options);
     log.debug('config', config);
   }

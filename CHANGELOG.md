@@ -24,4 +24,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.2.2] - 2018-05-07
 ### Added
-- Error handling when missing global dependencies
+- Environment error handing
+
+## [0.2.3] - 2018-05-07
+### Added
+- Storybook build
+- Storybook publish
+
+## [0.2.4] - 2018-05-07
+### added
+- port detection

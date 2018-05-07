@@ -1,12 +1,14 @@
 import _ from 'lodash';
+import detectPort from 'detect-port';
 import path from 'path';
 import rcConfig from 'rc-config';
 import { getEnv, setEnvironment } from 'cross-environment';
 import defaultConfig from './config';
 
 const pkg = require(path.resolve('package.json'));
+const occupiedPorts = [];
 
-export default function createConfig({
+export default async function createConfig({
   defaultEnv = 'development',
   options = {}
 }) {
@@ -19,6 +21,7 @@ export default function createConfig({
   const userConfig = rcConfig({ name: 'reaction' });
   const eslint = rcConfig({ name: 'eslint' });
   const config = _.merge(defaultConfig, userConfig);
+  const port = await getPort(config.port);
   return {
     ...config,
     publish: {
@@ -32,10 +35,12 @@ export default function createConfig({
         ? config.publish.ios
         : [config.publish.ios]
     },
+    port,
     ports: {
-      analyzer: config.port + 2,
-      dev: config.port + 3,
-      storybook: config.port + 1
+      analyzer: await getPort(port + 2),
+      dev: await getPort(port + 3),
+      storybook: await getPort(port + 1),
+      native: await getPort(8081)
     },
     envs: {
       ...config.envs,
@@ -53,4 +58,11 @@ export default function createConfig({
       _.map(config.paths, configPath => path.resolve(configPath))
     )
   };
+}
+
+async function getPort(port = 3333) {
+  let newPort = await detectPort(port);
+  if (_.includes(occupiedPorts, newPort)) return getPort(++newPort);
+  occupiedPorts.push(newPort);
+  return newPort;
 }

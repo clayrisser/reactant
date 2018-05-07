@@ -7,7 +7,7 @@ import log from '../../log';
 
 export default async function startAndroid(options, config) {
   if (!config) {
-    config = createConfig({ defaultEnv: 'development', options });
+    config = await createConfig({ defaultEnv: 'development', options });
     log.debug('options', options);
     log.debug('config', config);
   }
@@ -18,11 +18,11 @@ export default async function startAndroid(options, config) {
   }
   if (options.clean) await clean(options, config);
   if ((await readcp('which adb')).length) {
-    await easycp('adb reverse tcp:8081 tcp:8081 || true');
+    await easycp(`adb reverse tcp:8081 tcp:${config.ports.native} || true`);
   }
   setTimeout(async () => {
     spinner.stop();
-    easycp('react-native run-android');
+    easycp(`react-native run-android --port ${config.ports.native}`);
   }, 5000);
   await easycp('react-native start --reset-cache');
 }

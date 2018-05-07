@@ -17,9 +17,11 @@ export default {
     web: 'web'
   },
   publish: {
-    android: 'echo',
-    ios: 'echo',
-    web: 'echo'
+    android: 'echo "missing publish script"',
+    expo: 'echo "missing publish script"',
+    ios: 'echo "missing publish script"',
+    storybook: 'echo "missing publish script"',
+    web: 'echo "missing publish script"'
   },
   babel: {
     presets: [['env', { modules: false }], 'react-native', 'stage-2'],

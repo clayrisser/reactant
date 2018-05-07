@@ -7,7 +7,7 @@ import log from '../../log';
 
 export default async function startStorybook(options, config) {
   if (!config) {
-    config = createConfig({ options });
+    config = await createConfig({ options });
     log.debug('options', options);
     log.debug('config', config);
   }
