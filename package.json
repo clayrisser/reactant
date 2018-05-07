@@ -1,6 +1,6 @@
 {
   "name": "reaction",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A React framework",
   "main": "node_modules/reaction-build/lib/expo.js",
   "homepage": "https://github.com/codejamninja/reaction",
@@ -16,6 +16,7 @@
     "build:expo:android": "reaction build -p expo --expo-platform android",
     "build:expo:ios": "reaction build -p expo --expo-platform ios",
     "build:ios": "reaction build -p ios",
+    "build:storybook": "reaction build -p storybook",
     "build:web": "reaction build -p web",
     "build:web:analyze": "reaction build -p web --analyze",
     "build:web:serve": "npm run build:web && node dist/server.js",
@@ -28,6 +29,7 @@
     "publish:android": "reaction publish -p android",
     "publish:expo": "reaction publish -p expo",
     "publish:ios": "reaction publish -p ios",
+    "publish:storybook": "reaction publish -p storybook",
     "publish:web": "reaction publish -p web",
     "reaction": "reaction",
     "setup:inotify": "reaction setup --inotify",
@@ -36,8 +38,8 @@
     "start:expo": "reaction start -p expo",
     "start:expo:offline": "reaction start -p expo --offline",
     "start:ios": "reaction start -p ios",
+    "start:storybook": "reaction start -p storybook",
     "start:web": "reaction start -p web",
-    "storybook": "reaction storybook",
     "test": "npm run lint && jest"
   },
   "devDependencies": {
@@ -47,7 +49,7 @@
     "jest": "^22.4.3",
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "^16.3.2",
-    "reaction-build": "^0.2.1",
+    "reaction-build": "^0.2.4",
     "rimraf": "^2.6.2"
   },
   "dependencies": {
