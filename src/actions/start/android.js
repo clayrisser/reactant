@@ -1,4 +1,5 @@
-import easycp from 'easycp';
+import boom from 'boom';
+import easycp, { readcp } from 'easycp';
 import ora from 'ora';
 import clean from '../clean';
 import createConfig from '../../createConfig';
@@ -11,8 +12,14 @@ export default async function startAndroid(options, config) {
     log.debug('config', config);
   }
   const spinner = ora('starting android\n').start();
+  if (!(await readcp('which react-native')).length) {
+    spinner.stop();
+    throw boom.badRequest('react-native not installed');
+  }
   if (options.clean) await clean(options, config);
-  await easycp('adb reverse tcp:8081 tcp:8081 || true');
+  if ((await readcp('which adb')).length) {
+    await easycp('adb reverse tcp:8081 tcp:8081 || true');
+  }
   setTimeout(async () => {
     spinner.stop();
     easycp('react-native run-android');

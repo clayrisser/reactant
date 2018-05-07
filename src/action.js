@@ -9,6 +9,7 @@ import publishAndroid from './actions/publish/android';
 import publishExpo from './actions/publish/expo';
 import publishIos from './actions/publish/ios';
 import publishWeb from './actions/publish/web';
+import setup from './actions/setup';
 import startAndroid from './actions/start/android';
 import startExpo from './actions/start/expo';
 import startIos from './actions/start/ios';
@@ -30,6 +31,8 @@ export default async function action(cmd, options) {
       break;
     case 'clean':
       return clean(options);
+    case 'setup':
+      return setup(options);
     case 'start':
       if (options.platform === 'android') return startAndroid(options);
       if (options.platform === 'expo') return startExpo(options);

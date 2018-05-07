@@ -10,6 +10,7 @@ commander.command('build');
 commander.command('clean');
 commander.command('start');
 commander.command('storybook');
+commander.command('setup');
 commander.option('-a --analyze', 'analyze bundle');
 commander.option('-c --clean', 'clean');
 commander.option('-d --debug', 'debug logging');
@@ -19,6 +20,7 @@ commander.option('--inspect', 'inspect');
 commander.option('--inspect-brk', 'inpsect break');
 commander.option('--offline', 'offline');
 commander.option('--expo-platform [name]', 'expo platform name');
+commander.option('--inotify', 'increase inotify');
 commander.action((cmd, options) => {
   isAction = true;
   action(cmd, options).catch(error);
