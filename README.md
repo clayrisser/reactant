@@ -16,6 +16,8 @@ Please ★ this repo if you found it useful ★ ★ ★
 * Isomorphic (Universal)
 * Live Debugging
 * Compatible with Expo
+* Storybook integration
+* Built in bundle analyzer
 
 
 ## Demo
@@ -63,6 +65,12 @@ npm run start:android
 
 ```sh
 npm run start:ios
+```
+
+#### Storybook
+
+```sh
+npm run start:storybook
 ```
 
 
