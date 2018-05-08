@@ -1,4 +1,3 @@
-import SockjsClient from 'sockjs-client';
 import _ from 'lodash';
 // eslint-disable-next-line import/no-unresolved
 import config from 'reaction/config';
@@ -6,13 +5,13 @@ import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 // eslint-disable-next-line import/no-unresolved
 import log, { setLevel } from 'reaction/log';
 import stripAnsi from 'strip-ansi';
-import { format as urlFormat } from 'url';
 import {
   dismissBuildError,
   reportBuildError,
   startReportingRuntimeErrors,
   stopReportingRuntimeErrors
 } from 'react-error-overlay';
+import HotClient from './hotClient';
 
 // eslint-disable-next-line no-undef
 const browserWindow = window;
@@ -40,31 +39,40 @@ if (module.hot && _.isFunction(module.hot.dispose)) {
   module.hot.dispose(() => stopReportingRuntimeErrors());
 }
 
-createConnection(config.ports.dev, {
-  async hash(message) {
-    log.debug('hash', hash);
-    hash = message.data;
-  },
-  async stillOk() {
-    log.debug('still-ok');
-  },
-  async ok() {
-    log.debug('ok');
-    await handleSuccess();
-  },
-  async contentChanged() {
-    log.debug('content-changed');
-    windowReload();
-  },
-  async warnings(message) {
-    log.debug('warnings');
-    handleWarnings(message.data);
-  },
-  async errors(message) {
-    log.debug('errors');
-    handleErrors(message.data);
-  }
-});
+const client = new HotClient({ port: config.ports.dev });
+client.onConnected = async () => {
+  log.debug('connected');
+};
+client.onHash = async message => {
+  log.debug('hash', hash);
+  hash = message.data;
+};
+client.onStillOk = async () => {
+  log.debug('still-ok');
+};
+client.onOk = async () => {
+  log.debug('ok');
+  await handleSuccess();
+};
+client.onContentChanged = () => {
+  log.debug('content-changed');
+  windowReload();
+};
+client.onWarngins = message => {
+  log.debug('warnings');
+  handleWarnings(message.data);
+};
+client.onErrors = message => {
+  log.debug('errors');
+  handleErrors(message.data);
+};
+client.onClose = () => {
+  log.debug('close');
+  log.info(
+    'The development server has disconnected.\n' +
+      'Refresh the page if necessary.'
+  );
+};
 
 async function handleSuccess() {
   clearErrors();
@@ -187,55 +195,4 @@ function consoleClear() {
     // eslint-disable-next-line no-console
     console.clear();
   }
-}
-
-function createConnection(
-  port,
-  {
-    hash = () => {},
-    stillOk = () => {},
-    ok = () => {},
-    contentChanged = () => {},
-    warnings = () => {},
-    errors = () => {}
-  }
-) {
-  const connection = new SockjsClient(
-    urlFormat({
-      protocol: browserWindow.location.protocol,
-      hostname: browserWindow.location.hostname,
-      port,
-      pathname: '/sockjs-node'
-    })
-  );
-  connection.onclose = () => {
-    return log.info(
-      'The development server has disconnected.\n' +
-        'Refresh the page if necessary.'
-    );
-  };
-  connection.onmessage = e => {
-    const message = JSON.parse(e.data);
-    switch (message.type) {
-      case 'hash':
-        hash(message);
-        break;
-      case 'still-ok':
-        stillOk(message);
-        break;
-      case 'ok':
-        ok(message);
-        break;
-      case 'content-changed':
-        contentChanged(message);
-        break;
-      case 'warnings':
-        warnings(message);
-        break;
-      case 'errors':
-        errors(message);
-        break;
-    }
-  };
-  return connection;
 }
