@@ -22,7 +22,7 @@ Please ★ this repo if you found it useful ★ ★ ★
 
 ## Demo
 
-[Watch on YouTube](https://www.youtube.com/watch?v=RHo6JZ7A8VY))
+[Watch on YouTube](https://www.youtube.com/watch?v=RHo6JZ7A8VY)
 
 [![Native iOS, Android and Web from Same Codebase with Live Hot Reload](https://img.youtube.com/vi/RHo6JZ7A8VY/0.jpg)](https://www.youtube.com/watch?v=RHo6JZ7A8VY)
 
