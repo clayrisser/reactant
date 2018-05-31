@@ -13,7 +13,7 @@ if (module.hot) module.hot.accept('~/App', () => renderApp());
 renderApp();
 
 function renderApp() {
-  AppRegistry.registerComponent('App', () => require('~/App').default);
+  AppRegistry.registerComponent('App', () => require('./ClientApp').default);
   AppRegistry.runApplication('App', {
     initialProps: {},
     // eslint-disable-next-line no-undef
