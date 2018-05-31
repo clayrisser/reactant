@@ -1,18 +1,24 @@
-import App from '~/App';
 import cheerio from 'cheerio';
 import express from 'express';
-import indexHtml from './index.html';
 import { AppRegistry } from 'react-native';
 import { config, assets } from 'reaction';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
+import ServerApp from './ServerApp';
+import indexHtml from './index.html';
 
 const app = express();
 
 app.use(express.static(config.paths.distPublic));
 app.get('/*', async (req, res, next) => {
   try {
-    AppRegistry.registerComponent('App', () => App);
-    const { element, getStyleElement } = AppRegistry.getApplication('App', {});
+    const context = {};
+    AppRegistry.registerComponent('App', () => ServerApp);
+    const { element, getStyleElement } = AppRegistry.getApplication('App', {
+      initialProps: {
+        context,
+        location: req.url
+      }
+    });
     const appHtml = renderToString(element);
     const appCss = renderToStaticMarkup(getStyleElement());
     const $ = cheerio.load(indexHtml);
@@ -24,6 +30,7 @@ app.get('/*', async (req, res, next) => {
         config.environment === 'production' ? ' crossorigin' : ''
       }></script>`
     );
+    if (context.url) return res.redirect(301, context.url);
     return res.send($.html());
   } catch (err) {
     return next(err);

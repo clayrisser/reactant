@@ -1,5 +1,6 @@
 import Popup from '~/components/Popup';
 import React, { Component } from 'react';
+import Routes from '~/Routes';
 import { StyleSheet, Text, View } from 'react-native';
 
 class App extends Component {
@@ -8,6 +9,7 @@ class App extends Component {
       <View style={styles.box}>
         <Text style={styles.text}>Hello, world!</Text>
         <Popup title="Popup" message="I am a popup" />
+        <Routes />
       </View>
     );
   }
