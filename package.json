@@ -40,7 +40,8 @@
     "start:ios": "reaction start -p ios",
     "start:storybook": "reaction start -p storybook",
     "start:web": "reaction start -p web",
-    "test": "npm run lint && jest"
+    "test": "npm run lint && jest",
+    "storybook": "storybook start -p 7007"
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.1.1",
@@ -50,7 +51,14 @@
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "^16.3.2",
     "reaction-build": "^0.2.6",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "@storybook/react-native": "^3.4.7",
+    "@storybook/addon-actions": "^3.4.7",
+    "@storybook/addon-links": "^3.4.7",
+    "@storybook/addons": "^3.4.7",
+    "babel-core": "^6.26.3",
+    "babel-runtime": "^6.26.0",
+    "prop-types": "^15.6.1"
   },
   "dependencies": {
     "autobind-decorator": "^2.1.0",
