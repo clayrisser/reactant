@@ -15,21 +15,12 @@ export default async function clean(options, config) {
   }
   const spinner = ora('cleaning').start();
   const { paths } = config;
-  await easycp(
-    `rm -rf ${path.resolve(env.TMPDIR || '/tmp', 'react-*')} || true`
-  );
-  await easycp(
-    `rm -rf ${path.resolve(
-      env.TMPDIR || '/tmp',
-      'metro-bundler-cache-*'
-    )} || true`
-  );
-  await easycp(
-    `rm -rf ${path.resolve(
-      env.TMPDIR || '/tmp',
-      'haste-map-react-native-packager-*'
-    )} || true`
-  );
+  await easycp(`rm -rf ${path.resolve(env.TMPDIR || '/tmp', 'react-*')}`);
+  await easycp(`rm -rf ${path.resolve(env.TMPDIR || '/tmp', 'metro-*')}`);
+  await easycp(`rm -rf ${path.resolve(env.TMPDIR || '/tmp', 'haste-map-*')}`);
+  await easycp(`rm -rf ${path.resolve(paths.android, 'build')}`);
+  await easycp(`rm -rf ${path.resolve(paths.android, 'app/build')}`);
+  await easycp(`rm -rf ${path.resolve(paths.ios, 'build')}`);
   if (options.debug) {
     await easycp('watchman watch-del-all');
   } else {

@@ -1,5 +1,5 @@
 import boom from 'boom';
-import easycp, { readcp } from 'easycp';
+import easycp, { readcp, silentcp } from 'easycp';
 import ora from 'ora';
 import clean from '../clean';
 import createConfig from '../../createConfig';
@@ -18,10 +18,8 @@ export default async function startExpo(options, config) {
   }
   if (options.clean) await clean(options, config);
   if ((await readcp('which adb')).length) {
-    await easycp('adb reverse tcp:19000 tcp:19000 || true');
+    await silentcp('adb reverse tcp:19000 tcp:19000');
   }
-  setTimeout(() => {
-    spinner.stop();
-  }, 10000);
+  spinner.stop();
   await easycp(`exp start${options.offline ? ' --offline --localhost' : ''}`);
 }

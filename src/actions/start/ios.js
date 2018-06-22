@@ -17,12 +17,6 @@ export default async function startIos(options, config) {
     throw boom.badRequest('react-native not installed');
   }
   if (options.clean) await clean(options, config);
-  if ((await readcp('which adb')).length) {
-    await easycp(`adb reverse tcp:8081 tcp:${config.ports.native}`);
-  }
-  setTimeout(async () => {
-    spinner.stop();
-    easycp(`react-native run-ios --port ${config.ports.native}`);
-  }, 5000);
-  await easycp('react-native start --reset-cache');
+  spinner.stop();
+  easycp(`react-native run-ios --port ${config.ports.native}`);
 }

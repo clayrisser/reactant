@@ -1,5 +1,5 @@
 import boom from 'boom';
-import easycp, { readcp } from 'easycp';
+import easycp, { readcp, silentcp } from 'easycp';
 import ora from 'ora';
 import clean from '../clean';
 import createConfig from '../../createConfig';
@@ -18,10 +18,10 @@ export default async function startAndroid(options, config) {
   }
   if (options.clean) await clean(options, config);
   if ((await readcp('which adb')).length) {
-    await easycp(`adb reverse tcp:8081 tcp:${config.ports.native} || true`);
+    await silentcp(`adb reverse tcp:8081 tcp:${config.ports.native}`);
   }
+  spinner.stop();
   setTimeout(async () => {
-    spinner.stop();
     easycp(`react-native run-android --port ${config.ports.native}`);
   }, 5000);
   await easycp('react-native start --reset-cache');

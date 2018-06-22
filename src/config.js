@@ -6,14 +6,16 @@ export default {
   port: env.REACTION_PORT || 3333,
   envs: {},
   paths: {
+    android: 'android',
     client: 'web/client.js',
     dist: 'dist',
     distPublic: 'dist/public',
     distStorybook: 'dist/storybook',
+    ios: 'ios',
     server: 'node_modules/reaction-build/lib/server.js',
     src: 'src',
     srcPublic: 'src/public',
-    stories: 'stories',
+    stories: 'storybook/stories',
     web: 'web'
   },
   publish: {
