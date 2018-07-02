@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, Content } from 'native-base';
-import { Link } from 'reaction';
+import { Link } from 'reaction-build';
 
 export default class Splash extends Component {
   render() {
