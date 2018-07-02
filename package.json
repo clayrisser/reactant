@@ -1,7 +1,7 @@
 {
   "name": "reaction",
   "version": "0.2.5",
-  "description": "A React framework",
+  "description": "Write once . . . render everywhere",
   "main": "node_modules/reaction-build/lib/expo.js",
   "homepage": "https://github.com/codejamninja/reaction",
   "author": {
@@ -48,7 +48,7 @@
     "jest": "^22.4.3",
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "^16.3.2",
-    "reaction-build": "^0.2.13",
+    "reaction-build": "^0.2.15",
     "rimraf": "^2.6.2"
   },
   "dependencies": {
@@ -61,7 +61,7 @@
     "ignore-warnings": "^0.1.0",
     "lodash": "^4.17.5",
     "native-base": "^2.6.1",
-    "native-base-web": "0.0.5",
+    "native-base-web": "github:codejamninja/native-base-web#npm",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-art": "^16.3.2",
