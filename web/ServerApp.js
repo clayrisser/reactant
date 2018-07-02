@@ -3,13 +3,13 @@ import { StaticRouter } from 'react-router';
 import { StyleProvider, Root } from 'native-base';
 import App from '../src/App';
 import getTheme from '../src/theme/components';
-import variables from '../src/theme/variables';
+import { material } from '../src/theme/variables';
 
 export default class ServerApp extends Component {
   render() {
     return (
       <StaticRouter {...this.props}>
-        <StyleProvider style={getTheme(variables)}>
+        <StyleProvider style={getTheme(material)}>
           <Root>
             <App />
           </Root>
