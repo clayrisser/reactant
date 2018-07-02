@@ -6,7 +6,9 @@ import config from 'reaction/config';
 import inspect from 'reaction/inspect';
 // eslint-disable-next-line import/no-unresolved
 import log from 'reaction/log';
+// eslint-disable-next-line import/no-unresolved
+import Link from 'reaction/Link';
 
-export { assets, config, inspect, log };
+export { assets, config, inspect, log, Link };
 
-export default { assets, config, inspect, log };
+export default { assets, config, inspect, log, Link };
