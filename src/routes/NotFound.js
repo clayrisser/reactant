@@ -3,6 +3,6 @@ import { Text } from 'react-native';
 
 export default class NotFound extends Component {
   render() {
-    return <Text>Hi</Text>;
+    return <Text>Not Found</Text>;
   }
 }
