@@ -11,12 +11,12 @@ export default async function startExpo(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
+  if (options.clean) await clean(options, config);
   const spinner = ora('starting expo\n').start();
   if (!(await readcp('which exp')).length) {
     spinner.stop();
     throw boom.badRequest('exp not installed');
   }
-  if (options.clean) await clean(options, config);
   if ((await readcp('which adb')).length) {
     await silentcp('adb reverse tcp:19000 tcp:19000');
   }

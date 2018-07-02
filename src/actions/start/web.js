@@ -14,8 +14,8 @@ export default async function startWeb(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  const spinner = ora('starting web').start();
   if (options.clean) await clean(options, config);
+  const spinner = ora('starting web').start();
   const { paths } = config;
   fs.removeSync(path.resolve(paths.dist, 'assets.json'));
   const webpackWebConfig = createWebpackConfig('web', 'start', config);

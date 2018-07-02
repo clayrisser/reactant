@@ -1,6 +1,6 @@
 {
   "name": "reaction-build",
-  "version": "0.2.15",
+  "version": "0.2.18",
   "description": "Build tool for reaction",
   "homepage": "reaction.codejam.ninja",
   "author": {
@@ -95,7 +95,6 @@
     "parcel-bundler": "^1.8.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-native": "^0.54.2",
     "rimraf": "^2.6.2"
   },
   "license": "MIT",

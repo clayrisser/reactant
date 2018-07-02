@@ -11,12 +11,12 @@ export default async function buildExpo(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
+  await clean(options, config);
   const spinner = ora('building expo\n').start();
   if (!(await readcp('which exp')).length) {
     spinner.stop();
     throw boom.badRequest('exp not installed');
   }
-  await clean(options, config);
   await easycp('exp build:android');
   switch (options.expoPlatform) {
     case 'android':

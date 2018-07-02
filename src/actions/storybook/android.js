@@ -1,28 +1,25 @@
 import boom from 'boom';
-import easycp, { readcp, silentcp } from 'easycp';
+import easycp, { readcp } from 'easycp';
 import ora from 'ora';
 import clean from '../clean';
 import createConfig from '../../createConfig';
 import log from '../../log';
 
-export default async function startAndroid(options, config) {
+export default async function storybookAndroid(options, config) {
   if (!config) {
-    config = await createConfig({ defaultEnv: 'development', options });
+    config = await createConfig({ options });
     log.debug('options', options);
     log.debug('config', config);
   }
   if (options.clean) await clean(options, config);
-  const spinner = ora('starting android\n').start();
+  const spinner = ora('starting android storybook\n').start();
   if (!(await readcp('which react-native')).length) {
     spinner.stop();
     throw boom.badRequest('react-native not installed');
-  }
-  if ((await readcp('which adb')).length) {
-    await silentcp(`adb reverse tcp:8081 tcp:${config.ports.native}`);
   }
   spinner.stop();
   setTimeout(async () => {
     easycp(`react-native run-android --port ${config.ports.native}`);
   }, 5000);
-  await easycp('react-native start --reset-cache');
+  await easycp(`storybook start -p ${config.ports.storybookNative}`);
 }

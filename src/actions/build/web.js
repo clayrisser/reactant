@@ -22,9 +22,9 @@ export default async function buildWeb(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
+  await clean(options, config);
   const spinner = ora('building web').start();
   const { paths } = config;
-  await clean(options, config);
   if (fs.existsSync(paths.srcPublic)) {
     fs.copySync(paths.srcPublic, paths.distPublic, {
       dereference: true
