@@ -1,8 +1,21 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import Popup from '~/components/Popup';
+import PropTypes from 'prop-types';
+import { TouchableNativeFeedback } from 'react-native';
 
-const buttonStories = storiesOf('Button', module);
-buttonStories.add('with text', () => (
-  <Popup title="Hello Button" message="I am a popup" />
-));
+export default function Button(props) {
+  return (
+    <TouchableNativeFeedback onPress={props.onPress}>
+      {props.children}
+    </TouchableNativeFeedback>
+  );
+}
+
+Button.defaultProps = {
+  children: null,
+  onPress: () => {}
+};
+
+Button.propTypes = {
+  children: PropTypes.node,
+  onPress: PropTypes.func
+};
