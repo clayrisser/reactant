@@ -1,8 +1,53 @@
 # expo
 .expo/
 
-# dependencies
+# node
 /node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# iso
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+build/
+DerivedData/
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+
+# android
+*.apk
+*.ap_
+*.dex
+*.class
+bin/
+gen/
+out/
+.gradle/
+local.properties
+proguard/
+*.log
+.navigation/
+captures/
+*.iml
+.externalNativeBuild
+google-services.json
+freeline.py
+freeline/
+freeline_project_description.json
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+fastlane/readme.md
 
 # misc
 .env.local
@@ -10,18 +55,12 @@
 .env.test.local
 .env.production.local
 
-# android
-.gradle
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# build
+build/
+/dist
 
 # editors
 .idea/
-
-# build
-/android/build/*
-/android/app/build/*
-/android/app/app.iml
-/dist
+\#*\#
+.\#*
+*~
