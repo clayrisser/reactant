@@ -24,6 +24,7 @@
     "lint": "npm run lint:flow && eslint ./",
     "lint:fix": "eslint --fix ./",
     "lint:flow": "flow",
+    "prepublish": "rimraf node_modules/react-native-router/node_modules",
     "publish": "npm run publish:web",
     "publish:android": "reaction publish -p android",
     "publish:expo": "reaction publish -p expo",
@@ -36,6 +37,8 @@
     "start:expo": "reaction start -p expo",
     "start:expo:offline": "reaction start -p expo --offline",
     "start:ios": "reaction start -p ios",
+    "storybook:android": "reaction storybook -p android",
+    "storybook:ios": "reaction storybook -p ios",
     "storybook:web": "reaction storybook -p web",
     "start:web": "reaction start -p web",
     "test": "npm run lint && jest",
@@ -48,7 +51,7 @@
     "jest": "^22.4.3",
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "^16.3.2",
-    "reaction-build": "^0.2.15",
+    "reaction-build": "^0.2.18",
     "rimraf": "^2.6.2"
   },
   "dependencies": {
