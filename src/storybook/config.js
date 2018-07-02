@@ -1,13 +1,5 @@
 import { configure } from '@storybook/react';
+// eslint-disable-next-line import/no-unresolved
+import stories from '../../../../storybook/stories';
 
-// const req = require.context(
-//   '/home/codejamninja/Projects/reaction/storybook/stories',
-//   true,
-//   /[^/]+\/index.web\.js$/
-// );
-
-configure(() => {
-  // req.keys().forEach(path => req(path));
-  // eslint-disable-next-line
-  require('/home/codejamninja/Projects/reaction/storybook/stories');
-}, module);
+configure(() => stories, module);

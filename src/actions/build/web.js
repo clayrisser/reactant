@@ -25,9 +25,13 @@ export default async function buildWeb(options, config) {
   const spinner = ora('building web').start();
   const { paths } = config;
   await clean(options, config);
-  fs.copySync(paths.srcPublic, paths.distPublic, {
-    dereference: true
-  });
+  if (fs.existsSync(paths.srcPublic)) {
+    fs.copySync(paths.srcPublic, paths.distPublic, {
+      dereference: true
+    });
+  } else {
+    fs.mkdirsSync(paths.distPublic);
+  }
   const { stats, previousFileSizes, warnings } = await runBuild(
     config,
     await measureFileSizesBeforeBuild(paths.distPublic)
