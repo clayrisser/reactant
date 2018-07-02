@@ -1,14 +1,13 @@
-import variable from './../variables/platform';
+import variable from '~/theme/variables/platform';
 
 export default (variables = variable) => {
-	const rightTheme = {
-		'NativeBase.Button': {
-			alignSelf: null,
-		},
-		flex: 1,
-		alignSelf: 'center',
-		alignItems: 'flex-end',
-	};
-
-	return rightTheme;
+  const rightTheme = {
+    'NativeBase.Button': {
+      alignSelf: null
+    },
+    flex: 1,
+    alignSelf: 'center',
+    alignItems: 'flex-end'
+  };
+  return rightTheme;
 };
