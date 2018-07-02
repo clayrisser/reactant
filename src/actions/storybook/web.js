@@ -5,7 +5,7 @@ import clean from '../clean';
 import createConfig from '../../createConfig';
 import log from '../../log';
 
-export default async function startStorybook(options, config) {
+export default async function storybookWeb(options, config) {
   if (!config) {
     config = await createConfig({ options });
     log.debug('options', options);

@@ -1,4 +1,6 @@
+import 'babel-polyfill';
 import _ from 'lodash';
+import { sleep } from 'deasync';
 import createConfig from '../createConfig';
 import log, { setLevel } from '../log';
 
@@ -9,10 +11,18 @@ if (_.includes(process.argv, '--debug')) {
   setLevel('debug');
 }
 
-module.exports = async webpackConfig => {
-  const config = await createConfig({});
+module.exports = webpackConfig => {
+  let config = null;
+  createConfig({}).then(loadedConfig => {
+    config = loadedConfig;
+  });
+  while (!config) sleep(100);
   webpackConfig.resolve.extensions.unshift('.web.js');
-  webpackConfig.resolve.alias = { '~': config.paths.src };
+  webpackConfig.resolve.alias = {
+    '~': config.paths.src,
+    'react-native': require.resolve('react-native-web'),
+    reaction: 'reaction-build/lib'
+  };
   const jsxRule = _.find(
     webpackConfig.module.rules,
     rule => rule.loader.indexOf('babel-loader') > -1

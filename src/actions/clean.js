@@ -8,12 +8,12 @@ import log from '../log';
 const { env } = process;
 
 export default async function clean(options, config) {
+  const spinner = ora('cleaning').start();
   if (!config) {
     config = await createConfig({ options });
     log.debug('options', options);
     log.debug('config', config);
   }
-  const spinner = ora('cleaning').start();
   const { paths } = config;
   await easycp(`rm -rf ${path.resolve(env.TMPDIR || '/tmp', 'react-*')}`);
   await easycp(`rm -rf ${path.resolve(env.TMPDIR || '/tmp', 'metro-*')}`);
