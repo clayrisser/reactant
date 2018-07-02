@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, Content } from 'native-base';
 import { Link } from 'reaction';
 
 export default class Splash extends Component {
   render() {
     return (
-      <Link to="/404">
-        <Text>Splash</Text>
-      </Link>
+      <Content>
+        <Text>Loading . . .</Text>
+        <Link to="/todo-list">
+          <Text>ToDo List</Text>
+        </Link>
+      </Content>
     );
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.props.history.push('/todo-list');
+    }, 3000);
   }
 }

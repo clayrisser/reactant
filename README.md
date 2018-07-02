@@ -2,7 +2,7 @@
 
 [![GitHub stars](https://img.shields.io/github/stars/codejamninja/reaction.svg?style=social&label=Stars)](https://github.com/codejamninja/reaction)
 
-> One codebase to bring them all and in the darkness bind them
+> Write once . . . render everywhere
 
 Please ★ this repo if you found it useful ★ ★ ★
 
