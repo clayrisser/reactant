@@ -1,0 +1,51 @@
+{
+  "name": "reaction-base",
+  "version": "0.0.1",
+  "description": "Reaction core components",
+  "homepage": "https://github.com/codejamninja/reaction-base",
+  "bugs": {
+    "url": "https://github.com/codejamninja/reaction-base/issues",
+    "email": "jam@codejam.ninja"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Jam Risser",
+    "email": "jam@codejam.ninja",
+    "url": "https://codejam.ninja"
+  },
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codejamninja/reaction-base"
+  },
+  "scripts": {
+    "build": "babel src -d lib",
+    "clean": "rimraf lib && jest --clearCache",
+    "lint": "eslint ./",
+    "lint:fix": "eslint --fix ./",
+    "prepublish": "npm run build",
+    "test": "npm run lint && jest --forceExit"
+  },
+  "dependencies": {
+    "react-router-dom": "^4.3.1",
+    "react-router-native": "^4.3.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.9.0",
+    "jest": "^23.2.0",
+    "rimraf": "^2.6.2"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  }
+}
