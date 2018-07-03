@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-unresolved
-import Link from './Link';
+import storiesOf from './storiesOf';
 
-export { Link };
-export default { Link };
+export { storiesOf };
+export default { storiesOf };

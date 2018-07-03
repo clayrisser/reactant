@@ -1,12 +1,12 @@
 import 'babel-polyfill';
 import express from 'express';
 // eslint-disable-next-line import/no-unresolved
-import { setLevel } from 'reaction/log';
+import { setLevel } from 'reaction-base/lib/log';
 import ora from 'ora';
 import path from 'path';
 import { __express as ejs } from 'ejs';
 // eslint-disable-next-line import/no-unresolved
-import { config, log } from 'reaction';
+import { config, log } from 'reaction-base';
 import { createServer } from 'http';
 
 if (config.options.verbose) setLevel('verbose');

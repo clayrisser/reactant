@@ -1,9 +1,7 @@
 import _ from 'lodash';
-// eslint-disable-next-line import/no-unresolved
-import config from 'reaction/config';
+import config from 'reaction-base/lib/config';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
-// eslint-disable-next-line import/no-unresolved
-import log, { setLevel } from 'reaction/log';
+import log, { setLevel } from 'reaction-base/lib/log';
 import stripAnsi from 'strip-ansi';
 import {
   dismissBuildError,

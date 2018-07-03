@@ -2,9 +2,9 @@
   "extends": ["airbnb/base", "prettier"],
   "parser": "babel-eslint",
   "rules": {
-    "default-case": "off",
     "arrow-body-style": "off",
     "class-methods-use-this": "off",
+    "default-case": "off",
     "import/no-dynamic-require": "off",
     "import/no-extraneous-dependencies": "off",
     "no-param-reassign": "off",
@@ -16,14 +16,17 @@
     "no-unused-vars": [
       "warn",
       {
-        "vars": "all",
         "args": "after-used",
+        "argsIgnorePattern": "^_",
         "ignoreRestSiblings": true,
-        "argsIgnorePattern": "^_"
+        "vars": "all"
       }
     ],
     "comma-dangle": ["error", "never"],
     "import/extensions": ["error", "ignorePackages"],
-    "import/no-unresolved": ["error", { "ignore": ["^~"] }]
+    "import/no-unresolved": [
+      "error",
+      { "ignore": ["^~", "/storiesOf", "^reation-build", "^reaction-base"] }
+    ]
   }
 }

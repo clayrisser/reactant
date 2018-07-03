@@ -20,7 +20,6 @@ module.exports = webpackConfig => {
   webpackConfig.resolve.extensions.unshift('.web.js');
   webpackConfig.resolve.alias = {
     '~': config.paths.src,
-    reaction: 'reaction-build/lib',
     'native-base': require.resolve('native-base-web'),
     'react/lib/ReactNativePropRegistry': require.resolve(
       'react-native-web/dist/modules/ReactNativePropRegistry'
