@@ -1,6 +1,6 @@
 {
   "name": "reaction-base",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Reaction core components",
   "homepage": "https://github.com/codejamninja/reaction-base",
   "bugs": {
@@ -30,8 +30,13 @@
     "test": "npm run lint && jest --forceExit"
   },
   "dependencies": {
+    "cross-environment": "0.0.8",
+    "lodash": "^4.17.10",
+    "loglevel": "^1.6.1",
+    "react-native": "^0.54.2",
     "react-router-dom": "^4.3.1",
-    "react-router-native": "^4.3.0"
+    "react-router-native": "^4.3.0",
+    "winston": "^3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
