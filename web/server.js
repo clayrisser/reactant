@@ -1,7 +1,7 @@
 import cheerio from 'cheerio';
 import express from 'express';
 import { AppRegistry } from 'react-native';
-import { config, assets } from 'reaction';
+import { config, assets } from 'reaction-base';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import ServerApp from './ServerApp';
 import indexHtml from './index.html';
