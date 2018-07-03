@@ -1,5 +1,5 @@
 import React from 'react';
-import storiesOf from 'reaction/storiesOf';
+import { storiesOf } from 'reaction-build';
 import { Text } from 'react-native';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
