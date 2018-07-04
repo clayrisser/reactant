@@ -10,7 +10,7 @@
     "url": "https://codejam.ninja"
   },
   "scripts": {
-    "build": "npm run build:web",
+    "build": "reaction build",
     "build:android": "reaction build -p android",
     "build:expo": "reaction build -p expo",
     "build:expo:android": "reaction build -p expo --expo-platform android",
@@ -25,7 +25,7 @@
     "lint:fix": "eslint --fix ./",
     "lint:flow": "flow",
     "prepublish": "rimraf node_modules/react-native-router/node_modules",
-    "publish": "npm run publish:web",
+    "publish": "npm run publish",
     "publish:android": "reaction publish -p android",
     "publish:expo": "reaction publish -p expo",
     "publish:ios": "reaction publish -p ios",
@@ -37,21 +37,20 @@
     "start:expo": "reaction start -p expo",
     "start:expo:offline": "reaction start -p expo --offline",
     "start:ios": "reaction start -p ios",
+    "start:web": "reaction start -p web",
+    "storybook": "storybook",
     "storybook:android": "reaction storybook -p android",
     "storybook:ios": "reaction storybook -p ios",
     "storybook:web": "reaction storybook -p web",
-    "start:web": "reaction start -p web",
-    "test": "npm run lint && jest",
-    "storybook": "npm run storybook:web"
+    "test": "npm run lint && jest"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
-    "babel-preset-react-native-stage-0": "^1.0.1",
     "flow-bin": "^0.70.0",
     "jest": "^22.4.3",
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "^16.3.2",
-    "reaction-build": "^0.2.19",
+    "reaction-build": "^0.2.22",
     "rimraf": "^2.6.2"
   },
   "dependencies": {
@@ -76,7 +75,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-router-native": "^4.3.0",
-    "reaction-base": "0.0.5"
+    "reaction-base": "0.0.12"
   },
   "license": "MIT",
   "repository": "https://github.com/codejamninja/reaction",

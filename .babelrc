@@ -1,8 +1,10 @@
 {
-  "presets": ["babel-preset-react-native-stage-0/decorator-support"],
-  "env": {
-    "development": {
-      "plugins": ["transform-react-jsx-source"]
-    }
-  }
+  "presets": [
+    "react-native",
+    "stage-2"
+  ],
+  "plugins": [
+    "transform-decorators-legacy",
+    "transform-class-properties",
+  ]
 }
