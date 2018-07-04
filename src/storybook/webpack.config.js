@@ -1,8 +1,9 @@
 import 'babel-polyfill';
+import CircularJSON from 'circular-json';
 import _ from 'lodash';
+import log, { setLevel } from 'reaction-base/lib/log';
 import { sleep } from 'deasync';
 import createConfig from '../createConfig';
-import log, { setLevel } from '../log';
 
 if (_.includes(process.argv, '--verbose')) {
   setLevel('verbose');
@@ -25,6 +26,10 @@ module.exports = webpackConfig => {
       'react-native-web/dist/modules/ReactNativePropRegistry'
     ),
     'react-native': require.resolve('react-native-web')
+  };
+  webpackConfig.externals = {
+    ...webpackConfig.externals,
+    'reaction-base/lib/config': CircularJSON.stringify(config)
   };
   const jsxRule = _.find(
     webpackConfig.module.rules,

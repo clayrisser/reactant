@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import log from './log';
+import { log } from 'reaction-base';
 
 export default function error(err) {
   if (err.isJoi) err.code = 400;

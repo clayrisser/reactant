@@ -5,10 +5,10 @@ import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import fs from 'fs-extra';
 import ora from 'ora';
 import webpack from 'webpack';
+import { log } from 'reaction-base';
 import clean from '../clean';
 import createConfig from '../../createConfig';
 import createWebpackConfig from '../../create-webpack-config';
-import log from '../../log';
 
 const {
   measureFileSizesBeforeBuild,

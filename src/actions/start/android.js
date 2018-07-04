@@ -1,9 +1,9 @@
 import boom from 'boom';
 import easycp, { readcp, silentcp } from 'easycp';
 import ora from 'ora';
+import { log } from 'reaction-base';
 import clean from '../clean';
 import createConfig from '../../createConfig';
-import log from '../../log';
 
 export default async function startAndroid(options, config) {
   if (!config) {

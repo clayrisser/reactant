@@ -2,9 +2,9 @@ import easycp from 'easycp';
 import fs from 'fs-extra';
 import ora from 'ora';
 import path from 'path';
+import { log } from 'reaction-base';
 import clean from '../clean';
 import createConfig from '../../createConfig';
-import log from '../../log';
 
 export default async function storybookWeb(options, config) {
   if (!config) {

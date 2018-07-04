@@ -2,8 +2,8 @@ import easycp, { silentcp } from 'easycp';
 import fs from 'fs-extra';
 import ora from 'ora';
 import path from 'path';
+import { log } from 'reaction-base';
 import createConfig from '../createConfig.js';
-import log from '../log';
 
 const { env } = process;
 

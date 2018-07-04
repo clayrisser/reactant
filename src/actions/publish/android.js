@@ -2,9 +2,9 @@ import Promise from 'bluebird';
 import _ from 'lodash';
 import easycp from 'easycp';
 import ora from 'ora';
+import { log } from 'reaction-base';
 import buildAndroid from '../build/android';
 import createConfig from '../../createConfig';
-import log from '../../log';
 
 export default async function publishAndroid(options, config) {
   if (!config) {

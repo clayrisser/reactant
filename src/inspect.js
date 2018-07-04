@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { getRuntime } from 'cross-environment';
-import log from './log';
+import { log } from 'reaction-base';
 
 export default function inspect(...args) {
   log.info(...args);

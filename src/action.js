@@ -1,5 +1,6 @@
 import boom from 'boom';
 import commander from 'commander';
+import { setLevel } from 'reaction-base/lib/log';
 import buildAndroid from './actions/build/android';
 import buildExpo from './actions/build/expo';
 import buildIos from './actions/build/ios';
@@ -18,7 +19,6 @@ import storybookAndroid from './actions/storybook/android';
 import storybookIos from './actions/storybook/ios';
 import storybookWeb from './actions/storybook/web';
 import validate from './validate';
-import { setLevel } from './log';
 
 export default async function action(cmd, options) {
   if (options.verbose) setLevel('verbose');

@@ -1,8 +1,8 @@
 import boom from 'boom';
 import easycp, { silentcp } from 'easycp';
 import ora from 'ora';
+import { log } from 'reaction-base';
 import createConfig from '../createConfig';
-import log from '../log';
 
 export default async function setup(options, config) {
   if (!config) {
