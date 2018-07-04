@@ -18,8 +18,8 @@ function createLogger() {
       );
       return loglevel;
     }
-    // eslint-disable-next-line global-require
-    const { Logger, transports } = require('winston');
+    // eslint-disable-next-line global-require,no-eval
+    const { Logger, transports } = eval("require('winston')");
     return new Logger({
       level: 'info',
       exitOnError: false,
