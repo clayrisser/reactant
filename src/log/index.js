@@ -2,6 +2,10 @@ import _ from 'lodash';
 import loglevel from 'loglevel';
 import { Logger, transports } from 'winston';
 
+// eslint-disable-next-line no-new-func
+const isBrowser = new Function(
+  'try { return this === window } catch (e) { return false }'
+);
 const log = createLogger();
 
 function createLogger() {
@@ -34,10 +38,5 @@ export function setLevel(level) {
     log.level = level;
   }
 }
-
-// eslint-disable-next-line no-new-func
-const isBrowser = new Function(
-  'try { return this === window } catch (e) { return false }'
-);
 
 export default log;
