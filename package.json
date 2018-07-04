@@ -76,7 +76,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-router-native": "^4.3.0",
-    "reaction-base": "0.0.4"
+    "reaction-base": "0.0.5"
   },
   "license": "MIT",
   "repository": "https://github.com/codejamninja/reaction",
