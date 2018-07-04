@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Container, Content, Text, CheckBox, ListItem } from 'native-base';
-import autobind from 'autobind-decorator';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import autobind from 'autobind-decorator';
+import { Text, CheckBox, ListItem } from 'native-base';
 
 @autobind
 export default class TodoItem extends Component {
@@ -25,12 +25,10 @@ export default class TodoItem extends Component {
 
   render() {
     return (
-      <Content>
-        <ListItem onPress={this.handlePress}>
-          <CheckBox checked={this.state.finished} />
-          <Text>{this.props.children}</Text>
-        </ListItem>
-      </Content>
+      <ListItem onPress={this.handlePress}>
+        <CheckBox checked={this.state.finished} />
+        <Text>{this.props.children}</Text>
+      </ListItem>
     );
   }
 }
