@@ -6,7 +6,7 @@ export default class ClientApp extends Component {
   render() {
     return (
       <BrowserRouter {...this.props}>
-        <App />
+        <App {...this.props} />
       </BrowserRouter>
     );
   }
