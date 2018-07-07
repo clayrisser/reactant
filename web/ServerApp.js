@@ -6,7 +6,7 @@ export default class ServerApp extends Component {
   render() {
     return (
       <StaticRouter {...this.props}>
-        <App />
+        <App {...this.props} />
       </StaticRouter>
     );
   }
