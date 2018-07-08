@@ -10,8 +10,8 @@ import {
   NodeCookiesWrapper
 } from 'redux-persist-cookie-storage';
 import createStore from '../src/store/create';
-import indexHtml from './index.html';
 import initialState from '../src/store/initialState';
+import indexHtml from './index.html';
 
 const app = express();
 const context = {};
