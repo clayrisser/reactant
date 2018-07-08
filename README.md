@@ -2,10 +2,9 @@
 
 [![GitHub stars](https://img.shields.io/github/stars/codejamninja/reaction-base.svg?style=social&label=Stars)](https://github.com/codejamninja/reaction-base)
 
-> Reaction core components
+> reaction core components
 
 Please ★ this repo if you found it useful ★ ★ ★
-
 
 
 ## Installation

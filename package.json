@@ -1,7 +1,7 @@
 {
   "name": "reaction-base",
-  "version": "0.0.13",
-  "description": "Reaction core components",
+  "version": "0.0.14",
+  "description": "reaction core components",
   "homepage": "https://github.com/codejamninja/reaction-base",
   "bugs": {
     "url": "https://github.com/codejamninja/reaction-base/issues",
@@ -32,7 +32,7 @@
   "dependencies": {
     "lodash": "^4.17.10",
     "loglevel": "^1.6.1",
-    "winston": "^3.0.0"
+    "winston": "^2.4.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
