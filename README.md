@@ -43,35 +43,25 @@ git clone https://github.com/codejamninja/reaction
 
 ## Usage
 
-#### Web
-
-```sh
-npm run start:web
-```
-
-#### Expo
-
-```sh
-npm run start:expo
-```
-
-#### Android
-
-```sh
-npm run start:android
-```
-
-#### iOS
-
-```sh
-npm run start:ios
-```
-
-#### Storybook
-
-```sh
-npm run start:storybook
-```
+| Command                     | Description                      |
+| --------------------------- | -------------------------------- |
+| `npm run start:android`     | start android development        |
+| `npm run start:expo`        | start expo development           |
+| `npm run start:ios`         | start ios development            |
+| `npm run start:web`         | start web development            |
+| `npm run build:android`     | build android app                |
+| `npm run build:expo`        | build expo app                   |
+| `npm run build:ios`         | build ios app                    |
+| `npm run build:web:analyze` | build web app and analyze bundle |
+| `npm run build:web:serve`   | build web app and serve          |
+| `npm run build:web`         | build web app                    |
+| `npm run publish:android`   | publish android app              |
+| `npm run publish:expo`      | publish expo app                 |
+| `npm run publish:ios`       | publish ios app                  |
+| `npm run publish:web`       | publish web app                  |
+| `npm run storybook:android` | start android storybook          |
+| `npm run storybook:ios`     | start ios storybook              |
+| `npm run storybook:web`     | start web storybook              |
 
 
 ## Support
