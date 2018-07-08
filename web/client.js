@@ -33,5 +33,5 @@ const renderApp = async () => {
   });
 };
 
-if (module.hot) module.hot.accept('~/App', () => renderApp());
+if (module.hot) module.hot.accept('./ClientApp', renderApp);
 renderApp();
