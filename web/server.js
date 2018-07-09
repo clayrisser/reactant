@@ -9,8 +9,8 @@ import {
   CookieStorage,
   NodeCookiesWrapper
 } from 'redux-persist-cookie-storage';
-import createStore from '../src/store/create';
 import initialState from '../src/store/initialState';
+import { createWebStore } from '../src/store/create';
 import indexHtml from './index.html';
 
 const app = express();
@@ -21,7 +21,7 @@ app.use(Cookies.express());
 app.get('/*', async (req, res, next) => {
   try {
     context.cookieJar = new NodeCookiesWrapper(new Cookies(req, res));
-    context.store = await createStore(context);
+    context.store = await createWebStore(context);
     context.persistor = await new Promise(resolve => {
       const persistor = persistStore(context.store, initialState, () => {
         return resolve(persistor);
@@ -51,6 +51,8 @@ app.get('/*', async (req, res, next) => {
     res.removeHeader('Set-Cookie');
     return res.send($.html());
   } catch (err) {
+    await context.persistor.flush();
+    res.removeHeader('Set-Cookie');
     return next(err);
   }
 });
