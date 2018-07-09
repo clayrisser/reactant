@@ -11,7 +11,7 @@ export default class AndroidApp extends Component {
       <NativeRouter {...this.props}>
         <StyleProvider style={getTheme(material)}>
           <Root>
-            <App />
+            <App {...this.props} />
           </Root>
         </StyleProvider>
       </NativeRouter>

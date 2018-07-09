@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List, Button, View } from 'native-base';
+import { List } from 'native-base';
 import autobind from 'autobind-decorator';
 import TodoItem from '~/components/TodoItem';
 import PropTypes from 'prop-types';
@@ -17,14 +17,11 @@ class TodoList extends Component {
 
   render() {
     return (
-      <View>
-        <Button onPress={this.handlePress}>Hi</Button>
-        <List>
-          <TodoItem>Clean the Kitchen</TodoItem>
-          <TodoItem finished>Make the Bed</TodoItem>
-          <TodoItem>Eat Breakfast</TodoItem>
-        </List>
-      </View>
+      <List>
+        <TodoItem>Clean the Kitchen</TodoItem>
+        <TodoItem finished>Make the Bed</TodoItem>
+        <TodoItem>Eat Breakfast</TodoItem>
+      </List>
     );
   }
 }

@@ -14,7 +14,7 @@ function getStorage(context) {
     const { CookieStorage } = require('redux-persist-cookie-storage');
     return new CookieStorage(context.cookieJar, {});
   }
-  return require('redux-persist/lib/storage');
+  return require('redux-persist/lib/storage').default;
 }
 
 async function getInitialState(context, persistConfig) {
@@ -42,7 +42,16 @@ function getPersistConfig(context) {
   return persistConfig;
 }
 
-export default async function create(context) {
+export default function create(context) {
+  const persistConfig = getPersistConfig(context);
+  return createStore(
+    persistReducer(persistConfig, reducer),
+    initialState,
+    composeEnhancers(applyMiddleware(reduxThunk))
+  );
+}
+
+export async function createWebStore(context) {
   const persistConfig = getPersistConfig(context);
   return createStore(
     persistReducer(persistConfig, reducer),
