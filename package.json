@@ -1,6 +1,6 @@
 {
   "name": "reaction-build",
-  "version": "0.2.25",
+  "version": "0.2.26",
   "description": "Build tool for reaction",
   "homepage": "https://reaction.codejam.ninja",
   "author": {
@@ -87,7 +87,7 @@
     "core-js": "^2.5.7",
     "eslint-plugin-jest": "^21.17.0",
     "jest": "^23.3.0",
-    "native-base-web": "0.0.5",
+    "native-base-web": "github:codejamninja/native-base-web#npm",
     "parcel-bundler": "^1.9.4",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
