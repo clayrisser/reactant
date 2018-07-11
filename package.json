@@ -1,6 +1,6 @@
 {
   "name": "reaction-build",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "description": "build tool for reaction",
   "homepage": "https://reaction.codejam.ninja",
   "author": {
@@ -79,6 +79,7 @@
     "strip-ansi": "^4.0.0",
     "url": "^0.11.0",
     "url-loader": "^1.0.1",
+    "webpack": "^4.16.0",
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-dev-server": "^3.1.4",
     "webpack-node-externals": "^1.7.2"
@@ -93,8 +94,7 @@
     "react-dom": "^16.4.1",
     "react-native-web": "^0.8.8",
     "react-router-dom": "^4.3.1",
-    "rimraf": "^2.6.2",
-    "webpack": "^4.16.0"
+    "rimraf": "^2.6.2"
   },
   "license": "MIT",
   "repository": "https://github.com/codejamninja/reaction-build",
