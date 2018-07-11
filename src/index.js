@@ -1,13 +1,12 @@
-import assets from 'reaction-base/lib/assets';
-import config, { registerConfig } from 'reaction-base/lib/config';
+import assets from 'reaction-base/assets';
+import config from 'reaction-base/config';
 import Link from './Link';
 import log from './log';
 
-export { Link, assets, config, log, registerConfig };
+export { Link, assets, config, log };
 export default {
   Link,
   assets,
   config,
-  log,
-  registerConfig
+  log
 };

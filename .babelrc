@@ -1,14 +1,10 @@
 {
   "presets": [
-    [
-      "env",
-      {
-        "targets": {
-          "node": "4"
-        }
-      }
-    ],
+    "env",
     "stage-2"
   ],
-  "ignore": ["createStore.js"]
+  "ignore": [
+    "createStore.js",
+    "register*"
+  ]
 }

@@ -1,6 +1,6 @@
 {
   "name": "reaction-base",
-  "version": "0.2.14",
+  "version": "0.3.9",
   "description": "reaction core components",
   "homepage": "https://github.com/codejamninja/reaction-base",
   "bugs": {
@@ -13,26 +13,41 @@
     "email": "jam@codejam.ninja",
     "url": "https://codejam.ninja"
   },
-  "main": "lib/index.js",
+  "main": "es/index.js",
   "files": [
-    "lib"
+    "assets.js",
+    "config.js",
+    "createStore.js",
+    "index.js",
+    "Link",
+    "log",
+    "register"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/codejamninja/reaction-base"
   },
   "scripts": {
-    "build": "npm run clean && cp -r src lib && babel src -d lib",
-    "clean": "rimraf lib && jest --clearCache",
+    "build": "npm run clean && cp -r src/* . && babel src -d ./",
+    "clean": "rimraf *.js Link log register && jest --clearCache",
     "lint": "eslint ./",
     "lint:fix": "eslint --fix ./",
     "prepublish": "npm run build",
     "test": "npm run lint && jest --forceExit"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "cookies": "^0.7.1",
+    "cookies-js": "^1.2.3",
+    "express": "^4.16.3",
+    "ignore-warnings": "^0.1.0",
     "js-info": "^0.2.4",
     "lodash": "^4.17.10",
     "loglevel": "^1.6.1",
+    "react-dom": "^16.4.1",
+    "redux-devtools-extension": "^2.13.5",
+    "redux-persist": "^5.10.0",
+    "redux-persist-cookie-storage": "^1.0.0",
     "winston": "^2.4.3"
   },
   "devDependencies": {
