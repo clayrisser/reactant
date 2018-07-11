@@ -185,7 +185,6 @@ export default (variables = variable) => {
       ...thumbnailTheme(variables)
     }
   };
-
   const cssifyTheme = (grandparent, parent, parentKey) => {
     _.forEach(parent, (style, styleName) => {
       if (

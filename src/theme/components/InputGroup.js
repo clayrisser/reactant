@@ -58,7 +58,6 @@ export default (variables = variable) => {
       borderRadius: variables.inputGroupRoundedBorderRadius,
       borderColor: variables.inputBorderColor
     },
-
     '.success': {
       'NativeBase.Icon': {
         color: variables.inputSuccessBorderColor
@@ -82,7 +81,6 @@ export default (variables = variable) => {
       },
       borderColor: variables.inputSuccessBorderColor
     },
-
     '.error': {
       'NativeBase.Icon': {
         color: variables.inputErrorBorderColor

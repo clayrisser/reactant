@@ -162,7 +162,6 @@ export default (variables = variable) => {
       borderRadius: 30,
       borderColor: variables.inputBorderColor
     },
-
     '.success': {
       'NativeBase.Icon': {
         color: variables.inputSuccessBorderColor
@@ -186,7 +185,6 @@ export default (variables = variable) => {
       },
       borderColor: variables.inputSuccessBorderColor
     },
-
     '.error': {
       'NativeBase.Icon': {
         color: variables.inputErrorBorderColor
@@ -221,7 +219,6 @@ export default (variables = variable) => {
     '.picker': {
       marginLeft: 0
     },
-
     borderWidth: variables.borderWidth * 2,
     borderTopWidth: 0,
     borderRightWidth: 0,

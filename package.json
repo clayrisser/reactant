@@ -1,7 +1,7 @@
 {
   "name": "reaction",
   "version": "0.2.5",
-  "description": "Write once . . . render everywhere",
+  "description": "write once . . . render everywhere",
   "main": "expo/index.js",
   "homepage": "https://reaction.codejam.ninja",
   "author": {
@@ -44,15 +44,6 @@
     "storybook:web": "reaction storybook -p web",
     "test": "npm run lint && jest"
   },
-  "devDependencies": {
-    "babel-core": "^6.26.3",
-    "flow-bin": "^0.76.0",
-    "jest": "^23.3.0",
-    "jest-react-native": "^18.0.0",
-    "react-test-renderer": "^16.4.1",
-    "reaction-build": "^0.2.26",
-    "rimraf": "^2.6.2"
-  },
   "dependencies": {
     "autobind-decorator": "^2.1.0",
     "babel-polyfill": "^6.26.0",
@@ -78,12 +69,21 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-router-native": "^4.3.0",
-    "reaction-base": "0.0.14",
+    "reaction-base": "^0.2.10",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.5",
     "redux-persist": "^5.10.0",
     "redux-persist-cookie-storage": "^1.0.0",
     "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "flow-bin": "^0.76.0",
+    "jest": "^23.3.0",
+    "jest-react-native": "^18.0.0",
+    "react-test-renderer": "^16.4.1",
+    "reaction-build": "^0.2.32",
+    "rimraf": "^2.6.2"
   },
   "license": "MIT",
   "repository": "https://github.com/codejamninja/reaction",

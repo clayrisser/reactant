@@ -1,8 +1,8 @@
 import 'babel-polyfill';
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
+import createStore from 'reaction-base/lib/createStore';
 import { persistStore } from 'redux-persist';
-import createStore from '../src/store/create';
 
 const context = {};
 
