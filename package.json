@@ -1,6 +1,6 @@
 {
   "name": "reaction-build",
-  "version": "0.2.33",
+  "version": "0.3.0",
   "description": "build tool for reaction",
   "homepage": "https://reaction.codejam.ninja",
   "author": {
@@ -35,7 +35,6 @@
     "@storybook/addons": "^3.4.8",
     "@storybook/react": "^3.4.8",
     "@storybook/react-native": "^3.4.8",
-    "ansi-regex": "^3.0.0",
     "assets-webpack-plugin": "^3.8.4",
     "autobind-decorator": "^2.1.0",
     "babel-cli": "^6.26.0",
@@ -52,7 +51,6 @@
     "boom": "^7.2.0",
     "circular-json": "^0.5.5",
     "deasync": "^0.1.13",
-    "debug": "^3.1.0",
     "detect-port": "^1.2.3",
     "easycp": "^0.1.1",
     "ejs": "^2.6.1",
@@ -75,7 +73,7 @@
     "react-art": "^16.4.1",
     "react-dev-utils": "^5.0.1",
     "react-error-overlay": "^4.0.0",
-    "reaction-base": "^0.2.14",
+    "reaction-base": "^0.3.11",
     "sockjs-client": "^1.1.5",
     "start-server-webpack-plugin": "^2.2.5",
     "strip-ansi": "^4.0.0",

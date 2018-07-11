@@ -1,8 +1,8 @@
 import _ from 'lodash';
-import config from 'reaction-base/lib/config';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
-import log, { setLevel } from 'reaction-base/lib/log';
 import stripAnsi from 'strip-ansi';
+import { config, log } from 'reaction-base';
+import { setLevel } from 'reaction-base/log';
 import {
   dismissBuildError,
   reportBuildError,

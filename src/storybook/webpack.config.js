@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 import CircularJSON from 'circular-json';
 import _ from 'lodash';
-import log, { setLevel } from 'reaction-base/lib/log';
+import log, { setLevel } from 'reaction-base/log';
 import { sleep } from 'deasync';
 import createConfig from '../createConfig';
 
@@ -25,7 +25,7 @@ module.exports = webpackConfig => {
   };
   webpackConfig.externals = {
     ...webpackConfig.externals,
-    'reaction-base/lib/config': CircularJSON.stringify(config)
+    'reaction-base/config': CircularJSON.stringify(config)
   };
   const jsxRule = _.find(
     webpackConfig.module.rules,

@@ -1,6 +1,6 @@
 import boom from 'boom';
 import commander from 'commander';
-import { setLevel } from 'reaction-base/lib/log';
+import { setLevel } from 'reaction-base/log';
 import buildAndroid from './actions/build/android';
 import buildExpo from './actions/build/expo';
 import buildIos from './actions/build/ios';

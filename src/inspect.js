@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { runtime } from 'js-info';
 import { log } from 'reaction-base';
+import { runtime } from 'js-info';
 
 export default function inspect(...args) {
   log.info(...args);

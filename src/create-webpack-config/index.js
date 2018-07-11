@@ -30,14 +30,14 @@ export default function createWebpackConfig(target = 'web', action, config) {
       }
     },
     externals: {
-      'reaction-base/lib/config': CircularJSON.stringify(config)
+      'reaction-base/config': CircularJSON.stringify(config)
     },
     module: {
       strictExportPresence: true,
       rules: [
         {
           test: /\.(js|jsx|mjs)$/,
-          include: [paths.src, paths.web],
+          include: [paths.src, paths.web, require.resolve('reaction-base')],
           loader: require.resolve('eslint-loader'),
           options: eslint,
           enforce: 'pre'
@@ -50,7 +50,7 @@ export default function createWebpackConfig(target = 'web', action, config) {
         },
         {
           test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-          include: [paths.src, paths.web],
+          include: [paths.src, paths.web, require.resolve('reaction-base')],
           loader: require.resolve('url-loader'),
           options: {
             limit: 10000,
@@ -59,12 +59,12 @@ export default function createWebpackConfig(target = 'web', action, config) {
         },
         {
           test: /\.html?$/,
-          include: [paths.src, paths.web],
+          include: [paths.src, paths.web, require.resolve('reaction-base')],
           loader: require.resolve('html-loader')
         },
         {
           test: /\.md$/,
-          include: [paths.src, paths.web],
+          include: [paths.src, paths.web, require.resolve('reaction-base')],
           use: [
             {
               loader: require.resolve('html-loader')

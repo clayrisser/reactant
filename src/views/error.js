@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import ignoreWarnings from 'ignore-warnings';
-import log, { setLevel } from 'reaction-base/lib/log';
+import log, { setLevel } from 'reaction-base/log';
 import HotClient from '../hotClient';
 
 // eslint-disable-next-line no-undef
