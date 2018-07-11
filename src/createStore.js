@@ -3,8 +3,11 @@ import reduxThunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, applyMiddleware } from 'redux';
 import { persistReducer, getStoredState } from 'redux-persist';
-import initialState, { whitelist, blacklist } from '~/store/initialState';
-import reducer from '~/reducers';
+import reducer from '../../../src/reducers';
+import initialState, {
+  whitelist,
+  blacklist
+} from '../../../src/store/initialState';
 
 const composeEnhancers = composeWithDevTools({});
 

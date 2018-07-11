@@ -1,12 +1,11 @@
 import _ from 'lodash';
-import loglevel from 'loglevel';
-import { Logger, transports } from 'winston';
 import { runtime } from 'js-info';
 
 const log = createLogger();
 
 function createLogger() {
   if (runtime.node) {
+    const { Logger, transports } = require('winston');
     return new Logger({
       level: 'info',
       exitOnError: false,
@@ -19,6 +18,7 @@ function createLogger() {
       ]
     });
   }
+  const loglevel = require('loglevel');
   loglevel.setLevel(
     _.get(window, 'reaction.config.env') === 'production' ? 'error' : 'info'
   );
