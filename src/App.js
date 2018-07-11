@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import autobind from 'autobind-decorator';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import Routes from '~/routes';
-import createStore from '~/store/create';
-import autobind from 'autobind-decorator';
+import { View, Text } from 'react-native';
 
 @autobind
 export default class App extends Component {
@@ -16,7 +16,10 @@ export default class App extends Component {
     return (
       <Provider store={this.props.context.store}>
         <PersistGate loading={null} persistor={this.props.context.persistor}>
-          <Routes />
+          <View>
+            <Text>hi</Text>
+            <Routes />
+          </View>
         </PersistGate>
       </Provider>
     );

@@ -1,8 +1,8 @@
 import 'babel-polyfill';
 import React from 'react';
 import { KeepAwake, registerRootComponent } from 'expo';
+import createStore from 'reaction-base/lib/createStore';
 import { persistStore } from 'redux-persist';
-import createStore from '../src/store/create';
 
 if (process.env.NODE_ENV === 'development') KeepAwake.activate();
 

@@ -162,7 +162,6 @@ export default (variables = variable) => {
       shadowRadius: null,
       backgroundColor: 'transparent'
     },
-
     '.dark': {
       '.bordered': {
         ...darkCommon
@@ -180,58 +179,49 @@ export default (variables = variable) => {
       ...darkCommon,
       backgroundColor: variables.brandLight
     },
-
     '.primary': {
       '.bordered': {
         ...primaryCommon
       },
       backgroundColor: variables.btnPrimaryBg
     },
-
     '.success': {
       '.bordered': {
         ...successCommon
       },
       backgroundColor: variables.btnSuccessBg
     },
-
     '.info': {
       '.bordered': {
         ...infoCommon
       },
       backgroundColor: variables.btnInfoBg
     },
-
     '.warning': {
       '.bordered': {
         ...warningCommon
       },
       backgroundColor: variables.btnWarningBg
     },
-
     '.danger': {
       '.bordered': {
         ...dangerCommon
       },
       backgroundColor: variables.btnDangerBg
     },
-
     '.block': {
       justifyContent: 'center',
       alignSelf: 'stretch'
     },
-
     '.full': {
       justifyContent: 'center',
       alignSelf: 'stretch',
       borderRadius: 0
     },
-
     '.rounded': {
       // paddingHorizontal: variables.buttonPadding + 20,
       borderRadius: variables.borderRadiusLarge
     },
-
     '.transparent': {
       backgroundColor: 'transparent',
       elevation: 0,
@@ -283,7 +273,6 @@ export default (variables = variable) => {
         }
       }
     },
-
     '.small': {
       height: 30,
       'NativeBase.Text': {
@@ -298,21 +287,17 @@ export default (variables = variable) => {
         paddingTop: 0
       }
     },
-
     '.large': {
       height: 60,
       'NativeBase.Text': {
         fontSize: 22
       }
     },
-
     '.capitalize': {},
-
     '.vertical': {
       flexDirection: 'column',
       height: null
     },
-
     'NativeBase.Text': {
       fontFamily: variables.btnFontFamily,
       marginLeft: 0,
@@ -323,7 +308,6 @@ export default (variables = variable) => {
       backgroundColor: 'transparent'
       // childPosition: 1
     },
-
     'NativeBase.Icon': {
       color: variables.inverseTextColor,
       fontSize: 24,
@@ -336,7 +320,6 @@ export default (variables = variable) => {
       marginHorizontal: 16,
       paddingTop: platform === 'ios' ? 2 : undefined
     },
-
     '.iconLeft': {
       'NativeBase.Text': {
         marginLeft: 0

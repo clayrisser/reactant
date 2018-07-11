@@ -4,10 +4,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ignoreWarnings from 'ignore-warnings';
 import { AppRegistry } from 'react-native';
+import { createWebStore } from 'reaction-base/lib/createStore';
 import { log } from 'reaction-base';
 import { persistStore } from 'redux-persist';
 import initialState from '../src/store/initialState';
-import { createWebStore } from '../src/store/create';
 
 ignoreWarnings([
   'Calling ReactDOM.render() to hydrate server-rendered markup will stop working in React v17'

@@ -1,5 +1,4 @@
 import { Platform, PixelRatio } from 'react-native';
-
 import pickerTheme from './Picker';
 import variable from '~/theme/variables/platform';
 
@@ -13,7 +12,6 @@ export default (variables = variable) => {
       color: variables.listItemSelected
     }
   };
-
   const listItemTheme = {
     'NativeBase.InputGroup': {
       'NativeBase.Icon': {
@@ -435,6 +433,5 @@ export default (variables = variable) => {
     backgroundColor: variables.listBg,
     borderColor: variables.listBorderColor
   };
-
   return listItemTheme;
 };

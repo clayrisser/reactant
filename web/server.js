@@ -3,15 +3,15 @@ import cheerio from 'cheerio';
 import express from 'express';
 import { AppRegistry } from 'react-native';
 import { config, assets } from 'reaction-base';
+import { createWebStore } from 'reaction-base/lib/createStore';
 import { persistStore } from 'redux-persist';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import {
   CookieStorage,
   NodeCookiesWrapper
 } from 'redux-persist-cookie-storage';
-import initialState from '../src/store/initialState';
-import { createWebStore } from '../src/store/create';
 import indexHtml from './index.html';
+import initialState from '../src/store/initialState';
 
 const app = express();
 const context = {};
@@ -41,11 +41,15 @@ app.get('/*', async (req, res, next) => {
     $('title').text(config.title);
     $('head').append(appCss);
     $('#app').append(appHtml);
-    $('body').append(
-      `<script src="${assets.client.js}" defer${
-        config.environment === 'production' ? ' crossorigin' : ''
-      }></script>`
-    );
+    _.map(assets, asset => {
+      if (asset.js) {
+        $('body').append(
+          `<script src="${asset.js}" defer${
+            config.environment === 'production' ? ' crossorigin' : ''
+          }></script>`
+        );
+      }
+    });
     if (context.url) return res.redirect(301, context.url);
     await context.persistor.flush();
     res.removeHeader('Set-Cookie');
