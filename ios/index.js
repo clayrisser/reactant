@@ -1,16 +1,7 @@
 import 'babel-polyfill';
-import React, { Component } from 'react';
-import { AppRegistry } from 'react-native';
-import createStore from 'reaction-base/lib/createStore';
-import { persistStore } from 'redux-persist';
+import registerIos from 'reaction-base/register/ios';
+import config from './config.json';
 
-const context = {};
+const initialProps = {};
 
-context.store = createStore(context);
-context.persistor = persistStore(context.store);
-const initialProps = { context };
-
-const IosApp = require('./IosApp').default;
-AppRegistry.registerComponent('reaction', () => {
-  return () => <IosApp {...initialProps} />;
-});
+registerIos(initialProps, config);

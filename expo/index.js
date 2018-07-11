@@ -1,16 +1,7 @@
 import 'babel-polyfill';
-import React from 'react';
-import { KeepAwake, registerRootComponent } from 'expo';
-import createStore from 'reaction-base/lib/createStore';
-import { persistStore } from 'redux-persist';
+import registerExpo from 'reaction-base/register/expo';
+import config from './config.json';
 
-if (process.env.NODE_ENV === 'development') KeepAwake.activate();
+const initialProps = {};
 
-const context = {};
-
-context.store = createStore(context);
-context.persistor = persistStore(context.store);
-const initialProps = { context };
-
-const ExpoApp = require('./ExpoApp').default;
-registerRootComponent(() => <ExpoApp {...initialProps} />);
+registerExpo(initialProps, config);
