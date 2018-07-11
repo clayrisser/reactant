@@ -1,7 +1,11 @@
 {
   "extends": ["airbnb/base", "prettier"],
   "parser": "babel-eslint",
+  "globals": {
+    "window": true
+  },
   "rules": {
+    "global-require": "off",
     "import/extensions": "off",
     "import/no-unresolved": "off",
     "no-param-reassign": "off",

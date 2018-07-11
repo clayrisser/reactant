@@ -9,5 +9,6 @@
       }
     ],
     "stage-2"
-  ]
+  ],
+  "ignore": ["createStore.js"]
 }
