@@ -5,7 +5,7 @@ import path from 'path';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export default function createWebConfig(webpackConfig, action, config) {
-  const { ports, paths, host, environment } = config;
+  const { ports, paths, host, env } = config;
   webpackConfig = {
     ...webpackConfig,
     entry: {
@@ -13,8 +13,10 @@ export default function createWebConfig(webpackConfig, action, config) {
     },
     externals: {
       ...webpackConfig.externals,
-      winston: '{Logger:()=>{},transports:{Console:()=>{}}}',
-      'reaction/assets': '{}'
+      child_process: {},
+      deasync: {},
+      fs: {},
+      winston: {}
     },
     plugins: [
       ...webpackConfig.plugins,
@@ -24,7 +26,7 @@ export default function createWebConfig(webpackConfig, action, config) {
       })
     ]
   };
-  if (environment === 'development') {
+  if (env === 'development') {
     webpackConfig = {
       ...webpackConfig,
       output: {
@@ -41,11 +43,16 @@ export default function createWebConfig(webpackConfig, action, config) {
   } else {
     webpackConfig = {
       ...webpackConfig,
+      optimization: {
+        splitChunks: {
+          chunks: 'all'
+        }
+      },
       output: {
         path: paths.distPublic,
         publicPath: '/',
-        filename: 'scripts/bundle.[chunkhash:8].js',
-        chunkFilename: 'scripts/[name].[chunkhash:8].chunk.js'
+        filename: 'scripts/bundle.[hash:8].js',
+        chunkFilename: 'scripts/[name].[hash:8].chunk.js'
       },
       plugins: [
         ...webpackConfig.plugins,

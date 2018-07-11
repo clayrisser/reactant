@@ -2,7 +2,7 @@ import _ from 'lodash';
 import detectPort from 'detect-port';
 import path from 'path';
 import rcConfig from 'rc-config';
-import { getEnv, setEnvironment } from 'cross-environment';
+import { environment } from 'js-info';
 import defaultConfig from './config';
 
 const pkg = require(path.resolve('package.json'));
@@ -12,12 +12,7 @@ export default async function createConfig({
   defaultEnv = 'development',
   options = {}
 }) {
-  setEnvironment({
-    defaults: {
-      env: defaultEnv
-    }
-  });
-  const environment = getEnv();
+  environment.default = defaultEnv;
   const userConfig = rcConfig({ name: 'reaction' });
   const eslint = rcConfig({ name: 'eslint' });
   const config = _.merge(defaultConfig, userConfig);
@@ -45,12 +40,12 @@ export default async function createConfig({
     },
     envs: {
       ...config.envs,
-      NODE_ENV: environment,
-      __DEV__: environment !== 'production',
+      NODE_ENV: environment.value,
+      __DEV__: !environment.production,
       HOST: config.host,
       PORT: config.port
     },
-    environment,
+    env: environment.value,
     babel: _.merge(pkg.babel, config.babel),
     eslint: _.merge(eslint, pkg.eslint, config.eslint),
     options,

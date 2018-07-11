@@ -10,12 +10,12 @@ import createNodeConfig from './createNodeConfig';
 import createWebConfig from './createWebConfig';
 
 export default function createWebpackConfig(target = 'web', action, config) {
-  const { envs, paths, eslint, babel, environment, webpack } = config;
+  const { envs, paths, eslint, babel, env, webpack } = config;
   const webpackConfig = {
     context: process.cwd(),
     target,
     devtool: 'cheap-module-eval-source-map',
-    mode: environment,
+    mode: env,
     resolve: {
       modules: [path.resolve('node_modules')],
       extensions: ['.web.js', '.js', '.json', '.jsx', '.mjs'],
@@ -44,7 +44,7 @@ export default function createWebpackConfig(target = 'web', action, config) {
         },
         {
           test: /\.(js|jsx|mjs)$/,
-          include: [paths.src, paths.web],
+          include: [paths.src, paths.web, require.resolve('reaction-base')],
           loader: require.resolve('babel-loader'),
           options: babel
         },
@@ -106,7 +106,7 @@ export default function createWebpackConfig(target = 'web', action, config) {
       new DefinePlugin({
         ...envs
       }),
-      ...(environment !== 'production' ? [new NamedModulesPlugin()] : []),
+      ...(env !== 'production' ? [new NamedModulesPlugin()] : []),
       ...(action === 'start'
         ? [new HotModuleReplacementPlugin(), new NoEmitOnErrorsPlugin()]
         : [])

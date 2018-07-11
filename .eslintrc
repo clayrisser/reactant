@@ -1,6 +1,9 @@
 {
   "extends": ["airbnb/base", "prettier"],
   "parser": "babel-eslint",
+  "globals": {
+    "window": true
+  },
   "rules": {
     "arrow-body-style": "off",
     "class-methods-use-this": "off",

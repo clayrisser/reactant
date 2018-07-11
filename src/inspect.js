@@ -1,13 +1,11 @@
 import _ from 'lodash';
-import { getRuntime } from 'cross-environment';
+import { runtime } from 'js-info';
 import { log } from 'reaction-base';
 
 export default function inspect(...args) {
   log.info(...args);
-  if (getRuntime() === 'browser') {
-    // eslint-disable-next-line no-undef
-    const browserWindow = window;
-    if (browserWindow.reaction) {
+  if (runtime.browser) {
+    if (window.reaction) {
       let item = args;
       if (args.length) {
         if (args.length === 1) {
@@ -18,11 +16,11 @@ export default function inspect(...args) {
           item.shift();
         }
       }
-      if (!browserWindow.reaction.inspect) browserWindow.reaction.inspect = {};
-      browserWindow.reaction.inspect[
+      if (!window.reaction.inspect) window.reaction.inspect = {};
+      window.reaction.inspect[
         args.length > 1 && _.isString(args[0])
           ? args[0]
-          : _.get(browserWindow, 'reaction.inspect.length', 1) - 1
+          : _.get(window, 'reaction.inspect.length', 1) - 1
       ] = item;
     }
   }

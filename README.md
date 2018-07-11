@@ -2,7 +2,7 @@
 
 [![GitHub stars](https://img.shields.io/github/stars/codejamninja/reaction-build.svg?style=social&label=Stars)](https://github.com/codejamninja/reaction-build)
 
-> Build tool for reaction
+> build tool for reaction
 
 Please ★ this repo if you found it useful ★ ★ ★
 

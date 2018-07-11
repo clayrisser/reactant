@@ -5,12 +5,8 @@ import log, { setLevel } from 'reaction-base/lib/log';
 import { sleep } from 'deasync';
 import createConfig from '../createConfig';
 
-if (_.includes(process.argv, '--verbose')) {
-  setLevel('verbose');
-}
-if (_.includes(process.argv, '--debug')) {
-  setLevel('debug');
-}
+if (_.includes(process.argv, '--verbose')) setLevel('verbose');
+if (_.includes(process.argv, '--debug')) setLevel('debug');
 
 module.exports = webpackConfig => {
   let config = null;
