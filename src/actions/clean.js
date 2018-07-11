@@ -15,12 +15,15 @@ export default async function clean(options, config) {
     log.debug('config', config);
   }
   const { paths } = config;
-  await easycp(`rm -rf ${path.resolve(env.TMPDIR || '/tmp', 'react-*')}`);
-  await easycp(`rm -rf ${path.resolve(env.TMPDIR || '/tmp', 'metro-*')}`);
   await easycp(`rm -rf ${path.resolve(env.TMPDIR || '/tmp', 'haste-map-*')}`);
-  await easycp(`rm -rf ${path.resolve(paths.android, 'build')}`);
+  await easycp(`rm -rf ${path.resolve(env.TMPDIR || '/tmp', 'metro-*')}`);
+  await easycp(`rm -rf ${path.resolve(env.TMPDIR || '/tmp', 'react-*')}`);
   await easycp(`rm -rf ${path.resolve(paths.android, 'app/build')}`);
+  await easycp(`rm -rf ${path.resolve(paths.android, 'build')}`);
+  await easycp(`rm -rf ${path.resolve(paths.android, 'config.json')}`);
+  await easycp(`rm -rf ${path.resolve(paths.expo, 'config.json')}`);
   await easycp(`rm -rf ${path.resolve(paths.ios, 'build')}`);
+  await easycp(`rm -rf ${path.resolve(paths.ios, 'config.json')}`);
   if (options.debug) {
     await easycp('watchman watch-del-all');
   } else {

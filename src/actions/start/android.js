@@ -3,7 +3,7 @@ import easycp, { readcp, silentcp } from 'easycp';
 import ora from 'ora';
 import { log } from 'reaction-base';
 import clean from '../clean';
-import createConfig from '../../createConfig';
+import createConfig, { saveConfig } from '../../createConfig';
 
 export default async function startAndroid(options, config) {
   if (!config) {
@@ -13,6 +13,7 @@ export default async function startAndroid(options, config) {
   }
   if (options.clean) await clean(options, config);
   const spinner = ora('starting android\n').start();
+  await saveConfig('android', config);
   if (!(await readcp('which react-native')).length) {
     spinner.stop();
     throw boom.badRequest('react-native not installed');

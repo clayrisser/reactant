@@ -3,7 +3,7 @@ import easycp, { readcp, silentcp } from 'easycp';
 import ora from 'ora';
 import { log } from 'reaction-base';
 import clean from '../clean';
-import createConfig from '../../createConfig';
+import createConfig, { saveConfig } from '../../createConfig';
 
 export default async function startExpo(options, config) {
   if (!config) {
@@ -13,6 +13,7 @@ export default async function startExpo(options, config) {
   }
   if (options.clean) await clean(options, config);
   const spinner = ora('starting expo\n').start();
+  await saveConfig('expo', config);
   if (!(await readcp('which exp')).length) {
     spinner.stop();
     throw boom.badRequest('exp not installed');

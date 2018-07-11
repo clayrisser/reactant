@@ -2,15 +2,12 @@ import SockjsClient from 'sockjs-client';
 import autobind from 'autobind-decorator';
 import { format as urlFormat } from 'url';
 
-// eslint-disable-next-line no-undef
-const browserWindow = window;
-
 @autobind
 export default class HotClient {
   constructor({
     port = 3333,
-    protocol = browserWindow.location.protocol,
-    hostname = browserWindow.location.hostname
+    protocol = window.location.protocol,
+    hostname = window.location.hostname
   }) {
     this.connection = new SockjsClient(
       urlFormat({

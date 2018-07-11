@@ -27,7 +27,7 @@ export default {
     web: 'echo "missing publish script"'
   },
   babel: {
-    presets: [['env', { modules: false }], 'react-native', 'stage-2'],
+    presets: ['env', 'react-native', 'stage-2'],
     plugins: [
       'transform-decorators-legacy',
       'transform-class-properties',

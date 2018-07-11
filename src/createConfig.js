@@ -1,5 +1,7 @@
+import CircularJSON from 'circular-json';
 import _ from 'lodash';
 import detectPort from 'detect-port';
+import fs from 'fs-extra';
 import path from 'path';
 import rcConfig from 'rc-config';
 import { environment } from 'js-info';
@@ -19,6 +21,7 @@ export default async function createConfig({
   const port = await getPort(config.port);
   return {
     ...config,
+    key: _.snakeCase(config.title).replace(/_/g, '-'),
     publish: {
       android: _.isArray(config.publish.android)
         ? config.publish.android
@@ -61,4 +64,10 @@ async function getPort(port = 3333) {
   if (_.includes(occupiedPorts, newPort)) return getPort(++newPort);
   occupiedPorts.push(newPort);
   return newPort;
+}
+
+export async function saveConfig(platform, config) {
+  const configPath = path.resolve(config.paths[platform], 'config.json');
+  await fs.writeFile(configPath, CircularJSON.stringify(config));
+  return `config saved to ${configPath}`;
 }

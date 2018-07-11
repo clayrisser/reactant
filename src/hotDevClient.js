@@ -11,15 +11,12 @@ import {
 } from 'react-error-overlay';
 import HotClient from './hotClient';
 
-// eslint-disable-next-line no-undef
-const browserWindow = window;
-
 if (config.options.verbose) setLevel('verbose');
 if (config.options.debug) {
-  browserWindow.module = module;
+  window.module = module;
   setLevel('debug');
 }
-if (config !== 'production') browserWindow.reaction = { config };
+if (config !== 'production') window.reaction = { config };
 
 let hadServerError = false;
 let hadError = false;
@@ -42,6 +39,7 @@ client.onConnected = async () => {
   log.debug('connected');
 };
 client.onHash = async message => {
+  if (hash) log.info('hot reloading');
   log.debug('hash', hash);
   hash = message.data;
 };
@@ -141,7 +139,7 @@ async function handleWarnings(warnings) {
   isFirstCompilation = false;
 }
 
-browserWindow.hothot = module.hot;
+window.hothot = module.hot;
 
 async function applyUpdates() {
   if (!module.hot) return windowReload();
@@ -182,7 +180,7 @@ function windowReload() {
   if (config.options.debug) {
     log.debug('reloading window . . .');
   } else {
-    browserWindow.location.reload();
+    window.location.reload();
   }
 }
 
