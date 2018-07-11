@@ -1,5 +1,6 @@
 # expo
 .expo/
+/expo/config.json
 
 # node
 /node_modules
@@ -8,7 +9,7 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 
-# iso
+# ios
 xcuserdata/
 *.xcscmblueprint
 *.xccheckout
@@ -23,6 +24,7 @@ DerivedData/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
+/ios/config.json
 
 # android
 *.apk
@@ -49,6 +51,7 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+/android/config.json
 
 # misc
 .env.local

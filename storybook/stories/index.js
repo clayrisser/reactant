@@ -1,8 +1,8 @@
 import React from 'react';
-import { storiesOf } from 'reaction-build';
 import { Text } from 'react-native';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
+import { storiesOf } from 'reaction-build';
 import TodoItem from '~/components/TodoItem';
 import CenterView from './CenterView';
 import Welcome from './Welcome';

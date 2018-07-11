@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import autobind from 'autobind-decorator';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
+import { config } from 'reaction-base';
 import Routes from '~/routes';
-import { View, Text } from 'react-native';
 
 @autobind
 export default class App extends Component {
@@ -13,13 +13,11 @@ export default class App extends Component {
   };
 
   render() {
+    console.log('config', config);
     return (
       <Provider store={this.props.context.store}>
         <PersistGate loading={null} persistor={this.props.context.persistor}>
-          <View>
-            <Text>hi</Text>
-            <Routes />
-          </View>
+          <Routes />
         </PersistGate>
       </Provider>
     );
