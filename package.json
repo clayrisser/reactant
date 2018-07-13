@@ -1,6 +1,6 @@
 {
   "name": "reaction",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "write once . . . render everywhere",
   "main": "expo/index.js",
   "homepage": "https://reaction.codejam.ninja",
@@ -61,7 +61,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-router-native": "^4.3.0",
-    "reaction-base": "^0.3.11",
+    "reaction-base": "^0.3.14",
     "redux": "^4.0.0",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0"
@@ -72,7 +72,7 @@
     "jest": "^23.3.0",
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "^16.4.1",
-    "reaction-build": "^0.3.2",
+    "reaction-build": "^0.3.6",
     "rimraf": "^2.6.2"
   },
   "license": "MIT",
