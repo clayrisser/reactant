@@ -37,20 +37,32 @@ export default function createWebpackConfig(target = 'web', action, config) {
       rules: [
         {
           test: /\.(js|jsx|mjs)$/,
-          include: [paths.src, paths.web, require.resolve('reaction-base')],
+          include: [
+            paths.src,
+            paths.web,
+            path.resolve('node_modules/reaction-base')
+          ],
           loader: require.resolve('eslint-loader'),
           options: eslint,
           enforce: 'pre'
         },
         {
           test: /\.(js|jsx|mjs)$/,
-          include: [paths.src, paths.web, require.resolve('reaction-base')],
+          include: [
+            paths.src,
+            paths.web,
+            path.resolve('node_modules/reaction-base')
+          ],
           loader: require.resolve('babel-loader'),
           options: babel
         },
         {
           test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-          include: [paths.src, paths.web, require.resolve('reaction-base')],
+          include: [
+            paths.src,
+            paths.web,
+            path.resolve('node_modules/reaction-base')
+          ],
           loader: require.resolve('url-loader'),
           options: {
             limit: 10000,
@@ -59,12 +71,20 @@ export default function createWebpackConfig(target = 'web', action, config) {
         },
         {
           test: /\.html?$/,
-          include: [paths.src, paths.web, require.resolve('reaction-base')],
+          include: [
+            paths.src,
+            paths.web,
+            path.resolve('node_modules/reaction-base')
+          ],
           loader: require.resolve('html-loader')
         },
         {
           test: /\.md$/,
-          include: [paths.src, paths.web, require.resolve('reaction-base')],
+          include: [
+            paths.src,
+            paths.web,
+            path.resolve('node_modules/reaction-base')
+          ],
           use: [
             {
               loader: require.resolve('html-loader')
