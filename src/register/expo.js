@@ -9,8 +9,11 @@ import { setLevel } from '../log';
 
 export default function expo(componentName, initialProps = {}, config = {}) {
   if (config.dev) KeepAwake.activate();
-  if (config.options.verbose) setLevel('verbose');
-  if (config.options.debug) setLevel('debug');
+  if (config.options.verbose) {
+    setLevel('verbose');
+  } else if (config.options.debug || config.env === 'development') {
+    setLevel('debug');
+  }
   registerConfig(config);
   const context = {};
   context.store = createStore(context);

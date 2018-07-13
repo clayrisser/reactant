@@ -33,8 +33,11 @@ export default function client(initialProps = {}) {
     'Calling ReactDOM.render() to hydrate server-rendered ' +
       'markup will stop working in React v17'
   ]);
-  if (config.options.verbose) setLevel('verbose');
-  if (config.options.debug) setLevel('debug');
+  if (config.options.verbose) {
+    setLevel('verbose');
+  } else if (config.options.debug || config.env === 'development') {
+    setLevel('debug');
+  }
   if (module.hot)
     module.hot.accept(
       '../../../web/ClientApp',

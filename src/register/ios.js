@@ -6,9 +6,12 @@ import createStore from '../createStore';
 import { registerConfig } from '../config';
 import { setLevel } from '../log';
 
-export default function ios(componentName, initialProps = {}, config = {}) {
-  if (config.options.verbose) setLevel('verbose');
-  if (config.options.debug) setLevel('debug');
+export default function ios(initialProps = {}, config = {}) {
+  if (config.options.verbose) {
+    setLevel('verbose');
+  } else if (config.options.debug || config.env === 'development') {
+    setLevel('debug');
+  }
   registerConfig(config);
   const context = {};
   context.store = createStore(context);
