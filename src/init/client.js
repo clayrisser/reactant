@@ -29,10 +29,8 @@ async function renderClient(initialProps) {
 }
 
 export default function client(initialProps = {}) {
-  ignoreWarnings([
-    'Calling ReactDOM.render() to hydrate server-rendered ' +
-      'markup will stop working in React v17'
-  ]);
+  ignoreWarnings(config.ignore.warnings || []);
+  ignoreWarnings('error', config.ignore.errors || []);
   if (config.options.verbose) {
     setLevel('verbose');
   } else if (config.options.debug || config.env === 'development') {

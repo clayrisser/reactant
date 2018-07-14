@@ -5,6 +5,6 @@
   ],
   "ignore": [
     "createStore.js",
-    "register*"
+    "init/*.js"
   ]
 }

@@ -1,12 +1,15 @@
 import React from 'react';
+import ignoreWarnings from 'react-native-ignore-warnings';
 import { AppRegistry } from 'react-native';
 import { persistStore } from 'redux-persist';
-import AndroidApp from '../../../android/AndroidApp';
+import IosApp from '../../../ios/IosApp';
 import createStore from '../createStore';
 import { registerConfig } from '../config';
 import { setLevel } from '../log';
 
-export default function android(initialProps = {}, config = {}) {
+export default function ios(initialProps = {}, config = {}) {
+  ignoreWarnings(config.ignore.warnings || []);
+  ignoreWarnings('error', config.ignore.errors || []);
   if (config.options.verbose) {
     setLevel('verbose');
   } else if (config.options.debug || config.env === 'development') {
@@ -18,7 +21,7 @@ export default function android(initialProps = {}, config = {}) {
   context.persistor = persistStore(context.store);
   initialProps.context = context;
   AppRegistry.registerComponent(config.key, () => {
-    return () => <AndroidApp {...initialProps} />;
+    return () => <IosApp {...initialProps} />;
   });
   return { config, initialProps };
 }

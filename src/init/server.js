@@ -2,6 +2,7 @@ import Cookies from 'cookies';
 import _ from 'lodash';
 import cheerio from 'cheerio';
 import express from 'express';
+import ignoreWarnings from 'ignore-warnings';
 import { AppRegistry } from 'react-native';
 import { NodeCookiesWrapper } from 'redux-persist-cookie-storage';
 import { persistStore } from 'redux-persist';
@@ -13,13 +14,14 @@ import { config, assets } from '..';
 import { createWebStore } from '../createStore';
 import { setLevel } from '../log';
 
-export default function server(initialProps) {
+export default function server(initialProps, app = express()) {
+  ignoreWarnings(config.ignore.warnings || []);
+  ignoreWarnings('error', config.ignore.errors || []);
   if (config.options.verbose) {
     setLevel('verbose');
   } else if (config.options.debug || config.env === 'development') {
     setLevel('debug');
   }
-  const app = express();
   app.use(express.static(config.paths.distPublic));
   app.use(Cookies.express());
   app.get('/*', async (req, res, next) => {
