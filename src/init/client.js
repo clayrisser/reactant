@@ -5,7 +5,7 @@ import { persistStore } from 'redux-persist';
 import initialState from '../../../src/store/initialState';
 import { config } from '..';
 import { createWebStore } from '../createStore';
-import { setLevel } from '../log';
+import log, { setLevel } from '../log';
 
 const { document } = window;
 
@@ -15,7 +15,8 @@ async function renderClient(initialProps) {
   };
   context.store = await createWebStore(context);
   context.persistor = await new Promise(resolve => {
-    const persistor = persistStore(context.store, initialState, () => {
+    const { store } = context;
+    const persistor = persistStore(store, initialState, () => {
       return resolve(persistor);
     });
   });
@@ -31,16 +32,23 @@ async function renderClient(initialProps) {
 export default function client(initialProps = {}) {
   ignoreWarnings(config.ignore.warnings || []);
   ignoreWarnings('error', config.ignore.errors || []);
-  if (config.options.verbose) {
-    setLevel('verbose');
-  } else if (config.options.debug || config.env === 'development') {
+  if (
+    config.options.verbose ||
+    config.options.debug ||
+    config.level === 'trace'
+  ) {
+    setLevel('trace');
+  } else if (config.env === 'development') {
     setLevel('debug');
+  } else {
+    setLevel(config.level);
   }
+  if (config !== 'production') window.reaction = { config };
   if (module.hot)
     module.hot.accept(
       '../../../web/ClientApp',
       renderClient.bind(this, initialProps)
     );
-  renderClient(initialProps).catch(console.error);
+  renderClient(initialProps).catch(log.error);
   return { config, initialProps };
 }

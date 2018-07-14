@@ -5,6 +5,7 @@
     "window": true
   },
   "rules": {
+    "arrow-body-style": "off",
     "global-require": "off",
     "import/extensions": "off",
     "import/no-unresolved": "off",
@@ -13,6 +14,7 @@
     "no-shadow": "off",
     "no-underscore-dangle": "off",
     "no-use-before-define": "off",
+    "react/jsx-filename-extension": "off",
     "no-unused-vars": [
       "warn",
       {

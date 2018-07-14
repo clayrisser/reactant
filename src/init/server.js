@@ -17,11 +17,18 @@ import { setLevel } from '../log';
 export default function server(initialProps, app = express()) {
   ignoreWarnings(config.ignore.warnings || []);
   ignoreWarnings('error', config.ignore.errors || []);
-  if (config.options.verbose) {
-    setLevel('verbose');
-  } else if (config.options.debug || config.env === 'development') {
+  if (
+    config.options.verbose ||
+    config.options.debug ||
+    config.level === 'trace'
+  ) {
+    setLevel('trace');
+  } else if (config.env === 'development') {
     setLevel('debug');
+  } else {
+    setLevel(config.level);
   }
+  if (config !== 'production') global.reaction = { config };
   app.use(express.static(config.paths.distPublic));
   app.use(Cookies.express());
   app.get('/*', async (req, res, next) => {
@@ -30,7 +37,8 @@ export default function server(initialProps, app = express()) {
       context.cookieJar = new NodeCookiesWrapper(new Cookies(req, res));
       context.store = await createWebStore(context);
       context.persistor = await new Promise(resolve => {
-        const persistor = persistStore(context.store, initialState, () => {
+        const { store } = context;
+        const persistor = persistStore(store, initialState, () => {
           return resolve(persistor);
         });
       });

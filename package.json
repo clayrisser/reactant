@@ -1,6 +1,6 @@
 {
   "name": "reaction-base",
-  "version": "0.4.3",
+  "version": "1.0.0-rc.1",
   "description": "reaction core components",
   "homepage": "https://github.com/codejamninja/reaction-base",
   "bugs": {
@@ -28,14 +28,15 @@
     "url": "https://github.com/codejamninja/reaction-base"
   },
   "scripts": {
-    "build": "npm run clean && cp -r src/* . && babel src -d ./",
-    "clean": "rimraf *.js Link log init && jest --clearCache",
+    "build": "npm run clean && npm run test && cp -r src/* . && babel src -d ./",
+    "clean": "rimraf *.js Link log init *.log && jest --clearCache",
     "lint": "eslint ./",
     "lint:fix": "eslint --fix ./",
     "prepublish": "npm run build",
     "test": "npm run lint && jest --forceExit"
   },
   "dependencies": {
+    "babel-plugin-lodash": "^3.3.4",
     "cheerio": "^1.0.0-rc.2",
     "cookies": "^0.7.1",
     "cookies-js": "^1.2.3",
@@ -56,10 +57,13 @@
     "babel-eslint": "^8.2.6",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
-    "eslint": "^5.0.1",
+    "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jest": "^21.17.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.10.0",
     "jest": "^23.3.0",
     "rimraf": "^2.6.2"
   },
@@ -67,6 +71,18 @@
     "node": ">=4.0.0"
   },
   "eslintIgnore": [
-    "lib"
-  ]
+    "/assets.js",
+    "/config.js",
+    "/createStore.js",
+    "/index.js",
+    "/Link",
+    "/log",
+    "/init"
+  ],
+  "jest": {
+    "testMatch": [
+      "**/tests/**/[^_]*.js"
+    ],
+    "verbose": true
+  }
 }

@@ -3,6 +3,9 @@
     "env",
     "stage-2"
   ],
+  "plugins": [
+    "lodash"
+  ],
   "ignore": [
     "createStore.js",
     "init/*.js"

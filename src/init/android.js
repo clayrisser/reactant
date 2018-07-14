@@ -10,11 +10,18 @@ import { setLevel } from '../log';
 export default function android(initialProps = {}, config = {}) {
   ignoreWarnings(config.ignore.warnings || []);
   ignoreWarnings('error', config.ignore.errors || []);
-  if (config.options.verbose) {
-    setLevel('verbose');
-  } else if (config.options.debug || config.env === 'development') {
+  if (
+    config.options.verbose ||
+    config.options.debug ||
+    config.level === 'trace'
+  ) {
+    setLevel('trace');
+  } else if (config.env === 'development') {
     setLevel('debug');
+  } else {
+    setLevel(config.level);
   }
+  if (config !== 'production') window.reaction = { config };
   registerConfig(config);
   const context = {};
   context.store = createStore(context);

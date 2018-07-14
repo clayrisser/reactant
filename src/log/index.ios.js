@@ -1,12 +1,9 @@
-import _ from 'lodash';
 import loglevel from 'loglevel';
 
 const log = createLogger();
 
 function createLogger() {
-  loglevel.setLevel(
-    _.get(window, 'reaction.config.env') === 'production' ? 'error' : 'info'
-  );
+  loglevel.setLevel('debug');
   return loglevel;
 }
 

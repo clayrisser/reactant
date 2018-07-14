@@ -19,8 +19,8 @@ function getStorage(context) {
   return require('redux-persist/lib/storage').default;
 }
 
-async function getInitialState(context, persistConfig) {
-  if (context.cookieJar) {
+async function getInitialState({ cookieJar }, persistConfig) {
+  if (cookieJar) {
     try {
       return await getStoredState(persistConfig);
     } catch (err) {
