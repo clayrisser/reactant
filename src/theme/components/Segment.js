@@ -1,7 +1,7 @@
 import variable from '~/theme/variables/platform';
 
 export default (variables = variable) => {
-  const platform = variables.platform;
+  const { platform } = variables;
   const segmentTheme = {
     height: 45,
     borderColor: variables.segmentBorderColorMain,

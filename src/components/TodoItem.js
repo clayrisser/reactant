@@ -6,10 +6,13 @@ import { Text, CheckBox, ListItem } from 'native-base';
 @autobind
 export default class TodoItem extends Component {
   static propTypes = {
-    children: PropTypes.string
+    children: PropTypes.string,
+    finished: PropTypes.bool
   };
+
   static defaultProps = {
-    children: ''
+    children: '',
+    finished: false
   };
 
   constructor(props) {
@@ -20,14 +23,17 @@ export default class TodoItem extends Component {
   }
 
   handlePress() {
-    this.setState({ finished: !this.state.finished });
+    const { finished } = this.state;
+    this.setState({ finished: !finished });
   }
 
   render() {
+    const { children } = this.props;
+    const { finished } = this.state;
     return (
       <ListItem onPress={this.handlePress}>
-        <CheckBox checked={this.state.finished} />
-        <Text>{this.props.children}</Text>
+        <CheckBox checked={finished} />
+        <Text>{children}</Text>
       </ListItem>
     );
   }

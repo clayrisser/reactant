@@ -3,7 +3,7 @@ import pickerTheme from './Picker';
 import variable from '~/theme/variables/platform';
 
 export default (variables = variable) => {
-  const platform = variables.platform;
+  const { platform } = variables;
   const selectedStyle = {
     'NativeBase.Text': {
       color: variables.listItemSelected

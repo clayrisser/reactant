@@ -1,8 +1,7 @@
 import variable from '~/theme/variables/platform';
 
 export default (variables = variable) => {
-  const platformStyle = variables.platformStyle;
-  const platform = variables.platform;
+  const { platform, platformStyle } = variables;
   const iconCommon = {
     'NativeBase.Icon': {
       color: variables.tabBarActiveTextColor

@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import variable from '~/theme/variables/platform';
 
 export default (variables = variable) => {
-  const platform = variables.platform;
+  const { platform } = variables;
   const transparentBtnCommon = {
     'NativeBase.Text': {
       fontSize: variables.DefaultFontSize - 3,

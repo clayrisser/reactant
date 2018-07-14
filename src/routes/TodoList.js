@@ -11,6 +11,7 @@ class TodoList extends Component {
   static propTypes = {
     updateTmp: PropTypes.func.isRequired
   };
+
   handlePress() {
     this.props.updateTmp('boo', { hello: 'world' });
   }
@@ -27,7 +28,7 @@ class TodoList extends Component {
 }
 
 export default connect(
-  state => ({}),
+  () => {},
   dispatch => ({
     updateTmp: (...args) => dispatch(updateTmp(...args))
   })

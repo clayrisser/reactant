@@ -1,7 +1,7 @@
 import 'babel-polyfill';
-import registerIos from 'reaction-base/register/ios';
+import initIos from 'reaction-base/init/ios';
 import config from './config.json';
 
 const initialProps = {};
 
-registerIos(initialProps, config);
+export default initIos(initialProps, config);

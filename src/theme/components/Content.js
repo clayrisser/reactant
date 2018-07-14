@@ -1,6 +1,4 @@
-import variable from './../variables/platform';
-
-export default (variables = variable) => {
+export default () => {
   const contentTheme = {
     flex: 1,
     backgroundColor: 'transparent',
