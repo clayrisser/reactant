@@ -7,7 +7,7 @@ import createConfig from '../../createConfig';
 
 export default async function storybookAndroid(options, config) {
   if (!config) {
-    config = await createConfig({ options });
+    config = await createConfig({ action: 'storybook', options });
     log.debug('options', options);
     log.debug('config', config);
   }

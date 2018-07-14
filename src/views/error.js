@@ -26,22 +26,22 @@ log.error(browserWindow.reaction.errStack);
 startReportingRuntimeErrors({});
 reportBuildError(browserWindow.reaction.errStack);
 
-log.debug('connecting . . .');
+log.trace('connecting . . .');
 const client = new HotClient({ port: config.ports.dev });
 client.onConnected = async () => {
-  log.debug('connected');
+  log.trace('connected');
 };
 client.onHash = async message => {
-  log.debug('hash', hash);
+  log.trace('hash', hash);
   if (hash) windowReload();
   hash = message.data;
 };
 client.onContentChanged = () => {
-  log.debug('content-changed');
+  log.trace('content-changed');
   windowReload();
 };
 client.onClose = () => {
-  log.debug('close');
+  log.trace('close');
   log.info(
     'The development server has disconnected.\n' +
       'Refresh the page if necessary.'

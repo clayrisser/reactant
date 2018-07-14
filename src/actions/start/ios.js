@@ -7,7 +7,11 @@ import createConfig, { saveConfig } from '../../createConfig';
 
 export default async function startIos(options, config) {
   if (!config) {
-    config = await createConfig({ defaultEnv: 'development', options });
+    config = await createConfig({
+      action: 'start',
+      defaultEnv: 'development',
+      options
+    });
     log.debug('options', options);
     log.debug('config', config);
   }

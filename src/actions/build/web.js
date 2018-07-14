@@ -18,7 +18,11 @@ const { env } = process;
 
 export default async function buildWeb(options, config) {
   if (!config) {
-    config = await createConfig({ defaultEnv: 'production', options });
+    config = await createConfig({
+      action: 'build',
+      defaultEnv: 'production',
+      options
+    });
     log.debug('options', options);
     log.debug('config', config);
   }
@@ -55,11 +59,11 @@ async function runBuild(config, previousFileSizes) {
   process.noDeprecation = true;
   const webSpinner = ora('compiling web').start();
   const webStats = await compile(webpackWebConfig);
-  const webMessages = handleStats(webStats);
+  const webMessages = handleStats(webStats, config);
   webSpinner.succeed('compiled web');
   const serverSpinner = ora('compiling server').start();
   const nodeStats = await compile(webpackNodeConfig);
-  const nodeMessages = handleStats(nodeStats);
+  const nodeMessages = handleStats(nodeStats, config);
   serverSpinner.succeed('compiled server');
   return {
     stats: webStats,
@@ -68,23 +72,16 @@ async function runBuild(config, previousFileSizes) {
   };
 }
 
-function handleStats(stats) {
+function handleStats(stats, config) {
   const messages = formatWebpackMessages(stats.toJson({}, true));
-  const errorIgnoreList = [];
-  const errors = filterMessages(messages.errors, errorIgnoreList);
+  const errors = filterMessages(messages.errors, config.ignore.errors || []);
   if (errors.length) {
     throw new Error(`\n${errors.join('\n\n')}\n`);
   }
-  const warningIgnoreList = [
-    'asset size limit: The following asset(s) exceed the recommended size limit',
-    'entrypoint size limit: The following entrypoint(s)' +
-      ' combined asset size exceeds the recommended limit',
-    'webpack performance recommendations',
-    './node_modules/colors/lib/colors.js',
-    './node_modules/parse5/lib/index.js',
-    './node_modules/express/lib/view.js'
-  ];
-  const warnings = filterMessages(messages.warnings, warningIgnoreList);
+  const warnings = filterMessages(
+    messages.warnings,
+    config.ignore.warnings || []
+  );
   if (warnings.length) {
     if (env.CI && (!_.isString(env.CI) || env.CI.toLowerCase() !== 'false')) {
       log.info(

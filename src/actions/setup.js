@@ -6,7 +6,7 @@ import createConfig from '../createConfig';
 
 export default async function setup(options, config) {
   if (!config) {
-    config = await createConfig({ options });
+    config = await createConfig({ action: 'setup', options });
     log.debug('options', options);
     log.debug('config', config);
   }

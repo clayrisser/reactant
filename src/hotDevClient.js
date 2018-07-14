@@ -2,7 +2,6 @@ import _ from 'lodash';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import stripAnsi from 'strip-ansi';
 import { config, log } from 'reaction-base';
-import { setLevel } from 'reaction-base/log';
 import {
   dismissBuildError,
   reportBuildError,
@@ -11,12 +10,7 @@ import {
 } from 'react-error-overlay';
 import HotClient from './hotClient';
 
-if (config.options.verbose) setLevel('verbose');
-if (config.options.debug) {
-  window.module = module;
-  setLevel('debug');
-}
-if (config !== 'production') window.reaction = { config };
+if (config.options.debug) window.module = module;
 
 let hadServerError = false;
 let hadError = false;
@@ -39,32 +33,32 @@ client.onConnected = async () => {
   log.debug('connected');
 };
 client.onHash = async message => {
-  if (hash) log.info('hot reloading');
-  log.debug('hash', hash);
+  if (hash) log.debug('hot reloading');
+  log.trace('hash', hash);
   hash = message.data;
 };
 client.onStillOk = async () => {
-  log.debug('still-ok');
+  log.trace('still-ok');
 };
 client.onOk = async () => {
-  log.debug('ok');
+  log.trace('ok');
   await handleSuccess();
 };
 client.onContentChanged = () => {
-  log.debug('content-changed');
+  log.trace('content-changed');
   windowReload();
 };
 client.onWarngins = message => {
-  log.debug('warnings');
+  log.trace('warnings');
   handleWarnings(message.data);
 };
 client.onErrors = message => {
-  log.debug('errors');
+  log.trace('errors');
   handleErrors(message.data);
 };
 client.onClose = () => {
-  log.debug('close');
-  log.info(
+  log.trace('close');
+  log.debug(
     'The development server has disconnected.\n' +
       'Refresh the page if necessary.'
   );

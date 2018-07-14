@@ -10,7 +10,11 @@ import createWebpackConfig from '../../create-webpack-config';
 
 export default async function startWeb(options, config) {
   if (!config) {
-    config = await createConfig({ defaultEnv: 'development', options });
+    config = await createConfig({
+      action: 'start',
+      defaultEnv: 'development',
+      options
+    });
     log.debug('options', options);
     log.debug('config', config);
   }

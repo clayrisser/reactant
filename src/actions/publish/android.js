@@ -8,7 +8,11 @@ import createConfig from '../../createConfig';
 
 export default async function publishAndroid(options, config) {
   if (!config) {
-    config = await createConfig({ defaultEnv: 'production', options });
+    config = await createConfig({
+      action: 'publish',
+      defaultEnv: 'production',
+      options
+    });
     log.debug('options', options);
     log.debug('config', config);
   }

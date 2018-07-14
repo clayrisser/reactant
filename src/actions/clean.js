@@ -10,7 +10,7 @@ const { env } = process;
 export default async function clean(options, config) {
   const spinner = ora('cleaning').start();
   if (!config) {
-    config = await createConfig({ options });
+    config = await createConfig({ action: 'clean', options });
     log.debug('options', options);
     log.debug('config', config);
   }

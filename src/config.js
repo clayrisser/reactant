@@ -5,6 +5,12 @@ export default {
   host: env.REACTION_HOST || 'localhost',
   port: env.REACTION_PORT || 3333,
   envs: {},
+  ignore: {
+    errors: [],
+    warnings: [
+      'Calling ReactDOM.render() to hydrate server-rendered markup will stop working in React v17'
+    ]
+  },
   paths: {
     android: 'android',
     client: 'web/client.js',

@@ -7,7 +7,11 @@ import createConfig, { saveConfig } from '../../createConfig';
 
 export default async function buildExpo(options, config) {
   if (!config) {
-    config = await createConfig({ defaultEnv: 'production', options });
+    config = await createConfig({
+      action: 'build',
+      defaultEnv: 'production',
+      options
+    });
     log.debug('options', options);
     log.debug('config', config);
   }

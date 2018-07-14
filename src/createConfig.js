@@ -12,6 +12,7 @@ const occupiedPorts = [];
 
 export default async function createConfig({
   defaultEnv = 'development',
+  action = 'build',
   options = {}
 }) {
   environment.default = defaultEnv;
@@ -21,6 +22,7 @@ export default async function createConfig({
   const port = await getPort(config.port);
   return {
     ...config,
+    action,
     key: _.snakeCase(config.title).replace(/_/g, '-'),
     publish: {
       android: _.isArray(config.publish.android)
