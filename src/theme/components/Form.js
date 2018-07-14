@@ -1,7 +1,4 @@
-import variable from '~/theme/variables/platform';
-
-export default (variables = variable) => {
-  const platform = variables.platform;
+export default () => {
   const theme = {
     'NativeBase.Item': {
       '.fixedLabel': {

@@ -1,8 +1,8 @@
 import 'babel-polyfill';
-import registerServer from 'reaction-base/register/server';
+import express from 'express';
+import initServer from 'reaction-base/init/server';
 
+const app = express();
 const initialProps = {};
 
-const { app } = registerServer(initialProps);
-
-export default app;
+export default initServer(initialProps, app);

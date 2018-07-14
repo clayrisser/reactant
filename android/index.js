@@ -1,7 +1,7 @@
 import 'babel-polyfill';
-import registerAndroid from 'reaction-base/register/android';
+import initAndroid from 'reaction-base/init/android';
 import config from './config.json';
 
 const initialProps = {};
 
-registerAndroid(initialProps, config);
+export default initAndroid(initialProps, config);

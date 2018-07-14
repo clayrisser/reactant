@@ -4,13 +4,18 @@ import { View } from 'react-native';
 import style from './style';
 
 export default function CenterView(props) {
-  return <View style={style.main}>{props.children}</View>;
+  const { children } = props;
+  return (
+    <View style={style.main}>
+      {children}
+    </View>
+);
 }
 
 CenterView.defaultProps = {
-  children: null,
+  children: null
 };
 
 CenterView.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node
 };

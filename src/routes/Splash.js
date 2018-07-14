@@ -8,6 +8,13 @@ export default class Splash extends Component {
     history: PropTypes.object.isRequired
   };
 
+  componentDidMount() {
+    const { history } = this.props;
+    setTimeout(() => {
+      history.push('/todo-list');
+    }, 3000);
+  }
+
   render() {
     return (
       <View>
@@ -17,11 +24,5 @@ export default class Splash extends Component {
         </Link>
       </View>
     );
-  }
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.props.history.push('/todo-list');
-    }, 3000);
   }
 }

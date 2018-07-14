@@ -1,6 +1,6 @@
 import 'babel-polyfill';
-import registerClient from 'reaction-base/register/client';
+import initClient from 'reaction-base/init/client';
 
 const initialProps = {};
 
-registerClient(initialProps);
+export default initClient(initialProps);
