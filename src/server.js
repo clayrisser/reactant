@@ -32,7 +32,7 @@ startServer(server);
 
 function createApp() {
   // eslint-disable-next-line global-require
-  const { app } = require('~/../web/server');
+  const { app } = require('~/../web/server').default;
   app.disable('x-powered-by');
   app.use((err, req, res, _next) => {
     if (err) {

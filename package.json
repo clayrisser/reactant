@@ -1,6 +1,6 @@
 {
   "name": "reaction-build",
-  "version": "1.0.0-rc.2",
+  "version": "1.0.0-rc.6",
   "description": "build tool for reaction",
   "homepage": "https://reaction.codejam.ninja",
   "author": {
@@ -54,6 +54,7 @@
     "detect-port": "^1.2.3",
     "easycp": "^0.1.1",
     "ejs": "^2.6.1",
+    "eslint-loader": "^2.0.0",
     "file-loader": "^1.1.11",
     "fs-extra": "^6.0.1",
     "html-loader": "^0.5.5",
@@ -66,7 +67,7 @@
     "react-art": "^16.4.1",
     "react-dev-utils": "^5.0.1",
     "react-error-overlay": "^4.0.0",
-    "reaction-base": "^1.0.0-rc.1",
+    "reaction-base": "^1.0.0-rc.2",
     "sockjs-client": "^1.1.5",
     "start-server-webpack-plugin": "^2.2.5",
     "strip-ansi": "^4.0.0",
@@ -82,7 +83,6 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-config-prettier": "^2.9.0",
-    "eslint-loader": "^2.0.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jest": "^21.17.0",
     "eslint-plugin-jsx-a11y": "^6.1.0",

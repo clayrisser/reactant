@@ -30,7 +30,7 @@ if (module.hot && _.isFunction(module.hot.dispose)) {
 
 const client = new HotClient({ port: config.ports.dev });
 client.onConnected = async () => {
-  log.debug('connected');
+  log.trace('connected');
 };
 client.onHash = async message => {
   if (hash) log.debug('hot reloading');
@@ -172,7 +172,7 @@ function clearErrors() {
 
 function windowReload() {
   if (config.options.debug) {
-    log.debug('reloading window . . .');
+    log.debug('reloading window');
   } else {
     window.location.reload();
   }

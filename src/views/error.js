@@ -42,7 +42,7 @@ client.onContentChanged = () => {
 };
 client.onClose = () => {
   log.trace('close');
-  log.info(
+  log.debug(
     'The development server has disconnected.\n' +
       'Refresh the page if necessary.'
   );
@@ -50,7 +50,7 @@ client.onClose = () => {
 
 function windowReload() {
   if (config.options.debug) {
-    log.debug('reloading window . . .');
+    log.trace('reloading window . . .');
   } else {
     setTimeout(() => {
       browserWindow.location.reload();
