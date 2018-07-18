@@ -2,7 +2,6 @@ import Cookies from 'cookies-js';
 import ignoreWarnings from 'ignore-warnings';
 import { AppRegistry } from 'react-native';
 import { persistStore } from 'redux-persist';
-import initialState from '../../../src/store/initialState';
 import { config } from '..';
 import { createWebStore } from '../createStore';
 import log, { setLevel } from '../log';
@@ -16,7 +15,7 @@ async function renderClient(initialProps) {
   context.store = await createWebStore(context);
   context.persistor = await new Promise(resolve => {
     const { store } = context;
-    const persistor = persistStore(store, initialState, () => {
+    const persistor = persistStore(store, config.initialState, () => {
       return resolve(persistor);
     });
   });

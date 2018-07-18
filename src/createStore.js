@@ -4,10 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, applyMiddleware } from 'redux';
 import { persistReducer, getStoredState } from 'redux-persist';
 import reducer from '../../src/reducers';
-import initialState, {
-  whitelist,
-  blacklist
-} from '../../src/store/initialState';
+import { config } from '.';
 
 const composeEnhancers = composeWithDevTools({});
 
@@ -20,9 +17,11 @@ function getStorage(context) {
 }
 
 async function getInitialState({ cookieJar }, persistConfig) {
+  const { initialState } = config;
   if (cookieJar) {
     try {
-      return await getStoredState(persistConfig);
+      const state = await getStoredState(persistConfig);
+      if (state) return state;
     } catch (err) {
       return initialState;
     }
@@ -31,6 +30,7 @@ async function getInitialState({ cookieJar }, persistConfig) {
 }
 
 function getPersistConfig(context) {
+  const { whitelist, blacklist } = config;
   const persistConfig = {
     key: 'root',
     storage: getStorage(context),
@@ -45,6 +45,7 @@ function getPersistConfig(context) {
 }
 
 export default function create(context) {
+  const { initialState } = config;
   const persistConfig = getPersistConfig(context);
   return createStore(
     persistReducer(persistConfig, reducer),

@@ -9,7 +9,6 @@ import { persistStore } from 'redux-persist';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import ServerApp from '../../../web/ServerApp';
 import indexHtml from '../../../web/index.html';
-import initialState from '../../../src/store/initialState';
 import { config, assets } from '..';
 import { createWebStore } from '../createStore';
 import { setLevel } from '../log';
@@ -28,7 +27,12 @@ export default function server(initialProps, app = express()) {
   } else {
     setLevel(config.level);
   }
-  if (config !== 'production') global.reaction = { config };
+  if (!global.window) global.window = {};
+  if (config !== 'production') {
+    const reaction = { config };
+    global.window.reaction = reaction;
+    global.reaction = reaction;
+  }
   app.use(express.static(config.paths.distPublic));
   app.use(Cookies.express());
   app.get('/*', async (req, res, next) => {
@@ -38,7 +42,7 @@ export default function server(initialProps, app = express()) {
       context.store = await createWebStore(context);
       context.persistor = await new Promise(resolve => {
         const { store } = context;
-        const persistor = persistStore(store, initialState, () => {
+        const persistor = persistStore(store, config.initialState, () => {
           return resolve(persistor);
         });
       });
