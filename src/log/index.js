@@ -6,7 +6,7 @@ function createLogger() {
   if (runtime.node) {
     const { Logger, transports } = require('winston');
     return new Logger({
-      level: 'debug',
+      level: 'info',
       levels: {
         error: 0,
         warn: 1,
@@ -26,7 +26,7 @@ function createLogger() {
     });
   }
   const loglevel = require('loglevel');
-  loglevel.setLevel('debug');
+  loglevel.setLevel('info');
   return loglevel;
 }
 
