@@ -1,6 +1,6 @@
-import { REGISTER_MESSAGE } from '~/store/types';
+import { REGISTER_MESSAGE } from '~/actions/messages';
 
-export default function errors(state = [], action) {
+export default function messages(state = [], action) {
   switch (action.type) {
     case REGISTER_MESSAGE:
       return [...state, action.payload];

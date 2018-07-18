@@ -1,5 +1,5 @@
-import { START_LOADING, STOP_LOADING } from '~/store/types';
 import _ from 'lodash';
+import { START_LOADING, STOP_LOADING } from '~/actions/loading';
 
 export default function loading(state = [], action) {
   switch (action.type) {

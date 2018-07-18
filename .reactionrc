@@ -4,14 +4,9 @@ module.exports = {
     messages: [],
     loading: [],
     tmp: {},
-    todos: [
-      {
-        name: 'Clean the kitchen',
-        id: 'clean-the-kitchen',
-        done: false
-      }
-    ]
+    todos: []
   },
+  whitelist: ['todos'],
   webpack: function(config, webpack) {
     return webpack;
   }

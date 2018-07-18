@@ -2,17 +2,34 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import _ from 'lodash';
 import autobind from 'autobind-decorator';
-import { List } from 'native-base';
+import {
+  List,
+  View,
+  InputGroup,
+  Input,
+  Text,
+  Button,
+  Container,
+  Content,
+  Form,
+  Item
+} from 'native-base';
 import { connect } from 'react-redux';
+import { runtime } from 'js-info';
 import TodoItem from '~/components/TodoItem';
 import { addTodo, delTodo, toggleTodo } from '~/actions/todos';
 
 @autobind
 class TodoList extends Component {
   static propTypes = {
+    addTodo: PropTypes.func.isRequired,
+    delTodo: PropTypes.func.isRequired,
     todos: PropTypes.array.isRequired,
-    toggleTodo: PropTypes.func.isRequired,
-    delTodo: PropTypes.func.isRequired
+    toggleTodo: PropTypes.func.isRequired
+  };
+
+  state = {
+    todo: ''
   };
 
   handleToggle(todoId) {
@@ -21,6 +38,11 @@ class TodoList extends Component {
 
   handleDelete(todoId) {
     this.props.delTodo(todoId);
+  }
+
+  handleAddTodo() {
+    this.props.addTodo(this.state.todo);
+    this.setState({ todo: '' });
   }
 
   renderTodos() {
@@ -37,8 +59,51 @@ class TodoList extends Component {
     ));
   }
 
+  renderInput() {
+    if (runtime.reactNative) {
+      return (
+        <Form style={{ width: '80%' }}>
+          <Item style={{ width: '100%' }}>
+            <Input
+              value={this.state.todo}
+              placeholder="Todo Item"
+              onChangeText={todo => this.setState({ todo })}
+            />
+          </Item>
+        </Form>
+      );
+    }
+    return (
+      <InputGroup>
+        <Input
+          value={this.state.todo}
+          placeholder="Todo Item"
+          onChangeText={todo => this.setState({ todo })}
+        />
+      </InputGroup>
+    );
+  }
+
   render() {
-    return <List>{this.renderTodos()}</List>;
+    return (
+      <Container>
+        <Content>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'space-between'
+            }}
+          >
+            {this.renderInput()}
+            <Button onPress={this.handleAddTodo}>
+              <Text>Add</Text>
+            </Button>
+          </View>
+          <List>{this.renderTodos()}</List>
+        </Content>
+      </Container>
+    );
   }
 }
 
