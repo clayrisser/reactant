@@ -47,6 +47,7 @@
   "dependencies": {
     "autobind-decorator": "^2.1.0",
     "babel-polyfill": "^6.26.0",
+    "create-constants": "^0.1.0",
     "expo": "^28.0.0",
     "express": "^4.16.3",
     "lodash": "^4.17.10",
@@ -62,7 +63,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-router-native": "^4.3.0",
-    "reaction-base": "^1.0.0-rc.2",
+    "reaction-base": "^1.0.0-rc.14",
     "redux": "^4.0.0",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0"
@@ -83,7 +84,7 @@
     "jest": "^23.3.0",
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "^16.4.1",
-    "reaction-build": "^1.0.0-rc.6",
+    "reaction-build": "^1.0.0-rc.14",
     "rimraf": "^2.6.2"
   },
   "license": "MIT",
