@@ -3,7 +3,7 @@ const { env } = process;
 export default {
   title: 'Reaction',
   host: env.REACTION_HOST || 'localhost',
-  port: env.REACTION_PORT || 3333,
+  port: env.REACTION_PORT || 6001,
   envs: {},
   ignore: {
     errors: [],

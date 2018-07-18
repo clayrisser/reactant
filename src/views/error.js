@@ -3,28 +3,33 @@ import ignoreWarnings from 'ignore-warnings';
 import log, { setLevel } from 'reaction-base/log';
 import HotClient from '../hotClient';
 
-// eslint-disable-next-line no-undef
-const browserWindow = window;
-
-browserWindow.document.title = browserWindow.reaction.config.title;
-
+window.document.title = window.reaction.config.title;
 ignoreWarnings('react-error-overlay is not meant for use in production');
 
 let hash = null;
-const { config } = browserWindow.reaction;
+const { config } = window.reaction;
 
-if (config.options.verbose) setLevel('verbose');
-if (config.options.debug) setLevel('debug');
+if (
+  config.options.verbose ||
+  config.options.debug ||
+  config.level === 'trace'
+) {
+  setLevel('trace');
+} else if (config.env === 'development') {
+  setLevel('debug');
+} else {
+  setLevel(config.level);
+}
 
 const {
   reportBuildError,
   startReportingRuntimeErrors
 } = require('react-error-overlay');
 
-log.error(browserWindow.reaction.errStack);
+log.error(window.reaction.errStack);
 
 startReportingRuntimeErrors({});
-reportBuildError(browserWindow.reaction.errStack);
+reportBuildError(window.reaction.errStack);
 
 log.trace('connecting . . .');
 const client = new HotClient({ port: config.ports.dev });
@@ -53,7 +58,7 @@ function windowReload() {
     log.trace('reloading window . . .');
   } else {
     setTimeout(() => {
-      browserWindow.location.reload();
+      window.location.reload();
     }, 1000);
   }
 }

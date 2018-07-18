@@ -8,9 +8,11 @@ import {
 } from 'webpack';
 import createNodeConfig from './createNodeConfig';
 import createWebConfig from './createWebConfig';
+import { sanitizeConfig } from '../createConfig';
 
 export default function createWebpackConfig(target = 'web', action, config) {
   const { envs, paths, eslint, babel, env, webpack } = config;
+  const sanitizedConfig = sanitizeConfig(config);
   const webpackConfig = {
     context: process.cwd(),
     target,
@@ -30,7 +32,7 @@ export default function createWebpackConfig(target = 'web', action, config) {
       }
     },
     externals: {
-      'reaction-base/config': CircularJSON.stringify(config)
+      'reaction-base/config': CircularJSON.stringify(sanitizedConfig)
     },
     module: {
       strictExportPresence: true,

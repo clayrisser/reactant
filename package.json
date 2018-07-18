@@ -1,6 +1,6 @@
 {
   "name": "reaction-build",
-  "version": "1.0.0-rc.6",
+  "version": "1.0.0-rc.8",
   "description": "build tool for reaction",
   "homepage": "https://reaction.codejam.ninja",
   "author": {
@@ -62,12 +62,13 @@
     "js-info": "^0.2.4",
     "lodash": "^4.17.10",
     "markdown-loader": "^3.0.0",
+    "open-browser-webpack-plugin": "0.0.5",
     "ora": "^2.1.0",
     "rc-config": "0.0.5",
     "react-art": "^16.4.1",
     "react-dev-utils": "^5.0.1",
     "react-error-overlay": "^4.0.0",
-    "reaction-base": "^1.0.0-rc.2",
+    "reaction-base": "^1.0.0-rc.4",
     "sockjs-client": "^1.1.5",
     "start-server-webpack-plugin": "^2.2.5",
     "strip-ansi": "^4.0.0",

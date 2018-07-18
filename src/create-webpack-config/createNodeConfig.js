@@ -1,3 +1,4 @@
+import OpenBrowserPlugin from 'open-browser-webpack-plugin';
 import StartServerPlugin from 'start-server-webpack-plugin';
 import webpack from 'webpack';
 import webpackNodeExternals from 'webpack-node-externals';
@@ -51,7 +52,8 @@ export default function createNodeConfig(webpackConfig, action, config) {
             ...(options.inspect ? ['--inspect'] : []),
             ...(options.inspectBrk ? ['--inspect-brk'] : [])
           ]
-        })
+        }),
+        new OpenBrowserPlugin({ url: `http://localhost:${config.port}` })
       ]
     };
   }

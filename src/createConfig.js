@@ -23,7 +23,7 @@ export default async function createConfig({
   return {
     ...config,
     action,
-    key: _.snakeCase(config.title).replace(/_/g, '-'),
+    moduleName: _.snakeCase(config.title).replace(/_/g, '-'),
     publish: {
       android: _.isArray(config.publish.android)
         ? config.publish.android
@@ -61,14 +61,29 @@ export default async function createConfig({
   };
 }
 
-async function getPort(port = 3333) {
+async function getPort(port = 6001) {
   let newPort = await detectPort(port);
   if (_.includes(occupiedPorts, newPort)) return getPort(++newPort);
   occupiedPorts.push(newPort);
   return newPort;
 }
 
+export function sanitizeConfig(config) {
+  config = {
+    ...config,
+    options: {
+      debug: config.options.debug,
+      verbose: config.options.verbose
+    }
+  };
+  delete config.babel;
+  delete config.eslint;
+  delete config.publish;
+  return config;
+}
+
 export async function saveConfig(platform, config) {
+  config = sanitizeConfig(config);
   const configPath = path.resolve(config.paths[platform], 'config.json');
   await fs.writeFile(configPath, CircularJSON.stringify(config));
   return `config saved to ${configPath}`;
