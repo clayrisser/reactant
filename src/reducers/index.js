@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import errors from './errors';
 import loading from './loading';
+import messages from './messages';
 import tmp from './tmp';
+import todos from './todos';
 
 export default combineReducers({
-  errors,
   loading,
-  tmp
+  messages,
+  tmp,
+  todos
 });

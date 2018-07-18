@@ -1,17 +1,17 @@
-import { ADD_LOADING, DEL_LOADING } from '~/store/types';
+import { START_LOADING, STOP_LOADING } from '~/store/types';
 
-export function addLoading(uuid) {
+export function startLoading(loadingId) {
   return {
-    type: ADD_LOADING,
-    payload: uuid
+    type: START_LOADING,
+    payload: loadingId
   };
 }
 
-export function delLoading(uuid) {
+export function stopLoading(loadingId) {
   return {
-    type: DEL_LOADING,
-    payload: uuid
+    type: STOP_LOADING,
+    payload: loadingId
   };
 }
 
-export default { addLoading, delLoading };
+export default { startLoading, stopLoading };

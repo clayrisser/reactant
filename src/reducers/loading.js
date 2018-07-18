@@ -1,11 +1,11 @@
-import { ADD_LOADING, DEL_LOADING } from '~/store/types';
+import { START_LOADING, STOP_LOADING } from '~/store/types';
 import _ from 'lodash';
 
 export default function loading(state = [], action) {
   switch (action.type) {
-    case ADD_LOADING:
+    case START_LOADING:
       return [...state, action.payload];
-    case DEL_LOADING:
+    case STOP_LOADING:
       return _.filter(state, item => action.payload !== item);
   }
   return state;

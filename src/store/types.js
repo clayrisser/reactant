@@ -1,16 +1,18 @@
-// ERRORS
-export const REGISTER_ERROR = 'REGISTER_ERROR';
+import createConstants from 'create-constants';
 
-// LOADING
-export const ADD_LOADING = 'ADD_LOADING';
-export const DEL_LOADING = 'DEL_LOADING';
+export default createConstants([
+  // MESSAGES
+  'REGISTER_MESSAGE',
 
-// TMP
-export const UPDATE_TMP = 'UPDATE_TMP';
+  // LOADING
+  'START_LOADING',
+  'STOP_LOADING',
 
-export default {
-  REGISTER_ERROR,
-  ADD_LOADING,
-  DEL_LOADING,
-  UPDATE_TMP
-};
+  // TMP
+  'UPDATE_TMP',
+
+  // TODOS
+  'ADD_TODO',
+  'DEL_TODO',
+  'TOGGLE_TODO'
+]);
