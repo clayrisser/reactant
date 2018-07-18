@@ -22,9 +22,6 @@ export default async function startExpo(options, config) {
     spinner.stop();
     throw boom.badRequest('exp not installed');
   }
-  if ((await readcp('which adb')).length) {
-    await silentcp('adb reverse tcp:19000 tcp:19000');
-  }
   spinner.stop();
   await easycp(`exp start${options.offline ? ' --offline --localhost' : ''}`);
 }

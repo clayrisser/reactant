@@ -22,9 +22,6 @@ export default async function startAndroid(options, config) {
     spinner.stop();
     throw boom.badRequest('react-native not installed');
   }
-  if ((await readcp('which adb')).length) {
-    await silentcp(`adb reverse tcp:8081 tcp:${config.ports.native}`);
-  }
   spinner.stop();
   setTimeout(async () => {
     easycp(`react-native run-android --port ${config.ports.native}`);
