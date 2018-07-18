@@ -1,5 +1,6 @@
 import 'babel-polyfill';
 import CircularJSON from 'circular-json';
+import OpenBrowserPlugin from 'open-browser-webpack-plugin';
 import _ from 'lodash';
 import log, { setLevel } from 'reaction-base/log';
 import { sleep } from 'deasync';
@@ -27,6 +28,10 @@ module.exports = webpackConfig => {
     ...webpackConfig.externals,
     'reaction-base/config': CircularJSON.stringify(config)
   };
+  webpackConfig.plugins = [
+    ...webpackConfig.plugins,
+    new OpenBrowserPlugin({ url: `http://localhost:${config.ports.storybook}` })
+  ];
   const jsxRule = _.find(
     webpackConfig.module.rules,
     rule => rule.loader.indexOf('babel-loader') > -1

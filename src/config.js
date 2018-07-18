@@ -11,6 +11,9 @@ export default {
       'Calling ReactDOM.render() to hydrate server-rendered markup will stop working in React v17'
     ]
   },
+  initialState: {},
+  whitelist: [],
+  blacklist: [],
   paths: {
     android: 'android',
     client: 'web/client.js',
