@@ -1,6 +1,6 @@
-import { UPDATE_TMP } from '~/store/types';
+import { UPDATE_TMP } from '~/actions/tmp';
 
-export default function updateTmp(state = {}, action) {
+export default function tmp(state = {}, action) {
   switch (action.type) {
     case UPDATE_TMP:
       return {

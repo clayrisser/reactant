@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import autobind from 'autobind-decorator';
-import { Text, CheckBox, ListItem, Button } from 'native-base';
+import { Text, CheckBox, ListItem, Icon, View } from 'native-base';
+import { TouchableOpacity } from 'react-native';
+import { runtime } from 'js-info';
 
 @autobind
 export default class TodoItem extends Component {
@@ -20,17 +22,8 @@ export default class TodoItem extends Component {
     finished: false
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      finished: props.finished
-    };
-  }
-
   handleToggle() {
-    const { finished } = this.state;
     this.props.onToggle(this.props.id);
-    this.setState({ finished: !finished });
   }
 
   handleDelete() {
@@ -38,13 +31,35 @@ export default class TodoItem extends Component {
   }
 
   render() {
-    const { children } = this.props;
-    const { finished } = this.state;
+    const { children, finished } = this.props;
     return (
-      <ListItem onPress={this.handleToggle}>
-        <CheckBox checked={finished} />
-        <Text>{children}</Text>
-        <Button onPress={this.handleDelete}>Del</Button>
+      <ListItem>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'flex-start',
+              alignItems: 'center'
+            }}
+            onPress={this.handleToggle}
+          >
+            <CheckBox checked={finished} style={{ width: 20 }} />
+            <Text style={{ paddingLeft: runtime.reactNative ? 20 : 10 }}>
+              {children}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.handleDelete}>
+            <Icon name="ios-trash" />
+          </TouchableOpacity>
+        </View>
       </ListItem>
     );
   }

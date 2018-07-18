@@ -1,4 +1,5 @@
-import { START_LOADING, STOP_LOADING } from '~/store/types';
+export const START_LOADING = 'START_LOADING';
+export const STOP_LOADING = 'STOP_LOADING';
 
 export function startLoading(loadingId) {
   return {

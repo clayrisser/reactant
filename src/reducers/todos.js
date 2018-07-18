@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import { ADD_TODO, DEL_TODO, TOGGLE_TODO } from '~/store/types';
+import { ADD_TODO, DEL_TODO, TOGGLE_TODO } from '~/actions/todos';
 
-export default function updateTmp(state = [], action) {
+export default function todos(state = [], action) {
   switch (action.type) {
     case ADD_TODO:
       return [
@@ -15,8 +15,8 @@ export default function updateTmp(state = [], action) {
     case DEL_TODO:
       return _.filter(state, todo => action.payload !== todo.id);
     case TOGGLE_TODO: {
-      const cloned = { ...state };
-      const todo = _.find(state, todo => action.payload !== todo.id);
+      const cloned = _.cloneDeep(state);
+      const todo = _.find(cloned, todo => action.payload === todo.id);
       todo.done = !todo.done;
       return cloned;
     }

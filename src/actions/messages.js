@@ -1,4 +1,4 @@
-import { REGISTER_MESSAGE } from '~/store/types';
+export const REGISTER_MESSAGE = 'REGISTER_MESSAGE';
 
 export function registerMessage(message) {
   return {
