@@ -1,6 +1,6 @@
 {
   "name": "reaction-base",
-  "version": "1.0.0-rc.18",
+  "version": "1.0.0-rc.23",
   "description": "reaction core components",
   "homepage": "https://github.com/codejamninja/reaction-base",
   "bugs": {
@@ -15,13 +15,14 @@
   },
   "main": "index.js",
   "files": [
+    "Link",
+    "Reaction.js",
     "assets.js",
     "config.js",
     "createStore.js",
     "index.js",
-    "Link",
-    "log",
-    "init"
+    "init",
+    "log"
   ],
   "repository": {
     "type": "git",
@@ -37,6 +38,7 @@
   },
   "dependencies": {
     "babel-plugin-lodash": "^3.3.4",
+    "babel-preset-react": "^6.24.1",
     "cheerio": "^1.0.0-rc.2",
     "connected-react-router": "^4.3.0",
     "cookies": "^0.7.1",
@@ -47,6 +49,7 @@
     "js-info": "^0.2.4",
     "lodash": "^4.17.10",
     "loglevel": "^1.6.1",
+    "prop-types": "^15.6.2",
     "react-dom": "^16.4.1",
     "react-native-ignore-warnings": "^0.1.1",
     "redux-devtools-extension": "^2.13.5",

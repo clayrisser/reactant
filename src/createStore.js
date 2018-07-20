@@ -2,16 +2,16 @@ import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1';
 import reduxThunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
-import { createMemoryHistory } from 'history';
+import { createMemoryHistory, createBrowserHistory } from 'history';
 import { createStore, applyMiddleware } from 'redux';
 import { persistReducer, getStoredState } from 'redux-persist';
+import { runtime } from 'js-info';
 import reducers from '../../src/reducers';
 import { config } from '.';
 
-const history = createMemoryHistory({
-  initialEntries: ['/'],
-  initialIndex: 0
-});
+const history = (runtime.browser
+  ? createBrowserHistory
+  : createMemoryHistory)();
 const composeEnhancers = composeWithDevTools({});
 
 function getReducer(persistConfig) {

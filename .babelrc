@@ -1,12 +1,14 @@
 {
   "presets": [
     "env",
+    "react",
     "stage-2"
   ],
   "plugins": [
     "lodash"
   ],
   "ignore": [
+    "Reaction.js",
     "createStore.js",
     "init/*.js"
   ]

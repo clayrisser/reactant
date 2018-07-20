@@ -70,7 +70,6 @@ export default function server(initialProps, app = express()) {
       });
       await context.persistor.flush();
       res.removeHeader('Set-Cookie');
-      if (context.url) return res.redirect(301, context.url);
       return res.send($.html());
     } catch (err) {
       if (context.persistor) {
