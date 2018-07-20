@@ -24,8 +24,7 @@ export default function expo(componentName, initialProps = {}, config = {}) {
   }
   if (config !== 'production') window.reaction = { config };
   registerConfig(config);
-  const context = {};
-  context.store = createStore(context);
+  const context = createStore({});
   context.persistor = persistStore(context.store);
   initialProps.context = context;
   registerRootComponent(() => <ExpoApp {...initialProps} />);

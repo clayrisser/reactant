@@ -36,10 +36,11 @@ export default function server(initialProps, app = express()) {
   app.use(express.static(config.paths.distPublic));
   app.use(Cookies.express());
   app.get('/*', async (req, res, next) => {
-    const context = {};
+    let context = {};
     try {
-      context.cookieJar = new NodeCookiesWrapper(new Cookies(req, res));
-      context.store = await createWebStore(context);
+      context = await createWebStore({
+        cookieJar: new NodeCookiesWrapper(new Cookies(req, res))
+      });
       context.persistor = await new Promise(resolve => {
         const { store } = context;
         const persistor = persistStore(store, config.initialState, () => {
@@ -72,8 +73,10 @@ export default function server(initialProps, app = express()) {
       if (context.url) return res.redirect(301, context.url);
       return res.send($.html());
     } catch (err) {
-      await context.persistor.flush();
-      res.removeHeader('Set-Cookie');
+      if (context.persistor) {
+        await context.persistor.flush();
+        res.removeHeader('Set-Cookie');
+      }
       return next(err);
     }
   });

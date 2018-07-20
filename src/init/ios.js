@@ -23,8 +23,7 @@ export default function ios(initialProps = {}, config = {}) {
   }
   if (config !== 'production') window.reaction = { config };
   registerConfig(config);
-  const context = {};
-  context.store = createStore(context);
+  const context = createStore({});
   context.persistor = persistStore(context.store);
   initialProps.context = context;
   AppRegistry.registerComponent(config.moduleName, () => {

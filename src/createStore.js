@@ -1,12 +1,28 @@
 import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1';
 import reduxThunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
+import { createMemoryHistory } from 'history';
 import { createStore, applyMiddleware } from 'redux';
 import { persistReducer, getStoredState } from 'redux-persist';
-import reducer from '../../src/reducers';
+import reducers from '../../src/reducers';
 import { config } from '.';
 
+const history = createMemoryHistory({
+  initialEntries: ['/'],
+  initialIndex: 0
+});
 const composeEnhancers = composeWithDevTools({});
+
+function getReducer(persistConfig) {
+  return persistReducer(persistConfig, connectRouter(history)(reducers));
+}
+
+function getMiddleware() {
+  return composeEnhancers(
+    applyMiddleware(routerMiddleware(history), reduxThunk)
+  );
+}
 
 function getStorage(context) {
   if (context.cookieJar) {
@@ -44,21 +60,29 @@ function getPersistConfig(context) {
   return persistConfig;
 }
 
+export async function createWebStore(context) {
+  const persistConfig = getPersistConfig(context);
+  return {
+    ...context,
+    store: createStore(
+      getReducer(persistConfig),
+      await getInitialState(context, persistConfig),
+      getMiddleware()
+    ),
+    history
+  };
+}
+
 export default function create(context) {
   const { initialState } = config;
   const persistConfig = getPersistConfig(context);
-  return createStore(
-    persistReducer(persistConfig, reducer),
-    initialState,
-    composeEnhancers(applyMiddleware(reduxThunk))
-  );
-}
-
-export async function createWebStore(context) {
-  const persistConfig = getPersistConfig(context);
-  return createStore(
-    persistReducer(persistConfig, reducer),
-    await getInitialState(context, persistConfig),
-    composeEnhancers(applyMiddleware(reduxThunk))
-  );
+  return {
+    ...context,
+    store: createStore(
+      getReducer(persistConfig),
+      initialState,
+      getMiddleware()
+    ),
+    history
+  };
 }

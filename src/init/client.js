@@ -9,10 +9,9 @@ import log, { setLevel } from '../log';
 const { document } = window;
 
 async function renderClient(initialProps) {
-  const context = {
+  const context = await createWebStore({
     cookieJar: Cookies
-  };
-  context.store = await createWebStore(context);
+  });
   context.persistor = await new Promise(resolve => {
     const { store } = context;
     const persistor = persistStore(store, config.initialState, () => {
