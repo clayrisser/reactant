@@ -38,6 +38,7 @@ export default {
   babel: {
     presets: ['env', 'react-native', 'stage-2'],
     plugins: [
+      'lodash',
       'transform-decorators-legacy',
       'transform-class-properties',
       'react-native-web'

@@ -1,5 +1,5 @@
 import boom from 'boom';
-import easycp, { readcp, silentcp } from 'easycp';
+import easycp, { readcp } from 'easycp';
 import ora from 'ora';
 import { log } from 'reaction-base';
 import clean from '../clean';
