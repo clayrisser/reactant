@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
+import Reaction from 'reaction-base/Reaction';
 import { StaticRouter } from 'react-router';
-import App from '../src/App';
 
 export default class ServerApp extends Component {
   render() {
     return (
       <StaticRouter {...this.props}>
-        <App {...this.props} />
+        <Reaction {...this.props} />
       </StaticRouter>
     );
   }
