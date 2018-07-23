@@ -17,11 +17,11 @@ export default async function startAndroid(options, config) {
   }
   if (options.clean) await clean(options, config);
   const spinner = ora('starting android\n').start();
-  await saveConfig('android', config);
   if (!(await readcp('which react-native')).length) {
     spinner.stop();
     throw boom.badRequest('react-native not installed');
   }
+  await saveConfig('android', config);
   spinner.stop();
   setTimeout(async () => {
     easycp(`react-native run-android --port ${config.ports.native}`);

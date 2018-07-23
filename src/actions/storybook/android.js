@@ -1,9 +1,10 @@
 import boom from 'boom';
 import easycp, { readcp } from 'easycp';
+import open from 'open';
 import ora from 'ora';
 import { log } from 'reaction-base';
 import clean from '../clean';
-import createConfig from '../../createConfig';
+import createConfig, { saveConfig } from '../../createConfig';
 
 export default async function storybookAndroid(options, config) {
   if (!config) {
@@ -17,9 +18,11 @@ export default async function storybookAndroid(options, config) {
     spinner.stop();
     throw boom.badRequest('react-native not installed');
   }
+  await saveConfig('android', config);
   spinner.stop();
   setTimeout(async () => {
-    easycp(`react-native run-android --port ${config.ports.native}`);
+    await easycp(`react-native run-android --port ${config.ports.native}`);
+    open(`http://localhost:${config.ports.storybookNative}`);
   }, 5000);
   await easycp(`storybook start -p ${config.ports.storybookNative}`);
 }

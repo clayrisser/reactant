@@ -51,7 +51,6 @@ export default {
       'comma-dangle': ['error', 'never']
     }
   },
-  webpack: (config, webpack) => {
-    return webpack;
-  }
+  webpack: (config, webpack) => webpack,
+  storybook: (config, webpack) => webpack
 };

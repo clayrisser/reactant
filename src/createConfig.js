@@ -73,6 +73,7 @@ export function sanitizeConfig(config) {
     ...config,
     options: {
       debug: config.options.debug,
+      platform: config.options.platform,
       verbose: config.options.verbose
     }
   };

@@ -26,7 +26,11 @@ module.exports = webpackConfig => {
   };
   webpackConfig.externals = {
     ...webpackConfig.externals,
-    'reaction-base/config': CircularJSON.stringify(config)
+    'reaction-base/config': CircularJSON.stringify(config),
+    child_process: {},
+    deasync: {},
+    fs: {},
+    winston: {}
   };
   webpackConfig.plugins = [
     ...webpackConfig.plugins,
@@ -44,6 +48,7 @@ module.exports = webpackConfig => {
       presets: [...jsxRule.query.presets, ...(config.babel.presets || [])]
     }
   });
+  webpackConfig = config.storybook(config, webpackConfig);
   log.debug('webpackConfig', webpackConfig);
   return webpackConfig;
 };

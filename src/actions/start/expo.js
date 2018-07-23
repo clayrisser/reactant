@@ -17,11 +17,11 @@ export default async function startExpo(options, config) {
   }
   if (options.clean) await clean(options, config);
   const spinner = ora('starting expo\n').start();
-  await saveConfig('expo', config);
   if (!(await readcp('which exp')).length) {
     spinner.stop();
     throw boom.badRequest('exp not installed');
   }
+  await saveConfig('expo', config);
   spinner.stop();
   await easycp(`exp start${options.offline ? ' --offline --localhost' : ''}`);
 }

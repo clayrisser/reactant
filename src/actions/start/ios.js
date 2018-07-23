@@ -17,11 +17,11 @@ export default async function startIos(options, config) {
   }
   if (options.clean) await clean(options, config);
   const spinner = ora('Starting ios\n').start();
-  await saveConfig('ios', config);
   if (!(await readcp('which react-native')).length) {
     spinner.stop();
     throw boom.badRequest('react-native not installed');
   }
+  await saveConfig('ios', config);
   spinner.stop();
   easycp(`react-native run-ios --port ${config.ports.native}`);
 }

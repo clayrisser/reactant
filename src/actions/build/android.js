@@ -17,11 +17,11 @@ export default async function buildAndroid(options, config) {
   }
   await clean(options, config);
   const spinner = ora('building android\n').start();
-  await saveConfig('android', config);
   if (!(await readcp('which react-native')).length) {
     spinner.stop();
     throw boom.badRequest('react-native not installed');
   }
+  await saveConfig('android', config);
   await easycp('react-native bundle');
   spinner.succeed('built android');
 }

@@ -17,11 +17,11 @@ export default async function buildIos(options, config) {
   }
   await clean(options, config);
   const spinner = ora('building ios\n').start();
-  await saveConfig('ios', config);
   if (!(await readcp('which react-native')).length) {
     spinner.stop();
     throw boom.badRequest('react-native not installed');
   }
+  await saveConfig('ios', config);
   await easycp('react-native bundle');
   spinner.succeed('built ios');
 }
