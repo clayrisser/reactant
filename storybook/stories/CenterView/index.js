@@ -5,11 +5,7 @@ import style from './style';
 
 export default function CenterView(props) {
   const { children } = props;
-  return (
-    <View style={style.main}>
-      {children}
-    </View>
-);
+  return <View style={style.main}>{children}</View>;
 }
 
 CenterView.defaultProps = {
