@@ -3,14 +3,27 @@ import React, { Component } from 'react';
 import { ConnectedRouter } from 'connected-react-router';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
-import App from '../../src/App';
+import { config } from 'reaction-base';
 
 export default class Reaction extends Component {
   static propTypes = {
     context: PropTypes.object.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.App = require('../../src/App').default;
+    const { options } = config;
+    if (
+      config.action === 'storybook' &&
+      (options.platform === 'android' || options.platform === 'ios')
+    ) {
+      this.App = require('../../storybook').default;
+    }
+  }
+
   render() {
+    const { App } = this;
     const { store, persistor, history } = this.props.context;
     return (
       <Provider store={store}>
