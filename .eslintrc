@@ -3,6 +3,7 @@
   "parser": "babel-eslint",
   "rules": {
     "arrow-body-style": "off",
+    "no-use-before-define": "off",
     "default-case": "off",
     "no-param-reassign": "off",
     "no-shadow": "off",

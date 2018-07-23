@@ -1,4 +1,5 @@
 import React from 'react';
+import { List } from 'native-base';
 import { linkTo } from '@storybook/addon-links';
 import { storiesOf } from 'reaction-build';
 import TodoItem from '~/components/TodoItem';
@@ -10,18 +11,22 @@ storiesOf('Welcome', module).add('to Storybook', () => (
 ));
 
 storiesOf('TodoItem', module)
-  .addDecorator(getStory => (
-    <CenterView>
-      {getStory()}
-    </CenterView>
-))
+  .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
   .add('finished', () => (
-    <TodoItem finished>
-Finished Item
-    </TodoItem>
-))
+    <List style={styles.list}>
+      <TodoItem id="finished-item" finished>
+        Finished Item
+      </TodoItem>
+    </List>
+  ))
   .add('unfinished', () => (
-    <TodoItem>
-Unfinished Item
-    </TodoItem>
-));
+    <List style={styles.list}>
+      <TodoItem id="unfinished-item">Unfinished Item</TodoItem>
+    </List>
+  ));
+
+const styles = {
+  list: {
+    width: '100%'
+  }
+};
