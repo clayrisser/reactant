@@ -8,7 +8,7 @@
     "lodash"
   ],
   "ignore": [
-    "Reaction.js",
+    "Reaction*.js",
     "createStore.js",
     "init/*.js"
   ]

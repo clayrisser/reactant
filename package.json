@@ -1,6 +1,6 @@
 {
   "name": "reaction-base",
-  "version": "1.0.0-rc.26",
+  "version": "1.0.0-rc.28",
   "description": "reaction core components",
   "homepage": "https://github.com/codejamninja/reaction-base",
   "bugs": {
@@ -16,6 +16,8 @@
   "main": "index.js",
   "files": [
     "Link",
+    "Reaction.android.js",
+    "Reaction.ios.js",
     "Reaction.js",
     "assets.js",
     "config.js",
