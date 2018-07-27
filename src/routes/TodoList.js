@@ -2,20 +2,10 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import _ from 'lodash';
 import autobind from 'autobind-decorator';
-import {
-  List,
-  View,
-  InputGroup,
-  Input,
-  Text,
-  Button,
-  Container,
-  Content,
-  Form,
-  Item
-} from 'native-base';
+import { Container, Content, List, View, Header, Text } from 'native-base';
+import { config } from 'reaction-base';
 import { connect } from 'react-redux';
-import { runtime } from 'js-info';
+import AddTodo from '~/components/AddTodo';
 import TodoItem from '~/components/TodoItem';
 import { addTodo, delTodo, toggleTodo } from '~/actions/todos';
 
@@ -28,10 +18,6 @@ class TodoList extends Component {
     toggleTodo: PropTypes.func.isRequired
   };
 
-  state = {
-    todo: ''
-  };
-
   handleToggle(todoId) {
     this.props.toggleTodo(todoId);
   }
@@ -40,9 +26,8 @@ class TodoList extends Component {
     this.props.delTodo(todoId);
   }
 
-  handleAddTodo() {
-    this.props.addTodo(this.state.todo);
-    this.setState({ todo: '' });
+  handleAddTodo(todo) {
+    this.props.addTodo(todo);
   }
 
   renderTodos() {
@@ -59,48 +44,22 @@ class TodoList extends Component {
     ));
   }
 
-  renderInput() {
-    if (runtime.reactNative) {
-      return (
-        <Form style={{ width: '80%' }}>
-          <Item style={{ width: '100%' }}>
-            <Input
-              value={this.state.todo}
-              placeholder="Todo Item"
-              onChangeText={todo => this.setState({ todo })}
-            />
-          </Item>
-        </Form>
-      );
-    }
-    return (
-      <InputGroup>
-        <Input
-          value={this.state.todo}
-          placeholder="Todo Item"
-          onChangeText={todo => this.setState({ todo })}
-        />
-      </InputGroup>
-    );
-  }
-
   render() {
     return (
       <Container>
+        <Header
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <Text style={{ fontSize: 24 }}>{config.title}</Text>
+        </Header>
         <Content>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'space-between'
-            }}
-          >
-            {this.renderInput()}
-            <Button onPress={this.handleAddTodo}>
-              <Text>Add</Text>
-            </Button>
+          <View style={{ padding: 10 }}>
+            <AddTodo onPress={this.handleAddTodo} />
+            <List>{this.renderTodos()}</List>
           </View>
-          <List>{this.renderTodos()}</List>
         </Content>
       </Container>
     );
