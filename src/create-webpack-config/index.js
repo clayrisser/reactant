@@ -23,11 +23,7 @@ export default function createWebpackConfig(target = 'web', action, config) {
       extensions: ['.web.js', '.js', '.json', '.jsx', '.mjs'],
       alias: {
         '~': paths.src,
-        'native-base': require.resolve('native-base-web'),
         'react-native': require.resolve('react-native-web'),
-        'react/lib/ReactNativePropRegistry': require.resolve(
-          'react-native-web/dist/modules/ReactNativePropRegistry'
-        ),
         'webpack/hot/poll': require.resolve('webpack/hot/poll')
       }
     },
@@ -39,11 +35,7 @@ export default function createWebpackConfig(target = 'web', action, config) {
       rules: [
         {
           test: /\.(js|jsx|mjs)$/,
-          include: [
-            paths.src,
-            paths.web,
-            path.resolve('node_modules/reaction-base')
-          ],
+          include: [paths.android, paths.ios, paths.src, paths.web],
           loader: require.resolve('eslint-loader'),
           options: eslint,
           enforce: 'pre'
@@ -53,7 +45,18 @@ export default function createWebpackConfig(target = 'web', action, config) {
           include: [
             paths.src,
             paths.web,
-            path.resolve('node_modules/reaction-base')
+            path.resolve('node_modules/native-base-shoutem-theme'),
+            path.resolve('node_modules/react-native-drawer'),
+            path.resolve('node_modules/react-native-easy-grid'),
+            path.resolve(
+              'node_modules/react-native-keyboard-aware-scroll-view'
+            ),
+            path.resolve('node_modules/react-native-safe-area-view'),
+            path.resolve('node_modules/react-native-tab-view'),
+            path.resolve('node_modules/react-native-vector-icons'),
+            path.resolve('node_modules/react-native-web'),
+            path.resolve('node_modules/reaction-base'),
+            path.resolve('node_modules/static-container')
           ],
           loader: require.resolve('babel-loader'),
           options: babel
@@ -97,6 +100,27 @@ export default function createWebpackConfig(target = 'web', action, config) {
                 pedantic: true,
                 gfm: true,
                 breaks: true
+              }
+            }
+          ]
+        },
+        {
+          test: /\.s?css$/,
+          use: [
+            'isomorphic-style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true,
+                config: {
+                  path: path.resolve(__dirname, 'postcss.config.js')
+                }
               }
             }
           ]

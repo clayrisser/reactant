@@ -22,6 +22,7 @@ export default {
     distStorybook: 'dist/storybook',
     expo: 'expo',
     ios: 'ios',
+    root: '',
     server: 'node_modules/reaction-build/lib/server.js',
     src: 'src',
     srcPublic: 'src/public',
