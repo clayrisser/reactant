@@ -53,7 +53,6 @@
     "express": "^4.16.3",
     "lodash": "^4.17.10",
     "native-base": "^2.7.0",
-    "native-base-web": "github:codejamninja/native-base-web#npm",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-art": "^16.4.1",
@@ -84,7 +83,7 @@
     "jest": "^23.3.0",
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "^16.4.1",
-    "reaction-build": "^1.0.0-rc.30",
+    "reaction-build": "^1.0.0-rc.36",
     "rimraf": "^2.6.2"
   },
   "license": "MIT",
