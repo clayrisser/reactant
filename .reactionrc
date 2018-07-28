@@ -1,13 +1,8 @@
-module.exports = {
-  title: 'Reaction',
-  initialState: {
-    messages: [],
-    loading: [],
-    tmp: {},
-    todos: []
-  },
-  whitelist: ['todos'],
-  webpack: function(config, webpack) {
-    return webpack;
-  }
-};
+title: Reaction
+initialState:
+  messages: []
+  loading: []
+  tmp: {}
+  todos: []
+whitelist:
+  - todos

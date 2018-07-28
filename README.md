@@ -43,25 +43,28 @@ git clone https://github.com/codejamninja/reaction
 
 ## Usage
 
-| Command                     | Description                      |
-| --------------------------- | -------------------------------- |
-| `npm run start:android`     | start android development        |
-| `npm run start:expo`        | start expo development           |
-| `npm run start:ios`         | start ios development            |
-| `npm run start:web`         | start web development            |
-| `npm run build:android`     | build android app                |
-| `npm run build:expo`        | build expo app                   |
-| `npm run build:ios`         | build ios app                    |
-| `npm run build:web:analyze` | build web app and analyze bundle |
-| `npm run build:web:serve`   | build web app and serve          |
-| `npm run build:web`         | build web app                    |
-| `npm run publish:android`   | publish android app              |
-| `npm run publish:expo`      | publish expo app                 |
-| `npm run publish:ios`       | publish ios app                  |
-| `npm run publish:web`       | publish web app                  |
-| `npm run storybook:android` | start android storybook          |
-| `npm run storybook:ios`     | start ios storybook              |
-| `npm run storybook:web`     | start web storybook              |
+| Command                           | Description                      |
+| --------------------------------- | -------------------------------- |
+| `npm run build:android:storybook` | build android storybook          |
+| `npm run build:android`           | build android app                |
+| `npm run build:expo`              | build expo app                   |
+| `npm run build:ios:storybook`     | build ios storybook              |
+| `npm run build:ios`               | build ios app                    |
+| `npm run build:web:analyze`       | build web app and analyze bundle |
+| `npm run build:web:serve`         | build web app and serve          |
+| `npm run build:web:storybook`     | build web storybook              |
+| `npm run build:web`               | build web app                    |
+| `npm run publish:android`         | publish android app              |
+| `npm run publish:expo`            | publish expo app                 |
+| `npm run publish:ios`             | publish ios app                  |
+| `npm run publish:web`             | publish web app                  |
+| `npm run start:android:storybook` | start android storybook          |
+| `npm run start:android`           | start android development        |
+| `npm run start:expo`              | start expo development           |
+| `npm run start:ios:storybook`     | start ios storybook              |
+| `npm run start:ios`               | start ios development            |
+| `npm run start:web:storybook`     | start web storybook              |
+| `npm run start:web`               | start web development            |
 
 
 ## Support
