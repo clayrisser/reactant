@@ -1,5 +1,6 @@
 import boom from 'boom';
 import easycp, { readcp } from 'easycp';
+import open from 'open';
 import ora from 'ora';
 import { log } from 'reaction-base';
 import clean from '../clean';
@@ -23,5 +24,13 @@ export default async function startIos(options, config) {
   }
   await saveConfig('ios', config);
   spinner.stop();
-  easycp(`react-native run-ios --port ${config.ports.native}`);
+  if (options.storybook) {
+    setTimeout(async () => {
+      easycp(`react-native run-ios --port ${config.ports.native}`);
+      open(`http://localhost:${config.ports.storybookNative}`);
+    }, 5000);
+    await easycp(`storybook start -p ${config.ports.storybookNative}`);
+  } else {
+    easycp(`react-native run-ios --port ${config.ports.native}`);
+  }
 }

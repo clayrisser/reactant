@@ -15,9 +15,6 @@ import startAndroid from './actions/start/android';
 import startExpo from './actions/start/expo';
 import startIos from './actions/start/ios';
 import startWeb from './actions/start/web';
-import storybookAndroid from './actions/storybook/android';
-import storybookIos from './actions/storybook/ios';
-import storybookWeb from './actions/storybook/web';
 import validate from './validate';
 
 export default async function action(cmd, options) {
@@ -46,11 +43,6 @@ export default async function action(cmd, options) {
       if (options.platform === 'expo') return publishExpo(options);
       if (options.platform === 'ios') return publishIos(options);
       if (options.platform === 'web') return publishWeb(options);
-      break;
-    case 'storybook':
-      if (options.platform === 'android') return storybookAndroid(options);
-      if (options.platform === 'iso') return storybookIos(options);
-      if (options.platform === 'web') return storybookWeb(options);
       break;
     default:
       return commander.help();

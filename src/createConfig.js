@@ -74,6 +74,7 @@ export function sanitizeConfig(config) {
     options: {
       debug: config.options.debug,
       platform: config.options.platform,
+      storybook: config.options.storybook,
       verbose: config.options.verbose
     }
   };
