@@ -13,7 +13,7 @@ export default class Reaction extends Component {
   constructor(props) {
     super(props);
     this.App = require('../../src/App').default;
-    if (config.action === 'storybook') {
+    if (config.options.storybook) {
       this.App = require('../../storybook').default;
     }
   }
