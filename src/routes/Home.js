@@ -2,15 +2,13 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import _ from 'lodash';
 import autobind from 'autobind-decorator';
-import { Container, Content, List, View, Header, Text } from 'native-base';
-import { config } from 'reaction-base';
+import { List } from 'native-base';
 import { connect } from 'react-redux';
-import AddTodo from '~/components/AddTodo';
-import TodoItem from '~/components/TodoItem';
+import { MainContent, AddTodo, TodoItem } from '~/components';
 import { addTodo, delTodo, toggleTodo } from '~/actions/todos';
 
 @autobind
-class TodoList extends Component {
+class Home extends Component {
   static propTypes = {
     addTodo: PropTypes.func.isRequired,
     delTodo: PropTypes.func.isRequired,
@@ -46,30 +44,10 @@ class TodoList extends Component {
 
   render() {
     return (
-      <Container>
-        <Header
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        >
-          <Text style={{ fontSize: 24 }}>{config.title}</Text>
-        </Header>
-        <Content>
-          <View style={{ alignItems: 'center' }}>
-            <View
-              style={{
-                padding: 10,
-                maxWidth: 720,
-                width: '100%'
-              }}
-            >
-              <AddTodo onPress={this.handleAddTodo} />
-              <List>{this.renderTodos()}</List>
-            </View>
-          </View>
-        </Content>
-      </Container>
+      <MainContent>
+        <AddTodo onPress={this.handleAddTodo} />
+        <List>{this.renderTodos()}</List>
+      </MainContent>
     );
   }
 }
@@ -83,4 +61,4 @@ export default connect(
     delTodo: (...args) => dispatch(delTodo(...args)),
     toggleTodo: (...args) => dispatch(toggleTodo(...args))
   })
-)(TodoList);
+)(Home);
