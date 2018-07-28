@@ -43,32 +43,29 @@ export default class TodoItem extends Component {
       >
         <TouchableOpacity
           onPress={this.handleToggle}
-          style={{
-            alignItems: 'center',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            width: '100%'
-          }}
+          style={{ flexDirection: 'row', alignItems: 'center' }}
         >
           <View
             style={{
-              flexDirection: 'row'
+              width: runtime.reactNative ? 20 : null
             }}
           >
-            <View
+            <CheckBox
+              checked={finished}
               style={{
-                width: runtime.reactNative ? 20 : null
+                marginLeft: runtime.reactNative ? -10 : null
               }}
-            >
-              <CheckBox
-                checked={finished}
-                style={{
-                  marginLeft: runtime.reactNative ? -10 : null
-                }}
-              />
-            </View>
-            <Text style={{ paddingLeft: 10 }}>{children}</Text>
+            />
           </View>
+          <Text
+            style={{
+              flex: -1,
+              paddingLeft: 10,
+              width: '100%'
+            }}
+          >
+            {children}
+          </Text>
           <TouchableOpacity onPress={this.handleDelete}>
             <Icon name="ios-trash" />
           </TouchableOpacity>

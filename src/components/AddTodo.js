@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import autobind from 'autobind-decorator';
-import { Button, Input, Text, View } from 'native-base';
+import { Input, Icon, View } from 'native-base';
+import { TouchableOpacity } from 'react-native';
 
 @autobind
 export default class AddTodo extends Component {
@@ -18,44 +19,34 @@ export default class AddTodo extends Component {
   };
 
   handlePress() {
-    this.setState({ todo: '' });
-    this.props.onPress(this.state.todo);
+    const { todo } = this.state;
+    if (todo.length) {
+      this.setState({ todo: '' });
+      this.props.onPress(todo);
+    }
   }
 
   render() {
     return (
       <View
         style={{
-          flexDirection: 'row'
+          flexDirection: 'row',
+          paddingRight: 5
         }}
       >
-        <View
-          style={{
-            width: '70%'
-          }}
-        >
+        <View style={{ width: '100%', flex: -1, marginRight: 10 }}>
           <Input
             value={this.state.todo}
             placeholder="Todo Item"
             onChangeText={todo => this.setState({ todo })}
           />
         </View>
-        <View
-          style={{
-            width: '30%',
-            alignItems: 'flex-end'
-          }}
+        <TouchableOpacity
+          style={{ justifyContent: 'center' }}
+          onPress={this.handlePress}
         >
-          <Button
-            style={{
-              width: '100%',
-              justifyContent: 'center'
-            }}
-            onPress={this.handlePress}
-          >
-            <Text>Add</Text>
-          </Button>
-        </View>
+          <Icon name="md-add-circle" />
+        </TouchableOpacity>
       </View>
     );
   }
