@@ -56,9 +56,17 @@ class TodoList extends Component {
           <Text style={{ fontSize: 24 }}>{config.title}</Text>
         </Header>
         <Content>
-          <View style={{ padding: 10 }}>
-            <AddTodo onPress={this.handleAddTodo} />
-            <List>{this.renderTodos()}</List>
+          <View style={{ alignItems: 'center' }}>
+            <View
+              style={{
+                padding: 10,
+                maxWidth: 720,
+                width: '100%'
+              }}
+            >
+              <AddTodo onPress={this.handleAddTodo} />
+              <List>{this.renderTodos()}</List>
+            </View>
           </View>
         </Content>
       </Container>
