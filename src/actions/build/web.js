@@ -1,9 +1,11 @@
 import FileSizeReporter from 'react-dev-utils/FileSizeReporter';
 import _ from 'lodash';
 import chalk from 'chalk';
+import easycp from 'easycp';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import fs from 'fs-extra';
 import ora from 'ora';
+import path from 'path';
 import webpack from 'webpack';
 import { log } from 'reaction-base';
 import clean from '../clean';
@@ -29,26 +31,40 @@ export default async function buildWeb(options, config) {
   await clean(options, config);
   const spinner = ora('building web').start();
   const { paths } = config;
-  if (fs.existsSync(paths.srcPublic)) {
-    fs.copySync(paths.srcPublic, paths.distPublic, {
-      dereference: true
-    });
+  if (options.storybook) {
+    const storiesPath = fs.existsSync(
+      path.resolve(config.paths.stories, '.storybook')
+    )
+      ? path.resolve(config.paths.stories, '.storybook')
+      : path.resolve('node_modules/reaction-build/lib/storybook');
+    spinner.stop();
+    await easycp(
+      `node node_modules/@storybook/react/bin/build  -c ${storiesPath}${
+        options.debug ? ' -- --debug' : ''
+      }${options.verbose ? ' -- --verbose' : ''} -o ${paths.distStorybook}`
+    );
   } else {
-    fs.mkdirsSync(paths.distPublic);
+    if (fs.existsSync(paths.srcPublic)) {
+      fs.copySync(paths.srcPublic, paths.distPublic, {
+        dereference: true
+      });
+    } else {
+      fs.mkdirsSync(paths.distPublic);
+    }
+    const { stats, previousFileSizes, warnings } = await runBuild(
+      config,
+      await measureFileSizesBeforeBuild(paths.distPublic)
+    );
+    if (warnings.length) {
+      spinner.warn('built web');
+      log.info(warnings.join('\n\n'));
+    } else {
+      spinner.succeed('built web');
+    }
+    log.info('file sizes after gzip:\n');
+    printFileSizesAfterBuild(stats, previousFileSizes, paths.dist);
+    log.info('');
   }
-  const { stats, previousFileSizes, warnings } = await runBuild(
-    config,
-    await measureFileSizesBeforeBuild(paths.distPublic)
-  );
-  if (warnings.length) {
-    spinner.warn('built web');
-    log.info(warnings.join('\n\n'));
-  } else {
-    spinner.succeed('built web');
-  }
-  log.info('file sizes after gzip:\n');
-  printFileSizesAfterBuild(stats, previousFileSizes, paths.dist);
-  log.info('');
 }
 
 async function runBuild(config, previousFileSizes) {

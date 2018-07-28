@@ -21,6 +21,7 @@ export default async function startWeb(options, config) {
   }
   if (options.clean) await clean(options, config);
   const spinner = ora('starting web').start();
+  const { paths } = config;
   if (options.storybook) {
     const storiesPath = fs.existsSync(
       path.resolve(config.paths.stories, '.storybook')
@@ -36,7 +37,6 @@ export default async function startWeb(options, config) {
       }`
     );
   } else {
-    const { paths } = config;
     fs.removeSync(path.resolve(paths.dist, 'assets.json'));
     const webpackWebConfig = createWebpackConfig('web', 'start', config);
     log.debug('webpackWebConfig', webpackWebConfig);
