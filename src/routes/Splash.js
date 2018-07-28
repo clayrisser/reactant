@@ -11,7 +11,7 @@ export default class Splash extends Component {
   componentDidMount() {
     const { history } = this.props;
     setTimeout(() => {
-      history.push('/todo-list');
+      history.push('/home');
     }, 500);
   }
 
