@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { ConnectedRouter } from 'connected-react-router';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
+import { runtime } from 'js-info';
 import App from '../../src/App';
 
 function ReactionWrapper(props) {
@@ -30,6 +31,15 @@ function ReactionWrapper(props) {
 
     render() {
       const { store, persistor, history } = this.props.context;
+      if (runtime.node) {
+        return (
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <App {...this.props} />
+            </PersistGate>
+          </Provider>
+        );
+      }
       return (
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>

@@ -40,10 +40,11 @@ export default function server(initialProps, app = express()) {
     let context = {};
     try {
       context = await createWebStore({
+        cookieJar: new NodeCookiesWrapper(new Cookies(req, res)),
         insertCss: (...styles) => {
           return styles.forEach(style => css.add(style._getCss()));
         },
-        cookieJar: new NodeCookiesWrapper(new Cookies(req, res))
+        location: req.url
       });
       context.persistor = await new Promise(resolve => {
         const { store } = context;
@@ -52,7 +53,7 @@ export default function server(initialProps, app = express()) {
         });
       });
       initialProps.context = context;
-      initialProps.location = req.url;
+      initialProps.location = context.location;
       AppRegistry.registerComponent('App', () => ServerApp);
       const { element, getStyleElement } = AppRegistry.getApplication('App', {
         initialProps
