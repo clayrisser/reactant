@@ -3,6 +3,7 @@ import CircularJSON from 'circular-json';
 import OpenBrowserPlugin from 'open-browser-webpack-plugin';
 import _ from 'lodash';
 import log, { setLevel } from 'reaction-base/log';
+import path from 'path';
 import { sleep } from 'deasync';
 import createConfig from '../createConfig';
 
@@ -15,14 +16,14 @@ module.exports = webpackConfig => {
     config = loadedConfig;
   });
   while (!config) sleep(100);
+  const { paths } = config;
   webpackConfig.resolve.extensions.unshift('.web.js');
   webpackConfig.resolve.alias = {
-    '~': config.paths.src,
-    'native-base': require.resolve('native-base-web'),
-    'react/lib/ReactNativePropRegistry': require.resolve(
+    '~': paths.src,
+    'react-native': require.resolve('react-native-web'),
+    'react-native/Libraries/Renderer/shims/ReactNativePropRegistry': require.resolve(
       'react-native-web/dist/modules/ReactNativePropRegistry'
-    ),
-    'react-native': require.resolve('react-native-web')
+    )
   };
   webpackConfig.externals = {
     ...webpackConfig.externals,
@@ -41,6 +42,21 @@ module.exports = webpackConfig => {
     rule => rule.loader.indexOf('babel-loader') > -1
   );
   _.assign(jsxRule, {
+    include: [
+      ...jsxRule.include,
+      paths.src,
+      paths.web,
+      path.resolve('node_modules/native-base-shoutem-theme'),
+      path.resolve('node_modules/react-native-drawer'),
+      path.resolve('node_modules/react-native-easy-grid'),
+      path.resolve('node_modules/react-native-keyboard-aware-scroll-view'),
+      path.resolve('node_modules/react-native-safe-area-view'),
+      path.resolve('node_modules/react-native-tab-view'),
+      path.resolve('node_modules/react-native-vector-icons'),
+      path.resolve('node_modules/react-native-web'),
+      path.resolve('node_modules/reaction-base'),
+      path.resolve('node_modules/static-container')
+    ],
     query: {
       ...jsxRule.query,
       ...config.babel,
