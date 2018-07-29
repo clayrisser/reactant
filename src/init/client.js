@@ -10,6 +10,10 @@ const { document } = window;
 
 async function renderClient(initialProps) {
   const context = await createWebStore({
+    insertCss: (...styles) => {
+      const removeCss = styles.map(style => style._insertCss());
+      return () => removeCss.forEach(f => f());
+    },
     cookieJar: Cookies
   });
   context.persistor = await new Promise(resolve => {

@@ -36,9 +36,13 @@ export default function server(initialProps, app = express()) {
   app.use(express.static(config.paths.distPublic));
   app.use(Cookies.express());
   app.get('/*', async (req, res, next) => {
+    const css = new Set();
     let context = {};
     try {
       context = await createWebStore({
+        insertCss: (...styles) => {
+          return styles.forEach(style => css.add(style._getCss()));
+        },
         cookieJar: new NodeCookiesWrapper(new Cookies(req, res))
       });
       context.persistor = await new Promise(resolve => {
@@ -58,6 +62,7 @@ export default function server(initialProps, app = express()) {
       const $ = cheerio.load(indexHtml);
       $('title').text(config.title);
       $('head').append(appCss);
+      $('head').append(`<style type="text/css">${[...css].join('')}</style>`);
       $('#app').append(appHtml);
       _.map(assets, asset => {
         if (asset.js) {
