@@ -30,8 +30,7 @@ export default class AddTodo extends Component {
     return (
       <View
         style={{
-          flexDirection: 'row',
-          paddingRight: 5
+          flexDirection: 'row'
         }}
       >
         <View style={{ width: '100%', flex: -1, marginRight: 10 }}>

@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import autobind from 'autobind-decorator';
-import { Text, CheckBox, ListItem, Icon, View } from 'native-base';
+import { CheckBox, Icon, ListItem, Text, View } from 'native-base';
 import { TouchableOpacity } from 'react-native';
-import { runtime } from 'js-info';
 
 @autobind
 export default class TodoItem extends Component {
@@ -43,24 +42,14 @@ export default class TodoItem extends Component {
       >
         <TouchableOpacity
           onPress={this.handleToggle}
-          style={{ flexDirection: 'row', alignItems: 'center' }}
+          style={{ flexDirection: 'row', alignItems: 'center', width: '100%' }}
         >
-          <View
-            style={{
-              width: runtime.reactNative ? 20 : null
-            }}
-          >
-            <CheckBox
-              checked={finished}
-              style={{
-                marginLeft: runtime.reactNative ? -10 : null
-              }}
-            />
+          <View style={{ width: 20, marginRight: 5 }}>
+            <CheckBox style={{ marginLeft: -10 }} checked={finished} />
           </View>
           <Text
             style={{
               flex: -1,
-              paddingLeft: 10,
               width: '100%'
             }}
           >
