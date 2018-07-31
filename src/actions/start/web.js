@@ -37,7 +37,7 @@ export default async function startWeb(options, config) {
       }`
     );
   } else {
-    fs.removeSync(path.resolve(paths.dist, 'assets.json'));
+    fs.removeSync(path.resolve(paths.distWeb, 'assets.json'));
     const webpackWebConfig = createWebpackConfig('web', 'start', config);
     log.debug('webpackWebConfig', webpackWebConfig);
     const webpackNodeConfig = createWebpackConfig('node', 'start', config);

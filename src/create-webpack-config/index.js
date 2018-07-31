@@ -33,7 +33,10 @@ export default function createWebpackConfig(target = 'web', action, config) {
   const webpackConfig = {
     context: process.cwd(),
     target,
-    devtool: 'cheap-module-eval-source-map',
+    devtool:
+      env === 'development'
+        ? 'cheap-module-eval-source-map'
+        : 'nosources-source-map',
     mode: env,
     resolve: {
       modules: [path.resolve('node_modules')],
@@ -91,7 +94,7 @@ export default function createWebpackConfig(target = 'web', action, config) {
           loader: require.resolve('url-loader'),
           options: {
             limit: 10000,
-            name: 'public/media/[name].[hash:8].[ext]'
+            name: 'media/[name].[hash:8].[ext]'
           }
         },
         {

@@ -21,7 +21,7 @@ export default function createWebConfig(webpackConfig, action, config) {
     plugins: [
       ...webpackConfig.plugins,
       new AssetsWebpackPlugin({
-        path: paths.dist,
+        path: paths.distWeb,
         filename: 'assets.json'
       })
     ]
@@ -30,7 +30,7 @@ export default function createWebConfig(webpackConfig, action, config) {
     webpackConfig = {
       ...webpackConfig,
       output: {
-        path: paths.distPublic,
+        path: paths.distWebPublic,
         publicPath: action === 'start' ? `http://${host}:${ports.dev}/` : '/',
         pathinfo: true,
         filename: 'scripts/bundle.js',
@@ -44,31 +44,40 @@ export default function createWebConfig(webpackConfig, action, config) {
     webpackConfig = {
       ...webpackConfig,
       optimization: {
+        concatenateModules: true,
+        flagIncludedChunks: true,
+        mangleWasmImports: true,
+        mergeDuplicateChunks: true,
+        minimize: true,
+        occurrenceOrder: true,
+        providedExports: true,
+        removeAvailableModules: true,
+        removeEmptyChunks: true,
+        sideEffects: true,
+        minimizer: [
+          new UglifyWebpackPlugin({
+            uglifyOptions: {
+              compress: {
+                warnings: false,
+                comparisons: false
+              },
+              output: {
+                comments: false
+              }
+            },
+            sourceMap: true
+          })
+        ],
         splitChunks: {
           chunks: 'all'
         }
       },
       output: {
-        path: paths.distPublic,
+        path: paths.distWebPublic,
         publicPath: '/',
         filename: 'scripts/bundle.[hash:8].js',
         chunkFilename: 'scripts/[name].[hash:8].chunk.js'
-      },
-      plugins: [
-        ...webpackConfig.plugins,
-        new UglifyWebpackPlugin({
-          uglifyOptions: {
-            compress: {
-              warnings: false,
-              comparisons: false
-            },
-            output: {
-              comments: false
-            }
-          },
-          sourceMap: true
-        })
-      ]
+      }
     };
   }
   if (action === 'start') {

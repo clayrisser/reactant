@@ -11,7 +11,7 @@ export default function createNodeConfig(webpackConfig, action, config) {
     ...webpackConfig,
     entry: [paths.server],
     output: {
-      path: paths.dist,
+      path: paths.distWeb,
       publicPath: action === 'start' ? `http://${host}:${ports.dev}/` : '/',
       filename: 'server.js'
     },

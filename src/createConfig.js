@@ -23,7 +23,9 @@ export default async function createConfig({
   return {
     ...config,
     action,
-    moduleName: _.snakeCase(config.title).replace(/_/g, '-'),
+    moduleName: config.moduleName
+      ? config.moduleName
+      : _.snakeCase(config.title).replace(/_/g, '-'),
     publish: {
       android: _.isArray(config.publish.android)
         ? config.publish.android
@@ -56,9 +58,24 @@ export default async function createConfig({
     options,
     paths: _.zipObject(
       _.keys(config.paths),
-      _.map(config.paths, configPath => path.resolve(configPath))
+      _.map(config.paths, (configPath, configKey) => {
+        return resolvePath(configPath, configKey, config.paths);
+      })
     )
   };
+}
+
+function resolvePath(configPath, configKey, paths) {
+  let firstSlug = '';
+  const matches = configPath.match(/^[^/]+/);
+  if (matches && matches.length) [firstSlug] = matches;
+  if (_.includes(_.keys(paths), firstSlug)) {
+    return path.resolve(
+      resolvePath(paths[firstSlug]),
+      configPath.substr(firstSlug.length + 1)
+    );
+  }
+  return path.resolve(configPath);
 }
 
 async function getPort(port = 6001) {

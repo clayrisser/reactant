@@ -45,15 +45,15 @@ export default async function buildWeb(options, config) {
     );
   } else {
     if (fs.existsSync(paths.srcPublic)) {
-      fs.copySync(paths.srcPublic, paths.distPublic, {
+      fs.copySync(paths.srcPublic, paths.distWebPublic, {
         dereference: true
       });
     } else {
-      fs.mkdirsSync(paths.distPublic);
+      fs.mkdirsSync(paths.distWebPublic);
     }
     const { stats, previousFileSizes, warnings } = await runBuild(
       config,
-      await measureFileSizesBeforeBuild(paths.distPublic)
+      await measureFileSizesBeforeBuild(paths.distWebPublic)
     );
     if (warnings.length) {
       spinner.warn('built web');
@@ -62,7 +62,7 @@ export default async function buildWeb(options, config) {
       spinner.succeed('built web');
     }
     log.info('file sizes after gzip:\n');
-    printFileSizesAfterBuild(stats, previousFileSizes, paths.dist);
+    printFileSizesAfterBuild(stats, previousFileSizes, paths.distWeb);
     log.info('');
   }
 }

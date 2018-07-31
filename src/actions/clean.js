@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import easycp, { silentcp } from 'easycp';
 import fs from 'fs-extra';
 import ora from 'ora';
@@ -29,7 +30,14 @@ export default async function clean(options, config) {
   } else {
     await silentcp('watchman watch-del-all');
   }
-  fs.removeSync(paths.dist);
+  if (options.platform) {
+    fs.removeSync(paths[`dist${_.startCase(options.platform)}`]);
+    if (options.platform === 'web' && options.storybook) {
+      fs.removeSync(paths.distStorybook);
+    }
+  } else {
+    fs.removeSync(paths.dist);
+  }
   fs.removeSync(path.resolve('.expo'));
   spinner.succeed('cleaned');
 }

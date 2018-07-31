@@ -18,8 +18,12 @@ export default {
     android: 'android',
     client: 'web/client.js',
     dist: 'dist',
-    distPublic: 'dist/public',
+    distAndroid: 'dist/android',
+    distExpo: 'dist/expo',
+    distIos: 'dist/ios',
     distStorybook: 'dist/storybook',
+    distWeb: 'dist/web',
+    distWebPublic: 'distWeb/public',
     expo: 'expo',
     ios: 'ios',
     root: '',
@@ -27,6 +31,7 @@ export default {
     src: 'src',
     srcPublic: 'src/public',
     stories: 'storybook/stories',
+    storybook: 'storybook',
     web: 'web'
   },
   publish: {

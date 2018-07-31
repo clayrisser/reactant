@@ -22,7 +22,7 @@ startReportingRuntimeErrors({
     hadError = true;
     return true;
   },
-  filename: `${config.paths.distPublic}/scripts/bundle.js`
+  filename: `${config.paths.distWebPublic}/scripts/bundle.js`
 });
 if (module.hot && _.isFunction(module.hot.dispose)) {
   module.hot.dispose(() => stopReportingRuntimeErrors());
