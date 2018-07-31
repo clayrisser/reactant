@@ -33,7 +33,7 @@ export default function server(initialProps, app = express()) {
     global.window.reaction = reaction;
     global.reaction = reaction;
   }
-  app.use(express.static(config.paths.distPublic));
+  app.use(express.static(config.paths.distWebPublic));
   app.use(Cookies.express());
   app.get('/*', async (req, res, next) => {
     const css = new Set();
