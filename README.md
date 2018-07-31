@@ -54,6 +54,11 @@ git clone https://github.com/codejamninja/reaction
 | `npm run build:web:serve`         | build web app and serve          |
 | `npm run build:web:storybook`     | build web storybook              |
 | `npm run build:web`               | build web app                    |
+| `npm run clean`                   | clean everything                 |
+| `npm run clean:android`           | clean android                    |
+| `npm run clean:expo`              | clean expo                       |
+| `npm run clean:ios`               | clean ios                        |
+| `npm run clean:web`               | clean web                        |
 | `npm run publish:android`         | publish android app              |
 | `npm run publish:expo`            | publish expo app                 |
 | `npm run publish:ios`             | publish ios app                  |
