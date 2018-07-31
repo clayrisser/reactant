@@ -17,6 +17,7 @@ Please ★ this repo if you found it useful ★ ★ ★
 * Live Debugging
 * Compatible with Expo
 * Storybook integration
+* Offline support
 * Built in bundle analyzer
 
 
