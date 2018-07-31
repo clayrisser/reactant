@@ -1,4 +1,5 @@
 import CircularJSON from 'circular-json';
+import _ from 'lodash';
 import autoprefixer from 'autoprefixer';
 import path from 'path';
 import postcssFlexbugsFixes from 'postcss-flexbugs-fixes';
@@ -30,7 +31,7 @@ const postcssLoader = {
 export default function createWebpackConfig(target = 'web', action, config) {
   const { envs, paths, eslint, babel, env, webpack } = config;
   const sanitizedConfig = sanitizeConfig(config);
-  const webpackConfig = {
+  let webpackConfig = {
     context: process.cwd(),
     target,
     devtool:
@@ -192,7 +193,7 @@ export default function createWebpackConfig(target = 'web', action, config) {
           ],
           loader: require.resolve('file-loader'),
           options: {
-            name: 'public/media/[name].[hash:8].[ext]'
+            name: 'media/[name].[hash:8].[ext]'
           }
         }
       ]
@@ -208,7 +209,12 @@ export default function createWebpackConfig(target = 'web', action, config) {
     ]
   };
   if (target === 'web') {
-    return webpack(config, createWebConfig(webpackConfig, action, config));
+    webpackConfig = createWebConfig(webpackConfig, action, config);
+  } else {
+    webpackConfig = createNodeConfig(webpackConfig, action, config);
   }
-  return webpack(config, createNodeConfig(webpackConfig, action, config));
+  if (_.isFunction(webpack)) {
+    return webpack(config, webpackConfig);
+  }
+  return _.merge(webpackConfig, webpack);
 }

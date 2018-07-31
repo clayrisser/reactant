@@ -5,15 +5,23 @@ export default {
   host: env.REACTION_HOST || 'localhost',
   port: env.REACTION_PORT || 6001,
   envs: {},
+  level: 'info',
   ignore: {
     errors: [],
     warnings: [
-      'Calling ReactDOM.render() to hydrate server-rendered markup will stop working in React v17'
+      'Calling ReactDOM.render() to hydrate server-rendered markup will stop working in React v17',
+      'Webpack Bundle Analyzer saved report to',
+      'node_modules/bindings',
+      'node_modules/colors',
+      'node_modules/deasync',
+      'node_modules/ejs/lib/ejs',
+      'node_modules/express'
     ]
   },
   initialState: {},
   whitelist: [],
   blacklist: [],
+  offline: false,
   paths: {
     android: 'android',
     client: 'web/client.js',

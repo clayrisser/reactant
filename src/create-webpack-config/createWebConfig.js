@@ -1,29 +1,28 @@
 import AssetsWebpackPlugin from 'assets-webpack-plugin';
+import OfflinePlugin from 'offline-plugin';
 import UglifyWebpackPlugin from 'uglifyjs-webpack-plugin';
 import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
 import path from 'path';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import { IgnorePlugin } from 'webpack';
 
 export default function createWebConfig(webpackConfig, action, config) {
-  const { ports, paths, host, env } = config;
+  const { ports, paths, host, env, offline } = config;
   webpackConfig = {
     ...webpackConfig,
     entry: {
       client: [paths.client]
-    },
-    externals: {
-      ...webpackConfig.externals,
-      child_process: {},
-      deasync: {},
-      fs: {},
-      winston: {}
     },
     plugins: [
       ...webpackConfig.plugins,
       new AssetsWebpackPlugin({
         path: paths.distWeb,
         filename: 'assets.json'
-      })
+      }),
+      new IgnorePlugin(/^child_process$/),
+      new IgnorePlugin(/^deasync$/),
+      new IgnorePlugin(/^fs$/),
+      new IgnorePlugin(/^winston$/)
     ]
   };
   if (env === 'development') {
@@ -59,7 +58,8 @@ export default function createWebConfig(webpackConfig, action, config) {
             uglifyOptions: {
               compress: {
                 warnings: false,
-                comparisons: false
+                comparisons: false,
+                drop_console: true
               },
               output: {
                 comments: false
@@ -113,8 +113,26 @@ export default function createWebConfig(webpackConfig, action, config) {
       plugins: [
         ...webpackConfig.plugins,
         new BundleAnalyzerPlugin({
-          analyzerPort: ports.analyzer
+          analyzerPort: ports.analyzer,
+          analyzerMode: 'static'
         })
+      ]
+    };
+  }
+  if (offline) {
+    webpackConfig = {
+      ...webpackConfig,
+      plugins: [
+        ...webpackConfig.plugins,
+        new OfflinePlugin({ publicPath: paths.distWebPublic })
+      ]
+    };
+  } else {
+    webpackConfig = {
+      ...webpackConfig,
+      plugins: [
+        ...webpackConfig.plugins,
+        new IgnorePlugin(/^offline-plugin\/runtime/)
       ]
     };
   }

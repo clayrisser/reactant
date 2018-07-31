@@ -90,13 +90,18 @@ async function runBuild(config, previousFileSizes) {
 
 function handleStats(stats, config) {
   const messages = formatWebpackMessages(stats.toJson({}, true));
-  const errors = filterMessages(messages.errors, config.ignore.errors || []);
+  const errors = filterMessages(
+    messages.errors,
+    config.ignore.errors || [],
+    config.options
+  );
   if (errors.length) {
     throw new Error(`\n${errors.join('\n\n')}\n`);
   }
   const warnings = filterMessages(
     messages.warnings,
-    config.ignore.warnings || []
+    config.ignore.warnings || [],
+    config.options
   );
   if (warnings.length) {
     if (env.CI && (!_.isString(env.CI) || env.CI.toLowerCase() !== 'false')) {
@@ -114,7 +119,8 @@ function handleStats(stats, config) {
   return messages;
 }
 
-function filterMessages(messages, ignoreList) {
+function filterMessages(messages, ignoreList, options) {
+  if (options.debug) return messages;
   return _.filter(messages, message => {
     let filter = true;
     ignoreList.forEach(ignore => {
