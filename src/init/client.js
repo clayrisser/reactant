@@ -32,8 +32,11 @@ async function renderClient(initialProps) {
 }
 
 export default function client(initialProps = {}) {
-  ignoreWarnings(config.ignore.warnings || []);
-  ignoreWarnings('error', config.ignore.errors || []);
+  if (!config.options.debug) {
+    ignoreWarnings(config.ignore.warnings || []);
+    ignoreWarnings('error', config.ignore.errors || []);
+  }
+  if (config.offline) require('offline-plugin/runtime').install();
   if (
     config.options.verbose ||
     config.options.debug ||

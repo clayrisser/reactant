@@ -14,8 +14,10 @@ import { createWebStore } from '../createStore';
 import { setLevel } from '../log';
 
 export default function server(initialProps, app = express()) {
-  ignoreWarnings(config.ignore.warnings || []);
-  ignoreWarnings('error', config.ignore.errors || []);
+  if (!config.options.debug) {
+    ignoreWarnings(config.ignore.warnings || []);
+    ignoreWarnings('error', config.ignore.errors || []);
+  }
   if (
     config.options.verbose ||
     config.options.debug ||

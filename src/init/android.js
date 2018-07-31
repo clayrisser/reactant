@@ -8,8 +8,10 @@ import { registerConfig } from '../config';
 import { setLevel } from '../log';
 
 export default function android(initialProps = {}, config = {}) {
-  ignoreWarnings(config.ignore.warnings || []);
-  ignoreWarnings('error', config.ignore.errors || []);
+  if (!config.options.debug) {
+    ignoreWarnings(config.ignore.warnings || []);
+    ignoreWarnings('error', config.ignore.errors || []);
+  }
   if (
     config.options.verbose ||
     config.options.debug ||
