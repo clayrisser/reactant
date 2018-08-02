@@ -70,7 +70,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-router-native": "^4.3.0",
-    "reaction-base": "^1.0.0-rc.37",
+    "reaction-base": "^1.0.0-rc.38",
     "redux": "^4.0.0",
     "redux-persist": "git+https://github.com/codejamninja/redux-persist.git#npm",
     "redux-thunk": "^2.3.0"
@@ -91,7 +91,7 @@
     "jest": "^23.3.0",
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "^16.4.1",
-    "reaction-build": "^1.0.0-rc.64",
+    "reaction-build": "^1.0.0-rc.71",
     "rimraf": "^2.6.2"
   },
   "license": "MIT",
