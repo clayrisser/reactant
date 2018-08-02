@@ -118,6 +118,7 @@ export default function getRules({ paths, env }) {
         /\.(ts|tsx)$/,
         /\.(vue)$/,
         /\.bmp$/,
+        /\.ejs$/,
         /\.gif$/,
         /\.html?$/,
         /\.jpe?g$/,
