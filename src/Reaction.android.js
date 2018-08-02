@@ -16,7 +16,7 @@ function ReactionWrapper(props) {
       super(props);
       this.App = require('../../src/App').default;
       if (config.options.storybook) {
-        this.App = require('../../node_modules/reaction-build/lib/storybook').default;
+        this.App = require('../../node_modules/reaction-build/lib/storybook/native').default;
       }
     }
 
