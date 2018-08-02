@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 import { getStorybookUI, configure } from '@storybook/react-native';
 import { config } from 'reaction-base';
-import stories from '../../../../stories';
+import stories from '../../../../../stories';
 
 configure(() => stories, module);
 
@@ -17,5 +17,5 @@ class StorybookUIHMRRoot extends Component {
   }
 }
 
-AppRegistry.registerComponent(config.key, () => StorybookUIHMRRoot);
+AppRegistry.registerComponent(config.moduleName, () => StorybookUIHMRRoot);
 export default StorybookUIHMRRoot;

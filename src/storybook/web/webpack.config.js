@@ -5,8 +5,8 @@ import _ from 'lodash';
 import log, { setLevel } from 'reaction-base/log';
 import path from 'path';
 import { sleep } from 'deasync';
-import createConfig from '../createConfig';
-import getRules from '../create-webpack-config/getRules';
+import createConfig from '../../createConfig';
+import getRules from '../../create-webpack-config/getRules';
 
 if (_.includes(process.argv, '--verbose')) setLevel('verbose');
 if (_.includes(process.argv, '--debug')) setLevel('debug');

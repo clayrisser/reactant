@@ -2,6 +2,7 @@ import boom from 'boom';
 import easycp, { readcp } from 'easycp';
 import open from 'open';
 import ora from 'ora';
+import path from 'path';
 import { log } from 'reaction-base';
 import clean from '../clean';
 import createConfig, { saveConfig } from '../../createConfig';
@@ -29,7 +30,11 @@ export default async function startIos(options, config) {
       easycp(`react-native run-ios --port ${config.ports.native}`);
       open(`http://localhost:${config.ports.storybookNative}`);
     }, 5000);
-    await easycp(`storybook start -p ${config.ports.storybookNative}`);
+    await easycp(
+      `storybook start -p ${
+        config.ports.storybookNative
+      } --config-dir ${path.resolve(__dirname, '../../storybook')}`
+    );
   } else {
     easycp(`react-native run-ios --port ${config.ports.native}`);
   }

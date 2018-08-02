@@ -2,6 +2,7 @@ import boom from 'boom';
 import easycp, { readcp, silentcp } from 'easycp';
 import open from 'open';
 import ora from 'ora';
+import path from 'path';
 import { log } from 'reaction-base';
 import clean from '../clean';
 import createConfig, { saveConfig } from '../../createConfig';
@@ -26,20 +27,22 @@ export default async function startAndroid(options, config) {
   spinner.stop();
   setTimeout(async () => {
     easycp(`react-native run-android --port ${config.ports.native}`);
-    silentcp(
-      `adb reverse tcp:${config.ports.native} tcp:${config.ports.native}`
-    );
     if (options.storybook) {
-      silentcp(
-        `adb reverse tcp:${config.ports.storybookNative} tcp:${
-          config.ports.storybookNative
-        }`
-      );
       open(`http://localhost:${config.ports.storybookNative}`);
     }
   }, 5000);
+  silentcp(`adb reverse tcp:${config.ports.native} tcp:${config.ports.native}`);
   if (options.storybook) {
-    await easycp(`storybook start -p ${config.ports.storybookNative}`);
+    silentcp(
+      `adb reverse tcp:${config.ports.storybookNative} tcp:${
+        config.ports.storybookNative
+      }`
+    );
+    await easycp(
+      `storybook start -p ${
+        config.ports.storybookNative
+      } --config-dir ${path.resolve(__dirname, '../../storybook')}`
+    );
   } else {
     await easycp('react-native start --reset-cache');
   }
