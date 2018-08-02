@@ -26,17 +26,19 @@ export default async function startAndroid(options, config) {
   spinner.stop();
   setTimeout(async () => {
     easycp(`react-native run-android --port ${config.ports.native}`);
+    silentcp(
+      `adb reverse tcp:${config.ports.native} tcp:${config.ports.native}`
+    );
     if (options.storybook) {
+      silentcp(
+        `adb reverse tcp:${config.ports.storybookNative} tcp:${
+          config.ports.storybookNative
+        }`
+      );
       open(`http://localhost:${config.ports.storybookNative}`);
     }
   }, 5000);
-  silentcp(`adb reverse tcp:${config.ports.native} tcp:${config.ports.native}`);
   if (options.storybook) {
-    silentcp(
-      `adb reverse tcp:${config.ports.storybookNative} tcp:${
-        config.ports.storybookNative
-      }`
-    );
     await easycp(`storybook start -p ${config.ports.storybookNative}`);
   } else {
     await easycp('react-native start --reset-cache');

@@ -47,7 +47,7 @@ export default async function createConfig({
       dev: await getPort(port + 3),
       native: await getPort(8081),
       storybook: await getPort(port + 1),
-      storybookNative: await getPort(7007)
+      storybookNative: await getPort(port + 4)
     },
     envs: {
       ...config.envs,

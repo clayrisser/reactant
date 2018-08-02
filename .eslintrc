@@ -21,6 +21,7 @@
     "react/jsx-filename-extension": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/no-this-in-sfc": "off",
+    "react/prefer-stateless-function": "off",
     "yoda": "off",
     "no-unused-vars": [
       "warn",
@@ -37,11 +38,13 @@
       "error",
       {
         "ignore": [
-          "^~",
+          ".\/stories$",
           "/storiesOf",
-          "^reation-build",
+          "^native-base",
+          "^react-native",
           "^reaction-base",
-          "^native-base"
+          "^reation-build",
+          "^~"
         ]
       }
     ]
