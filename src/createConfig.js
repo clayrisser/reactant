@@ -18,7 +18,11 @@ export default async function createConfig({
   environment.default = defaultEnv;
   const userConfig = rcConfig({ name: 'reaction' });
   const eslint = rcConfig({ name: 'eslint' });
-  const config = _.merge(defaultConfig, userConfig);
+  const config = _.merge(
+    defaultConfig,
+    userConfig,
+    options.config ? JSON.parse(options.config) : {}
+  );
   const port = await getPort(config.port);
   return {
     ...config,

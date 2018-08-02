@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb/base", "prettier"],
+  "extends": ["airbnb", "prettier"],
   "parser": "babel-eslint",
   "globals": {
     "window": true
@@ -12,9 +12,15 @@
     "import/no-extraneous-dependencies": "off",
     "no-param-reassign": "off",
     "no-plusplus": "off",
+    "no-return-assign": "off",
     "no-shadow": "off",
     "no-underscore-dangle": "off",
     "no-use-before-define": "off",
+    "react/destructuring-assignment": "off",
+    "react/forbid-prop-types": "off",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/no-this-in-sfc": "off",
     "yoda": "off",
     "no-unused-vars": [
       "warn",
@@ -29,7 +35,15 @@
     "import/extensions": ["error", "ignorePackages"],
     "import/no-unresolved": [
       "error",
-      { "ignore": ["^~", "/storiesOf", "^reation-build", "^reaction-base"] }
+      {
+        "ignore": [
+          "^~",
+          "/storiesOf",
+          "^reation-build",
+          "^reaction-base",
+          "^native-base"
+        ]
+      }
     ]
   }
 }
