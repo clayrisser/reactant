@@ -91,7 +91,7 @@
     "jest": "^23.3.0",
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "^16.4.1",
-    "reaction-build": "^1.0.0-rc.61",
+    "reaction-build": "^1.0.0-rc.64",
     "rimraf": "^2.6.2"
   },
   "license": "MIT",
