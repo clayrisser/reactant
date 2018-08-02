@@ -3,10 +3,11 @@
   "parser": "babel-eslint",
   "rules": {
     "arrow-body-style": "off",
-    "no-use-before-define": "off",
     "default-case": "off",
     "no-param-reassign": "off",
     "no-shadow": "off",
+    "no-underscore-dangle": "off",
+    "no-use-before-define": "off",
     "react/destructuring-assignment": "off",
     "react/forbid-prop-types": "off",
     "react/jsx-filename-extension": "off",
