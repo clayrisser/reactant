@@ -4,9 +4,9 @@ import OpenBrowserPlugin from 'open-browser-webpack-plugin';
 import _ from 'lodash';
 import log, { setLevel } from 'reaction-base/log';
 import path from 'path';
-import { IgnorePlugin } from 'webpack';
 import { sleep } from 'deasync';
 import createConfig from '../createConfig';
+import getRules from '../create-webpack-config/getRules';
 
 if (_.includes(process.argv, '--verbose')) setLevel('verbose');
 if (_.includes(process.argv, '--debug')) setLevel('debug');
@@ -28,14 +28,15 @@ module.exports = webpackConfig => {
   };
   webpackConfig.externals = {
     ...webpackConfig.externals,
-    'reaction-base/config': CircularJSON.stringify(config)
+    'react-art': {},
+    'reaction-base/config': CircularJSON.stringify(config),
+    child_process: {},
+    deasync: {},
+    fs: {},
+    winston: {}
   };
   webpackConfig.plugins = [
     ...webpackConfig.plugins,
-    new IgnorePlugin(/^child_process$/),
-    new IgnorePlugin(/^deasync$/),
-    new IgnorePlugin(/^fs$/),
-    new IgnorePlugin(/^winston$/),
     new OpenBrowserPlugin({
       url: `http://localhost:${config.ports.storybook}`
     })
@@ -67,6 +68,11 @@ module.exports = webpackConfig => {
       presets: [...jsxRule.query.presets, ...(config.babel.presets || [])]
     }
   });
+  delete jsxRule.exclude;
+  webpackConfig.module.rules = [
+    ...webpackConfig.module.rules,
+    ...getRules(config)
+  ];
   if (_.isFunction(config.storybook)) {
     webpackConfig = config.storybook(config, webpackConfig);
   } else {

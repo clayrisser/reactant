@@ -13,6 +13,10 @@ export default function createWebConfig(webpackConfig, action, config) {
     entry: {
       client: [paths.client]
     },
+    externals: {
+      ...webpackConfig.externals,
+      'react-art': {}
+    },
     plugins: [
       ...webpackConfig.plugins,
       new AssetsWebpackPlugin({
