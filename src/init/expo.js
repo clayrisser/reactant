@@ -7,7 +7,7 @@ import createStore from '../createStore';
 import { registerConfig } from '../config';
 import { setLevel } from '../log';
 
-export default function expo(componentName, initialProps = {}, config = {}) {
+export default function expo(initialProps = {}, config = {}) {
   if (!config.options.debug) {
     ignoreWarnings(config.ignore.warnings || []);
     ignoreWarnings('error', config.ignore.errors || []);
