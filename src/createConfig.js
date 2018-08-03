@@ -29,7 +29,7 @@ export default async function createConfig({
     action,
     moduleName: config.moduleName
       ? config.moduleName
-      : _.snakeCase(config.title).replace(/_/g, '-'),
+      : _.camelCase(config.title).replace(/_/g, '-'),
     publish: {
       android: _.isArray(config.publish.android)
         ? config.publish.android
