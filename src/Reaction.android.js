@@ -6,6 +6,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { config } from 'reaction-base';
 
+if (typeof global.self === 'undefined') global.self = global;
+
 function ReactionWrapper(props) {
   class Reaction extends Component {
     static propTypes = {
