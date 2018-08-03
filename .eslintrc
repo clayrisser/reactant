@@ -4,6 +4,7 @@
   "rules": {
     "arrow-body-style": "off",
     "default-case": "off",
+    "global-require": "off",
     "no-param-reassign": "off",
     "no-shadow": "off",
     "no-underscore-dangle": "off",
