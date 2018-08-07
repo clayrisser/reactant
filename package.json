@@ -91,7 +91,7 @@
     "jest": "^23.3.0",
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "^16.4.1",
-    "reaction-build": "^1.0.0-rc.85",
+    "reaction-build": "^1.0.0-rc.86",
     "rimraf": "^2.6.2"
   },
   "license": "MIT",
@@ -105,5 +105,10 @@
   ],
   "jest": {
     "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": [
+      "src/assets/fonts"
+    ]
   }
 }
