@@ -1,4 +1,5 @@
 title: Reaction
+moduleName: reaction
 ignore:
   errors:
     - 'Warning: Received `false` for a non-boolean attribute `uppercase`.'

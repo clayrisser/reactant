@@ -1,7 +1,11 @@
 {
   "expo": {
-    "sdkVersion": "29.0.0"
+    "sdkVersion": "29.0.0",
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#000000"
+    }
   },
   "name": "reaction",
-  "displayName": "reaction"
+  "displayName": "Reaction"
 }
