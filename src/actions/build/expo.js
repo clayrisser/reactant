@@ -3,7 +3,8 @@ import easycp, { readcp } from 'easycp';
 import ora from 'ora';
 import { log } from 'reaction-base';
 import clean from '../clean';
-import createConfig, { saveConfig } from '../../createConfig';
+import configureExpo from '../configure/expo';
+import createConfig from '../../createConfig';
 
 export default async function buildExpo(options, config) {
   if (!config) {
@@ -16,12 +17,12 @@ export default async function buildExpo(options, config) {
     log.debug('config', config);
   }
   await clean(options, config);
+  await configureExpo(options, config);
   const spinner = ora('building expo\n').start();
   if (!(await readcp('which exp')).length) {
     spinner.stop();
     throw boom.badRequest('exp not installed');
   }
-  await saveConfig('expo', config);
   await easycp('exp build:android');
   switch (options.expoPlatform) {
     case 'android':

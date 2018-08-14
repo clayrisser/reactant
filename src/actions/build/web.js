@@ -8,6 +8,7 @@ import ora from 'ora';
 import path from 'path';
 import webpack from 'webpack';
 import { log } from 'reaction-base';
+import configureWeb from '../configure/web';
 import clean from '../clean';
 import createConfig from '../../createConfig';
 import createWebpackConfig from '../../create-webpack-config';
@@ -29,6 +30,7 @@ export default async function buildWeb(options, config) {
     log.debug('config', config);
   }
   await clean(options, config);
+  await configureWeb(options, config);
   const spinner = ora('building web').start();
   const { paths } = config;
   if (options.storybook) {

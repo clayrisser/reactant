@@ -6,6 +6,10 @@ import buildExpo from './actions/build/expo';
 import buildIos from './actions/build/ios';
 import buildWeb from './actions/build/web';
 import clean from './actions/clean';
+import configureAndroid from './actions/configure/android';
+import configureExpo from './actions/configure/expo';
+import configureIos from './actions/configure/ios';
+import configureWeb from './actions/configure/web';
 import publishAndroid from './actions/publish/android';
 import publishExpo from './actions/publish/expo';
 import publishIos from './actions/publish/ios';
@@ -43,6 +47,12 @@ export default async function action(cmd, options) {
       if (options.platform === 'expo') return publishExpo(options);
       if (options.platform === 'ios') return publishIos(options);
       if (options.platform === 'web') return publishWeb(options);
+      break;
+    case 'configure':
+      if (options.platform === 'android') return configureAndroid(options);
+      if (options.platform === 'expo') return configureExpo(options);
+      if (options.platform === 'ios') return configureIos(options);
+      if (options.platform === 'web') return configureWeb(options);
       break;
     default:
       return commander.help();

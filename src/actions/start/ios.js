@@ -5,7 +5,8 @@ import ora from 'ora';
 import path from 'path';
 import { log } from 'reaction-base';
 import clean from '../clean';
-import createConfig, { saveConfig } from '../../createConfig';
+import createConfig from '../../createConfig';
+import configureIos from '../configure/ios';
 
 export default async function startIos(options, config) {
   if (!config) {
@@ -18,12 +19,12 @@ export default async function startIos(options, config) {
     log.debug('config', config);
   }
   if (options.clean) await clean(options, config);
+  await configureIos(options, config);
   const spinner = ora('Starting ios\n').start();
   if (!(await readcp('which react-native')).length) {
     spinner.stop();
     throw boom.badRequest('react-native not installed');
   }
-  await saveConfig('ios', config);
   spinner.stop();
   if (options.storybook) {
     setTimeout(async () => {
@@ -36,6 +37,10 @@ export default async function startIos(options, config) {
       } --config-dir ${path.resolve(__dirname, '../../storybook')}`
     );
   } else {
-    easycp(`react-native run-ios --port ${config.ports.native}`);
+    easycp(
+      `react-native run-ios --port ${config.ports.native} ${
+        options.simulator ? ` --simulator ${options.simulator}` : ''
+      }${options.simulator ? ` --device ${options.device}` : ''}`
+    );
   }
 }

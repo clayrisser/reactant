@@ -5,7 +5,8 @@ import ora from 'ora';
 import path from 'path';
 import { log } from 'reaction-base';
 import clean from '../clean';
-import createConfig, { saveConfig } from '../../createConfig';
+import configureAndroid from '../configure/android';
+import createConfig from '../../createConfig';
 
 export default async function buildAndroid(options, config) {
   if (!config) {
@@ -18,13 +19,13 @@ export default async function buildAndroid(options, config) {
     log.debug('config', config);
   }
   await clean(options, config);
+  await configureAndroid(options, config);
   const spinner = ora('building android\n').start();
   const { paths } = config;
   if (!(await readcp('which react-native')).length) {
     spinner.stop();
     throw boom.badRequest('react-native not installed');
   }
-  await saveConfig('android', config);
   await fs.mkdirs(paths.distAndroid);
   spinner.stop();
   await easycp(

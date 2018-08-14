@@ -26,7 +26,7 @@ export default async function createConfig({
   const port = await getPort(config.port);
   return {
     ...config,
-    action,
+    action: action || config.action,
     moduleName: config.moduleName
       ? config.moduleName
       : _.camelCase(config.title).replace(/_/g, '-'),
