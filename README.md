@@ -63,6 +63,10 @@ git clone https://github.com/codejamninja/reaction
 | `npm run clean:web:storybook`     | clean web storybook              |
 | `npm run clean:web`               | clean web                        |
 | `npm run clean`                   | clean everything                 |
+| `npm run configure:android`       | configure android                |
+| `npm run configure:expo`          | configure expo                   |
+| `npm run configure:ios`           | configure ios                    |
+| `npm run configure:web`           | configure web                    |
 | `npm run publish:android`         | publish android app              |
 | `npm run publish:expo`            | publish expo app                 |
 | `npm run publish:ios`             | publish ios app                  |
