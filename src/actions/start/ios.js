@@ -40,7 +40,7 @@ export default async function startIos(options, config) {
     easycp(
       `react-native run-ios --port ${config.ports.native} ${
         options.simulator ? ` --simulator ${options.simulator}` : ''
-      }${options.simulator ? ` --device ${options.device}` : ''}`
+      }${options.device ? ` --device ${options.device}` : ''}`
     );
   }
 }
