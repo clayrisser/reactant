@@ -53,6 +53,9 @@ fastlane/test_output
 fastlane/readme.md
 /android/config.json
 
+# web
+/web/config.json
+
 # misc
 .env.local
 .env.development.local
