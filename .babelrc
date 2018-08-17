@@ -1,14 +1,5 @@
 {
-  "presets": [
-    "env",
-    "react-native",
-    "stage-2"
-  ],
-  "plugins": [
-    "transform-class-properties",
-    "transform-decorators-legacy"
-  ],
-  "ignore": [
-    "art/core/color.js"
-  ]
+  "presets": ["react-native", "react-native-stage-0"],
+  "plugins": ["transform-class-properties", "transform-decorators-legacy"],
+  "ignore": ["art/core/color.js"]
 }
