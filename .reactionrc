@@ -3,6 +3,9 @@ moduleName: reaction
 ignore:
   errors:
     - 'Warning: Received `false` for a non-boolean attribute `uppercase`.'
+  warnings:
+    - 'Module RCTImageLoader requires'
+    - 'Class RCTCxxModule was not exported'
 initialState:
   messages: []
   loading: []
