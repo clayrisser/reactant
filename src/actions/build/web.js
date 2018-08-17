@@ -30,7 +30,7 @@ export default async function buildWeb(options, config) {
     log.debug('config', config);
   }
   await clean(options, config);
-  await configureWeb(options, config);
+  await configureWeb({ ...options, clean: false }, config);
   const spinner = ora('building web').start();
   const { paths } = config;
   if (options.storybook) {

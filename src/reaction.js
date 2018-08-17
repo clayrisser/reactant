@@ -7,10 +7,11 @@ let isAction = false;
 
 commander.version(version);
 commander.command('build');
+commander.command('bundle');
 commander.command('clean');
 commander.command('configure');
-commander.command('start');
 commander.command('setup');
+commander.command('start');
 commander.option('--action [action]', 'override default action');
 commander.option('--clean', 'clean');
 commander.option('--device [device]', 'run on device');

@@ -1,6 +1,7 @@
 import ora from 'ora';
 import { log } from 'reaction-base';
-import createConfig, { saveConfig } from '../../createConfig';
+import clean from '../clean';
+import createConfig from '../../createConfig';
 
 export default async function configureWeb(options, config) {
   if (!config) {
@@ -13,6 +14,6 @@ export default async function configureWeb(options, config) {
     log.debug('config', config);
   }
   const spinner = ora('configuring web\n').start();
-  await saveConfig('web', config);
+  if (options.clean) await clean(options, config);
   spinner.succeed('configured web');
 }

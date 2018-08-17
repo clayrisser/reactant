@@ -4,7 +4,6 @@ import open from 'open';
 import ora from 'ora';
 import path from 'path';
 import { log } from 'reaction-base';
-import clean from '../clean';
 import createConfig from '../../createConfig';
 import configureAndroid from '../configure/android';
 
@@ -18,7 +17,6 @@ export default async function startAndroid(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  if (options.clean) await clean(options, config);
   await configureAndroid(options, config);
   const spinner = ora('starting android\n').start();
   if (!(await readcp('which react-native')).length) {

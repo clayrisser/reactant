@@ -5,7 +5,6 @@ import ora from 'ora';
 import path from 'path';
 import webpack from 'webpack';
 import { log } from 'reaction-base';
-import clean from '../clean';
 import createConfig from '../../createConfig';
 import createWebpackConfig from '../../create-webpack-config';
 import configureWeb from '../configure/web';
@@ -20,7 +19,6 @@ export default async function startWeb(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  if (options.clean) await clean(options, config);
   await configureWeb(options, config);
   const spinner = ora('starting web').start();
   const { paths } = config;

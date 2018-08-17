@@ -5,6 +5,8 @@ import buildAndroid from './actions/build/android';
 import buildExpo from './actions/build/expo';
 import buildIos from './actions/build/ios';
 import buildWeb from './actions/build/web';
+import bundleAndroid from './actions/bundle/android';
+import bundleIos from './actions/bundle/ios';
 import clean from './actions/clean';
 import configureAndroid from './actions/configure/android';
 import configureExpo from './actions/configure/expo';
@@ -53,6 +55,10 @@ export default async function action(cmd, options) {
       if (options.platform === 'expo') return configureExpo(options);
       if (options.platform === 'ios') return configureIos(options);
       if (options.platform === 'web') return configureWeb(options);
+      break;
+    case 'bundle':
+      if (options.platform === 'android') return bundleAndroid(options);
+      if (options.platform === 'ios') return bundleIos(options);
       break;
     default:
       return commander.help();

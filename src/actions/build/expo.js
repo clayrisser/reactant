@@ -17,7 +17,7 @@ export default async function buildExpo(options, config) {
     log.debug('config', config);
   }
   await clean(options, config);
-  await configureExpo(options, config);
+  await configureExpo({ ...options, clean: false }, config);
   const spinner = ora('building expo\n').start();
   if (!(await readcp('which exp')).length) {
     spinner.stop();

@@ -4,7 +4,6 @@ import open from 'open';
 import ora from 'ora';
 import path from 'path';
 import { log } from 'reaction-base';
-import clean from '../clean';
 import createConfig from '../../createConfig';
 import configureIos from '../configure/ios';
 
@@ -18,7 +17,6 @@ export default async function startIos(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  if (options.clean) await clean(options, config);
   await configureIos(options, config);
   const spinner = ora('Starting ios\n').start();
   if (!(await readcp('which react-native')).length) {

@@ -1,11 +1,8 @@
 import boom from 'boom';
 import easycp, { readcp } from 'easycp';
-import fs from 'fs-extra';
 import ora from 'ora';
-import path from 'path';
 import { log } from 'reaction-base';
-import clean from '../clean';
-import configureAndroid from '../configure/android';
+import bundleAndroid from '../bundle/android';
 import createConfig from '../../createConfig';
 
 export default async function buildAndroid(options, config) {
@@ -18,24 +15,17 @@ export default async function buildAndroid(options, config) {
     log.debug('options', options);
     log.debug('config', config);
   }
-  await clean(options, config);
-  await configureAndroid(options, config);
+  await bundleAndroid(options, config);
   const spinner = ora('building android\n').start();
-  const { paths } = config;
   if (!(await readcp('which react-native')).length) {
     spinner.stop();
     throw boom.badRequest('react-native not installed');
   }
-  await fs.mkdirs(paths.distAndroid);
   spinner.stop();
   await easycp(
-    `react-native bundle --entry-file ${path.resolve(
-      paths.android,
-      'index.js'
-    )} --bundle-output ${path.resolve(
-      paths.distAndroid,
-      `${config.moduleName}.bundle`
-    )}`
+    `react-native run-android --configuration Release ${
+      options.simulator ? ` --simulator ${options.simulator}` : ''
+    }${options.device ? ` --device ${options.device}` : ''}`
   );
   spinner.succeed('built android');
 }
