@@ -1,5 +1,6 @@
 import boom from 'boom';
 import easycp, { readcp } from 'easycp';
+import fs from 'fs-extra';
 import ora from 'ora';
 import path from 'path';
 import { log } from 'reaction-base';
@@ -26,14 +27,20 @@ export default async function buildIos(options, config) {
     throw boom.badRequest('react-native not installed');
   }
   spinner.stop();
+  fs.mkdirsSync(paths.distIos);
   await easycp(
-    `react-native bundle --entry-file ${path.resolve(
+    `react-native bundle --entry-file=${path.resolve(
       paths.ios,
       'index.js'
-    )} --bundle-output ${path.resolve(
+    )} --bundle-output=${path.resolve(
       paths.distIos,
-      `${config.moduleName}.bundle`
-    )}`
+      'main.jsbundle'
+    )} --dev=false --platform=ios --assets-dest=${path.resolve(paths.distIos)}`
+  );
+  await easycp(
+    `react-native run-ios --configuration Release ${
+      options.simulator ? ` --simulator ${options.simulator}` : ''
+    }${options.device ? ` --device ${options.device}` : ''}`
   );
   spinner.succeed('built ios');
 }
