@@ -7,8 +7,8 @@ import { Provider } from 'react-redux';
 import { runtime } from 'js-info';
 import App from '../../src/App';
 
-function ReactionWrapper(props) {
-  class Reaction extends Component {
+function ReactantWrapper(props) {
+  class Reactant extends Component {
     static propTypes = {
       context: PropTypes.object.isRequired
     };
@@ -61,12 +61,12 @@ function ReactionWrapper(props) {
     }
     return (childContextTypes[key] = PropTypes[typeof item].isRequired);
   });
-  Reaction.childContextTypes = childContextTypes;
-  return <Reaction {...props} />;
+  Reactant.childContextTypes = childContextTypes;
+  return <Reactant {...props} />;
 }
 
-ReactionWrapper.propTypes = {
+ReactantWrapper.propTypes = {
   context: PropTypes.object.isRequired
 };
 
-export default ReactionWrapper;
+export default ReactantWrapper;

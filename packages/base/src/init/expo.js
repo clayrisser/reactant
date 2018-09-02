@@ -24,7 +24,7 @@ export default function expo(initialProps = {}, config = {}) {
   } else {
     setLevel(config.level);
   }
-  if (config !== 'production') window.reaction = { config };
+  if (config !== 'production') window.reactant = { config };
   registerConfig(config);
   const context = createStore({});
   context.persistor = persistStore(context.store);

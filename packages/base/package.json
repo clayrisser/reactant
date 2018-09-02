@@ -31,17 +31,18 @@
     "url": "https://github.com/codejamninja/reactant/packages/base"
   },
   "scripts": {
-    "build": "npm run clean && npm run test && cp -r src/* . && babel src -d ./",
+    "babel": "babel",
+    "build": "npm run test && cp -r src/* . && babel src -d ./",
     "clean": "rimraf *.js Link log init *.log && jest --clearCache",
-    "lint": "eslint ./",
-    "lint:fix": "eslint --fix ./",
+    "format": "prettier --write ./src/**/*.js",
+    "lint": "npm run format && eslint ./",
+    "lint:fix": "npm run format && eslint --fix ./",
+    "prepublish": "npm run clean && npm run build",
     "test": "npm run lint && jest --forceExit"
   },
   "dependencies": {
-    "babel-plugin-lodash": "^3.3.4",
-    "babel-preset-react": "^6.24.1",
-    "cheerio": "^1.0.0-rc.2",
-    "connected-react-router": "^4.3.0",
+    "cheerio": "^0.22.0",
+    "connected-react-router": "^4.4.1",
     "cookies": "^0.7.1",
     "cookies-js": "^1.2.3",
     "express": "^4.16.3",
@@ -52,7 +53,7 @@
     "loglevel": "^1.6.1",
     "offline-plugin": "^5.0.5",
     "prop-types": "^15.6.2",
-    "react-dom": "^16.4.1",
+    "react-dom": "^16.4.2",
     "react-native-ignore-warnings": "^0.1.1",
     "redux-devtools-extension": "^2.13.5",
     "redux-persist": "git+https://github.com/codejamninja/redux-persist.git#npm",
@@ -60,31 +61,32 @@
     "winston": "^2.4.3"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.2.6",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-2": "^6.24.1",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^17.0.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jest": "^21.17.0",
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^9.0.0",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-preset-everything": "0.1.0",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.0.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.22.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.10.0",
-    "jest": "^23.3.0",
+    "eslint-plugin-react": "^7.11.1",
+    "jest": "^23.5.0",
     "rimraf": "^2.6.2"
   },
   "engines": {
     "node": ">=4.0.0"
   },
   "eslintIgnore": [
-    "/assets.js",
-    "/config.js",
-    "/createStore.js",
-    "/index.js",
+    "/*.js",
     "/Link",
-    "/log",
-    "/init"
+    "/init",
+    "/log"
   ],
   "jest": {
     "testMatch": [
