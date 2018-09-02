@@ -1,6 +1,6 @@
 {
-  "name": "@reaction-framework/base",
-  "version": "0.0.1",
+  "name": "@reactant/base",
+  "version": "0.0.0",
   "description": "reaction core components",
   "homepage": "https://github.com/codejamninja/reaction-base",
   "bugs": {
@@ -35,7 +35,6 @@
     "clean": "rimraf *.js Link log init *.log && jest --clearCache",
     "lint": "eslint ./",
     "lint:fix": "eslint --fix ./",
-    "prepublish": "npm run build",
     "test": "npm run lint && jest --forceExit"
   },
   "dependencies": {
@@ -92,5 +91,6 @@
       "**/tests/**/[^_]*.js"
     ],
     "verbose": true
-  }
+  },
+  "gitHead": "d5156cf520b9d996902e19ec1e79191454168b00"
 }
