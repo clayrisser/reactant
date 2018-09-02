@@ -1,5 +1,9 @@
 {
-  "name": "reaction-framework",
+  "name": "@reactant/reactant",
+  "version": "0.0.0",
+  "files": [
+    "packages"
+  ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "lerna": "lerna",

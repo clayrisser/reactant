@@ -1,6 +1,6 @@
 {
-  "name": "@reaction-framework/cli",
-  "version": "0.0.1",
+  "name": "@reactant/cli",
+  "version": "0.0.0",
   "description": "build tool for reaction",
   "homepage": "https://reaction.codejam.ninja",
   "author": {
@@ -21,7 +21,6 @@
     "clean": "rimraf lib bin .cache",
     "lint": "eslint ./",
     "lint:fix": "eslint --fix ./",
-    "prepublish": "npm run build",
     "start": "babel-node src/reaction",
     "test": "npm run lint && jest --forceExit",
     "test:reset": "jest --clearCache && npm run test"
@@ -30,7 +29,7 @@
     "reaction": "bin/reaction.js"
   },
   "dependencies": {
-    "@reaction-framework/base": "^0.0.1",
+    "@reactant/base": "^0.0.0",
     "@storybook/addon-actions": "^3.4.8",
     "@storybook/addon-links": "^3.4.8",
     "@storybook/addons": "^3.4.8",
@@ -120,5 +119,6 @@
       "**/tests/**/[^_]*.js"
     ],
     "verbose": true
-  }
+  },
+  "gitHead": "d5156cf520b9d996902e19ec1e79191454168b00"
 }

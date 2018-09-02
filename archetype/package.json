@@ -1,5 +1,5 @@
 {
-  "name": "reaction",
+  "name": "reactant",
   "version": "0.0.1",
   "description": "write once . . . render everywhere",
   "main": "expo/index.js",
@@ -61,7 +61,7 @@
     "test": "npm run lint && jest --forceExit"
   },
   "dependencies": {
-    "@reaction-framework/base": "^0.0.1",
+    "@reactant/base": "^0.0.0",
     "autobind-decorator": "^2.1.0",
     "babel-polyfill": "^6.26.0",
     "expo": "^29.0.0",
@@ -84,7 +84,7 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "@reaction-framework/cli": "^0.0.1",
+    "@reactant/cli": "^0.0.0",
     "@storybook/addon-actions": "^3.4.8",
     "@storybook/addon-links": "^3.4.8",
     "@storybook/react-native": "^3.4.8",
