@@ -1,0 +1,52 @@
+{
+  "extends": ["airbnb", "prettier"],
+  "parser": "babel-eslint",
+  "globals": {
+    "window": true
+  },
+  "rules": {
+    "arrow-body-style": "off",
+    "class-methods-use-this": "off",
+    "default-case": "off",
+    "import/no-dynamic-require": "off",
+    "import/no-extraneous-dependencies": "off",
+    "no-param-reassign": "off",
+    "no-plusplus": "off",
+    "no-return-assign": "off",
+    "no-shadow": "off",
+    "no-underscore-dangle": "off",
+    "no-use-before-define": "off",
+    "react/destructuring-assignment": "off",
+    "react/forbid-prop-types": "off",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/no-this-in-sfc": "off",
+    "react/prefer-stateless-function": "off",
+    "yoda": "off",
+    "no-unused-vars": [
+      "warn",
+      {
+        "args": "after-used",
+        "argsIgnorePattern": "^_",
+        "ignoreRestSiblings": true,
+        "vars": "all"
+      }
+    ],
+    "comma-dangle": ["error", "never"],
+    "import/extensions": ["error", "ignorePackages"],
+    "import/no-unresolved": [
+      "error",
+      {
+        "ignore": [
+          ".\/stories$",
+          "/storiesOf",
+          "^native-base",
+          "^react-native",
+          "^reaction-base",
+          "^reation-build",
+          "^~"
+        ]
+      }
+    ]
+  }
+}
