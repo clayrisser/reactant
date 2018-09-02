@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Text, View } from 'native-base';
-import { config } from 'reaction-base';
+import { config } from '@reactant/base';
 
 export default class Splash extends Component {
   static propTypes = {

@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import CircularJSON from 'circular-json';
 import OpenBrowserPlugin from 'open-browser-webpack-plugin';
 import _ from 'lodash';
-import log, { setLevel } from 'reaction-base/log';
+import log, { setLevel } from '@reactant/base/log';
 import path from 'path';
 import { sleep } from 'deasync';
 import createConfig from '../../createConfig';
@@ -29,7 +29,7 @@ module.exports = webpackConfig => {
   webpackConfig.externals = {
     ...webpackConfig.externals,
     'react-art': {},
-    'reaction-base/config': CircularJSON.stringify(config),
+    '@reactant/base/config': CircularJSON.stringify(config),
     child_process: {},
     deasync: {},
     fs: {},
@@ -58,7 +58,7 @@ module.exports = webpackConfig => {
       path.resolve('node_modules/react-native-tab-view'),
       path.resolve('node_modules/react-native-vector-icons'),
       path.resolve('node_modules/react-native-web'),
-      path.resolve('node_modules/reaction-base'),
+      path.resolve('node_modules/@reactant/base'),
       path.resolve('node_modules/static-container')
     ],
     query: {

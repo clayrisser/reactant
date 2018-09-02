@@ -4,7 +4,7 @@ import fs from 'fs-extra';
 import ora from 'ora';
 import path from 'path';
 import webpack from 'webpack';
-import { log } from 'reaction-base';
+import { log } from '@reactant/base';
 import createConfig from '../../createConfig';
 import createWebpackConfig from '../../create-webpack-config';
 import configureWeb from '../configure/web';

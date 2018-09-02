@@ -1,6 +1,6 @@
-# reaction-base
+# @reaction/base
 
-[![GitHub stars](https://img.shields.io/github/stars/codejamninja/reaction-base.svg?style=social&label=Stars)](https://github.com/codejamninja/reaction-base)
+[![GitHub stars](https://img.shields.io/github/stars/codejamninja/reaction.svg?style=social&label=Stars)](https://github.com/codejamninja/reaction/packages/base)
 
 > reaction core components
 
@@ -10,7 +10,7 @@ Please ★ this repo if you found it useful ★ ★ ★
 ## Installation
 
 ```sh
-npm install --save reaction-base
+npm install --save @reaction/base
 ```
 
 

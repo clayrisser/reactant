@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { log } from 'reaction-base';
+import { log } from '@reactant/base';
 import { runtime } from 'js-info';
 
 export default function inspect(...args) {

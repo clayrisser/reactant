@@ -24,7 +24,7 @@ export default function getRules({ paths, env }) {
       include: [
         paths.src,
         paths.web,
-        path.resolve('node_modules/reaction-base')
+        path.resolve('node_modules/@reactant/base')
       ],
       loader: require.resolve('url-loader'),
       options: {
@@ -37,7 +37,7 @@ export default function getRules({ paths, env }) {
       include: [
         paths.src,
         paths.web,
-        path.resolve('node_modules/reaction-base')
+        path.resolve('node_modules/@reactant/base')
       ],
       loader: require.resolve('html-loader')
     },
@@ -46,7 +46,7 @@ export default function getRules({ paths, env }) {
       include: [
         paths.src,
         paths.web,
-        path.resolve('node_modules/reaction-base')
+        path.resolve('node_modules/@reactant/base')
       ],
       use: [
         {

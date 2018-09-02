@@ -36,7 +36,7 @@ export default function createWebpackConfig(target = 'web', action, config) {
       }
     },
     externals: {
-      'reaction-base/config': CircularJSON.stringify(sanitizedConfig)
+      '@reactant/base/config': CircularJSON.stringify(sanitizedConfig)
     },
     module: {
       strictExportPresence: true,
@@ -64,7 +64,7 @@ export default function createWebpackConfig(target = 'web', action, config) {
             path.resolve('node_modules/react-native-tab-view'),
             path.resolve('node_modules/react-native-vector-icons'),
             path.resolve('node_modules/react-native-web'),
-            path.resolve('node_modules/reaction-base'),
+            path.resolve('node_modules/@reactant/base'),
             path.resolve('node_modules/static-container')
           ],
           loader: require.resolve('babel-loader'),

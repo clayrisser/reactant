@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import stripAnsi from 'strip-ansi';
-import { config, log } from 'reaction-base';
+import { config, log } from '@reactant/base';
 import {
   dismissBuildError,
   reportBuildError,

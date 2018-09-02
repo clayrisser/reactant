@@ -2,7 +2,7 @@ import _ from 'lodash';
 import boom from 'boom';
 import easycp, { readcp } from 'easycp';
 import ora from 'ora';
-import { log } from 'reaction-base';
+import { log } from '@reactant/base';
 import createConfig from '../../createConfig';
 
 export default async function publishExpo(options, config) {

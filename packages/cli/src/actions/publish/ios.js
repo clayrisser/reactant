@@ -4,7 +4,7 @@ import easycp from 'easycp';
 import fs from 'fs';
 import ora from 'ora';
 import path from 'path';
-import { log } from 'reaction-base';
+import { log } from '@reactant/base';
 import buildIos from '../build/ios';
 import createConfig from '../../createConfig';
 

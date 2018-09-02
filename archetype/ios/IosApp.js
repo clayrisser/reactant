@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Reaction from 'reaction-base/Reaction';
+import Reaction from '@reactant/base/Reaction';
 import { NativeRouter } from 'react-router-native';
 import { Root, StyleProvider } from 'native-base';
 import getTheme from '../src/theme/components';

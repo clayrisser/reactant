@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import express from 'express';
-import initServer from 'reaction-base/init/server';
+import initServer from '@reactant/base/init/server';
 
 const app = express();
 const initialProps = {};

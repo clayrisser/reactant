@@ -2,9 +2,9 @@
   "name": "@reactant/base",
   "version": "0.0.0",
   "description": "reaction core components",
-  "homepage": "https://github.com/codejamninja/reaction-base",
+  "homepage": "https://github.com/codejamninja/reactant/packages/base",
   "bugs": {
-    "url": "https://github.com/codejamninja/reaction-base/issues",
+    "url": "https://github.com/codejamninja/reactant/issues",
     "email": "jam@codejam.ninja"
   },
   "license": "MIT",
@@ -28,7 +28,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/codejamninja/reaction-base"
+    "url": "https://github.com/codejamninja/reactant/packages/base"
   },
   "scripts": {
     "build": "npm run clean && npm run test && cp -r src/* . && babel src -d ./",

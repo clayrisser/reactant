@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 import { getStorybookUI, configure } from '@storybook/react-native';
-import { config } from 'reaction-base';
+import { config } from '@reactant/base';
 import stories from '../../../../../stories';
 
 configure(() => stories, module);

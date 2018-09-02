@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import ignoreWarnings from 'ignore-warnings';
-import log, { setLevel } from 'reaction-base/log';
+import log, { setLevel } from '@reactant/base/log';
 import HotClient from '../hotClient';
 
 window.document.title = window.reaction.config.title;

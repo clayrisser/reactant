@@ -3,7 +3,7 @@ import easycp, { readcp } from 'easycp';
 import fs from 'fs-extra';
 import ora from 'ora';
 import path from 'path';
-import { log } from 'reaction-base';
+import { log } from '@reactant/base';
 import clean from '../clean';
 import configureAndroid from '../configure/android';
 import createConfig from '../../createConfig';

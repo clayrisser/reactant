@@ -3,7 +3,7 @@ import easycp, { silentcp } from 'easycp';
 import fs from 'fs-extra';
 import ora from 'ora';
 import path from 'path';
-import { log } from 'reaction-base';
+import { log } from '@reactant/base';
 import createConfig from '../createConfig.js';
 
 const { env } = process;

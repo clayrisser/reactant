@@ -1,5 +1,5 @@
 import ora from 'ora';
-import { log } from 'reaction-base';
+import { log } from '@reactant/base';
 import clean from '../clean';
 import createConfig from '../../createConfig';
 
