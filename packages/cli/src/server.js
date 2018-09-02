@@ -1,10 +1,10 @@
 import 'babel-polyfill';
 import express from 'express';
-import log, { setLevel } from 'reaction-base/log';
+import log, { setLevel } from '@reactant/base/log';
 import ora from 'ora';
 import path from 'path';
 import { __express as ejs } from 'ejs';
-import { config } from 'reaction-base';
+import { config } from '@reactant/base';
 import { createServer } from 'http';
 
 if (config.options.verbose) setLevel('verbose');

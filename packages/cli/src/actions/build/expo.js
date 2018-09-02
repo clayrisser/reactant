@@ -1,7 +1,7 @@
 import boom from 'boom';
 import easycp, { readcp } from 'easycp';
 import ora from 'ora';
-import { log } from 'reaction-base';
+import { log } from '@reactant/base';
 import clean from '../clean';
 import configureExpo from '../configure/expo';
 import createConfig from '../../createConfig';

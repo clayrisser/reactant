@@ -30,7 +30,7 @@ export default function createNodeConfig(webpackConfig, action, config) {
           /\.(mp4|mp3|ogg|swf|webp)$/
         ]
       }),
-      'reaction-base/assets': "require('./assets.json')"
+      '@reactant/base/assets': "require('./assets.json')"
     },
     plugins: [
       ...webpackConfig.plugins,

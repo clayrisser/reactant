@@ -1,7 +1,7 @@
 import boom from 'boom';
 import easycp, { readcp } from 'easycp';
 import ora from 'ora';
-import { log } from 'reaction-base';
+import { log } from '@reactant/base';
 import bundleIos from '../bundle/ios';
 import createConfig from '../../createConfig';
 

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Container, Content, Header, Text, View } from 'native-base';
-import { config, Link } from 'reaction-base';
+import { config, Link } from '@reactant/base';
 
 export default class MainContent extends Component {
   static propTypes = {

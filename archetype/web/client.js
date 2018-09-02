@@ -1,5 +1,5 @@
 import 'babel-polyfill';
-import initClient from 'reaction-base/init/client';
+import initClient from '@reactant/base/init/client';
 
 const initialProps = {};
 
