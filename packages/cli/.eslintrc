@@ -38,7 +38,7 @@
       "error",
       {
         "ignore": [
-          ".\/stories$",
+          "./stories$",
           "/storiesOf",
           "^native-base",
           "^react-native",
@@ -48,5 +48,10 @@
         ]
       }
     ]
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "legacyDecorators": true
+    }
   }
 }

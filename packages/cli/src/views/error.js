@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import ignoreWarnings from 'ignore-warnings';
 import log, { setLevel } from '@reactant/base/log';
 import HotClient from '../hotClient';

@@ -1,15 +1,15 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
         "targets": {
-          "node": "4"
+          "node": "6"
         }
       }
     ],
-    "react",
-    "stage-2"
+    "@babel/preset-react",
+    "everything"
   ],
-  "plugins": ["transform-decorators-legacy"]
+  "ignore": ["Reactant*.js", "createStore.js", "init/*.js"]
 }
