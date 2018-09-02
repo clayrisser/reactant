@@ -1,6 +1,6 @@
 {
   "name": "reaction",
-  "version": "1.0.0-rc.1",
+  "version": "0.0.1",
   "description": "write once . . . render everywhere",
   "main": "expo/index.js",
   "homepage": "https://reaction.codejam.ninja",
@@ -61,6 +61,7 @@
     "test": "npm run lint && jest --forceExit"
   },
   "dependencies": {
+    "@reaction-framework/base": "^0.0.1",
     "autobind-decorator": "^2.1.0",
     "babel-polyfill": "^6.26.0",
     "expo": "^29.0.0",
@@ -78,12 +79,12 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-router-native": "^4.3.0",
-    "reaction-base": "^1.0.0-rc.41",
     "redux": "^4.0.0",
     "redux-persist": "git+https://github.com/codejamninja/redux-persist.git#npm",
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "@reaction-framework/cli": "^0.0.1",
     "@storybook/addon-actions": "^3.4.8",
     "@storybook/addon-links": "^3.4.8",
     "@storybook/react-native": "^3.4.8",
@@ -101,7 +102,6 @@
     "jest": "^23.3.0",
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "^16.4.1",
-    "reaction-build": "^1.0.0-rc.104",
     "rimraf": "^2.6.2"
   },
   "license": "MIT",
