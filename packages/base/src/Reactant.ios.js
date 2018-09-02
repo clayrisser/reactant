@@ -4,12 +4,12 @@ import _ from 'lodash';
 import { ConnectedRouter } from 'connected-react-router';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
-import { config } from 'reaction-base';
+import { config } from 'reactant-base';
 
 if (typeof global.self === 'undefined') global.self = global;
 
-function ReactionWrapper(props) {
-  class Reaction extends Component {
+function ReactantWrapper(props) {
+  class Reactant extends Component {
     static propTypes = {
       context: PropTypes.object.isRequired
     };
@@ -18,7 +18,7 @@ function ReactionWrapper(props) {
       super(props);
       this.App = require('../../src/App').default;
       if (config.options.storybook) {
-        this.App = require('../../node_modules/reaction-build/lib/storybook/native').default;
+        this.App = require('../../node_modules/reactant-build/lib/storybook/native').default;
       }
     }
 
@@ -50,12 +50,12 @@ function ReactionWrapper(props) {
     }
     return (childContextTypes[key] = PropTypes[typeof item].isRequired);
   });
-  Reaction.childContextTypes = childContextTypes;
-  return <Reaction {...props} />;
+  Reactant.childContextTypes = childContextTypes;
+  return <Reactant {...props} />;
 }
 
-ReactionWrapper.propTypes = {
+ReactantWrapper.propTypes = {
   context: PropTypes.object.isRequired
 };
 
-export default ReactionWrapper;
+export default ReactantWrapper;

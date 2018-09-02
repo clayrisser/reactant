@@ -48,7 +48,7 @@ export default function client(initialProps = {}) {
   } else {
     setLevel(config.level);
   }
-  if (config !== 'production') window.reaction = { config };
+  if (config !== 'production') window.reactant = { config };
   if (module.hot)
     module.hot.accept(
       '../../../web/ClientApp',

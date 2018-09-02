@@ -31,9 +31,9 @@ export default function server(initialProps, app = express()) {
   }
   if (!global.window) global.window = {};
   if (config !== 'production') {
-    const reaction = { config };
-    global.window.reaction = reaction;
-    global.reaction = reaction;
+    const reactant = { config };
+    global.window.reactant = reactant;
+    global.reactant = reactant;
   }
   app.use(express.static(config.paths.distWebPublic));
   app.use(Cookies.express());

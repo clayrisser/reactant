@@ -1,15 +1,16 @@
 {
   "presets": [
-    "env",
-    "react",
-    "stage-2"
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "6"
+        }
+      }
+    ],
+    "@babel/preset-react",
+    "everything"
   ],
-  "plugins": [
-    "lodash"
-  ],
-  "ignore": [
-    "Reaction*.js",
-    "createStore.js",
-    "init/*.js"
-  ]
+  "plugins": ["lodash"],
+  "ignore": ["Reactant*.js", "createStore.js", "init/*.js"]
 }

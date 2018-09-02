@@ -1,5 +1,5 @@
-import assets from 'reaction-base/assets';
-import config from 'reaction-base/config';
+import assets from '@reactant/base/assets';
+import config from '@reactant/base/config';
 import Link from './Link';
 import log from './log';
 
