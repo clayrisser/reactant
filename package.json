@@ -1,7 +1,9 @@
 {
   "name": "reaction-framework",
   "scripts": {
-    "lerna": "lerna"
+    "bootstrap": "lerna bootstrap",
+    "lerna": "lerna",
+    "publish": "lerna publish"
   },
   "devDependencies": {
     "lerna": "^3.2.1"
