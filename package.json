@@ -1,0 +1,9 @@
+{
+  "name": "reaction-framework",
+  "scripts": {
+    "lerna": "lerna"
+  },
+  "devDependencies": {
+    "lerna": "^3.2.1"
+  }
+}
