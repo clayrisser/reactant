@@ -1,5 +1,5 @@
 {
-  "name": "reaction-base",
+  "name": "@reaction-framework/base",
   "version": "1.0.0-rc.41",
   "description": "reaction core components",
   "homepage": "https://github.com/codejamninja/reaction-base",
