@@ -19,6 +19,7 @@ module.exports = webpackConfig => {
   while (!config) sleep(100);
   const { paths } = config;
   webpackConfig.resolve.extensions.unshift('.web.js');
+  webpackConfig.resolve.symlinks = false;
   webpackConfig.resolve.alias = {
     '~': paths.src,
     'react-native': require.resolve('react-native-web'),

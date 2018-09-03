@@ -24,8 +24,9 @@ export default function createWebpackConfig(target = 'web', action, config) {
         : 'nosources-source-map',
     mode: env,
     resolve: {
-      modules: [path.resolve('node_modules')],
       extensions: ['.web.js', '.js', '.json', '.jsx', '.mjs'],
+      modules: [path.resolve('node_modules')],
+      symlinks: false,
       alias: {
         '~': paths.src,
         'react-native': require.resolve('react-native-web'),
