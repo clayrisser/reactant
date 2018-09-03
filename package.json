@@ -1,12 +1,15 @@
 {
-  "name": "@reactant/reactant",
+  "name": "reactant",
   "version": "0.0.2",
   "files": [
     "packages"
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
+    "clean": "lerna clean",
     "lerna": "lerna",
+    "link": "lerna link",
+    "ls": "lerna ls",
     "publish": "lerna publish"
   },
   "devDependencies": {
