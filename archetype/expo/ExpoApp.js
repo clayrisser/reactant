@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Reaction from '@reactant/base/Reaction';
+import Reactant from '@reactant/base/Reactant';
 import { Font } from 'expo';
 import { NativeRouter } from 'react-router-native';
 import { Root, StyleProvider } from 'native-base';
@@ -17,7 +17,7 @@ export default class ExpoApp extends Component {
       <NativeRouter {...this.props}>
         <StyleProvider style={getTheme(material)}>
           <Root>
-            <Reaction {...this.props} />
+            <Reactant {...this.props} />
           </Root>
         </StyleProvider>
       </NativeRouter>

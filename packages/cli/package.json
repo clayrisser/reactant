@@ -16,11 +16,12 @@
   "scripts": {
     "build": "npm run test && npm run build:lib && npm run build:bin && npm run build:err",
     "build:bin": "mkdir -p bin && babel src/bin.js -o bin/reactant.js",
-    "build:lib": "babel src --ignore bin.js -d lib",
     "build:err": "parcel build src/views/error.html -d lib/views --out-file error.ejs",
+    "build:lib": "babel src --ignore bin.js -d lib",
     "clean": "rimraf lib bin .cache",
     "lint": "eslint ./",
     "lint:fix": "eslint --fix ./",
+    "prepublish": "npm run clean && npm run build",
     "start": "babel-node src/reactant",
     "test": "npm run lint && jest --forceExit",
     "test:reset": "jest --clearCache && npm run test"

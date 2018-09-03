@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Reaction from '@reactant/base/Reaction';
+import Reactant from '@reactant/base/Reactant';
 import { BrowserRouter } from 'react-router-dom';
 import { StyleProvider } from 'native-base';
 import getTheme from '../src/theme/components';
@@ -10,7 +10,7 @@ export default class ClientApp extends Component {
     return (
       <BrowserRouter {...this.props}>
         <StyleProvider style={getTheme(material)}>
-          <Reaction {...this.props} />
+          <Reactant {...this.props} />
         </StyleProvider>
       </BrowserRouter>
     );

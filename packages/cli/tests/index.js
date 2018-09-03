@@ -1,5 +1,5 @@
 describe('jest', () => {
-  it('is works', async () => {
+  it('it works', async () => {
     expect(true).toBe(true);
   });
 });
