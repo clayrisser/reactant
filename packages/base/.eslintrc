@@ -8,6 +8,7 @@
     "arrow-body-style": "off",
     "global-require": "off",
     "import/extensions": "off",
+    "import/no-extraneous-dependencies": "off",
     "import/no-unresolved": "off",
     "no-param-reassign": "off",
     "no-plusplus": "off",

@@ -5,7 +5,7 @@
     "packages"
   ],
   "scripts": {
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap --hoist && npm run link",
     "clean": "lerna clean",
     "lerna": "lerna",
     "link": "lerna link",
@@ -13,6 +13,8 @@
     "publish": "lerna publish"
   },
   "devDependencies": {
-    "lerna": "^3.2.1"
+    "lerna": "^3.2.1",
+    "@reactant/base": "^0.0.4",
+    "@reactant/cli": "^0.0.4"
   }
 }
