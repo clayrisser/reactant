@@ -3,11 +3,11 @@ import ignoreWarnings from 'ignore-warnings';
 import log, { setLevel } from '@reactant/base/log';
 import HotClient from '../hotClient';
 
-window.document.title = window.reaction.config.title;
+window.document.title = window.reactant.config.title;
 ignoreWarnings('react-error-overlay is not meant for use in production');
 
 let hash = null;
-const { config } = window.reaction;
+const { config } = window.reactant;
 
 if (
   config.options.verbose ||
@@ -26,10 +26,10 @@ const {
   startReportingRuntimeErrors
 } = require('react-error-overlay');
 
-log.error(window.reaction.errStack);
+log.error(window.reactant.errStack);
 
 startReportingRuntimeErrors({});
-reportBuildError(window.reaction.errStack);
+reportBuildError(window.reactant.errStack);
 
 log.trace('connecting . . .');
 const client = new HotClient({ port: config.ports.dev });

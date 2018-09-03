@@ -1,9 +1,9 @@
 const { env } = process;
 
 export default {
-  title: 'Reaction',
-  host: env.REACTION_HOST || 'localhost',
-  port: env.REACTION_PORT || 6001,
+  title: 'Reactant',
+  host: env.REACTANT_HOST || 'localhost',
+  port: env.REACTANT_PORT || 6001,
   envs: {},
   level: 'info',
   ignore: {
@@ -35,7 +35,7 @@ export default {
     expo: 'expo',
     ios: 'ios',
     root: '',
-    server: 'node_modules/reaction-build/lib/server.js',
+    server: 'node_modules/reactant-build/lib/server.js',
     src: 'src',
     srcPublic: 'src/public',
     stories: 'storybook/stories',

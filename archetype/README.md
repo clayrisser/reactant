@@ -1,6 +1,6 @@
-# reaction
+# reactant
 
-[![GitHub stars](https://img.shields.io/github/stars/codejamninja/reaction.svg?style=social&label=Stars)](https://github.com/codejamninja/reaction)
+[![GitHub stars](https://img.shields.io/github/stars/codejamninja/reactant.svg?style=social&label=Stars)](https://github.com/codejamninja/reactant)
 
 > write once . . . render everywhere
 
@@ -31,7 +31,7 @@ Please ★ this repo if you found it useful ★ ★ ★
 ## Installation
 
 ```sh
-git clone https://github.com/codejamninja/reaction
+git clone https://github.com/codejamninja/reactant
 ```
 
 
@@ -84,24 +84,24 @@ git clone https://github.com/codejamninja/reaction
 
 ## Support
 
-Submit an [issue](https://github.com/codejamninja/reaction/issues/new)
+Submit an [issue](https://github.com/codejamninja/reactant/issues/new)
 
 
 ## Contributing
 
-Review the [guidelines for contributing](https://github.com/codejamninja/reaction/blob/master/CONTRIBUTING.md)
+Review the [guidelines for contributing](https://github.com/codejamninja/reactant/blob/master/CONTRIBUTING.md)
 
 
 ## License
 
-[MIT License](https://github.com/codejamninja/reaction/blob/master/LICENSE)
+[MIT License](https://github.com/codejamninja/reactant/blob/master/LICENSE)
 
 [Jam Risser](https://codejam.ninja) © 2018
 
 
 ## Changelog
 
-Review the [changelog](https://github.com/codejamninja/reaction/blob/master/CHANGELOG.md)
+Review the [changelog](https://github.com/codejamninja/reactant/blob/master/CHANGELOG.md)
 
 
 ## Credits

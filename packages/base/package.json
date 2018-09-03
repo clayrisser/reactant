@@ -1,7 +1,7 @@
 {
   "name": "@reactant/base",
   "version": "0.0.3",
-  "description": "reaction core components",
+  "description": "reactant core components",
   "homepage": "https://github.com/codejamninja/reactant/packages/base",
   "bugs": {
     "url": "https://github.com/codejamninja/reactant/issues",
@@ -16,9 +16,9 @@
   "main": "index.js",
   "files": [
     "Link",
-    "Reaction.android.js",
-    "Reaction.ios.js",
-    "Reaction.js",
+    "Reactant.android.js",
+    "Reactant.ios.js",
+    "Reactant.js",
     "assets.js",
     "config.js",
     "createStore.js",

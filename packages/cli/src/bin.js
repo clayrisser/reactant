@@ -2,4 +2,4 @@
 
 import '@babel/polyfill';
 // eslint-disable-next-line import/no-unresolved
-import '../lib/reaction.js';
+import '../lib/reactant.js';

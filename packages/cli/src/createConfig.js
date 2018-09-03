@@ -16,7 +16,7 @@ export default async function createConfig({
   options = {}
 }) {
   environment.default = defaultEnv;
-  const userConfig = rcConfig({ name: 'reaction' });
+  const userConfig = rcConfig({ name: 'reactant' });
   const eslint = rcConfig({ name: 'eslint' });
   const config = _.merge(
     defaultConfig,

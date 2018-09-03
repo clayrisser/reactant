@@ -27,7 +27,7 @@ export default async function startWeb(options, config) {
       path.resolve(config.paths.stories, '.storybook')
     )
       ? path.resolve(config.paths.stories, '.storybook')
-      : path.resolve('node_modules/reaction-build/lib/storybook/web');
+      : path.resolve('node_modules/@reactant/cli/lib/storybook/web');
     spinner.stop();
     await easycp(
       `node node_modules/@storybook/react/bin -p ${
