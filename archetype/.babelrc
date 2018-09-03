@@ -1,5 +1,16 @@
 {
-  "presets": ["react-native", "react-native-stage-0"],
-  "plugins": ["transform-class-properties", "transform-decorators-legacy"],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "6"
+        }
+      }
+    ],
+    "react-native",
+    "everything"
+  ],
+  "plugins": ["lodash"],
   "ignore": ["art/core/color.js"]
 }

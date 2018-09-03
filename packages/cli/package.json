@@ -1,8 +1,8 @@
 {
   "name": "@reactant/cli",
-  "version": "0.0.1",
-  "description": "build tool for reaction",
-  "homepage": "https://reaction.codejam.ninja",
+  "version": "0.0.2",
+  "description": "build tool for reactant",
+  "homepage": "https://reactant.codejam.ninja",
   "author": {
     "name": "Jam Risser",
     "email": "jam@codejam.ninja",
@@ -15,22 +15,25 @@
   ],
   "scripts": {
     "build": "npm run test && npm run build:lib && npm run build:bin && npm run build:err",
-    "build:bin": "mkdir -p bin && babel src/bin.js -o bin/reaction.js",
+    "build:bin": "mkdir -p bin && babel src/bin.js -o bin/reactant.js",
     "build:lib": "babel src --ignore bin.js -d lib",
     "build:err": "parcel build src/views/error.html -d lib/views --out-file error.ejs",
     "clean": "rimraf lib bin .cache",
     "lint": "eslint ./",
     "lint:fix": "eslint --fix ./",
-    "start": "babel-node src/reaction",
+    "start": "babel-node src/reactant",
     "test": "npm run lint && jest --forceExit",
     "test:reset": "jest --clearCache && npm run test"
   },
   "bin": {
-    "reaction": "bin/reaction.js"
+    "reactant": "bin/reactant.js"
   },
   "dependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
     "@babel/polyfill": "^7.0.0",
-    "@reactant/base": "0.0.1",
+    "@babel/preset-env": "^7.0.0",
+    "@reactant/base": "0.0.2",
     "@storybook/addon-actions": "^3.4.10",
     "@storybook/addon-links": "^3.4.10",
     "@storybook/addons": "^3.4.10",
@@ -39,6 +42,9 @@
     "assets-webpack-plugin": "^3.9.6",
     "autobind-decorator": "^2.1.0",
     "autoprefixer": "^9.1.3",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^9.0.0",
+    "babel-preset-everything": "^0.1.2",
     "bluebird": "^3.5.1",
     "boom": "^7.2.0",
     "circular-json": "^0.5.5",
@@ -90,19 +96,13 @@
     "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^9.0.0",
-    "babel-preset-everything": "^0.1.2",
     "jest": "^23.5.0",
     "parcel-bundler": "git+https://github.com/codejamninja/parcel.git#npm",
     "rimraf": "^2.6.2"
   },
   "license": "MIT",
-  "repository": "https://github.com/codejamninja/reaction-build",
+  "repository": "https://github.com/codejamninja/reactant/packages/build",
   "engines": {
     "node": ">= 4.0.0"
   },
