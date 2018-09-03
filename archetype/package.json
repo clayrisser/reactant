@@ -1,7 +1,7 @@
 {
   "name": "reactant",
   "private": true,
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "write once . . . render everywhere",
   "main": "expo/index.js",
   "homepage": "https://reactant.codejam.ninja",
@@ -62,7 +62,7 @@
     "test": "npm run lint && jest --forceExit"
   },
   "dependencies": {
-    "@reactant/base": "^0.0.3",
+    "@reactant/base": "^0.0.4",
     "autobind-decorator": "^2.1.0",
     "babel-polyfill": "^6.26.0",
     "expo": "^29.0.0",
@@ -85,7 +85,7 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "@reactant/cli": "^0.0.3",
+    "@reactant/cli": "^0.0.4",
     "@storybook/addon-actions": "^3.4.8",
     "@storybook/addon-links": "^3.4.8",
     "@storybook/react-native": "^3.4.8",
