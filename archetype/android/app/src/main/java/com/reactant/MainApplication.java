@@ -1,4 +1,4 @@
-package com.reaction;
+package com.reactant;
 
 import android.app.Application;
 

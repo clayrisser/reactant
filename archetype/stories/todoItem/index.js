@@ -1,7 +1,7 @@
 import React from 'react';
 import { List } from 'native-base';
 import { action } from '@storybook/addon-actions';
-import { storiesOf } from 'reaction-build';
+import { storiesOf } from '@reactant/cli';
 import TodoItem from '~/components/TodoItem';
 
 const todoItem = storiesOf('TodoItem', module);
