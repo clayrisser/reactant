@@ -50,13 +50,19 @@ export default {
     web: 'echo "missing publish script"'
   },
   babel: {
-    presets: ['env', 'react-native', 'stage-2'],
-    plugins: [
-      'lodash',
-      'transform-decorators-legacy',
-      'transform-class-properties',
-      'react-native-web'
-    ]
+    presets: [
+      [
+        '@babel/preset-env',
+        {
+          targets: {
+            node: '6'
+          }
+        }
+      ],
+      'react-native',
+      'everything'
+    ],
+    plugins: ['lodash', 'react-native-web']
   },
   eslint: {
     extends: ['airbnb', 'prettier'],
