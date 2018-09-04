@@ -6,7 +6,7 @@ import { createMemoryHistory, createBrowserHistory } from 'history';
 import { createStore, applyMiddleware } from 'redux';
 import { persistReducer, getStoredState } from 'redux-persist';
 import { runtime } from 'js-info';
-import reducers from '../../src/reducers';
+import reducers from '~/reducers';
 import { config } from '.';
 
 const history = (runtime.browser

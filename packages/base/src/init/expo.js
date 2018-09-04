@@ -2,7 +2,7 @@ import React from 'react';
 import ignoreWarnings from 'react-native-ignore-warnings';
 import { KeepAwake, registerRootComponent } from 'expo';
 import { persistStore } from 'redux-persist';
-import ExpoApp from '../../../expo/ExpoApp';
+import ExpoApp from '~/../expo/ExpoApp';
 import createStore from '../createStore';
 import { registerConfig } from '../config';
 import { setLevel } from '../log';

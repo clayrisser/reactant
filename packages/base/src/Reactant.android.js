@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { ConnectedRouter } from 'connected-react-router';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
-import { config } from 'reactant-base';
+import { config } from '@reactant/base';
 
 if (typeof global.self === 'undefined') global.self = global;
 

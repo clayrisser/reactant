@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { runtime } from 'js-info';
-import App from '../../src/App';
+import App from '~/src/App';
 
 function ReactantWrapper(props) {
   class Reactant extends Component {

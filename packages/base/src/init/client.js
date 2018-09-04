@@ -23,7 +23,7 @@ async function renderClient(initialProps) {
     });
   });
   initialProps.context = context;
-  const ClientApp = require('../../../web/ClientApp').default;
+  const ClientApp = require('~/../web/ClientApp').default;
   AppRegistry.registerComponent('App', () => ClientApp);
   AppRegistry.runApplication('App', {
     initialProps,
@@ -51,7 +51,7 @@ export default function client(initialProps = {}) {
   if (config !== 'production') window.reactant = { config };
   if (module.hot)
     module.hot.accept(
-      '../../../web/ClientApp',
+      '~/../web/ClientApp',
       renderClient.bind(this, initialProps)
     );
   renderClient(initialProps).catch(log.error);
