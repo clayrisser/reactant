@@ -5,6 +5,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import rcConfig from 'rc-config';
 import { environment } from 'js-info';
+import { sleep } from 'deasync';
 import defaultConfig from './config';
 import pkg from '../package.json';
 
@@ -67,6 +68,15 @@ export default async function createConfig({
       })
     )
   };
+}
+
+export function createConfigSync(...args) {
+  let config = null;
+  createConfig(...args).then(loadedConfig => {
+    config = loadedConfig;
+  });
+  while (!config) sleep(100);
+  return config;
 }
 
 function resolvePath(configPath, configKey, paths) {
