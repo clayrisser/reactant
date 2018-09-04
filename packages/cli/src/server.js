@@ -1,4 +1,4 @@
-import '@babel/polyfill';
+import 'babel-polyfill';
 import express from 'express';
 import log, { setLevel } from '@reactant/base/log';
 import ora from 'ora';

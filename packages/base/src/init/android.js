@@ -2,7 +2,7 @@ import React from 'react';
 import ignoreWarnings from 'react-native-ignore-warnings';
 import { AppRegistry } from 'react-native';
 import { persistStore } from 'redux-persist';
-import AndroidApp from '../../../android/AndroidApp';
+import AndroidApp from '~/../android/AndroidApp';
 import createStore from '../createStore';
 import { registerConfig } from '../config';
 import { setLevel } from '../log';

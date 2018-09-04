@@ -1,4 +1,4 @@
-import '@babel/polyfill';
+import 'babel-polyfill';
 import CircularJSON from 'circular-json';
 import OpenBrowserPlugin from 'open-browser-webpack-plugin';
 import _ from 'lodash';

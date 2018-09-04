@@ -47,10 +47,5 @@ idea/
 .idea/
 
 # Application
-/*.js
-/Link
-/log
-/init
-/Reaction*.js
-
+/lib
 package-lock.json

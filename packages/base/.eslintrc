@@ -1,36 +1,16 @@
 {
-  "extends": ["airbnb", "prettier"],
-  "parser": "babel-eslint",
+  "extends": ["jam"],
   "globals": {
     "window": true
   },
   "rules": {
-    "arrow-body-style": "off",
     "global-require": "off",
-    "import/extensions": "off",
     "import/no-extraneous-dependencies": "off",
-    "import/no-unresolved": "off",
-    "no-param-reassign": "off",
-    "no-plusplus": "off",
-    "no-return-assign": "off",
-    "no-shadow": "off",
-    "no-underscore-dangle": "off",
-    "no-use-before-define": "off",
-    "react/destructuring-assignment": "off",
-    "react/forbid-prop-types": "off",
-    "react/jsx-filename-extension": "off",
-    "react/jsx-one-expression-per-line": "off",
-    "react/no-this-in-sfc": "off",
-    "react/prefer-stateless-function": "off",
-    "no-unused-vars": [
-      "warn",
+    "import/no-unresolved": [
+      "error",
       {
-        "args": "after-used",
-        "argsIgnorePattern": "^_",
-        "ignoreRestSiblings": true,
-        "vars": "all"
+        "ignore": ["^~", "^@reactant/base"]
       }
-    ],
-    "comma-dangle": ["error", "never"]
+    ]
   }
 }

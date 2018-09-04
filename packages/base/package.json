@@ -13,27 +13,21 @@
     "email": "jam@codejam.ninja",
     "url": "https://codejam.ninja"
   },
-  "main": "index.js",
+  "main": "lib/index.js",
   "files": [
-    "Link",
-    "Reactant.android.js",
-    "Reactant.ios.js",
-    "Reactant.js",
+    "Link.js",
     "assets.js",
     "config.js",
-    "createStore.js",
-    "index.js",
-    "init",
-    "log"
+    "lib",
+    "log.js"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/codejamninja/reactant/packages/base"
   },
   "scripts": {
-    "babel": "babel",
-    "build": "npm run test && cp -r src/* . && babel src -d ./",
-    "clean": "rimraf *.js Link log init *.log && jest --clearCache",
+    "build": "npm run test && mkdir -p lib && cp -r src/* lib && babel src -d lib",
+    "clean": "rimraf lib && jest --clearCache",
     "format": "prettier --write ./src/**/*.js",
     "lint": "npm run format && eslint ./",
     "lint:fix": "npm run format && eslint --fix ./",
@@ -69,18 +63,14 @@
     "winston": "^2.4.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^9.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-plugin-lodash": "^3.3.4",
-    "babel-preset-everything": "^0.1.2",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "eslint": "^5.5.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^3.0.1",
-    "eslint-plugin-import": "^2.14.0",
+    "eslint-config-jam": "0.1.0",
     "eslint-plugin-jest": "^21.22.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
@@ -88,13 +78,10 @@
     "rimraf": "^2.6.2"
   },
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "eslintIgnore": [
-    "/*.js",
-    "/Link",
-    "/init",
-    "/log"
+    "lib"
   ],
   "jest": {
     "testMatch": [

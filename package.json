@@ -5,8 +5,9 @@
     "packages"
   ],
   "scripts": {
-    "bootstrap": "lerna bootstrap --hoist && npm run link",
-    "clean": "lerna clean",
+    "bootstrap": "lerna bootstrap && npm run link",
+    "bootstrap:hoist": "lerna bootstrap --hoist && npm run link",
+    "clean": "lerna clean -y",
     "lerna": "lerna",
     "link": "lerna link",
     "ls": "lerna ls",

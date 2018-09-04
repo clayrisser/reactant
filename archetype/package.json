@@ -64,7 +64,6 @@
   "dependencies": {
     "@reactant/base": "0.0.4",
     "autobind-decorator": "^2.1.0",
-    "babel-polyfill": "^6.26.0",
     "expo": "^29.0.0",
     "express": "^4.16.3",
     "lodash": "^4.17.10",
@@ -94,8 +93,10 @@
     "@storybook/addon-links": "^3.4.10",
     "@storybook/react-native": "^3.4.10",
     "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^9.0.0",
     "babel-plugin-react-native-web": "^0.8.9",
-    "babel-preset-react-native": "^4.0.0",
+    "babel-preset-react-native": "^5.0.2",
+    "babel-preset-everything": "^0.1.2",
     "eslint": "^5.5.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.0.1",
@@ -107,6 +108,7 @@
     "flow-bin": "^0.80.0",
     "jest": "^23.5.0",
     "jest-react-native": "^18.0.0",
+    "metro": "^0.45.0",
     "react-test-renderer": "^16.4.2",
     "rimraf": "^2.6.2"
   },
