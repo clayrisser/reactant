@@ -48,7 +48,6 @@ idea/
 
 # Application
 /lib
-/bin
 /.cache
 
 package-lock.json

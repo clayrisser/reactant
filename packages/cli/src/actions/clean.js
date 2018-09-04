@@ -4,7 +4,7 @@ import fs from 'fs-extra';
 import ora from 'ora';
 import path from 'path';
 import { log } from '@reactant/base';
-import createConfig from '../createConfig.js';
+import createConfig from '../createConfig';
 
 const { env } = process;
 
