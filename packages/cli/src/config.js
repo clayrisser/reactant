@@ -35,7 +35,7 @@ export default {
     expo: 'expo',
     ios: 'ios',
     root: '',
-    server: 'node_modules/reactant-build/lib/server.js',
+    server: 'node_modules/@reactant/cli/lib/server.js',
     src: 'src',
     srcPublic: 'src/public',
     stories: 'storybook/stories',
@@ -52,7 +52,7 @@ export default {
   babel: {
     presets: [
       [
-        '@babel/preset-env',
+        'env',
         {
           targets: {
             node: '6'
@@ -60,16 +60,12 @@ export default {
         }
       ],
       'react-native',
-      'everything'
+      'stage-0'
     ],
-    plugins: ['lodash', 'react-native-web']
+    plugins: ['transform-decorators-legacy', 'lodash', 'react-native-web']
   },
   eslint: {
-    extends: ['airbnb', 'prettier'],
-    parser: 'babel-eslint',
-    rules: {
-      'comma-dangle': ['error', 'never']
-    }
+    extends: ['jam']
   },
   webpack: (config, webpack) => webpack,
   storybook: (config, webpack) => webpack

@@ -1,6 +1,8 @@
 import CircularJSON from 'circular-json';
 import _ from 'lodash';
+import fs from 'fs-extra';
 import path from 'path';
+import { getLinkedPaths } from 'linked-deps';
 import {
   DefinePlugin,
   NamedModulesPlugin,
@@ -25,8 +27,8 @@ export default function createWebpackConfig(target = 'web', action, config) {
     mode: env,
     resolve: {
       extensions: ['.web.js', '.js', '.json', '.jsx', '.mjs'],
-      modules: [path.resolve('node_modules')],
-      symlinks: false,
+      modules: getModules(),
+      symlinks: true,
       alias: {
         '~': paths.src,
         'react-native': require.resolve('react-native-web'),
@@ -92,4 +94,21 @@ export default function createWebpackConfig(target = 'web', action, config) {
     return webpack(config, webpackConfig);
   }
   return _.merge(webpackConfig, webpack);
+}
+
+function getModules() {
+  let modulePaths = [fs.realpathSync(path.resolve(__dirname, '../../..'))];
+  const pkgPath = path.resolve(__dirname, '../../../../archetype/package.json');
+  if (fs.existsSync(pkgPath)) {
+    modulePaths = _.map(
+      [
+        path.resolve(__dirname, '../../../../archetype'),
+        ...getLinkedPaths(pkgPath)
+      ],
+      dependancyPath => {
+        return path.join(dependancyPath, 'node_modules');
+      }
+    );
+  }
+  return modulePaths;
 }

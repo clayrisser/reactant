@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Reactant from '@reactant/base/Reactant';
+import Reactant from '@reactant/base/lib/Reactant';
 import { BrowserRouter } from 'react-router-dom';
 import { StyleProvider } from 'native-base';
 import getTheme from '../src/theme/components';
