@@ -6,7 +6,7 @@ import path from 'path';
 import webpack from 'webpack';
 import { log } from '@reactant/base';
 import createConfig from '../../createConfig';
-import createWebpackConfig from '../../create-webpack-config';
+import createWebpackConfig from '../../webpack/createWebpackConfig';
 import configureWeb from '../configure/web';
 
 export default async function startWeb(options, config) {
@@ -38,12 +38,12 @@ export default async function startWeb(options, config) {
     );
   } else {
     fs.removeSync(path.resolve(paths.distWeb, 'assets.json'));
-    const webpackWebConfig = createWebpackConfig('web', 'start', config);
-    log.debug('webpackWebConfig', webpackWebConfig);
-    const webpackNodeConfig = createWebpackConfig('node', 'start', config);
-    log.debug('webpackNodeConfig', webpackNodeConfig);
+    const webpackClientConfig = createWebpackConfig(config, 'client');
+    log.debug('webpackClientConfig', webpackClientConfig);
+    const webpackServerConfig = createWebpackConfig(config, 'server');
+    log.debug('webpackServerConfig', webpackServerConfig);
     process.noDeprecation = true;
-    webpack(webpackNodeConfig).watch(
+    webpack(webpackServerConfig).watch(
       {
         quiet: true,
         stats: 'none'
@@ -53,8 +53,11 @@ export default async function startWeb(options, config) {
         spinner.stop();
       }
     );
-    const webStats = webpack(webpackWebConfig);
-    const clientDevServer = new DevServer(webStats, webpackWebConfig.devServer);
+    const webStats = webpack(webpackClientConfig);
+    const clientDevServer = new DevServer(
+      webStats,
+      webpackClientConfig.devServer
+    );
     clientDevServer.listen(config.ports.dev, 'localhost', err => {
       if (err) log.error(err);
     });

@@ -5,8 +5,8 @@ import webpackNodeExternals from 'webpack-node-externals';
 
 const { LimitChunkCountPlugin } = webpack.optimize;
 
-export default function createNodeConfig(webpackConfig, action, config) {
-  const { paths, host, ports, options } = config;
+export default function createServerConfig(config, webpackConfig) {
+  const { paths, host, ports, options, action } = config;
   webpackConfig = {
     ...webpackConfig,
     entry: [paths.server],

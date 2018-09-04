@@ -6,8 +6,8 @@ import path from 'path';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { IgnorePlugin } from 'webpack';
 
-export default function createWebConfig(webpackConfig, action, config) {
-  const { ports, paths, host, env, offline } = config;
+export default function createClientConfig(config, webpackConfig) {
+  const { ports, paths, host, env, offline, action } = config;
   webpackConfig = {
     ...webpackConfig,
     entry: {

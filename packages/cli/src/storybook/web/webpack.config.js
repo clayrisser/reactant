@@ -6,7 +6,7 @@ import log, { setLevel } from '@reactant/base/log';
 import path from 'path';
 import { sleep } from 'deasync';
 import createConfig from '../../createConfig';
-import getRules from '../../create-webpack-config/getRules';
+import getRules from '../../webpack/getRules';
 
 if (_.includes(process.argv, '--verbose')) setLevel('verbose');
 if (_.includes(process.argv, '--debug')) setLevel('debug');

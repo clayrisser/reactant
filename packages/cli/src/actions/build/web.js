@@ -11,7 +11,7 @@ import { log } from '@reactant/base';
 import configureWeb from '../configure/web';
 import clean from '../clean';
 import createConfig from '../../createConfig';
-import createWebpackConfig from '../../create-webpack-config';
+import createWebpackConfig from '../../webpack/createWebpackConfig';
 
 const {
   measureFileSizesBeforeBuild,
@@ -70,17 +70,17 @@ export default async function buildWeb(options, config) {
 }
 
 async function runBuild(config, previousFileSizes) {
-  const webpackWebConfig = createWebpackConfig('web', 'build', config);
-  log.debug('webpackWebConfig', webpackWebConfig);
-  const webpackNodeConfig = createWebpackConfig('node', 'build', config);
-  log.debug('webpackNodeConfig', webpackNodeConfig);
+  const webpackClientConfig = createWebpackConfig(config, 'web');
+  log.debug('webpackClientConfig', webpackClientConfig);
+  const webpackServerConfig = createWebpackConfig(config, 'server');
+  log.debug('webpackServerConfig', webpackServerConfig);
   process.noDeprecation = true;
   const webSpinner = ora('compiling web').start();
-  const webStats = await compile(webpackWebConfig);
+  const webStats = await compile(webpackClientConfig);
   const webMessages = handleStats(webStats, config);
   webSpinner.succeed('compiled web');
   const serverSpinner = ora('compiling server').start();
-  const nodeStats = await compile(webpackNodeConfig);
+  const nodeStats = await compile(webpackServerConfig);
   const nodeMessages = handleStats(nodeStats, config);
   serverSpinner.succeed('compiled server');
   return {

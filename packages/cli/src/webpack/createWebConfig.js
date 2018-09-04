@@ -9,15 +9,18 @@ import {
   HotModuleReplacementPlugin,
   NoEmitOnErrorsPlugin
 } from 'webpack';
-import createNodeConfig from './createNodeConfig';
-import createWebConfig from './createWebConfig';
+import createClientConfig from './createClientConfig';
+import createServerConfig from './createServerConfig';
 import getRules from './getRules';
 import { sanitizeConfig } from '../createConfig';
 
-export default function createWebpackConfig(target = 'web', action, config) {
-  const { envs, paths, eslint, babel, env, webpack } = config;
+export default function createWebConfig(config, webpackConfig, target = 'web') {
+  const { envs, paths, eslint, babel, env, action } = config;
   const sanitizedConfig = sanitizeConfig(config);
-  let webpackConfig = {
+  if (target === 'client') target = 'web';
+  if (target === 'server') target = 'node';
+  webpackConfig = {
+    ...webpackConfig,
     context: process.cwd(),
     target,
     devtool:
@@ -86,14 +89,9 @@ export default function createWebpackConfig(target = 'web', action, config) {
     ]
   };
   if (target === 'web') {
-    webpackConfig = createWebConfig(webpackConfig, action, config);
-  } else {
-    webpackConfig = createNodeConfig(webpackConfig, action, config);
+    return createClientConfig(config, webpackConfig);
   }
-  if (_.isFunction(webpack)) {
-    return webpack(config, webpackConfig);
-  }
-  return _.merge(webpackConfig, webpack);
+  return createServerConfig(config, webpackConfig);
 }
 
 function getModules() {
