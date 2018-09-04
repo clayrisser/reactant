@@ -11,6 +11,6 @@
     "react",
     "stage-0"
   ],
-  "plugins": ["lodash"],
+  "plugins": ["transform-decorators-legacy", "lodash"],
   "ignore": ["Reactant*.js", "createStore.js", "init/*.js"]
 }

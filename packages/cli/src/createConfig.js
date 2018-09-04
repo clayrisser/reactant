@@ -6,8 +6,8 @@ import path from 'path';
 import rcConfig from 'rc-config';
 import { environment } from 'js-info';
 import defaultConfig from './config';
+import pkg from '../package.json';
 
-const pkg = require(path.resolve('package.json'));
 const occupiedPorts = [];
 
 export default async function createConfig({
