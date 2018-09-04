@@ -1,4 +1,4 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-exports.default = require('./lib/Link').default;
+module.exports = require('./lib/Link');

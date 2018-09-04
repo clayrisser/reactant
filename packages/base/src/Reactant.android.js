@@ -16,9 +16,9 @@ function ReactantWrapper(props) {
 
     constructor(props) {
       super(props);
-      this.App = require('../../src/App').default;
+      this.App = require('~/App').default;
       if (config.options.storybook) {
-        this.App = require('../../node_modules/@reactant/cli/lib/storybook/native').default;
+        this.App = require('~/../node_modules/@reactant/cli/lib/storybook/native').default;
       }
     }
 

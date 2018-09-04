@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { runtime } from 'js-info';
-import App from '~/src/App';
+import App from '~/App';
 
 function ReactantWrapper(props) {
   class Reactant extends Component {
@@ -20,7 +20,7 @@ function ReactantWrapper(props) {
     componentWillMount() {
       const { context } = this.props;
       if (context.insertCss) {
-        const rootStyle = require('../../web/styles/root.scss?root=./web/styles/');
+        const rootStyle = require('~/../web/styles/root.scss?root=./web/styles/');
         this.removeCss = context.insertCss(rootStyle);
       }
     }
