@@ -54,7 +54,10 @@ export default async function startIos(options, config) {
     await easycp(
       `node ${haulBin} start --port ${
         config.ports.native
-      } --config ${path.resolve(__dirname, '../../webpack/haul.js')}`
+      } --platform ios --config ${path.resolve(
+        __dirname,
+        '../../webpack/haul.js'
+      )}`
     );
   }
 }
