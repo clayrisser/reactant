@@ -1,5 +1,6 @@
 import boom from 'boom';
 import easycp, { readcp } from 'easycp';
+import fs from 'fs-extra';
 import open from 'open';
 import ora from 'ora';
 import path from 'path';
@@ -43,14 +44,14 @@ export default async function startIos(options, config) {
       } --config-dir ${path.resolve(__dirname, '../../storybook')}`
     );
   } else {
+    let haulBin = path.resolve(__dirname, '../../../node_modules/haul/bin/cli');
+    if (!fs.existsSync) {
+      haulBin = path.resolve(__dirname, '../../../../../haul/bin/cli');
+    }
     await easycp(
-      `node ${path.resolve(
-        __dirname,
-        '../../../node_modules/haul/bin/cli'
-      )} start --port ${config.ports.native} --config ${path.resolve(
-        __dirname,
-        '../../webpack/haul.js'
-      )}`
+      `node ${haulBin} start --port ${
+        config.ports.native
+      } --config ${path.resolve(__dirname, '../../webpack/haul.js')}`
     );
   }
 }
