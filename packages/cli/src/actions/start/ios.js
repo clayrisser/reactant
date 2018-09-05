@@ -45,7 +45,7 @@ export default async function startIos(options, config) {
     );
   } else {
     let haulBin = path.resolve(__dirname, '../../../node_modules/haul/bin/cli');
-    if (!fs.existsSync) {
+    if (!fs.existsSync(haulBin)) {
       haulBin = path.resolve(__dirname, '../../../../../haul/bin/cli');
     }
     await easycp(
