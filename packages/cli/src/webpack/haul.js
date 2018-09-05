@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import path from 'path';
-import fs from 'fs-extra';
 import createWebpackConfig from './createWebpackConfig';
 import { createConfigSync } from '../createConfig';
 
@@ -15,7 +14,6 @@ module.exports = ({ platform }, defaults) => {
     ...webpackConfig,
     ...createWebpackConfig(config, webpackConfig)
   };
-  fs.writeFileSync('__webpack.json', JSON.stringify(webpackConfig));
   if (_.isFunction(webpack)) {
     return webpack(config, webpackConfig);
   }
