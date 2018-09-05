@@ -1,4 +1,7 @@
 {
-  "packages": ["archetype", "packages/*"],
-  "version": "0.0.4"
+  "packages": [
+    "archetype",
+    "packages/*"
+  ],
+  "version": "0.0.5"
 }
