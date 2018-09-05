@@ -38,7 +38,7 @@ export default {
     server: 'node_modules/@reactant/cli/lib/server.js',
     src: 'src',
     srcPublic: 'src/public',
-    stories: 'storybook/stories',
+    stories: 'stories',
     storybook: 'storybook',
     web: 'web'
   },

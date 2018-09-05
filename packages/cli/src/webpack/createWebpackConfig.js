@@ -3,14 +3,16 @@ import fs from 'fs-extra';
 import path from 'path';
 import { getLinkedPaths } from 'linked-deps';
 
-export default function createWebpackConfig(config, target) {
+export default function createWebpackConfig(config, webpackConfig, target) {
   const { webpack, options, paths } = config;
-  let webpackConfig = {
+  webpackConfig = {
+    ...webpackConfig,
     resolve: {
-      modules: getModules(),
-      extensions: ['.web.js', '.js', '.json', '.jsx', '.mjs'],
+      ...webpackConfig.resolve,
+      modules: [...(webpackConfig.modules || []), ...getModules()],
       symlinks: false,
       alias: {
+        ...webpackConfig.alias,
         '~': paths.src
       }
     }
@@ -42,7 +44,7 @@ export default function createWebpackConfig(config, target) {
 }
 
 function getModules() {
-  let modulePaths = [fs.realpathSync(path.resolve(__dirname, '../../..'))];
+  let modulePaths = [fs.realpathSync(path.resolve(__dirname, '../../../..'))];
   const pkgPath = path.resolve(__dirname, '../../../../archetype/package.json');
   if (fs.existsSync(pkgPath)) {
     modulePaths = _.map(
