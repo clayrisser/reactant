@@ -5,5 +5,12 @@ export default function createAndroidConfig(config, webpackConfig) {
     ...webpackConfig,
     ...createHaulConfig(config, webpackConfig)
   };
+  webpackConfig = {
+    ...webpackConfig,
+    resolve: {
+      ...webpackConfig.resolve,
+      extensions: ['.android.js', '.js', '.json', '.jsx', '.mjs']
+    }
+  };
   return webpackConfig;
 }

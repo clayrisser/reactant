@@ -9,7 +9,7 @@
       }
     ],
     "react-native",
-    "stage-0"
+    "react-native-stage-0"
   ],
   "plugins": ["lodash", "transform-decorators-legacy"],
   "ignore": ["art/core/color.js"]

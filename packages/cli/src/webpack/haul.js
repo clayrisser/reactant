@@ -7,10 +7,13 @@ import { createConfigSync } from '../createConfig';
 module.exports = ({ platform }, defaults) => {
   const config = createConfigSync({ options: { platform } });
   const { paths, webpack } = config;
-  const webpackConfig = {
+  let webpackConfig = {
     ...defaults,
-    ...createWebpackConfig(config),
     entry: path.join(paths.root, `${platform}/index.js`)
+  };
+  webpackConfig = {
+    ...webpackConfig,
+    ...createWebpackConfig(config, webpackConfig)
   };
   fs.writeFileSync('__webpack.json', JSON.stringify(webpackConfig));
   if (_.isFunction(webpack)) {

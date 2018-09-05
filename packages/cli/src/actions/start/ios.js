@@ -44,9 +44,12 @@ export default async function startIos(options, config) {
       } --config-dir ${path.resolve(__dirname, '../../storybook')}`
     );
   } else {
-    let haulBin = path.resolve(__dirname, '../../../node_modules/haul/bin/cli');
+    let haulBin = path.resolve(
+      __dirname,
+      '../../../node_modules/haul/bin/cli.js'
+    );
     if (!fs.existsSync(haulBin)) {
-      haulBin = path.resolve(__dirname, '../../../../../haul/bin/cli');
+      haulBin = path.resolve(__dirname, '../../../../../haul/bin/cli.js');
     }
     await easycp(
       `node ${haulBin} start --port ${
