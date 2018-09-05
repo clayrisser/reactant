@@ -1,8 +1,5 @@
 import CircularJSON from 'circular-json';
-import _ from 'lodash';
-import fs from 'fs-extra';
 import path from 'path';
-import { getLinkedPaths } from 'linked-deps';
 import {
   DefinePlugin,
   NamedModulesPlugin,
@@ -29,11 +26,9 @@ export default function createWebConfig(config, webpackConfig, target = 'web') {
         : 'nosources-source-map',
     mode: env,
     resolve: {
-      extensions: ['.web.js', '.js', '.json', '.jsx', '.mjs'],
-      modules: getModules(),
-      symlinks: true,
+      ...webpackConfig.resolve,
       alias: {
-        '~': paths.src,
+        ...webpackConfig.resolve.alias,
         'react-native': require.resolve('react-native-web'),
         'react-native/Libraries/Renderer/shims/ReactNativePropRegistry': require.resolve(
           'react-native-web/dist/modules/ReactNativePropRegistry'
@@ -92,21 +87,4 @@ export default function createWebConfig(config, webpackConfig, target = 'web') {
     return createClientConfig(config, webpackConfig);
   }
   return createServerConfig(config, webpackConfig);
-}
-
-function getModules() {
-  let modulePaths = [fs.realpathSync(path.resolve(__dirname, '../../..'))];
-  const pkgPath = path.resolve(__dirname, '../../../../archetype/package.json');
-  if (fs.existsSync(pkgPath)) {
-    modulePaths = _.map(
-      [
-        path.resolve(__dirname, '../../../../archetype'),
-        ...getLinkedPaths(pkgPath)
-      ],
-      dependancyPath => {
-        return path.join(dependancyPath, 'node_modules');
-      }
-    );
-  }
-  return modulePaths;
 }

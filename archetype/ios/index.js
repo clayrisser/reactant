@@ -1,5 +1,5 @@
 import 'babel-polyfill';
-import initIos from '@reactant/base/init/ios';
+import initIos from '@reactant/base/lib/init/ios';
 import config from './config.json';
 
 const initialProps = {};

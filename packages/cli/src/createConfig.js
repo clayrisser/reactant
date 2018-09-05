@@ -11,7 +11,7 @@ import pkg from '../package.json';
 
 const occupiedPorts = [];
 
-export default async function createConfig({
+async function createConfig({
   defaultEnv = 'development',
   action = 'build',
   options = {}
@@ -121,3 +121,5 @@ export async function saveConfig(platform, config) {
   await fs.writeFile(configPath, CircularJSON.stringify(config));
   return `config saved to ${configPath}`;
 }
+
+export default createConfig;

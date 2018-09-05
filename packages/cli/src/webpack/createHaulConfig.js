@@ -1,9 +1,6 @@
-import { createWebpackConfig } from 'haul';
-
 export default function createHaulConfig(config, webpackConfig) {
   webpackConfig = {
-    ...webpackConfig,
-    ...createWebpackConfig()
+    ...webpackConfig
   };
   return webpackConfig;
 }
