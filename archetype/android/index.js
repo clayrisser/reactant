@@ -1,5 +1,5 @@
 import 'babel-polyfill';
-import initAndroid from '@reactant/base/init/android';
+import initAndroid from '@reactant/base/lib/init/android';
 import config from './config.json';
 
 const initialProps = {};
