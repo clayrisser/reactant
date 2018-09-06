@@ -4,7 +4,11 @@ import createWebpackConfig from './createWebpackConfig';
 import { createConfigSync } from '../createConfig';
 
 module.exports = ({ platform }, defaults) => {
-  const config = createConfigSync({ options: { platform } });
+  const options = {
+    platform,
+    debug: _.includes(process.argv, '--debug') || _.includes(process.argv, '-d')
+  };
+  const config = createConfigSync({ options });
   const { paths, webpack } = config;
   let webpackConfig = {
     ...defaults,

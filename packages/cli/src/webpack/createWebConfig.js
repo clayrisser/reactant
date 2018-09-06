@@ -1,4 +1,3 @@
-import CircularJSON from 'circular-json';
 import path from 'path';
 import {
   DefinePlugin,
@@ -9,11 +8,9 @@ import {
 import createClientConfig from './createClientConfig';
 import createServerConfig from './createServerConfig';
 import getRules from './getRules';
-import { sanitizeConfig } from '../createConfig';
 
 export default function createWebConfig(config, webpackConfig, target = 'web') {
   const { envs, paths, eslint, babel, env, action } = config;
-  const sanitizedConfig = sanitizeConfig(config);
   if (target === 'client') target = 'web';
   if (target === 'server') target = 'node';
   webpackConfig = {
@@ -35,9 +32,6 @@ export default function createWebConfig(config, webpackConfig, target = 'web') {
         ),
         'webpack/hot/poll': require.resolve('webpack/hot/poll')
       }
-    },
-    externals: {
-      '@reactant/base/config': CircularJSON.stringify(sanitizedConfig)
     },
     module: {
       strictExportPresence: true,

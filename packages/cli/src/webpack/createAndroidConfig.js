@@ -9,7 +9,7 @@ export default function createAndroidConfig(config, webpackConfig) {
     ...webpackConfig,
     resolve: {
       ...webpackConfig.resolve,
-      extensions: ['.android.js', '.js', '.json', '.jsx', '.mjs']
+      extensions: ['.android.js', '.native.js', '.js', '.json', '.jsx', '.mjs']
     }
   };
   return webpackConfig;

@@ -1,10 +1,13 @@
+import CircularJSON from 'circular-json';
 import _ from 'lodash';
 import fs from 'fs-extra';
 import path from 'path';
 import { getLinkedPaths } from 'linked-deps';
+import { sanitizeConfig } from '../createConfig';
 
 export default function createWebpackConfig(config, webpackConfig, target) {
   const { webpack, options, paths } = config;
+  const sanitizedConfig = sanitizeConfig(config);
   webpackConfig = {
     ...webpackConfig,
     resolve: {
@@ -15,6 +18,9 @@ export default function createWebpackConfig(config, webpackConfig, target) {
         ...webpackConfig.alias,
         '~': paths.src
       }
+    },
+    externals: {
+      '@reactant/base/config': CircularJSON.stringify(sanitizedConfig)
     }
   };
   switch (options.platform) {

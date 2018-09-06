@@ -4,10 +4,11 @@ import { AppRegistry } from 'react-native';
 import { persistStore } from 'redux-persist';
 import IosApp from '~/../ios/IosApp';
 import createStore from '../createStore';
+import { config } from '..';
 import { registerConfig } from '../config';
 import { setLevel } from '../log';
 
-export default function ios(initialProps = {}, config = {}) {
+export default function ios(initialProps = {}) {
   if (!config.options.debug) {
     ignoreWarnings(config.ignore.warnings || []);
     ignoreWarnings('error', config.ignore.errors || []);
