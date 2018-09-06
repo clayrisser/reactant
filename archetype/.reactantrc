@@ -1,5 +1,5 @@
-title: Reaction
-moduleName: reaction
+title: Reactant
+moduleName: reactant
 ignore:
   errors:
     - 'Warning: Received `false` for a non-boolean attribute `uppercase`.'

@@ -1,7 +1,7 @@
 import ora from 'ora';
 import { log } from '@reactant/base';
 import clean from '../clean';
-import createConfig, { saveConfig } from '../../createConfig';
+import createConfig from '../../createConfig';
 
 export default async function configureIos(options, config) {
   if (!config) {
@@ -15,6 +15,5 @@ export default async function configureIos(options, config) {
   }
   const spinner = ora('configuring ios\n').start();
   if (options.clean) await clean(options, config);
-  await saveConfig('ios', config);
   spinner.succeed('configured ios');
 }

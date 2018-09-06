@@ -9,7 +9,7 @@ export default function createIosConfig(config, webpackConfig) {
     ...webpackConfig,
     resolve: {
       ...webpackConfig.resolve,
-      extensions: ['.ios.js', '.js', '.json', '.jsx', '.mjs']
+      extensions: ['.ios.js', '.native.js', '.js', '.json', '.jsx', '.mjs']
     }
   };
   return webpackConfig;

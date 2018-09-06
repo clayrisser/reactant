@@ -16,14 +16,26 @@ async function createConfig({
   action = 'build',
   options = {}
 }) {
+  const optionsConfig = options.config ? JSON.parse(options.config) : {};
   environment.default = defaultEnv;
   const userConfig = rcConfig({ name: 'reactant' });
   const eslint = rcConfig({ name: 'eslint' });
-  const config = _.merge(
-    defaultConfig,
-    userConfig,
-    options.config ? JSON.parse(options.config) : {}
-  );
+  const config = {
+    ...defaultConfig,
+    ...userConfig,
+    ignore: {
+      errors: [
+        ...(defaultConfig.ignore ? defaultConfig.ignore.errors : []),
+        ...(userConfig.ignore ? userConfig.ignore.errors : []),
+        ...(optionsConfig.ignore ? optionsConfig.ignore.errors : [])
+      ],
+      warnings: [
+        ...(defaultConfig.ignore ? defaultConfig.ignore.warnings : []),
+        ...(userConfig.ignore ? userConfig.ignore.warnings : []),
+        ...(optionsConfig.ignore ? optionsConfig.ignore.warnings : [])
+      ]
+    }
+  };
   const port = await getPort(config.port);
   return {
     ...config,
