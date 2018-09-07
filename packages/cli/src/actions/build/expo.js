@@ -1,23 +1,16 @@
 import boom from 'boom';
 import easycp, { readcp } from 'easycp';
 import ora from 'ora';
-import { log } from '@reactant/base';
-import clean from '../clean';
 import configureExpo from '../configure/expo';
-import createConfig from '../../createConfig';
+import { loadConfig } from '../../config';
 
-export default async function buildExpo(options, config) {
-  if (!config) {
-    config = await createConfig({
-      action: 'build',
-      defaultEnv: 'production',
-      options
-    });
-    log.debug('options', options);
-    log.debug('config', config);
-  }
-  await clean(options, config);
-  await configureExpo({ ...options, clean: false }, config);
+export default async function buildExpo(options) {
+  loadConfig({
+    action: 'build',
+    defaultEnv: 'production',
+    options
+  });
+  await configureExpo(options);
   const spinner = ora('building expo\n').start();
   if (!(await readcp('which exp')).length) {
     spinner.stop();

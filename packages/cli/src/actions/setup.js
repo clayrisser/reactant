@@ -1,15 +1,10 @@
 import boom from 'boom';
 import easycp, { silentcp } from 'easycp';
 import ora from 'ora';
-import { log } from '@reactant/base';
-import createConfig from '../createConfig';
+import { loadConfig } from '../config';
 
-export default async function setup(options, config) {
-  if (!config) {
-    config = await createConfig({ action: 'setup', options });
-    log.debug('options', options);
-    log.debug('config', config);
-  }
+export default async function setup(options) {
+  loadConfig({ action: 'setup', options });
   if (options.inotify) {
     if (!(process.getuid && process.getuid() === 0)) {
       throw boom.badRequest('requires root privileges');

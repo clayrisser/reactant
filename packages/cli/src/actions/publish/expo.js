@@ -2,19 +2,14 @@ import _ from 'lodash';
 import boom from 'boom';
 import easycp, { readcp } from 'easycp';
 import ora from 'ora';
-import { log } from '@reactant/base';
-import createConfig from '../../createConfig';
+import { loadConfig } from '../../config';
 
-export default async function publishExpo(options, config) {
-  if (!config) {
-    config = await createConfig({
-      action: 'publish',
-      defaultEnv: 'production',
-      options
-    });
-    log.debug('options', options);
-    log.debug('config', config);
-  }
+export default async function publishExpo(options) {
+  const config = loadConfig({
+    action: 'publish',
+    defaultEnv: 'production',
+    options
+  });
   const spinner = ora('publishing expo\n').start();
   if (!(await readcp('which exp')).length) {
     spinner.stop();

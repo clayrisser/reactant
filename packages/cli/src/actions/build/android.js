@@ -1,21 +1,16 @@
 import boom from 'boom';
 import easycp, { readcp } from 'easycp';
 import ora from 'ora';
-import { log } from '@reactant/base';
 import bundleAndroid from '../bundle/android';
-import createConfig from '../../createConfig';
+import { loadConfig } from '../../config';
 
-export default async function buildAndroid(options, config) {
-  if (!config) {
-    config = await createConfig({
-      action: 'build',
-      defaultEnv: 'production',
-      options
-    });
-    log.debug('options', options);
-    log.debug('config', config);
-  }
-  await bundleAndroid(options, config);
+export default async function buildAndroid(options) {
+  loadConfig({
+    action: 'build',
+    defaultEnv: 'production',
+    options
+  });
+  await bundleAndroid(options);
   const spinner = ora('building android\n').start();
   if (!(await readcp('which react-native')).length) {
     spinner.stop();

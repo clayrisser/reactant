@@ -1,21 +1,16 @@
 import boom from 'boom';
 import easycp, { readcp } from 'easycp';
 import ora from 'ora';
-import { log } from '@reactant/base';
 import bundleIos from '../bundle/ios';
-import createConfig from '../../createConfig';
+import { loadConfig } from '../../config';
 
-export default async function buildIos(options, config) {
-  if (!config) {
-    config = await createConfig({
-      action: 'build',
-      defaultEnv: 'production',
-      options
-    });
-    log.debug('options', options);
-    log.debug('config', config);
-  }
-  await bundleIos(options, config);
+export default async function buildIos(options) {
+  loadConfig({
+    action: 'build',
+    defaultEnv: 'production',
+    options
+  });
+  await bundleIos(options);
   const spinner = ora('building ios\n').start();
   if (!(await readcp('which react-native')).length) {
     spinner.stop();

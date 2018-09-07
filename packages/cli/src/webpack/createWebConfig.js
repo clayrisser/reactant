@@ -1,6 +1,5 @@
 import path from 'path';
 import {
-  DefinePlugin,
   NamedModulesPlugin,
   HotModuleReplacementPlugin,
   NoEmitOnErrorsPlugin
@@ -10,7 +9,7 @@ import createServerConfig from './createServerConfig';
 import getRules from './getRules';
 
 export default function createWebConfig(config, webpackConfig, target = 'web') {
-  const { envs, paths, eslint, babel, env, action } = config;
+  const { paths, eslint, babel, env, action } = config;
   if (target === 'client') target = 'web';
   if (target === 'server') target = 'node';
   webpackConfig = {
@@ -21,7 +20,6 @@ export default function createWebConfig(config, webpackConfig, target = 'web') {
       env === 'development'
         ? 'cheap-module-eval-source-map'
         : 'nosources-source-map',
-    mode: env,
     resolve: {
       ...webpackConfig.resolve,
       alias: {
@@ -36,6 +34,7 @@ export default function createWebConfig(config, webpackConfig, target = 'web') {
     module: {
       strictExportPresence: true,
       rules: [
+        ...webpackConfig.rules,
         ...getRules({ paths, env }),
         {
           test: /\.(js|jsx|mjs)$/,
@@ -68,9 +67,7 @@ export default function createWebConfig(config, webpackConfig, target = 'web') {
       ]
     },
     plugins: [
-      new DefinePlugin({
-        ...envs
-      }),
+      ...webpackConfig.plugins,
       ...(env !== 'production' ? [new NamedModulesPlugin()] : []),
       ...(action === 'start'
         ? [new HotModuleReplacementPlugin(), new NoEmitOnErrorsPlugin()]

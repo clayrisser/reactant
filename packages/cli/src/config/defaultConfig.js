@@ -26,6 +26,7 @@ export default {
   paths: {
     android: 'android',
     client: 'web/client.js',
+    debug: '.debug',
     dist: 'dist',
     distAndroid: 'dist/android',
     distExpo: 'dist/expo',

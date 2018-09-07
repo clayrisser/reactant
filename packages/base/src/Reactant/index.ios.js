@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { ConnectedRouter } from 'connected-react-router';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
-import { config } from '@reactant/base';
+import App from '~/App';
 
 if (typeof global.self === 'undefined') global.self = global;
 
@@ -14,20 +14,11 @@ function ReactantWrapper(props) {
       context: PropTypes.object.isRequired
     };
 
-    constructor(props) {
-      super(props);
-      this.App = require('~/App').default;
-      if (config.options.storybook) {
-        this.App = require('~/../node_modules/@reactant/cli/lib/storybook/native').default;
-      }
-    }
-
     getChildContext() {
       return this.props.context;
     }
 
     render() {
-      const { App } = this;
       const { store, persistor, history } = this.props.context;
       return (
         <Provider store={store}>

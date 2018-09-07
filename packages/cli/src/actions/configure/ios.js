@@ -1,19 +1,14 @@
 import ora from 'ora';
-import { log } from '@reactant/base';
 import clean from '../clean';
-import createConfig from '../../createConfig';
+import { loadConfig } from '../../config';
 
-export default async function configureIos(options, config) {
-  if (!config) {
-    config = await createConfig({
-      action: 'build',
-      defaultEnv: 'production',
-      options
-    });
-    log.debug('options', options);
-    log.debug('config', config);
-  }
+export default async function configureIos(options) {
+  loadConfig({
+    action: 'build',
+    defaultEnv: 'production',
+    options
+  });
   const spinner = ora('configuring ios\n').start();
-  if (options.clean) await clean(options, config);
+  if (options.clean) await clean(options);
   spinner.succeed('configured ios');
 }

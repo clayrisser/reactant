@@ -4,19 +4,14 @@ import OpenBrowserPlugin from 'open-browser-webpack-plugin';
 import _ from 'lodash';
 import log, { setLevel } from '@reactant/base/log';
 import path from 'path';
-import { sleep } from 'deasync';
-import createConfig from '../../createConfig';
 import getRules from '../../webpack/getRules';
+import { loadConfig } from '../../config';
 
 if (_.includes(process.argv, '--verbose')) setLevel('verbose');
 if (_.includes(process.argv, '--debug')) setLevel('debug');
 
 module.exports = webpackConfig => {
-  let config = null;
-  createConfig({}).then(loadedConfig => {
-    config = loadedConfig;
-  });
-  while (!config) sleep(100);
+  const config = loadConfig({});
   const { paths } = config;
   webpackConfig.resolve.extensions.unshift('.web.js');
   webpackConfig.resolve.symlinks = false;

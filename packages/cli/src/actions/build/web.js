@@ -9,9 +9,8 @@ import path from 'path';
 import webpack from 'webpack';
 import { log } from '@reactant/base';
 import configureWeb from '../configure/web';
-import clean from '../clean';
-import createConfig from '../../createConfig';
 import createWebpackConfig from '../../webpack/createWebpackConfig';
+import { loadConfig } from '../../config';
 
 const {
   measureFileSizesBeforeBuild,
@@ -19,25 +18,18 @@ const {
 } = FileSizeReporter;
 const { env } = process;
 
-export default async function buildWeb(options, config) {
-  if (!config) {
-    config = await createConfig({
-      action: 'build',
-      defaultEnv: 'production',
-      options
-    });
-    log.debug('options', options);
-    log.debug('config', config);
-  }
-  await clean(options, config);
-  await configureWeb({ ...options, clean: false }, config);
-  const spinner = ora('building web').start();
+export default async function buildWeb(options) {
+  const config = loadConfig({
+    action: 'build',
+    defaultEnv: 'production',
+    options
+  });
   const { paths } = config;
+  await configureWeb(options);
+  const spinner = ora('building web').start();
   if (options.storybook) {
-    const storiesPath = fs.existsSync(
-      path.resolve(config.paths.stories, '.storybook')
-    )
-      ? path.resolve(config.paths.stories, '.storybook')
+    const storiesPath = fs.existsSync(path.resolve(paths.stories, '.storybook'))
+      ? path.resolve(paths.stories, '.storybook')
       : path.resolve('node_modules/@reactant/cli/lib/storybook');
     spinner.stop();
     await easycp(

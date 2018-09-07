@@ -3,25 +3,18 @@ import easycp, { readcp } from 'easycp';
 import fs from 'fs-extra';
 import ora from 'ora';
 import path from 'path';
-import { log } from '@reactant/base';
-import clean from '../clean';
 import configureIos from '../configure/ios';
-import createConfig from '../../createConfig';
+import { loadConfig } from '../../config';
 
-export default async function bundleIos(options, config) {
-  if (!config) {
-    config = await createConfig({
-      action: 'bundle',
-      defaultEnv: 'production',
-      options
-    });
-    log.debug('options', options);
-    log.debug('config', config);
-  }
-  await clean(options, config);
-  await configureIos({ ...options, clean: false }, config);
-  const spinner = ora('bundling ios\n').start();
+export default async function bundleIos(options) {
+  const config = loadConfig({
+    action: 'bundle',
+    defaultEnv: 'production',
+    options
+  });
   const { paths } = config;
+  await configureIos(options);
+  const spinner = ora('bundling ios\n').start();
   if (!(await readcp('which react-native')).length) {
     spinner.stop();
     throw boom.badRequest('react-native not installed');

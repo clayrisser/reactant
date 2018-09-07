@@ -3,25 +3,18 @@ import easycp, { readcp } from 'easycp';
 import fs from 'fs-extra';
 import ora from 'ora';
 import path from 'path';
-import { log } from '@reactant/base';
-import clean from '../clean';
 import configureAndroid from '../configure/android';
-import createConfig from '../../createConfig';
+import { loadConfig } from '../../config';
 
-export default async function bundleAndroid(options, config) {
-  if (!config) {
-    config = await createConfig({
-      action: 'build',
-      defaultEnv: 'production',
-      options
-    });
-    log.debug('options', options);
-    log.debug('config', config);
-  }
-  await clean(options, config);
-  await configureAndroid({ ...options, clean: false }, config);
-  const spinner = ora('bundling android\n').start();
+export default async function bundleAndroid(options) {
+  const config = loadConfig({
+    action: 'build',
+    defaultEnv: 'production',
+    options
+  });
   const { paths } = config;
+  await configureAndroid(options);
+  const spinner = ora('bundling android\n').start();
   if (!(await readcp('which react-native')).length) {
     spinner.stop();
     throw boom.badRequest('react-native not installed');

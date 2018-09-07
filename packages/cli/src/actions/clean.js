@@ -3,18 +3,16 @@ import easycp, { silentcp } from 'easycp';
 import fs from 'fs-extra';
 import ora from 'ora';
 import path from 'path';
-import { log } from '@reactant/base';
-import createConfig from '../createConfig';
+import { loadConfig } from '../config';
 
 const { env } = process;
+let didClean = false;
 
-export default async function clean(options, config) {
+export default async function clean(options) {
+  if (didClean) return false;
   const spinner = ora('cleaning').start();
-  if (!config) {
-    config = await createConfig({ action: 'clean', options });
-    log.debug('options', options);
-    log.debug('config', config);
-  }
+  didClean = true;
+  const config = loadConfig({ action: 'clean', options });
   const { paths } = config;
   fs.removeSync(path.resolve(env.TMPDIR || '/tmp', 'haste-map-*'));
   fs.removeSync(path.resolve(env.TMPDIR || '/tmp', 'metro-*'));
@@ -49,4 +47,5 @@ export default async function clean(options, config) {
   }
   fs.removeSync(path.resolve('.expo'));
   spinner.succeed('cleaned');
+  return true;
 }
