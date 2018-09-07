@@ -1,24 +1,19 @@
 import boom from 'boom';
 import easycp, { readcp } from 'easycp';
 import fs from 'fs-extra';
-import open from 'open';
+// import open from 'open';
 import ora from 'ora';
 import path from 'path';
-import { log } from '@reactant/base';
-import createConfig from '../../createConfig';
 import configureIos from '../configure/ios';
+import { loadConfig } from '../../config';
 
-export default async function startIos(options, config) {
-  if (!config) {
-    config = await createConfig({
-      action: 'start',
-      defaultEnv: 'development',
-      options
-    });
-    log.debug('options', options);
-    log.debug('config', config);
-  }
-  await configureIos(options, config);
+export default async function startIos(options) {
+  const config = loadConfig({
+    action: 'start',
+    defaultEnv: 'development',
+    options
+  });
+  await configureIos(options);
   const spinner = ora('Starting ios\n').start();
   if (!(await readcp('which react-native')).length) {
     spinner.stop();
@@ -52,8 +47,8 @@ export default async function startIos(options, config) {
       haulBin = path.resolve(__dirname, '../../../../../haul/bin/cli.js');
     }
     await easycp(
-      `node ${haulBin} start --port ${
-        config.ports.native
+      `node ${haulBin} start --port ${config.ports.native}${
+        config.options.debug ? ' --debug' : ''
       } --platform ios --config ${path.resolve(
         __dirname,
         '../../webpack/haul.js'

@@ -2,22 +2,17 @@ import Promise from 'bluebird';
 import _ from 'lodash';
 import easycp from 'easycp';
 import ora from 'ora';
-import { log } from '@reactant/base';
 import buildWeb from '../build/web';
-import createConfig from '../../createConfig';
+import { loadConfig } from '../../config';
 
-export default async function publishWeb(options, config) {
-  if (!config) {
-    config = await createConfig({
-      action: 'publish',
-      defaultEnv: 'production',
-      options
-    });
-    log.debug('options', options);
-    log.debug('config', config);
-  }
+export default async function publishWeb(options) {
+  const config = loadConfig({
+    action: 'publish',
+    defaultEnv: 'production',
+    options
+  });
   const spinner = ora('publishing web').start();
-  await buildWeb(options, config);
+  await buildWeb(options);
   if (_.get(config, 'publish.web')) {
     await Promise.mapSeries(config.publish.web, async script => {
       await easycp(script);

@@ -47,6 +47,7 @@
     "chalk": "^2.4.1",
     "circular-json": "^0.5.5",
     "commander": "^2.17.1",
+    "create-local-domain-socket": "^1.0.2",
     "css-loader": "^1.0.0",
     "deasync": "^0.1.13",
     "detect-port": "^1.2.3",

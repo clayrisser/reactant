@@ -9,6 +9,10 @@ export default function createHaulConfig(config, webpackConfig) {
   });
   webpackConfig = {
     ...webpackConfig,
+    resolve: {
+      ...webpackConfig.resolve,
+      extensions: ['.native.js', ...webpackConfig.resolve.extensions]
+    },
     module: {
       ...webpackConfig.module,
       rules: [...(webpackConfig.module ? webpackConfig.module.rules : []), {}]

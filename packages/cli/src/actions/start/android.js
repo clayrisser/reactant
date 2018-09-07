@@ -3,21 +3,16 @@ import easycp, { readcp, silentcp } from 'easycp';
 import open from 'open';
 import ora from 'ora';
 import path from 'path';
-import { log } from '@reactant/base';
-import createConfig from '../../createConfig';
+import { loadConfig } from '../../config';
 import configureAndroid from '../configure/android';
 
-export default async function startAndroid(options, config) {
-  if (!config) {
-    config = await createConfig({
-      action: 'start',
-      defaultEnv: 'development',
-      options
-    });
-    log.debug('options', options);
-    log.debug('config', config);
-  }
-  await configureAndroid(options, config);
+export default async function startAndroid(options) {
+  const config = loadConfig({
+    action: 'start',
+    defaultEnv: 'development',
+    options
+  });
+  await configureAndroid(options);
   const spinner = ora('starting android\n').start();
   if (!(await readcp('which react-native')).length) {
     spinner.stop();

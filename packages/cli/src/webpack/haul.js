@@ -1,14 +1,15 @@
 import _ from 'lodash';
+import fs from 'fs-extra';
 import path from 'path';
 import createWebpackConfig from './createWebpackConfig';
-import { createConfigSync } from '../createConfig';
+import { loadConfig } from '../config';
 
 module.exports = ({ platform }, defaults) => {
   const options = {
     platform,
     debug: _.includes(process.argv, '--debug') || _.includes(process.argv, '-d')
   };
-  const config = createConfigSync({ options });
+  const config = loadConfig({ options });
   const { paths, webpack } = config;
   let webpackConfig = {
     ...defaults,
@@ -19,7 +20,12 @@ module.exports = ({ platform }, defaults) => {
     ...createWebpackConfig(config, webpackConfig)
   };
   if (_.isFunction(webpack)) {
-    return webpack(config, webpackConfig);
+    webpackConfig = webpack(config, webpackConfig);
+  } else {
+    webpackConfig = _.merge(webpackConfig, webpack);
   }
-  return _.merge(webpackConfig, webpack);
+  if (options.debug) {
+    fs.writeFileSync(path.resolve(paths.debug, platform, 'webpackConfig.json'));
+  }
+  return webpackConfig;
 };

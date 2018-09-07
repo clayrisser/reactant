@@ -1,6 +1,7 @@
 import createHaulConfig from './createHaulConfig';
 
 export default function createAndroidConfig(config, webpackConfig) {
+  const { options } = config;
   webpackConfig = {
     ...webpackConfig,
     ...createHaulConfig(config, webpackConfig)
@@ -9,7 +10,11 @@ export default function createAndroidConfig(config, webpackConfig) {
     ...webpackConfig,
     resolve: {
       ...webpackConfig.resolve,
-      extensions: ['.android.js', '.native.js', '.js', '.json', '.jsx', '.mjs']
+      extensions: [
+        ...(options.storybook ? ['.storybook.android.js'] : []),
+        '.android.js',
+        ...webpackConfig.resolve.extensions
+      ]
     }
   };
   return webpackConfig;

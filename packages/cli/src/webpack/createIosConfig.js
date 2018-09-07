@@ -1,6 +1,7 @@
 import createHaulConfig from './createHaulConfig';
 
 export default function createIosConfig(config, webpackConfig) {
+  const { options } = config;
   webpackConfig = {
     ...webpackConfig,
     ...createHaulConfig(config, webpackConfig)
@@ -9,7 +10,11 @@ export default function createIosConfig(config, webpackConfig) {
     ...webpackConfig,
     resolve: {
       ...webpackConfig.resolve,
-      extensions: ['.ios.js', '.native.js', '.js', '.json', '.jsx', '.mjs']
+      extensions: [
+        ...(options.storybook ? ['.storybook.ios.js'] : []),
+        '.ios.js',
+        ...webpackConfig.resolve.extensions
+      ]
     }
   };
   return webpackConfig;

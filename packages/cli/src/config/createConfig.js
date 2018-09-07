@@ -1,17 +1,24 @@
-import CircularJSON from 'circular-json';
 import _ from 'lodash';
 import detectPort from 'detect-port';
-import fs from 'fs-extra';
 import path from 'path';
 import rcConfig from 'rc-config';
 import { environment } from 'js-info';
 import { sleep } from 'deasync';
-import defaultConfig from './config';
-import pkg from '../package.json';
+import defaultConfig from './defaultConfig';
+import pkg from '../../package.json';
 
 const occupiedPorts = [];
 
-async function createConfig({
+export default function createConfig(...args) {
+  let config = null;
+  createConfigAsync(...args).then(loadedConfig => {
+    config = loadedConfig;
+  });
+  while (!config) sleep(100);
+  return config;
+}
+
+async function createConfigAsync({
   defaultEnv = 'development',
   action = 'build',
   options = {}
@@ -56,11 +63,12 @@ async function createConfig({
     },
     port,
     ports: {
-      analyzer: await getPort(port + 2),
-      dev: await getPort(port + 3),
-      native: await getPort(8081),
-      storybook: await getPort(port + 1),
-      storybookNative: await getPort(port + 4)
+      analyzer: _.get(config, 'ports.analyzer') || (await getPort(port + 2)),
+      dev: _.get(config, 'ports.dev') || (await getPort(port + 3)),
+      native: _.get(config, 'ports.native') || 8081,
+      storybook: _.get(config, 'ports.storybook') || (await getPort(port + 1)),
+      storybookNative:
+        _.get(config, 'ports.storybookNative') || (await getPort(port + 4))
     },
     envs: {
       ...config.envs,
@@ -82,15 +90,6 @@ async function createConfig({
   };
 }
 
-export function createConfigSync(...args) {
-  let config = null;
-  createConfig(...args).then(loadedConfig => {
-    config = loadedConfig;
-  });
-  while (!config) sleep(100);
-  return config;
-}
-
 function resolvePath(configPath, configKey, paths) {
   let firstSlug = '';
   const matches = configPath.match(/^[^/]+/);
@@ -110,28 +109,3 @@ async function getPort(port = 6001) {
   occupiedPorts.push(newPort);
   return newPort;
 }
-
-export function sanitizeConfig(config) {
-  config = {
-    ...config,
-    options: {
-      debug: config.options.debug,
-      platform: config.options.platform,
-      storybook: config.options.storybook,
-      verbose: config.options.verbose
-    }
-  };
-  delete config.babel;
-  delete config.eslint;
-  delete config.publish;
-  return config;
-}
-
-export async function saveConfig(platform, config) {
-  config = sanitizeConfig(config);
-  const configPath = path.resolve(config.paths[platform], 'config.json');
-  await fs.writeFile(configPath, CircularJSON.stringify(config));
-  return `config saved to ${configPath}`;
-}
-
-export default createConfig;

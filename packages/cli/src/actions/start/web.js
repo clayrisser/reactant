@@ -5,21 +5,17 @@ import ora from 'ora';
 import path from 'path';
 import webpack from 'webpack';
 import { log } from '@reactant/base';
-import createConfig from '../../createConfig';
-import createWebpackConfig from '../../webpack/createWebpackConfig';
 import configureWeb from '../configure/web';
+import createWebpackConfig from '../../webpack/createWebpackConfig';
+import { loadConfig } from '../../config';
 
-export default async function startWeb(options, config) {
-  if (!config) {
-    config = await createConfig({
-      action: 'start',
-      defaultEnv: 'development',
-      options
-    });
-    log.debug('options', options);
-    log.debug('config', config);
-  }
-  await configureWeb(options, config);
+export default async function startWeb(options) {
+  const config = loadConfig({
+    action: 'start',
+    defaultEnv: 'development',
+    options
+  });
+  await configureWeb(options);
   const spinner = ora('starting web').start();
   const { paths } = config;
   if (options.storybook) {

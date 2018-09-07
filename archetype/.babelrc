@@ -11,6 +11,6 @@
     "react-native",
     "react-native-stage-0"
   ],
-  "plugins": ["lodash", "transform-decorators-legacy"],
+  "plugins": ["transform-decorators-legacy", "lodash"],
   "ignore": ["art/core/color.js"]
 }
