@@ -27,6 +27,7 @@ export default async function clean(options) {
   }
   if (options.platform) {
     fs.removeSync(paths[`dist${_.startCase(options.platform)}`]);
+    fs.removeSync(path.resolve(paths.debug, _.startCase(options.platform)));
     if (options.platform !== 'web') {
       fs.removeSync(path.resolve(paths[options.platform], 'config.json'));
     }
@@ -44,6 +45,7 @@ export default async function clean(options) {
     fs.removeSync(path.resolve(paths.ios, 'config.json'));
     fs.removeSync(path.resolve(paths.root, 'node_modules/.cache'));
     fs.removeSync(paths.dist);
+    fs.removeSync(paths.debug);
   }
   fs.removeSync(path.resolve('.expo'));
   spinner.succeed('cleaned');

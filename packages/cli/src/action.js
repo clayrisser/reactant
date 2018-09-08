@@ -1,6 +1,7 @@
 import boom from 'boom';
 import commander from 'commander';
 import { setLevel } from '@reactant/base/log';
+import { Socket } from './config';
 import buildAndroid from './actions/build/android';
 import buildExpo from './actions/build/expo';
 import buildIos from './actions/build/ios';
@@ -26,7 +27,14 @@ import validate from './validate';
 export default async function action(cmd, options) {
   if (options.verbose) setLevel('verbose');
   if (options.debug) setLevel('debug');
+  const socket = new Socket({ silent: !options.debug });
+  await socket.start();
   await validate(cmd, options);
+  await runAction(cmd, options);
+  socket.stop();
+}
+
+async function runAction(cmd, options) {
   switch (cmd) {
     case 'build':
       if (options.platform === 'android') return buildAndroid(options);
