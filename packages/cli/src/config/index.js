@@ -1,15 +1,24 @@
 import CircularJSON from 'circular-json';
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
 import { log } from '@reactant/base';
 import createConfig from './createConfig';
+import Socket, { socketGetConfig } from './socket';
 
 let globalConfig = null;
 
 function loadConfig(...args) {
   if (!globalConfig) {
     globalConfig = createConfig(...args);
+    const { paths, options } = globalConfig;
     log.debug('config', globalConfig);
+    if (options.debug) {
+      fs.mkdirsSync(path.resolve(paths.debug, options.platform));
+      fs.writeFileSync(
+        path.resolve(paths.debug, options.platform, 'config.json'),
+        CircularJSON.stringify(globalConfig, null, 2)
+      );
+    }
   }
   return globalConfig;
 }
@@ -37,9 +46,29 @@ function sanitizeConfig(config) {
   return config;
 }
 
-export { loadConfig, saveConfig, sanitizeConfig };
+function rebuildConfig({
+  action = 'start',
+  defaultEnv = 'development',
+  options
+}) {
+  const socketConfig = socketGetConfig();
+  if (socketConfig) {
+    ({ action } = socketConfig);
+    defaultEnv = socketConfig.env;
+    options = {
+      ...options,
+      ...socketConfig.options,
+      platform: options.platform
+    };
+  }
+  return loadConfig({ options, defaultEnv, action });
+}
+
+export { loadConfig, saveConfig, sanitizeConfig, Socket, rebuildConfig };
 export default {
   loadConfig,
   saveConfig,
-  sanitizeConfig
+  sanitizeConfig,
+  Socket,
+  rebuildConfig
 };
