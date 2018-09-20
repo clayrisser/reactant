@@ -33,10 +33,11 @@ export default async function startWeb(options) {
       }`
     );
   } else {
-    fs.removeSync(path.resolve(paths.distWeb, 'assets.json'));
-    const webpackClientConfig = createWebpackConfig(config, 'client');
+    fs.mkdirsSync(paths.distWeb);
+    fs.writeJsonSync(path.resolve(paths.distWeb, 'assets.json'), {});
+    const webpackClientConfig = createWebpackConfig(config, {}, 'client');
     log.debug('webpackClientConfig', webpackClientConfig);
-    const webpackServerConfig = createWebpackConfig(config, 'server');
+    const webpackServerConfig = createWebpackConfig(config, {}, 'server');
     log.debug('webpackServerConfig', webpackServerConfig);
     process.noDeprecation = true;
     webpack(webpackServerConfig).watch(
