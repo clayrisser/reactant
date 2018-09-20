@@ -2,6 +2,7 @@ import boom from 'boom';
 import easycp, { readcp } from 'easycp';
 import fs from 'fs-extra';
 // import open from 'open';
+import openTerminal from 'open-terminal';
 import ora from 'ora';
 import path from 'path';
 import configureIos from '../configure/ios';
@@ -20,18 +21,24 @@ export default async function startIos(options) {
     throw boom.badRequest('react-native not installed');
   }
   spinner.stop();
-  // setTimeout(async () => {
-  //   easycp(
-  //     `react-native run-ios --port ${config.ports.native} ${
-  //       options.simulator ? ` --simulator ${options.simulator}` : ''
-  //     }${options.device ? ` --device ${options.device}` : ''}`
-  //   );
-  //   open(
-  //     `http://localhost:${
-  //       options.storybook ? config.ports.storybookNative : config.ports.native
-  //     }`
-  //   );
-  // }, 5000);
+  setTimeout(async () => {
+    openTerminal(
+      `react-native run-ios --port ${config.ports.native} ${
+        options.simulator ? ` --simulator ${options.simulator}` : ''
+      }${options.device ? ` --device ${options.device}` : ''}`,
+      { cwd: config.paths.root }
+    );
+    // easycp(
+    //   `react-native run-ios --port ${config.ports.native} ${
+    //     options.simulator ? ` --simulator ${options.simulator}` : ''
+    //   }${options.device ? ` --device ${options.device}` : ''}`
+    // );
+    // open(
+    //   `http://localhost:${
+    //     options.storybook ? config.ports.storybookNative : config.ports.native
+    //   }`
+    // );
+  }, 5000);
   if (options.storybook) {
     await easycp(
       `storybook start -p ${

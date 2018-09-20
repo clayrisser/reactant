@@ -26,7 +26,7 @@ export default function createWebpackConfig(config, webpackConfig, target) {
       '@reactant/base/config': CircularJSON.stringify(sanitizedConfig)
     },
     plugins: [
-      ...webpackConfig.plugins,
+      ...(webpackConfig.plugins || []),
       new DefinePlugin({
         ...envs
       })

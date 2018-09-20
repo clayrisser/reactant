@@ -34,7 +34,7 @@ export default function createWebConfig(config, webpackConfig, target = 'web') {
     module: {
       strictExportPresence: true,
       rules: [
-        ...webpackConfig.rules,
+        ...(webpackConfig.rules || []),
         ...getRules({ paths, env }),
         {
           test: /\.(js|jsx|mjs)$/,
