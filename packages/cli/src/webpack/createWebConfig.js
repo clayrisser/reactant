@@ -36,13 +36,13 @@ export default function createWebConfig(config, webpackConfig, target = 'web') {
       rules: [
         ...(webpackConfig.rules || []),
         ...getRules({ paths, env }),
-        {
-          test: /\.(js|jsx|mjs)$/,
-          include: [paths.android, paths.ios, paths.src, paths.web],
-          loader: require.resolve('eslint-loader'),
-          options: eslint,
-          enforce: 'pre'
-        },
+        // {
+        //   test: /\.(js|jsx|mjs)$/,
+        //   include: [paths.android, paths.ios, paths.src, paths.web],
+        //   loader: require.resolve('eslint-loader'),
+        //   options: eslint,
+        //   enforce: 'pre'
+        // },
         {
           test: /\.(js|jsx|mjs)$/,
           include: [
