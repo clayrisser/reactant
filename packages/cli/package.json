@@ -111,6 +111,7 @@
     "eslint-plugin-react": "^7.11.1",
     "jest": "^23.5.0",
     "parcel-bundler": "^1.9.7",
+    "prettier": "^1.14.3",
     "rimraf": "^2.6.2"
   },
   "license": "MIT",
