@@ -110,6 +110,7 @@
     "flow-bin": "^0.75.0",
     "jest": "^23.5.0",
     "jest-react-native": "^18.0.0",
+    "prettier": "^1.14.3",
     "react-test-renderer": "^16.4.2",
     "rimraf": "^2.6.2"
   },
