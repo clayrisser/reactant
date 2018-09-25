@@ -14,8 +14,6 @@
     "publish": "lerna publish"
   },
   "devDependencies": {
-    "lerna": "^3.2.1",
-    "@reactant/base": "^0.0.4",
-    "@reactant/cli": "^0.0.4"
+    "lerna": "^3.2.1"
   }
 }

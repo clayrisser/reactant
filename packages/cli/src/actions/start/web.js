@@ -23,14 +23,14 @@ export default async function startWeb(options) {
       path.resolve(config.paths.stories, '.storybook')
     )
       ? path.resolve(config.paths.stories, '.storybook')
-      : path.resolve('node_modules/@reactant/cli/lib/storybook/web');
+      : path.resolve(__dirname, '../../storybook/web');
+    console.log('storiesPath', storiesPath);
     spinner.stop();
+    const storybookBinPath = require.resolve('@storybook/react/bin');
     await easycp(
-      `node node_modules/@storybook/react/bin -p ${
-        config.ports.storybook
-      } -c ${storiesPath}${options.debug ? ' -- --debug' : ''}${
-        options.verbose ? ' -- --verbose' : ''
-      }`
+      `node ${storybookBinPath} -p ${config.ports.storybook} -c ${storiesPath}${
+        options.debug ? ' -- --debug' : ''
+      }${options.verbose ? ' -- --verbose' : ''}`
     );
   } else {
     fs.mkdirsSync(paths.distWeb);
