@@ -19,18 +19,19 @@ export default async function startWeb(options) {
   const spinner = ora('starting web').start();
   const { paths } = config;
   if (options.storybook) {
-    const storiesPath = fs.existsSync(
-      path.resolve(config.paths.stories, '.storybook')
-    )
-      ? path.resolve(config.paths.stories, '.storybook')
-      : path.resolve(__dirname, '../../storybook/web');
-    console.log('storiesPath', storiesPath);
+    fs.copySync(
+      path.resolve(__dirname, '../../storybook'),
+      path.resolve(config.paths.root, '.storybook')
+    );
     spinner.stop();
     const storybookBinPath = require.resolve('@storybook/react/bin');
     await easycp(
-      `node ${storybookBinPath} -p ${config.ports.storybook} -c ${storiesPath}${
-        options.debug ? ' -- --debug' : ''
-      }${options.verbose ? ' -- --verbose' : ''}`
+      `node ${storybookBinPath} -p ${config.ports.storybook} -c ${path.resolve(
+        config.paths.root,
+        '.storybook/web'
+      )}${options.debug ? ' -- --debug' : ''}${
+        options.verbose ? ' -- --verbose' : ''
+      }`
     );
   } else {
     fs.mkdirsSync(paths.distWeb);

@@ -4,8 +4,10 @@ import OpenBrowserPlugin from 'open-browser-webpack-plugin';
 import _ from 'lodash';
 import log, { setLevel } from '@reactant/base/log';
 import path from 'path';
-import getRules from '../../webpack/getRules';
-import { loadConfig } from '../../config';
+// eslint-disable-next-line import/no-unresolved
+import getRules from '@reactant/cli/lib/webpack/getRules';
+// eslint-disable-next-line import/no-unresolved
+import { loadConfig } from '@reactant/cli/lib/config';
 
 if (_.includes(process.argv, '--verbose')) setLevel('verbose');
 if (_.includes(process.argv, '--debug')) setLevel('debug');
@@ -37,34 +39,11 @@ module.exports = webpackConfig => {
       url: `http://localhost:${config.ports.storybook}`
     })
   ];
-  const jsxRule = _.find(
-    webpackConfig.module.rules,
-    rule => rule.loader.indexOf('babel-loader') > -1
-  );
-  _.assign(jsxRule, {
-    include: [
-      ...jsxRule.include,
-      paths.src,
-      paths.web,
-      path.resolve('node_modules/native-base-shoutem-theme'),
-      path.resolve('node_modules/react-native-drawer'),
-      path.resolve('node_modules/react-native-easy-grid'),
-      path.resolve('node_modules/react-native-keyboard-aware-scroll-view'),
-      path.resolve('node_modules/react-native-safe-area-view'),
-      path.resolve('node_modules/react-native-tab-view'),
-      path.resolve('node_modules/react-native-vector-icons'),
-      path.resolve('node_modules/react-native-web'),
-      path.resolve('node_modules/@reactant/base'),
-      path.resolve('node_modules/static-container')
-    ],
-    query: {
-      ...jsxRule.query,
-      ...config.babel,
-      plugins: [...jsxRule.query.plugins, ...(config.babel.plugins || [])],
-      presets: [...jsxRule.query.presets, ...(config.babel.presets || [])]
-    }
+  webpackConfig = replaceBabelRule(webpackConfig, {
+    test: /\.(js|jsx|mjs)$/,
+    include: [paths.root],
+    loader: require.resolve('babel-loader')
   });
-  delete jsxRule.exclude;
   webpackConfig.module.rules = [
     ...webpackConfig.module.rules,
     ...getRules(config)
@@ -77,3 +56,17 @@ module.exports = webpackConfig => {
   log.debug('webpackConfig', webpackConfig);
   return webpackConfig;
 };
+
+function replaceBabelRule(webpackConfig, rule) {
+  const babelRule = _.find(webpackConfig.module.rules, rule => {
+    return !!_.find(
+      _.isArray(rule.use) ? rule.use : [],
+      rule => rule.loader.indexOf('babel-loader') > -1
+    );
+  });
+  _.each(_.keys(babelRule), key => {
+    delete babelRule[key];
+  });
+  _.assign(babelRule, rule);
+  return webpackConfig;
+}
