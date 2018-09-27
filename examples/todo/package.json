@@ -1,7 +1,7 @@
 {
   "name": "todo",
   "private": true,
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "todo app example built in reactant",
   "main": "expo/index.js",
   "homepage": "https://reactant.codejam.ninja",
@@ -62,7 +62,7 @@
     "test": "npm run lint && jest --forceExit"
   },
   "dependencies": {
-    "@reactant/base": "^0.0.15",
+    "@reactant/base": "^0.0.16",
     "autobind-decorator": "^2.1.0",
     "babel-loader": "^7.1.5",
     "babel-polyfill": "^6.26.0",
@@ -87,8 +87,8 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "@reactant/cli": "^0.0.15",
-    "@reactant/storybook": "^0.0.15",
+    "@reactant/cli": "^0.0.16",
+    "@reactant/storybook": "^0.0.16",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",
