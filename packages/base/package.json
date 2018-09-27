@@ -1,6 +1,6 @@
 {
   "name": "@reactant/base",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "reactant core components",
   "homepage": "https://github.com/codejamninja/reactant/packages/base",
   "bugs": {
