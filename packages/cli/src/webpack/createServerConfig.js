@@ -6,10 +6,19 @@ import webpackNodeExternals from 'webpack-node-externals';
 const { LimitChunkCountPlugin } = webpack.optimize;
 
 export default function createServerConfig(config, webpackConfig) {
-  const { paths, host, ports, options, action } = config;
+  const { paths, host, ports, options, action, platform } = config;
   webpackConfig = {
     ...webpackConfig,
     entry: [paths.server],
+    resolve: {
+      ...webpackConfig.resolve,
+      alias: {
+        ...webpackConfig.resolve.alias,
+        '@reactant/base/init/server': platform.web.native
+          ? require.resolve('@reactant/base/init/native/server')
+          : require.resolve('@reactant/base/init/server')
+      }
+    },
     output: {
       path: paths.distWeb,
       publicPath: action === 'start' ? `http://${host}:${ports.dev}/` : '/',
