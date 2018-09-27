@@ -1,12 +1,11 @@
 {
-  "extends": ["jam"],
+  "extends": ["jam/base"],
   "globals": {
     "window": true,
     "Promise": true
   },
   "rules": {
     "no-empty": "off",
-    "global-require": "off",
-    "import/no-dynamic-require": "off"
+    "global-require": "off"
   }
 }

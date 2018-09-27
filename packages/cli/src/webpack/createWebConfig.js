@@ -9,7 +9,7 @@ import createServerConfig from './createServerConfig';
 import getRules from './getRules';
 
 export default function createWebConfig(config, webpackConfig, target = 'web') {
-  const { paths, eslint, babel, env, action } = config;
+  const { paths, /* eslint, */ babel, env, action } = config;
   if (target === 'client') target = 'web';
   if (target === 'server') target = 'node';
   webpackConfig = {

@@ -1,6 +1,5 @@
 import boom from 'boom';
 import easycp, { readcp } from 'easycp';
-import fs from 'fs-extra';
 // import open from 'open';
 import openTerminal from 'open-terminal';
 import ora from 'ora';

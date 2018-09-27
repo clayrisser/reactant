@@ -1,6 +1,5 @@
 import CircularJSON from 'circular-json';
 import _ from 'lodash';
-import fs from 'fs-extra';
 import path from 'path';
 import { DefinePlugin } from 'webpack';
 import { getLinkedPaths } from 'linked-deps';
@@ -14,7 +13,7 @@ export default function createWebpackConfig(config, webpackConfig, target) {
     mode: env,
     resolve: {
       ...webpackConfig.resolve,
-      modules: [...(webpackConfig.modules || []), ...getModules()],
+      modules: [...(webpackConfig.modules || []), ...getModules(config)],
       symlinks: false,
       extensions: ['.js', '.json', '.jsx', '.mjs'],
       alias: {
@@ -58,19 +57,13 @@ export default function createWebpackConfig(config, webpackConfig, target) {
   return _.merge(webpackConfig, webpack);
 }
 
-function getModules() {
-  let modulePaths = [fs.realpathSync(path.resolve(__dirname, '../../../..'))];
-  const pkgPath = path.resolve(__dirname, '../../../../archetype/package.json');
-  if (fs.existsSync(pkgPath)) {
-    modulePaths = _.map(
-      [
-        path.resolve(__dirname, '../../../../archetype'),
-        ...getLinkedPaths(pkgPath)
-      ],
-      dependancyPath => {
-        return path.join(dependancyPath, 'node_modules');
-      }
-    );
-  }
-  return modulePaths;
+function getModules(config) {
+  const { paths } = config;
+  const pkgPath = path.resolve(paths.root, 'package.json');
+  return _.map(
+    [path.resolve(paths.root), ...getLinkedPaths(pkgPath)],
+    dependancyPath => {
+      return path.join(dependancyPath, 'node_modules');
+    }
+  );
 }
