@@ -1,8 +1,6 @@
 import SockjsClient from 'sockjs-client';
-import autobind from 'autobind-decorator';
 import { format as urlFormat } from 'url';
 
-@autobind
 export default class HotClient {
   constructor({
     port = 6001,

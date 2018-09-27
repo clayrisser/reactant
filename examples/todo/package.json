@@ -1,8 +1,8 @@
 {
-  "name": "reactant",
+  "name": "todo",
   "private": true,
   "version": "0.0.15",
-  "description": "write once . . . render everywhere",
+  "description": "todo app example built in reactant",
   "main": "expo/index.js",
   "homepage": "https://reactant.codejam.ninja",
   "author": {
