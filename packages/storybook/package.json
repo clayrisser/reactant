@@ -71,5 +71,6 @@
       "**/tests/**/[^_]*.js"
     ],
     "verbose": true
-  }
+  },
+  "gitHead": "3c667c1477ab22cfad2d5486ab2e8db3077864ab"
 }
