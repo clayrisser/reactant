@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { storiesOf } from '@reactant/cli';
+import { storiesOf } from '@reactant/storybook';
 import AddTodo from '~/components/AddTodo';
 
 const addTodo = storiesOf('AddTodo', module);

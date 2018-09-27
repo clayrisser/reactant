@@ -66,6 +66,7 @@
     "open-browser-webpack-plugin": "0.0.5",
     "open-terminal": "0.0.2",
     "ora": "^3.0.0",
+    "pkg-dir": "^3.0.0",
     "postcss-flexbugs-fixes": "^4.1.0",
     "postcss-loader": "^3.0.0",
     "prop-types": "^15.6.2",
