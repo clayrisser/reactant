@@ -1,14 +1,14 @@
 import _ from 'lodash';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import stripAnsi from 'strip-ansi';
-import { config, log } from '@reactant/base';
 import {
   dismissBuildError,
   reportBuildError,
   startReportingRuntimeErrors,
   stopReportingRuntimeErrors
 } from 'react-error-overlay';
-import HotClient from './hotClient';
+import HotClient from '@reactant/base/lib/hotClient';
+import { config, log } from '@reactant/base';
 
 if (config.options.debug) window.module = module;
 

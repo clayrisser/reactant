@@ -27,7 +27,9 @@
     "url": "https://github.com/codejamninja/reactant/packages/base"
   },
   "scripts": {
-    "build": "npm run test && mkdir -p lib && cp -r src/* lib && babel src -d lib",
+    "build": "npm run test && npm run build:lib && npm run build:err",
+    "build:err": "parcel build src/views/error.html -d lib/views --out-file error.ejs",
+    "build:lib": "babel src -d lib",
     "clean": "rimraf lib && jest --clearCache",
     "format": "prettier --write ./src/**/*.js",
     "lint": "npm run format && eslint ./",
@@ -36,10 +38,13 @@
     "test": "npm run lint && jest --forceExit"
   },
   "dependencies": {
+    "autobind-decorator": "^2.1.0",
+    "babel-polyfill": "^6.26.0",
     "cheerio": "^0.22.0",
     "connected-react-router": "^4.4.1",
     "cookies": "^0.7.1",
     "cookies-js": "^1.2.3",
+    "ejs": "^2.6.1",
     "expo": "^29.0.0",
     "express": "^4.16.3",
     "history": "^4.7.2",
@@ -48,6 +53,7 @@
     "lodash": "^4.17.10",
     "loglevel": "^1.6.1",
     "offline-plugin": "^5.0.5",
+    "ora": "^3.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
@@ -61,6 +67,8 @@
     "redux-persist": "git+https://github.com/codejamninja/redux-persist.git#npm",
     "redux-persist-cookie-storage": "^1.0.0",
     "redux-thunk": "^2.3.0",
+    "sockjs-client": "^1.1.5",
+    "url": "^0.11.0",
     "winston": "^2.4.3"
   },
   "devDependencies": {
@@ -77,6 +85,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
     "jest": "^23.5.0",
+    "parcel-bundler": "^1.9.7",
     "prettier": "^1.14.3",
     "rimraf": "^2.6.2"
   },

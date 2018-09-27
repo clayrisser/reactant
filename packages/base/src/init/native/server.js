@@ -9,9 +9,9 @@ import { persistStore } from 'redux-persist';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import ServerApp from '~/../web/ServerApp';
 import indexHtml from '~/../web/index.html';
-import { config, assets } from '..';
-import { createWebStore } from '../createStore';
-import { setLevel } from '../log';
+import { config, assets } from '../..';
+import { createWebStore } from '../../createStore';
+import { setLevel } from '../../log';
 
 export default function server(initialProps, app = express()) {
   if (!config.options.debug) {
