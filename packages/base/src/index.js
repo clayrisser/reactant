@@ -19,13 +19,25 @@ function getAssets() {
   return assets;
 }
 
+function getReactant() {
+  let Reactant = null;
+  try {
+    Reactant = require('./Reactant');
+    if (Reactant.__esModule) Reactant = Reactant.default;
+    return require('./Reactant').default;
+  } catch (err) {}
+  return Reactant;
+}
+
 const config = getConfig();
 const assets = getAssets();
+const Reactant = getReactant();
 
-export { Link, assets, config, log };
+export { Link, assets, config, log, Reactant };
 export default {
   Link,
   assets,
   config,
-  log
+  log,
+  Reactant
 };

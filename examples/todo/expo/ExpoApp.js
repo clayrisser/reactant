@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Reactant from '@reactant/base/lib/Reactant';
 import { Font } from 'expo';
 import { NativeRouter } from 'react-router-native';
+import { Reactant } from '@reactant/base';
 import { Root, StyleProvider } from 'native-base';
 import fonts from '../src/assets/fonts';
 import getTheme from '../src/theme/components';

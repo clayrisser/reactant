@@ -1,0 +1,18 @@
+title: Reactant
+moduleName: reactant
+ignore:
+  errors:
+    - 'for a non-boolean attribute'
+  warnings:
+    - 'Module RCTImageLoader requires'
+    - 'Class RCTCxxModule was not exported'
+initialState:
+  messages: []
+  loading: []
+  tmp: {}
+  todos: []
+whitelist:
+  - todos
+platform:
+  web:
+    native: false

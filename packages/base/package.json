@@ -16,6 +16,7 @@
   "main": "lib/index.js",
   "files": [
     "Link.js",
+    "Reactant.js",
     "assets.js",
     "config.js",
     "init",

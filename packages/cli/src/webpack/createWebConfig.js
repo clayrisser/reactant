@@ -10,7 +10,7 @@ import createServerConfig from './createServerConfig';
 import getRules from './getRules';
 
 export default function createWebConfig(config, webpackConfig, target = 'web') {
-  const { paths, /* eslint, */ babel, env, action } = config;
+  const { paths, /* eslint, */ babel, env, action, platform } = config;
   if (target === 'client') target = 'web';
   if (target === 'server') target = 'node';
   webpackConfig = {
@@ -49,23 +49,25 @@ export default function createWebConfig(config, webpackConfig, target = 'web') {
           include: [
             paths.src,
             paths.web,
-            ...getModuleIncludes(
-              [
-                '@reactant/base',
-                'native-base',
-                'native-base-shoutem-theme',
-                'react-native-drawer',
-                'react-native-easy-grid',
-                'react-native-keyboard-aware-scroll-view',
-                'react-native-safe-area-view',
-                'react-native-tab-view',
-                'react-native-vector-icons',
-                'react-native-web',
-                'react-navigation',
-                'static-container'
-              ],
-              config
-            )
+            ...(platform.web.native
+              ? getModuleIncludes(
+                  [
+                    '@reactant/base',
+                    'native-base',
+                    'native-base-shoutem-theme',
+                    'react-native-drawer',
+                    'react-native-easy-grid',
+                    'react-native-keyboard-aware-scroll-view',
+                    'react-native-safe-area-view',
+                    'react-native-tab-view',
+                    'react-native-vector-icons',
+                    'react-native-web',
+                    'react-navigation',
+                    'static-container'
+                  ],
+                  config
+                )
+              : [])
           ],
           loader: require.resolve('babel-loader'),
           options: babel
