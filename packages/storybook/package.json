@@ -1,6 +1,6 @@
 {
   "name": "@reactant/storybook",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "storybook tooling for reactant",
   "homepage": "https://reactant.codejam.ninja",
   "author": {
@@ -24,7 +24,7 @@
     "test:reset": "jest --clearCache && npm run test"
   },
   "dependencies": {
-    "@reactant/base": "^0.0.16",
+    "@reactant/base": "^0.0.17",
     "@storybook/addon-actions": "^4.0.0-alpha.23",
     "@storybook/addon-links": "^4.0.0-alpha.23",
     "@storybook/addons": "^4.0.0-alpha.23",
