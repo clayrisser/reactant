@@ -1,7 +1,8 @@
 import Cookies from 'cookies-js';
+import React from 'react';
 import ignoreWarnings from 'ignore-warnings';
-import { AppRegistry } from 'react-native';
 import { persistStore } from 'redux-persist';
+import { hydrate } from 'react-dom';
 import { config } from '..';
 import { createWebStore } from '../createStore';
 import log, { setLevel } from '../log';
@@ -24,11 +25,7 @@ async function renderClient(initialProps) {
   });
   initialProps.context = context;
   const ClientApp = require('~/../web/ClientApp').default;
-  AppRegistry.registerComponent('App', () => ClientApp);
-  AppRegistry.runApplication('App', {
-    initialProps,
-    rootTag: document.getElementById('app')
-  });
+  hydrate(<ClientApp {...initialProps} />, document.getElementById('app'));
 }
 
 export default function client(initialProps = {}) {

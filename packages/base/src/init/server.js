@@ -1,12 +1,12 @@
 import Cookies from 'cookies';
+import React from 'react';
 import _ from 'lodash';
 import cheerio from 'cheerio';
 import express from 'express';
 import ignoreWarnings from 'ignore-warnings';
-import { AppRegistry } from 'react-native';
 import { NodeCookiesWrapper } from 'redux-persist-cookie-storage';
 import { persistStore } from 'redux-persist';
-import { renderToString, renderToStaticMarkup } from 'react-dom/server';
+import { renderToString /* , renderToStaticMarkup */ } from 'react-dom/server';
 import ServerApp from '~/../web/ServerApp';
 import indexHtml from '~/../web/index.html';
 import { config, assets } from '..';
@@ -56,15 +56,11 @@ export default function server(initialProps, app = express()) {
       });
       initialProps.context = context;
       initialProps.location = context.location;
-      AppRegistry.registerComponent('App', () => ServerApp);
-      const { element, getStyleElement } = AppRegistry.getApplication('App', {
-        initialProps
-      });
-      const appHtml = renderToString(element);
-      const appCss = renderToStaticMarkup(getStyleElement());
+      const appHtml = renderToString(<ServerApp {...initialProps} />);
+      // const appCss = renderToStaticMarkup(getStyleElement());
       const $ = cheerio.load(indexHtml);
       $('title').text(config.title);
-      $('head').append(appCss);
+      // $('head').append(appCss);
       $('head').append(`<style type="text/css">${[...css].join('')}</style>`);
       $('#app').append(appHtml);
       _.map(assets, asset => {

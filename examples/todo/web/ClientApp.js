@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Reactant from '@reactant/base/lib/Reactant';
 import { BrowserRouter } from 'react-router-dom';
+import { Reactant } from '@reactant/base';
 import { StyleProvider } from 'native-base';
-import getTheme from '../src/theme/components';
-import { material } from '../src/theme/variables';
+import getTheme from '~/theme/components';
+import { material } from '~/theme/variables';
 
 export default class ClientApp extends Component {
   render() {
