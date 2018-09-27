@@ -19,19 +19,28 @@ export default async function startWeb(options) {
   const spinner = ora('starting web').start();
   const { paths } = config;
   if (options.storybook) {
+    const storybookPath = path.resolve(paths.root, '.reactant/storybook');
+    let storybookModuleLibPath = require.resolve('@reactant/storybook/lib');
+    storybookModuleLibPath = storybookModuleLibPath.substr(
+      0,
+      storybookModuleLibPath.length - 9
+    );
+    fs.mkdirsSync(storybookPath);
     fs.copySync(
-      path.resolve(__dirname, '../../storybook'),
-      path.resolve(config.paths.root, '.storybook')
+      path.resolve(storybookModuleLibPath, 'web'),
+      path.resolve(storybookPath, 'web')
+    );
+    fs.copySync(
+      require.resolve('@reactant/storybook/lib/addons.js'),
+      path.resolve(storybookPath, 'addons.js')
     );
     spinner.stop();
-    const storybookBinPath = require.resolve('@storybook/react/bin');
     await easycp(
-      `node ${storybookBinPath} -p ${config.ports.storybook} -c ${path.resolve(
-        config.paths.root,
-        '.storybook/web'
-      )}${options.debug ? ' -- --debug' : ''}${
-        options.verbose ? ' -- --verbose' : ''
-      }`
+      `node ${require.resolve('@storybook/react/bin')} -p ${
+        config.ports.storybook
+      } -c ${path.resolve(storybookPath, 'web')}${
+        options.debug ? ' -- --debug' : ''
+      }${options.verbose ? ' -- --verbose' : ''}`
     );
   } else {
     fs.mkdirsSync(paths.distWeb);
