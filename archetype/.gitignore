@@ -76,5 +76,4 @@ build/
 .DS_Store
 
 # reaction
-.debug
-/.storybook
+/.reactant
