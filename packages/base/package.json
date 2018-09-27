@@ -18,6 +18,7 @@
     "Link.js",
     "assets.js",
     "config.js",
+    "init",
     "lib",
     "log.js"
   ],

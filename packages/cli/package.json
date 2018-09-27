@@ -70,7 +70,6 @@
     "postcss-loader": "^3.0.0",
     "prop-types": "^15.6.2",
     "rc-config": "0.0.5",
-    "react": "^16.5.2",
     "react-dev-utils": "^5.0.2",
     "react-error-overlay": "^4.0.1",
     "sass-loader": "^7.1.0",
