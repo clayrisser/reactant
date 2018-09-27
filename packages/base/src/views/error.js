@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 import ignoreWarnings from 'ignore-warnings';
-import log, { setLevel } from '@reactant/base/log';
 import HotClient from '../hotClient';
+import log, { setLevel } from '../log';
 
 window.document.title = window.reactant.config.title;
 ignoreWarnings('react-error-overlay is not meant for use in production');

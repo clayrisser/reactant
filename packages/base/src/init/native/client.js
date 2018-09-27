@@ -2,9 +2,9 @@ import Cookies from 'cookies-js';
 import ignoreWarnings from 'ignore-warnings';
 import { AppRegistry } from 'react-native';
 import { persistStore } from 'redux-persist';
-import { config } from '..';
-import { createWebStore } from '../createStore';
-import log, { setLevel } from '../log';
+import { config } from '../..';
+import { createWebStore } from '../../createStore';
+import log, { setLevel } from '../../log';
 
 const { document } = window;
 

@@ -1,11 +1,11 @@
 import 'babel-polyfill';
 import express from 'express';
-import log, { setLevel } from '@reactant/base/log';
 import ora from 'ora';
 import path from 'path';
 import { __express as ejs } from 'ejs';
-import { config } from '@reactant/base';
 import { createServer } from 'http';
+import log, { setLevel } from './log';
+import { config } from '.';
 
 if (config.options.verbose) setLevel('verbose');
 if (config.options.debug) setLevel('debug');

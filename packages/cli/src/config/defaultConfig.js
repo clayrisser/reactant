@@ -38,7 +38,7 @@ export default {
     ios: 'ios',
     reactant: '.reactant',
     root: '',
-    server: 'node_modules/@reactant/cli/lib/server.js',
+    server: 'node_modules/@reactant/base/lib/server.js',
     src: 'src',
     srcPublic: 'src/public',
     stories: 'stories',
