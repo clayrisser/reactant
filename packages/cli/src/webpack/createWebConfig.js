@@ -1,4 +1,5 @@
 import path from 'path';
+import pkgDir from 'pkg-dir';
 import {
   NamedModulesPlugin,
   HotModuleReplacementPlugin,
@@ -48,18 +49,23 @@ export default function createWebConfig(config, webpackConfig, target = 'web') {
           include: [
             paths.src,
             paths.web,
-            path.resolve('node_modules/native-base-shoutem-theme'),
-            path.resolve('node_modules/react-native-drawer'),
-            path.resolve('node_modules/react-native-easy-grid'),
-            path.resolve(
-              'node_modules/react-native-keyboard-aware-scroll-view'
-            ),
-            path.resolve('node_modules/react-native-safe-area-view'),
-            path.resolve('node_modules/react-native-tab-view'),
-            path.resolve('node_modules/react-native-vector-icons'),
-            path.resolve('node_modules/react-native-web'),
-            path.resolve('node_modules/@reactant/base'),
-            path.resolve('node_modules/static-container')
+            ...getModuleIncludes(
+              [
+                '@reactant/base',
+                'native-base',
+                'native-base-shoutem-theme',
+                'react-native-drawer',
+                'react-native-easy-grid',
+                'react-native-keyboard-aware-scroll-view',
+                'react-native-safe-area-view',
+                'react-native-tab-view',
+                'react-native-vector-icons',
+                'react-native-web',
+                'react-navigation',
+                'static-container'
+              ],
+              config
+            )
           ],
           loader: require.resolve('babel-loader'),
           options: babel
@@ -78,4 +84,18 @@ export default function createWebConfig(config, webpackConfig, target = 'web') {
     return createClientConfig(config, webpackConfig);
   }
   return createServerConfig(config, webpackConfig);
+}
+
+function getModuleIncludes(modules, config) {
+  const { paths } = config;
+  const includes = [];
+  modules.forEach(module => {
+    try {
+      const modulePath = pkgDir.sync(
+        require.resolve(path.resolve(paths.root, 'node_modules', module))
+      );
+      includes.push(modulePath);
+    } catch (err) {}
+  });
+  return includes;
 }

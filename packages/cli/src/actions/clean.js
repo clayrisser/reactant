@@ -45,7 +45,7 @@ export default async function clean(options) {
     fs.removeSync(path.resolve(paths.ios, 'config.json'));
     fs.removeSync(path.resolve(paths.root, 'node_modules/.cache'));
     fs.removeSync(paths.dist);
-    fs.removeSync(paths.debug);
+    fs.removeSync(paths.reactant);
   }
   fs.removeSync(path.resolve('.expo'));
   spinner.succeed('cleaned');
