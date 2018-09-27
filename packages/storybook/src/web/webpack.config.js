@@ -1,12 +1,8 @@
 import 'babel-polyfill';
 import CircularJSON from 'circular-json';
-import OpenBrowserPlugin from 'open-browser-webpack-plugin';
 import _ from 'lodash';
 import log, { setLevel } from '@reactant/base/log';
-import path from 'path';
-// eslint-disable-next-line import/no-unresolved
 import getRules from '@reactant/cli/lib/webpack/getRules';
-// eslint-disable-next-line import/no-unresolved
 import { loadConfig } from '@reactant/cli/lib/config';
 
 if (_.includes(process.argv, '--verbose')) setLevel('verbose');
@@ -20,6 +16,7 @@ module.exports = webpackConfig => {
   webpackConfig.resolve.alias = {
     '~': paths.src,
     'react-native': require.resolve('react-native-web'),
+    '@reactant/storybook': '~/../.reactant/storybook',
     'react-native/Libraries/Renderer/shims/ReactNativePropRegistry': require.resolve(
       'react-native-web/dist/modules/ReactNativePropRegistry'
     )
@@ -33,12 +30,6 @@ module.exports = webpackConfig => {
     fs: {},
     winston: {}
   };
-  webpackConfig.plugins = [
-    ...webpackConfig.plugins,
-    new OpenBrowserPlugin({
-      url: `http://localhost:${config.ports.storybook}`
-    })
-  ];
   webpackConfig = replaceBabelRule(webpackConfig, {
     test: /\.(js|jsx|mjs)$/,
     include: [paths.root],

@@ -7,6 +7,12 @@
   "rules": {
     "no-empty": "off",
     "global-require": "off",
-    "import/no-dynamic-require": "off"
+    "import/no-dynamic-require": "off",
+    "import/no-unresolved": [
+      "error",
+      {
+        "ignore": ["^~", "^./lib", "^@reactant"]
+      }
+    ]
   }
 }

@@ -4,6 +4,7 @@ import fs from 'fs-extra';
 import ora from 'ora';
 import path from 'path';
 import webpack from 'webpack';
+import pkgDir from 'pkg-dir';
 import { log } from '@reactant/base';
 import configureWeb from '../configure/web';
 import createWebpackConfig from '../../webpack/createWebpackConfig';
@@ -19,26 +20,16 @@ export default async function startWeb(options) {
   const spinner = ora('starting web').start();
   const { paths } = config;
   if (options.storybook) {
-    const storybookPath = path.resolve(paths.root, '.reactant/storybook');
-    let storybookModuleLibPath = require.resolve('@reactant/storybook/lib');
-    storybookModuleLibPath = storybookModuleLibPath.substr(
-      0,
-      storybookModuleLibPath.length - 9
-    );
-    fs.mkdirsSync(storybookPath);
+    fs.mkdirsSync(paths.reactant);
     fs.copySync(
-      path.resolve(storybookModuleLibPath, 'web'),
-      path.resolve(storybookPath, 'web')
-    );
-    fs.copySync(
-      require.resolve('@reactant/storybook/lib/addons.js'),
-      path.resolve(storybookPath, 'addons.js')
+      path.resolve(pkgDir.sync(require.resolve('@reactant/storybook')), 'lib'),
+      path.resolve(paths.storybook)
     );
     spinner.stop();
     await easycp(
       `node ${require.resolve('@storybook/react/bin')} -p ${
         config.ports.storybook
-      } -c ${path.resolve(storybookPath, 'web')}${
+      } -c ${path.resolve(paths.storybook, 'web')}${
         options.debug ? ' -- --debug' : ''
       }${options.verbose ? ' -- --verbose' : ''}`
     );

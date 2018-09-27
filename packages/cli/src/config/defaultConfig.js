@@ -36,12 +36,13 @@ export default {
     distWebPublic: 'distWeb/public',
     expo: 'expo',
     ios: 'ios',
+    reactant: '.reactant',
     root: '',
     server: 'node_modules/@reactant/cli/lib/server.js',
     src: 'src',
     srcPublic: 'src/public',
     stories: 'stories',
-    storybook: 'storybook',
+    storybook: 'reactant/storybook',
     web: 'web'
   },
   publish: {
