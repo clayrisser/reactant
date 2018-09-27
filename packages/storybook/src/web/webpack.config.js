@@ -1,8 +1,10 @@
 import 'babel-polyfill';
 import CircularJSON from 'circular-json';
 import _ from 'lodash';
-import log, { setLevel } from '@reactant/base/log';
 import getRules from '@reactant/cli/lib/webpack/getRules';
+import log, { setLevel } from '@reactant/base/log';
+import path from 'path';
+import pkgDir from 'pkg-dir';
 import { loadConfig } from '@reactant/cli/lib/config';
 
 if (_.includes(process.argv, '--verbose')) setLevel('verbose');
@@ -32,7 +34,26 @@ module.exports = webpackConfig => {
   };
   webpackConfig = replaceBabelRule(webpackConfig, {
     test: /\.(js|jsx|mjs)$/,
-    include: [paths.root],
+    include: [
+      paths.src,
+      paths.stories,
+      ...getModuleIncludes(
+        [
+          'native-base',
+          'native-base-shoutem-theme',
+          'react-native-drawer',
+          'react-native-easy-grid',
+          'react-native-keyboard-aware-scroll-view',
+          'react-native-safe-area-view',
+          'react-native-tab-view',
+          'react-native-vector-icons',
+          'react-native-web',
+          'react-navigation',
+          'static-container'
+        ],
+        config
+      )
+    ],
     loader: require.resolve('babel-loader')
   });
   webpackConfig.module.rules = [
@@ -47,6 +68,20 @@ module.exports = webpackConfig => {
   log.debug('webpackConfig', webpackConfig);
   return webpackConfig;
 };
+
+function getModuleIncludes(modules, config) {
+  const { paths } = config;
+  const includes = [];
+  modules.forEach(module => {
+    try {
+      const modulePath = pkgDir.sync(
+        require.resolve(path.resolve(paths.root, 'node_modules', module))
+      );
+      includes.push(modulePath);
+    } catch (err) {}
+  });
+  return includes;
+}
 
 function replaceBabelRule(webpackConfig, rule) {
   const babelRule = _.find(webpackConfig.module.rules, rule => {
