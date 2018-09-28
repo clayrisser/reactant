@@ -1,6 +1,7 @@
 import CircularJSON from 'circular-json';
 import _ from 'lodash';
 import path from 'path';
+import pkgDir from 'pkg-dir';
 import { DefinePlugin } from 'webpack';
 import { getLinkedPaths } from 'linked-deps';
 import { sanitizeConfig } from '../config';
@@ -11,6 +12,7 @@ export default function createWebpackConfig(config, webpackConfig = {}) {
   webpackConfig = {
     ...webpackConfig,
     mode: env,
+    context: pkgDir.sync(process.cwd()),
     resolve: {
       ...webpackConfig.resolve,
       modules: [...(webpackConfig.modules || []), ...getModules(config)],
