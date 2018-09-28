@@ -1,7 +1,7 @@
 import build from './build';
 import clean from './clean';
-import configure from './configure';
+import publish from './publish';
 import start from './start';
 
-export { build, clean, configure, start };
-export default { build, clean, configure, start };
+export { build, clean, publish, start };
+export default { build, clean, publish, start };

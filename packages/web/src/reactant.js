@@ -1,4 +1,4 @@
-import { build, clean, configure, start } from './actions';
+import { build, clean, publish, start } from './actions';
 import createConfig from './createConfig';
 
 export default {
@@ -6,13 +6,13 @@ export default {
   actions: {
     build: {
       run: build,
-      dependsOn: ['clean', 'configure']
+      dependsOn: ['clean']
     },
     clean,
-    configure,
-    start: {
-      run: start,
-      dependsOn: ['configure']
-    }
+    publish: {
+      run: publish,
+      dependsOn: ['build']
+    },
+    start
   }
 };
