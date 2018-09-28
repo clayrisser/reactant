@@ -10,8 +10,8 @@
   },
   "main": "lib/index.js",
   "files": [
-    "lib",
-    "bin"
+    "bin",
+    "lib"
   ],
   "scripts": {
     "build": "npm run test && babel src --ignore bin.js -d lib",
@@ -43,6 +43,7 @@
     "deasync": "^0.1.13",
     "detect-port": "^1.2.3",
     "easycp": "^0.1.1",
+    "err": "^2.1.10",
     "file-loader": "^2.0.0",
     "fs-extra": "^7.0.0",
     "haul": "^1.0.0-rc.7",
@@ -64,7 +65,7 @@
     "postcss-flexbugs-fixes": "^4.1.0",
     "postcss-loader": "^3.0.0",
     "prop-types": "^15.6.2",
-    "rc-config": "0.0.5",
+    "rc-config": "^0.1.0",
     "react-dev-utils": "^5.0.2",
     "react-error-overlay": "^4.0.1",
     "sass-loader": "^7.1.0",
@@ -85,7 +86,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
     "eslint": "^5.5.0",
-    "eslint-config-jam": "0.1.1",
+    "eslint-config-jam": "0.1.4",
     "eslint-plugin-jest": "^21.22.0",
     "jest": "^23.5.0",
     "prettier": "^1.14.3",

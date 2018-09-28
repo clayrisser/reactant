@@ -5,8 +5,8 @@ import { DefinePlugin } from 'webpack';
 import { getLinkedPaths } from 'linked-deps';
 import { sanitizeConfig } from '../config';
 
-export default function createWebpackConfig(config, webpackConfig, target) {
-  const { webpack, options, paths, env, envs } = config;
+export default function createWebpackConfig(config, webpackConfig = {}) {
+  const { paths, env, envs } = config;
   const sanitizedConfig = sanitizeConfig(config);
   webpackConfig = {
     ...webpackConfig,
@@ -31,30 +31,7 @@ export default function createWebpackConfig(config, webpackConfig, target) {
       })
     ]
   };
-  switch (options.platform) {
-    case 'ios':
-      webpackConfig = {
-        ...webpackConfig,
-        ...require('./createIosConfig').default(config, webpackConfig)
-      };
-      break;
-    case 'android':
-      webpackConfig = {
-        ...webpackConfig,
-        ...require('./createAndroidConfig').default(config, webpackConfig)
-      };
-      break;
-    case 'web':
-      webpackConfig = {
-        ...webpackConfig,
-        ...require('./createWebConfig').default(config, webpackConfig, target)
-      };
-      break;
-  }
-  if (_.isFunction(webpack)) {
-    return webpack(config, webpackConfig);
-  }
-  return _.merge(webpackConfig, webpack);
+  return webpackConfig;
 }
 
 function getModules(config) {

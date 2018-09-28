@@ -1,0 +1,68 @@
+{
+  "name": "@reactant/web",
+  "version": "0.0.18",
+  "description": "reactant web module",
+  "reactantPlatform": "web",
+  "keywords": [
+    "@reactant/web",
+    "reactant",
+    "react",
+    "webn"
+  ],
+  "homepage": "https://github.com/codejamninja/reactant/packages/web",
+  "bugs": {
+    "url": "https://github.com/codejamninja/reactant/packages/web/issues",
+    "email": "jam@codejam.ninja"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Jam Risser",
+    "email": "jam@codejam.ninja",
+    "url": "https://codejam.ninja"
+  },
+  "files": [
+    "lib",
+    "reactant.js"
+  ],
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codejamninja/reactant/packages/web"
+  },
+  "scripts": {
+    "build": "babel src -d lib",
+    "clean": "rimraf lib",
+    "lint": "npm run format && eslint ./",
+    "lint:fix": "npm run format && eslint --fix ./",
+    "format": "prettier --write ./src/**/*.js",
+    "prepublish": "npm run clean && npm run build",
+    "start": "babel-node src"
+  },
+  "dependencies": {
+    "easycp": "^0.1.1",
+    "fs-extra": "^7.0.0",
+    "ora": "^3.0.0",
+    "pkg-dir": "^3.0.0",
+    "webpack": "^4.20.2",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^9.0.0",
+    "babel-preset-everything": "^0.1.2",
+    "eslint": "^5.5.0",
+    "eslint-config-jam": "^0.1.2",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "rimraf": "^2.6.2"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "eslintIgnore": [
+    "lib"
+  ]
+}
