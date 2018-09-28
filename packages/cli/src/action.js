@@ -4,10 +4,10 @@ import _ from 'lodash';
 import commander from 'commander';
 import log, { setLevel } from '@reactant/base/log';
 import ora from 'ora';
-import path from 'path';
 import validate from './validate';
 import { Socket, loadConfig, createConfig } from './config';
 import { createWebpackConfig } from './webpack';
+import { loadReactantPlatform, getReactantPlatforms } from './platform';
 
 export default async function action(cmd, options) {
   if (options.verbose) setLevel('verbose');
@@ -15,7 +15,6 @@ export default async function action(cmd, options) {
   await validate(cmd, options);
   let config = createConfig({
     action: cmd,
-    defaultEnv: 'development',
     options
   });
   const reactantPlatforms = getReactantPlatforms(config);
@@ -86,41 +85,4 @@ function getActionNames(actionName, platform, actionNames = []) {
       actionName
     ])
   );
-}
-
-function loadReactantPlatform(config, platformName) {
-  const { paths } = config;
-  const rootPath = path.resolve(paths.root, 'node_modules', platformName);
-  let platform = require(path.resolve(rootPath, 'reactant'));
-  if (platform.__esModule) platform = platform.default;
-  platform = {
-    ...platform,
-    actions: _.zipObject(
-      _.keys(platform.actions),
-      _.map(platform.actions, action => {
-        if (action.run) {
-          if (action.dependsOn) return action;
-          return { ...action, dependsOn: [] };
-        }
-        return { run: action, dependsOn: [] };
-      })
-    ),
-    rootPath
-  };
-  return platform;
-}
-
-function getReactantPlatforms(config) {
-  const { paths } = config;
-  const platformNames = _.keys(
-    require(path.resolve(paths.root, 'package.json')).dependencies
-  );
-  return _.filter(platformNames, platformName => {
-    return require(path.resolve(
-      paths.root,
-      'node_modules',
-      platformName,
-      'package.json'
-    )).reactantPlatform;
-  });
 }
