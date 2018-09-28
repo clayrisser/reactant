@@ -1,6 +1,9 @@
 import AssetsWebpackPlugin from 'assets-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
 import path from 'path';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import {
   HotModuleReplacementPlugin,
   IgnorePlugin,
@@ -10,7 +13,17 @@ import {
 import getRules from '@reactant/cli/lib/webpack/getRules';
 
 function createWebpackConfig(config, webpackConfig) {
-  const { paths, env, action, babel, host, ports } = config;
+  const {
+    action,
+    babel,
+    env,
+    host,
+    options,
+    paths,
+    platform,
+    ports,
+    title
+  } = config;
   webpackConfig = {
     ...webpackConfig,
     entry: {
@@ -23,15 +36,7 @@ function createWebpackConfig(config, webpackConfig) {
         'webpack/hot/poll': require.resolve('webpack/hot/poll')
       }
     },
-    externals: {
-      ...webpackConfig.externals,
-      'react-art': {}
-    },
     target: 'web',
-    devtool:
-      env === 'development'
-        ? 'cheap-module-eval-source-map'
-        : 'nosources-source-map',
     plugins: [
       ...webpackConfig.plugins,
       new AssetsWebpackPlugin({
@@ -40,7 +45,7 @@ function createWebpackConfig(config, webpackConfig) {
       }),
       new CopyWebpackPlugin([
         {
-          from: path.resolve(paths.root, 'web/index.html'),
+          from: paths.srcPublic,
           to: paths.webPublic
         }
       ]),
@@ -48,6 +53,11 @@ function createWebpackConfig(config, webpackConfig) {
       new IgnorePlugin(/^deasync$/),
       new IgnorePlugin(/^fs$/),
       new IgnorePlugin(/^winston$/),
+      new HtmlWebpackPlugin({
+        title,
+        minify: true,
+        template: path.resolve(paths.root, platform, 'index.html')
+      }),
       ...(env !== 'production' ? [new NamedModulesPlugin()] : []),
       ...(action === 'start'
         ? [new HotModuleReplacementPlugin(), new NoEmitOnErrorsPlugin()]
@@ -70,14 +80,6 @@ function createWebpackConfig(config, webpackConfig) {
   if (env === 'development') {
     webpackConfig = {
       ...webpackConfig,
-      devServer: {
-        contentBase: paths.distWebPublic,
-        before: app => {
-          app.get('/some/path', (req, res) => {
-            res.json({ custom: 'response' });
-          });
-        }
-      },
       output: {
         path: paths.distWebPublic,
         publicPath: action === 'start' ? `http://${host}:${ports.dev}/` : '/',
@@ -88,6 +90,46 @@ function createWebpackConfig(config, webpackConfig) {
           return path.resolve(info.resourcePath).replace(/\\/g, '/');
         }
       }
+    };
+  }
+  if (action === 'start') {
+    webpackConfig = {
+      ...webpackConfig,
+      entry: {
+        client: [
+          ...webpackConfig.entry.client,
+          require.resolve('@reactant/cli/lib/hotDevClient')
+        ]
+      },
+      devServer: {
+        before(app) {
+          app.use(errorOverlayMiddleware());
+        },
+        contentBase: paths.distWebPublic,
+        compress: true,
+        disableHostCheck: true,
+        headers: { 'Access-Control-Allow-Origin': '*' },
+        historyApiFallback: { disableDotRule: true },
+        host,
+        hot: true,
+        noInfo: !options.debug,
+        overlay: false,
+        port: ports.dev,
+        quiet: !options.debug,
+        watchOptions: { ignored: /node_modules/ }
+      }
+    };
+  }
+  if (config.options.analyze) {
+    webpackConfig = {
+      ...webpackConfig,
+      plugins: [
+        ...webpackConfig.plugins,
+        new BundleAnalyzerPlugin({
+          analyzerPort: ports.analyzer,
+          analyzerMode: 'static'
+        })
+      ]
     };
   }
   return webpackConfig;
