@@ -1,8 +1,13 @@
 import { build, clean, configure, start } from './actions';
+import createConfig from './createConfig';
 
 export default {
+  config: createConfig,
   actions: {
-    build,
+    build: {
+      run: build,
+      dependsOn: ['clean', 'configure']
+    },
     clean,
     configure,
     start: {

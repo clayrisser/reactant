@@ -27,7 +27,7 @@ function createWebpackConfig(config, webpackConfig) {
   webpackConfig = {
     ...webpackConfig,
     entry: {
-      client: [paths.client]
+      client: [path.resolve(paths.root, 'web/client.js')]
     },
     resolve: {
       ...webpackConfig.resolve,

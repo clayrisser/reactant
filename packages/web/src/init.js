@@ -1,17 +1,11 @@
 import React from 'react';
 import ignoreWarnings from 'ignore-warnings';
-import { render } from 'react-dom';
 import { config } from '@reactant/base';
-import log, { setLevel } from '@reactant/base/log';
+import { render } from 'react-dom';
+import { setLevel } from '@reactant/base/log';
+import ClientApp from '~/../web/ClientApp';
 
 const { document } = window;
-
-async function renderClient(initialProps) {
-  log.info('rendering client');
-  // eslint-disable-next-line global-require
-  const ClientApp = require('~/../web/ClientApp').default;
-  render(<ClientApp {...initialProps} />, document.getElementById('app'));
-}
 
 export default function client(initialProps = {}) {
   if (!config.options.debug) {
@@ -30,12 +24,6 @@ export default function client(initialProps = {}) {
     setLevel(config.level);
   }
   if (config !== 'production') window.reactant = { config };
-  if (module.hot) {
-    module.hot.accept(
-      '~/../web/ClientApp',
-      renderClient.bind(this, initialProps)
-    );
-  }
-  renderClient(initialProps).catch(log.error);
+  render(<ClientApp {...initialProps} />, document.getElementById('app'));
   return { config, initialProps };
 }

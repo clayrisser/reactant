@@ -22,23 +22,36 @@ export default function createConfig(...args) {
 async function createConfigAsync({
   defaultEnv = 'development',
   action = 'build',
-  options = {}
+  options = {},
+  platformConfig = {}
 }) {
   const optionsConfig = options.config ? JSON.parse(options.config) : {};
   environment.default = defaultEnv;
   const userConfig = rcConfig({ name: 'reactant' });
   const eslint = rcConfig({ name: 'eslint' });
-  const config = {
-    ...defaultConfig,
-    ...userConfig,
+  let config = {};
+  if (_.isFunction(platformConfig)) {
+    config = platformConfig(defaultConfig);
+  } else {
+    config = _.merge({}, defaultConfig, platformConfig);
+  }
+  if (_.isFunction(userConfig)) {
+    config = userConfig(config);
+  } else {
+    config = _.merge({}, config, userConfig);
+  }
+  config = {
+    ...config,
     ignore: {
       errors: [
         ...(defaultConfig.ignore ? defaultConfig.ignore.errors : []),
+        ...(platformConfig.ignore ? platformConfig.ignore.errors : []),
         ...(userConfig.ignore ? userConfig.ignore.errors : []),
         ...(optionsConfig.ignore ? optionsConfig.ignore.errors : [])
       ],
       warnings: [
         ...(defaultConfig.ignore ? defaultConfig.ignore.warnings : []),
+        ...(platformConfig.ignore ? platformConfig.ignore.warnings : []),
         ...(userConfig.ignore ? userConfig.ignore.warnings : []),
         ...(optionsConfig.ignore ? optionsConfig.ignore.warnings : [])
       ]
@@ -47,6 +60,7 @@ async function createConfigAsync({
   const port = await getPort(config.port);
   return {
     ...config,
+    platform: options.platform,
     action: action || config.action,
     moduleName: config.moduleName
       ? config.moduleName

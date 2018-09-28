@@ -23,11 +23,6 @@ function loadConfig(...args) {
   return globalConfig;
 }
 
-function mutateConfig(mutator) {
-  globalConfig = mutator(globalConfig);
-  return globalConfig;
-}
-
 function saveConfig(platform) {
   const config = sanitizeConfig(globalConfig);
   const configPath = path.resolve(config.paths[platform], 'config.json');
@@ -75,7 +70,7 @@ export {
   sanitizeConfig,
   Socket,
   rebuildConfig,
-  mutateConfig
+  createConfig
 };
 export default {
   loadConfig,
@@ -83,5 +78,5 @@ export default {
   sanitizeConfig,
   Socket,
   rebuildConfig,
-  mutateConfig
+  createConfig
 };

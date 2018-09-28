@@ -11,6 +11,7 @@ import getRules from './getRules';
 
 export default function createWebConfig(config, webpackConfig, target = 'web') {
   const { paths, /* eslint, */ babel, env, action, platform } = config;
+  process.env.NODE_ENV = env;
   if (target === 'client') target = 'web';
   if (target === 'server') target = 'node';
   webpackConfig = {

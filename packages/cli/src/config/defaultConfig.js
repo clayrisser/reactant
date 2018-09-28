@@ -53,6 +53,7 @@ export default {
     web: 'echo "missing publish script"'
   },
   babel: {
+    babelrc: false,
     presets: [
       [
         'env',
@@ -62,10 +63,9 @@ export default {
           }
         }
       ],
-      'react-native',
       'stage-0'
     ],
-    plugins: ['transform-decorators-legacy', 'lodash', 'react-native-web']
+    plugins: ['transform-decorators-legacy']
   },
   eslint: {
     extends: ['jam']
