@@ -23,6 +23,11 @@ function loadConfig(...args) {
   return globalConfig;
 }
 
+function mutateConfig(mutator) {
+  globalConfig = mutator(globalConfig);
+  return globalConfig;
+}
+
 function saveConfig(platform) {
   const config = sanitizeConfig(globalConfig);
   const configPath = path.resolve(config.paths[platform], 'config.json');
@@ -64,11 +69,19 @@ function rebuildConfig({
   return loadConfig({ options, defaultEnv, action });
 }
 
-export { loadConfig, saveConfig, sanitizeConfig, Socket, rebuildConfig };
+export {
+  loadConfig,
+  saveConfig,
+  sanitizeConfig,
+  Socket,
+  rebuildConfig,
+  mutateConfig
+};
 export default {
   loadConfig,
   saveConfig,
   sanitizeConfig,
   Socket,
-  rebuildConfig
+  rebuildConfig,
+  mutateConfig
 };

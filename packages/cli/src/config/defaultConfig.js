@@ -70,15 +70,7 @@ export default {
   eslint: {
     extends: ['jam']
   },
-  platform: {
-    android: {},
-    ios: {},
-    expo: {},
-    web: {
-      native: true,
-      isomorphic: true
-    }
-  },
+  platforms: {},
   webpack: (config, webpack) => webpack,
   storybook: (config, webpack) => webpack
 };

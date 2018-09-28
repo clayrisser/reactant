@@ -1,75 +1,124 @@
-import boom from 'boom';
+import Err from 'err';
+import Promise from 'bluebird';
+import _ from 'lodash';
 import commander from 'commander';
-import { setLevel } from '@reactant/base/log';
-import { Socket } from './config';
-import buildAndroid from './actions/build/android';
-import buildExpo from './actions/build/expo';
-import buildIos from './actions/build/ios';
-import buildWeb from './actions/build/web';
-import bundleAndroid from './actions/bundle/android';
-import bundleIos from './actions/bundle/ios';
-import clean from './actions/clean';
-import configureAndroid from './actions/configure/android';
-import configureExpo from './actions/configure/expo';
-import configureIos from './actions/configure/ios';
-import configureWeb from './actions/configure/web';
-import publishAndroid from './actions/publish/android';
-import publishExpo from './actions/publish/expo';
-import publishIos from './actions/publish/ios';
-import publishWeb from './actions/publish/web';
-import setup from './actions/setup';
-import startAndroid from './actions/start/android';
-import startExpo from './actions/start/expo';
-import startIos from './actions/start/ios';
-import startWeb from './actions/start/web';
+import log, { setLevel } from '@reactant/base/log';
+import ora from 'ora';
+import path from 'path';
 import validate from './validate';
+import { Socket, loadConfig, mutateConfig } from './config';
+import { createWebpackConfig } from './webpack';
 
 export default async function action(cmd, options) {
   if (options.verbose) setLevel('verbose');
   if (options.debug) setLevel('debug');
+  await validate(cmd, options);
+  let config = loadConfig({
+    action: cmd,
+    defaultEnv: 'development',
+    options
+  });
+  const reactantPlatforms = getReactantPlatforms(config);
+  if (!_.includes(_.keys(config.platforms), options.platform)) {
+    throw new Err(`invalid platform '${options.platform}'`, 400);
+  }
+  const platformName = config.platforms[options.platform];
+  if (!_.includes(reactantPlatforms, platformName)) {
+    throw new Err(`reactant platform '${platformName}' is not installed`, 400);
+  }
+  config = mutateConfig(config => {
+    return {
+      ...config,
+      platform: options.platform
+    };
+  });
+  const platform = loadReactantPlatform(config, platformName);
+  if (!platform.actions[cmd]) return commander.help();
   const socket = new Socket({ silent: !options.debug });
   await socket.start();
-  await validate(cmd, options);
-  await runAction(cmd, options);
-  socket.stop();
+  await runActions(config, { platform });
+  return socket.stop();
 }
 
-async function runAction(cmd, options) {
-  switch (cmd) {
-    case 'build':
-      if (options.platform === 'android') return buildAndroid(options);
-      if (options.platform === 'expo') return buildExpo(options);
-      if (options.platform === 'ios') return buildIos(options);
-      if (options.platform === 'web') return buildWeb(options);
-      break;
-    case 'clean':
-      return clean(options);
-    case 'setup':
-      return setup(options);
-    case 'start':
-      if (options.platform === 'android') return startAndroid(options);
-      if (options.platform === 'expo') return startExpo(options);
-      if (options.platform === 'ios') return startIos(options);
-      if (options.platform === 'web') return startWeb(options);
-      break;
-    case 'publish':
-      if (options.platform === 'android') return publishAndroid(options);
-      if (options.platform === 'expo') return publishExpo(options);
-      if (options.platform === 'ios') return publishIos(options);
-      if (options.platform === 'web') return publishWeb(options);
-      break;
-    case 'configure':
-      if (options.platform === 'android') return configureAndroid(options);
-      if (options.platform === 'expo') return configureExpo(options);
-      if (options.platform === 'ios') return configureIos(options);
-      if (options.platform === 'web') return configureWeb(options);
-      break;
-    case 'bundle':
-      if (options.platform === 'android') return bundleAndroid(options);
-      if (options.platform === 'ios') return bundleIos(options);
-      break;
-    default:
-      return commander.help();
-  }
-  throw boom.badRequest('invalid platform');
+async function runActions(config, { platform }) {
+  const webpackConfig = createWebpackConfig(config);
+  await Promise.mapSeries(
+    getActionNames(config.action, platform),
+    async actionName => {
+      let action = platform.actions[actionName];
+      action = { ...action, name: actionName };
+      const spinner = ora(`started ${action.name} ${config.platform}`).start();
+      spinner._succeed = spinner.succeed;
+      spinner.succeed = (...args) => {
+        spinner._succeed(
+          ...(args.length
+            ? args
+            : [`finished ${action.name} ${config.platform}`])
+        );
+      };
+      return runAction(config, { platform, action, spinner, webpackConfig });
+    }
+  );
+  return null;
+}
+
+async function runAction(config, { platform, action, spinner, webpackConfig }) {
+  await action.run(config, { platform, action, spinner, webpackConfig });
+  spinner.stop();
+}
+
+function getActionNames(actionName, platform, actionNames = []) {
+  return _.uniq(
+    _.flattenDeep([
+      ...actionNames,
+      ..._.map(platform.actions[actionName].dependsOn, actionName => {
+        if (_.includes(actionNames, actionName)) {
+          log.warn(`circular action found for '${actionName}'`);
+          return [actionName];
+        }
+        return getActionNames(actionName, platform, [
+          ...actionNames,
+          actionName
+        ]);
+      }),
+      actionName
+    ])
+  );
+}
+
+function loadReactantPlatform(config, platformName) {
+  const { paths } = config;
+  const rootPath = path.resolve(paths.root, 'node_modules', platformName);
+  let platform = require(path.resolve(rootPath, 'reactant'));
+  if (platform.__esModule) platform = platform.default;
+  platform = {
+    ...platform,
+    actions: _.zipObject(
+      _.keys(platform.actions),
+      _.map(platform.actions, action => {
+        if (action.run) {
+          if (action.dependsOn) return action;
+          return { ...action, dependsOn: [] };
+        }
+        return { run: action, dependsOn: [] };
+      })
+    ),
+    rootPath
+  };
+  return platform;
+}
+
+function getReactantPlatforms(config) {
+  const { paths } = config;
+  const platformNames = _.keys(
+    require(path.resolve(paths.root, 'package.json')).dependencies
+  );
+  return _.filter(platformNames, platformName => {
+    return require(path.resolve(
+      paths.root,
+      'node_modules',
+      platformName,
+      'package.json'
+    )).reactantPlatform;
+  });
 }

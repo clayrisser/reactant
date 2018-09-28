@@ -13,6 +13,5 @@ initialState:
   todos: []
 whitelist:
   - todos
-platform:
-  web:
-    native: false
+platforms:
+  web: '@reactant/web'

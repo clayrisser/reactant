@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import detectPort from 'detect-port';
 import path from 'path';
+import pkgDir from 'pkg-dir';
 import rcConfig from 'rc-config';
 import { environment } from 'js-info';
 import { sleep } from 'deasync';
@@ -96,6 +97,7 @@ function resolvePath(configPath, configKey, paths) {
   if (matches && matches.length) [firstSlug] = matches;
   if (_.includes(_.keys(paths), firstSlug)) {
     return path.resolve(
+      pkgDir.sync(process.cwd()),
       resolvePath(paths[firstSlug]),
       configPath.substr(firstSlug.length + 1)
     );
