@@ -1,17 +1,29 @@
 import commander from 'commander';
+import _ from 'lodash';
 import action from './action';
 import error from './error';
+import { createConfig } from './config';
 import { version } from '../package';
+import { loadReactantPlatform, getReactantPlatforms } from './platform';
 
 let isAction = false;
 
+function getActions() {
+  const config = createConfig({});
+  let actions = [];
+  _.each(getReactantPlatforms(config), platformName => {
+    const platform = loadReactantPlatform(config, platformName);
+    _.each(_.keys(platform.actions), action => {
+      actions = _.uniq([...actions, action]);
+    });
+  });
+  return actions;
+}
+
+_.each(getActions(), action => {
+  commander.command(action);
+});
 commander.version(version);
-commander.command('build');
-commander.command('bundle');
-commander.command('clean');
-commander.command('configure');
-commander.command('setup');
-commander.command('start');
 commander.option('--action [action]', 'override default action');
 commander.option('--clean', 'clean');
 commander.option('--device [device]', 'run on device');
