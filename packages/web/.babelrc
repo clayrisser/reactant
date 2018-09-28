@@ -1,13 +1,15 @@
 {
   "presets": [
     [
-      "@babel/preset-env",
+      "env",
       {
         "targets": {
           "node": "6"
         }
       }
     ],
-    "everything"
-  ]
+    "react",
+    "stage-0"
+  ],
+  "plugins": ["transform-decorators-legacy"]
 }
