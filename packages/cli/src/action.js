@@ -6,14 +6,14 @@ import log, { setLevel } from '@reactant/base/log';
 import ora from 'ora';
 import path from 'path';
 import validate from './validate';
-import { Socket, loadConfig, mutateConfig } from './config';
+import { Socket, loadConfig, createConfig } from './config';
 import { createWebpackConfig } from './webpack';
 
 export default async function action(cmd, options) {
   if (options.verbose) setLevel('verbose');
   if (options.debug) setLevel('debug');
   await validate(cmd, options);
-  let config = loadConfig({
+  let config = createConfig({
     action: cmd,
     defaultEnv: 'development',
     options
@@ -26,14 +26,15 @@ export default async function action(cmd, options) {
   if (!_.includes(reactantPlatforms, platformName)) {
     throw new Err(`reactant platform '${platformName}' is not installed`, 400);
   }
-  config = mutateConfig(config => {
-    return {
-      ...config,
-      platform: options.platform
-    };
-  });
+  process.env.NODE_ENV = config.env;
   const platform = loadReactantPlatform(config, platformName);
   if (!platform.actions[cmd]) return commander.help();
+  config = loadConfig({
+    action: cmd,
+    defaultEnv: 'development',
+    options,
+    platformConfig: platform.config || {}
+  });
   const socket = new Socket({ silent: !options.debug });
   await socket.start();
   await runActions(config, { platform });
