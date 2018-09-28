@@ -63,7 +63,7 @@ async function runActions(config, { platform }) {
 }
 
 async function runAction(config, { platform, action, spinner, webpackConfig }) {
-  await action.run(config, { platform, action, spinner, webpackConfig });
+  await action.run(config, { platform, action, spinner, webpackConfig, log });
   spinner.stop();
 }
 

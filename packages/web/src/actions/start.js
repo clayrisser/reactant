@@ -4,11 +4,11 @@ import fs from 'fs-extra';
 import path from 'path';
 import webpack from 'webpack';
 import pkgDir from 'pkg-dir';
+import { createWebpackConfig } from '../webpack';
 
-export default async function start(
-  config,
-  { spinner, log, createWebpackConfig }
-) {
+export default async function start(config, { spinner, log, webpackConfig }) {
+  webpackConfig = createWebpackConfig(config, webpackConfig);
+  log.debug('webpackConfig', webpackConfig);
   return spinner.succeed();
   // const { options, paths } = config;
   // if (options.storybook) {
