@@ -1,4 +1,6 @@
 import AssetsWebpackPlugin from 'assets-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import path from 'path';
 import {
   HotModuleReplacementPlugin,
   IgnorePlugin,
@@ -8,7 +10,7 @@ import {
 import getRules from '@reactant/cli/lib/webpack/getRules';
 
 function createWebpackConfig(config, webpackConfig) {
-  const { paths, env, action, babel } = config;
+  const { paths, env, action, babel, host, ports } = config;
   webpackConfig = {
     ...webpackConfig,
     entry: {
@@ -36,6 +38,12 @@ function createWebpackConfig(config, webpackConfig) {
         path: paths.distWeb,
         filename: 'assets.json'
       }),
+      new CopyWebpackPlugin([
+        {
+          from: path.resolve(paths.root, 'web/index.html'),
+          to: paths.webPublic
+        }
+      ]),
       new IgnorePlugin(/^child_process$/),
       new IgnorePlugin(/^deasync$/),
       new IgnorePlugin(/^fs$/),
@@ -59,6 +67,29 @@ function createWebpackConfig(config, webpackConfig) {
       ]
     }
   };
+  if (env === 'development') {
+    webpackConfig = {
+      ...webpackConfig,
+      devServer: {
+        contentBase: paths.distWebPublic,
+        before: app => {
+          app.get('/some/path', (req, res) => {
+            res.json({ custom: 'response' });
+          });
+        }
+      },
+      output: {
+        path: paths.distWebPublic,
+        publicPath: action === 'start' ? `http://${host}:${ports.dev}/` : '/',
+        pathinfo: true,
+        filename: 'scripts/bundle.js',
+        chunkFilename: 'scripts/[name].chunk.js',
+        devtoolModuleFilenameTemplate: info => {
+          return path.resolve(info.resourcePath).replace(/\\/g, '/');
+        }
+      }
+    };
+  }
   return webpackConfig;
 }
 

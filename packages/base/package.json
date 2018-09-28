@@ -58,6 +58,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-error-overlay": "^4.0.1",
     "react-native": "^0.55.4",
     "react-native-ignore-warnings": "^0.1.1",
     "react-redux": "^5.0.7",

@@ -56,15 +56,16 @@ async function runActions(config, { platform }) {
             : [`finished ${action.name} ${config.platform}`])
         );
       };
-      return runAction(config, { platform, action, spinner, webpackConfig });
+      return action.run(config, {
+        platform,
+        action,
+        spinner,
+        webpackConfig,
+        log
+      });
     }
   );
   return null;
-}
-
-async function runAction(config, { platform, action, spinner, webpackConfig }) {
-  await action.run(config, { platform, action, spinner, webpackConfig, log });
-  spinner.stop();
 }
 
 function getActionNames(actionName, platform, actionNames = []) {

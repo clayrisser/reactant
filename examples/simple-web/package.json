@@ -1,0 +1,111 @@
+{
+  "name": "simple-web",
+  "private": true,
+  "version": "0.0.18",
+  "description": "todo web app example built in reactant",
+  "main": "expo/index.js",
+  "homepage": "https://reactant.codejam.ninja",
+  "author": {
+    "name": "Jam Risser",
+    "email": "jam@codejam.ninja",
+    "url": "https://codejam.ninja"
+  },
+  "scripts": {
+    "build:expo:android": "reactant build -p expo --expo-platform android",
+    "build:expo:ios": "reactant build -p expo --expo-platform ios",
+    "build:ios": "reactant build -p ios",
+    "build:ios:storybook": "reactant build -s -p ios",
+    "build:web": "reactant build -p web",
+    "build:web:analyze": "reactant build -p web --analyze",
+    "build:web:serve": "npm run build:web && node dist/server.js",
+    "build:web:storybook": "reactant build -s -p web",
+    "bundle:android": "reactant bundle -p android",
+    "bundle:ios": "reactant bundle -p ios",
+    "clean": "reactant clean",
+    "clean:android": "reactant clean -p android",
+    "clean:android:storybook": "reactant clean -s -p android",
+    "clean:expo": "reactant clean -p expo",
+    "clean:ios": "reactant clean -p ios",
+    "clean:ios:storybook": "reactant clean -s -p ios",
+    "clean:web": "reactant clean -p web",
+    "clean:web:storybook": "reactant clean -s -p web",
+    "configure": "npm run configure:web",
+    "configure:android": "reactant configure -p android",
+    "configure:expo": "reactant configure -p expo",
+    "configure:ios": "reactant configure -p ios",
+    "configure:web": "reactant configure -p web",
+    "expo": "exp",
+    "lint": "npm run lint:flow && eslint ./",
+    "lint:fix": "eslint --fix ./",
+    "lint:flow": "flow",
+    "prepublish": "rimraf node_modules/react-native-router/node_modules",
+    "publish": "npm run publish",
+    "publish:android": "reactant publish -p android",
+    "publish:expo": "reactant publish -p expo",
+    "publish:ios": "reactant publish -p ios",
+    "publish:web": "reactant publish -p web",
+    "reactant": "reactant",
+    "setup:inotify": "reactant setup --inotify",
+    "start": "npm run start:web",
+    "start:android": "reactant start -p android",
+    "start:android:storybook": "reactant start -s -p android",
+    "start:expo": "reactant start -p expo",
+    "start:expo:offline": "reactant start -p expo --offline",
+    "start:ios": "reactant start -p ios",
+    "start:ios:storybook": "reactant start -s -p ios",
+    "start:web": "reactant start -p web",
+    "start:web:storybook": "reactant start -s -p web",
+    "test": "npm run lint && jest --forceExit"
+  },
+  "dependencies": {
+    "@reactant/base": "^0.0.18",
+    "@reactant/web": "^0.0.18",
+    "autobind-decorator": "^2.1.0",
+    "babel-polyfill": "^6.26.0",
+    "lodash": "^4.17.10",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "react-art": "^16.5.2"
+  },
+  "devDependencies": {
+    "@reactant/cli": "^0.0.18",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^9.0.0",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-plugin-react-native-web": "^0.8.9",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react-native": "^4.0.0",
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^5.5.0",
+    "eslint-config-jam": "^0.1.2",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.22.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "flow-bin": "^0.75.0",
+    "jest": "^23.5.0",
+    "prettier": "^1.14.3",
+    "react-test-renderer": "^16.4.2",
+    "rimraf": "^2.6.2"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/codejamninja/reactant",
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "eslintIgnore": [
+    "lib",
+    "dist"
+  ],
+  "jest": {
+    "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": [
+      "src/assets/fonts"
+    ]
+  }
+}
