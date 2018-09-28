@@ -13,6 +13,10 @@ export default function createWebpackConfig(config, webpackConfig = {}) {
     ...webpackConfig,
     mode: env,
     context: pkgDir.sync(process.cwd()),
+    devtool:
+      env === 'development'
+        ? 'cheap-module-eval-source-map'
+        : 'nosources-source-map',
     resolve: {
       ...webpackConfig.resolve,
       modules: [...(webpackConfig.modules || []), ...getModules(config)],

@@ -1,6 +1,6 @@
 import 'babel-polyfill';
-import initClient from '@reactant/base/init/client';
+import { init } from '@reactant/web';
 
 const initialProps = {};
 
-export default initClient(initialProps);
+export default init(initialProps);

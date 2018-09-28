@@ -1,15 +1,16 @@
 import React from 'react';
 import ignoreWarnings from 'ignore-warnings';
-import { hydrate } from 'react-dom';
+import { render } from 'react-dom';
 import { config } from '@reactant/base';
 import log, { setLevel } from '@reactant/base/log';
 
 const { document } = window;
 
 async function renderClient(initialProps) {
+  log.info('rendering client');
   // eslint-disable-next-line global-require
   const ClientApp = require('~/../web/ClientApp').default;
-  hydrate(<ClientApp {...initialProps} />, document.getElementById('app'));
+  render(<ClientApp {...initialProps} />, document.getElementById('app'));
 }
 
 export default function client(initialProps = {}) {

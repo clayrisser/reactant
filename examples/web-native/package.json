@@ -1,5 +1,5 @@
 {
-  "name": "simple-web",
+  "name": "todo-web",
   "private": true,
   "version": "0.0.18",
   "description": "todo web app example built in reactant",
@@ -11,6 +11,10 @@
     "url": "https://codejam.ninja"
   },
   "scripts": {
+    "build": "reactant build",
+    "build:android": "reactant build -p android",
+    "build:android:storybook": "reactant build -s -p android",
+    "build:expo": "reactant build -p expo",
     "build:expo:android": "reactant build -p expo --expo-platform android",
     "build:expo:ios": "reactant build -p expo --expo-platform ios",
     "build:ios": "reactant build -p ios",
@@ -61,14 +65,31 @@
     "@reactant/base": "^0.0.18",
     "@reactant/web": "^0.0.18",
     "autobind-decorator": "^2.1.0",
+    "babel-loader": "^7.1.5",
     "babel-polyfill": "^6.26.0",
+    "expo": "^29.0.0",
+    "express": "^4.16.3",
     "lodash": "^4.17.10",
+    "native-base": "^2.8.0",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
-    "react-art": "^16.5.2"
+    "react-art": "^16.5.2",
+    "react-native": "^0.55.4",
+    "react-native-router": "^0.2.1",
+    "react-native-vector-icons": "^5.0.0",
+    "react-native-web": "^0.9.0",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-router-native": "^4.3.0",
+    "redux": "^4.0.0",
+    "redux-persist": "^5.10.0",
+    "redux-persist-cookie-storage": "^1.0.0",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@reactant/cli": "^0.0.18",
+    "@reactant/storybook": "^0.0.18",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",
@@ -87,6 +108,7 @@
     "eslint-plugin-react": "^7.11.1",
     "flow-bin": "^0.75.0",
     "jest": "^23.5.0",
+    "jest-react-native": "^18.0.0",
     "prettier": "^1.14.3",
     "react-test-renderer": "^16.4.2",
     "rimraf": "^2.6.2"
