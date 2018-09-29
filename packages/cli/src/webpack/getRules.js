@@ -1,5 +1,6 @@
-import path from 'path';
 import autoprefixer from 'autoprefixer';
+import path from 'path';
+import pkgDir from 'pkg-dir';
 import postcssFlexbugsFixes from 'postcss-flexbugs-fixes';
 
 const postcssLoader = {
@@ -17,15 +18,21 @@ const postcssLoader = {
   }
 };
 
-export default function getRules({ paths, env }) {
+export default function getRules({ paths, env, platform, platforms }) {
+  const include = [
+    paths.src,
+    paths.platform,
+    pkgDir.sync(
+      require.resolve(
+        path.resolve(paths.root, 'node_modules', platforms[platform])
+      )
+    ),
+    pkgDir.sync(require.resolve('@reactant/core'))
+  ];
   return [
     {
       test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-      include: [
-        paths.src,
-        paths.web,
-        path.resolve('node_modules/@reactant/base')
-      ],
+      include,
       loader: require.resolve('url-loader'),
       options: {
         limit: 10000,
@@ -34,20 +41,12 @@ export default function getRules({ paths, env }) {
     },
     {
       test: /\.html?$/,
-      include: [
-        paths.src,
-        paths.web,
-        path.resolve('node_modules/@reactant/base')
-      ],
+      include,
       loader: require.resolve('html-loader')
     },
     {
       test: /\.md$/,
-      include: [
-        paths.src,
-        paths.web,
-        path.resolve('node_modules/@reactant/base')
-      ],
+      include,
       use: [
         {
           loader: require.resolve('html-loader')
@@ -67,7 +66,7 @@ export default function getRules({ paths, env }) {
       test: /\.(s?css|sass)$/,
       exclude: [
         path.resolve(paths.root, 'node_modules'),
-        path.resolve(paths.web, 'styles')
+        path.resolve(paths.platform, 'styles')
       ],
       loaders: [
         'isomorphic-style-loader',
@@ -92,7 +91,7 @@ export default function getRules({ paths, env }) {
       test: /\.(s?css|sass)$/,
       include: [
         path.resolve(paths.root, 'node_modules'),
-        path.resolve(paths.web, 'styles')
+        path.resolve(paths.platform, 'styles')
       ],
       loaders: [
         'isomorphic-style-loader',
@@ -110,6 +109,7 @@ export default function getRules({ paths, env }) {
       ]
     },
     {
+      include,
       exclude: [
         /\.(js|jsx|mjs)$/,
         /\.(less)$/,

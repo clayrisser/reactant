@@ -4,7 +4,8 @@ import path from 'path';
 function loadReactantPlatform(config, platformName) {
   const { paths } = config;
   const rootPath = path.resolve(paths.root, 'node_modules', platformName);
-  let platform = require(path.resolve(rootPath, 'reactant'));
+  const packagePkg = require(path.resolve(rootPath, 'package.json'));
+  let platform = require(path.resolve(rootPath, packagePkg.reactantPlatform));
   if (platform.__esModule) platform = platform.default;
   platform = {
     ...platform,
@@ -29,7 +30,7 @@ function getReactantPlatforms(config) {
     require(path.resolve(paths.root, 'package.json')).dependencies
   );
   return _.filter(platformNames, platformName => {
-    return require(path.resolve(
+    return !!require(path.resolve(
       paths.root,
       'node_modules',
       platformName,

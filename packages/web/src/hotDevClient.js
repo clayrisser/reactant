@@ -1,3 +1,4 @@
+import HMRClient from 'hmr-client';
 import _ from 'lodash';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import stripAnsi from 'strip-ansi';
@@ -7,8 +8,7 @@ import {
   startReportingRuntimeErrors,
   stopReportingRuntimeErrors
 } from 'react-error-overlay';
-import HotClient from '@reactant/base/lib/hotClient';
-import { config, log } from '@reactant/base';
+import { config, log } from '@reactant/core';
 
 if (config.options.debug) window.module = module;
 
@@ -28,12 +28,12 @@ if (module.hot && _.isFunction(module.hot.dispose)) {
   module.hot.dispose(() => stopReportingRuntimeErrors());
 }
 
-const client = new HotClient({ port: config.ports.dev });
+const client = new HMRClient({ port: config.ports.dev });
 client.onConnected = async () => {
   log.trace('connected');
 };
 client.onHash = async message => {
-  if (hash) log.debug('hot reloading');
+  if (hash) log.trace('hot reloading');
   log.trace('hash', hash);
   hash = message.data;
 };

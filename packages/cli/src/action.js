@@ -2,9 +2,8 @@ import Err from 'err';
 import Promise from 'bluebird';
 import _ from 'lodash';
 import commander from 'commander';
-import log, { setLevel } from '@reactant/base/log';
+import log, { setLevel } from '@reactant/core/log';
 import ora from 'ora';
-import validate from './validate';
 import { Socket, loadConfig, createConfig } from './config';
 import { createWebpackConfig } from './webpack';
 import { loadReactantPlatform, getReactantPlatforms } from './platform';
@@ -12,7 +11,6 @@ import { loadReactantPlatform, getReactantPlatforms } from './platform';
 export default async function action(cmd, options) {
   if (options.verbose) setLevel('verbose');
   if (options.debug) setLevel('debug');
-  await validate(cmd, options);
   let config = createConfig({
     action: cmd,
     options

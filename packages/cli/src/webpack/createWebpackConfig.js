@@ -4,6 +4,7 @@ import path from 'path';
 import pkgDir from 'pkg-dir';
 import { DefinePlugin } from 'webpack';
 import { getLinkedPaths } from 'linked-deps';
+import getRules from './getRules';
 import { sanitizeConfig } from '../config';
 
 export default function createWebpackConfig(config, webpackConfig = {}) {
@@ -28,7 +29,10 @@ export default function createWebpackConfig(config, webpackConfig = {}) {
       }
     },
     externals: {
-      '@reactant/base/config': CircularJSON.stringify(sanitizedConfig)
+      '@reactant/core/config': CircularJSON.stringify(sanitizedConfig)
+    },
+    module: {
+      rules: getRules(config)
     },
     plugins: [
       ...(webpackConfig.plugins || []),
