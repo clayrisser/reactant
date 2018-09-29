@@ -10,24 +10,13 @@ import {
   NamedModulesPlugin,
   NoEmitOnErrorsPlugin
 } from 'webpack';
-import getRules from '@reactant/cli/lib/webpack/getRules';
 
 function createWebpackConfig(config, webpackConfig) {
-  const {
-    action,
-    babel,
-    env,
-    host,
-    options,
-    paths,
-    platform,
-    ports,
-    title
-  } = config;
+  const { action, babel, env, host, options, paths, ports, title } = config;
   webpackConfig = {
     ...webpackConfig,
     entry: {
-      client: [path.resolve(paths.root, 'web/client.js')]
+      client: [path.resolve(paths.platform, 'client.js')]
     },
     resolve: {
       ...webpackConfig.resolve,
@@ -40,13 +29,13 @@ function createWebpackConfig(config, webpackConfig) {
     plugins: [
       ...webpackConfig.plugins,
       new AssetsWebpackPlugin({
-        path: paths.distWeb,
+        path: paths.dist,
         filename: 'assets.json'
       }),
       new CopyWebpackPlugin([
         {
-          from: paths.srcPublic,
-          to: paths.webPublic
+          from: path.resolve(paths.src, 'public'),
+          to: path.resolve(paths.dist, 'public')
         }
       ]),
       new IgnorePlugin(/^child_process$/),
@@ -56,7 +45,7 @@ function createWebpackConfig(config, webpackConfig) {
       new HtmlWebpackPlugin({
         title,
         minify: true,
-        template: path.resolve(paths.root, platform, 'index.html')
+        template: path.resolve(paths.platform, 'index.html')
       }),
       ...(env !== 'production' ? [new NamedModulesPlugin()] : []),
       ...(action === 'start'
@@ -64,13 +53,13 @@ function createWebpackConfig(config, webpackConfig) {
         : [])
     ],
     module: {
+      ...webpackConfig.module,
       strictExportPresence: true,
       rules: [
-        ...(webpackConfig.rules || []),
-        ...getRules({ paths, env }),
+        ...webpackConfig.module.rules,
         {
           test: /\.(js|jsx|mjs)$/,
-          include: [paths.src, paths.web],
+          include: [paths.src, paths.platform],
           loader: require.resolve('babel-loader'),
           options: babel
         }
@@ -96,9 +85,10 @@ function createWebpackConfig(config, webpackConfig) {
     webpackConfig = {
       ...webpackConfig,
       entry: {
+        ...webpackConfig.entry,
         client: [
           ...webpackConfig.entry.client,
-          require.resolve('@reactant/cli/lib/hotDevClient')
+          require.resolve('./hotDevClient')
         ]
       },
       devServer: {

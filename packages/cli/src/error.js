@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { log } from '@reactant/base';
+import { log } from '@reactant/core';
 
 export default function error(err) {
   if (err.isJoi) err.code = 400;

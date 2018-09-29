@@ -1,10 +1,9 @@
-import Link from './Link';
 import log from './log';
 
 function getConfig() {
   let config = require('./config').default;
   try {
-    config = require('@reactant/base/config');
+    config = require('@reactant/core/config');
     if (config.__esModule) config = config.default;
   } catch (err) {}
   return config;
@@ -13,7 +12,7 @@ function getConfig() {
 function getAssets() {
   let assets = require('./assets').default;
   try {
-    assets = require('@reactant/base/assets');
+    assets = require('@reactant/core/assets');
     if (assets.__esModule) assets = assets.default;
   } catch (err) {}
   return assets;
@@ -22,9 +21,8 @@ function getAssets() {
 const config = getConfig();
 const assets = getAssets();
 
-export { Link, assets, config, log };
+export { assets, config, log };
 export default {
-  Link,
   assets,
   config,
   log

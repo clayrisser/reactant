@@ -1,6 +1,6 @@
-# @reactant/base
+# @reactant/core
 
-[![GitHub stars](https://img.shields.io/github/stars/codejamninja/reactant.svg?style=social&label=Stars)](https://github.com/codejamninja/reactant/packages/base)
+[![GitHub stars](https://img.shields.io/github/stars/codejamninja/reactant.svg?style=social&label=Stars)](https://github.com/codejamninja/reactant/packages/core)
 
 > reactant core components
 
@@ -10,7 +10,7 @@ Please ★ this repo if you found it useful ★ ★ ★
 ## Installation
 
 ```sh
-npm install --save @reactant/base
+npm install --save @reactant/core
 ```
 
 

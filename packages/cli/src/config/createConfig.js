@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import detectPort from 'detect-port';
+import mergeConfiguration from 'merge-configuration';
 import path from 'path';
 import pkgDir from 'pkg-dir';
 import rcConfig from 'rc-config';
@@ -9,6 +10,7 @@ import defaultConfig from './defaultConfig';
 import pkg from '../../package.json';
 
 const occupiedPorts = [];
+const rootPath = pkgDir.sync(process.cwd());
 
 export default function createConfig(...args) {
   let config = null;
@@ -29,19 +31,11 @@ async function createConfigAsync({
   environment.default = defaultEnv;
   const userConfig = rcConfig({ name: 'reactant' });
   const eslint = rcConfig({ name: 'eslint' });
-  let config = {};
-  if (_.isFunction(platformConfig)) {
-    config = platformConfig(defaultConfig);
-  } else {
-    config = _.merge({}, defaultConfig, platformConfig);
-  }
-  if (_.isFunction(userConfig)) {
-    config = userConfig(config);
-  } else {
-    config = _.merge({}, config, userConfig);
-  }
-  config = {
-    ...config,
+  const config = {
+    ...mergeConfiguration(
+      mergeConfiguration(defaultConfig, platformConfig),
+      userConfig
+    ),
     ignore: {
       errors: [
         ...(defaultConfig.ignore ? defaultConfig.ignore.errors : []),
@@ -65,26 +59,23 @@ async function createConfigAsync({
     moduleName: config.moduleName
       ? config.moduleName
       : _.camelCase(config.title).replace(/_/g, '-'),
-    publish: {
-      android: _.isArray(config.publish.android)
-        ? config.publish.android
-        : [config.publish.android],
-      web: _.isArray(config.publish.web)
-        ? config.publish.web
-        : config.publish.web,
-      ios: _.isArray(config.publish.ios)
-        ? config.publish.ios
-        : [config.publish.ios]
-    },
+    publish: _.reduce(
+      config.publish,
+      (publish, item, key) => {
+        publish[key] = _.isArray(item) ? item : [item];
+        return publish;
+      },
+      {}
+    ),
     port,
-    ports: {
-      analyzer: _.get(config, 'ports.analyzer') || (await getPort(port + 2)),
-      dev: _.get(config, 'ports.dev') || (await getPort(port + 3)),
-      native: _.get(config, 'ports.native') || 8081,
-      storybook: _.get(config, 'ports.storybook') || (await getPort(port + 1)),
-      storybookNative:
-        _.get(config, 'ports.storybookNative') || (await getPort(port + 4))
-    },
+    ports: await _.reduce(
+      config.ports,
+      async (ports, item, key) => {
+        ports[key] = item || (await getPort(port + _.keys(ports).length));
+        return ports;
+      },
+      {}
+    ),
     envs: {
       ...config.envs,
       NODE_ENV: environment.value,
@@ -93,14 +84,46 @@ async function createConfigAsync({
       PORT: config.port
     },
     env: environment.value,
-    babel: _.merge(pkg.babel, config.babel),
-    eslint: _.merge(eslint, pkg.eslint, config.eslint),
-    options,
-    paths: _.zipObject(
-      _.keys(config.paths),
-      _.map(config.paths, (configPath, configKey) => {
-        return resolvePath(configPath, configKey, config.paths);
-      })
+    babel: mergeConfiguration(pkg.babel, config.babel),
+    eslint: mergeConfiguration(
+      mergeConfiguration(eslint, pkg.eslint),
+      config.eslint
+    ),
+    options: _.reduce(
+      options,
+      (options, option, key) => {
+        if (
+          key.length &&
+          key[0] !== '_' &&
+          key !== 'Command' &&
+          key !== 'Option' &&
+          key !== 'args' &&
+          key !== 'commands' &&
+          key !== 'options' &&
+          key !== 'rawArgs'
+        ) {
+          options[key] = option;
+        }
+        return options;
+      },
+      {}
+    ),
+    paths: _.reduce(
+      config.paths,
+      (paths, path, key) => {
+        if (!_.includes(_.keys(paths), key)) {
+          paths[key] = resolvePath(path, key, config.paths);
+        }
+        return paths;
+      },
+      {
+        ...(options.platform
+          ? {
+              platform: path.resolve(rootPath, options.platform),
+              dist: path.resolve(rootPath, config.paths.dist, options.platform)
+            }
+          : {})
+      }
     )
   };
 }
@@ -111,12 +134,12 @@ function resolvePath(configPath, configKey, paths) {
   if (matches && matches.length) [firstSlug] = matches;
   if (_.includes(_.keys(paths), firstSlug)) {
     return path.resolve(
-      pkgDir.sync(process.cwd()),
+      rootPath,
       resolvePath(paths[firstSlug]),
       configPath.substr(firstSlug.length + 1)
     );
   }
-  return path.resolve(configPath);
+  return path.resolve(rootPath, configPath);
 }
 
 async function getPort(port = 6001) {

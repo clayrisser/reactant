@@ -1,5 +1,5 @@
 {
-  "extends": ["jam"],
+  "extends": ["jam/base"],
   "globals": {
     "window": true
   },

@@ -1,8 +1,8 @@
 import React from 'react';
 import ignoreWarnings from 'ignore-warnings';
-import { config } from '@reactant/base';
+import { config } from '@reactant/core';
 import { render } from 'react-dom';
-import { setLevel } from '@reactant/base/log';
+import { setLevel } from '@reactant/core/log';
 import ClientApp from '~/../web/ClientApp';
 
 const { document } = window;

@@ -1,7 +1,7 @@
 import CircularJSON from 'circular-json';
 import fs from 'fs-extra';
 import path from 'path';
-import { log } from '@reactant/base';
+import { log } from '@reactant/core';
 import createConfig from './createConfig';
 import Socket, { socketGetConfig } from './socket';
 
