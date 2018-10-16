@@ -20,10 +20,10 @@ export default {
   blacklist: [],
   offline: false,
   paths: {
-    debug: '{reactant}/debug/{dist}/{dist}',
-    dist: 'dist/{platform}/{reactant}/{src}',
-    reactant: '.reactant/{platform}/{src}/{root}',
-    root: '{src}',
+    debug: '{reactant}/debug',
+    dist: 'dist/{platform}',
+    reactant: '.reactant/{platform}',
+    root: '',
     src: 'src'
   },
   publish: {},
