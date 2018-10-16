@@ -6,7 +6,8 @@ export default {
   host: env.REACTANT_HOST || 'localhost',
   port: env.REACTANT_PORT || 6001,
   ports: {
-    dev: null
+    dev: null,
+    bla: null
   },
   envs: {},
   level: 'info',
@@ -19,10 +20,10 @@ export default {
   blacklist: [],
   offline: false,
   paths: {
-    debug: 'reactant/debug',
-    dist: 'dist',
-    reactant: '.reactant',
-    root: '',
+    debug: '{reactant}/debug/{dist}/{dist}',
+    dist: 'dist/{platform}/{reactant}/{src}',
+    reactant: '.reactant/{platform}/{src}/{root}',
+    root: '{src}',
     src: 'src'
   },
   publish: {},
@@ -44,7 +45,5 @@ export default {
   eslint: {
     extends: ['jam']
   },
-  platforms: {},
-  webpack: (config, webpack) => webpack,
-  storybook: (config, webpack) => webpack
+  platforms: {}
 };

@@ -22,17 +22,28 @@ export default function createWebpackConfig(config, webpackConfig = {}) {
       ...webpackConfig.resolve,
       modules: [...(webpackConfig.modules || []), ...getModules(config)],
       symlinks: false,
-      extensions: ['.js', '.json', '.jsx', '.mjs'],
+      extensions: _.uniq([
+        ...(webpackConfig.resolve.extensions || []),
+        '.js',
+        '.json',
+        '.jsx',
+        '.mjs'
+      ]),
       alias: {
         ...webpackConfig.alias,
         '~': paths.src
       }
     },
     externals: {
+      ...webpackConfig.externals,
       '@reactant/core/config': CircularJSON.stringify(sanitizedConfig)
     },
     module: {
-      rules: getRules(config)
+      ...webpackConfig.module,
+      rules: {
+        ...webpackConfig.module.rules,
+        ...getRules(config)
+      }
     },
     plugins: [
       ...(webpackConfig.plugins || []),

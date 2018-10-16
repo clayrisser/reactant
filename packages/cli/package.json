@@ -12,7 +12,9 @@
   "files": [
     "action.js",
     "bin",
-    "lib"
+    "config",
+    "lib",
+    "webpack"
   ],
   "scripts": {
     "build": "npm run test && babel src --ignore bin.js -d lib",
@@ -46,7 +48,7 @@
     "linked-deps": "^0.1.0",
     "lodash": "^4.17.11",
     "markdown-loader": "^4.0.0",
-    "merge-configuration": "^0.1.2",
+    "merge-configuration": "^0.1.3",
     "node-ipc": "^9.1.1",
     "ora": "^3.0.0",
     "pkg-dir": "^3.0.0",
@@ -54,6 +56,7 @@
     "postcss-loader": "^3.0.0",
     "rc-config": "^0.1.0",
     "sass-loader": "^7.1.0",
+    "trailduck": "^0.2.2",
     "url-loader": "^1.1.1",
     "webpack": "^4.20.2"
   },

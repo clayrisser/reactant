@@ -1,5 +1,15 @@
 export default function(config) {
-  config.babel.presets.push(require.resolve('babel-preset-react'));
-  config.babel.plugins.unshift(require.resolve('react-hot-loader/babel'));
-  return config;
+  return {
+    ...config,
+    babel: {
+      ...config.babel,
+      presets: [...config.babel.presets, require.resolve('babel-preset-react')],
+      plugins: [
+        require.resolve('react-hot-loader/babel'),
+        ...config.babel.plugins
+      ]
+    },
+    webpack: webpack => webpack,
+    storybook: webpack => webpack
+  };
 }
