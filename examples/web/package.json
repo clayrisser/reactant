@@ -29,7 +29,6 @@
     "test": "npm run lint && jest --forceExit"
   },
   "dependencies": {
-    "@reactant/base": "^0.0.18",
     "@reactant/web": "^0.0.18",
     "autobind-decorator": "^2.1.0",
     "babel-polyfill": "^6.26.0",

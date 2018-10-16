@@ -1,4 +1,5 @@
 import createWebpackConfig from './createWebpackConfig';
+import getRules from './getRules';
 
-export { createWebpackConfig };
-export default { createWebpackConfig };
+export { createWebpackConfig, getRules };
+export default { createWebpackConfig, getRules };

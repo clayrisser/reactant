@@ -5,6 +5,8 @@
   },
   "rules": {
     "global-require": "off",
-    "import/no-dynamic-require": "off"
+    "guard-for-in": "off",
+    "import/no-dynamic-require": "off",
+    "no-restricted-syntax": "off"
   }
 }

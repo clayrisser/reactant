@@ -2,6 +2,7 @@ import AssetsWebpackPlugin from 'assets-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
+import mergeConfiguration from 'merge-configuration';
 import path from 'path';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import {
@@ -15,6 +16,13 @@ function createWebpackConfig(config, webpackConfig) {
   const { action, babel, env, host, options, paths, ports, title } = config;
   webpackConfig = {
     ...webpackConfig,
+    externals: {
+      ...webpackConfig.externals,
+      child_process: {},
+      deasync: {},
+      fs: {},
+      winston: {}
+    },
     entry: {
       client: [path.resolve(paths.platform, 'client.js')]
     },
@@ -122,6 +130,7 @@ function createWebpackConfig(config, webpackConfig) {
       ]
     };
   }
+  webpackConfig = mergeConfiguration(webpackConfig, config.webpack, {}, config);
   return webpackConfig;
 }
 

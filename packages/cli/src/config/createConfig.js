@@ -1,16 +1,12 @@
 import _ from 'lodash';
-import detectPort from 'detect-port';
 import mergeConfiguration from 'merge-configuration';
-import path from 'path';
-import pkgDir from 'pkg-dir';
 import rcConfig from 'rc-config';
 import { environment } from 'js-info';
 import { sleep } from 'deasync';
+import ConfigPaths from './paths';
+import ConfigPorts from './ports';
 import defaultConfig from './defaultConfig';
 import pkg from '../../package.json';
-
-const occupiedPorts = [];
-const rootPath = pkgDir.sync(process.cwd());
 
 export default function createConfig(...args) {
   let config = null;
@@ -36,6 +32,7 @@ async function createConfigAsync({
       mergeConfiguration(defaultConfig, platformConfig),
       userConfig
     ),
+    platform: options.platform || '',
     ignore: {
       errors: [
         ...(defaultConfig.ignore ? defaultConfig.ignore.errors : []),
@@ -51,10 +48,10 @@ async function createConfigAsync({
       ]
     }
   };
-  const port = await getPort(config.port);
+  const configPaths = new ConfigPaths(config);
+  const configPorts = new ConfigPorts(config);
   return {
     ...config,
-    platform: options.platform,
     action: action || config.action,
     moduleName: config.moduleName
       ? config.moduleName
@@ -67,15 +64,8 @@ async function createConfigAsync({
       },
       {}
     ),
-    port,
-    ports: await _.reduce(
-      config.ports,
-      async (ports, item, key) => {
-        ports[key] = item || (await getPort(port + _.keys(ports).length));
-        return ports;
-      },
-      {}
-    ),
+    port: configPorts.basePort,
+    ports: configPorts.ports,
     envs: {
       ...config.envs,
       NODE_ENV: environment.value,
@@ -108,43 +98,6 @@ async function createConfigAsync({
       },
       {}
     ),
-    paths: _.reduce(
-      config.paths,
-      (paths, path, key) => {
-        if (!_.includes(_.keys(paths), key)) {
-          paths[key] = resolvePath(path, key, config.paths);
-        }
-        return paths;
-      },
-      {
-        ...(options.platform
-          ? {
-              platform: path.resolve(rootPath, options.platform),
-              dist: path.resolve(rootPath, config.paths.dist, options.platform)
-            }
-          : {})
-      }
-    )
+    paths: configPaths.paths
   };
-}
-
-function resolvePath(configPath, configKey, paths) {
-  let firstSlug = '';
-  const matches = configPath.match(/^[^/]+/);
-  if (matches && matches.length) [firstSlug] = matches;
-  if (_.includes(_.keys(paths), firstSlug)) {
-    return path.resolve(
-      rootPath,
-      resolvePath(paths[firstSlug]),
-      configPath.substr(firstSlug.length + 1)
-    );
-  }
-  return path.resolve(rootPath, configPath);
-}
-
-async function getPort(port = 6001) {
-  let newPort = await detectPort(port);
-  if (_.includes(occupiedPorts, newPort)) return getPort(++newPort);
-  occupiedPorts.push(newPort);
-  return newPort;
 }
