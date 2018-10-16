@@ -35,7 +35,7 @@
     "autoprefixer": "^9.1.5",
     "bluebird": "^3.5.2",
     "circular-json": "^0.5.7",
-    "commander": "^2.18.0",
+    "commander": "^2.19.0",
     "css-loader": "^1.0.0",
     "deasync": "^0.1.13",
     "detect-port": "^1.2.3",
