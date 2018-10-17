@@ -1,6 +1,6 @@
 import createConfig from '../../src/config/createConfig';
 
-describe('createConfig()', () => {
+describe('createConfig({args})', () => {
   it('should create config', async () => {
     const config = createConfig({
       options: { platform: 'some-platform' },
