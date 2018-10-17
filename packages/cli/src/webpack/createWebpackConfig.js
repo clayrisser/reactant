@@ -23,7 +23,7 @@ export default function createWebpackConfig(config, webpackConfig = {}) {
       modules: [...(webpackConfig.modules || []), ...getModules(config)],
       symlinks: false,
       extensions: _.uniq([
-        ...(webpackConfig.resolve.extensions || []),
+        ..._.get(webpackConfig, 'resolve.extensions', []),
         '.js',
         '.json',
         '.jsx',
@@ -40,10 +40,7 @@ export default function createWebpackConfig(config, webpackConfig = {}) {
     },
     module: {
       ...webpackConfig.module,
-      rules: {
-        ...webpackConfig.module.rules,
-        ...getRules(config)
-      }
+      rules: [..._.get(webpackConfig, 'module.rules', []), ...getRules(config)]
     },
     plugins: [
       ...(webpackConfig.plugins || []),
