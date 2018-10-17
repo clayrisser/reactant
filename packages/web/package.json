@@ -1,6 +1,6 @@
 {
   "name": "@reactant/web",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "reactant web module",
   "reactantPlatform": "lib/reactant.js",
   "keywords": [
@@ -41,8 +41,8 @@
     "start": "babel-node src"
   },
   "dependencies": {
-    "@reactant/cli": "0.0.18",
-    "@reactant/core": "0.0.18",
+    "@reactant/cli": "^0.0.19",
+    "@reactant/core": "^0.0.19",
     "@storybook/addon-actions": "^4.0.0-alpha.23",
     "@storybook/addon-links": "^4.0.0-alpha.23",
     "@storybook/addons": "^4.0.0-alpha.23",
