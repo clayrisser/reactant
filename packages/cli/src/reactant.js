@@ -1,16 +1,10 @@
-import Err from 'err';
 import _ from 'lodash';
 import commander from 'commander';
 import action from './action';
-import error from './error';
+import { handleError, ERR_NO_ACTION, ERR_NO_PLATFORM } from './errors';
 import { createConfig } from './config';
 import { version } from '../package';
 import { loadReactantPlatform, getReactantPlatforms } from './platform';
-
-const errors = {
-  NO_ACTION: new Err('No action specified', 400),
-  NO_PLATFORM: new Err('No platform specified', 400)
-};
 
 let isAction = false;
 
@@ -46,13 +40,17 @@ commander.option('-p --platform [name]', 'platform name');
 commander.option('-s --storybook', 'storybook');
 commander.option('-v --verbose', 'verbose logging');
 commander.action((cmd, options) => {
-  isAction = true;
-  if (!options) throw errors.NO_ACTION;
-  if (!options.platform) throw errors.NO_PLATFORM;
-  return action(cmd, options).catch(error);
+  try {
+    isAction = true;
+    if (!options) throw ERR_NO_ACTION;
+    if (!options.platform) throw ERR_NO_PLATFORM;
+    return action(cmd, options).catch(handleError);
+  } catch (err) {
+    return handleError(err);
+  }
 });
 commander.parse(process.argv);
 
 if (!isAction) {
-  throw errors.NO_ACTION;
+  handleError(ERR_NO_ACTION);
 }
