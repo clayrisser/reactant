@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import AssetsWebpackPlugin from 'assets-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -29,13 +30,13 @@ function createWebpackConfig(config, webpackConfig) {
     resolve: {
       ...webpackConfig.resolve,
       alias: {
-        ...webpackConfig.resolve.alias,
+        ..._.get(webpackConfig, 'resolve.alias', {}),
         'webpack/hot/poll': require.resolve('webpack/hot/poll')
       }
     },
     target: 'web',
     plugins: [
-      ...webpackConfig.plugins,
+      ...(webpackConfig.plugins || []),
       new AssetsWebpackPlugin({
         path: paths.dist,
         filename: 'assets.json'
@@ -64,7 +65,7 @@ function createWebpackConfig(config, webpackConfig) {
       ...webpackConfig.module,
       strictExportPresence: true,
       rules: [
-        ...webpackConfig.module.rules,
+        ..._.get(webpackConfig, 'module.rules', []),
         {
           test: /\.(js|jsx|mjs)$/,
           include: [paths.src, paths.platform],
