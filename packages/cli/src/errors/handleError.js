@@ -6,9 +6,11 @@ export default function handleError(err) {
   if (!err.code || !_.isNumber(err.code)) err.code = 500;
   const statusCode = err.code.toString();
   if (statusCode.length && statusCode[0] === '4') {
-    return log.warn(err.message);
+    log.warn(err.message);
+  } else {
+    log.error(err.stack);
   }
-  return log.error(err);
+  process.exit(1);
 }
 
 function sanitizeErr(err) {

@@ -9,7 +9,7 @@ export default class ConfigPaths {
   constructor(config) {
     const { paths, platform } = config;
     this.config = config;
-    this.pathVars = { ...paths, platform };
+    this.pathVars = { ...paths, _platform: platform };
     this.parsedPathVars = this.getParsedPathVars();
     this.rootPath = pkgDir.sync(process.cwd());
     this.hasCycles({ throwError: true });

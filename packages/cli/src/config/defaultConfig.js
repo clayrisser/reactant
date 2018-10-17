@@ -21,8 +21,9 @@ export default {
   offline: false,
   paths: {
     debug: '{reactant}/debug',
-    dist: 'dist/{platform}',
-    reactant: '.reactant/{platform}',
+    dist: 'dist/{_platform}',
+    platform: '{_platform}',
+    reactant: '.reactant/{_platform}',
     root: '',
     src: 'src'
   },
