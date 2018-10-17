@@ -6,8 +6,7 @@ export default {
   host: env.REACTANT_HOST || 'localhost',
   port: env.REACTANT_PORT || 6001,
   ports: {
-    dev: null,
-    bla: null
+    dev: null
   },
   envs: {},
   level: 'info',

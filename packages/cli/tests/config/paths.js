@@ -8,7 +8,9 @@ describe('ConfigPaths.paths', () => {
       platform: 'some-platform',
       paths: {
         hello: 'world',
-        world: 'hello/{hello}'
+        world: 'hello/{hello}',
+        howdy: 'hello/{world}',
+        texas: 'howdy/{hello}'
       }
     });
     expect(configPaths.paths.hello).toBe(
@@ -16,6 +18,12 @@ describe('ConfigPaths.paths', () => {
     );
     expect(configPaths.paths.world).toBe(
       path.resolve(pkgDir.sync(process.cwd()), 'hello/world')
+    );
+    expect(configPaths.paths.howdy).toBe(
+      path.resolve(pkgDir.sync(process.cwd()), 'hello/hello/world')
+    );
+    expect(configPaths.paths.texas).toBe(
+      path.resolve(pkgDir.sync(process.cwd()), 'howdy/world')
     );
   });
   it('it throws error for cyclic config paths', async () => {
