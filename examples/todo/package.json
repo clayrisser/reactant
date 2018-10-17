@@ -1,7 +1,7 @@
 {
   "name": "todo",
   "private": true,
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "todo app example built in reactant",
   "main": "expo/index.js",
   "homepage": "https://reactant.codejam.ninja",
@@ -87,8 +87,8 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "@reactant/cli": "^0.0.18",
-    "@reactant/storybook": "^0.0.18",
+    "@reactant/cli": "^0.0.19",
+    "@reactant/storybook": "^0.0.19",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",
