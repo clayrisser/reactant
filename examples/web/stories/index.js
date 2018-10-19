@@ -1,1 +1,1 @@
-import './welcome';
+import './button';

@@ -8,8 +8,9 @@ export default class StyledComponents {
   constructor(ChildRoot, { theme = {}, themes = {} }) {
     this.ChildRoot = ChildRoot;
     this.theme = {
-      ...themes[config.theme],
-      ...theme
+      ...themes[config.themeName],
+      ...theme,
+      ...config.theme
     };
   }
 
