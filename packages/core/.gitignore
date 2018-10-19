@@ -49,3 +49,4 @@ idea/
 # Application
 /lib
 package-lock.json
+yarn.lock

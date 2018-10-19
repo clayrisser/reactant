@@ -1,4 +1,5 @@
 import log from './log';
+import ReactantApp from './ReactantApp';
 
 function getConfig() {
   let config = require('./config').default;
@@ -21,8 +22,9 @@ function getAssets() {
 const config = getConfig();
 const assets = getAssets();
 
-export { assets, config, log };
+export { ReactantApp, assets, config, log };
 export default {
+  ReactantApp,
   assets,
   config,
   log

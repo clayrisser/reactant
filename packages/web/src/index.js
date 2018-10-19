@@ -1,5 +1,5 @@
-import Reactant from './Reactant';
-import init from './init';
+import Root from './Root';
+import App from './App';
 
-export { Reactant, init };
-export default { Reactant, init };
+export { Root, App };
+export default { Root, App };
