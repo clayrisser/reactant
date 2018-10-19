@@ -1,0 +1,70 @@
+{
+  "name": "@reactant/styled-components",
+  "version": "0.0.21",
+  "description": "reactant web module",
+  "reactantPlugin": "lib/reactantPlugin.js",
+  "keywords": [
+    "@reactant/styled-components",
+    "reactant",
+    "react",
+    "webn"
+  ],
+  "homepage": "https://github.com/codejamninja/reactant/packages/web",
+  "bugs": {
+    "url": "https://github.com/codejamninja/reactant/packages/web/issues",
+    "email": "jam@codejam.ninja"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Jam Risser",
+    "email": "jam@codejam.ninja",
+    "url": "https://codejam.ninja"
+  },
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codejamninja/reactant/packages/web"
+  },
+  "scripts": {
+    "build": "babel src -d lib",
+    "clean": "rimraf lib",
+    "format": "prettier --write ./src/**/*.js",
+    "lint": "npm run format && eslint ./",
+    "lint:fix": "npm run format && eslint --fix ./",
+    "prepublish": "npm run clean && npm run build",
+    "start": "babel-node src",
+    "test": "npm run lint",
+    "test:reset": "jest --clearCache && npm run test"
+  },
+  "dependencies": {
+    "@reactant/core": "^0.0.21",
+    "react": "^16.5.2",
+    "styled-components": "^4.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^9.0.0",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^5.5.0",
+    "eslint-config-jam": "^0.1.2",
+    "eslint-plugin-jest": "^21.25.1",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "rimraf": "^2.6.2"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "eslintIgnore": [
+    "lib"
+  ]
+}
