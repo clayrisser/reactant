@@ -1,7 +1,7 @@
 {
   "name": "web",
   "private": true,
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "web app built in reactant",
   "main": "web/client.js",
   "homepage": "https://reactant.codejam.ninja",
@@ -29,8 +29,8 @@
     "test": "npm run lint && jest --forceExit"
   },
   "dependencies": {
-    "@reactant/core": "^0.0.20",
-    "@reactant/web": "^0.0.20",
+    "@reactant/core": "^0.0.21",
+    "@reactant/web": "^0.0.21",
     "@storybook/react": "^3.4.11",
     "autobind-decorator": "^2.1.0",
     "babel-polyfill": "^6.26.0",
@@ -39,7 +39,7 @@
     "react": "^16.5.2"
   },
   "devDependencies": {
-    "@reactant/cli": "^0.0.20",
+    "@reactant/cli": "^0.0.21",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",
