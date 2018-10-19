@@ -2,15 +2,15 @@ import React from 'react';
 import ignoreWarnings from 'ignore-warnings';
 import { ReactantApp } from '@reactant/core';
 import { render } from 'react-dom';
+import Reactant from './Reactant';
 
 const { document } = window;
 
 export default class App extends ReactantApp {
-  constructor(
-    Root,
-    { props = {}, container = document.getElementById('app') }
-  ) {
+  constructor(Root = Reactant, options = {}) {
+    const { props = {}, container = document.getElementById('app') } = options;
     super(...arguments);
+    this.Root = Root;
     this.props = props;
     this.container = container;
     if (!this.config.options.debug) {
