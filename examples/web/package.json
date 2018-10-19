@@ -32,12 +32,15 @@
     "@reactant/core": "^0.0.21",
     "@reactant/styled-components": "^0.0.21",
     "@reactant/web": "^0.0.21",
+    "@storybook/addon-actions": "^3.4.11",
     "@storybook/react": "^3.4.11",
+    "autobind": "^1.0.3",
     "autobind-decorator": "^2.1.0",
     "babel-polyfill": "^6.26.0",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
-    "react": "^16.5.2"
+    "react": "^16.5.2",
+    "styled-components": "^4.0.2"
   },
   "devDependencies": {
     "@reactant/cli": "^0.0.21",
