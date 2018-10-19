@@ -8,6 +8,7 @@ export default {
   ports: {
     dev: null
   },
+  plugins: [],
   envs: {},
   level: 'info',
   ignore: {

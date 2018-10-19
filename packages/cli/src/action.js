@@ -7,6 +7,7 @@ import log, { setLevel } from '@reactant/core/log';
 import ora from 'ora';
 import { Socket, loadConfig, createConfig } from './config';
 import { createWebpackConfig } from './webpack';
+import { getReactantPluginsConfig } from './plugin';
 import { loadReactantPlatform, getReactantPlatforms } from './platform';
 
 export default async function action(cmd, options) {
@@ -31,7 +32,8 @@ export default async function action(cmd, options) {
     action: cmd,
     defaultEnv: 'development',
     options,
-    platformConfig: platform.config || {}
+    platformConfig: platform.config || {},
+    pluginsConfig: getReactantPluginsConfig(config, config.plugins)
   });
   const socket = new Socket({ silent: !options.debug });
   await socket.start();

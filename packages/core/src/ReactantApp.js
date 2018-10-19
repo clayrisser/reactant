@@ -23,8 +23,10 @@ export default class ReactantApp {
     }
   }
 
-  register(pluginName) {
-    log.trace(`registering plugin '${pluginName}'`);
+  register(Plugin, options = {}) {
+    const plugin = new Plugin(this.Root, options);
+    log.trace(`registering plugin '${plugin.name}'`);
+    this.Root = plugin.Root;
   }
 
   render() {

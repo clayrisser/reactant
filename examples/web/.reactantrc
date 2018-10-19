@@ -1,3 +1,5 @@
 title: Reactant
 platforms:
   web: '@reactant/web'
+plugins:
+  - '@reactant/styled-components'

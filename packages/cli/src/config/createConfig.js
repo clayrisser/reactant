@@ -21,7 +21,8 @@ async function createConfigAsync({
   defaultEnv = 'development',
   action = 'build',
   options = {},
-  platformConfig = {}
+  platformConfig = {},
+  pluginsConfig = {}
 }) {
   const optionsConfig = options.config ? JSON.parse(options.config) : {};
   environment.default = defaultEnv;
@@ -29,8 +30,14 @@ async function createConfigAsync({
   const eslint = rcConfig({ name: 'eslint' });
   const config = {
     ...mergeConfiguration(
-      mergeConfiguration(defaultConfig, platformConfig),
-      userConfig
+      mergeConfiguration(
+        mergeConfiguration(
+          mergeConfiguration(defaultConfig, platformConfig),
+          pluginsConfig
+        ),
+        userConfig
+      ),
+      optionsConfig
     ),
     platform: options.platform || '',
     ignore: {
