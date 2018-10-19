@@ -9,15 +9,20 @@ function loadReactantPlatform(config, platformName) {
   if (platform.__esModule) platform = platform.default;
   platform = {
     ...platform,
-    actions: _.zipObject(
-      _.keys(platform.actions),
-      _.map(platform.actions, action => {
+    actions: _.reduce(
+      platform.actions,
+      (actions, action, key) => {
         if (action.run) {
-          if (action.dependsOn) return action;
-          return { ...action, dependsOn: [] };
+          if (action.dependsOn) {
+            action = { ...action, dependsOn: [] };
+          }
+        } else {
+          action = { run: action, dependsOn: [] };
         }
-        return { run: action, dependsOn: [] };
-      })
+        actions[key] = action;
+        return actions;
+      },
+      {}
     ),
     rootPath
   };

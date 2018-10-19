@@ -1,17 +1,21 @@
 import 'babel-polyfill';
 import _ from 'lodash';
-import mergeConfiguration from 'merge-configuration';
+import mergeConfiguration from '@reactant/web/node_modules/merge-configuration';
 import { createWebpackConfig } from '@reactant/cli/webpack';
 import log, { setLevel } from '@reactant/core/log';
 import path from 'path';
 import pkgDir from 'pkg-dir';
-import { loadConfig } from '@reactant/cli/config';
+import { rebuildConfig } from '@reactant/cli/config';
 
+let debug = false;
 if (_.includes(process.argv, '--verbose')) setLevel('verbose');
-if (_.includes(process.argv, '--debug')) setLevel('debug');
+if (_.includes(process.argv, '--debug')) {
+  setLevel('debug');
+  debug = true;
+}
 
 module.exports = webpackConfig => {
-  const config = loadConfig({});
+  const config = rebuildConfig({ options: { platform: 'web', debug } });
   const { paths } = config;
   webpackConfig = createWebpackConfig(config, webpackConfig);
   webpackConfig.resolve.extensions.unshift('.web.js');

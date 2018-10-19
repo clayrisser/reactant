@@ -8,19 +8,25 @@ import { loadReactantPlatform, getReactantPlatforms } from './platform';
 
 let isAction = false;
 
-function getActions() {
+function getCliInfo() {
   const config = createConfig({});
   let actions = [];
+  let options = [];
   _.each(getReactantPlatforms(config), platformName => {
     const platform = loadReactantPlatform(config, platformName);
     _.each(_.keys(platform.actions), action => {
       actions = _.uniq([...actions, action]);
     });
+    _.each(platform.options, (description, key) => {
+      options = _.uniqBy([...options, { key, description }], 'key');
+    });
   });
-  return actions;
+  return { actions, options };
 }
 
-_.each(getActions(), action => {
+const cliInfo = getCliInfo();
+
+_.each(cliInfo.actions, action => {
   commander.command(action);
 });
 commander.version(version);
@@ -37,8 +43,10 @@ commander.option('-a --analyze', 'analyze bundle');
 commander.option('-c --config [config]', 'config');
 commander.option('-d --debug', 'debug logging');
 commander.option('-p --platform [name]', 'platform name');
-commander.option('-s --storybook', 'storybook');
 commander.option('-v --verbose', 'verbose logging');
+_.each(cliInfo.options, option => {
+  commander.option(option.key, option.description);
+});
 commander.action((cmd, options) => {
   try {
     isAction = true;
