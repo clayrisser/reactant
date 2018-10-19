@@ -1,5 +1,6 @@
 import Err from 'err';
 import Promise from 'bluebird';
+import TrailDuck from 'trailduck';
 import _ from 'lodash';
 import commander from 'commander';
 import log, { setLevel } from '@reactant/core/log';
@@ -66,21 +67,26 @@ async function runActions(config, { platform }) {
   return null;
 }
 
-function getActionNames(actionName, platform, actionNames = []) {
-  return _.uniq(
-    _.flattenDeep([
-      ...actionNames,
-      ..._.map(platform.actions[actionName].dependsOn, actionName => {
-        if (_.includes(actionNames, actionName)) {
-          log.warn(`circular action found for '${actionName}'`);
-          return [actionName];
-        }
-        return getActionNames(actionName, platform, [
-          ...actionNames,
-          actionName
-        ]);
-      }),
-      actionName
-    ])
-  );
+function getActionGraph(actionName, platform, graph = {}) {
+  const action = platform.actions[actionName];
+  graph[actionName] = { children: action.dependsOn };
+  _.each(action.dependsOn, actionName => {
+    if (!_.includes(_.keys(graph), actionName)) {
+      graph = getActionGraph(actionName, platform, graph);
+    }
+  });
+  return graph;
+}
+
+function getActionNames(actionName, platform) {
+  const graph = getActionGraph(actionName, platform);
+  const trailDuck = new TrailDuck(graph);
+  const cyclicalActions = _.uniq(_.flatten(trailDuck.cycles));
+  if (cyclicalActions.length) {
+    throw new Err(
+      `cyclical actions detected '${cyclicalActions.join("', '")}'`,
+      500
+    );
+  }
+  return _.map(trailDuck.ordered, 'name');
 }
