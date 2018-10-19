@@ -30,16 +30,7 @@ _.each(cliInfo.actions, action => {
   commander.command(action);
 });
 commander.version(version);
-commander.option('--action [action]', 'override default action');
 commander.option('--clean', 'clean');
-commander.option('--device [device]', 'run on device');
-commander.option('--expo-platform [name]', 'expo platform name');
-commander.option('--inotify', 'increase inotify');
-commander.option('--inspect', 'inspect');
-commander.option('--inspect-brk', 'inpsect break');
-commander.option('--offline', 'offline');
-commander.option('--simulator [simulator]', 'run on simulator');
-commander.option('-a --analyze', 'analyze bundle');
 commander.option('-c --config [config]', 'config');
 commander.option('-d --debug', 'debug logging');
 commander.option('-p --platform [name]', 'platform name');

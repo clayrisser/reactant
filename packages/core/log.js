@@ -1,4 +1,1 @@
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-module.exports = require('./lib/log');
+require('export-es6')(module, require('./lib/log'));

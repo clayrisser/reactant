@@ -4,6 +4,7 @@
     "window": true
   },
   "rules": {
-    "no-empty": "off"
+    "no-empty": "off",
+    "prefer-rest-params": "off"
   }
 }

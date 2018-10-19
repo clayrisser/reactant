@@ -1,6 +1,10 @@
 import 'babel-polyfill';
-import { init } from '@reactant/web';
+import { App } from '@reactant/web';
 
-const initialProps = {};
+const app = new App({
+  props: {}
+});
+app.register('howdy');
+app.render();
 
-export default init(initialProps);
+export default app;
