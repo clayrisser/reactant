@@ -16,7 +16,7 @@ if (_.includes(process.argv, '--debug')) {
 
 module.exports = webpackConfig => {
   const config = rebuildConfig({ options: { platform: 'web', debug } });
-  const { paths } = config;
+  const { paths, babel } = config;
   webpackConfig = createWebpackConfig(config, webpackConfig);
   webpackConfig.resolve.extensions.unshift('.web.js');
   webpackConfig.externals = {
@@ -33,7 +33,8 @@ module.exports = webpackConfig => {
       paths.stories,
       ...getModuleIncludes(['react-navigation', 'static-container'], config)
     ],
-    loader: require.resolve('babel-loader')
+    loader: require.resolve('babel-loader'),
+    options: babel
   });
   webpackConfig = mergeConfiguration(
     webpackConfig,
