@@ -1,0 +1,10 @@
+{
+  "rules": {
+    "import/no-unresolved": [
+      "error",
+      {
+        "ignore": ["^~", "^./lib", "^@reactant"]
+      }
+    ]
+  }
+}

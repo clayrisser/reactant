@@ -2,8 +2,9 @@ import CircularJSON from 'circular-json';
 import fs from 'fs-extra';
 import path from 'path';
 import { log } from '@reactant/core';
-import createConfig from './createConfig';
 import Socket, { socketGetConfig } from './socket';
+import createConfig from './createConfig';
+import { loadReactantPlatform } from '../platform';
 
 let globalConfig = null;
 
@@ -61,7 +62,14 @@ function rebuildConfig({
       platform: options.platform
     };
   }
-  return loadConfig({ options, defaultEnv, action });
+  const platformName = socketConfig.platforms[options.platform];
+  const platform = loadReactantPlatform(socketConfig, platformName);
+  return loadConfig({
+    options,
+    defaultEnv,
+    action,
+    platformConfig: platform.config || {}
+  });
 }
 
 export {

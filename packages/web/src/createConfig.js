@@ -18,6 +18,11 @@ export default function(config) {
       ...config.ports,
       storybook: null
     },
+    paths: {
+      ...config.paths,
+      stories: 'stories',
+      storybook: '{reactant}/storybook'
+    },
     webpack: webpack => webpack,
     ...(storybook ? { storybook: webpack => webpack } : {})
   };
