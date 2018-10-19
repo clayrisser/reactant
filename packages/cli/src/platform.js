@@ -13,7 +13,7 @@ function loadReactantPlatform(config, platformName) {
       platform.actions,
       (actions, action, key) => {
         if (action.run) {
-          if (action.dependsOn) {
+          if (!action.dependsOn) {
             action = { ...action, dependsOn: [] };
           }
         } else {
