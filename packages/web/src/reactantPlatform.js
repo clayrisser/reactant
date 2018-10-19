@@ -14,5 +14,8 @@ export default {
       dependsOn: ['build']
     },
     start
+  },
+  options: {
+    '-s --storybook': 'storybook'
   }
 };

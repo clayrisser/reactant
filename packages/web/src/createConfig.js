@@ -1,3 +1,8 @@
+import _ from 'lodash';
+
+const storybook =
+  _.includes(process.argv, '-s') || _.includes(process.argv, '--storybook');
+
 export default function(config) {
   return {
     ...config,
@@ -9,7 +14,11 @@ export default function(config) {
         ...config.babel.plugins
       ]
     },
+    ports: {
+      ...config.ports,
+      storybook: null
+    },
     webpack: webpack => webpack,
-    storybook: webpack => webpack
+    ...(storybook ? { storybook: webpack => webpack } : {})
   };
 }
