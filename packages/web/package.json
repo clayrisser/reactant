@@ -22,7 +22,7 @@
   },
   "files": [
     "Reactant.js",
-    "init.js",
+    "App.js",
     "lib",
     "storiesOf.js"
   ],

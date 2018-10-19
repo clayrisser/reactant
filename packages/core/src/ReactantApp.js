@@ -2,7 +2,8 @@ import { log, config } from '.';
 import { setLevel } from './log';
 
 export default class ReactantApp {
-  constructor() {
+  constructor(Root) {
+    this.Root = Root;
     this.config = config;
     if (
       config.options.verbose ||
