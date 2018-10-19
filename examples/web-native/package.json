@@ -1,7 +1,7 @@
 {
   "name": "todo-web",
   "private": true,
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "todo web app example built in reactant",
   "main": "expo/index.js",
   "homepage": "https://reactant.codejam.ninja",
@@ -63,7 +63,7 @@
   },
   "dependencies": {
     "@reactant/base": "^0.0.18",
-    "@reactant/web": "^0.0.19",
+    "@reactant/web": "^0.0.20",
     "autobind-decorator": "^2.1.0",
     "babel-loader": "^7.1.5",
     "babel-polyfill": "^6.26.0",
@@ -88,8 +88,8 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "@reactant/cli": "^0.0.19",
-    "@reactant/storybook": "^0.0.19",
+    "@reactant/cli": "^0.0.20",
+    "@reactant/storybook": "^0.0.20",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",
