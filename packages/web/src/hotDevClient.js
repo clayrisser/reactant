@@ -30,34 +30,34 @@ if (module.hot && _.isFunction(module.hot.dispose)) {
 
 const client = new HMRClient({ port: config.ports.dev });
 client.onConnected = async () => {
-  log.trace('connected');
+  log.silly('connected');
 };
 client.onHash = async message => {
-  if (hash) log.trace('hot reloading');
-  log.trace('hash', hash);
+  if (hash) log.silly('hot reloading');
+  log.silly('hash', hash);
   hash = message.data;
 };
 client.onStillOk = async () => {
-  log.trace('still-ok');
+  log.silly('still-ok');
 };
 client.onOk = async () => {
-  log.trace('ok');
+  log.silly('ok');
   await handleSuccess();
 };
 client.onContentChanged = () => {
-  log.trace('content-changed');
+  log.silly('content-changed');
   windowReload();
 };
 client.onWarngins = message => {
-  log.trace('warnings');
+  log.silly('warnings');
   handleWarnings(message.data);
 };
 client.onErrors = message => {
-  log.trace('errors');
+  log.silly('errors');
   handleErrors(message.data);
 };
 client.onClose = () => {
-  log.trace('close');
+  log.silly('close');
   log.debug(
     'The development server has disconnected.\n' +
       'Refresh the page if necessary.'

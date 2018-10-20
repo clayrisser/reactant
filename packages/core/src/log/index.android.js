@@ -1,14 +1,8 @@
-import loglevel from 'loglevel';
-
-const log = createLogger();
+const logger = createLogger();
 
 function createLogger() {
-  loglevel.setLevel('debug');
-  return loglevel;
+  return require('./loglevel');
 }
 
-export function setLevel(level) {
-  log.setLevel(level);
-}
-
-export default log;
+export const { setLevel } = logger;
+export default logger.default;
