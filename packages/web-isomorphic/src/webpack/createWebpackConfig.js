@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import mergeConfiguration from 'merge-configuration';
 import path from 'path';
 import pkgDir from 'pkg-dir';
@@ -11,7 +12,7 @@ import createClientConfig from './createClientConfig';
 import createServerConfig from './createServerConfig';
 
 export default function createWebConfig(config, webpackConfig, target = 'web') {
-  const { paths, /* eslint, */ babel, env, action, platform } = config;
+  const { paths, /* eslint, */ babel, env, action } = config;
   process.env.NODE_ENV = env;
   if (target === 'client') target = 'web';
   if (target === 'server') target = 'node';
@@ -26,11 +27,7 @@ export default function createWebConfig(config, webpackConfig, target = 'web') {
     resolve: {
       ...webpackConfig.resolve,
       alias: {
-        ...webpackConfig.resolve.alias,
-        'react-native': require.resolve('react-native-web'),
-        'react-native/Libraries/Renderer/shims/ReactNativePropRegistry': require.resolve(
-          'react-native-web/dist/modules/ReactNativePropRegistry'
-        ),
+        ..._.get(webpackConfig, 'resolve.alias'),
         'webpack/hot/poll': require.resolve('webpack/hot/poll')
       }
     },
@@ -51,25 +48,10 @@ export default function createWebConfig(config, webpackConfig, target = 'web') {
           include: [
             paths.src,
             paths.platform,
-            ...(platform.web.native
-              ? getModuleIncludes(
-                  [
-                    '@reactant/base',
-                    'native-base',
-                    'native-base-shoutem-theme',
-                    'react-native-drawer',
-                    'react-native-easy-grid',
-                    'react-native-keyboard-aware-scroll-view',
-                    'react-native-safe-area-view',
-                    'react-native-tab-view',
-                    'react-native-vector-icons',
-                    'react-native-web',
-                    'react-navigation',
-                    'static-container'
-                  ],
-                  config
-                )
-              : [])
+            ...getModuleIncludes(
+              ['@reactant/core', 'react-navigation', 'static-container'],
+              config
+            )
           ],
           loader: require.resolve('babel-loader'),
           options: babel
@@ -86,8 +68,9 @@ export default function createWebConfig(config, webpackConfig, target = 'web') {
   };
   if (target === 'web') {
     webpackConfig = createClientConfig(config, webpackConfig);
+  } else {
+    webpackConfig = createServerConfig(config, webpackConfig);
   }
-  webpackConfig = createServerConfig(config, webpackConfig);
   return mergeConfiguration(webpackConfig, config.webpack, {}, config);
 }
 

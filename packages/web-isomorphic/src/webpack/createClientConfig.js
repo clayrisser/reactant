@@ -7,20 +7,11 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { IgnorePlugin } from 'webpack';
 
 export default function createClientConfig(config, webpackConfig) {
-  const { ports, paths, host, env, offline, action, platform } = config;
+  const { ports, paths, host, env, offline, action } = config;
   webpackConfig = {
     ...webpackConfig,
     entry: {
       client: [path.resolve(paths.platform, 'client.js')]
-    },
-    resolve: {
-      ...webpackConfig.resolve,
-      alias: {
-        ...webpackConfig.resolve.alias,
-        '@reactant/base/init/client': platform.web.native
-          ? require.resolve('@reactant/base/init/native/client')
-          : require.resolve('@reactant/base/init/client')
-      }
     },
     externals: {
       ...webpackConfig.externals,

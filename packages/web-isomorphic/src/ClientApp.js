@@ -3,8 +3,6 @@ import React from 'react';
 import ignoreWarnings from 'ignore-warnings';
 import { ReactantApp, config, log } from '@reactant/core';
 import { hydrate } from 'react-dom';
-import { persistStore } from 'redux-persist';
-import { render } from 'react-dom';
 import Reactant from './Reactant';
 
 const { document } = window;
@@ -31,17 +29,14 @@ export default class ClientApp extends ReactantApp {
         return () => removeCss.forEach(f => f());
       }
     };
-    hydrate(<ClientApp {...initialProps} />, document.getElementById('app'));
+    hydrate(<Root {...this.props} />, document.getElementById('app'));
   }
 
   init() {
     super.init();
     if (config.offline) require('offline-plugin/runtime').install();
     if (module.hot) {
-      module.hot.accept(
-        '~/../web/ClientRoot',
-        renderClient.bind(this, initialProps)
-      );
+      module.hot.accept('~/../web/ClientRoot', this.render.bind(this));
     }
     this.render().catch(log.error);
   }

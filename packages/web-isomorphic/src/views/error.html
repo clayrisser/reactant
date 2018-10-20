@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Loading . . .</title>
+  </head>
+  <body>
+    <script>
+      window.reactant = {
+        config: JSON.parse(
+          '<%- JSON.stringify(config).replace(/\\/g, \'\\\\\')' +
+          '.replace(/"/g, \'\\"\').replace(/\n/g, \'\\n\') %>'
+        ),
+        errStack: '<%- errStack.replace(/\\/g, \'\\\\\')' +
+                  '.replace(/"/g, \'\\"\').replace(/\n/g, \'\\n\') %>'
+      };
+    </script>
+    <script src="error.js"></script>
+  </body>
+</html>

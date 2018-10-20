@@ -1,10 +1,10 @@
 import CircularJSON from 'circular-json';
-import WebpackDevServer, { addDevServerEntrypoints } from 'webpack-dev-server';
+import WebpackDevServer from 'webpack-dev-server';
 import easycp from 'easycp';
 import fs from 'fs-extra';
 import path from 'path';
 import webpack from 'webpack';
-import { createWebConfig } from '../webpack';
+import { createWebpackConfig } from '../webpack';
 
 export default async function start(config, { spinner, log, webpackConfig }) {
   const { paths, options, ports } = config;
@@ -20,7 +20,7 @@ export default async function start(config, { spinner, log, webpackConfig }) {
       }`
     );
   } else {
-    const webpackClientConfig = createWebConfig(
+    const webpackClientConfig = createWebpackConfig(
       config,
       webpackConfig,
       'client'
@@ -33,7 +33,7 @@ export default async function start(config, { spinner, log, webpackConfig }) {
       );
     }
     log.debug('webpackClientConfig', webpackClientConfig);
-    const webpackServerConfig = createWebConfig(
+    const webpackServerConfig = createWebpackConfig(
       config,
       webpackConfig,
       'server'
@@ -46,14 +46,26 @@ export default async function start(config, { spinner, log, webpackConfig }) {
       );
     }
     log.debug('webpackServerConfig', webpackServerConfig);
-
+    process.noDeprecation = true;
     fs.mkdirsSync(path.resolve(paths.src, 'public'));
     fs.mkdirsSync(paths.dist);
     fs.writeJsonSync(path.resolve(paths.dist, 'assets.json'), {});
-    addDevServerEntrypoints(webpackConfig, webpackConfig.devServer);
-    const compiler = webpack(webpackConfig);
-    const server = new WebpackDevServer(compiler, webpackConfig.devServer);
-    server.listen(ports.dev, webpackConfig.devServer.host, () => {
+    webpack(webpackServerConfig).watch(
+      {
+        quiet: true,
+        stats: 'none'
+      },
+      err => {
+        if (err) log.error(err);
+        spinner.stop();
+      }
+    );
+    const clientCompiler = webpack(webpackClientConfig);
+    const server = new WebpackDevServer(
+      clientCompiler,
+      webpackClientConfig.devServer
+    );
+    server.listen(ports.dev, webpackClientConfig.devServer.host, () => {
       spinner.stop();
       log.info(`listening on port ${ports.dev}`);
     });
