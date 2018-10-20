@@ -7,13 +7,11 @@
 Please ★ this repo if you found it useful ★ ★ ★
 
 
-
 ## Installation
 
 ```sh
 npm install --save @reactant/web
 ```
-
 
 
 ## Usage

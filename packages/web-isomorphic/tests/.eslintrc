@@ -1,0 +1,6 @@
+{
+  "extends": ["plugin:jest/recommended"],
+  "rules": {
+    "no-new": "off"
+  }
+}
