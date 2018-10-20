@@ -7,7 +7,7 @@ import webpack from 'webpack';
 import { createWebpackConfig } from '../webpack';
 
 export default async function start(config, { spinner, log, webpackConfig }) {
-  const { paths, options, ports, platform } = config;
+  const { paths, options, ports } = config;
   if (options.storybook) {
     fs.mkdirsSync(paths.storybook);
     fs.copySync(path.resolve(__dirname, '../storybook'), paths.storybook);
@@ -24,13 +24,13 @@ export default async function start(config, { spinner, log, webpackConfig }) {
     if (options.debug) {
       fs.mkdirsSync(paths.debug);
       fs.writeFileSync(
-        path.resolve(paths.debug, 'webpack.config.json'),
+        path.resolve(paths.debug, 'webpack.client.json'),
         CircularJSON.stringify(webpackConfig, null, 2)
       );
     }
     log.debug('webpackConfig', webpackConfig);
     fs.mkdirsSync(path.resolve(paths.src, 'public'));
-    fs.mkdirsSync(path.resolve(paths.dist, platform));
+    fs.mkdirsSync(paths.dist);
     fs.writeJsonSync(path.resolve(paths.dist, 'assets.json'), {});
     addDevServerEntrypoints(webpackConfig, webpackConfig.devServer);
     const compiler = webpack(webpackConfig);

@@ -29,7 +29,7 @@ export default class ReactantApp {
     this.Root = plugin.Root;
   }
 
-  render() {
-    log.silly(`rendering to platform '${this.config.platform}'`);
+  init() {
+    log.silly(`initializing platform '${this.config.platform}'`);
   }
 }

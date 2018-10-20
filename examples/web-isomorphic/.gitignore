@@ -1,0 +1,80 @@
+# expo
+.expo/
+/expo/config.json
+
+# node
+/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# ios
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+build/
+DerivedData/
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+/ios/config.json
+
+# android
+*.apk
+*.ap_
+*.dex
+*.class
+bin/
+gen/
+out/
+.gradle/
+local.properties
+proguard/
+*.log
+.navigation/
+captures/
+*.iml
+.externalNativeBuild
+google-services.json
+freeline.py
+freeline/
+freeline_project_description.json
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+fastlane/readme.md
+/android/config.json
+
+# web
+/web/config.json
+
+# misc
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# build
+build/
+/dist
+
+# editors
+.idea/
+\#*\#
+.\#*
+*~
+
+# mac
+.DS_Store
+
+# reactant
+/.reactant
+yarn.lock
