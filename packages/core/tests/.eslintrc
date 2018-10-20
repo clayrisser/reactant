@@ -1,3 +1,6 @@
 {
-  "extends": ["plugin:jest/recommended"]
+  "extends": ["plugin:jest/recommended"],
+  "rules": {
+    "import/no-dynamic-require": "off"
+  }
 }

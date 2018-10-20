@@ -1,41 +1,13 @@
 import { runtime } from 'js-info';
 
-const log = createLogger();
+const logger = createLogger();
 
-function createLogger() {
-  if (runtime.node) {
-    const { Logger, transports } = require('winston');
-    return new Logger({
-      level: 'info',
-      levels: {
-        error: 0,
-        warn: 1,
-        info: 2,
-        verbose: 3,
-        debug: 4,
-        trace: 5
-      },
-      exitOnError: false,
-      transports: [
-        new transports.Console({
-          prettyPrint: true,
-          colorize: true,
-          showLevel: false
-        })
-      ]
-    });
+export function createLogger(engine = runtime.node ? 'winston' : 'loglevel') {
+  if (engine === 'winston') {
+    return require('./winston');
   }
-  const loglevel = require('loglevel');
-  loglevel.setLevel('info');
-  return loglevel;
+  return require('./loglevel');
 }
 
-export function setLevel(level) {
-  if (runtime.node) {
-    log.level = level;
-  } else {
-    log.setLevel(level);
-  }
-}
-
-export default log;
+export const { setLevel } = logger;
+export default logger.default;

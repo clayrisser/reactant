@@ -26,7 +26,7 @@
     "url": "https://github.com/codejamninja/reactant/packages/core"
   },
   "scripts": {
-    "build": "npm run test && babel src -d lib",
+    "build": "babel src -d lib",
     "clean": "rimraf lib && jest --clearCache",
     "format": "prettier --write ./src/**/*.js",
     "lint": "npm run format && eslint ./",

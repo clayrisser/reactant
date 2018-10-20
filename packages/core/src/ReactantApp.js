@@ -25,11 +25,11 @@ export default class ReactantApp {
 
   register(Plugin, options = {}) {
     const plugin = new Plugin(this.Root, options);
-    log.trace(`registering plugin '${plugin.name}'`);
+    log.silly(`registering plugin '${plugin.name}'`);
     this.Root = plugin.Root;
   }
 
   render() {
-    log.trace(`rendering to platform '${this.config.platform}'`);
+    log.silly(`rendering to platform '${this.config.platform}'`);
   }
 }
