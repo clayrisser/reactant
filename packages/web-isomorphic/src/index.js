@@ -1,5 +1,6 @@
-import App from './App';
+import ClientApp from './ClientApp';
 import Reactant from './Reactant';
+import ServerApp from './ServerApp';
 
-export { App, Reactant };
-export default { App, Reactant };
+export { ClientApp, Reactant, ServerApp };
+export default { ClientApp, Reactant, ServerApp };

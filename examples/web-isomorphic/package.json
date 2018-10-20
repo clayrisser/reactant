@@ -1,0 +1,73 @@
+{
+  "name": "web",
+  "private": true,
+  "version": "0.0.24",
+  "description": "web app built in reactant",
+  "main": "web/client.js",
+  "homepage": "https://reactant.codejam.ninja",
+  "author": {
+    "name": "Jam Risser",
+    "email": "jam@codejam.ninja",
+    "url": "https://codejam.ninja"
+  },
+  "scripts": {
+    "build": "reactant build -p web",
+    "build:analyze": "reactant build -p web --analyze",
+    "build:serve": "npm run build:web && node dist/server.js",
+    "build:storybook": "reactant build -s -p web",
+    "clean": "reactant clean -p web",
+    "clean:storybook": "reactant clean -s -p web",
+    "configure": "reactant configure -p web",
+    "lint": "npm run lint:flow && eslint ./",
+    "lint:fix": "eslint --fix ./",
+    "lint:flow": "flow",
+    "prepublish": "rimraf node_modules/react-native-router/node_modules",
+    "publish": "reactant publish -p web",
+    "reactant": "reactant",
+    "start": "reactant start -p web",
+    "start:storybook": "reactant start -s -p web",
+    "test": "npm run lint && jest --forceExit"
+  },
+  "dependencies": {
+    "@reactant/core": "^0.0.24",
+    "@reactant/styled-components": "^0.0.24",
+    "@reactant/web": "^0.0.24",
+    "@storybook/addon-actions": "^3.4.11",
+    "@storybook/react": "^3.4.11",
+    "autobind": "^1.0.3",
+    "autobind-decorator": "^2.1.0",
+    "babel-polyfill": "^6.26.0",
+    "lodash": "^4.17.10",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "styled-components": "^4.0.2"
+  },
+  "devDependencies": {
+    "@reactant/cli": "^0.0.24",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^9.0.0",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^5.5.0",
+    "eslint-config-jam": "^0.1.2",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.22.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "jest": "^23.5.0",
+    "prettier": "^1.14.3",
+    "react-test-renderer": "^16.4.2",
+    "rimraf": "^2.6.2"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/codejamninja/reactant/examples/web",
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "eslintIgnore": [
+    "dist"
+  ]
+}

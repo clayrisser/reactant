@@ -4,10 +4,10 @@ import easycp from 'easycp';
 import fs from 'fs-extra';
 import path from 'path';
 import webpack from 'webpack';
-import { createWebpackConfig } from '../webpack';
+import { createWebConfig } from '../webpack';
 
 export default async function start(config, { spinner, log, webpackConfig }) {
-  const { paths, options, ports, platform } = config;
+  const { paths, options, ports } = config;
   if (options.storybook) {
     fs.mkdirsSync(paths.storybook);
     fs.copySync(path.resolve(__dirname, '../storybook'), paths.storybook);
@@ -20,17 +20,35 @@ export default async function start(config, { spinner, log, webpackConfig }) {
       }`
     );
   } else {
-    webpackConfig = createWebpackConfig(config, webpackConfig);
+    const webpackClientConfig = createWebConfig(
+      config,
+      webpackConfig,
+      'client'
+    );
     if (options.debug) {
       fs.mkdirsSync(paths.debug);
       fs.writeFileSync(
-        path.resolve(paths.debug, 'webpack.config.json'),
+        path.resolve(paths.debug, 'webpack.client.json'),
         CircularJSON.stringify(webpackConfig, null, 2)
       );
     }
-    log.debug('webpackConfig', webpackConfig);
+    log.debug('webpackClientConfig', webpackClientConfig);
+    const webpackServerConfig = createWebConfig(
+      config,
+      webpackConfig,
+      'server'
+    );
+    if (options.debug) {
+      fs.mkdirsSync(paths.debug);
+      fs.writeFileSync(
+        path.resolve(paths.debug, 'webpack.server.json'),
+        CircularJSON.stringify(webpackConfig, null, 2)
+      );
+    }
+    log.debug('webpackServerConfig', webpackServerConfig);
+
     fs.mkdirsSync(path.resolve(paths.src, 'public'));
-    fs.mkdirsSync(path.resolve(paths.dist, platform));
+    fs.mkdirsSync(paths.dist);
     fs.writeJsonSync(path.resolve(paths.dist, 'assets.json'), {});
     addDevServerEntrypoints(webpackConfig, webpackConfig.devServer);
     const compiler = webpack(webpackConfig);

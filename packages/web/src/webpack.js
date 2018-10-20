@@ -79,7 +79,7 @@ function createWebpackConfig(config, webpackConfig) {
     webpackConfig = {
       ...webpackConfig,
       output: {
-        path: paths.distWebPublic,
+        path: path.resolve(paths.dist, 'public'),
         publicPath: action === 'start' ? `http://${host}:${ports.dev}/` : '/',
         pathinfo: true,
         filename: 'scripts/bundle.js',
@@ -104,7 +104,7 @@ function createWebpackConfig(config, webpackConfig) {
         before(app) {
           app.use(errorOverlayMiddleware());
         },
-        contentBase: paths.distWebPublic,
+        contentBase: path.resolve(paths.dist, 'public'),
         compress: true,
         disableHostCheck: true,
         headers: { 'Access-Control-Allow-Origin': '*' },
@@ -131,8 +131,7 @@ function createWebpackConfig(config, webpackConfig) {
       ]
     };
   }
-  webpackConfig = mergeConfiguration(webpackConfig, config.webpack, {}, config);
-  return webpackConfig;
+  return mergeConfiguration(webpackConfig, config.webpack, {}, config);
 }
 
 export { createWebpackConfig };

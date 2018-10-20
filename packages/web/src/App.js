@@ -8,8 +8,8 @@ const { document } = window;
 
 export default class App extends ReactantApp {
   constructor(Root = Reactant, options = {}) {
-    const { props = {}, container = document.getElementById('app') } = options;
     super(...arguments);
+    const { props = {}, container = document.getElementById('app') } = options;
     this.Root = Root;
     this.props = props;
     this.container = container;
@@ -19,8 +19,8 @@ export default class App extends ReactantApp {
     }
   }
 
-  render() {
-    super.render();
+  init() {
+    super.init();
     const { Root } = this;
     render(<Root {...this.props} />, this.container);
   }
