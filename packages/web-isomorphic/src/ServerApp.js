@@ -5,14 +5,10 @@ import cheerio from 'cheerio';
 import express from 'express';
 import ignoreWarnings from 'ignore-warnings';
 import { NodeCookiesWrapper } from 'redux-persist-cookie-storage';
-import { ReactantApp } from '@reactant/core';
-import { config, assets } from '@reactant/core';
-import { persistStore } from 'redux-persist';
+import { ReactantApp, config, assets } from '@reactant/core';
 import { renderToString /* , renderToStaticMarkup */ } from 'react-dom/server';
 import Reactant from './Reactant';
 import indexHtml from '~/../web/index.html';
-
-const { document } = window;
 
 export default class ServerApp extends ReactantApp {
   constructor(Root = Reactant, options = {}) {

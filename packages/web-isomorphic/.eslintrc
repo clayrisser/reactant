@@ -4,6 +4,7 @@
     "window": true
   },
   "rules": {
+    "global-require": "off",
     "no-empty": "off",
     "prefer-rest-params": "off"
   }

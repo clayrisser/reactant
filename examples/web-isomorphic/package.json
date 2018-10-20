@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "web-isomorphic",
   "private": true,
   "version": "0.0.24",
   "description": "web app built in reactant",
@@ -31,7 +31,7 @@
   "dependencies": {
     "@reactant/core": "^0.0.24",
     "@reactant/styled-components": "^0.0.24",
-    "@reactant/web": "^0.0.24",
+    "@reactant/web-isomorphic": "^0.0.24",
     "@storybook/addon-actions": "^3.4.11",
     "@storybook/react": "^3.4.11",
     "autobind": "^1.0.3",

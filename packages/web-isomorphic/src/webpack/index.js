@@ -1,4 +1,4 @@
-import createWebConfig from './createWebConfig';
+import createWebpackConfig from './createWebpackConfig';
 
-export { createWebConfig };
-export default { createWebConfig };
+export { createWebpackConfig };
+export default { createWebpackConfig };
