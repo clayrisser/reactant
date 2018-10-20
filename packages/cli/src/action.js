@@ -10,7 +10,7 @@ import { createWebpackConfig } from './webpack';
 import { getReactantPluginsConfig } from './plugin';
 import { loadReactantPlatform, getReactantPlatforms } from './platform';
 
-export default async function action(cmd, options) {
+export default async function action(cmd, options, spinner) {
   if (options.verbose) setLevel('verbose');
   if (options.debug) setLevel('debug');
   let config = createConfig({
@@ -37,6 +37,7 @@ export default async function action(cmd, options) {
   });
   const socket = new Socket({ silent: !options.debug });
   await socket.start();
+  spinner.succeed('loaded config');
   await runActions(config, { platform });
   return socket.stop();
 }

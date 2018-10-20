@@ -1,3 +1,4 @@
+import CircularJSON from 'circular-json';
 import WebpackDevServer, { addDevServerEntrypoints } from 'webpack-dev-server';
 import easycp from 'easycp';
 import fs from 'fs-extra';
@@ -20,10 +21,17 @@ export default async function start(config, { spinner, log, webpackConfig }) {
     );
   } else {
     webpackConfig = createWebpackConfig(config, webpackConfig);
+    if (options.debug) {
+      fs.mkdirsSync(paths.debug);
+      fs.writeFileSync(
+        path.resolve(paths.debug, 'webpack.config.json'),
+        CircularJSON.stringify(webpackConfig, null, 2)
+      );
+    }
     log.debug('webpackConfig', webpackConfig);
     fs.mkdirsSync(path.resolve(paths.src, 'public'));
     fs.mkdirsSync(path.resolve(paths.dist, platform));
-    fs.writeJsonSync(path.resolve(paths.dist, platform, 'assets.json'), {});
+    fs.writeJsonSync(path.resolve(paths.dist, 'assets.json'), {});
     addDevServerEntrypoints(webpackConfig, webpackConfig.devServer);
     const compiler = webpack(webpackConfig);
     const server = new WebpackDevServer(compiler, webpackConfig.devServer);

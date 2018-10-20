@@ -1,10 +1,13 @@
 import _ from 'lodash';
 import commander from 'commander';
+import ora from 'ora';
 import action from './action';
 import { handleError, ERR_NO_ACTION, ERR_NO_PLATFORM } from './errors';
 import { createConfig } from './config';
 import { version } from '../package';
 import { loadReactantPlatform, getReactantPlatforms } from './platform';
+
+const spinner = ora('loading config').start();
 
 let isAction = false;
 
@@ -43,7 +46,7 @@ commander.action((cmd, options) => {
     isAction = true;
     if (!options) throw ERR_NO_ACTION;
     if (!options.platform) throw ERR_NO_PLATFORM;
-    return action(cmd, options).catch(handleError);
+    return action(cmd, options, spinner).catch(handleError);
   } catch (err) {
     return handleError(err);
   }
