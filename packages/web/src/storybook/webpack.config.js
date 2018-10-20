@@ -1,10 +1,12 @@
 import 'babel-polyfill';
+import CircularJSON from 'circular-json';
 import _ from 'lodash';
-import mergeConfiguration from '@reactant/web/node_modules/merge-configuration';
-import { createWebpackConfig } from '@reactant/cli/webpack';
+import fs from 'fs-extra';
 import log, { setLevel } from '@reactant/core/log';
+import mergeConfiguration from '@reactant/web/node_modules/merge-configuration';
 import path from 'path';
 import pkgDir from 'pkg-dir';
+import { createWebpackConfig } from '@reactant/cli/webpack';
 import { rebuildConfig } from '@reactant/cli/config';
 
 let debug = false;
@@ -16,7 +18,7 @@ if (_.includes(process.argv, '--debug')) {
 
 module.exports = webpackConfig => {
   const config = rebuildConfig({ options: { platform: 'web', debug } });
-  const { paths, babel } = config;
+  const { paths, babel, options } = config;
   webpackConfig = createWebpackConfig(config, webpackConfig);
   webpackConfig.resolve.extensions.unshift('.web.js');
   webpackConfig.externals = {
@@ -42,6 +44,13 @@ module.exports = webpackConfig => {
     {},
     config
   );
+  if (options.debug) {
+    fs.mkdirsSync(paths.debug);
+    fs.writeFileSync(
+      path.resolve(paths.debug, 'webpack.storybook.json'),
+      CircularJSON.stringify(webpackConfig, null, 2)
+    );
+  }
   log.debug('webpackConfig', webpackConfig);
   return webpackConfig;
 };

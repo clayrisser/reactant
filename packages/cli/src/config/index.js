@@ -12,14 +12,14 @@ function loadConfig(...args) {
   if (!globalConfig) {
     globalConfig = createConfig(...args);
     const { paths, options } = globalConfig;
-    log.debug('config', globalConfig);
     if (options.debug) {
-      fs.mkdirsSync(path.resolve(paths.debug, options.platform));
+      fs.mkdirsSync(paths.debug);
       fs.writeFileSync(
-        path.resolve(paths.debug, options.platform, 'config.json'),
+        path.resolve(paths.debug, 'config.json'),
         CircularJSON.stringify(globalConfig, null, 2)
       );
     }
+    log.debug('config', globalConfig);
   }
   return globalConfig;
 }
