@@ -1,0 +1,106 @@
+{
+  "name": "@reactant/web-isomorphic",
+  "version": "0.0.24",
+  "description": "reactant web isomorphic module",
+  "reactantPlatform": "lib/reactantPlatform.js",
+  "keywords": [
+    "@reactant/web-isomorphic",
+    "reactant",
+    "react",
+    "webn"
+  ],
+  "homepage": "https://github.com/codejamninja/reactant/packages/web-isomorphic",
+  "bugs": {
+    "url": "https://github.com/codejamninja/reactant/packages/web-isomorphic/issues",
+    "email": "jam@codejam.ninja"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Jam Risser",
+    "email": "jam@codejam.ninja",
+    "url": "https://codejam.ninja"
+  },
+  "files": [
+    "Reactant.js",
+    "App.js",
+    "lib",
+    "storiesOf.js"
+  ],
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codejamninja/reactant/packages/web-isomorphic"
+  },
+  "scripts": {
+    "build": "babel src -d lib",
+    "clean": "rimraf lib",
+    "format": "prettier --write ./src/**/*.js",
+    "lint": "npm run format && eslint ./",
+    "lint:fix": "npm run format && eslint --fix ./",
+    "prepublish": "npm run clean && npm run build",
+    "start": "babel-node src",
+    "test": "npm run lint && jest --forceExit",
+    "test:reset": "jest --clearCache && npm run test"
+  },
+  "dependencies": {
+    "@reactant/cli": "^0.0.24",
+    "@reactant/core": "^0.0.24",
+    "@storybook/addon-actions": "^4.0.0-alpha.23",
+    "@storybook/addon-links": "^4.0.0-alpha.23",
+    "@storybook/addons": "^4.0.0-alpha.23",
+    "@storybook/react": "^4.0.0-alpha.23",
+    "assets-webpack-plugin": "^3.9.6",
+    "circular-json": "^0.5.7",
+    "copy-webpack-plugin": "^4.5.2",
+    "easycp": "^0.1.1",
+    "export-es6": "^0.1.0",
+    "fs-extra": "^7.0.0",
+    "hmr-client": "^0.1.3",
+    "html-webpack-plugin": "^3.2.0",
+    "ignore-warnings": "^0.1.0",
+    "lodash": "^4.17.11",
+    "merge-configuration": "^0.1.3",
+    "ora": "^3.0.0",
+    "pkg-dir": "^3.0.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "react-dev-utils": "^5.0.2",
+    "react-dom": "^16.5.2",
+    "react-error-overlay": "^4.0.1",
+    "react-hot-loader": "^4.3.11",
+    "strip-ansi": "^4.0.0",
+    "webpack": "^4.20.2",
+    "webpack-bundle-analyzer": "^3.0.2",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^9.0.0",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^5.5.0",
+    "eslint-config-jam": "^0.1.2",
+    "eslint-plugin-jest": "^21.25.1",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "jest": "^23.6.0",
+    "rimraf": "^2.6.2"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "eslintIgnore": [
+    "lib"
+  ],
+  "jest": {
+    "testMatch": [
+      "**/tests/**/[^_]*.js"
+    ],
+    "verbose": true
+  }
+}

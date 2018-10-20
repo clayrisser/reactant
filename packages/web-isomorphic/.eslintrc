@@ -1,0 +1,10 @@
+{
+  "extends": ["jam"],
+  "globals": {
+    "window": true
+  },
+  "rules": {
+    "no-empty": "off",
+    "prefer-rest-params": "off"
+  }
+}
