@@ -7,6 +7,6 @@ const app = new ClientApp(ClientRoot, {
   props: {}
 });
 app.register(StyledComponents);
-app.render();
+app.init();
 
 export default app;

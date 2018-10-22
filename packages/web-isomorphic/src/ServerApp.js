@@ -4,6 +4,7 @@ import _ from 'lodash';
 import cheerio from 'cheerio';
 import express from 'express';
 import ignoreWarnings from 'ignore-warnings';
+import path from 'path';
 import { NodeCookiesWrapper } from 'redux-persist-cookie-storage';
 import { ReactantApp, config, assets } from '@reactant/core';
 import { renderToString /* , renderToStaticMarkup */ } from 'react-dom/server';
@@ -21,7 +22,6 @@ export default class ServerApp extends ReactantApp {
       ignoreWarnings(this.config.ignore.warnings || []);
       ignoreWarnings('error', this.config.ignore.errors || []);
     }
-    this.listen();
   }
 
   async handle(req, res, next) {
@@ -59,7 +59,8 @@ export default class ServerApp extends ReactantApp {
 
   init() {
     super.init();
-    this.app.use(express.static(config.paths.distWebPublic));
+    const { paths } = this.config;
+    this.app.use(express.static(path.resolve(paths.dist, 'public')));
     this.app.use(Cookies.express());
     this.app.get('/*', this.handle);
   }

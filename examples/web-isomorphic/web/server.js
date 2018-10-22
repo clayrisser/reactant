@@ -7,6 +7,6 @@ const app = new ServerApp(ServerRoot, {
   props: {}
 });
 app.register(StyledComponents);
-app.render();
+app.init();
 
 export default app;

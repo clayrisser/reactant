@@ -5,8 +5,6 @@ import { ReactantApp, config, log } from '@reactant/core';
 import { hydrate } from 'react-dom';
 import Reactant from './Reactant';
 
-const { document } = window;
-
 export default class ClientApp extends ReactantApp {
   constructor(Root = Reactant, options = {}) {
     const { props = {}, container = document.getElementById('app') } = options;
