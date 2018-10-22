@@ -8,7 +8,7 @@ import getRules from './getRules';
 import { sanitizeConfig } from '../config';
 
 export default function createWebpackConfig(config, webpackConfig = {}) {
-  const { paths, env, envs } = config;
+  const { paths, env, envs, platform, platformType } = config;
   const sanitizedConfig = sanitizeConfig(config);
   webpackConfig = {
     ...webpackConfig,
@@ -24,10 +24,18 @@ export default function createWebpackConfig(config, webpackConfig = {}) {
       symlinks: false,
       extensions: _.uniq([
         ..._.get(webpackConfig, 'resolve.extensions', []),
+        `.${platform}.js`,
+        `.${platform}.jsx`,
+        `.${platform}.mjs`,
+        `.${platform}.json`,
+        `.${platformType}.js`,
+        `.${platformType}.jsx`,
+        `.${platformType}.mjs`,
+        `.${platformType}.json`,
         '.js',
-        '.json',
         '.jsx',
-        '.mjs'
+        '.mjs',
+        '.json'
       ]),
       alias: {
         ...webpackConfig.alias,

@@ -33,6 +33,7 @@ export default async function action(cmd, options, spinner) {
     defaultEnv: 'development',
     options,
     platformConfig: platform.config || {},
+    platformType: platform.type,
     pluginsConfig: getReactantPluginsConfig(config, config.plugins)
   });
   const socket = new Socket({ silent: !options.debug });

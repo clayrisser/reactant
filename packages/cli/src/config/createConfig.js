@@ -21,6 +21,7 @@ async function createConfigAsync({
   defaultEnv = 'development',
   action = 'build',
   options = {},
+  platformType = '',
   platformConfig = {},
   pluginsConfig = {}
 }) {
@@ -73,6 +74,7 @@ async function createConfigAsync({
     ),
     port: configPorts.basePort,
     ports: configPorts.ports,
+    platformType,
     envs: {
       ...config.envs,
       NODE_ENV: environment.value,

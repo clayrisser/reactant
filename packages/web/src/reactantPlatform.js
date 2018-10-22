@@ -3,6 +3,7 @@ import createConfig from './createConfig';
 
 export default {
   config: createConfig,
+  type: 'web',
   actions: {
     build: {
       run: build,
