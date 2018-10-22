@@ -31,7 +31,7 @@ export default function createServerConfig(config, webpackConfig) {
           /\.(mp4|mp3|ogg|swf|webp)$/
         ]
       }),
-      '@reactant/base/assets': "require('./assets.json')"
+      '@reactant/core/assets': "require('./assets.json')"
     },
     plugins: [
       ...webpackConfig.plugins,

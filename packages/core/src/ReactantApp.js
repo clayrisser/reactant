@@ -2,6 +2,8 @@ import { log, config } from '.';
 import { setLevel } from './log';
 
 export default class ReactantApp {
+  plugins = {};
+
   constructor(Root) {
     this.Root = Root;
     this.config = config;
@@ -26,6 +28,7 @@ export default class ReactantApp {
   register(Plugin, options = {}) {
     const plugin = new Plugin(this.Root, options);
     log.silly(`registering plugin '${plugin.name}'`);
+    this.plugins[plugin.name] = options;
     this.Root = plugin.Root;
   }
 

@@ -1,6 +1,7 @@
 import Cookies from 'cookies';
 import React from 'react';
 import _ from 'lodash';
+import autobind from 'autobind-decorator';
 import cheerio from 'cheerio';
 import express from 'express';
 import ignoreWarnings from 'ignore-warnings';
@@ -11,6 +12,7 @@ import { renderToString /* , renderToStaticMarkup */ } from 'react-dom/server';
 import Reactant from './Reactant';
 import indexHtml from '~/../web/index.html';
 
+@autobind
 export default class ServerApp extends ReactantApp {
   constructor(Root = Reactant, options = {}) {
     super(...arguments);

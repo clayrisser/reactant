@@ -52,6 +52,7 @@
     "@storybook/addons": "^4.0.0-alpha.23",
     "@storybook/react": "^4.0.0-alpha.23",
     "assets-webpack-plugin": "^3.9.6",
+    "autobind-decorator": "^2.1.0",
     "babel-polyfill": "6.26.0",
     "chalk": "^2.4.1",
     "cheerio": "^1.0.0-rc.2",
