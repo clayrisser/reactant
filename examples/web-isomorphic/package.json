@@ -38,6 +38,7 @@
     "autobind-decorator": "^2.1.0",
     "babel-polyfill": "^6.26.0",
     "lodash": "^4.17.10",
+    "net": "^1.0.2",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "styled-components": "^4.0.2"

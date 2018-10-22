@@ -53,6 +53,7 @@
     "@storybook/react": "^4.0.0-alpha.23",
     "assets-webpack-plugin": "^3.9.6",
     "babel-polyfill": "6.26.0",
+    "chalk": "^2.4.1",
     "cheerio": "^1.0.0-rc.2",
     "circular-json": "^0.5.7",
     "cookies": "^0.7.2",

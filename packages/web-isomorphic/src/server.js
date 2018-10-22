@@ -14,6 +14,8 @@ let errorApp = null;
 let serverError = false;
 let serverSpinner = ora('starting server').start();
 
+log.info('started server');
+
 if (module.hot) {
   errorApp = express();
   errorApp.disable('x-powered-by');
