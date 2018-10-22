@@ -59,17 +59,21 @@ export default async function start(config, { spinner, log, webpackConfig }) {
     const clientCompiler = webpack(webpackClientConfig);
     let started = false;
     clientCompiler.plugin('done', () => {
-      spinner.succeed('compiled client');
-      spinner = ora('compiling server').start();
+      if (!started) {
+        spinner.succeed('compiled client');
+        spinner = ora('compiling server').start();
+      } else {
+        ora('recompiled').succeed();
+      }
       serverCompiler.watch(
         {
           quiet: true,
           stats: 'none'
         },
         () => {
-          spinner.succeed('compiled server');
           if (!started) {
             started = true;
+            spinner.succeed('compiled server');
             spinner = ora(`started ${action} ${platform}`).succeed();
           }
           resolve();

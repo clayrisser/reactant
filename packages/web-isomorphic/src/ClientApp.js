@@ -1,10 +1,12 @@
 import Cookies from 'cookies-js';
 import React from 'react';
+import autobind from 'autobind-decorator';
 import ignoreWarnings from 'ignore-warnings';
 import { ReactantApp, config, log } from '@reactant/core';
 import { hydrate } from 'react-dom';
 import Reactant from './Reactant';
 
+@autobind
 export default class ClientApp extends ReactantApp {
   constructor(Root = Reactant, options = {}) {
     const { props = {}, container = document.getElementById('app') } = options;
@@ -34,7 +36,7 @@ export default class ClientApp extends ReactantApp {
     super.init();
     if (config.offline) require('offline-plugin/runtime').install();
     if (module.hot) {
-      module.hot.accept('~/../web/ClientRoot', this.render.bind(this));
+      module.hot.accept('~/../web/ClientRoot', this.render);
     }
     this.render().catch(log.error);
   }
