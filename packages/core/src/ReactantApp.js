@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { log, config } from '.';
 import { setLevel } from './log';
 
@@ -25,14 +26,19 @@ export default class ReactantApp {
     }
   }
 
-  register(Plugin, options = {}) {
+  async register(Plugin, options = {}) {
     const plugin = new Plugin(this.Root, options);
     log.silly(`registering plugin '${plugin.name}'`);
     this.plugins[plugin.name] = plugin;
-    this.Root = plugin.Root;
+    if (this.getRoot && _.isFunction(this.getRoot)) {
+      this.Root = await plugin.getRoot();
+    } else {
+      this.Root = plugin.Root;
+    }
   }
 
   init() {
     log.silly(`initializing platform '${this.config.platform}'`);
+    return this;
   }
 }

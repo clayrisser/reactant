@@ -26,13 +26,16 @@ if (module.hot) {
   });
 }
 
-const app = createApp();
-const server = createServer(app);
-startServer(server);
+async function init() {
+  const app = await createApp();
+  const server = createServer(app);
+  startServer(server);
+  return app;
+}
 
-function createApp() {
+async function createApp() {
   // eslint-disable-next-line global-require
-  const { app } = require('~/../web/server').default;
+  const { app } = await require('~/../web/server').default;
   app.disable('x-powered-by');
   app.use((err, req, res, _next) => {
     if (err) {
@@ -71,4 +74,4 @@ function startServer(server) {
   });
 }
 
-export default createApp();
+export default init();
