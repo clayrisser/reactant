@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import {
-  ThemeProvider,
-  ServerStyleSheet,
-  StyleSheetManager
-} from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import { config } from '@reactant/core';
 
 export default class StyledComponents {
@@ -11,7 +7,6 @@ export default class StyledComponents {
 
   constructor(ChildRoot, { theme = {}, themes = {} }) {
     this.ChildRoot = ChildRoot;
-    this.sheet = new ServerStyleSheet();
     this.theme = {
       ...themes[config.themeName],
       ...theme,
@@ -20,21 +15,15 @@ export default class StyledComponents {
   }
 
   get Root() {
-    const { ChildRoot, sheet, theme } = this;
+    const { ChildRoot, theme } = this;
     return class Root extends Component {
       render() {
         return (
-          <StyleSheetManager sheet={sheet.instance}>
-            <ThemeProvider theme={theme}>
-              <ChildRoot {...this.props} />
-            </ThemeProvider>
-          </StyleSheetManager>
+          <ThemeProvider theme={theme}>
+            <ChildRoot {...this.props} />
+          </ThemeProvider>
         );
       }
     };
-  }
-
-  modifyCheerio($) {
-    return $;
   }
 }

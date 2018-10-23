@@ -5,6 +5,12 @@
   },
   "rules": {
     "no-empty": "off",
-    "prefer-rest-params": "off"
+    "prefer-rest-params": "off",
+    "import/no-unresolved": [
+      "error",
+      {
+        "ignore": ["^~", "^./lib", "./styledComponents"]
+      }
+    ]
   }
 }
