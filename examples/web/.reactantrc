@@ -3,3 +3,5 @@ platforms:
   web: '@reactant/web'
 plugins:
   - '@reactant/styled-components'
+initialState:
+  todos: []

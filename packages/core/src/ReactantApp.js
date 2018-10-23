@@ -30,7 +30,7 @@ export default class ReactantApp {
     const plugin = new Plugin(this.Root, options);
     log.silly(`registering plugin '${plugin.name}'`);
     this.plugins[plugin.name] = plugin;
-    if (this.getRoot && _.isFunction(this.getRoot)) {
+    if (plugin.getRoot && _.isFunction(plugin.getRoot)) {
       this.Root = await plugin.getRoot();
     } else {
       this.Root = plugin.Root;

@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@reactant/core": "^0.0.27",
+    "@reactant/redux": "0.0.27",
     "@reactant/styled-components": "^0.0.27",
     "@reactant/web-isomorphic": "^0.0.27",
     "@storybook/addon-actions": "^3.4.11",
