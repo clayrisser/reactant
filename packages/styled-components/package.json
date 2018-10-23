@@ -1,6 +1,6 @@
 {
   "name": "@reactant/styled-components",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "description": "reactant web module",
   "reactantPlugin": "lib/reactantPlugin.js",
   "keywords": [
@@ -40,7 +40,7 @@
     "test:reset": "jest --clearCache && npm run test"
   },
   "dependencies": {
-    "@reactant/core": "^0.0.27",
+    "@reactant/core": "^0.0.28",
     "react": "^16.5.2",
     "styled-components": "^4.0.2"
   },
