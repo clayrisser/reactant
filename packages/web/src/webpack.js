@@ -14,7 +14,18 @@ import {
 } from 'webpack';
 
 function createWebpackConfig(config, webpackConfig) {
-  const { action, babel, env, host, options, paths, ports, title } = config;
+  const {
+    action,
+    babel,
+    env,
+    host,
+    options,
+    paths,
+    ports,
+    title,
+    platform,
+    platformType
+  } = config;
   webpackConfig = {
     ...webpackConfig,
     externals: {
@@ -32,7 +43,18 @@ function createWebpackConfig(config, webpackConfig) {
       alias: {
         ..._.get(webpackConfig, 'resolve.alias', {}),
         'webpack/hot/poll': require.resolve('webpack/hot/poll')
-      }
+      },
+      extensions: _.uniq([
+        `.${platform}.client.js`,
+        `.${platform}.client.jsx`,
+        `.${platform}.client.mjs`,
+        `.${platform}.client.json`,
+        `.${platformType}.client.js`,
+        `.${platformType}.client.jsx`,
+        `.${platformType}.client.mjs`,
+        `.${platformType}.client.json`,
+        ..._.get(webpackConfig, 'resolve.extensions', [])
+      ])
     },
     target: 'web',
     plugins: [

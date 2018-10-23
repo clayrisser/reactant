@@ -1,13 +1,23 @@
 import AssetsWebpackPlugin from 'assets-webpack-plugin';
 import OfflinePlugin from 'offline-plugin';
 import UglifyWebpackPlugin from 'uglifyjs-webpack-plugin';
+import _ from 'lodash';
 import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
 import path from 'path';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { IgnorePlugin } from 'webpack';
 
 export default function createClientConfig(config, webpackConfig) {
-  const { ports, paths, host, env, offline, action } = config;
+  const {
+    ports,
+    paths,
+    host,
+    env,
+    offline,
+    action,
+    platform,
+    platformType
+  } = config;
   webpackConfig = {
     ...webpackConfig,
     entry: {
@@ -16,6 +26,20 @@ export default function createClientConfig(config, webpackConfig) {
     externals: {
       ...webpackConfig.externals,
       'react-art': {}
+    },
+    resolve: {
+      ...webpackConfig.resolve,
+      extensions: _.uniq([
+        `.${platform}.client.js`,
+        `.${platform}.client.jsx`,
+        `.${platform}.client.mjs`,
+        `.${platform}.client.json`,
+        `.${platformType}.client.js`,
+        `.${platformType}.client.jsx`,
+        `.${platformType}.client.mjs`,
+        `.${platformType}.client.json`,
+        ..._.get(webpackConfig, 'resolve.extensions', [])
+      ])
     },
     plugins: [
       ...webpackConfig.plugins,

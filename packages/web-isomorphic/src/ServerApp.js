@@ -40,7 +40,7 @@ export default class ServerApp extends ReactantApp {
         location: this.props.location
       };
       const appHtml = renderToString(<Root {...this.props} />);
-      const $ = cheerio.load(indexHtml);
+      let $ = cheerio.load(indexHtml);
       $('title').text(config.title);
       $('head').append(`<style type="text/css">${[...css].join('')}</style>`);
       $('#app').append(appHtml);
@@ -51,6 +51,11 @@ export default class ServerApp extends ReactantApp {
               config.environment === 'production' ? ' crossorigin' : ''
             }></script>`
           );
+        }
+      });
+      _.each(this.plugins, plugin => {
+        if (plugin.modifyCheerio) {
+          $ = plugin.modifyCheerio($);
         }
       });
       return res.send($.html());
