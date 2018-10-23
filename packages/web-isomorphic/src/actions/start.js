@@ -31,7 +31,7 @@ export default async function start(config, { spinner, log, webpackConfig }) {
     fs.mkdirsSync(paths.debug);
     fs.writeFileSync(
       path.resolve(paths.debug, 'webpack.client.json'),
-      CircularJSON.stringify(webpackConfig, null, 2)
+      CircularJSON.stringify(webpackClientConfig, null, 2)
     );
   }
   log.debug('webpackClientConfig', webpackClientConfig);
@@ -44,7 +44,7 @@ export default async function start(config, { spinner, log, webpackConfig }) {
     fs.mkdirsSync(paths.debug);
     fs.writeFileSync(
       path.resolve(paths.debug, 'webpack.server.json'),
-      CircularJSON.stringify(webpackConfig, null, 2)
+      CircularJSON.stringify(webpackServerConfig, null, 2)
     );
   }
   log.debug('webpackServerConfig', webpackServerConfig);

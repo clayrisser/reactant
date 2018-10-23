@@ -1,5 +1,6 @@
 import OpenBrowserPlugin from 'open-browser-webpack-plugin';
 import StartServerPlugin from 'start-server-webpack-plugin';
+import _ from 'lodash';
 import path from 'path';
 import webpack from 'webpack';
 import webpackNodeExternals from 'webpack-node-externals';
@@ -7,7 +8,15 @@ import webpackNodeExternals from 'webpack-node-externals';
 const { LimitChunkCountPlugin } = webpack.optimize;
 
 export default function createServerConfig(config, webpackConfig) {
-  const { paths, host, ports, options, action } = config;
+  const {
+    paths,
+    host,
+    ports,
+    options,
+    action,
+    platform,
+    platformType
+  } = config;
   webpackConfig = {
     ...webpackConfig,
     entry: [path.resolve(__dirname, '../server.js')],
@@ -15,6 +24,20 @@ export default function createServerConfig(config, webpackConfig) {
       path: paths.dist,
       publicPath: action === 'start' ? `http://${host}:${ports.dev}/` : '/',
       filename: 'server.js'
+    },
+    resolve: {
+      ...webpackConfig.resolve,
+      extensions: _.uniq([
+        `.${platform}.server.js`,
+        `.${platform}.server.jsx`,
+        `.${platform}.server.mjs`,
+        `.${platform}.server.json`,
+        `.${platformType}.server.js`,
+        `.${platformType}.server.jsx`,
+        `.${platformType}.server.mjs`,
+        `.${platformType}.server.json`,
+        ..._.get(webpackConfig, 'resolve.extensions', [])
+      ])
     },
     node: {
       console: true,

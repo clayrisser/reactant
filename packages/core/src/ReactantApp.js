@@ -28,7 +28,7 @@ export default class ReactantApp {
   register(Plugin, options = {}) {
     const plugin = new Plugin(this.Root, options);
     log.silly(`registering plugin '${plugin.name}'`);
-    this.plugins[plugin.name] = options;
+    this.plugins[plugin.name] = plugin;
     this.Root = plugin.Root;
   }
 
