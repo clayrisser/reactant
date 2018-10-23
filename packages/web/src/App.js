@@ -23,5 +23,6 @@ export default class App extends ReactantApp {
     super.init();
     const { Root } = this;
     render(<Root {...this.props} />, this.container);
+    return this;
   }
 }

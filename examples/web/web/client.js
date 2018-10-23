@@ -3,10 +3,12 @@ import StyledComponents from '@reactant/styled-components';
 import { App } from '@reactant/web';
 import ClientRoot from './ClientRoot';
 
-const app = new App(ClientRoot, {
-  props: {}
-});
-app.register(StyledComponents);
-app.init();
+async function createApp() {
+  const app = new App(ClientRoot, {
+    props: {}
+  });
+  await app.register(StyledComponents);
+  return app.init();
+}
 
-export default app;
+export default createApp();

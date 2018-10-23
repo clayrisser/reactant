@@ -1,4 +1,5 @@
 import Cookies from 'cookies';
+import Promise from 'bluebird';
 import React from 'react';
 import _ from 'lodash';
 import autobind from 'autobind-decorator';
@@ -53,9 +54,10 @@ export default class ServerApp extends ReactantApp {
           );
         }
       });
-      _.each(this.plugins, plugin => {
+      await Promise.mapSeries(_.keys(this.plugins), async key => {
+        const plugin = this.plugins[key];
         if (plugin.modifyCheerio) {
-          $ = plugin.modifyCheerio($);
+          $ = await plugin.modifyCheerio($);
         }
       });
       return res.send($.html());
@@ -66,9 +68,12 @@ export default class ServerApp extends ReactantApp {
 
   init() {
     super.init();
-    const { paths } = this.config;
-    this.app.use(express.static(path.resolve(paths.dist, 'public')));
-    this.app.use(Cookies.express());
-    this.app.get('/*', this.handle);
+    return new Promise(resolve => {
+      const { paths } = this.config;
+      this.app.use(express.static(path.resolve(paths.dist, 'public')));
+      this.app.use(Cookies.express());
+      this.app.get('/*', this.handle);
+      return resolve(this);
+    });
   }
 }
