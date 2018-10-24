@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { config } from '@reactant/core';
 import { createStore, applyMiddleware } from 'redux';
-import { persistReducer, getStoredState } from 'redux-persist';
+import { persistReducer, getStoredState, persistStore } from 'redux-persist';
 import {
   CookieStorage,
   NodeCookiesWrapper
@@ -16,6 +16,8 @@ import {
 
 export default class StyledComponents {
   name = 'redux';
+
+  initialized = false;
 
   constructor(
     ChildRoot,
@@ -54,21 +56,39 @@ export default class StyledComponents {
   willInit(app) {
     const expressApp = app.app;
     expressApp.use(Cookies.express());
+    this.initialized = true;
     return app;
   }
 
-  willRender(app, { req, res }) {
-    this.cookieJar = new NodeCookiesWrapper(new Cookies(req, res));
-    app.props = {
-      ...app.props,
-      context: {
-        ...app.props.context,
-        cookieJar: this.cookieJar
+  async willRender(app, { req, res }) {
+    if (this.initialized) {
+      this.cookieJar = new NodeCookiesWrapper(new Cookies(req, res));
+      app.props = {
+        ...app.props,
+        context: {
+          ...app.props.context,
+          cookieJar: this.cookieJar
+        }
+      };
+      this.props = app.props;
+      if (!this.persist.storage) {
+        this.persist.storage = new CookieStorage(this.cookieJar, {});
       }
-    };
-    this.props = app.props;
-    if (!this.persist.storage) {
-      this.persist.storage = new CookieStorage(this.cookieJar, {});
+      const store = await this.getStore();
+      this.props = { ...this.props, store };
+      this.persistor = await new Promise(resolve => {
+        const persistor = persistStore(store, config.initialState, () => {
+          return resolve(persistor);
+        });
+      });
+    }
+    return app;
+  }
+
+  async didRender(app, { res }) {
+    if (this.initialized) {
+      await this.persistor.flush();
+      res.removeHeader('Set-Cookie');
     }
     return app;
   }
@@ -95,14 +115,13 @@ export default class StyledComponents {
   }
 
   async getRoot() {
-    const { ChildRoot } = this;
-    const store = await this.getStore();
-    this.props = { ...this.props, store };
+    const { ChildRoot, initialized, props } = this;
+    if (!initialized) return ChildRoot;
     return class Root extends Component {
       render() {
         return (
-          <Provider store={store}>
-            <ChildRoot {...this.props} />
+          <Provider store={props.store}>
+            <ChildRoot {...props} />
           </Provider>
         );
       }

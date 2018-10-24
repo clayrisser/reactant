@@ -10,10 +10,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { config } from '@reactant/core';
 import { createStore, applyMiddleware } from 'redux';
 import { persistReducer, getStoredState } from 'redux-persist';
-import {
-  CookieStorage,
-  NodeCookiesWrapper
-} from 'redux-persist-cookie-storage';
+import { CookieStorage } from 'redux-persist-cookie-storage';
+
+function getDefaultStorage() {
+  const { platform, platforms } = config;
+  if (platforms[platform] === '@reactant/web-isomorphic') return null;
+  return storage;
+}
 
 export default class StyledComponents {
   name = 'redux';
@@ -27,7 +30,7 @@ export default class StyledComponents {
       persist = {
         key: 'root',
         stateReconciler: autoMergeLevel1,
-        storage
+        storage: getDefaultStorage()
       },
       whitelist = []
     }

@@ -9,6 +9,7 @@ export default class ReactantApp {
   constructor(Root, options = {}) {
     const { props = {} } = options;
     this.Root = Root;
+    this.BaseRoot = Root;
     this.props = props;
     this.config = config;
     if (
@@ -36,11 +37,13 @@ export default class ReactantApp {
   }
 
   async getRoot() {
-    let { Root } = this;
+    let Root = this.BaseRoot;
     await Promise.mapSeries(this.plugins, async plugin => {
       if (plugin.getRoot && _.isFunction(plugin.getRoot)) {
+        plugin.ChildRoot = Root;
         Root = await plugin.getRoot();
       } else {
+        plugin.ChildRoot = Root;
         ({ Root } = plugin);
       }
     });
