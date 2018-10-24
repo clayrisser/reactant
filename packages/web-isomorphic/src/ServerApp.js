@@ -6,7 +6,7 @@ import cheerio from 'cheerio';
 import express from 'express';
 import ignoreWarnings from 'ignore-warnings';
 import path from 'path';
-import { ReactantApp, config, assets } from '@reactant/core';
+import { ReactantApp, config, assets, log } from '@reactant/core';
 import { renderToString /* , renderToStaticMarkup */ } from 'react-dom/server';
 import Reactant from './Reactant';
 import indexHtml from '~/../web/index.html';
@@ -26,14 +26,15 @@ export default class ServerApp extends ReactantApp {
 
   async handle(req, res, next) {
     try {
+      log.silly('url:', req.url);
       const css = new Set();
-      this.props.location = req.url;
       await Promise.mapSeries(_.keys(this.plugins), async key => {
         const plugin = this.plugins[key];
         if (plugin.willRender) {
           await plugin.willRender(this, { req, res });
         }
       });
+      this.props.location = req.url;
       this.props.context = {
         ...this.props.context,
         insertCss: (...styles) => {
@@ -41,7 +42,7 @@ export default class ServerApp extends ReactantApp {
         },
         location: this.props.location
       };
-      this.Root = await this.getRoot();
+      this.Root = await this.getRoot({ req, res });
       const { Root } = this;
       const appHtml = renderToString(<Root {...this.props} />);
       const $ = cheerio.load(indexHtml);
@@ -73,12 +74,6 @@ export default class ServerApp extends ReactantApp {
   async init() {
     await super.init();
     const { paths } = this.config;
-    await Promise.mapSeries(_.keys(this.plugins), async key => {
-      const plugin = this.plugins[key];
-      if (plugin.willInit) {
-        await plugin.willInit(this);
-      }
-    });
     this.app.use(express.static(path.resolve(paths.dist, 'public')));
     this.app.get('/*', this.handle);
     return this;

@@ -41,7 +41,7 @@ export default class ReactantApp {
     await Promise.mapSeries(this.plugins, async plugin => {
       if (plugin.getRoot && _.isFunction(plugin.getRoot)) {
         plugin.ChildRoot = Root;
-        Root = await plugin.getRoot();
+        Root = await plugin.getRoot({});
       } else {
         plugin.ChildRoot = Root;
         ({ Root } = plugin);
@@ -52,6 +52,12 @@ export default class ReactantApp {
 
   async init() {
     log.silly(`initializing platform '${this.config.platform}'`);
+    await Promise.mapSeries(_.keys(this.plugins), async key => {
+      const plugin = this.plugins[key];
+      if (plugin.willInit) {
+        await plugin.willInit(this);
+      }
+    });
     this.Root = await this.getRoot();
     return this;
   }

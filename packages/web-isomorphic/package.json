@@ -32,7 +32,8 @@
     "url": "https://github.com/codejamninja/reactant/packages/web-isomorphic"
   },
   "scripts": {
-    "build": "npm run test && npm run build:lib && npm run build:err",
+    "build": "npm run test && npm run build:copy && npm run build:lib && npm run build:err",
+    "build:copy": "mkdir -p lib && cp -r src/public lib",
     "build:err": "parcel build src/views/error.html -d lib/views --out-file error.ejs",
     "build:lib": "babel src -d lib",
     "clean": "rimraf lib",

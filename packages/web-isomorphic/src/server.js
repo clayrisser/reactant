@@ -39,7 +39,7 @@ async function createApp() {
   app.disable('x-powered-by');
   app.use((err, req, res, _next) => {
     if (err) {
-      log.error(err);
+      log.error(err.stack);
       if (module.hot) {
         serverError = true;
         req.err = err;

@@ -21,7 +21,6 @@ export default class ClientApp extends ReactantApp {
   }
 
   async render() {
-    const { Root } = this;
     await Promise.mapSeries(_.keys(this.plugins), async key => {
       const plugin = this.plugins[key];
       if (plugin.willRender) {
@@ -34,6 +33,8 @@ export default class ClientApp extends ReactantApp {
         return () => removeCss.forEach(f => f());
       }
     };
+    this.Root = await this.getRoot({});
+    const { Root } = this;
     hydrate(<Root {...this.props} />, document.getElementById('app'));
     await Promise.mapSeries(_.keys(this.plugins), async key => {
       const plugin = this.plugins[key];

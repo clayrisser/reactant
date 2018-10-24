@@ -21,6 +21,8 @@ function getDefaultStorage() {
 export default class StyledComponents {
   name = 'redux';
 
+  initialized = false;
+
   constructor(
     ChildRoot,
     {
@@ -55,7 +57,11 @@ export default class StyledComponents {
     return persistReducer(this.persist, reducers);
   }
 
-  willRender(app) {
+  willInit() {
+    this.initialized = true;
+  }
+
+  async willRender(app) {
     const cookieJar = Cookies;
     app.props = {
       ...app.props,
@@ -68,6 +74,8 @@ export default class StyledComponents {
     if (!this.persist.storage) {
       this.persist.storage = new CookieStorage(cookieJar, {});
     }
+    const store = await this.getStore();
+    this.props = { ...this.props, store };
     return app;
   }
 
@@ -93,14 +101,13 @@ export default class StyledComponents {
   }
 
   async getRoot() {
-    const { ChildRoot } = this;
-    const store = await this.getStore();
-    this.props = { ...this.props, store };
+    const { ChildRoot, props, initialized } = this;
+    if (!initialized) return ChildRoot;
     return class Root extends Component {
       render() {
         return (
-          <Provider store={store}>
-            <ChildRoot {...this.props} />
+          <Provider store={props.store}>
+            <ChildRoot {...props} />
           </Provider>
         );
       }

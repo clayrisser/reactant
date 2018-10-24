@@ -51,6 +51,14 @@ export default async function start(config, { spinner, log, webpackConfig }) {
   process.noDeprecation = true;
   fs.mkdirsSync(path.resolve(paths.src, 'public'));
   fs.mkdirsSync(paths.dist);
+  fs.copySync(
+    path.resolve(__dirname, '../public'),
+    path.resolve(paths.dist, 'public')
+  );
+  fs.copySync(
+    path.resolve(paths.src, 'public'),
+    path.resolve(paths.dist, 'public')
+  );
   fs.writeJsonSync(path.resolve(paths.dist, 'assets.json'), {});
   spinner.stop();
   return new Promise(resolve => {

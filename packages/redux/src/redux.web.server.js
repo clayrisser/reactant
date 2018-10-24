@@ -6,7 +6,7 @@ import reducers from '~/reducers';
 import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { config } from '@reactant/core';
+import { config, log } from '@reactant/core';
 import { createStore, applyMiddleware } from 'redux';
 import { persistReducer, getStoredState, persistStore } from 'redux-persist';
 import {
@@ -61,27 +61,25 @@ export default class StyledComponents {
   }
 
   async willRender(app, { req, res }) {
-    if (this.initialized) {
-      this.cookieJar = new NodeCookiesWrapper(new Cookies(req, res));
-      app.props = {
-        ...app.props,
-        context: {
-          ...app.props.context,
-          cookieJar: this.cookieJar
-        }
-      };
-      this.props = app.props;
-      if (!this.persist.storage) {
-        this.persist.storage = new CookieStorage(this.cookieJar, {});
+    this.cookieJar = new NodeCookiesWrapper(new Cookies(req, res));
+    app.props = {
+      ...app.props,
+      context: {
+        ...app.props.context,
+        cookieJar: this.cookieJar
       }
-      const store = await this.getStore();
-      this.props = { ...this.props, store };
-      this.persistor = await new Promise(resolve => {
-        const persistor = persistStore(store, config.initialState, () => {
-          return resolve(persistor);
-        });
-      });
+    };
+    this.props = app.props;
+    if (!this.persist.storage) {
+      this.persist.storage = new CookieStorage(this.cookieJar, {});
     }
+    const store = await this.getStore();
+    this.props = { ...this.props, store };
+    this.persistor = await new Promise(resolve => {
+      const persistor = persistStore(store, config.initialState, () => {
+        return resolve(persistor);
+      });
+    });
     return app;
   }
 
