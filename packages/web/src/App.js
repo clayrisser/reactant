@@ -9,9 +9,8 @@ const { document } = window;
 export default class App extends ReactantApp {
   constructor(Root = Reactant, options = {}) {
     super(...arguments);
-    const { props = {}, container = document.getElementById('app') } = options;
+    const { container = document.getElementById('app') } = options;
     this.Root = Root;
-    this.props = props;
     this.container = container;
     if (!this.config.options.debug) {
       ignoreWarnings(this.config.ignore.warnings || []);
@@ -19,8 +18,8 @@ export default class App extends ReactantApp {
     }
   }
 
-  init() {
-    super.init();
+  async init() {
+    await super.init();
     const { Root } = this;
     render(<Root {...this.props} />, this.container);
     return this;

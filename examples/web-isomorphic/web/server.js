@@ -3,12 +3,9 @@ import StyledComponents from '@reactant/styled-components';
 import ServerApp from '@reactant/web-isomorphic/ServerApp';
 import ServerRoot from './ServerRoot';
 
-async function createApp() {
-  const app = new ServerApp(ServerRoot, {
-    props: {}
-  });
-  await app.register(StyledComponents);
-  return app.init();
-}
+const app = new ServerApp(ServerRoot, {
+  props: {}
+});
+app.register(StyledComponents);
 
-export default createApp();
+export default app.init();

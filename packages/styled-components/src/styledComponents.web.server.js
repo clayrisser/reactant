@@ -34,10 +34,11 @@ export default class StyledComponents {
     };
   }
 
-  modifyCheerio($) {
+  didRender(app) {
+    const { $ } = app;
     const { sheet } = this;
     const css = sheet.getStyleTags();
     $('head').append(`<style type="text/css">${css}</style>`);
-    return $;
+    return app;
   }
 }

@@ -1,5 +1,7 @@
+import Cookies from 'cookies-js';
 import React, { Component } from 'react';
 import _ from 'lodash';
+import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1';
 import reducers from '~/reducers';
 import reduxThunk from 'redux-thunk';
 import storage from 'redux-persist/lib/storage';
@@ -8,6 +10,10 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { config } from '@reactant/core';
 import { createStore, applyMiddleware } from 'redux';
 import { persistReducer, getStoredState } from 'redux-persist';
+import {
+  CookieStorage,
+  NodeCookiesWrapper
+} from 'redux-persist-cookie-storage';
 
 export default class StyledComponents {
   name = 'redux';
@@ -20,6 +26,7 @@ export default class StyledComponents {
       initialState = {},
       persist = {
         key: 'root',
+        stateReconciler: autoMergeLevel1,
         storage
       },
       whitelist = []
@@ -43,6 +50,22 @@ export default class StyledComponents {
 
   get reducer() {
     return persistReducer(this.persist, reducers);
+  }
+
+  willRender(app) {
+    const cookieJar = Cookies;
+    app.props = {
+      ...app.props,
+      context: {
+        ...app.props.context,
+        cookieJar
+      }
+    };
+    this.props = app.props;
+    if (!this.persist.storage) {
+      this.persist.storage = new CookieStorage(cookieJar, {});
+    }
+    return app;
   }
 
   async getInitialState() {

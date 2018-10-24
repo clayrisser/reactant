@@ -1,5 +1,7 @@
+import Cookies from 'cookies';
 import React, { Component } from 'react';
 import _ from 'lodash';
+import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1';
 import reducers from '~/reducers';
 import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
@@ -7,6 +9,10 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { config } from '@reactant/core';
 import { createStore, applyMiddleware } from 'redux';
 import { persistReducer, getStoredState } from 'redux-persist';
+import {
+  CookieStorage,
+  NodeCookiesWrapper
+} from 'redux-persist-cookie-storage';
 
 export default class StyledComponents {
   name = 'redux';
@@ -17,7 +23,11 @@ export default class StyledComponents {
       blacklist = [],
       devTools = {},
       initialState = {},
-      persist = {},
+      persist = {
+        key: 'root',
+        stateReconciler: autoMergeLevel1,
+        storage: null
+      },
       whitelist = []
     }
   ) {
@@ -39,6 +49,28 @@ export default class StyledComponents {
 
   get reducer() {
     return persistReducer(this.persist, reducers);
+  }
+
+  willInit(app) {
+    const expressApp = app.app;
+    expressApp.use(Cookies.express());
+    return app;
+  }
+
+  willRender(app, { req, res }) {
+    this.cookieJar = new NodeCookiesWrapper(new Cookies(req, res));
+    app.props = {
+      ...app.props,
+      context: {
+        ...app.props.context,
+        cookieJar: this.cookieJar
+      }
+    };
+    this.props = app.props;
+    if (!this.persist.storage) {
+      this.persist.storage = new CookieStorage(this.cookieJar, {});
+    }
+    return app;
   }
 
   async getInitialState() {
@@ -63,8 +95,9 @@ export default class StyledComponents {
   }
 
   async getRoot() {
-    const { ChildRoot, getStore } = this;
-    const store = await getStore();
+    const { ChildRoot } = this;
+    const store = await this.getStore();
+    this.props = { ...this.props, store };
     return class Root extends Component {
       render() {
         return (
