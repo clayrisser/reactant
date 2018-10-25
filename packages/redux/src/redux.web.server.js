@@ -34,13 +34,13 @@ export default class StyledComponents {
     }
   ) {
     this.ChildRoot = ChildRoot;
-    this.blacklist = _.uniq([...blacklist, ...config.blacklist]);
+    this.blacklist = _.uniq([...blacklist, ...config.redux.blacklist]);
     this.devTools = devTools;
     this.persist = persist;
-    this.whitelist = _.uniq([...whitelist, ...config.whitelist]);
+    this.whitelist = _.uniq([...whitelist, ...config.redux.whitelist]);
     this.initialState = {
       ...initialState,
-      ...config.initialState
+      ...config.redux.initialState
     };
   }
 

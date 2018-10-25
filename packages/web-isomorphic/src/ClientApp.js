@@ -1,9 +1,8 @@
-import _ from 'lodash';
-import Promise from 'bluebird';
 import React from 'react';
 import autobind from 'autobind-decorator';
 import ignoreWarnings from 'ignore-warnings';
 import { ReactantApp, config, log } from '@reactant/core';
+import { callLifecycle } from '@reactant/core/plugin';
 import { hydrate } from 'react-dom';
 import Reactant from './Reactant';
 
@@ -21,12 +20,7 @@ export default class ClientApp extends ReactantApp {
   }
 
   async render() {
-    await Promise.mapSeries(_.keys(this.plugins), async key => {
-      const plugin = this.plugins[key];
-      if (plugin.willRender) {
-        await plugin.willRender(this, {});
-      }
-    });
+    await callLifecycle('willRender', this, {});
     this.props.context = {
       insertCss: (...styles) => {
         const removeCss = styles.map(style => style._insertCss());
@@ -36,12 +30,7 @@ export default class ClientApp extends ReactantApp {
     this.Root = await this.getRoot({});
     const { Root } = this;
     hydrate(<Root {...this.props} />, document.getElementById('app'));
-    await Promise.mapSeries(_.keys(this.plugins), async key => {
-      const plugin = this.plugins[key];
-      if (plugin.didRender) {
-        await plugin.didRender(this, {});
-      }
-    });
+    await callLifecycle('didRender', this, {});
   }
 
   async init() {

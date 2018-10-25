@@ -1,6 +1,7 @@
 import React from 'react';
 import ignoreWarnings from 'ignore-warnings';
 import { ReactantApp, config } from '@reactant/core';
+import { callLifecycle } from '@reactant/core/plugin';
 import { render } from 'react-dom';
 import Reactant from './Reactant';
 
@@ -21,7 +22,9 @@ export default class App extends ReactantApp {
   async init() {
     await super.init();
     const { Root } = this;
+    callLifecycle('willRender', this, {});
     render(<Root {...this.props} />, this.container);
+    callLifecycle('didRender', this, {});
     return this;
   }
 }

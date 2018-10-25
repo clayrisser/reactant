@@ -2,6 +2,8 @@ title: Reactant
 platforms:
   web: '@reactant/web-isomorphic'
 plugins:
+  - '@reactant/redux'
   - '@reactant/styled-components'
-initialState:
-  todos: []
+redux:
+  initialState:
+    todos: []

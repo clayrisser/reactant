@@ -4,9 +4,7 @@ import Redux from '@reactant/redux';
 import StyledComponents from '@reactant/styled-components';
 import ClientRoot from './ClientRoot';
 
-const app = new ClientApp(ClientRoot, {
-  props: {}
-});
+const app = new ClientApp(ClientRoot);
 app.register(StyledComponents);
 app.register(Redux);
 

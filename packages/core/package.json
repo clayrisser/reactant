@@ -19,7 +19,8 @@
     "assets.js",
     "config.js",
     "lib",
-    "log.js"
+    "log.js",
+    "plugin.js"
   ],
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "bluebird": "^3.5.2",
     "export-es6": "^0.1.0",
     "js-info": "^0.3.0",
     "lodash": "^4.17.11",

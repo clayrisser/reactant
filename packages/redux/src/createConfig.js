@@ -1,8 +1,11 @@
 export default function(config) {
   return {
     ...config,
-    blacklist: [],
-    initialState: {},
-    whitelist: []
+    redux: {
+      ...config.redux,
+      blacklist: [],
+      initialState: {},
+      whitelist: []
+    }
   };
 }

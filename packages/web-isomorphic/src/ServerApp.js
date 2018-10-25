@@ -1,4 +1,3 @@
-import Promise from 'bluebird';
 import React from 'react';
 import _ from 'lodash';
 import autobind from 'autobind-decorator';
@@ -7,6 +6,7 @@ import express from 'express';
 import ignoreWarnings from 'ignore-warnings';
 import path from 'path';
 import { ReactantApp, config, assets, log } from '@reactant/core';
+import { callLifecycle } from '@reactant/core/plugin';
 import { renderToString /* , renderToStaticMarkup */ } from 'react-dom/server';
 import Reactant from './Reactant';
 import indexHtml from '~/../web/index.html';
@@ -29,12 +29,7 @@ export default class ServerApp extends ReactantApp {
       log.silly('url:', req.url);
       const css = new Set();
       req.props = { ...this.props };
-      await Promise.mapSeries(_.keys(this.plugins), async key => {
-        const plugin = this.plugins[key];
-        if (plugin.willRender) {
-          await plugin.willRender(this, { req, res });
-        }
-      });
+      await callLifecycle('willRender', this, { req, res });
       req.props.location = req.url;
       req.props.context = {
         ...req.props.context,
@@ -60,12 +55,7 @@ export default class ServerApp extends ReactantApp {
         }
       });
       req.$ = $;
-      await Promise.mapSeries(_.keys(this.plugins), async key => {
-        const plugin = this.plugins[key];
-        if (plugin.didRender) {
-          await plugin.didRender(this, { req, res });
-        }
-      });
+      await callLifecycle('didRender', this, { req, res });
       res.sent = true;
       return res.send(req.$.html());
     } catch (err) {

@@ -14,9 +14,9 @@ export default class StyledComponents {
   constructor(ChildRoot, { theme = {}, themes = {} }) {
     this.ChildRoot = ChildRoot;
     this.theme = {
-      ...themes[config.themeName],
+      ...themes[config.styledComponents.themeName],
       ...theme,
-      ...config.theme
+      ...config.styledComponents.theme
     };
   }
 

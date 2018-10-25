@@ -1,7 +1,10 @@
 export default function(config) {
   return {
     ...config,
-    themeName: 'base',
-    theme: {}
+    styledComponents: {
+      ...config.styledComponents,
+      theme: {},
+      themeName: 'base'
+    }
   };
 }

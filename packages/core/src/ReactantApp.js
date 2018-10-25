@@ -1,5 +1,6 @@
 import Promise from 'bluebird';
 import _ from 'lodash';
+import { callLifecycle } from './plugin';
 import { log, config } from '.';
 import { setLevel } from './log';
 
@@ -41,12 +42,12 @@ export default class ReactantApp {
     this.plugins.push(plugin);
   }
 
-  async getRoot(...props) {
+  async getRoot(...args) {
     let Root = this.BaseRoot;
     await Promise.mapSeries(this.plugins, async plugin => {
       if (plugin.getRoot && _.isFunction(plugin.getRoot)) {
         plugin.ChildRoot = Root;
-        Root = await plugin.getRoot(this, ...props);
+        Root = await plugin.getRoot(this, ...args);
       } else {
         plugin.ChildRoot = Root;
         ({ Root } = plugin);
@@ -55,15 +56,10 @@ export default class ReactantApp {
     return Root;
   }
 
-  async init() {
+  async init(...args) {
     log.silly(`initializing platform '${config.platform}'`);
     this.Root = await this.getRoot({});
-    await Promise.mapSeries(_.keys(this.plugins), async key => {
-      const plugin = this.plugins[key];
-      if (plugin.willInit) {
-        await plugin.willInit(this);
-      }
-    });
+    await callLifecycle('willInit', this, ...args);
     return this;
   }
 }

@@ -15,9 +15,6 @@ export default {
     errors: [],
     warnings: []
   },
-  initialState: {},
-  whitelist: [],
-  blacklist: [],
   offline: false,
   paths: {
     debug: '{reactant}/debug',

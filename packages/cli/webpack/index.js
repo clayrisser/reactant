@@ -1,4 +1,1 @@
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-module.exports = require('../lib/webpack');
+require('export-es6')(module, require('../lib/webpack'));
