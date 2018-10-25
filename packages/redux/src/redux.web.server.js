@@ -6,7 +6,7 @@ import reducers from '~/reducers';
 import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { config, log } from '@reactant/core';
+import { config } from '@reactant/core';
 import { createStore, applyMiddleware } from 'redux';
 import { persistReducer, getStoredState, persistStore } from 'redux-persist';
 import {
@@ -49,10 +49,6 @@ export default class StyledComponents {
     return composeEnhancers(applyMiddleware(reduxThunk));
   }
 
-  get reducer() {
-    return persistReducer(this.persist, reducers);
-  }
-
   willInit(app) {
     const expressApp = app.app;
     expressApp.use(Cookies.express());
@@ -61,21 +57,23 @@ export default class StyledComponents {
   }
 
   async willRender(app, { req, res }) {
-    this.cookieJar = new NodeCookiesWrapper(new Cookies(req, res));
-    app.props = {
-      ...app.props,
+    const cookieJar = new NodeCookiesWrapper(new Cookies(req, res));
+    req.props = {
+      ...req.props,
       context: {
-        ...app.props.context,
-        cookieJar: this.cookieJar
+        ...req.props.context,
+        cookieJar
       }
     };
-    this.props = app.props;
-    if (!this.persist.storage) {
-      this.persist.storage = new CookieStorage(this.cookieJar, {});
-    }
-    const store = await this.getStore();
-    this.props = { ...this.props, store };
-    this.persistor = await new Promise(resolve => {
+    const persist = {
+      key: this.persist.key,
+      stateReconciler: this.persist.stateReconciler,
+      storage: this.persist.storage || new CookieStorage(cookieJar, {})
+    };
+    req.persist = persist;
+    const store = await this.getStore({ req });
+    req.props.context = { ...req.props.context, store };
+    req.persistor = await new Promise(resolve => {
       const persistor = persistStore(store, config.initialState, () => {
         return resolve(persistor);
       });
@@ -83,19 +81,38 @@ export default class StyledComponents {
     return app;
   }
 
-  async didRender(app, { res }) {
+  async didRender(app, { req, res }) {
     if (this.initialized) {
-      await this.persistor.flush();
+      await req.persistor.flush();
       res.removeHeader('Set-Cookie');
     }
     return app;
   }
 
-  async getInitialState() {
-    const { cookieJar } = this;
+  async getRoot(app, { req }) {
+    const { ChildRoot, initialized } = this;
+    if (!initialized) return ChildRoot;
+    const { props } = req;
+    return class Root extends Component {
+      render() {
+        return (
+          <Provider store={props.context.store}>
+            <ChildRoot {...props} />
+          </Provider>
+        );
+      }
+    };
+  }
+
+  getReducer({ persist }) {
+    return persistReducer(persist, reducers);
+  }
+
+  async getInitialState({ req }) {
+    const { cookieJar } = req.props.context;
     if (cookieJar) {
       try {
-        const state = await getStoredState(this.persist);
+        const state = await getStoredState(req.persist);
         if (state) return state;
       } catch (err) {
         return this.initialState;
@@ -104,25 +121,11 @@ export default class StyledComponents {
     return this.initialState;
   }
 
-  async getStore() {
+  async getStore({ req }) {
     return createStore(
-      this.reducer,
-      await this.getInitialState(),
+      this.getReducer({ persist: req.persist }),
+      await this.getInitialState({ req }),
       this.middleware
     );
-  }
-
-  async getRoot() {
-    const { ChildRoot, initialized, props } = this;
-    if (!initialized) return ChildRoot;
-    return class Root extends Component {
-      render() {
-        return (
-          <Provider store={props.store}>
-            <ChildRoot {...props} />
-          </Provider>
-        );
-      }
-    };
   }
 }

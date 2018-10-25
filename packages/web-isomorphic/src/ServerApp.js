@@ -18,9 +18,9 @@ export default class ServerApp extends ReactantApp {
     const { app = express() } = options;
     this.Root = Root;
     this.app = app;
-    if (!this.config.options.debug) {
-      ignoreWarnings(this.config.ignore.warnings || []);
-      ignoreWarnings('error', this.config.ignore.errors || []);
+    if (!config.options.debug) {
+      ignoreWarnings(config.ignore.warnings || []);
+      ignoreWarnings('error', config.ignore.errors || []);
     }
   }
 
@@ -28,23 +28,24 @@ export default class ServerApp extends ReactantApp {
     try {
       log.silly('url:', req.url);
       const css = new Set();
+      req.props = { ...this.props };
       await Promise.mapSeries(_.keys(this.plugins), async key => {
         const plugin = this.plugins[key];
         if (plugin.willRender) {
           await plugin.willRender(this, { req, res });
         }
       });
-      this.props.location = req.url;
-      this.props.context = {
-        ...this.props.context,
+      req.props.location = req.url;
+      req.props.context = {
+        ...req.props.context,
         insertCss: (...styles) => {
           return styles.forEach(style => css.add(style._getCss()));
         },
-        location: this.props.location
+        location: req.props.location
       };
-      this.Root = await this.getRoot({ req, res });
-      const { Root } = this;
-      const appHtml = renderToString(<Root {...this.props} />);
+      req.Root = await this.getRoot({ req, res });
+      const { Root, props } = req;
+      const appHtml = renderToString(<Root {...props} />);
       const $ = cheerio.load(indexHtml);
       $('title').text(config.title);
       $('head').append(`<style type="text/css">${[...css].join('')}</style>`);
@@ -58,14 +59,15 @@ export default class ServerApp extends ReactantApp {
           );
         }
       });
-      this.$ = $;
+      req.$ = $;
       await Promise.mapSeries(_.keys(this.plugins), async key => {
         const plugin = this.plugins[key];
         if (plugin.didRender) {
           await plugin.didRender(this, { req, res });
         }
       });
-      return res.send(this.$.html());
+      res.sent = true;
+      return res.send(req.$.html());
     } catch (err) {
       return next(err);
     }
@@ -73,7 +75,7 @@ export default class ServerApp extends ReactantApp {
 
   async init() {
     await super.init();
-    const { paths } = this.config;
+    const { paths } = config;
     this.app.use(express.static(path.resolve(paths.dist, 'public')));
     this.app.get('/*', this.handle);
     return this;

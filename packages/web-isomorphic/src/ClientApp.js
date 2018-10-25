@@ -14,9 +14,9 @@ export default class ClientApp extends ReactantApp {
     super(...arguments);
     this.Root = Root;
     this.container = container;
-    if (!this.config.options.debug) {
-      ignoreWarnings(this.config.ignore.warnings || []);
-      ignoreWarnings('error', this.config.ignore.errors || []);
+    if (!config.options.debug) {
+      ignoreWarnings(config.ignore.warnings || []);
+      ignoreWarnings('error', config.ignore.errors || []);
     }
   }
 
@@ -24,7 +24,7 @@ export default class ClientApp extends ReactantApp {
     await Promise.mapSeries(_.keys(this.plugins), async key => {
       const plugin = this.plugins[key];
       if (plugin.willRender) {
-        await plugin.willRender(this);
+        await plugin.willRender(this, {});
       }
     });
     this.props.context = {
@@ -39,7 +39,7 @@ export default class ClientApp extends ReactantApp {
     await Promise.mapSeries(_.keys(this.plugins), async key => {
       const plugin = this.plugins[key];
       if (plugin.didRender) {
-        await plugin.didRender(this);
+        await plugin.didRender(this, {});
       }
     });
   }
