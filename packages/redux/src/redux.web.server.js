@@ -5,6 +5,7 @@ import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1';
 import reducers from '~/reducers';
 import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
+import { callLifecycle } from '@reactant/core/plugin';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { config } from '@reactant/core';
 import { createStore, applyMiddleware } from 'redux';
@@ -44,11 +45,6 @@ export default class StyledComponents {
     };
   }
 
-  get middleware() {
-    const composeEnhancers = composeWithDevTools(this.devTools);
-    return composeEnhancers(applyMiddleware(reduxThunk));
-  }
-
   willInit(app) {
     const expressApp = app.app;
     expressApp.use(Cookies.express());
@@ -71,7 +67,7 @@ export default class StyledComponents {
       storage: this.persist.storage || new CookieStorage(cookieJar, {})
     };
     req.persist = persist;
-    const store = await this.getStore({ req });
+    const store = await this.getStore({ req, res });
     req.props.context = { ...req.props.context, store };
     req.persistor = await new Promise(resolve => {
       const persistor = persistStore(store, config.initialState, () => {
@@ -104,8 +100,17 @@ export default class StyledComponents {
     };
   }
 
-  getReducer({ persist }) {
-    return persistReducer(persist, reducers);
+  async getReducer({ req, res }) {
+    const reducer = reducers;
+    await callLifecycle('reduxApplyReducer', this, { req, res, reducer });
+    return persistReducer(req.persist, reducer);
+  }
+
+  async getMiddleware({ req, res }) {
+    const composeEnhancers = composeWithDevTools(this.devTools);
+    const middleware = [reduxThunk];
+    await callLifecycle('reduxApplyMiddleware', this, { req, res, middleware });
+    return composeEnhancers(applyMiddleware(...middleware));
   }
 
   async getInitialState({ req }) {
@@ -121,11 +126,11 @@ export default class StyledComponents {
     return this.initialState;
   }
 
-  async getStore({ req }) {
+  async getStore({ req, res }) {
     return createStore(
-      this.getReducer({ persist: req.persist }),
+      await this.getReducer({ req, res }),
       await this.getInitialState({ req }),
-      this.middleware
+      await this.getMiddleware({ req, res })
     );
   }
 }

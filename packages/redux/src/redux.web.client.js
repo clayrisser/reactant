@@ -48,15 +48,6 @@ export default class StyledComponents {
     };
   }
 
-  get middleware() {
-    const composeEnhancers = composeWithDevTools(this.devTools);
-    return composeEnhancers(applyMiddleware(reduxThunk));
-  }
-
-  get reducer() {
-    return persistReducer(this.persist, reducers);
-  }
-
   willInit() {
     this.initialized = true;
   }
@@ -79,6 +70,34 @@ export default class StyledComponents {
     return app;
   }
 
+  async getRoot() {
+    const { ChildRoot, props, initialized } = this;
+    if (!initialized) return ChildRoot;
+    return class Root extends Component {
+      render() {
+        return (
+          <Provider store={props.store}>
+            <ChildRoot {...props} />
+          </Provider>
+        );
+      }
+    };
+  }
+
+  async getReducer() {
+    const { persist } = this;
+    const reducer = reducers;
+    await callLifecycle('reduxApplyReducer', this, { reducer });
+    return persistReducer(persist, reducer);
+  }
+
+  async getMiddleware() {
+    const composeEnhancers = composeWithDevTools(this.devTools);
+    const middleware = [reduxThunk];
+    await callLifecycle('reduxApplyMiddleware', this, { middleware });
+    return composeEnhancers(applyMiddleware(...middleware));
+  }
+
   async getInitialState() {
     const { cookieJar } = this;
     if (cookieJar) {
@@ -94,23 +113,9 @@ export default class StyledComponents {
 
   async getStore() {
     return createStore(
-      this.reducer,
+      await this.getReducer(),
       await this.getInitialState(),
-      this.middleware
+      await this.getMiddleware()
     );
-  }
-
-  async getRoot() {
-    const { ChildRoot, props, initialized } = this;
-    if (!initialized) return ChildRoot;
-    return class Root extends Component {
-      render() {
-        return (
-          <Provider store={props.store}>
-            <ChildRoot {...props} />
-          </Provider>
-        );
-      }
-    };
   }
 }

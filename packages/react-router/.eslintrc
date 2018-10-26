@@ -9,7 +9,13 @@
     "import/no-unresolved": [
       "error",
       {
-        "ignore": ["^~", "^./lib", "^./redux"]
+        "ignore": [
+          "^~",
+          "^./lib",
+          "^./reactRouter",
+          "^react-router-",
+          "^connected-react-router"
+        ]
       }
     ]
   }
