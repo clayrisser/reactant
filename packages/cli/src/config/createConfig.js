@@ -1,3 +1,4 @@
+import Err from 'err';
 import _ from 'lodash';
 import mergeConfiguration from 'merge-configuration';
 import rcConfig from 'rc-config';
@@ -29,7 +30,7 @@ async function createConfigAsync({
   environment.default = defaultEnv;
   const userConfig = rcConfig({ name: 'reactant' });
   const eslint = rcConfig({ name: 'eslint' });
-  const config = {
+  let config = {
     ...mergeConfiguration(
       mergeConfiguration(
         mergeConfiguration(
@@ -41,6 +42,7 @@ async function createConfigAsync({
       optionsConfig
     ),
     platform: options.platform || '',
+    platformType,
     ignore: {
       errors: [
         ...(defaultConfig.ignore ? defaultConfig.ignore.errors : []),
@@ -56,6 +58,8 @@ async function createConfigAsync({
       ]
     }
   };
+  config = mergePlatformConfig(config);
+  config = mergePluginsConfig(config);
   const configPaths = new ConfigPaths(config);
   const configPorts = new ConfigPorts(config);
   return {
@@ -74,7 +78,6 @@ async function createConfigAsync({
     ),
     port: configPorts.basePort,
     ports: configPorts.ports,
-    platformType,
     envs: {
       ...config.envs,
       NODE_ENV: environment.value,
@@ -109,4 +112,44 @@ async function createConfigAsync({
     ),
     paths: configPaths.paths
   };
+}
+
+function mergePlatformConfig(config) {
+  const platform = config.platforms[config.platform];
+  if (_.isArray(platform) && config.platform.length > 1) {
+    const [, platformConfig] = platform;
+    if (platformConfig.platform) {
+      throw new Err("platform config cannot set 'platform'", 400);
+    }
+    config = mergeConfiguration(config, platformConfig);
+  }
+  config.platforms = _.reduce(
+    config.platforms,
+    (platforms, platorm, key) => {
+      if (_.isArray(platorm)) {
+        [platorm] = platorm;
+      }
+      platforms[key] = platorm;
+      return platforms;
+    },
+    {}
+  );
+  return config;
+}
+
+function mergePluginsConfig(config) {
+  _.each(config.plugins, plugin => {
+    if (_.isArray(plugin)) {
+      const [pluginName] = plugin;
+      config.plugin = pluginName;
+      if (plugin.length > 1) {
+        const [, pluginConfig] = plugin;
+        if (pluginConfig.plugins) {
+          throw new Err("plugin config cannot set 'plugins'", 400);
+        }
+        config = mergeConfiguration(config, pluginConfig);
+      }
+    }
+  });
+  return config;
 }

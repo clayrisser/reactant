@@ -17,6 +17,9 @@ function loadReactantPlugins(config, pluginNames) {
   return _.reduce(
     pluginNames,
     (plugins, pluginName) => {
+      if (_.isArray(pluginName) && pluginName.length) {
+        [pluginName] = pluginName;
+      }
       plugins[pluginName] = loadReactantPlugin(config, pluginName);
       return plugins;
     },
