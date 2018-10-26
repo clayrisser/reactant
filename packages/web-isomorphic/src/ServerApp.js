@@ -4,12 +4,12 @@ import autobind from 'autobind-decorator';
 import cheerio from 'cheerio';
 import express from 'express';
 import ignoreWarnings from 'ignore-warnings';
+import indexHtml from '@reactant/web-isomorphic/index.html';
 import path from 'path';
 import { ReactantApp, config, assets, log } from '@reactant/core';
 import { callLifecycle } from '@reactant/core/plugin';
 import { renderToString /* , renderToStaticMarkup */ } from 'react-dom/server';
 import Reactant from './Reactant';
-import indexHtml from '~/../web/index.html';
 
 @autobind
 export default class ServerApp extends ReactantApp {

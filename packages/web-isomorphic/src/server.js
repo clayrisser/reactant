@@ -34,8 +34,7 @@ async function init() {
 }
 
 async function createApp() {
-  // eslint-disable-next-line global-require
-  const { app } = await require('~/../web/server').default;
+  const { app } = await require('@reactant/web-isomorphic/server').default;
   app.disable('x-powered-by');
   app.use((err, req, res, _next) => {
     if (err) {
@@ -53,11 +52,12 @@ async function createApp() {
 }
 
 function startServer(server) {
+  const { platform } = config;
   server.listen(config.port, err => {
     if (err) throw err;
     serverSpinner.succeed(`server listening on port ${config.port}`);
     if (module.hot) {
-      module.hot.accept('~/../web/server.js', () => {
+      module.hot.accept(`~/../${platform}/server.js`, () => {
         log.info('[HMR] updating HMR');
         if (serverError) {
           serverError = false;

@@ -37,7 +37,7 @@ export default class ClientApp extends ReactantApp {
     await super.init();
     if (config.offline) require('offline-plugin/runtime').install();
     if (module.hot) {
-      module.hot.accept('~/../web/ClientRoot', this.render);
+      module.hot.accept('@reactant/web-isomorphic/ClientRoot', this.render);
     }
     await this.render().catch(log.error);
     return this;

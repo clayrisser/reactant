@@ -27,6 +27,17 @@ export default function createServerConfig(config, webpackConfig) {
     },
     resolve: {
       ...webpackConfig.resolve,
+      alias: {
+        ..._.get(webpackConfig, 'resolve.alias'),
+        '@reactant/web-isomorphic/index.html': path.resolve(
+          paths.platform,
+          'index.html'
+        ),
+        '@reactant/web-isomorphic/server': path.resolve(
+          paths.platform,
+          'server.js'
+        )
+      },
       extensions: _.uniq([
         `.${platform}.server.js`,
         `.${platform}.server.jsx`,
