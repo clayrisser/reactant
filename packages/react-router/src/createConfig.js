@@ -1,6 +1,8 @@
 export default function(config) {
   return {
     ...config,
-    reactRouter: {}
+    reactRouter: {
+      bindRedux: null
+    }
   };
 }

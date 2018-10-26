@@ -19,7 +19,10 @@ export default class ReactRouter {
     { bindRedux = _.includes(config.plugins, '@reactant/redux') }
   ) {
     this.ChildRoot = ChildRoot;
-    this.bindRedux = bindRedux;
+    this.bindRedux =
+      config.reactRouter.bindRedux !== null
+        ? config.reactRouter.bindRedux
+        : bindRedux;
   }
 
   reduxApplyReducer(app, { reducer }) {
