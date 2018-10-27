@@ -1,4 +1,5 @@
 import Button from './Button';
+import DynamicComponent from './DynamicComponentReact';
 
-export { Button };
+export { Button, DynamicComponent };
 export default { Button };
