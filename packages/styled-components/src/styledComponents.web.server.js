@@ -7,7 +7,7 @@ import {
 import { config } from '@reactant/core';
 
 export default class StyledComponents {
-  name = 'styled-components';
+  name = '@reactant/styled-components';
 
   constructor(ChildRoot, { theme = {}, themes = {} }) {
     this.ChildRoot = ChildRoot;

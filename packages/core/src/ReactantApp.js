@@ -38,12 +38,13 @@ export default class ReactantApp {
   async register(Plugin, options = {}) {
     const plugin = new Plugin(this.BaseRoot, options);
     log.silly(`registering plugin '${plugin.name}'`);
-    this.plugins.push(plugin);
+    this.plugins[plugin.name] = plugin;
   }
 
   async getRoot(...args) {
     let Root = this.BaseRoot;
-    await Promise.mapSeries(this.plugins, async plugin => {
+    await Promise.mapSeries(config.plugins, async pluginName => {
+      const plugin = this.plugins[pluginName];
       if (plugin.getRoot && _.isFunction(plugin.getRoot)) {
         plugin.ChildRoot = Root;
         Root = await plugin.getRoot(this, ...args);

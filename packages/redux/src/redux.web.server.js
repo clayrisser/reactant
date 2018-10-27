@@ -17,7 +17,7 @@ import {
 } from 'redux-persist-cookie-storage';
 
 export default class StyledComponents {
-  name = 'redux';
+  name = '@reactant/redux';
 
   constructor(
     ChildRoot,

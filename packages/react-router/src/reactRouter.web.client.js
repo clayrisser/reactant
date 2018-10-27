@@ -12,7 +12,7 @@ import {
 const history = createBrowserHistory();
 
 export default class ReactRouter {
-  name = 'react-router';
+  name = '@reactant/react-router';
 
   constructor(
     ChildRoot,

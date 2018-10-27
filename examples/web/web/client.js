@@ -7,7 +7,7 @@ import ClientRoot from './ClientRoot';
 
 const app = new App(ClientRoot);
 app.register(ReactRouter);
-app.register(Redux);
 app.register(StyledComponents);
+app.register(Redux);
 
 export default app.init();

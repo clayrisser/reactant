@@ -11,7 +11,10 @@ function getReactantPluginsConfig(config, pluginNames) {
     (config, plugin) => {
       return mergeConfiguration(config, plugin.config);
     },
-    {}
+    {
+      ...config,
+      plugins: _.map(plugins, 'name')
+    }
   );
 }
 

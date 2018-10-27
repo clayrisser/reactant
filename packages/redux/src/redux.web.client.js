@@ -21,7 +21,7 @@ function getDefaultStorage() {
 }
 
 export default class StyledComponents {
-  name = 'redux';
+  name = '@reactant/redux';
 
   constructor(
     ChildRoot,
