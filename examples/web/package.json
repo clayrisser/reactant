@@ -1,7 +1,7 @@
 {
   "name": "web",
   "private": true,
-  "version": "0.0.32",
+  "version": "0.0.33",
   "description": "web app built in reactant",
   "main": "web/client.js",
   "homepage": "https://reactant.codejam.ninja",
@@ -29,11 +29,11 @@
     "test": "npm run lint && jest --forceExit"
   },
   "dependencies": {
-    "@reactant/core": "^0.0.32",
-    "@reactant/react-router": "0.0.32",
-    "@reactant/redux": "^0.0.32",
-    "@reactant/styled-components": "^0.0.32",
-    "@reactant/web": "^0.0.32",
+    "@reactant/core": "^0.0.33",
+    "@reactant/react-router": "^0.0.33",
+    "@reactant/redux": "^0.0.33",
+    "@reactant/styled-components": "^0.0.33",
+    "@reactant/web": "^0.0.33",
     "@storybook/addon-actions": "^3.4.11",
     "@storybook/react": "^3.4.11",
     "autobind": "^1.0.3",
@@ -48,7 +48,7 @@
     "styled-components": "^4.0.2"
   },
   "devDependencies": {
-    "@reactant/cli": "^0.0.32",
+    "@reactant/cli": "^0.0.33",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",
