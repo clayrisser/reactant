@@ -2,6 +2,7 @@ import Cookies from 'cookies-js';
 import React, { Component } from 'react';
 import _ from 'lodash';
 import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import reducers from '~/reducers';
 import reduxThunk from 'redux-thunk';
 import storage from 'redux-persist/lib/storage';
@@ -11,7 +12,7 @@ import { callLifecycle } from '@reactant/core/plugin';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { config } from '@reactant/core';
 import { createStore, applyMiddleware } from 'redux';
-import { persistReducer, getStoredState } from 'redux-persist';
+import { persistReducer, getStoredState, persistStore } from 'redux-persist';
 
 function getDefaultStorage() {
   const { platform, platforms } = config;
@@ -21,8 +22,6 @@ function getDefaultStorage() {
 
 export default class StyledComponents {
   name = 'redux';
-
-  initialized = false;
 
   constructor(
     ChildRoot,
@@ -38,51 +37,75 @@ export default class StyledComponents {
       whitelist = []
     }
   ) {
+    whitelist = _.uniq([...whitelist, ...config.redux.whitelist]);
+    blacklist = _.uniq([...blacklist, ...config.redux.blacklist]);
     this.ChildRoot = ChildRoot;
-    this.blacklist = _.uniq([...blacklist, ...config.redux.blacklist]);
     this.devTools = devTools;
-    this.persist = persist;
-    this.whitelist = _.uniq([...whitelist, ...config.redux.whitelist]);
+    const filterRedux = whitelist.length ? 'whitelist' : 'blacklist';
+    this.persist = {
+      ...persist,
+      ...{
+        [filterRedux]: filterRedux === 'whitelist' ? whitelist : blacklist
+      }
+    };
+    if (!_.isNil(config.redux.persist)) {
+      const configPersist = config.redux.persist;
+      if (_.isPlainObject(configPersist)) {
+        if (configPersist.storage === 'default') delete configPersist.storage;
+        this.persist = { ...this.persist, ...configPersist };
+        if (configPersist.storage === 'local') {
+          this.persist = { ...this.persist, storage };
+        }
+        if (Number(configPersist.mergeLevel) === 1) {
+          this.persist = { ...this.persist, stateReconciler: autoMergeLevel1 };
+        } else if (Number(configPersist.mergeLevel) === 2) {
+          this.persist = { ...this.persist, stateReconciler: autoMergeLevel2 };
+        }
+      } else if (configPersist === 'local') {
+        this.persist = { ...this.persist, storage };
+      } else if (configPersist === false) {
+        this.persist = false;
+      }
+    }
     this.initialState = {
       ...initialState,
       ...config.redux.initialState
     };
   }
 
-  willInit() {
-    this.initialized = true;
-  }
-
   async willRender(app) {
     this.app = app;
-    const cookieJar = Cookies;
+    const persist = this.persist ? { ...this.persist } : false;
+    const cookieJar = persist && persist.storage ? null : Cookies;
+    if (persist && !persist.storage) {
+      persist.storage = new CookieStorage(cookieJar, {});
+    }
     app.props = {
       ...app.props,
       context: {
         ...app.props.context,
-        cookieJar
+        ...(cookieJar ? { cookieJar } : {})
       }
     };
-    const { persist } = this;
-    if (!persist.storage) {
-      persist.storage = new CookieStorage(cookieJar, {});
-    }
     app.redux = { persist };
     app.redux.initialState = await this.getInitialState();
     app.redux.middleware = await this.getMiddleware();
     app.redux.reducer = await this.getReducer();
     const store = await this.getStore();
-    app.props.context = {
-      ...app.props.context,
-      store
-    };
+    app.props.context = { ...app.props.context, store };
+    if (persist) {
+      app.redux.persistor = await new Promise(resolve => {
+        const persistor = persistStore(store, app.redux.initialState, () => {
+          return resolve(persistor);
+        });
+      });
+    }
     return app;
   }
 
   async getRoot(app) {
-    const { ChildRoot, initialized } = this;
+    const { ChildRoot } = this;
     const { props } = app;
-    if (!initialized) return ChildRoot;
     return class ReduxPlugin extends Component {
       render() {
         return (
@@ -100,6 +123,7 @@ export default class StyledComponents {
       reducer: reducers
     };
     await callLifecycle('reduxApplyReducer', app, { redux });
+    if (!app.redux.persist) return redux.reducer;
     return persistReducer(app.redux.persist, redux.reducer);
   }
 
@@ -115,12 +139,11 @@ export default class StyledComponents {
 
   async getInitialState() {
     const { app, initialState } = this;
-    const { props } = app;
     const redux = {
       initialState
     };
     await callLifecycle('reduxApplyInitialState', app, { redux });
-    if (props.context.cookieJar) {
+    if (app.redux.persist) {
       try {
         const state = await getStoredState(app.redux.persist);
         if (state) return state;

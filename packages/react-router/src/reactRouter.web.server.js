@@ -14,8 +14,6 @@ const history = createMemoryHistory();
 export default class ReactRouter {
   name = 'react-router';
 
-  initialized = false;
-
   constructor(
     ChildRoot,
     { bindRedux = _.includes(config.plugins, '@reactant/redux') }
@@ -25,10 +23,6 @@ export default class ReactRouter {
       config.reactRouter.bindRedux !== null
         ? config.reactRouter.bindRedux
         : bindRedux;
-  }
-
-  willInit() {
-    this.initialized = true;
   }
 
   reduxApplyReducer(app, { redux }) {
@@ -42,9 +36,8 @@ export default class ReactRouter {
   }
 
   getRoot(app, { req }) {
-    const { ChildRoot, bindRedux, initialized } = this;
+    const { ChildRoot, bindRedux } = this;
     const { props } = req;
-    if (!initialized) return ChildRoot;
     return class ReactRouterPlugin extends Component {
       render() {
         if (bindRedux) {
@@ -53,7 +46,11 @@ export default class ReactRouter {
               location={props.context.location}
               context={props.context}
             >
-              <ConnectedRouter history={history} store={props.context.store}>
+              <ConnectedRouter
+                history={history}
+                location={props.context.location}
+                store={props.context.store}
+              >
                 <ChildRoot {...props} />
               </ConnectedRouter>
             </StaticRouter>

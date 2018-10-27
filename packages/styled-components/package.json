@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "@reactant/core": "^0.0.33",
+    "lodash": "^4.17.11",
     "react": "^16.5.2",
     "styled-components": "^4.0.2"
   },

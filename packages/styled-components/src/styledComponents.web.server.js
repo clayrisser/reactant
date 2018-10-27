@@ -9,8 +9,6 @@ import { config } from '@reactant/core';
 export default class StyledComponents {
   name = 'styled-components';
 
-  initialized = false;
-
   constructor(ChildRoot, { theme = {}, themes = {} }) {
     this.ChildRoot = ChildRoot;
     this.theme = {
@@ -20,10 +18,6 @@ export default class StyledComponents {
     };
   }
 
-  willInit() {
-    this.initialized = true;
-  }
-
   willRender(app, { req }) {
     const sheet = new ServerStyleSheet();
     req.sheet = sheet;
@@ -31,8 +25,7 @@ export default class StyledComponents {
   }
 
   getRoot(app, { req }) {
-    const { ChildRoot, theme, initialized } = this;
-    if (!initialized) return ChildRoot;
+    const { ChildRoot, theme } = this;
     const { sheet, props } = req;
     return class StyledComponentsPlugin extends Component {
       render() {
