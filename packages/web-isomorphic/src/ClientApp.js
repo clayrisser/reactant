@@ -8,10 +8,10 @@ import Reactant from './Reactant';
 
 @autobind
 export default class ClientApp extends ReactantApp {
-  constructor(Root = Reactant, options = {}) {
+  constructor(BaseRoot = Reactant, options = {}) {
     const { container = document.getElementById('app') } = options;
     super(...arguments);
-    this.Root = Root;
+    this.BaseRoot = BaseRoot;
     this.container = container;
     if (!config.options.debug) {
       ignoreWarnings(config.ignore.warnings || []);
@@ -21,19 +21,22 @@ export default class ClientApp extends ReactantApp {
 
   async render() {
     await callLifecycle('willRender', this, {});
-    this.props.context = {
+    const { props } = this;
+    props.context = {
+      ...props.context,
       insertCss: (...styles) => {
         const removeCss = styles.map(style => style._insertCss());
         return () => removeCss.forEach(f => f());
       }
     };
-    this.Root = await this.getRoot({});
-    const { Root } = this;
-    hydrate(<Root {...this.props} />, document.getElementById('app'));
+    const Root = await this.getRoot({});
+    if (window.reactant) window.reactant.context = props.context;
+    hydrate(<Root {...props} />, document.getElementById('app'));
     await callLifecycle('didRender', this, {});
   }
 
   async init() {
+    log.debug('local rendering taking over');
     await super.init();
     if (config.offline) require('offline-plugin/runtime').install();
     if (module.hot) {

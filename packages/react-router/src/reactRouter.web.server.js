@@ -31,13 +31,13 @@ export default class ReactRouter {
     this.initialized = true;
   }
 
-  reduxApplyReducer(app, { reducer }) {
-    _.assign(reducer, connectRouter(history)(reducer));
+  reduxApplyReducer(app, { redux }) {
+    redux.reducer = connectRouter(history)(redux.reducer);
     return app;
   }
 
-  reduxApplyMiddleware(app, { middleware }) {
-    middleware.push(routerMiddleware(history));
+  reduxApplyMiddleware(app, { redux }) {
+    redux.middleware.push(routerMiddleware(history));
     return app;
   }
 
@@ -45,7 +45,7 @@ export default class ReactRouter {
     const { ChildRoot, bindRedux, initialized } = this;
     const { props } = req;
     if (!initialized) return ChildRoot;
-    return class Root extends Component {
+    return class ReactRouterPlugin extends Component {
       render() {
         if (bindRedux) {
           return (
@@ -53,7 +53,7 @@ export default class ReactRouter {
               location={props.context.location}
               context={props.context}
             >
-              <ConnectedRouter history={history}>
+              <ConnectedRouter history={history} store={props.context.store}>
                 <ChildRoot {...props} />
               </ConnectedRouter>
             </StaticRouter>

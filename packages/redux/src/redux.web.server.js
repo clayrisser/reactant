@@ -7,7 +7,7 @@ import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { callLifecycle } from '@reactant/core/plugin';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { config } from '@reactant/core';
+import { config, log } from '@reactant/core';
 import { createStore, applyMiddleware } from 'redux';
 import { persistReducer, getStoredState, persistStore } from 'redux-persist';
 import {
@@ -53,6 +53,7 @@ export default class StyledComponents {
   }
 
   async willRender(app, { req, res }) {
+    this.app = app;
     const cookieJar = new NodeCookiesWrapper(new Cookies(req, res));
     req.props = {
       ...req.props,
@@ -66,7 +67,10 @@ export default class StyledComponents {
       stateReconciler: this.persist.stateReconciler,
       storage: this.persist.storage || new CookieStorage(cookieJar, {})
     };
-    req.persist = persist;
+    req.redux = { persist };
+    req.redux.initialState = await this.getInitialState({ req, res });
+    req.redux.middleware = await this.getMiddleware({ req, res });
+    req.redux.reducer = await this.getReducer({ req, res });
     const store = await this.getStore({ req, res });
     req.props.context = { ...req.props.context, store };
     req.persistor = await new Promise(resolve => {
@@ -82,6 +86,18 @@ export default class StyledComponents {
       await req.persistor.flush();
       res.removeHeader('Set-Cookie');
     }
+    if (req.reactant) {
+      const state = req.props.context.store.getState();
+      log.silly('state', state);
+      req.reactant = {
+        ...req.reactant,
+        context: {
+          ...req.reactant.context,
+          cookieJar: {},
+          store: { state }
+        }
+      };
+    }
     return app;
   }
 
@@ -89,7 +105,7 @@ export default class StyledComponents {
     const { ChildRoot, initialized } = this;
     if (!initialized) return ChildRoot;
     const { props } = req;
-    return class Root extends Component {
+    return class ReduxPlugin extends Component {
       render() {
         return (
           <Provider store={props.context.store}>
@@ -101,36 +117,44 @@ export default class StyledComponents {
   }
 
   async getReducer({ req, res }) {
-    const reducer = reducers;
-    await callLifecycle('reduxApplyReducer', this, { req, res, reducer });
-    return persistReducer(req.persist, reducer);
+    const { app } = this;
+    const redux = {
+      reducer: reducers
+    };
+    await callLifecycle('reduxApplyReducer', app, { req, res, redux });
+    return persistReducer(req.redux.persist, redux.reducer);
   }
 
   async getMiddleware({ req, res }) {
-    const composeEnhancers = composeWithDevTools(this.devTools);
-    const middleware = [reduxThunk];
-    await callLifecycle('reduxApplyMiddleware', this, { req, res, middleware });
-    return composeEnhancers(applyMiddleware(...middleware));
+    const { app, devTools } = this;
+    const redux = {
+      middleware: [reduxThunk]
+    };
+    const composeEnhancers = composeWithDevTools(devTools);
+    await callLifecycle('reduxApplyMiddleware', app, { req, res, redux });
+    return composeEnhancers(applyMiddleware(...redux.middleware));
   }
 
-  async getInitialState({ req }) {
-    const { cookieJar } = req.props.context;
-    if (cookieJar) {
+  async getInitialState({ req, res }) {
+    const { app, initialState } = this;
+    const { props } = req;
+    const redux = {
+      initialState
+    };
+    await callLifecycle('reduxApplyInitialState', app, { req, res, redux });
+    if (props.context.cookieJar) {
       try {
-        const state = await getStoredState(req.persist);
+        const state = await getStoredState(req.redux.persist);
         if (state) return state;
       } catch (err) {
-        return this.initialState;
+        return initialState;
       }
     }
-    return this.initialState;
+    return initialState;
   }
 
-  async getStore({ req, res }) {
-    return createStore(
-      await this.getReducer({ req, res }),
-      await this.getInitialState({ req }),
-      await this.getMiddleware({ req, res })
-    );
+  async getStore({ req }) {
+    const { redux } = req;
+    return createStore(redux.reducer, redux.initialState, redux.middleware);
   }
 }

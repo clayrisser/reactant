@@ -33,13 +33,13 @@ export default class StyledComponents {
   getRoot(app, { req }) {
     const { ChildRoot, theme, initialized } = this;
     if (!initialized) return ChildRoot;
-    const { sheet } = req;
-    return class Root extends Component {
+    const { sheet, props } = req;
+    return class StyledComponentsPlugin extends Component {
       render() {
         return (
           <StyleSheetManager sheet={sheet.instance}>
             <ThemeProvider theme={theme}>
-              <ChildRoot {...req.props} />
+              <ChildRoot {...props} />
             </ThemeProvider>
           </StyleSheetManager>
         );

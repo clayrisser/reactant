@@ -14,6 +14,13 @@ export default function(config) {
         ...config.babel.plugins
       ]
     },
+    ignore: {
+      ...config.ignore,
+      errors: [
+        ..._.get(config, 'ignore.errors', []),
+        'reconciliation failed could not dive into'
+      ]
+    },
     ports: {
       ...config.ports,
       storybook: null

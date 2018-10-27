@@ -14,13 +14,14 @@ export default class StyledComponents {
     };
   }
 
-  get Root() {
+  getRoot(app) {
     const { ChildRoot, theme } = this;
-    return class Root extends Component {
+    const { props } = app;
+    return class StyledComponentsPlugin extends Component {
       render() {
         return (
           <ThemeProvider theme={theme}>
-            <ChildRoot {...this.props} />
+            <ChildRoot {...props} />
           </ThemeProvider>
         );
       }

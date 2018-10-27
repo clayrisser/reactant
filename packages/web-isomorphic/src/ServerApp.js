@@ -1,8 +1,10 @@
+import CircularJSON from 'circular-json';
 import React from 'react';
 import _ from 'lodash';
 import autobind from 'autobind-decorator';
 import cheerio from 'cheerio';
 import express from 'express';
+import fs from 'fs-extra';
 import ignoreWarnings from 'ignore-warnings';
 import indexHtml from '@reactant/web-isomorphic/index.html';
 import path from 'path';
@@ -13,10 +15,10 @@ import Reactant from './Reactant';
 
 @autobind
 export default class ServerApp extends ReactantApp {
-  constructor(Root = Reactant, options = {}) {
+  constructor(BaseRoot = Reactant, options = {}) {
     super(...arguments);
     const { app = express() } = options;
-    this.Root = Root;
+    this.BaseRoot = BaseRoot;
     this.app = app;
     if (!config.options.debug) {
       ignoreWarnings(config.ignore.warnings || []);
@@ -25,7 +27,9 @@ export default class ServerApp extends ReactantApp {
   }
 
   async handle(req, res, next) {
+    const { paths } = config;
     try {
+      if (global.reactant) req.reactant = global.reactant;
       log.silly('url:', req.url);
       const css = new Set();
       req.props = { ...this.props };
@@ -38,8 +42,9 @@ export default class ServerApp extends ReactantApp {
         },
         location: req.props.location
       };
-      req.Root = await this.getRoot({ req, res });
-      const { Root, props } = req;
+      const Root = await this.getRoot({ req, res });
+      const { props } = req;
+      if (req.reactant) req.reactant.context = props.context;
       const appHtml = renderToString(<Root {...props} />);
       const $ = cheerio.load(indexHtml);
       $('title').text(config.title);
@@ -56,6 +61,13 @@ export default class ServerApp extends ReactantApp {
       });
       req.$ = $;
       await callLifecycle('didRender', this, { req, res });
+      if (req.reactant) {
+        fs.mkdirsSync(paths.debug);
+        fs.writeFileSync(
+          path.resolve(paths.debug, 'reactant.json'),
+          CircularJSON.stringify(req.reactant, null, 2)
+        );
+      }
       res.sent = true;
       return res.send(req.$.html());
     } catch (err) {

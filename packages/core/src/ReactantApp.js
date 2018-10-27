@@ -7,10 +7,9 @@ import { setLevel } from './log';
 export default class ReactantApp {
   plugins = [];
 
-  constructor(Root, options = {}) {
+  constructor(BaseRoot, options = {}) {
     const { props = {}, context = {} } = options;
-    this.Root = Root;
-    this.BaseRoot = Root;
+    this.BaseRoot = BaseRoot;
     this.props = {
       ...props,
       context: {
@@ -30,14 +29,14 @@ export default class ReactantApp {
       setLevel(config.level);
     }
     if (typeof global.window === 'undefined') global.window = {};
-    if (config !== 'production') {
+    if (config.env !== 'production') {
       window.reactant = { config };
       global.reactant = { config };
     }
   }
 
   async register(Plugin, options = {}) {
-    const plugin = new Plugin(this.Root, options);
+    const plugin = new Plugin(this.BaseRoot, options);
     log.silly(`registering plugin '${plugin.name}'`);
     this.plugins.push(plugin);
   }
@@ -58,7 +57,6 @@ export default class ReactantApp {
 
   async init(...args) {
     log.silly(`initializing platform '${config.platform}'`);
-    this.Root = await this.getRoot({});
     await callLifecycle('willInit', this, ...args);
     return this;
   }

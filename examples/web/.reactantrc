@@ -2,6 +2,7 @@ title: Reactant
 platforms:
   web: '@reactant/web'
 plugins:
+  - '@reactant/react-router'
   - '@reactant/redux'
   - '@reactant/styled-components'
 redux:

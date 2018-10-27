@@ -42,21 +42,7 @@ async function createConfigAsync({
       optionsConfig
     ),
     platform: options.platform || '',
-    platformType,
-    ignore: {
-      errors: [
-        ...(defaultConfig.ignore ? defaultConfig.ignore.errors : []),
-        ...(platformConfig.ignore ? platformConfig.ignore.errors : []),
-        ...(userConfig.ignore ? userConfig.ignore.errors : []),
-        ...(optionsConfig.ignore ? optionsConfig.ignore.errors : [])
-      ],
-      warnings: [
-        ...(defaultConfig.ignore ? defaultConfig.ignore.warnings : []),
-        ...(platformConfig.ignore ? platformConfig.ignore.warnings : []),
-        ...(userConfig.ignore ? userConfig.ignore.warnings : []),
-        ...(optionsConfig.ignore ? optionsConfig.ignore.warnings : [])
-      ]
-    }
+    platformType
   };
   config = mergePlatformConfig(config);
   config = mergePluginsConfig(config);

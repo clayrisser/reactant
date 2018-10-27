@@ -5,12 +5,13 @@ import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1';
 import reducers from '~/reducers';
 import reduxThunk from 'redux-thunk';
 import storage from 'redux-persist/lib/storage';
+import { CookieStorage } from 'redux-persist-cookie-storage';
 import { Provider } from 'react-redux';
+import { callLifecycle } from '@reactant/core/plugin';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { config } from '@reactant/core';
 import { createStore, applyMiddleware } from 'redux';
 import { persistReducer, getStoredState } from 'redux-persist';
-import { CookieStorage } from 'redux-persist-cookie-storage';
 
 function getDefaultStorage() {
   const { platform, platforms } = config;
@@ -53,6 +54,7 @@ export default class StyledComponents {
   }
 
   async willRender(app) {
+    this.app = app;
     const cookieJar = Cookies;
     app.props = {
       ...app.props,
@@ -61,22 +63,30 @@ export default class StyledComponents {
         cookieJar
       }
     };
-    this.props = app.props;
-    if (!this.persist.storage) {
-      this.persist.storage = new CookieStorage(cookieJar, {});
+    const { persist } = this;
+    if (!persist.storage) {
+      persist.storage = new CookieStorage(cookieJar, {});
     }
+    app.redux = { persist };
+    app.redux.initialState = await this.getInitialState();
+    app.redux.middleware = await this.getMiddleware();
+    app.redux.reducer = await this.getReducer();
     const store = await this.getStore();
-    this.props = { ...this.props, store };
+    app.props.context = {
+      ...app.props.context,
+      store
+    };
     return app;
   }
 
-  async getRoot() {
-    const { ChildRoot, props, initialized } = this;
+  async getRoot(app) {
+    const { ChildRoot, initialized } = this;
+    const { props } = app;
     if (!initialized) return ChildRoot;
-    return class Root extends Component {
+    return class ReduxPlugin extends Component {
       render() {
         return (
-          <Provider store={props.store}>
+          <Provider store={props.context.store}>
             <ChildRoot {...props} />
           </Provider>
         );
@@ -85,37 +95,44 @@ export default class StyledComponents {
   }
 
   async getReducer() {
-    const { persist } = this;
-    const reducer = reducers;
-    await callLifecycle('reduxApplyReducer', this, { reducer });
-    return persistReducer(persist, reducer);
+    const { app } = this;
+    const redux = {
+      reducer: reducers
+    };
+    await callLifecycle('reduxApplyReducer', app, { redux });
+    return persistReducer(app.redux.persist, redux.reducer);
   }
 
   async getMiddleware() {
-    const composeEnhancers = composeWithDevTools(this.devTools);
-    const middleware = [reduxThunk];
-    await callLifecycle('reduxApplyMiddleware', this, { middleware });
-    return composeEnhancers(applyMiddleware(...middleware));
+    const { app, devTools } = this;
+    const redux = {
+      middleware: [reduxThunk]
+    };
+    const composeEnhancers = composeWithDevTools(devTools);
+    await callLifecycle('reduxApplyMiddleware', app, { redux });
+    return composeEnhancers(applyMiddleware(...redux.middleware));
   }
 
   async getInitialState() {
-    const { cookieJar } = this;
-    if (cookieJar) {
+    const { app, initialState } = this;
+    const { props } = app;
+    const redux = {
+      initialState
+    };
+    await callLifecycle('reduxApplyInitialState', app, { redux });
+    if (props.context.cookieJar) {
       try {
-        const state = await getStoredState(this.persist);
+        const state = await getStoredState(app.redux.persist);
         if (state) return state;
       } catch (err) {
-        return this.initialState;
+        return redux.initialState;
       }
     }
-    return this.initialState;
+    return redux.initialState;
   }
 
   async getStore() {
-    return createStore(
-      await this.getReducer(),
-      await this.getInitialState(),
-      await this.getMiddleware()
-    );
+    const { redux } = this.app;
+    return createStore(redux.reducer, redux.initialState, redux.middleware);
   }
 }

@@ -8,10 +8,10 @@ import Reactant from './Reactant';
 const { document } = window;
 
 export default class App extends ReactantApp {
-  constructor(Root = Reactant, options = {}) {
+  constructor(BaseRoot = Reactant, options = {}) {
     super(...arguments);
     const { container = document.getElementById('app') } = options;
-    this.Root = Root;
+    this.BaseRoot = BaseRoot;
     this.container = container;
     if (!config.options.debug) {
       ignoreWarnings(config.ignore.warnings || []);
@@ -21,10 +21,12 @@ export default class App extends ReactantApp {
 
   async init() {
     await super.init();
-    const { Root } = this;
-    callLifecycle('willRender', this, {});
-    render(<Root {...this.props} />, this.container);
-    callLifecycle('didRender', this, {});
+    await callLifecycle('willRender', this, {});
+    const { props } = this;
+    const Root = await this.getRoot({});
+    if (window.reactant) window.reactant.context = props.context;
+    render(<Root {...props} />, this.container);
+    await callLifecycle('didRender', this, {});
     return this;
   }
 }

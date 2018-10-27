@@ -29,6 +29,13 @@ export default function createClientConfig(config, webpackConfig) {
     },
     resolve: {
       ...webpackConfig.resolve,
+      alias: {
+        ..._.get(webpackConfig, 'resolve.alias'),
+        '@reactant/web-isomorphic/ClientRoot': path.resolve(
+          paths.platform,
+          'ClientRoot.js'
+        )
+      },
       extensions: _.uniq([
         `.${platform}.client.js`,
         `.${platform}.client.jsx`,
