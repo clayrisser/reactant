@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { StaticRouter } from 'react-router';
+import { StaticRouter } from 'react-router-defer';
 import { config } from '@reactant/core';
 import { createMemoryHistory } from 'history';
 import {
@@ -46,11 +46,7 @@ export default class ReactRouter {
               location={props.context.location}
               context={props.context}
             >
-              <ConnectedRouter
-                history={history}
-                location={props.context.location}
-                store={props.context.store}
-              >
+              <ConnectedRouter history={history}>
                 <ChildRoot {...props} />
               </ConnectedRouter>
             </StaticRouter>

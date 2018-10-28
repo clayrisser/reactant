@@ -20,6 +20,7 @@ export default class ClientApp extends ReactantApp {
   }
 
   async render() {
+    this.container = document.getElementById('app');
     await callLifecycle('willRender', this, {});
     const { props } = this;
     props.context = {
@@ -31,7 +32,7 @@ export default class ClientApp extends ReactantApp {
     };
     const Root = await this.getRoot({});
     if (window.reactant) window.reactant.context = props.context;
-    hydrate(<Root {...props} />, document.getElementById('app'));
+    hydrate(<Root {...props} />, this.container);
     await callLifecycle('didRender', this, {});
   }
 

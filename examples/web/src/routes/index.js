@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router';
-import Loadable from 'react-loadable';
-
-const Home = Load(() => import('./Home'));
-const NotFound = Load(() => import('./NotFound'));
+import { Switch, Route } from 'react-router-defer';
 
 export default class Routes extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route component={NotFound} />
+        <Route exact path="/" componentDefer={() => import('./Home')} />
+        <Route componentDefer={() => import('./NotFound')} />
       </Switch>
     );
   }
-}
-
-function Load(loader) {
-  return Loadable({ loader, loading: () => 'loading' });
 }
