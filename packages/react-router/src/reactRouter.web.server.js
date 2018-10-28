@@ -9,8 +9,6 @@ import {
   routerMiddleware
 } from 'connected-react-router';
 
-const history = createMemoryHistory();
-
 export default class ReactRouter {
   name = '@reactant/react-router';
 
@@ -25,13 +23,23 @@ export default class ReactRouter {
         : bindRedux;
   }
 
-  reduxApplyReducer(app, { redux }) {
-    redux.reducer = connectRouter(history)(redux.reducer);
+  willRender(app, { req }) {
+    const { props } = req;
+    props.context = {
+      ...(props.context || {}),
+      history: createMemoryHistory()
+    };
+  }
+
+  reduxApplyReducer(app, { req, redux }) {
+    const { props } = req;
+    redux.reducer = connectRouter(props.context.history)(redux.reducer);
     return app;
   }
 
-  reduxApplyMiddleware(app, { redux }) {
-    redux.middleware.push(routerMiddleware(history));
+  reduxApplyMiddleware(app, { req, redux }) {
+    const { props } = req;
+    redux.middleware.push(routerMiddleware(props.context.history));
     return app;
   }
 
@@ -46,7 +54,11 @@ export default class ReactRouter {
               location={props.context.location}
               context={props.context}
             >
-              <ConnectedRouter history={history}>
+              <ConnectedRouter
+                history={props.context.history}
+                location={props.context.location}
+                store={props.context.store}
+              >
                 <ChildRoot {...props} />
               </ConnectedRouter>
             </StaticRouter>

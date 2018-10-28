@@ -11,8 +11,6 @@ import {
 } from 'connected-react-router';
 import './replaceWithPolyfill';
 
-const history = createBrowserHistory();
-
 export default class ReactRouter {
   name = '@reactant/react-router';
 
@@ -36,18 +34,27 @@ export default class ReactRouter {
 
   reduxApplyReducer(app, { redux }) {
     const { bindRedux } = this;
-    if (bindRedux) redux.reducer = connectRouter(history)(redux.reducer);
+    const { props } = app;
+    if (bindRedux)
+      redux.reducer = connectRouter(props.context.history)(redux.reducer);
     return app;
   }
 
   reduxApplyMiddleware(app, { redux }) {
     const { bindRedux } = this;
-    if (bindRedux) redux.middleware.push(routerMiddleware(history));
+    const { props } = app;
+    if (bindRedux)
+      redux.middleware.push(routerMiddleware(props.context.history));
     return app;
   }
 
   willRender(app) {
     this.app = app;
+    const { props } = app;
+    props.context = {
+      ...(props.context || {}),
+      history: createBrowserHistory()
+    };
     app.container = document.createElement('div');
   }
 
@@ -66,7 +73,7 @@ export default class ReactRouter {
         if (bindRedux) {
           return (
             <BrowserRouter>
-              <ConnectedRouter history={history}>
+              <ConnectedRouter history={props.context.history}>
                 <ChildRoot {...props} />
               </ConnectedRouter>
             </BrowserRouter>

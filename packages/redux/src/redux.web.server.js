@@ -170,12 +170,10 @@ export default class StyledComponents {
     if (req.redux.persist) {
       try {
         const state = await getStoredState(req.redux.persist);
-        if (state) return state;
-      } catch (err) {
-        return initialState;
-      }
+        if (state) _.merge(redux.initialState, state);
+      } catch (err) {}
     }
-    return initialState;
+    return redux.initialState;
   }
 
   async getStore({ req }) {
