@@ -1,6 +1,5 @@
 import CircularJSON from 'circular-json';
 import React from 'react';
-import _ from 'lodash';
 import autobind from 'autobind-decorator';
 import cheerio from 'cheerio';
 import express from 'express';
@@ -50,15 +49,11 @@ export default class ServerApp extends ReactantApp {
       $('title').text(config.title);
       $('head').append(`<style type="text/css">${[...css].join('')}</style>`);
       $('#app').append(appHtml);
-      _.map(assets, asset => {
-        if (asset.js) {
-          $('body').append(
-            `<script src="${asset.js}" defer${
-              config.environment === 'production' ? ' crossorigin' : ''
-            }></script>`
-          );
-        }
-      });
+      $('body').append(
+        `<script src="${assets.client.js}" defer${
+          config.environment === 'production' ? ' crossorigin' : ''
+        }></script>`
+      );
       req.$ = $;
       await callLifecycle('didRender', this, { req, res });
       if (req.reactant) {
