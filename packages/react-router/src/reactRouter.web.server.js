@@ -46,6 +46,7 @@ export default class ReactRouter {
   getRoot(app, { req }) {
     const { ChildRoot, bindRedux } = this;
     const { props } = req;
+    props.context.history.push(props.context.location);
     return class ReactRouterPlugin extends Component {
       render() {
         if (bindRedux) {
