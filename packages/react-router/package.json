@@ -45,7 +45,7 @@
     "history": "^4.7.2",
     "lodash": "^4.17.11",
     "react": "^16.5.2",
-    "react-router-defer": "^0.1.1"
+    "react-router-defer": "^0.4.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

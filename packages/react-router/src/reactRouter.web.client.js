@@ -24,10 +24,11 @@ export default class ReactRouter {
         ? config.reactRouter.bindRedux
         : bindRedux;
     let loaded = false;
-    onRouteLoaded(() => {
+    const routeLoadedHandle = onRouteLoaded(() => {
       if (!loaded) {
         loaded = true;
         this.handleLoaded();
+        routeLoadedHandle.remove();
       }
     });
   }

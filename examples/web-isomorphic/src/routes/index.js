@@ -5,8 +5,8 @@ export default class Routes extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" componentDefer={() => import('./Home')} />
-        <Route componentDefer={() => import('./NotFound')} />
+        <Route exact path="/" component={() => import('./Home')} />
+        <Route component={() => import('./NotFound')} />
       </Switch>
     );
   }
