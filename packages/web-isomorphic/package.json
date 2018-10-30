@@ -1,6 +1,6 @@
 {
   "name": "@reactant/web-isomorphic",
-  "version": "0.0.37",
+  "version": "0.0.38",
   "description": "reactant web isomorphic module",
   "reactantPlatform": "lib/reactantPlatform.js",
   "keywords": [
@@ -46,8 +46,8 @@
     "test:reset": "jest --clearCache && npm run test"
   },
   "dependencies": {
-    "@reactant/cli": "^0.0.37",
-    "@reactant/core": "^0.0.37",
+    "@reactant/cli": "^0.0.38",
+    "@reactant/core": "^0.0.38",
     "@storybook/addon-actions": "^4.0.0-alpha.23",
     "@storybook/addon-links": "^4.0.0-alpha.23",
     "@storybook/addons": "^4.0.0-alpha.23",
