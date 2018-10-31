@@ -75,13 +75,20 @@ export default async function start(config, { spinner, log, webpackConfig }) {
       }
       serverCompiler.watch(
         {
-          quiet: true,
+          quiet: false,
           stats: 'none'
         },
-        () => {
-          if (!started) {
+        (err, stats) => {
+          const info = stats.toJson();
+          const hasWarnings = stats.hasWarnings();
+          if (hasWarnings) log.warn(info.warnings.join('\n'));
+          if (stats.hasErrors()) {
+            log.error(info.errors.join('\n'));
+            spinner.fail('failed to compile server');
+            process.exit(1);
+          } else if (!started) {
             started = true;
-            spinner.succeed('compiled server');
+            spinner[hasWarnings ? 'warn' : 'succeed']('compiled server');
             spinner = ora(`started ${action} ${platform}`).succeed();
           }
           resolve();

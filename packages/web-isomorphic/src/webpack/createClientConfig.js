@@ -9,14 +9,15 @@ import { IgnorePlugin } from 'webpack';
 
 export default function createClientConfig(config, webpackConfig) {
   const {
-    ports,
-    paths,
-    host,
-    env,
-    offline,
     action,
+    env,
+    host,
+    offline,
+    options,
+    paths,
     platform,
-    platformType
+    platformType,
+    ports
   } = config;
   webpackConfig = {
     ...webpackConfig,
@@ -134,10 +135,10 @@ export default function createClientConfig(config, webpackConfig) {
         historyApiFallback: { disableDotRule: true },
         host,
         hot: true,
-        noInfo: true,
+        noInfo: !options.debug,
         overlay: false,
         port: ports.dev,
-        quiet: true,
+        quiet: false,
         watchOptions: { ignored: /node_modules/ }
       }
     };

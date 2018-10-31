@@ -136,7 +136,7 @@ function createWebpackConfig(config, webpackConfig) {
         noInfo: !options.debug,
         overlay: false,
         port: ports.dev,
-        quiet: !options.debug,
+        quiet: false,
         watchOptions: { ignored: /node_modules/ }
       }
     };

@@ -86,7 +86,8 @@ export default function createServerConfig(config, webpackConfig) {
           nodeArgs: [
             ...(options.inspect ? ['--inspect'] : []),
             ...(options.inspectBrk ? ['--inspect-brk'] : [])
-          ]
+          ],
+          keyboard: true
         }),
         new OpenBrowserPlugin({ url: `http://localhost:${config.port}` })
       ]
