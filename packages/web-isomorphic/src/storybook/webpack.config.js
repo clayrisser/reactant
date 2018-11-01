@@ -3,12 +3,23 @@ import CircularJSON from 'circular-json';
 import _ from 'lodash';
 import fs from 'fs-extra';
 import log, { setLevel } from '@reactant/core/log';
-import mergeConfiguration from 'merge-configuration';
 import path from 'path';
 import pkgDir from 'pkg-dir';
 import { createWebpackConfig } from '@reactant/cli/webpack';
 import { rebuildConfig } from '@reactant/cli/config';
 
+function getMergeConfiguration() {
+  let mergeConfiguration = null;
+  try {
+    mergeConfiguration = require('merge-configuration').default;
+  } catch (err) {
+    mergeConfiguration = require('@reactant/web-isomorphic/node_modules/merge-configuration')
+      .default;
+  }
+  return mergeConfiguration;
+}
+
+const mergeConfiguration = getMergeConfiguration();
 let debug = false;
 if (_.includes(process.argv, '--verbose')) setLevel('verbose');
 if (_.includes(process.argv, '--debug')) {
