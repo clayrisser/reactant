@@ -1,6 +1,6 @@
 {
   "name": "@reactant/redux",
-  "version": "0.0.38",
+  "version": "0.0.39",
   "description": "reactant web module",
   "reactantPlugin": "lib/reactantPlugin.js",
   "keywords": [
@@ -40,7 +40,7 @@
     "test:reset": "jest --clearCache && npm run test"
   },
   "dependencies": {
-    "@reactant/core": "^0.0.38",
+    "@reactant/core": "^0.0.39",
     "cookies": "^0.7.2",
     "cookies-js": "^1.2.3",
     "lodash": "^4.17.11",
