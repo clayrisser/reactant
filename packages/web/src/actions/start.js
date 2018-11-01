@@ -11,6 +11,13 @@ export default async function start(config, { spinner, log, webpackConfig }) {
   if (options.storybook) {
     fs.mkdirsSync(paths.storybook);
     fs.copySync(path.resolve(__dirname, '../storybook'), paths.storybook);
+    const storybookPath = path.resolve(paths.root, 'storybook');
+    if (
+      fs.existsSync(storybookPath) &&
+      fs.lstatSync(storybookPath).isDirectory()
+    ) {
+      fs.copySync(storybookPath, paths.storybook);
+    }
     spinner.stop();
     await easycp(
       `node ${require.resolve('@storybook/react/bin')} -p ${
