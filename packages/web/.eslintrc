@@ -5,6 +5,7 @@
   },
   "rules": {
     "no-empty": "off",
-    "prefer-rest-params": "off"
+    "prefer-rest-params": "off",
+    "react/no-multi-comp": "off"
   }
 }
