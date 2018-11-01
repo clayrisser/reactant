@@ -1,6 +1,6 @@
 {
   "name": "@reactant/web",
-  "version": "0.0.39",
+  "version": "0.0.40",
   "description": "reactant web module",
   "reactantPlatform": "lib/reactantPlatform.js",
   "keywords": [
@@ -43,8 +43,8 @@
     "test:reset": "jest --clearCache && npm run test"
   },
   "dependencies": {
-    "@reactant/cli": "^0.0.39",
-    "@reactant/core": "^0.0.39",
+    "@reactant/cli": "^0.0.40",
+    "@reactant/core": "^0.0.40",
     "@storybook/addon-actions": "^3.4.11",
     "@storybook/addon-links": "^3.4.11",
     "@storybook/addons": "^3.4.11",
