@@ -3,7 +3,7 @@ import CircularJSON from 'circular-json';
 import _ from 'lodash';
 import fs from 'fs-extra';
 import log, { setLevel } from '@reactant/core/log';
-import mergeConfiguration from '@reactant/web/node_modules/merge-configuration';
+import mergeConfiguration from 'merge-configuration';
 import path from 'path';
 import pkgDir from 'pkg-dir';
 import { createWebpackConfig } from '@reactant/cli/webpack';
