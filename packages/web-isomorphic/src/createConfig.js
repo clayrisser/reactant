@@ -16,10 +16,6 @@ export default function(config) {
     },
     ignore: {
       ...config.ignore,
-      errors: [
-        ..._.get(config, 'ignore.errors', []),
-        'reconciliation failed could not dive into'
-      ],
       warnings: [
         ..._.get(config, 'ignore.warnings', []),
         'bindings/bindings.js 76:22-40',
