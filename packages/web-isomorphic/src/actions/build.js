@@ -1,19 +1,16 @@
 import CircularJSON from 'circular-json';
 import FileSizeReporter from 'react-dev-utils/FileSizeReporter';
 import _ from 'lodash';
-import chalk from 'chalk';
-import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import fs from 'fs-extra';
 import path from 'path';
 import webpack from 'webpack';
 import { log } from '@reactant/core';
-import { createWebpackConfig } from '../webpack';
+import { createWebpackConfig, handleStats } from '../webpack';
 
 const {
   measureFileSizesBeforeBuild,
   printFileSizesAfterBuild
 } = FileSizeReporter;
-const { env } = process;
 
 export default async function build(config, { spinner, webpackConfig }) {
   const { paths, options } = config;
@@ -80,63 +77,15 @@ async function runBuild(
 ) {
   process.noDeprecation = true;
   const webStats = await compile(webpackClientConfig);
-  const webMessages = handleStats(webStats, config);
+  const webMessages = handleStats(webStats);
   const nodeStats = await compile(webpackServerConfig);
-  const nodeMessages = handleStats(nodeStats, config);
+  const nodeMessages = handleStats(nodeStats);
   return {
-    stats: webStats,
+    errors: _.assign({}, webMessages.errors, nodeMessages.errors),
     previousFileSizes,
+    stats: webStats,
     warnings: _.assign({}, webMessages.warnings, nodeMessages.warnings)
   };
-}
-
-function handleStats(stats, config) {
-  const messages = formatWebpackMessages(stats.toJson({}, true));
-  const errors = filterMessages(
-    messages.errors,
-    config.ignore.errors || [],
-    config.options
-  );
-  if (errors.length) {
-    throw new Error(`\n${errors.join('\n\n')}\n`);
-  }
-  const warnings = filterMessages(
-    messages.warnings,
-    config.ignore.warnings || [],
-    config.options
-  );
-  if (warnings.length) {
-    if (env.CI && (!_.isString(env.CI) || env.CI.toLowerCase() !== 'false')) {
-      log.info(
-        chalk.yellow(
-          '\ntreating warnings as errors because `CI = true`\n' +
-            'most CI servers set it automatically'
-        )
-      );
-      throw new Error(`\n${warnings.join('\n\n')}\n`);
-    } else {
-      log.info(`\n${warnings.join('\n\n')}\n`);
-    }
-  }
-  return messages;
-}
-
-function filterMessages(messages, ignoreList, options) {
-  if (options.debug) return messages;
-  return _.filter(messages, message => {
-    let filter = true;
-    ignoreList.forEach(ignore => {
-      if (
-        (_.isRegExp(ignore) && ignore.test(message)) ||
-        message.indexOf(ignore) > -1
-      ) {
-        filter = false;
-        return false;
-      }
-      return true;
-    });
-    return filter;
-  });
 }
 
 async function compile(config) {

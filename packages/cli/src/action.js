@@ -39,7 +39,10 @@ export default async function action(cmd, options, spinner) {
   const socket = new Socket({ silent: !options.debug });
   await socket.start();
   spinner.succeed('loaded config');
-  await runActions(config, { platform });
+  await runActions(config, { platform }).catch(err => {
+    socket.stop();
+    throw err;
+  });
   return socket.stop();
 }
 

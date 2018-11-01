@@ -1,4 +1,5 @@
 import createWebpackConfig from './createWebpackConfig';
+import handleStats from './handleStats';
 
-export { createWebpackConfig };
-export default { createWebpackConfig };
+export { createWebpackConfig, handleStats };
+export default { createWebpackConfig, handleStats };

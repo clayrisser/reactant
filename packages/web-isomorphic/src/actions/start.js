@@ -1,14 +1,15 @@
 import CircularJSON from 'circular-json';
+import open from 'open';
 import WebpackDevServer from 'webpack-dev-server';
 import easycp from 'easycp';
 import fs from 'fs-extra';
 import ora from 'ora';
 import path from 'path';
 import webpack from 'webpack';
-import { createWebpackConfig } from '../webpack';
+import { createWebpackConfig, handleStats } from '../webpack';
 
 export default async function start(config, { spinner, log, webpackConfig }) {
-  const { paths, options, ports, action, platform } = config;
+  const { paths, options, ports, action, platform, port } = config;
   if (options.storybook) {
     fs.mkdirsSync(paths.storybook);
     fs.copySync(path.resolve(__dirname, '../storybook'), paths.storybook);
@@ -61,50 +62,46 @@ export default async function start(config, { spinner, log, webpackConfig }) {
   );
   fs.writeJsonSync(path.resolve(paths.dist, 'assets.json'), {});
   spinner.stop();
-  return new Promise(resolve => {
-    spinner = ora('compiling client').start();
-    const serverCompiler = webpack(webpackServerConfig);
-    const clientCompiler = webpack(webpackClientConfig);
-    let started = false;
+  spinner = ora('compiling client').start();
+  const serverCompiler = webpack(webpackServerConfig);
+  const clientCompiler = webpack(webpackClientConfig);
+  const server = new WebpackDevServer(
+    clientCompiler,
+    webpackClientConfig.devServer
+  );
+  let started = false;
+  await new Promise(resolve => {
     clientCompiler.plugin('done', () => {
       if (!started) {
         spinner.succeed('compiled client');
         spinner = ora('compiling server').start();
-      } else {
-        ora('recompiled').succeed();
+        return resolve();
       }
-      serverCompiler.watch(
-        {
-          quiet: false,
-          stats: 'none'
-        },
-        (err, stats) => {
-          const info = stats.toJson();
-          const hasWarnings = stats.hasWarnings();
-          if (hasWarnings) log.warn(info.warnings.join('\n'));
-          if (stats.hasErrors()) {
-            log.error(info.errors.join('\n'));
-            spinner.fail('failed to compile server');
-            process.exit(1);
-          } else if (!started) {
-            started = true;
-            spinner[hasWarnings ? 'warn' : 'succeed']('compiled server');
-            spinner = ora(`started ${action} ${platform}`).succeed();
-          }
-          resolve();
-        }
-      );
+      return ora('recompiled').succeed();
     });
-    const server = new WebpackDevServer(
-      clientCompiler,
-      webpackClientConfig.devServer
-    );
+  });
+  await new Promise(resolve => {
+    serverCompiler.watch({ quiet: true, stats: 'none' }, (err, stats) => {
+      const { errors, warnings } = handleStats(stats, config);
+      if (errors.length) {
+        spinner.fail('failed to compile server');
+      } else if (!started) {
+        started = true;
+        spinner[warnings.length ? 'warn' : 'succeed']('compiled server');
+        spinner = ora(`started ${action} ${platform}`).succeed();
+      }
+      return resolve();
+    });
+  });
+  await new Promise((resolve, reject) => {
     server.listen(ports.dev, webpackClientConfig.devServer.host, err => {
       if (err) {
         spinner.stop();
-        log.error(err);
-        resolve();
+        return reject(err);
       }
+      return resolve();
     });
   });
+  await new Promise(r => setTimeout(r, 3000));
+  return open(`http://localhost:${port}`);
 }

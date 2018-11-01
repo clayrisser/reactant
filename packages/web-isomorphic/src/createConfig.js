@@ -19,6 +19,17 @@ export default function(config) {
       errors: [
         ..._.get(config, 'ignore.errors', []),
         'reconciliation failed could not dive into'
+      ],
+      warnings: [
+        ..._.get(config, 'ignore.warnings', []),
+        'bindings/bindings.js 76:22-40',
+        'bindings/bindings.js 76:43-53',
+        'colors.js 138:29-43',
+        'deasync/index.js 31:12-28',
+        'ejs/lib/ejs.js 903:4-22',
+        'ejs/lib/ejs.js 904:2-20',
+        'parse5/lib/index.js 55:23-49',
+        'view.js 81:13-25'
       ]
     },
     ports: {

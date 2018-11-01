@@ -1,4 +1,3 @@
-import OpenBrowserPlugin from 'open-browser-webpack-plugin';
 import StartServerPlugin from 'start-server-webpack-plugin';
 import _ from 'lodash';
 import path from 'path';
@@ -88,8 +87,7 @@ export default function createServerConfig(config, webpackConfig) {
             ...(options.inspectBrk ? ['--inspect-brk'] : [])
           ],
           keyboard: true
-        }),
-        new OpenBrowserPlugin({ url: `http://localhost:${config.port}` })
+        })
       ]
     };
   }
