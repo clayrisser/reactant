@@ -7,7 +7,7 @@
     "@reactant/web",
     "reactant",
     "react",
-    "webn"
+    "web"
   ],
   "homepage": "https://github.com/codejamninja/reactant/packages/web",
   "bugs": {
@@ -21,8 +21,8 @@
     "url": "https://codejam.ninja"
   },
   "files": [
-    "Reactant.js",
     "App.js",
+    "Reactant.js",
     "lib",
     "storiesOf.js"
   ],

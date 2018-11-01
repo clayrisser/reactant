@@ -21,8 +21,9 @@
     "url": "https://codejam.ninja"
   },
   "files": [
+    "ClientApp.js",
     "Reactant.js",
-    "App.js",
+    "ServerApp.js",
     "lib",
     "storiesOf.js"
   ],
