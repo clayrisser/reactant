@@ -2,6 +2,7 @@ import CircularJSON from 'circular-json';
 import fs from 'fs-extra';
 import path from 'path';
 import { log } from '@reactant/core';
+import { registerConfig } from '@reactant/core/config';
 import Socket, { socketGetConfig } from './socket';
 import createConfig from './createConfig';
 import { loadReactantPlatform } from '../platform';
@@ -11,15 +12,8 @@ let globalConfig = null;
 function loadConfig(...args) {
   if (!globalConfig) {
     globalConfig = createConfig(...args);
-    const { paths, options } = globalConfig;
-    if (options.debug) {
-      fs.mkdirsSync(paths.debug);
-      fs.writeFileSync(
-        path.resolve(paths.debug, 'config.json'),
-        CircularJSON.stringify(globalConfig, null, 2)
-      );
-    }
-    log.debug('config', globalConfig);
+    registerConfig(globalConfig);
+    log.write('config', globalConfig);
   }
   return globalConfig;
 }

@@ -1,10 +1,18 @@
 import log from './log';
 import ReactantApp from './ReactantApp';
 
+let registeredConfig = false;
+
 function getConfig() {
-  let config = require('./config').default;
+  const requiredConfig = require('./config');
+  let config = requiredConfig.default;
   try {
     config = require('@reactant/core/config');
+    if (!registeredConfig) {
+      registeredConfig = true;
+      const { registerConfig } = requiredConfig;
+      registerConfig(config);
+    }
     if (config.__esModule) config = config.default;
   } catch (err) {}
   return config;

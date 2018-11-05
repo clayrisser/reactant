@@ -25,4 +25,8 @@ export function setLevel(level) {
   }
 }
 
+log.write = (label, ...args) => {
+  log.debug(label, ...args);
+};
+
 export default log;

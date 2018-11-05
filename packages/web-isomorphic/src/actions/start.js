@@ -1,4 +1,3 @@
-import CircularJSON from 'circular-json';
 import open from 'open';
 import WebpackDevServer from 'webpack-dev-server';
 import easycp from 'easycp';
@@ -12,7 +11,6 @@ export default async function start(config, { spinner, log, webpackConfig }) {
   const { paths, options, ports, action, platform, port } = config;
   if (options.storybook) {
     fs.mkdirsSync(paths.storybook);
-    fs.copySync(path.resolve(__dirname, '../storybook'), paths.storybook);
     fs.copySync(path.resolve(__dirname, '../storybook'), paths.storybook);
     const storybookPath = path.resolve(paths.root, 'storybook');
     if (
@@ -31,35 +29,20 @@ export default async function start(config, { spinner, log, webpackConfig }) {
     );
     return null;
   }
+  process.noDeprecation = true;
   const webpackClientConfig = createWebpackConfig(
     config,
     webpackConfig,
     'client'
   );
-  if (options.debug) {
-    fs.mkdirsSync(paths.debug);
-    fs.writeFileSync(
-      path.resolve(paths.debug, 'webpack.client.json'),
-      CircularJSON.stringify(webpackClientConfig, null, 2)
-    );
-  }
-  log.debug('webpackClientConfig', webpackClientConfig);
+  log.write('webpackClientConfig', webpackClientConfig);
   const webpackServerConfig = createWebpackConfig(
     config,
     webpackConfig,
     'server'
   );
-  if (options.debug) {
-    fs.mkdirsSync(paths.debug);
-    fs.writeFileSync(
-      path.resolve(paths.debug, 'webpack.server.json'),
-      CircularJSON.stringify(webpackServerConfig, null, 2)
-    );
-  }
-  log.debug('webpackServerConfig', webpackServerConfig);
-  process.noDeprecation = true;
-  fs.mkdirsSync(path.resolve(paths.src, 'public'));
-  fs.mkdirsSync(paths.dist);
+  log.write('webpackServerConfig', webpackServerConfig);
+  fs.mkdirsSync(path.resolve(paths.dist, 'public'));
   fs.copySync(
     path.resolve(__dirname, '../public'),
     path.resolve(paths.dist, 'public')
@@ -68,7 +51,6 @@ export default async function start(config, { spinner, log, webpackConfig }) {
     path.resolve(paths.src, 'public'),
     path.resolve(paths.dist, 'public')
   );
-  fs.writeJsonSync(path.resolve(paths.dist, 'assets.json'), {});
   spinner.stop();
   spinner = ora('compiling client').start();
   const serverCompiler = webpack(webpackServerConfig);

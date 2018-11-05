@@ -71,6 +71,7 @@
     "isomorphic-style-loader": "^4.0.0",
     "lodash": "^4.17.11",
     "merge-configuration": "^0.2.0",
+    "mime": "^1.6.0",
     "newregexp": "^1.0.1",
     "node-sass": "^4.9.4",
     "offline-plugin": "^5.0.5",
