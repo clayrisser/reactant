@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { config } from '@reactant/core';
 import SassProvider from './SassProvider';
 
 export default class StyledComponents {
@@ -21,7 +20,7 @@ export default class StyledComponents {
   }
 
   didRender(app, { req }) {
-    const { $, props, sass } = req;
+    const { $, sass } = req;
     $('head').append(
       `<style type="text/css">${[...sass.css].join('')}</style>`
     );
@@ -31,10 +30,14 @@ export default class StyledComponents {
   getRoot(app, { req }) {
     const { ChildRoot } = this;
     const { props } = req;
-    return (
-      <SassProvider>
-        <ChildRoot {...props} />
-      </SassProvider>
-    );
+    return class SassPlugin extends Component {
+      render() {
+        return (
+          <SassProvider insertCss={props.context.insertCss}>
+            <ChildRoot {...props} />
+          </SassProvider>
+        );
+      }
+    };
   }
 }

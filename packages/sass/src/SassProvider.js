@@ -1,21 +1,18 @@
 import PropTypes from 'prop-types';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import _ from 'lodash';
 import styles from '~/styles';
 
 export default class SassProvider extends Component {
   static propTypes = {
-    children: PropTypes.node.isRequired
-  };
-
-  static contextTypes = {
+    children: PropTypes.node.isRequired,
     insertCss: PropTypes.func.isRequired
   };
 
   styles = {};
 
   componentWillMount() {
-    const { insertCss } = this.context;
+    const { insertCss } = this.props;
     _.each(styles, (style, key) => {
       this.styles[key] = { remove: insertCss(style) };
     });
@@ -28,6 +25,6 @@ export default class SassProvider extends Component {
   }
 
   render() {
-    return this.props.children;
+    return <div>{this.props.children}</div>;
   }
 }
