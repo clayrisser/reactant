@@ -24,11 +24,7 @@ export default class ClientApp extends ReactantApp {
     await callLifecycle('willRender', this, {});
     const { props } = this;
     props.context = {
-      ...props.context,
-      insertCss: (...styles) => {
-        const removeCss = styles.map(style => style._insertCss());
-        return () => removeCss.forEach(f => f());
-      }
+      ...props.context
     };
     const Root = await this.getRoot({});
     if (window.reactant) window.reactant.context = props.context;

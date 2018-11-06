@@ -30,15 +30,11 @@ export default class ServerApp extends ReactantApp {
     try {
       if (global.reactant) req.reactant = global.reactant;
       log.silly('url:', req.url);
-      const css = new Set();
       req.props = { ...this.props };
       await callLifecycle('willRender', this, { req, res });
       req.props.location = req.url;
       req.props.context = {
         ...req.props.context,
-        insertCss: (...styles) => {
-          return styles.forEach(style => css.add(style._getCss()));
-        },
         location: req.props.location
       };
       const Root = await this.getRoot({ req, res });
@@ -47,7 +43,6 @@ export default class ServerApp extends ReactantApp {
       const appHtml = renderToString(<Root {...props} />);
       const $ = cheerio.load(indexHtml);
       $('title').text(config.title);
-      $('head').append(`<style type="text/css">${[...css].join('')}</style>`);
       $('#app').append(appHtml);
       $('body').append(
         `<script src="${assets.client.js}" defer${

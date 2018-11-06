@@ -4,6 +4,7 @@ platforms:
 plugins:
   - '@reactant/react-router'
   - '@reactant/redux'
+  - '@reactant/sass'
   - '@reactant/styled-components'
 redux:
   initialState:

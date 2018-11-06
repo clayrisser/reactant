@@ -7,7 +7,9 @@ import { sleep } from 'deasync';
 import ConfigPaths from './paths';
 import ConfigPorts from './ports';
 import defaultConfig from './defaultConfig';
+import merge from './merge';
 import pkg from '../../package.json';
+import { getReactantPluginsConfig } from '../plugin';
 
 export default function createConfig(...args) {
   let config = null;
@@ -19,28 +21,21 @@ export default function createConfig(...args) {
 }
 
 async function createConfigAsync({
-  defaultEnv = 'development',
   action = 'build',
+  defaultEnv = 'development',
   options = {},
-  platformType = '',
   platformConfig = {},
-  pluginsConfig = {}
+  platformType = '',
+  plugins = []
 }) {
   const optionsConfig = options.config ? JSON.parse(options.config) : {};
   environment.default = defaultEnv;
   const userConfig = rcConfig({ name: 'reactant' });
   const eslint = rcConfig({ name: 'eslint' });
-  let config = {
-    ...mergeConfiguration(
-      mergeConfiguration(
-        mergeConfiguration(
-          mergeConfiguration(defaultConfig, platformConfig),
-          pluginsConfig
-        ),
-        userConfig
-      ),
-      optionsConfig
-    ),
+  let config = merge(defaultConfig, platformConfig);
+  const pluginsConfig = getReactantPluginsConfig(config, plugins);
+  config = {
+    ...merge(merge(merge(config, pluginsConfig), userConfig), optionsConfig),
     platform: options.platform || '',
     platformType
   };
@@ -107,7 +102,7 @@ function mergePlatformConfig(config) {
     if (platformConfig.platform) {
       throw new Err("platform config cannot set 'platform'", 400);
     }
-    config = mergeConfiguration(config, platformConfig);
+    config = merge(config, platformConfig);
   }
   config.platforms = _.reduce(
     config.platforms,
@@ -133,7 +128,7 @@ function mergePluginsConfig(config) {
         if (pluginConfig.plugins) {
           throw new Err("plugin config cannot set 'plugins'", 400);
         }
-        config = mergeConfiguration(config, pluginConfig);
+        config = merge(config, pluginConfig);
       }
     }
   });

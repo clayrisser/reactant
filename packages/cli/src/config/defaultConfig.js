@@ -43,5 +43,6 @@ export default {
   eslint: {
     extends: ['jam']
   },
-  platforms: {}
+  platforms: {},
+  webpack: {}
 };

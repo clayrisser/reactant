@@ -1,13 +1,16 @@
 {
-  "name": "@reactant/web",
+  "name": "@reactant/sass",
   "version": "0.0.46",
-  "description": "reactant web module",
-  "reactantPlatform": "lib/reactantPlatform.js",
+  "description": "reactant sass module",
+  "reactantPlugin": "lib/reactantPlugin.js",
   "keywords": [
-    "@reactant/web",
-    "reactant",
+    "@reactant/sass",
+    "css",
+    "isomorphic",
     "react",
-    "web"
+    "reactant",
+    "sass",
+    "web-isomorphic"
   ],
   "homepage": "https://github.com/codejamninja/reactant/packages/web",
   "bugs": {
@@ -21,10 +24,7 @@
     "url": "https://codejam.ninja"
   },
   "files": [
-    "App.js",
-    "Reactant.js",
-    "lib",
-    "storiesOf.js"
+    "lib"
   ],
   "main": "lib/index.js",
   "repository": {
@@ -32,48 +32,26 @@
     "url": "https://github.com/codejamninja/reactant/packages/web"
   },
   "scripts": {
-    "build": "npm run test && npm run build:copy && npm run build:lib",
-    "build:copy": "mkdir -p lib && cp -r src/public lib",
-    "build:lib": "babel src -d lib",
+    "build": "babel src -d lib",
     "clean": "rimraf lib",
     "format": "prettier --write ./src/**/*.js",
     "lint": "npm run format && eslint ./",
     "lint:fix": "npm run format && eslint --fix ./",
     "prepublish": "npm run clean && npm run build",
     "start": "babel-node src",
-    "test": "npm run lint && jest --forceExit",
+    "test": "npm run lint",
     "test:reset": "jest --clearCache && npm run test"
   },
   "dependencies": {
-    "@reactant/cli": "^0.0.46",
     "@reactant/core": "^0.0.46",
-    "@storybook/addon-actions": "^4.0.2",
-    "@storybook/addon-links": "^4.0.2",
-    "@storybook/addons": "^4.0.2",
-    "@storybook/react": "^4.0.2",
-    "assets-webpack-plugin": "^3.9.6",
-    "circular-json": "^0.5.7",
-    "copy-webpack-plugin": "^4.5.2",
-    "easycp": "^0.1.1",
-    "export-es6": "^0.1.0",
-    "fs-extra": "^7.0.0",
-    "hmr-client": "^0.1.3",
-    "html-webpack-plugin": "^3.2.0",
-    "ignore-warnings": "^0.2.0",
+    "autoprefixer": "^9.1.5",
+    "isomorphic-style-loader": "^4.0.0",
     "lodash": "^4.17.11",
-    "merge-configuration": "^0.3.2",
-    "ora": "^3.0.0",
-    "pkg-dir": "^3.0.0",
+    "postcss-flexbugs-fixes": "^4.1.0",
+    "postcss-loader": "^3.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
-    "react-dev-utils": "^5.0.2",
-    "react-dom": "^16.5.2",
-    "react-error-overlay": "^4.0.1",
-    "react-hot-loader": "^4.3.11",
-    "strip-ansi": "^4.0.0",
-    "webpack": "^4.20.2",
-    "webpack-bundle-analyzer": "^3.0.2",
-    "webpack-dev-server": "^3.1.9"
+    "sass-loader": "^7.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -91,7 +69,6 @@
     "eslint-plugin-jest": "^21.25.1",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
-    "jest": "^23.6.0",
     "rimraf": "^2.6.2"
   },
   "engines": {
@@ -99,11 +76,5 @@
   },
   "eslintIgnore": [
     "lib"
-  ],
-  "jest": {
-    "testMatch": [
-      "**/tests/**/[^_]*.js"
-    ],
-    "verbose": true
-  }
+  ]
 }

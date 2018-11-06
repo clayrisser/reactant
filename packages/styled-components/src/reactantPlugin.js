@@ -1,5 +1,6 @@
 import createConfig from './createConfig';
 
 export default {
-  config: createConfig
+  config: createConfig,
+  platforms: ['@reactant/web', '@reactant/web-isomorphic']
 };

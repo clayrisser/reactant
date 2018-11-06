@@ -1,15 +1,15 @@
 import Err from 'err';
 import TrailDuck from 'trailduck';
 import _ from 'lodash';
-import mergeConfiguration from 'merge-configuration';
 import path from 'path';
+import merge from './config/merge';
 
 function getReactantPluginsConfig(config, pluginNames) {
   const plugins = loadReactantPlugins(config, pluginNames);
   return _.reduce(
     plugins,
     (config, plugin) => {
-      return mergeConfiguration(config, plugin.config);
+      return merge(config, plugin.config);
     },
     {
       ...config,
