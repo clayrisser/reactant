@@ -35,7 +35,7 @@
     "bluebird": "^3.5.2",
     "circular-json": "^0.5.7",
     "commander": "^2.19.0",
-    "css-loader": "^1.0.0",
+    "css-loader": "^1.0.1",
     "deasync": "^0.1.13",
     "detect-port": "^1.2.3",
     "err": "^2.1.10",

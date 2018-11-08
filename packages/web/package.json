@@ -52,7 +52,7 @@
     "@storybook/addons": "^4.0.2",
     "@storybook/react": "^4.0.2",
     "assets-webpack-plugin": "^3.9.6",
-    "circular-json": "^0.5.7",
+    "circular-json": "^0.5.9",
     "copy-webpack-plugin": "^4.5.2",
     "easycp": "^0.1.1",
     "export-es6": "^0.1.0",

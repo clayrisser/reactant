@@ -58,7 +58,7 @@
     "babel-polyfill": "^6.26.0",
     "chalk": "^2.4.1",
     "cheerio": "^1.0.0-rc.2",
-    "circular-json": "^0.5.7",
+    "circular-json": "^0.5.9",
     "copy-webpack-plugin": "^4.5.2",
     "easycp": "^0.1.1",
     "ejs": "^2.6.1",
