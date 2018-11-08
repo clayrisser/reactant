@@ -5,7 +5,7 @@ export default function(config) {
     ...config,
     ignore: {
       ...config.ignore,
-      errors: [...config.ignore.errors, 'matching']
+      errors: [...config.ignore.errors]
     },
     reactRouter: {
       ...(config.reactRouter || {}),
