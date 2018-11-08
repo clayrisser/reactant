@@ -29,6 +29,7 @@ export default async function start(config, { spinner, log, webpackConfig }) {
     webpackConfig = createWebpackConfig(config, webpackConfig);
     log.write('webpackConfig', webpackConfig);
     fs.mkdirsSync(path.resolve(paths.dist, 'public'));
+    fs.mkdirsSync(path.resolve(paths.src, 'public'));
     fs.copySync(
       path.resolve(__dirname, '../public'),
       path.resolve(paths.dist, 'public')

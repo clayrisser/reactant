@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "@reactant/core": "^0.0.47",
+    "connected-react-router": "^4.5.0",
     "history": "^4.7.2",
     "lodash": "^4.17.11",
     "react": "^16.5.2",
