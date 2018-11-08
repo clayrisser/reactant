@@ -1,6 +1,6 @@
 {
   "name": "@reactant/sass",
-  "version": "0.0.48",
+  "version": "0.0.49",
   "description": "reactant sass module",
   "reactantPlugin": "lib/reactantPlugin.js",
   "keywords": [
@@ -43,7 +43,7 @@
     "test:reset": "jest --clearCache && npm run test"
   },
   "dependencies": {
-    "@reactant/core": "^0.0.48",
+    "@reactant/core": "^0.0.49",
     "autoprefixer": "^9.1.5",
     "css-loader": "^1.0.1",
     "isomorphic-style-loader": "^4.0.0",
