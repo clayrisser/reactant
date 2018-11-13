@@ -42,8 +42,8 @@ export default class StyledComponents {
 
   didRender(app, { req }) {
     const { $, sheet } = req;
-    const css = sheet.getStyleTags();
-    $('head').append(`<style type="text/css">${css}</style>`);
+    const style = sheet.getStyleTags();
+    $('head').append(style);
     return app;
   }
 }
