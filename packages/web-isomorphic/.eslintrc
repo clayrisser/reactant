@@ -1,10 +1,12 @@
 {
   "extends": ["jam"],
   "globals": {
-    "window": true,
-    "document": true
+    "__webpack_hash__": true,
+    "document": true,
+    "window": true
   },
   "rules": {
+    "camelcase": "off",
     "global-require": "off",
     "no-empty": "off",
     "prefer-rest-params": "off",

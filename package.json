@@ -7,9 +7,11 @@
   "scripts": {
     "bootstrap": "lerna bootstrap && npm run link",
     "bootstrap:hoist": "lerna bootstrap --hoist && npm run link",
-    "clean": "lerna clean -y",
+    "clean": "lerna clean -y && git clean -fXd -e \\!node_modules -e \\!node_modules/**/*",
     "lerna": "lerna",
     "link": "lerna link",
+    "lint": "lerna run lint",
+    "lint:fix": "lerna run lint:fix",
     "ls": "lerna ls",
     "prepublish": "npm run bootstrap",
     "publish": "lerna publish"

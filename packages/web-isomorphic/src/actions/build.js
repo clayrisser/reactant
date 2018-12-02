@@ -77,9 +77,9 @@ async function runBuild(
 ) {
   process.noDeprecation = true;
   const webStats = await compile(webpackClientConfig);
-  const webMessages = handleStats(webStats);
+  const webMessages = handleStats(webStats, config);
   const nodeStats = await compile(webpackServerConfig);
-  const nodeMessages = handleStats(nodeStats);
+  const nodeMessages = handleStats(nodeStats, config);
   return {
     errors: _.assign({}, webMessages.errors, nodeMessages.errors),
     previousFileSizes,

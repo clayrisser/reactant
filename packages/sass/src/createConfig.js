@@ -6,6 +6,7 @@ export default function(config) {
     sass: {
       ...(config.sass || {})
     },
+    storybook: createWebpackConfig,
     webpack: createWebpackConfig
   };
 }

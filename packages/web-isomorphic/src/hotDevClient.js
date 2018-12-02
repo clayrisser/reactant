@@ -156,7 +156,6 @@ async function applyUpdates() {
 }
 
 function isUpdateAvailable() {
-  // eslint-disable-next-line camelcase,no-undef
   return hash !== __webpack_hash__;
 }
 
