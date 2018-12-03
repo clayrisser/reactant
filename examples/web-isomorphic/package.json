@@ -1,7 +1,7 @@
 {
   "name": "web-isomorphic",
   "private": true,
-  "version": "0.0.53",
+  "version": "0.0.54",
   "description": "web app built in reactant",
   "main": "web/client.js",
   "homepage": "https://reactant.codejam.ninja",
@@ -29,12 +29,12 @@
     "test": "npm run lint && jest --forceExit"
   },
   "dependencies": {
-    "@reactant/core": "^0.0.53",
-    "@reactant/react-router": "^0.0.53",
-    "@reactant/redux": "^0.0.53",
-    "@reactant/sass": "^0.0.53",
-    "@reactant/styled-components": "^0.0.53",
-    "@reactant/web-isomorphic": "^0.0.53",
+    "@reactant/core": "^0.0.54",
+    "@reactant/react-router": "^0.0.54",
+    "@reactant/redux": "^0.0.54",
+    "@reactant/sass": "^0.0.54",
+    "@reactant/styled-components": "^0.0.54",
+    "@reactant/web-isomorphic": "^0.0.54",
     "@storybook/addon-actions": "^4.0.2",
     "@storybook/react": "^4.0.2",
     "autobind": "^1.0.3",
@@ -50,7 +50,7 @@
     "styled-components": "^4.0.2"
   },
   "devDependencies": {
-    "@reactant/cli": "^0.0.53",
+    "@reactant/cli": "^0.0.54",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",
