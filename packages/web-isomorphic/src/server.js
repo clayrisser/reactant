@@ -53,7 +53,7 @@ async function createApp() {
 
 function startServer(server) {
   const { platform } = config;
-  server.listen(config.port, err => {
+  server.listen(config.port, config.host, err => {
     if (err) throw err;
     serverSpinner.succeed(`server listening on port ${config.port}`);
     if (module.hot) {

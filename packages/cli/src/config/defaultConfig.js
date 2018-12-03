@@ -3,7 +3,7 @@ const { env } = process;
 export default {
   title: 'Reactant',
   moduleName: 'reactant',
-  host: env.REACTANT_HOST || 'localhost',
+  host: env.REACTANT_HOST || '0.0.0.0',
   port: env.REACTANT_PORT || 6001,
   ports: {
     dev: null
