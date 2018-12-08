@@ -31,6 +31,8 @@
     "reactant": "bin/reactant.js"
   },
   "dependencies": {
+    "@ecosystem/config": "^0.2.4",
+    "@ecosystem/module-loader": "^0.2.5",
     "@reactant/core": "^0.0.54",
     "bluebird": "^3.5.2",
     "circular-json": "^0.5.7",

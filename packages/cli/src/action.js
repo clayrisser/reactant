@@ -1,13 +1,11 @@
 import Err from 'err';
-import Promise from 'bluebird';
 import TrailDuck from 'trailduck';
 import _ from 'lodash';
-import commander from 'commander';
 import log, { setLevel } from '@reactant/core/log';
 import ora from 'ora';
-import { Socket, loadConfig, createConfig } from './config';
+import { mapSeries } from 'bluebird';
+import { createConfig } from './config';
 import { createWebpackConfig } from './webpack';
-import { loadReactantPlatform, getReactantPlatforms } from './platform';
 
 export default async function action(cmd, options, spinner) {
   if (options.verbose) setLevel('verbose');
@@ -16,65 +14,46 @@ export default async function action(cmd, options, spinner) {
     action: cmd,
     options
   });
-  const reactantPlatforms = getReactantPlatforms(config);
-  if (!_.includes(_.keys(config.platforms), options.platform)) {
-    throw new Err(`invalid platform '${options.platform}'`, 400);
-  }
-  const platformName = config.platforms[options.platform];
-  if (!_.includes(reactantPlatforms, platformName)) {
-    throw new Err(`reactant platform '${platformName}' is not installed`, 400);
-  }
-  process.env.NODE_ENV = config.env;
-  const platform = loadReactantPlatform(config, platformName);
-  if (!platform.actions[cmd]) return commander.help();
-  config = loadConfig({
+  config = createConfig({
     action: cmd,
-    defaultEnv: 'development',
-    options,
-    platformConfig: platform.config || {},
-    platformType: platform.type,
-    plugins: config.plugins
+    options
   });
-  const socket = new Socket({ silent: !options.debug });
-  await socket.start();
   spinner.succeed('loaded config');
-  await runActions(config, { platform }).catch(err => {
-    socket.stop();
+  await runActions(config).catch(err => {
     throw err;
   });
-  return socket.stop();
 }
 
-async function runActions(config, { platform }) {
+async function runActions(config) {
+  const { platform } = config;
   const webpackConfig = createWebpackConfig(config);
-  await Promise.mapSeries(
-    getActionNames(config.action, platform),
-    async actionName => {
-      let action = platform.actions[actionName];
-      action = { ...action, name: actionName };
-      const spinner = ora(`started ${action.name} ${config.platform}`).start();
-      spinner._succeed = spinner.succeed;
-      spinner.succeed = (...args) => {
-        spinner._succeed(
-          ...(args.length
-            ? args
-            : [`finished ${action.name} ${config.platform}`])
-        );
-      };
-      return action.run(config, {
-        platform,
-        action,
-        spinner,
-        webpackConfig,
-        log
-      });
-    }
-  );
+  await mapSeries(getActionNames(config.action, platform), async actionName => {
+    let action = platform.properties.actions[actionName];
+    action = { ...action, name: actionName };
+    const spinner = ora(
+      `started ${action.name} ${platform.properties.name}`
+    ).start();
+    spinner._succeed = spinner.succeed;
+    spinner.succeed = (...args) => {
+      spinner._succeed(
+        ...(args.length
+          ? args
+          : [`finished ${action.name} ${config.platform.properties.name}`])
+      );
+    };
+    return action.run(config, {
+      platform,
+      action,
+      spinner,
+      webpackConfig,
+      log
+    });
+  });
   return null;
 }
 
 function getActionGraph(actionName, platform, graph = {}) {
-  const action = platform.actions[actionName];
+  const action = platform.properties.actions[actionName];
   graph[actionName] = { children: action.dependsOn };
   _.each(action.dependsOn, actionName => {
     if (!_.includes(_.keys(graph), actionName)) {

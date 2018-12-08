@@ -5,11 +5,9 @@ import pkgDir from 'pkg-dir';
 import { DefinePlugin } from 'webpack';
 import { getLinkedPaths } from 'linked-deps';
 import getRules from './getRules';
-import { sanitizeConfig } from '../config';
 
 export default function createWebpackConfig(config, webpackConfig = {}) {
   const { paths, env, envs, platform, platformType } = config;
-  const sanitizedConfig = sanitizeConfig(config);
   webpackConfig = {
     ...webpackConfig,
     mode: env,
@@ -44,7 +42,7 @@ export default function createWebpackConfig(config, webpackConfig = {}) {
     },
     externals: {
       ...webpackConfig.externals,
-      '@reactant/core/config': CircularJSON.stringify(sanitizedConfig)
+      '@reactant/core/config': CircularJSON.stringify(config)
     },
     module: {
       ...webpackConfig.module,
