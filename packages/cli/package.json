@@ -49,7 +49,7 @@
     "linked-deps": "^0.1.0",
     "lodash": "^4.17.11",
     "markdown-loader": "^4.0.0",
-    "merge-configuration": "^0.3.2",
+    "merge-configuration": "^0.4.0",
     "node-ipc": "^9.1.1",
     "ora": "^3.0.0",
     "pkg-dir": "^3.0.0",

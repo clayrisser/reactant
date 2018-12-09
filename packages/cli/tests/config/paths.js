@@ -3,7 +3,7 @@ import ConfigPaths from '../../src/config/paths';
 describe('ConfigPaths.paths', () => {
   it('it resolves config paths', async () => {
     const configPaths = new ConfigPaths({
-      platform: 'some-platform',
+      platformName: 'some-platform',
       paths: {
         hello: 'world',
         world: 'hello/{hello}',
@@ -19,7 +19,7 @@ describe('ConfigPaths.paths', () => {
   it('it throws error for cyclic config paths', async () => {
     try {
       new ConfigPaths({
-        platform: 'some-platform',
+        platformName: 'some-platform',
         paths: {
           hello: '{world}',
           world: '{hello}'

@@ -10,14 +10,11 @@ import { createWebpackConfig } from './webpack';
 export default async function action(cmd, options, spinner) {
   if (options.verbose) setLevel('verbose');
   if (options.debug) setLevel('debug');
-  let config = createConfig({
+  const config = createConfig({
     action: cmd,
     options
   });
-  config = createConfig({
-    action: cmd,
-    options
-  });
+  log.debug('config ===>', config);
   spinner.succeed('loaded config');
   await runActions(config).catch(err => {
     throw err;

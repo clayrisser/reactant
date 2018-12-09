@@ -10,11 +10,29 @@ import ConfigPaths from './paths';
 import ConfigPorts from './ports';
 import defaultConfig from './defaultConfig';
 
-export default function createConfig({ action = 'build', options = {} }) {
+export default function createConfig({ action, options = {} }) {
   options = sanitizeOptions(options);
   const { reactant, loaders } = createConfigLoader(options.config);
-  const { config } = reactant;
+  let { config } = reactant;
   const [platforms, plugins] = loaders;
+  config = {
+    ...config,
+    env: environment.value,
+    options,
+    platforms,
+    plugins,
+    moduleName: config.moduleName
+      ? config.moduleName
+      : _.camelCase(config.title).replace(/_/g, '-'),
+    envs: {
+      ...config.envs,
+      HOST: config.host,
+      NODE_ENV: environment.value,
+      PORT: config.port,
+      __DEV__: !environment.production
+    }
+  };
+  if (!action) return config;
   if (options.platform && !_.isBoolean(options.platform)) {
     config.platformName = options.platform;
   }
@@ -31,23 +49,9 @@ export default function createConfig({ action = 'build', options = {} }) {
     ...config,
     action: action || config.action,
     babel: mergeConfiguration(pkg.babel, config.babel),
-    env: environment.value,
-    options,
     paths: configPaths.paths,
-    platforms,
-    plugins,
     port: configPorts.basePort,
     ports: configPorts.ports,
-    moduleName: config.moduleName
-      ? config.moduleName
-      : _.camelCase(config.title).replace(/_/g, '-'),
-    envs: {
-      ...config.envs,
-      HOST: config.host,
-      NODE_ENV: environment.value,
-      PORT: config.port,
-      __DEV__: !environment.production
-    },
     eslint: mergeConfiguration(
       mergeConfiguration(eslint, pkg.eslint),
       config.eslint
