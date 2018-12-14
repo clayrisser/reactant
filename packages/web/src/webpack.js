@@ -66,7 +66,7 @@ function createWebpackConfig(config, webpackConfig) {
       new CopyWebpackPlugin([
         {
           from: path.resolve(paths.src, 'public'),
-          to: path.resolve(paths.dist, 'public')
+          to: path.resolve(paths.dist)
         }
       ]),
       new IgnorePlugin(/^child_process$/),
@@ -101,7 +101,7 @@ function createWebpackConfig(config, webpackConfig) {
     webpackConfig = {
       ...webpackConfig,
       output: {
-        path: path.resolve(paths.dist, 'public'),
+        path: path.resolve(paths.dist),
         publicPath: action === 'start' ? `http://${host}:${ports.dev}/` : '/',
         pathinfo: true,
         filename: 'scripts/bundle.js',
@@ -126,7 +126,7 @@ function createWebpackConfig(config, webpackConfig) {
         before(app) {
           app.use(errorOverlayMiddleware());
         },
-        contentBase: path.resolve(paths.dist, 'public'),
+        contentBase: path.resolve(paths.dist),
         compress: true,
         disableHostCheck: true,
         headers: { 'Access-Control-Allow-Origin': '*' },
