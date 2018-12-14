@@ -81,7 +81,7 @@
     "react-dev-utils": "^5.0.2",
     "react-dom": "^16.5.2",
     "react-error-overlay": "^4.0.1",
-    "react-hot-loader": "^4.3.11",
+    "react-hot-loader": "4.5.2",
     "start-server-webpack-plugin": "^2.2.5",
     "strip-ansi": "^4.0.0",
     "uglifyjs-webpack-plugin": "^2.0.1",

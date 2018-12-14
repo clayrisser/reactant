@@ -41,7 +41,7 @@ export default class ServerApp extends ReactantApp {
       const { props } = req;
       if (req.reactant) req.reactant.context = props.context;
       const appHtml = renderToString(<Root {...props} />);
-      const $ = cheerio.load(indexHtml);
+      const $ = cheerio.load(indexHtml, { _useHtmlParser2: true });
       $('title').text(config.title);
       $('#app').append(appHtml);
       $('body').append(
