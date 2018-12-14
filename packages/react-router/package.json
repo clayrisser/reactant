@@ -1,6 +1,6 @@
 {
   "name": "@reactant/react-router",
-  "version": "0.0.54",
+  "version": "0.0.55",
   "description": "reactant web module",
   "reactantPlugin": "lib/reactantPlugin.js",
   "keywords": [
@@ -41,7 +41,7 @@
     "test:reset": "jest --clearCache && npm run test"
   },
   "dependencies": {
-    "@reactant/core": "^0.0.54",
+    "@reactant/core": "^0.0.55",
     "connected-react-router": "^4.5.0",
     "history": "^4.7.2",
     "lodash": "^4.17.11",
