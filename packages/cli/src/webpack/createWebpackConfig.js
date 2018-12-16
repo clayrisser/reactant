@@ -6,10 +6,9 @@ import { DefinePlugin } from 'webpack';
 import { getLinkedPaths } from 'linked-deps';
 import getRules from './getRules';
 
-export default function createWebpackConfig(config, webpackConfig = {}) {
-  const { paths, env, envs, platform, platformType } = config;
-  webpackConfig = {
-    ...webpackConfig,
+export default function createWebpackConfig(config, { platform }) {
+  const { paths, env, envs, platformName } = config;
+  return {
     mode: env,
     context: pkgDir.sync(process.cwd()),
     devtool:
@@ -17,45 +16,38 @@ export default function createWebpackConfig(config, webpackConfig = {}) {
         ? 'cheap-module-eval-source-map'
         : 'nosources-source-map',
     resolve: {
-      ...webpackConfig.resolve,
-      modules: [...(webpackConfig.modules || []), ...getModules(config)],
+      modules: getModules(config),
       symlinks: false,
       extensions: _.uniq([
-        ..._.get(webpackConfig, 'resolve.extensions', []),
-        `.${platform}.js`,
-        `.${platform}.jsx`,
-        `.${platform}.mjs`,
-        `.${platform}.json`,
-        `.${platformType}.js`,
-        `.${platformType}.jsx`,
-        `.${platformType}.mjs`,
-        `.${platformType}.json`,
+        `.${platformName}.js`,
+        `.${platformName}.jsx`,
+        `.${platformName}.mjs`,
+        `.${platformName}.json`,
+        `.${platform.type}.js`,
+        `.${platform.type}.jsx`,
+        `.${platform.type}.mjs`,
+        `.${platform.type}.json`,
         '.js',
         '.jsx',
         '.mjs',
         '.json'
       ]),
       alias: {
-        ...webpackConfig.alias,
         '~': paths.src
       }
     },
     externals: {
-      ...webpackConfig.externals,
       '@reactant/core/config': CircularJSON.stringify(config)
     },
     module: {
-      ...webpackConfig.module,
-      rules: [..._.get(webpackConfig, 'module.rules', []), ...getRules(config)]
+      rules: getRules(config, { platform })
     },
     plugins: [
-      ...(webpackConfig.plugins || []),
       new DefinePlugin({
         ...envs
       })
     ]
   };
-  return webpackConfig;
 }
 
 function getModules(config) {

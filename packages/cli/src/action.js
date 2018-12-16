@@ -10,20 +10,19 @@ import { createWebpackConfig } from './webpack';
 export default async function action(cmd, options, spinner) {
   if (options.verbose) setLevel('verbose');
   if (options.debug) setLevel('debug');
-  const config = createConfig({
+  const { config, platform, platforms, plugins } = createConfig({
     action: cmd,
     options
   });
   log.debug('config ===>', config);
   spinner.succeed('loaded config');
-  await runActions(config).catch(err => {
+  await runActions({ config, platform, platforms, plugins }).catch(err => {
     throw err;
   });
 }
 
-async function runActions(config) {
-  const { platform } = config;
-  const webpackConfig = createWebpackConfig(config);
+async function runActions({ config, platform, platforms, plugins }) {
+  const webpackConfig = createWebpackConfig(config, { platform });
   await mapSeries(getActionNames(config.action, platform), async actionName => {
     let action = platform.properties.actions[actionName];
     action = { ...action, name: actionName };
@@ -39,11 +38,13 @@ async function runActions(config) {
       );
     };
     return action.run(config, {
-      platform,
       action,
+      log,
+      platform,
+      platforms,
+      plugins,
       spinner,
-      webpackConfig,
-      log
+      webpackConfig
     });
   });
   return null;

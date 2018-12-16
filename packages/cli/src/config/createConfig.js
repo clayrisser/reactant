@@ -14,13 +14,13 @@ export default function createConfig({ action, options = {} }) {
   options = sanitizeOptions(options);
   const { reactant, loaders } = createConfigLoader(options.config);
   let { config } = reactant;
-  const [platforms, plugins] = loaders;
+  const [platformsLoader, pluginsLoader] = loaders;
+  const platforms = platformsLoader.modules;
+  const plugins = pluginsLoader.modules;
   config = {
     ...config,
     env: environment.value,
     options,
-    platforms,
-    plugins,
     moduleName: config.moduleName
       ? config.moduleName
       : _.camelCase(config.title).replace(/_/g, '-'),
@@ -36,16 +36,14 @@ export default function createConfig({ action, options = {} }) {
   if (options.platform && !_.isBoolean(options.platform)) {
     config.platformName = options.platform;
   }
-  if (config.platformName) {
-    config.platform = _.find(platforms.modules, platform => {
-      return !!platform.properties.name;
-    });
-  }
+  const platform = config.platformName
+    ? platforms[config.platforms[config.platformName]]
+    : null;
   const configPaths = new ConfigPaths(config);
   const configPorts = new ConfigPorts(config);
   const eslint = rcConfig({ name: 'eslint' });
   const pkg = path.resolve(pkgDir.sync(process.cwd()), 'package.json');
-  return {
+  config = {
     ...config,
     action: action || config.action,
     babel: mergeConfiguration(pkg.babel, config.babel),
@@ -57,6 +55,7 @@ export default function createConfig({ action, options = {} }) {
       config.eslint
     )
   };
+  return { config, platform, platforms, plugins };
 }
 
 function createConfigLoader(

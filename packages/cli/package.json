@@ -31,7 +31,7 @@
     "reactant": "bin/reactant.js"
   },
   "dependencies": {
-    "@ecosystem/config": "^0.2.4",
+    "@ecosystem/config": "^0.2.6",
     "@ecosystem/module-loader": "^0.2.5",
     "@reactant/core": "^0.0.54",
     "bluebird": "^3.5.2",
@@ -49,7 +49,7 @@
     "linked-deps": "^0.1.0",
     "lodash": "^4.17.11",
     "markdown-loader": "^4.0.0",
-    "merge-configuration": "^0.4.0",
+    "merge-configuration": "^0.4.1",
     "node-ipc": "^9.1.1",
     "ora": "^3.0.0",
     "pkg-dir": "^3.0.0",

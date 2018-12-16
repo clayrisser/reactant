@@ -23,7 +23,7 @@ export default function(config) {
       stories: 'stories',
       storybook: '{reactant}/storybook'
     },
-    webpack: webpack => webpack,
-    ...(storybook ? { storybook: webpack => webpack } : {})
+    webpack: {},
+    ...(storybook ? { storybook: {} } : {})
   };
 }
