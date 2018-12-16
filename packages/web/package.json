@@ -87,7 +87,6 @@
     "babel-preset-everything": "^0.2.1",
     "eslint": "^5.10.0",
     "eslint-config-jam": "^0.1.6",
-    "eslint-plugin-jest": "^22.1.2",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
     "jest": "^23.6.0"
