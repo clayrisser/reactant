@@ -5,7 +5,10 @@ import path from 'path';
 import webpack from 'webpack';
 import { createWebpackConfig } from '../webpack';
 
-export default async function start(config, { spinner, log, webpackConfig }) {
+export default async function start(
+  config,
+  { spinner, log, webpackConfig, platform }
+) {
   const { paths, options, ports } = config;
   if (options.storybook) {
     fs.mkdirsSync(paths.storybook);
@@ -26,8 +29,8 @@ export default async function start(config, { spinner, log, webpackConfig }) {
       }`
     );
   } else {
-    webpackConfig = createWebpackConfig(config, webpackConfig);
-    log.write('webpackConfig', webpackConfig);
+    webpackConfig = createWebpackConfig(config, { webpackConfig, platform });
+    log.debug('webpackConfig ===>', webpackConfig);
     fs.mkdirsSync(path.resolve(paths.dist, 'public'));
     fs.mkdirsSync(path.resolve(paths.src, 'public'));
     fs.copySync(

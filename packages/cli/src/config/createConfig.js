@@ -13,6 +13,7 @@ import defaultConfig from './defaultConfig';
 export default function createConfig({ action, options = {} }) {
   options = sanitizeOptions(options);
   const { reactant, loaders } = createConfigLoader(options.config);
+  const { socket } = reactant;
   let { config } = reactant;
   const [platformsLoader, pluginsLoader] = loaders;
   const platforms = getPlatforms(platformsLoader);
@@ -55,7 +56,7 @@ export default function createConfig({ action, options = {} }) {
       config.eslint
     )
   };
-  return { config, platform, platforms, plugins };
+  return { config, platform, platforms, plugins, socket };
 }
 
 function createConfigLoader(

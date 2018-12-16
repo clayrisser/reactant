@@ -3,9 +3,12 @@ import path from 'path';
 import webpack from 'webpack';
 import { createWebpackConfig } from '../webpack';
 
-export default async function build(config, { spinner, log, webpackConfig }) {
+export default async function build(
+  config,
+  { spinner, log, webpackConfig, platform, socket }
+) {
   const { paths } = config;
-  webpackConfig = createWebpackConfig(config, webpackConfig);
+  webpackConfig = createWebpackConfig(config, { platform, webpackConfig });
   log.write('webpackConfig', webpackConfig);
   fs.mkdirsSync(path.resolve(paths.dist));
   fs.mkdirsSync(path.resolve(paths.src, 'public'));
@@ -13,6 +16,7 @@ export default async function build(config, { spinner, log, webpackConfig }) {
   fs.copySync(path.resolve(paths.src, 'public'), paths.dist);
   const stats = await compile(webpackConfig);
   spinner.succeed();
+  socket.stop();
   return { stats };
 }
 

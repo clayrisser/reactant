@@ -13,7 +13,7 @@ import {
   NoEmitOnErrorsPlugin
 } from 'webpack';
 
-function createWebpackConfig(config, webpackConfig) {
+function createWebpackConfig(config, { platform, webpackConfig }) {
   const {
     action,
     babel,
@@ -23,8 +23,7 @@ function createWebpackConfig(config, webpackConfig) {
     paths,
     ports,
     title,
-    platform,
-    platformType
+    platformName
   } = config;
   webpackConfig = {
     ...webpackConfig,
@@ -45,14 +44,14 @@ function createWebpackConfig(config, webpackConfig) {
         'webpack/hot/poll': require.resolve('webpack/hot/poll')
       },
       extensions: _.uniq([
-        `.${platform}.client.js`,
-        `.${platform}.client.jsx`,
-        `.${platform}.client.mjs`,
-        `.${platform}.client.json`,
-        `.${platformType}.client.js`,
-        `.${platformType}.client.jsx`,
-        `.${platformType}.client.mjs`,
-        `.${platformType}.client.json`,
+        `.${platform.properties.type}.client.js`,
+        `.${platform.properties.type}.client.json`,
+        `.${platform.properties.type}.client.jsx`,
+        `.${platform.properties.type}.client.mjs`,
+        `.${platformName}.client.js`,
+        `.${platformName}.client.json`,
+        `.${platformName}.client.jsx`,
+        `.${platformName}.client.mjs`,
         ..._.get(webpackConfig, 'resolve.extensions', [])
       ])
     },

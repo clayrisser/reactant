@@ -10,39 +10,37 @@ import { createWebpackConfig } from './webpack';
 export default async function action(cmd, options, spinner) {
   if (options.verbose) setLevel('verbose');
   if (options.debug) setLevel('debug');
-  const { config, platform, platforms, plugins } = createConfig({
+  const payload = createConfig({
     action: cmd,
     options
   });
+  const { config } = payload;
   log.debug('config ===>', config);
   spinner.succeed('loaded config');
-  await runActions({ config, platform, platforms, plugins }).catch(err => {
+  await runActions(payload).catch(err => {
     throw err;
   });
 }
 
-async function runActions({ config, platform, platforms, plugins }) {
+async function runActions(payload) {
+  const { config, platform } = payload;
+  delete payload.config;
+  const { platformName } = config;
   const webpackConfig = createWebpackConfig(config, { platform });
   await mapSeries(getActionNames(config.action, platform), async actionName => {
     let action = platform.properties.actions[actionName];
     action = { ...action, name: actionName };
-    const spinner = ora(
-      `started ${action.name} ${platform.properties.name}`
-    ).start();
+    const spinner = ora(`started ${action.name} ${platformName}`).start();
     spinner._succeed = spinner.succeed;
     spinner.succeed = (...args) => {
       spinner._succeed(
-        ...(args.length
-          ? args
-          : [`finished ${action.name} ${config.platform.properties.name}`])
+        ...(args.length ? args : [`finished ${action.name} ${platformName}`])
       );
     };
     return action.run(config, {
+      ...payload,
       action,
       log,
-      platform,
-      platforms,
-      plugins,
       spinner,
       webpackConfig
     });
