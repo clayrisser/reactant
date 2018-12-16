@@ -6,16 +6,11 @@ import webpackNodeExternals from 'webpack-node-externals';
 
 const { LimitChunkCountPlugin } = webpack.optimize;
 
-export default function createServerConfig(config, webpackConfig) {
-  const {
-    paths,
-    host,
-    ports,
-    options,
-    action,
-    platform,
-    platformType
-  } = config;
+export default function createServerConfig(
+  config,
+  { platform, webpackConfig }
+) {
+  const { paths, host, ports, options, action, platformName } = config;
   webpackConfig = {
     ...webpackConfig,
     entry: [path.resolve(__dirname, '../server.js')],
@@ -38,14 +33,14 @@ export default function createServerConfig(config, webpackConfig) {
         )
       },
       extensions: _.uniq([
-        `.${platform}.server.js`,
-        `.${platform}.server.jsx`,
-        `.${platform}.server.mjs`,
-        `.${platform}.server.json`,
-        `.${platformType}.server.js`,
-        `.${platformType}.server.jsx`,
-        `.${platformType}.server.mjs`,
-        `.${platformType}.server.json`,
+        `.${platform.properties.name}.server.js`,
+        `.${platform.properties.name}.server.json`,
+        `.${platform.properties.name}.server.jsx`,
+        `.${platform.properties.name}.server.mjs`,
+        `.${platformName}.server.js`,
+        `.${platformName}.server.json`,
+        `.${platformName}.server.jsx`,
+        `.${platformName}.server.mjs`,
         ..._.get(webpackConfig, 'resolve.extensions', [])
       ])
     },

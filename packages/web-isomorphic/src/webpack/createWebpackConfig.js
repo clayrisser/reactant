@@ -11,7 +11,10 @@ import {
 import createClientConfig from './createClientConfig';
 import createServerConfig from './createServerConfig';
 
-export default function createWebConfig(config, webpackConfig, target = 'web') {
+export default function createWebConfig(
+  config,
+  { webpackConfig, target = 'web', platform }
+) {
   const { paths, /* eslint, */ babel, env, action } = config;
   process.env.NODE_ENV = env;
   if (target === 'client') target = 'web';
@@ -35,7 +38,7 @@ export default function createWebConfig(config, webpackConfig, target = 'web') {
       strictExportPresence: true,
       rules: [
         ...(webpackConfig.rules || []),
-        ...getRules(config),
+        ...getRules(config, { platform }),
         // {
         //   test: /\.(js|jsx|mjs)$/,
         //   include: [paths.android, paths.ios, paths.src, paths.web],
@@ -67,9 +70,9 @@ export default function createWebConfig(config, webpackConfig, target = 'web') {
     ]
   };
   if (target === 'web') {
-    webpackConfig = createClientConfig(config, webpackConfig);
+    webpackConfig = createClientConfig(config, { platform, webpackConfig });
   } else {
-    webpackConfig = createServerConfig(config, webpackConfig);
+    webpackConfig = createServerConfig(config, { platform, webpackConfig });
   }
   return mergeConfiguration(webpackConfig, config.webpack, {}, config);
 }

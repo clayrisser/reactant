@@ -7,8 +7,11 @@ import path from 'path';
 import webpack from 'webpack';
 import { createWebpackConfig, handleStats } from '../webpack';
 
-export default async function start(config, { spinner, log, webpackConfig }) {
-  const { paths, options, ports, action, platform, port } = config;
+export default async function start(
+  config,
+  { spinner, log, webpackConfig, platform }
+) {
+  const { paths, options, ports, action, port, platformName } = config;
   if (options.storybook) {
     fs.mkdirsSync(paths.storybook);
     fs.copySync(path.resolve(__dirname, '../storybook'), paths.storybook);
@@ -30,17 +33,17 @@ export default async function start(config, { spinner, log, webpackConfig }) {
     return null;
   }
   process.noDeprecation = true;
-  const webpackClientConfig = createWebpackConfig(
-    config,
-    webpackConfig,
-    'client'
-  );
+  const webpackClientConfig = createWebpackConfig(config, {
+    platform,
+    target: 'client',
+    webpackConfig
+  });
   log.write('webpackClientConfig', webpackClientConfig);
-  const webpackServerConfig = createWebpackConfig(
-    config,
-    webpackConfig,
-    'server'
-  );
+  const webpackServerConfig = createWebpackConfig(config, {
+    platform,
+    target: 'server',
+    webpackConfig
+  });
   log.write('webpackServerConfig', webpackServerConfig);
   fs.mkdirsSync(path.resolve(paths.dist, 'public'));
   fs.mkdirsSync(path.resolve(paths.src, 'public'));
@@ -79,7 +82,7 @@ export default async function start(config, { spinner, log, webpackConfig }) {
       } else if (!started) {
         started = true;
         spinner[warnings.length ? 'warn' : 'succeed']('compiled server');
-        spinner = ora(`started ${action} ${platform}`).succeed();
+        spinner = ora(`started ${action} ${platformName}`).succeed();
       }
       return resolve();
     });

@@ -12,13 +12,16 @@ const {
   printFileSizesAfterBuild
 } = FileSizeReporter;
 
-export default async function build(config, { spinner, webpackConfig }) {
+export default async function build(
+  config,
+  { spinner, webpackConfig, platform, socket }
+) {
   const { paths, options } = config;
-  const webpackClientConfig = createWebpackConfig(
-    config,
-    webpackConfig,
-    'client'
-  );
+  const webpackClientConfig = createWebpackConfig(config, {
+    platform,
+    target: 'client',
+    webpackConfig
+  });
   if (options.debug) {
     fs.mkdirsSync(paths.debug);
     fs.writeFileSync(
@@ -27,11 +30,11 @@ export default async function build(config, { spinner, webpackConfig }) {
     );
   }
   log.debug('webpackClientConfig', webpackClientConfig);
-  const webpackServerConfig = createWebpackConfig(
-    config,
-    webpackConfig,
-    'server'
-  );
+  const webpackServerConfig = createWebpackConfig(config, {
+    platform,
+    target: 'server',
+    webpackConfig
+  });
   if (options.debug) {
     fs.mkdirsSync(paths.debug);
     fs.writeFileSync(
@@ -66,6 +69,7 @@ export default async function build(config, { spinner, webpackConfig }) {
   log.info('file sizes after gzip:\n');
   printFileSizesAfterBuild(stats, previousFileSizes, paths.dist);
   log.info('');
+  socket.stop();
   return spinner.succeed();
 }
 

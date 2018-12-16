@@ -7,7 +7,10 @@ import path from 'path';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { IgnorePlugin } from 'webpack';
 
-export default function createClientConfig(config, webpackConfig) {
+export default function createClientConfig(
+  config,
+  { platform, webpackConfig }
+) {
   const {
     action,
     env,
@@ -15,8 +18,7 @@ export default function createClientConfig(config, webpackConfig) {
     offline,
     options,
     paths,
-    platform,
-    platformType,
+    platformName,
     ports
   } = config;
   webpackConfig = {
@@ -38,14 +40,14 @@ export default function createClientConfig(config, webpackConfig) {
         )
       },
       extensions: _.uniq([
-        `.${platform}.client.js`,
-        `.${platform}.client.jsx`,
-        `.${platform}.client.mjs`,
-        `.${platform}.client.json`,
-        `.${platformType}.client.js`,
-        `.${platformType}.client.jsx`,
-        `.${platformType}.client.mjs`,
-        `.${platformType}.client.json`,
+        `.${platform.properties.name}.client.js`,
+        `.${platform.properties.name}.client.json`,
+        `.${platform.properties.name}.client.jsx`,
+        `.${platform.properties.name}.client.mjs`,
+        `.${platformName}.client.js`,
+        `.${platformName}.client.json`,
+        `.${platformName}.client.jsx`,
+        `.${platformName}.client.mjs`,
         ..._.get(webpackConfig, 'resolve.extensions', [])
       ])
     },
