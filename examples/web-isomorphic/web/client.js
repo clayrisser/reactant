@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import ClientApp from '@reactant/web-isomorphic/ClientApp';
 import ReactRouter from '@reactant/react-router';
 import Redux from '@reactant/redux';

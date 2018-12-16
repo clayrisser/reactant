@@ -31,6 +31,7 @@
     "reactant": "bin/reactant.js"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "@ecosystem/config": "^0.2.8",
     "@ecosystem/module-loader": "^0.2.5",
     "@reactant/core": "0.0.56",
@@ -61,7 +62,6 @@
   "devDependencies": {
     "@babel/cli": "^7.2.0",
     "@babel/core": "^7.2.2",
-    "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",

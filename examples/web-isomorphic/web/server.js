@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import ReactRouter from '@reactant/react-router';
 import Redux from '@reactant/redux';
 import Sass from '@reactant/sass';

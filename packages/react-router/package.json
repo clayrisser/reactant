@@ -41,6 +41,7 @@
     "test:reset": "jest --clearCache && npm run test"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "@reactant/core": "0.0.56",
     "connected-react-router": "^6.0.0",
     "history": "^4.7.2",
@@ -52,7 +53,6 @@
     "@babel/cli": "^7.2.0",
     "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-export-default-from": "^7.2.0",
-    "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",

@@ -29,6 +29,7 @@
     "test": "npm run lint && jest --forceExit"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "@reactant/core": "0.0.56",
     "@reactant/react-router": "0.0.56",
     "@reactant/redux": "0.0.56",
@@ -39,7 +40,6 @@
     "@storybook/react": "^4.1.2",
     "autobind": "^1.0.3",
     "autobind-decorator": "^2.4.0",
-    "babel-polyfill": "^6.26.0",
     "lodash": "^4.17.11",
     "mime": "^2.4.0",
     "net": "^1.0.2",

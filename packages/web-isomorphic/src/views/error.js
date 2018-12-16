@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import HMRClient from 'hmr-client';
 import ignoreWarnings from 'ignore-warnings';
 import log, { setLevel } from '@reactant/core/log';
