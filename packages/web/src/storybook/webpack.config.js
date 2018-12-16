@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import CircularJSON from 'circular-json';
 import _ from 'lodash';
 import fs from 'fs-extra';
