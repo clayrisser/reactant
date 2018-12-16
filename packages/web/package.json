@@ -35,7 +35,7 @@
     "build": "npm run test && npm run build:copy && npm run build:lib",
     "build:copy": "mkdir -p lib && cp -r src/public lib",
     "build:lib": "babel src -d lib",
-    "clean": "rimraf lib",
+    "clean": "git clean -fXd -e \\!node_modules -e \\!node_modules/**/*",
     "format": "prettier --write ./src/**/*.js",
     "lint": "npm run format && eslint ./",
     "lint:fix": "npm run format && eslint --fix ./",
