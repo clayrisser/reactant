@@ -1,6 +1,6 @@
 {
   "name": "@reactant/cli",
-  "version": "0.0.54",
+  "version": "0.0.56",
   "description": "build tool for reactant",
   "homepage": "https://reactant.codejam.ninja",
   "author": {
@@ -33,7 +33,7 @@
   "dependencies": {
     "@ecosystem/config": "^0.2.6",
     "@ecosystem/module-loader": "^0.2.5",
-    "@reactant/core": "^0.0.54",
+    "@reactant/core": "^0.0.56",
     "bluebird": "^3.5.2",
     "circular-json": "^0.5.7",
     "commander": "^2.19.0",
