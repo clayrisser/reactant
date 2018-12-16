@@ -15,8 +15,8 @@ export default function createConfig({ action, options = {} }) {
   const { reactant, loaders } = createConfigLoader(options.config);
   let { config } = reactant;
   const [platformsLoader, pluginsLoader] = loaders;
-  const platforms = platformsLoader.modules;
-  const plugins = pluginsLoader.modules;
+  const platforms = getPlatforms(platformsLoader);
+  const plugins = getPlugins(pluginsLoader);
   config = {
     ...config,
     env: environment.value,
@@ -106,6 +106,48 @@ function createConfigLoader(
     );
   }
   return { reactant, loaders };
+}
+
+function getPlatforms(platformsLoader) {
+  return _.reduce(
+    platformsLoader.modules,
+    (platforms, platform, platformName) => {
+      platforms[platformName] = {
+        ...platform,
+        properties: {
+          ...platform.properties,
+          actions: _.reduce(
+            platform.properties.actions,
+            (actions, action, key) => {
+              if (action.run) {
+                if (!action.dependsOn) {
+                  action = { ...action, dependsOn: [] };
+                }
+              } else {
+                action = { run: action, dependsOn: [] };
+              }
+              actions[key] = action;
+              return actions;
+            },
+            {}
+          )
+        }
+      };
+      return platforms;
+    },
+    {}
+  );
+}
+
+function getPlugins(pluginsLoader) {
+  return _.reduce(
+    pluginsLoader.modules,
+    (plugins, plugin, pluginName) => {
+      plugins[pluginName] = plugin;
+      return plugins;
+    },
+    {}
+  );
 }
 
 export function rebuildConfig() {
