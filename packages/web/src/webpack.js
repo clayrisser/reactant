@@ -13,7 +13,7 @@ import {
   NoEmitOnErrorsPlugin
 } from 'webpack';
 
-function createWebpackConfig(config, { platform, webpackConfig }) {
+function createWebpackConfig(config, { platform, webpackConfig = {} }) {
   const {
     action,
     babel,

@@ -8,18 +8,14 @@ import pkgDir from 'pkg-dir';
 import { createWebpackConfig } from '@reactant/cli/webpack';
 import { rebuildConfig } from '@reactant/cli/config';
 
-function getMergeConfiguration() {
-  let mergeConfiguration = null;
-  try {
-    mergeConfiguration = require('merge-configuration').default;
-  } catch (err) {
-    mergeConfiguration = require('@reactant/web-isomorphic/node_modules/merge-configuration')
-      .default;
-  }
-  return mergeConfiguration;
-}
-
-const mergeConfiguration = getMergeConfiguration();
+const mergeConfiguration = require(require.resolve('merge-configuration', {
+  paths: [
+    path.resolve(
+      pkgDir.sync(process.cwd()),
+      'node_modules/@reactant/web-isomorphic'
+    )
+  ]
+})).default;
 let debug = false;
 if (_.includes(process.argv, '--verbose')) setLevel('verbose');
 if (_.includes(process.argv, '--debug')) {
@@ -28,9 +24,11 @@ if (_.includes(process.argv, '--debug')) {
 }
 
 module.exports = webpackConfig => {
-  const config = rebuildConfig({ options: { platform: 'web', debug } });
+  const { config, platform } = rebuildConfig({
+    options: { platform: 'web', debug }
+  });
   const { paths, babel, options } = config;
-  webpackConfig = createWebpackConfig(config, webpackConfig);
+  webpackConfig = createWebpackConfig(config, { platform, webpackConfig });
   webpackConfig.resolve.extensions.unshift('.web.js');
   webpackConfig.externals = {
     ...webpackConfig.externals,

@@ -21,32 +21,31 @@ export default async function start(
       fs.copySync(storybookPath, paths.storybook);
     }
     spinner.stop();
-    await easycp(
+    return easycp(
       `node ${require.resolve('@storybook/react/bin')} -p ${
         config.ports.storybook
       } -c ${paths.storybook}${options.debug ? ' -- --debug' : ''}${
         options.verbose ? ' -- --verbose' : ''
       }`
     );
-  } else {
-    webpackConfig = createWebpackConfig(config, { webpackConfig, platform });
-    log.debug('webpackConfig ===>', webpackConfig);
-    fs.mkdirsSync(path.resolve(paths.dist, 'public'));
-    fs.mkdirsSync(path.resolve(paths.src, 'public'));
-    fs.copySync(
-      path.resolve(__dirname, '../public'),
-      path.resolve(paths.dist, 'public')
-    );
-    fs.copySync(
-      path.resolve(paths.src, 'public'),
-      path.resolve(paths.dist, 'public')
-    );
-    addDevServerEntrypoints(webpackConfig, webpackConfig.devServer);
-    const compiler = webpack(webpackConfig);
-    const server = new WebpackDevServer(compiler, webpackConfig.devServer);
-    server.listen(ports.dev, webpackConfig.devServer.host, () => {
-      spinner.stop();
-      log.info(`listening on port ${ports.dev}`);
-    });
   }
+  webpackConfig = createWebpackConfig(config, { webpackConfig, platform });
+  log.debug('webpackConfig ===>', webpackConfig);
+  fs.mkdirsSync(path.resolve(paths.dist, 'public'));
+  fs.mkdirsSync(path.resolve(paths.src, 'public'));
+  fs.copySync(
+    path.resolve(__dirname, '../public'),
+    path.resolve(paths.dist, 'public')
+  );
+  fs.copySync(
+    path.resolve(paths.src, 'public'),
+    path.resolve(paths.dist, 'public')
+  );
+  addDevServerEntrypoints(webpackConfig, webpackConfig.devServer);
+  const compiler = webpack(webpackConfig);
+  const server = new WebpackDevServer(compiler, webpackConfig.devServer);
+  return server.listen(ports.dev, webpackConfig.devServer.host, () => {
+    spinner.stop();
+    log.info(`listening on port ${ports.dev}`);
+  });
 }

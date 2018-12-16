@@ -8,6 +8,7 @@
   "rules": {
     "camelcase": "off",
     "global-require": "off",
+    "import/no-dynamic-require": "off",
     "no-empty": "off",
     "prefer-rest-params": "off",
     "react/no-multi-comp": "off",

@@ -33,7 +33,7 @@ export default function createConfig({ action, options = {} }) {
       __DEV__: !environment.production
     }
   };
-  if (!action) return config;
+  if (!action) return { config, platforms, plugins, socket };
   if (options.platform && !_.isBoolean(options.platform)) {
     config.platformName = options.platform;
   }
@@ -56,6 +56,7 @@ export default function createConfig({ action, options = {} }) {
       config.eslint
     )
   };
+  reactant.appendConfig(config);
   return { config, platform, platforms, plugins, socket };
 }
 
@@ -88,7 +89,7 @@ function createConfigLoader(
     defaultConfig,
     loaders,
     optionsConfig,
-    socket: _finished
+    socket: _finished ? {} : false
   });
   const { config } = reactant;
   if (!_plugins) {

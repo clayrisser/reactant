@@ -6,9 +6,13 @@ import { DefinePlugin } from 'webpack';
 import { getLinkedPaths } from 'linked-deps';
 import getRules from './getRules';
 
-export default function createWebpackConfig(config, { platform }) {
+export default function createWebpackConfig(
+  config,
+  { platform, webpackConfig = {} }
+) {
   const { paths, env, envs, platformName } = config;
   return {
+    ...webpackConfig,
     mode: env,
     context: pkgDir.sync(process.cwd()),
     devtool:
@@ -16,9 +20,14 @@ export default function createWebpackConfig(config, { platform }) {
         ? 'cheap-module-eval-source-map'
         : 'nosources-source-map',
     resolve: {
-      modules: getModules(config),
+      ...(webpackConfig.resolve || {}),
+      modules: [
+        ..._.get(webpackConfig, 'resolve.modules', []),
+        ...getModules(config)
+      ],
       symlinks: false,
       extensions: _.uniq([
+        ..._.get(webpackConfig, 'resolve.extensions', []),
         `.${platformName}.js`,
         `.${platformName}.jsx`,
         `.${platformName}.mjs`,
@@ -33,16 +42,23 @@ export default function createWebpackConfig(config, { platform }) {
         '.json'
       ]),
       alias: {
+        ..._.get(webpackConfig, 'resolve.alias', {}),
         '~': paths.src
       }
     },
     externals: {
+      ...(webpackConfig.externals || {}),
       '@reactant/core/config': CircularJSON.stringify(config)
     },
     module: {
-      rules: getRules(config, { platform })
+      ...(webpackConfig.module || {}),
+      rules: [
+        ..._.get(webpackConfig, 'module.rules', []),
+        ...getRules(config, { platform })
+      ]
     },
     plugins: [
+      ...(webpackConfig.plugins || []),
       new DefinePlugin({
         ...envs
       })

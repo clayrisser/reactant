@@ -12,7 +12,7 @@ const spinner = ora('loading config').start();
 let isAction = false;
 
 function getCliInfo() {
-  const config = createConfig({});
+  const { config } = createConfig({});
   let actions = [];
   let options = [];
   _.each(getReactantPlatforms(config), platformName => {
