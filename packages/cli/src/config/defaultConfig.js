@@ -1,3 +1,6 @@
+import path from 'path';
+import pkgDir from 'pkg-dir';
+
 const { env } = process;
 
 export default {
@@ -29,16 +32,16 @@ export default {
     babelrc: false,
     presets: [
       [
-        'env',
+        resolve('@babel/preset-env'),
         {
           targets: {
             node: '6'
           }
         }
       ],
-      'stage-0'
-    ],
-    plugins: ['transform-decorators-legacy']
+      resolve('@babel/preset-react'),
+      resolve('everything')
+    ]
   },
   eslint: {
     extends: ['jam']
@@ -46,3 +49,9 @@ export default {
   platforms: {},
   webpack: {}
 };
+
+function resolve(packageName) {
+  return require.resolve(packageName, {
+    paths: [path.resolve(pkgDir.sync(process.cwd()), 'node_modules')]
+  });
+}

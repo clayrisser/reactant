@@ -1,4 +1,6 @@
 import _ from 'lodash';
+import path from 'path';
+import pkgDir from 'pkg-dir';
 
 const storybook =
   _.includes(process.argv, '-s') || _.includes(process.argv, '--storybook');
@@ -8,11 +10,7 @@ export default function(config) {
     ...config,
     babel: {
       ...config.babel,
-      presets: [...config.babel.presets, require.resolve('babel-preset-react')],
-      plugins: [
-        require.resolve('react-hot-loader/babel'),
-        ...config.babel.plugins
-      ]
+      plugins: [resolve('react-hot-loader/babel'), ...config.babel.plugins]
     },
     ports: {
       ...config.ports,
@@ -26,4 +24,10 @@ export default function(config) {
     webpack: {},
     ...(storybook ? { storybook: {} } : {})
   };
+}
+
+function resolve(packageName) {
+  return require.resolve(packageName, {
+    paths: [path.resolve(pkgDir.sync(process.cwd()), 'node_modules')]
+  });
 }
