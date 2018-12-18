@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-require('babel-polyfill');
+require('@babel/polyfill');
 require('../lib/reactant');

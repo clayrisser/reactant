@@ -1,5 +1,4 @@
-import path from 'path';
-import pkgDir from 'pkg-dir';
+import resolve from '@reactant/core/resolve';
 
 const { env } = process;
 
@@ -32,15 +31,15 @@ export default {
     babelrc: false,
     presets: [
       [
-        resolve('@babel/preset-env'),
+        resolve('@babel/preset-env', __dirname),
         {
           targets: {
             node: '6'
           }
         }
       ],
-      resolve('@babel/preset-react'),
-      resolve('everything')
+      resolve('@babel/preset-react', __dirname),
+      resolve('babel-preset-everything', __dirname)
     ]
   },
   eslint: {
@@ -49,9 +48,3 @@ export default {
   platforms: {},
   webpack: {}
 };
-
-function resolve(packageName) {
-  return require.resolve(packageName, {
-    paths: [path.resolve(pkgDir.sync(process.cwd()), 'node_modules')]
-  });
-}

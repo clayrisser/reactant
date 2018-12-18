@@ -37,7 +37,7 @@
     "format": "prettier --write ./src/**/*.js",
     "lint": "npm run format && eslint ./",
     "lint:fix": "npm run format && eslint --fix ./",
-    "prepublish": "npm run clean && npm run build",
+    "prepublish": "npm run build",
     "start": "babel-node src",
     "test": "npm run lint",
     "test:reset": "jest --clearCache && npm run test"
@@ -64,7 +64,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
-    "babel-preset-everything": "^0.2.1",
+    "babel-preset-everything": "^0.2.2",
     "eslint": "^5.10.0",
     "eslint-config-jam": "^0.1.6",
     "eslint-plugin-jsx-a11y": "^6.1.2",

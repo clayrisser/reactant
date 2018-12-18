@@ -21,7 +21,6 @@
     "lint": "npm run lint:flow && eslint ./",
     "lint:fix": "eslint --fix ./",
     "lint:flow": "flow",
-    "prepublish": "rimraf node_modules/react-native-router/node_modules",
     "publish": "reactant publish -p web",
     "reactant": "reactant",
     "start": "reactant start -p web",

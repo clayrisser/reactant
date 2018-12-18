@@ -21,7 +21,6 @@
     "lint": "npm run lint:flow && eslint ./",
     "lint:fix": "eslint --fix ./",
     "lint:flow": "flow",
-    "prepublish": "rimraf node_modules/react-native-router/node_modules",
     "publish": "reactant publish -p web",
     "reactant": "reactant",
     "start": "reactant start -p web",
@@ -50,7 +49,9 @@
     "styled-components": "^4.1.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.2",
     "@reactant/cli": "0.0.56",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.10.0",
     "eslint-config-jam": "^0.1.6",

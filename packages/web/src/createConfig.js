@@ -1,6 +1,5 @@
 import _ from 'lodash';
-import path from 'path';
-import pkgDir from 'pkg-dir';
+import resolve from '@reactant/core/resolve';
 
 const storybook =
   _.includes(process.argv, '-s') || _.includes(process.argv, '--storybook');
@@ -10,7 +9,10 @@ export default function(config) {
     ...config,
     babel: {
       ...config.babel,
-      plugins: [resolve('react-hot-loader/babel'), ...config.babel.plugins]
+      plugins: _.uniq([
+        resolve('react-hot-loader/babel', __dirname),
+        ...(config?.babel?.plugins || [])
+      ])
     },
     ports: {
       ...config.ports,
@@ -24,10 +26,4 @@ export default function(config) {
     webpack: {},
     ...(storybook ? { storybook: {} } : {})
   };
-}
-
-function resolve(packageName) {
-  return require.resolve(packageName, {
-    paths: [path.resolve(pkgDir.sync(process.cwd()), 'node_modules')]
-  });
 }

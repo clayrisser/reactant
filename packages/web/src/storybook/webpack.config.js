@@ -5,6 +5,7 @@ import fs from 'fs-extra';
 import log, { setLevel } from '@reactant/core/log';
 import path from 'path';
 import pkgDir from 'pkg-dir';
+import resolve from '@reactant/core/resolve';
 import { createWebpackConfig } from '@reactant/cli/webpack';
 import { rebuildConfig } from '@reactant/cli/config';
 
@@ -41,7 +42,7 @@ module.exports = webpackConfig => {
       paths.stories,
       ...getModuleIncludes(['react-navigation', 'static-container'], config)
     ],
-    loader: require.resolve('babel-loader'),
+    loader: resolve('babel-loader', __dirname),
     options: babel
   });
   webpackConfig = mergeConfiguration(

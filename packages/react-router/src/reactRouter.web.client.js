@@ -36,16 +36,18 @@ export default class ReactRouter {
   reduxApplyReducer(app, { redux }) {
     const { bindRedux } = this;
     const { props } = app;
-    if (bindRedux)
+    if (bindRedux) {
       redux.reducer = connectRouter(props.context.history)(redux.reducer);
+    }
     return app;
   }
 
   reduxApplyMiddleware(app, { redux }) {
     const { bindRedux } = this;
     const { props } = app;
-    if (bindRedux)
+    if (bindRedux) {
       redux.middleware.push(routerMiddleware(props.context.history));
+    }
     return app;
   }
 

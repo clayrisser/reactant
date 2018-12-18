@@ -2,9 +2,10 @@ import _ from 'lodash';
 import autoprefixer from 'autoprefixer';
 import path from 'path';
 import postcssFlexbugsFixes from 'postcss-flexbugs-fixes';
+import resolve from '@reactant/core/resolve';
 
 const postcssLoader = {
-  loader: 'postcss-loader',
+  loader: resolve('postcss-loader', __dirname),
   options: {
     sourceMap: true,
     ident: 'postcss',
@@ -34,9 +35,9 @@ export default function createWebpackConfig(webpackConfig, config) {
             path.resolve(paths.platform, 'styles')
           ],
           loaders: [
-            'isomorphic-style-loader',
+            resolve('isomorphic-style-loader', __dirname),
             {
-              loader: 'css-loader',
+              loader: resolve('css-loader', __dirname),
               options: {
                 importLoaders: 1,
                 localIdentName:
@@ -48,7 +49,7 @@ export default function createWebpackConfig(webpackConfig, config) {
               }
             },
             postcssLoader,
-            'sass-loader'
+            resolve('sass-loader', __dirname)
           ]
         },
         {
@@ -59,9 +60,9 @@ export default function createWebpackConfig(webpackConfig, config) {
             path.resolve(paths.platform, 'styles')
           ],
           loaders: [
-            'isomorphic-style-loader',
+            resolve('isomorphic-style-loader', __dirname),
             {
-              loader: 'css-loader',
+              loader: resolve('css-loader', __dirname),
               options: {
                 importLoaders: 1,
                 localIdentName: '[local]',
@@ -70,7 +71,7 @@ export default function createWebpackConfig(webpackConfig, config) {
               }
             },
             postcssLoader,
-            'sass-loader'
+            resolve('sass-loader', __dirname)
           ]
         }
       ]

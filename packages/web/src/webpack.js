@@ -1,10 +1,11 @@
-import _ from 'lodash';
 import AssetsWebpackPlugin from 'assets-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import _ from 'lodash';
 import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
 import mergeConfiguration from 'merge-configuration';
 import path from 'path';
+import resolve from '@reactant/core/resolve';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import {
   HotModuleReplacementPlugin,
@@ -41,7 +42,7 @@ function createWebpackConfig(config, { platform, webpackConfig = {} }) {
       ...webpackConfig.resolve,
       alias: {
         ..._.get(webpackConfig, 'resolve.alias', {}),
-        'webpack/hot/poll': require.resolve('webpack/hot/poll')
+        'webpack/hot/poll': resolve('webpack/hot/poll', __dirname)
       },
       extensions: _.uniq([
         `.${platform.properties.type}.client.js`,
