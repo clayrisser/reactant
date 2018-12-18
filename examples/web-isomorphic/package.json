@@ -40,7 +40,7 @@
     "autobind": "^1.0.3",
     "autobind-decorator": "^2.4.0",
     "lodash": "^4.17.11",
-    "mime": "^2.4.0",
+    "mime": "^1.6.0",
     "net": "^1.0.2",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
@@ -49,9 +49,7 @@
     "styled-components": "^4.1.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
     "@reactant/cli": "0.0.56",
-    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.10.0",
     "eslint-config-jam": "^0.1.6",
