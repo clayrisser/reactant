@@ -3,7 +3,7 @@
     "import/no-unresolved": [
       "error",
       {
-        "ignore": ["^~", "^./lib", "^@reactant"]
+        "ignore": ["^~", "^./lib", "^@reactant", "^../../../stories$"]
       }
     ]
   }

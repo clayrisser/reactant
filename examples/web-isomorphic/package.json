@@ -35,8 +35,6 @@
     "@reactant/sass": "0.0.56",
     "@reactant/styled-components": "0.0.56",
     "@reactant/web-isomorphic": "0.0.56",
-    "@storybook/addon-actions": "^4.1.2",
-    "@storybook/react": "^4.1.2",
     "autobind": "^1.0.3",
     "autobind-decorator": "^2.4.0",
     "lodash": "^4.17.11",
@@ -50,6 +48,9 @@
   },
   "devDependencies": {
     "@reactant/cli": "0.0.56",
+    "@storybook/addon-actions": "^4.1.2",
+    "@storybook/addon-links": "^4.1.2",
+    "@storybook/react": "^4.1.2",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.10.0",
     "eslint-config-jam": "^0.1.6",

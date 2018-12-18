@@ -1,3 +1,15 @@
 {
-  "extends": ["jam"]
+  "extends": ["jam"],
+  "rules": {
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "storybook/**/*.js",
+          "tests/**/*.js",
+          "stories/**/*.js"
+        ]
+      }
+    ]
+  }
 }
