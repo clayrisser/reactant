@@ -36,29 +36,29 @@
     "test": "npm run lint && jest --forceExit"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.0.0",
-    "bluebird": "^3.5.3",
-    "circular-json": "^0.5.9",
-    "export-es6": "^0.1.0",
-    "js-info": "^0.3.0",
-    "lodash": "^4.17.11",
-    "loglevel": "^1.6.1",
-    "winston": "^2.4.4"
+    "@babel/polyfill": "~7.0.0",
+    "bluebird": "~3.5.3",
+    "circular-json": "~0.5.9",
+    "export-es6": "~0.1.0",
+    "js-info": "~0.3.0",
+    "lodash": "~4.17.11",
+    "loglevel": "~1.6.1",
+    "winston": "~2.4.4"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.0",
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^10.0.1",
-    "babel-loader": "^8.0.4",
-    "babel-preset-everything": "^0.2.2",
-    "eslint": "^5.10.0",
-    "eslint-config-jam": "^0.1.6",
-    "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-react": "^7.11.1",
-    "prettier": "^1.15.3"
+    "@babel/cli": "~7.2.0",
+    "@babel/core": "~7.2.2",
+    "@babel/preset-env": "~7.2.0",
+    "@babel/preset-react": "~7.0.0",
+    "babel-core": "~7.0.0-bridge.0",
+    "babel-eslint": "~10.0.1",
+    "babel-loader": "~8.0.4",
+    "babel-preset-everything": "~0.2.2",
+    "eslint": "~5.10.0",
+    "eslint-config-jam": "~0.1.6",
+    "eslint-plugin-jsx-a11y": "~6.1.2",
+    "eslint-plugin-react": "~7.11.1",
+    "prettier": "~1.15.3"
   },
   "engines": {
     "node": ">=6.0.0"
