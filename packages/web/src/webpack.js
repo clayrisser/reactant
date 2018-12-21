@@ -30,10 +30,10 @@ function createWebpackConfig(config, { platform, webpackConfig = {} }) {
     ...webpackConfig,
     externals: {
       ...webpackConfig.externals,
-      child_process: {},
-      deasync: {},
-      fs: {},
-      winston: {}
+      child_process: '{}',
+      deasync: '{}',
+      fs: '{}',
+      winston: '{}'
     },
     entry: {
       client: [path.resolve(paths.platform, 'client.js')]

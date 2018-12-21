@@ -28,7 +28,10 @@ export default function createClientConfig(
     },
     externals: {
       ...webpackConfig.externals,
-      'react-art': {}
+      child_process: '{}',
+      deasync: '{}',
+      fs: '{}',
+      winston: '{}'
     },
     resolve: {
       ...webpackConfig.resolve,
