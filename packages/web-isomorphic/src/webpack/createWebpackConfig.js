@@ -23,10 +23,6 @@ export default function createWebConfig(
     ...webpackConfig,
     context: process.cwd(),
     target,
-    devtool:
-      env === 'development'
-        ? 'cheap-module-eval-source-map'
-        : 'nosources-source-map',
     resolve: {
       ...webpackConfig.resolve,
       alias: {
