@@ -17,7 +17,7 @@ export default function createWebpackConfig(
     context: pkgDir.sync(process.cwd()),
     devtool:
       env === 'development'
-        ? 'cheap-module-eval-source-map'
+        ? 'cheap-module-source-map'
         : 'nosources-source-map',
     resolve: {
       ...(webpackConfig.resolve || {}),
