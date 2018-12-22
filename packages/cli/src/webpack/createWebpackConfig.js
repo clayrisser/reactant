@@ -22,12 +22,12 @@ export default function createWebpackConfig(
     resolve: {
       ...(webpackConfig.resolve || {}),
       modules: [
-        ..._.get(webpackConfig, 'resolve.modules', []),
+        ...(webpackConfig?.resolve?.modules || []),
         ...getModules(config)
       ],
       symlinks: false,
       extensions: _.uniq([
-        ..._.get(webpackConfig, 'resolve.extensions', []),
+        ...(webpackConfig?.resolve?.extensions || []),
         `.${platformName}.js`,
         `.${platformName}.jsx`,
         `.${platformName}.mjs`,
@@ -42,7 +42,7 @@ export default function createWebpackConfig(
         '.json'
       ]),
       alias: {
-        ..._.get(webpackConfig, 'resolve.alias', {}),
+        ...(webpackConfig?.resolve?.alias || {}),
         '~': paths.src
       }
     },
@@ -53,7 +53,7 @@ export default function createWebpackConfig(
     module: {
       ...(webpackConfig.module || {}),
       rules: [
-        ..._.get(webpackConfig, 'module.rules', []),
+        ...(webpackConfig?.module?.rules || []),
         ...getRules(config, { platform })
       ]
     },

@@ -26,7 +26,7 @@ export default function createWebConfig(
     resolve: {
       ...webpackConfig.resolve,
       alias: {
-        ..._.get(webpackConfig, 'resolve.alias'),
+        ...(webpackConfig?.resolve?.alias || {}),
         'webpack/hot/poll': require.resolve('webpack/hot/poll')
       }
     },

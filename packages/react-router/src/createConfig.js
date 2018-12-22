@@ -13,7 +13,7 @@ export default function(config) {
     },
     redux: {
       ...(config.redux || {}),
-      blacklist: [..._.get(config, 'redux.blacklist', []), 'router']
+      blacklist: [...(config?.redux?.blacklist || []), 'router']
     }
   };
 }

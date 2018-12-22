@@ -17,6 +17,6 @@ function sanitizeErr(err) {
   if (err.isJoi) err.code = 400;
   if (err.originalError) err = err.originalError;
   if (err.statusCode) err.code = err.statusCode;
-  if (err.output) err.code = _.get(err, 'output.statusCode');
+  if (err?.output?.statusCode) err.code = err.output.statusCode;
   return err;
 }

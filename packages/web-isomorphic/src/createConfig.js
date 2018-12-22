@@ -17,7 +17,7 @@ export default function(config) {
     ignore: {
       ...config.ignore,
       warnings: [
-        ..._.get(config, 'ignore.warnings', []),
+        ...(config?.ignore?.warnings || []),
         '/(express\\/lib\\/view)|(colors\\/lib\\/colors)|(bindings\\/bindings)|' +
           '(deasync\\/index)|(parse5\\/lib\\/index)|(ejs\\/lib\\/ejs)\\.js.*' +
           '(Critical dependency: the request of a dependency is an expression)|' +

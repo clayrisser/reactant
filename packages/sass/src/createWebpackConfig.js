@@ -26,7 +26,7 @@ export default function createWebpackConfig(webpackConfig, config) {
     module: {
       ...(webpackConfig.rules || {}),
       rules: [
-        ..._.get(webpackConfig, 'module.rules', []),
+        ...(webpackConfig?.module?.rules || []),
         {
           // local styles
           test: /\.(s?css|sass)$/,

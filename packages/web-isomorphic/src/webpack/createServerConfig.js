@@ -22,7 +22,7 @@ export default function createServerConfig(
     resolve: {
       ...webpackConfig.resolve,
       alias: {
-        ..._.get(webpackConfig, 'resolve.alias'),
+        ...(webpackConfig?.resolve?.alias || {}),
         '@reactant/web-isomorphic/index.html': path.resolve(
           paths.platform,
           'index.html'
@@ -41,7 +41,7 @@ export default function createServerConfig(
         `.${platformName}.server.json`,
         `.${platformName}.server.jsx`,
         `.${platformName}.server.mjs`,
-        ..._.get(webpackConfig, 'resolve.extensions', [])
+        ...(webpackConfig?.resolve?.extensions || [])
       ])
     },
     node: {

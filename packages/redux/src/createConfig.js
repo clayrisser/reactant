@@ -1,14 +1,12 @@
-import _ from 'lodash';
-
 export default function(config) {
   return {
     ...config,
     redux: {
       ...(config.redux || {}),
-      blacklist: [..._.get(config, 'redux.blacklist', [])],
-      initialState: { ..._.get(config, 'redux.initialState', {}) },
+      blacklist: config?.redux?.blacklist || [],
+      initialState: config?.redux?.initialState || {},
       persist: true,
-      whitelist: [..._.get(config, 'redux.whitelist', [])]
+      whitelist: config?.redux?.whitelist || []
     }
   };
 }

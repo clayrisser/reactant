@@ -36,7 +36,7 @@ export default function createClientConfig(
     resolve: {
       ...webpackConfig.resolve,
       alias: {
-        ..._.get(webpackConfig, 'resolve.alias'),
+        ...(webpackConfig?.resolve?.alias || {}),
         '@reactant/web-isomorphic/ClientRoot': path.resolve(
           paths.platform,
           'ClientRoot.js'
@@ -51,7 +51,7 @@ export default function createClientConfig(
         `.${platformName}.client.json`,
         `.${platformName}.client.jsx`,
         `.${platformName}.client.mjs`,
-        ..._.get(webpackConfig, 'resolve.extensions', [])
+        ...(webpackConfig?.resolve?.extensions || [])
       ])
     },
     plugins: [

@@ -41,7 +41,7 @@ function createWebpackConfig(config, { platform, webpackConfig = {} }) {
     resolve: {
       ...webpackConfig.resolve,
       alias: {
-        ..._.get(webpackConfig, 'resolve.alias', {}),
+        ...(webpackConfig?.resolve?.alias || {}),
         'webpack/hot/poll': resolve('webpack/hot/poll', __dirname)
       },
       extensions: _.uniq([
@@ -53,7 +53,7 @@ function createWebpackConfig(config, { platform, webpackConfig = {} }) {
         `.${platformName}.client.json`,
         `.${platformName}.client.jsx`,
         `.${platformName}.client.mjs`,
-        ..._.get(webpackConfig, 'resolve.extensions', [])
+        ...(webpackConfig?.resolve?.extensions || [])
       ])
     },
     target: 'web',
@@ -87,7 +87,7 @@ function createWebpackConfig(config, { platform, webpackConfig = {} }) {
       ...webpackConfig.module,
       strictExportPresence: true,
       rules: [
-        ..._.get(webpackConfig, 'module.rules', []),
+        ...(webpackConfig?.module?.rules || []),
         {
           test: /\.(js|jsx|mjs)$/,
           include: [paths.src, paths.platform],
