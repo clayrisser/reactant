@@ -113,7 +113,6 @@ Review the [changelog](https://github.com/codejamninja/reactant/blob/master/CHAN
 | css-loader                               | `~1.0.1`          |
 | mime                                     | `~1.6.0`          |
 | redux                                    | `~4.0.1`          |
-| webpack                                  | `~4.27.1`         |
 | winston                                  | `~2.4.4`          |
 
 

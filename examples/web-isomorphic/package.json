@@ -38,6 +38,7 @@
     "autobind": "^1.0.3",
     "autobind-decorator": "^2.4.0",
     "lodash": "^4.17.11",
+    "mime": "~1.6.0",
     "net": "^1.0.2",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
