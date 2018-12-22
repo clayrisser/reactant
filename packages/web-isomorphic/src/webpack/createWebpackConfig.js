@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import mergeConfiguration from 'merge-configuration';
 import path from 'path';
 import pkgDir from 'pkg-dir';

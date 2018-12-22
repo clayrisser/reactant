@@ -20,7 +20,7 @@ export default class ReactRouter {
   ) {
     this.ChildRoot = ChildRoot;
     this.bindRedux =
-      config.reactRouter.bindRedux !== null
+      config?.reactRouter?.bindRedux !== null
         ? config.reactRouter.bindRedux
         : bindRedux;
     let loaded = false;
