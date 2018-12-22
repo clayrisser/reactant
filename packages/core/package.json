@@ -20,7 +20,8 @@
     "config.js",
     "lib",
     "log.js",
-    "plugin.js"
+    "plugin.js",
+    "resolve.js"
   ],
   "repository": {
     "type": "git",

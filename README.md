@@ -107,11 +107,12 @@ Review the [changelog](https://github.com/codejamninja/reactant/blob/master/CHAN
 ## Package Descrpencies
 | Package                                  | Version           |
 | -------                                  | -------           |
-| connected-react-router                   | `~4.5.0`          |
-| babel-plugin-transform-numeric-separator | `~7.0.0-beta.3`   |
 | babel-core                               | `~7.0.0-bridge.0` |
-| redux                                    | `~4.0.1`          |
+| babel-plugin-transform-numeric-separator | `~7.0.0-beta.3`   |
+| connected-react-router                   | `~4.5.0`          |
+| css-loader                               | `~1.0.1`          |
 | mime                                     | `~1.6.0`          |
+| redux                                    | `~4.0.1`          |
 | webpack                                  | `~4.27.1`         |
 | winston                                  | `~2.4.4`          |
 
