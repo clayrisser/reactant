@@ -9,9 +9,10 @@ import storage from 'redux-persist/lib/storage';
 import { CookieStorage } from 'redux-persist-cookie-storage';
 import { Provider } from 'react-redux';
 import { callLifecycle } from '@reactant/core/plugin';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { config } from '@reactant/core';
-import { createStore, applyMiddleware } from 'redux';
+import { loadingReducer, loadingMiddleware } from 'redux-loading';
 import { persistReducer, getStoredState, persistStore } from 'redux-persist';
 
 function getDefaultStorage() {
@@ -120,7 +121,7 @@ export default class StyledComponents {
   async getReducer() {
     const { app } = this;
     const redux = {
-      reducer: reducers
+      reducer: combineReducers({ ...reducers, loading: loadingReducer })
     };
     await callLifecycle('reduxApplyReducer', app, { redux });
     if (!app.redux.persist) return redux.reducer;
@@ -130,7 +131,7 @@ export default class StyledComponents {
   async getMiddleware() {
     const { app, devTools } = this;
     const redux = {
-      middleware: [reduxThunk]
+      middleware: [reduxThunk, loadingMiddleware]
     };
     const composeEnhancers = composeWithDevTools(devTools);
     await callLifecycle('reduxApplyMiddleware', app, { redux });

@@ -9,7 +9,8 @@ import { Provider } from 'react-redux';
 import { callLifecycle } from '@reactant/core/plugin';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { config, log } from '@reactant/core';
-import { createStore, applyMiddleware } from 'redux';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
+import { loadingReducer, loadingMiddleware } from 'redux-loading';
 import { persistReducer, getStoredState, persistStore } from 'redux-persist';
 import {
   CookieStorage,
@@ -144,7 +145,7 @@ export default class StyledComponents {
   async getReducer({ req, res }) {
     const { app } = this;
     const redux = {
-      reducer: reducers
+      reducer: combineReducers({ ...reducers, loading: loadingReducer })
     };
     await callLifecycle('reduxApplyReducer', app, { req, res, redux });
     if (!req.redux.persist) return redux.reducer;
@@ -154,7 +155,7 @@ export default class StyledComponents {
   async getMiddleware({ req, res }) {
     const { app, devTools } = this;
     const redux = {
-      middleware: [reduxThunk]
+      middleware: [reduxThunk, loadingMiddleware]
     };
     const composeEnhancers = composeWithDevTools(devTools);
     await callLifecycle('reduxApplyMiddleware', app, { req, res, redux });
