@@ -1,6 +1,6 @@
 {
   "name": "@reactant/web-isomorphic",
-  "version": "0.0.65",
+  "version": "0.0.64",
   "description": "reactant web isomorphic module",
   "reactantPlatform": "lib/reactantPlatform.js",
   "keywords": [
