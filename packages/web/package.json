@@ -1,6 +1,6 @@
 {
   "name": "@reactant/web",
-  "version": "0.0.66",
+  "version": "0.0.67",
   "description": "reactant web module",
   "reactantPlatform": "lib/reactantPlatform.js",
   "keywords": [
@@ -46,8 +46,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "~7.0.0",
-    "@reactant/cli": "^0.0.66",
-    "@reactant/core": "^0.0.66",
+    "@reactant/cli": "^0.0.67",
+    "@reactant/core": "^0.0.67",
     "@storybook/addon-actions": "~4.1.2",
     "@storybook/addon-links": "~4.1.2",
     "@storybook/addons": "~4.1.2",
