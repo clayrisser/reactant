@@ -67,8 +67,12 @@ export default class ServerApp extends ReactantApp {
 
   async init() {
     await super.init();
-    console.log(path.resolve(__dirname, 'public'));
-    this.app.use(express.static(path.resolve(__dirname, 'public')));
+    const { paths } = config;
+    let publicPath = path.resolve(paths.dist, 'public');
+    if (!fs.existsSync(publicPath)) {
+      publicPath = path.resolve(process.cwd(), 'public');
+    }
+    this.app.use(express.static(publicPath));
     this.app.get('/*', this.handle);
     return this;
   }
