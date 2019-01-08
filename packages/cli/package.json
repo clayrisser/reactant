@@ -1,6 +1,6 @@
 {
   "name": "@reactant/cli",
-  "version": "0.0.68",
+  "version": "0.0.69",
   "description": "build tool for reactant",
   "homepage": "https://reactant.codejam.ninja",
   "author": {
@@ -38,7 +38,7 @@
     "@babel/preset-react": "~7.0.0",
     "@ecosystem/config": "~0.2.8",
     "@ecosystem/module-loader": "~0.2.9",
-    "@reactant/core": "^0.0.68",
+    "@reactant/core": "^0.0.69",
     "babel-core": "~7.0.0-bridge.0",
     "babel-eslint": "~10.0.1",
     "babel-loader": "~8.0.4",
