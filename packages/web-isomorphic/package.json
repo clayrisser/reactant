@@ -1,6 +1,6 @@
 {
   "name": "@reactant/web-isomorphic",
-  "version": "0.0.61",
+  "version": "0.0.62",
   "description": "reactant web isomorphic module",
   "reactantPlatform": "lib/reactantPlatform.js",
   "keywords": [
@@ -48,8 +48,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "~7.0.0",
-    "@reactant/cli": "^0.0.61",
-    "@reactant/core": "^0.0.61",
+    "@reactant/cli": "^0.0.62",
+    "@reactant/core": "^0.0.62",
     "@storybook/addon-actions": "~4.1.2",
     "@storybook/addon-links": "~4.1.2",
     "@storybook/addons": "~4.1.2",
