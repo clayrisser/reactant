@@ -4,8 +4,11 @@ import UglifyWebpackPlugin from 'uglifyjs-webpack-plugin';
 import _ from 'lodash';
 import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
 import path from 'path';
+import pkgDir from 'pkg-dir';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { IgnorePlugin } from 'webpack';
+
+const rootPath = pkgDir.sync(process.cwd());
 
 export default function createClientConfig(
   config,
@@ -24,7 +27,7 @@ export default function createClientConfig(
   webpackConfig = {
     ...webpackConfig,
     entry: {
-      client: [path.resolve(paths.platform, 'client.js')]
+      client: [path.resolve(rootPath, paths.platform, 'client.js')]
     },
     externals: {
       ...webpackConfig.externals,
@@ -38,6 +41,7 @@ export default function createClientConfig(
       alias: {
         ...(webpackConfig?.resolve?.alias || {}),
         '@reactant/web-isomorphic/ClientRoot': path.resolve(
+          rootPath,
           paths.platform,
           'ClientRoot.js'
         )
@@ -57,7 +61,7 @@ export default function createClientConfig(
     plugins: [
       ...webpackConfig.plugins,
       new AssetsWebpackPlugin({
-        path: paths.dist,
+        path: path.resolve(rootPath, paths.dist),
         filename: 'assets.json'
       }),
       new IgnorePlugin(/^child_process$/),
@@ -70,7 +74,7 @@ export default function createClientConfig(
     webpackConfig = {
       ...webpackConfig,
       output: {
-        path: path.resolve(paths.dist, 'public'),
+        path: path.resolve(rootPath, paths.dist, 'public'),
         publicPath: action === 'start' ? `http://${host}:${ports.dev}/` : '/',
         pathinfo: true,
         filename: 'scripts/bundle.js',
@@ -114,7 +118,7 @@ export default function createClientConfig(
         }
       },
       output: {
-        path: path.resolve(paths.dist, 'public'),
+        path: path.resolve(rootPath, paths.dist, 'public'),
         publicPath: '/',
         filename: 'scripts/bundle.[hash:8].js',
         chunkFilename: 'scripts/[name].[hash:8].chunk.js'
@@ -165,7 +169,9 @@ export default function createClientConfig(
       ...webpackConfig,
       plugins: [
         ...webpackConfig.plugins,
-        new OfflinePlugin({ publicPath: path.resolve(paths.dist, 'public') })
+        new OfflinePlugin({
+          publicPath: path.resolve(rootPath, paths.dist, 'public')
+        })
       ]
     };
   } else {

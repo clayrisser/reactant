@@ -94,6 +94,10 @@ export default class ConfigPaths {
   }
 
   resolve(configPath, key) {
-    return path.resolve(this.rootPath, this.preResolve(configPath, key));
+    const resolvedPath = path.resolve(
+      this.rootPath,
+      this.preResolve(configPath, key)
+    );
+    return resolvedPath.substr(this.rootPath.length + 1);
   }
 }

@@ -6,6 +6,8 @@ import { DefinePlugin } from 'webpack';
 import { getLinkedPaths } from 'linked-deps';
 import getRules from './getRules';
 
+const rootPath = pkgDir.sync(process.cwd());
+
 export default function createWebpackConfig(
   config,
   { platform, webpackConfig = {} }
@@ -21,10 +23,7 @@ export default function createWebpackConfig(
         : 'nosources-source-map',
     resolve: {
       ...(webpackConfig.resolve || {}),
-      modules: [
-        ...(webpackConfig?.resolve?.modules || []),
-        ...getModules(config)
-      ],
+      modules: [...(webpackConfig?.resolve?.modules || []), ...getModules()],
       symlinks: false,
       extensions: _.uniq([
         ...(webpackConfig?.resolve?.extensions || []),
@@ -43,7 +42,7 @@ export default function createWebpackConfig(
       ]),
       alias: {
         ...(webpackConfig?.resolve?.alias || {}),
-        '~': paths.src
+        '~': path.resolve(rootPath, paths.src)
       }
     },
     externals: {
@@ -66,11 +65,10 @@ export default function createWebpackConfig(
   };
 }
 
-function getModules(config) {
-  const { paths } = config;
-  const pkgPath = path.resolve(paths.root, 'package.json');
+function getModules() {
+  const pkgPath = path.resolve(rootPath, 'package.json');
   return _.map(
-    [path.resolve(paths.root), ...getLinkedPaths(pkgPath)],
+    [path.resolve(rootPath), ...getLinkedPaths(pkgPath)],
     dependancyPath => {
       return path.join(dependancyPath, 'node_modules');
     }

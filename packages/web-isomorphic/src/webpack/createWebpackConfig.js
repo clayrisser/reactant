@@ -10,6 +10,8 @@ import {
 import createClientConfig from './createClientConfig';
 import createServerConfig from './createServerConfig';
 
+const rootPath = pkgDir.sync(process.cwd());
+
 export default function createWebConfig(
   config,
   { webpackConfig, target = 'web', platform }
@@ -44,12 +46,13 @@ export default function createWebConfig(
         {
           test: /\.(js|jsx|mjs)$/,
           include: [
-            paths.src,
-            paths.platform,
-            ...getModuleIncludes(
-              ['@reactant/core', 'react-navigation', 'static-container'],
-              config
-            )
+            path.resolve(rootPath, paths.src),
+            path.resolve(rootPath, paths.platform),
+            ...getModuleIncludes([
+              '@reactant/core',
+              'react-navigation',
+              'static-container'
+            ])
           ],
           loader: require.resolve('babel-loader'),
           options: babel
@@ -72,13 +75,12 @@ export default function createWebConfig(
   return mergeConfiguration(webpackConfig, config.webpack, {}, config);
 }
 
-function getModuleIncludes(modules, config) {
-  const { paths } = config;
+function getModuleIncludes(modules) {
   const includes = [];
   modules.forEach(module => {
     try {
       const modulePath = pkgDir.sync(
-        require.resolve(path.resolve(paths.root, 'node_modules', module))
+        require.resolve(path.resolve(rootPath, 'node_modules', module))
       );
       includes.push(modulePath);
     } catch (err) {}

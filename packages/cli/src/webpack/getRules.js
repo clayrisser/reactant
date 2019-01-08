@@ -1,17 +1,19 @@
 import path from 'path';
 import pkgDir from 'pkg-dir';
 
+const rootPath = pkgDir.sync(process.cwd());
+
 export default function getRules({ paths }, { platform }) {
   const include = [
-    paths.src,
-    paths.platform,
+    path.resolve(rootPath, paths.src),
+    path.resolve(rootPath, paths.platform),
     pkgDir.sync(
       require.resolve(platform.name, {
-        paths: [path.resolve(paths.root, 'node_modules')]
+        paths: [path.resolve(rootPath, 'node_modules')]
       })
     ),
     pkgDir.sync(require.resolve('@reactant/core'), {
-      paths: [path.resolve(paths.root, 'node_modules')]
+      paths: [path.resolve(rootPath, 'node_modules')]
     })
   ];
   return [

@@ -1,10 +1,12 @@
 import StartServerPlugin from 'start-server-webpack-plugin';
 import _ from 'lodash';
 import path from 'path';
+import pkgDir from 'pkg-dir';
 import webpack from 'webpack';
 import webpackNodeExternals from 'webpack-node-externals';
 
 const { LimitChunkCountPlugin } = webpack.optimize;
+const rootPath = pkgDir.sync(process.cwd());
 
 export default function createServerConfig(
   config,
@@ -15,7 +17,7 @@ export default function createServerConfig(
     ...webpackConfig,
     entry: [path.resolve(__dirname, '../server.js')],
     output: {
-      path: paths.dist,
+      path: path.resolve(rootPath, paths.dist),
       publicPath: action === 'start' ? `http://${host}:${ports.dev}/` : '/',
       filename: 'server.js'
     },
@@ -24,10 +26,12 @@ export default function createServerConfig(
       alias: {
         ...(webpackConfig?.resolve?.alias || {}),
         '@reactant/web-isomorphic/index.html': path.resolve(
+          rootPath,
           paths.platform,
           'index.html'
         ),
         '@reactant/web-isomorphic/server': path.resolve(
+          rootPath,
           paths.platform,
           'server.js'
         )
