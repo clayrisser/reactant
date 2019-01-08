@@ -18,9 +18,7 @@ export default function createWebpackConfig(
     mode: env,
     context: pkgDir.sync(process.cwd()),
     devtool:
-      env === 'development'
-        ? 'cheap-module-source-map'
-        : 'nosources-source-map',
+      env === 'development' ? 'inline-source-map' : 'nosources-source-map',
     resolve: {
       ...(webpackConfig.resolve || {}),
       modules: [...(webpackConfig?.resolve?.modules || []), ...getModules()],
