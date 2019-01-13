@@ -9,10 +9,9 @@ import resolve from '@reactant/core/resolve';
 import { createWebpackConfig } from '@reactant/cli/webpack';
 import { rebuildConfig } from '@reactant/cli/config';
 
+const rootPath = pkgDir.sync(process.cwd());
 const mergeConfiguration = require(require.resolve('merge-configuration', {
-  paths: [
-    path.resolve(pkgDir.sync(process.cwd()), 'node_modules/@reactant/web')
-  ]
+  paths: [path.resolve(rootPath, 'node_modules/@reactant/web')]
 })).default;
 let debug = false;
 if (_.includes(process.argv, '--verbose')) setLevel('verbose');
@@ -38,9 +37,9 @@ module.exports = webpackConfig => {
   webpackConfig = replaceBabelRule(webpackConfig, {
     test: /\.(js|jsx|mjs)$/,
     include: [
-      paths.src,
-      paths.stories,
-      ...getModuleIncludes(['react-navigation', 'static-container'], config)
+      path.resolve(rootPath, paths.src),
+      path.resolve(rootPath, paths.stories),
+      ...getModuleIncludes(['react-navigation', 'static-container'])
     ],
     loader: resolve('babel-loader', __dirname),
     options: babel
@@ -52,9 +51,12 @@ module.exports = webpackConfig => {
     config
   );
   if (options.debug) {
-    fs.mkdirsSync(paths.debug);
+    fs.mkdirsSync(path.resolve(rootPath, paths.debug));
     fs.writeFileSync(
-      path.resolve(paths.debug, 'webpack.storybook.json'),
+      path.resolve(
+        path.resolve(rootPath, paths.debug),
+        'webpack.storybook.json'
+      ),
       CircularJSON.stringify(webpackConfig, null, 2)
     );
   }
@@ -62,13 +64,12 @@ module.exports = webpackConfig => {
   return webpackConfig;
 };
 
-function getModuleIncludes(modules, config) {
-  const { paths } = config;
+function getModuleIncludes(modules) {
   const includes = [];
   modules.forEach(module => {
     try {
       const modulePath = pkgDir.sync(
-        require.resolve(path.resolve(paths.root, 'node_modules', module))
+        require.resolve(path.resolve(rootPath, 'node_modules', module))
       );
       includes.push(modulePath);
     } catch (err) {}
