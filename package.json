@@ -8,6 +8,8 @@
     "bootstrap": "lerna bootstrap && npm run link",
     "bootstrap:hoist": "lerna bootstrap --hoist && npm run link",
     "clean": "lerna clean -y && git clean -fXd -e \\!node_modules -e \\!node_modules/**/*",
+    "docs:build": "sphinxdoc build",
+    "docs:start": "sphinxdoc start",
     "lerna": "lerna",
     "link": "lerna link",
     "lint": "lerna run lint",
@@ -17,5 +19,13 @@
   },
   "devDependencies": {
     "lerna": "^3.2.1"
+  },
+  "dependencies": {
+    "@sphinxdoc/cli": "^0.1.5",
+    "@sphinxdoc/gatsby": "^0.1.11"
+  },
+  "sphinxdoc": {
+    "platformName": "gatsby",
+    "open": true
   }
 }
