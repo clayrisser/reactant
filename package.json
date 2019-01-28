@@ -21,11 +21,12 @@
     "lerna": "^3.2.1"
   },
   "dependencies": {
-    "@sphinxdoc/cli": "^0.1.5",
-    "@sphinxdoc/gatsby": "^0.1.11"
+    "@sphinxdoc/cli": "^0.1.30",
+    "@sphinxdoc/gatsby": "^0.1.30"
   },
   "sphinxdoc": {
+    "open": true,
     "platformName": "gatsby",
-    "open": true
+    "src": "packages/core"
   }
 }
