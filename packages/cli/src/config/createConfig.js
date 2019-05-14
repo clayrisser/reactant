@@ -71,7 +71,7 @@ function createConfigLoader(
       configPath: 'config',
       dependsOnPath: 'dependsOn'
     });
-    if (moduleLoader === 'reactantPlugin') {
+    if (moduleLoaderName === 'reactantPlugin') {
       const { modules } = moduleLoader;
       delete moduleLoader.modules;
       moduleLoader.modules = _.reduce(
