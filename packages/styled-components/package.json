@@ -1,6 +1,6 @@
 {
   "name": "@reactant/styled-components",
-  "version": "0.0.71",
+  "version": "0.0.72",
   "description": "reactant web module",
   "reactantPlugin": "lib/reactantPlugin.js",
   "keywords": [
@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "~7.0.0",
-    "@reactant/core": "^0.0.71",
+    "@reactant/core": "^0.0.72",
     "lodash": "~4.17.11",
     "react": "~16.7.0",
     "styled-components": "~4.1.3"

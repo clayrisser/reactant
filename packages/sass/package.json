@@ -1,6 +1,6 @@
 {
   "name": "@reactant/sass",
-  "version": "0.0.71",
+  "version": "0.0.72",
   "description": "reactant sass module",
   "reactantPlugin": "lib/reactantPlugin.js",
   "keywords": [
@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "~7.0.0",
-    "@reactant/core": "^0.0.71",
+    "@reactant/core": "^0.0.72",
     "autoprefixer": "~9.4.3",
     "css-loader": "~1.0.1",
     "isomorphic-style-loader": "~4.0.0",
