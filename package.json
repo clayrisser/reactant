@@ -1,6 +1,7 @@
 {
   "name": "reactant",
-  "version": "0.0.11",
+  "description": "write once . . . render everywhere",
+  "version": "0.0.100",
   "files": [
     "packages"
   ],
@@ -8,25 +9,19 @@
     "bootstrap": "lerna bootstrap && npm run link",
     "bootstrap:hoist": "lerna bootstrap --hoist && npm run link",
     "clean": "lerna clean -y && git clean -fXd -e \\!node_modules -e \\!node_modules/**/*",
-    "docs:build": "sphinxdoc build",
-    "docs:start": "sphinxdoc start",
+    "clean:purge": "git clean -fXd",
+    "format": "lerna run format",
+    "keycloak": "cd example/keycloak && docker-compose up",
     "lerna": "lerna",
     "link": "lerna link",
     "lint": "lerna run lint",
     "lint:fix": "lerna run lint:fix",
     "ls": "lerna ls",
-    "publish": "lerna publish"
+    "publish": "lerna publish",
+    "test": "lerna run test"
   },
   "devDependencies": {
-    "lerna": "^3.2.1"
+    "lerna": "^3.14.1"
   },
-  "dependencies": {
-    "@sphinxdoc/cli": "^0.1.30",
-    "@sphinxdoc/gatsby": "^0.1.30"
-  },
-  "sphinxdoc": {
-    "open": true,
-    "platformName": "gatsby",
-    "src": "packages/core"
-  }
+  "license": "MIT"
 }

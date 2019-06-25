@@ -9,23 +9,15 @@ Please ★ this repo if you found it useful ★ ★ ★
 
 ## Features
 
-* Supports custom platforms
-  * web
-  * web-isomorphic
-* Supports custom plugins
-  * redux
-  * react-router
-  * styled-components
-  * sass
+* supports typescript
+* supports custom platforms
+* supports custom plugins
 
 
 ## Installation
 
 ```sh
-git clone https://github.com/codejamninja/reactant
-cp -r reactant/examples/web web
-cd web
-yarn
+npm install -g @reactant/core
 ```
 
 
@@ -36,17 +28,17 @@ yarn
 
 ## Usage
 
-| Command                           | Description                      |
-| --------------------------------- | -------------------------------- |
-| `reactant -p web build`           | build web platform               |
-| `reactant -p web start`           | start web platform               |
-| `reactant -p web start:storybook` | start storybook                  |
-
+[Contribute](https://github.com/codejamninja/reactant/blob/master/CONTRIBUTING.md) usage docs
 
 
 ## Support
 
 Submit an [issue](https://github.com/codejamninja/reactant/issues/new)
+
+
+## Screenshots
+
+[Contribute](https://github.com/codejamninja/reactant/blob/master/CONTRIBUTING.md) a screenshot
 
 
 ## Contributing
@@ -58,24 +50,12 @@ Review the [guidelines for contributing](https://github.com/codejamninja/reactan
 
 [MIT License](https://github.com/codejamninja/reactant/blob/master/LICENSE)
 
-[Jam Risser](https://codejam.ninja) © 2018
+[Jam Risser](https://codejam.ninja) © 2019
 
 
 ## Changelog
 
 Review the [changelog](https://github.com/codejamninja/reactant/blob/master/CHANGELOG.md)
-
-
-## Package Descrpencies
-| Package                                  | Version           |
-| -------                                  | -------           |
-| babel-core                               | `~7.0.0-bridge.0` |
-| babel-plugin-transform-numeric-separator | `~7.0.0-beta.3`   |
-| connected-react-router                   | `~4.5.0`          |
-| css-loader                               | `~1.0.1`          |
-| mime                                     | `~1.6.0`          |
-| redux                                    | `~4.0.1`          |
-| winston                                  | `~2.4.4`          |
 
 
 ## Credits
