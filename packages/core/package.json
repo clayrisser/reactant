@@ -1,13 +1,8 @@
 {
-  "name": "@reactant/core",
+  "name": "@reactant/cli",
   "version": "0.0.72",
-  "description": "reactant core components",
-  "homepage": "https://github.com/codejamninja/reactant/packages/core",
-  "bugs": {
-    "url": "https://github.com/codejamninja/reactant/issues",
-    "email": "jam@codejam.ninja"
-  },
-  "license": "MIT",
+  "description": "build tool for reactant",
+  "homepage": "https://reactant.codejam.ninja",
   "author": {
     "name": "Jam Risser",
     "email": "jam@codejam.ninja",
@@ -15,56 +10,82 @@
   },
   "main": "lib/index.js",
   "files": [
-    "ReactantApp.js",
-    "assets.js",
-    "config.js",
+    "action.js",
+    "bin",
+    "config",
     "lib",
-    "log.js",
-    "plugin.js",
-    "resolve.js"
+    "webpack"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/codejamninja/reactant/packages/core"
-  },
   "scripts": {
-    "build": "babel src -d lib",
-    "clean": "git clean -fXd -e \\!node_modules -e \\!node_modules/**/*",
-    "format": "prettier --write ./src/**/*.js",
+    "build": "npm run test && babel src --ignore bin.js -d lib",
+    "clean": "git clean -fXd -e \\!node_modules -e \\!node_modules/**/* && jest --clearCache",
+    "clean:purge": "jest --clearCache && git clean -fXd",
+    "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx} --ignore-path .gitignore",
     "lint": "npm run format && eslint ./",
     "lint:fix": "npm run format && eslint --fix ./",
     "prepublish": "npm run build",
+    "start": "babel-node src/reactant",
     "test": "npm run lint && jest --forceExit"
   },
-  "dependencies": {
-    "@babel/polyfill": "~7.0.0",
-    "bluebird": "~3.5.3",
-    "circular-json": "~0.5.9",
-    "export-es6": "~0.1.0",
-    "js-info": "~0.3.0",
-    "lodash": "~4.17.11",
-    "loglevel": "~1.6.1",
-    "winston": "~2.4.4"
+  "bin": {
+    "reactant": "bin/reactant.js"
   },
-  "devDependencies": {
-    "@babel/cli": "~7.2.0",
+  "dependencies": {
+    "@babel/cli": "^7.4.4",
     "@babel/core": "~7.2.2",
+    "@babel/polyfill": "~7.0.0",
     "@babel/preset-env": "~7.2.0",
     "@babel/preset-react": "~7.0.0",
+    "@ecosystem/config": "~0.4.0",
+    "@ecosystem/module-loader": "~0.4.0",
+    "@reactant/core": "^0.0.72",
     "babel-core": "~7.0.0-bridge.0",
     "babel-eslint": "~10.0.1",
     "babel-loader": "~8.0.4",
     "babel-preset-everything": "~0.2.2",
-    "eslint": "~5.10.0",
-    "eslint-config-jam": "~0.1.6",
-    "eslint-plugin-jsx-a11y": "~6.1.2",
-    "eslint-plugin-react": "~7.11.1",
-    "prettier": "~1.15.3"
+    "bluebird": "~3.5.3",
+    "circular-json": "~0.5.9",
+    "commander": "~2.19.0",
+    "cosmiconfig": "^5.2.1",
+    "css-loader": "~1.0.1",
+    "deasync": "^0.1.15",
+    "detect-port": "~1.3.0",
+    "err": "~2.1.10",
+    "export-es6": "~0.1.0",
+    "file-loader": "~2.0.0",
+    "flow-bin": "~0.89.0",
+    "fs-extra": "~7.0.1",
+    "html-loader": "~0.5.5",
+    "js-info": "~0.3.0",
+    "linked-deps": "~0.1.0",
+    "lodash": "~4.17.11",
+    "markdown-loader": "~4.0.0",
+    "merge-configuration": "~0.4.1",
+    "node-ipc": "~9.1.1",
+    "ora": "~3.0.0",
+    "pkg-dir": "~3.0.0",
+    "rc-config": "~0.1.0",
+    "trailduck": "~0.2.2",
+    "url-loader": "~1.1.2",
+    "webpack": "4.28.2"
   },
+  "devDependencies": {
+    "@babel/node": "^7.4.5",
+    "eslint": "^6.0.1",
+    "eslint-config-jam": "^0.2.12",
+    "eslint-plugin-jest": "^22.7.1",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.14.2",
+    "jest": "^24.8.0",
+    "prettier": "^1.18.2"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/codejamninja/reactant/packages/core",
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">= 6.0.0"
   },
   "eslintIgnore": [
+    "bin",
     "lib"
   ],
   "jest": {

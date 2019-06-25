@@ -3,48 +3,50 @@ import TrailDuck from 'trailduck';
 import _ from 'lodash';
 import log, { setLevel } from '@reactant/core/log';
 import ora from 'ora';
+import { createConfig } from '@reactant/core/config';
 import { mapSeries } from 'bluebird';
-import { createConfig } from './config';
 import { createWebpackConfig } from './webpack';
 
 export default async function action(cmd, options, spinner) {
   if (options.verbose) setLevel('verbose');
   if (options.debug) setLevel('debug');
-  const payload = createConfig({
-    action: cmd,
-    options
-  });
-  const { config } = payload;
+  const config = createConfig({ action: cmd, options });
   log.debug('config ===>', config);
   spinner.succeed('loaded config');
-  await runActions(payload).catch(err => {
+  try {
+    await runActions(config);
+  } catch (err) {
     throw err;
-  });
+  }
 }
 
-async function runActions(payload) {
-  const { config, platform } = payload;
-  delete payload.config;
-  const { platformName } = config;
-  const webpackConfig = createWebpackConfig(config, { platform });
-  await mapSeries(getActionNames(config.action, platform), async actionName => {
-    let action = platform.properties.actions[actionName];
-    action = { ...action, name: actionName };
-    const spinner = ora(`started ${action.name} ${platformName}`).start();
-    spinner._succeed = spinner.succeed;
-    spinner.succeed = (...args) => {
-      spinner._succeed(
-        ...(args.length ? args : [`finished ${action.name} ${platformName}`])
-      );
-    };
-    return action.run(config, {
-      ...payload,
-      action,
-      log,
-      spinner,
-      webpackConfig
-    });
-  });
+async function runActions(config, payload = {}) {
+  const webpackConfig = createWebpackConfig(config);
+  await mapSeries(
+    getActionNames(config.action, config.platform),
+    async actionName => {
+      let action = config.platform.actions[actionName];
+      action = { ...action, name: actionName };
+      const spinner = ora(
+        `started ${action.name} ${config.platform.name}`
+      ).start();
+      spinner._succeed = spinner.succeed;
+      spinner.succeed = (...args) => {
+        spinner._succeed(
+          ...(args.length
+            ? args
+            : [`finished ${action.name} ${config.platform.name}`])
+        );
+      };
+      return action.run(config, {
+        ...payload,
+        action,
+        log,
+        spinner,
+        webpackConfig
+      });
+    }
+  );
   return null;
 }
 

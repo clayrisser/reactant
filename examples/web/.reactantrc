@@ -2,10 +2,6 @@ title: Reactant
 platforms:
   web: '@reactant/web'
 plugins:
-  - '@reactant/react-router'
-  - '@reactant/redux'
-  - '@reactant/sass'
-  - '@reactant/styled-components'
-redux:
-  initialState:
-    todos: []
+  - resolve: '@reactant/redux'
+    options:
+      initialState: {}

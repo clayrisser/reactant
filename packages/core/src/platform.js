@@ -2,16 +2,14 @@ import _ from 'lodash';
 import path from 'path';
 
 function loadReactantPlatform(config, platformName) {
-  if (_.isArray(platformName) && platformName.length) {
-    [platformName] = platformName;
-  }
   const { paths } = config;
   const rootPath = path.resolve(paths.root, 'node_modules', platformName);
   const packagePkg = require(path.resolve(rootPath, 'package.json'));
   let platform = require(path.resolve(rootPath, packagePkg.reactantPlatform));
   if (platform.__esModule) platform = platform.default;
-  platform = {
+  return {
     ...platform,
+    name: platformName,
     actions: _.reduce(
       platform.actions,
       (actions, action, key) => {
@@ -29,7 +27,6 @@ function loadReactantPlatform(config, platformName) {
     ),
     rootPath
   };
-  return platform;
 }
 
 function getReactantPlatforms(config) {

@@ -19,7 +19,8 @@
   "scripts": {
     "build": "npm run test && babel src --ignore bin.js -d lib",
     "clean": "git clean -fXd -e \\!node_modules -e \\!node_modules/**/*",
-    "format": "prettier --write ./src/**/*.js",
+    "clean:purge": "git clean -fXd",
+    "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx} --ignore-path .gitignore",
     "lint": "npm run format && eslint ./",
     "lint:fix": "npm run format && eslint --fix ./",
     "prepublish": "npm run build",

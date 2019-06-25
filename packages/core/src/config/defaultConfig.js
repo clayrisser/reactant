@@ -3,21 +3,23 @@ import resolve from '@reactant/core/resolve';
 const { env } = process;
 
 export default {
-  title: 'Reactant',
-  moduleName: 'reactant',
+  envs: {},
   host: env.REACTANT_HOST || '0.0.0.0',
+  level: 'info',
+  platforms: {},
+  plugins: [],
   port: env.REACTANT_PORT || 6001,
+  webpack: {},
+  eslint: {
+    extends: ['jam']
+  },
   ports: {
     dev: null
   },
-  plugins: [],
-  envs: {},
-  level: 'info',
   ignore: {
     errors: [],
     warnings: []
   },
-  offline: false,
   paths: {
     debug: '{reactant}/debug',
     dist: 'dist/{_platform}',
@@ -26,7 +28,6 @@ export default {
     root: '',
     src: 'src'
   },
-  publish: {},
   babel: {
     babelrc: false,
     presets: [
@@ -41,10 +42,5 @@ export default {
       resolve('@babel/preset-react', __dirname),
       resolve('babel-preset-everything', __dirname)
     ]
-  },
-  eslint: {
-    extends: ['jam']
-  },
-  platforms: {},
-  webpack: {}
+  }
 };

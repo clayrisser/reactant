@@ -1,11 +1,14 @@
 import _ from 'lodash';
 import commander from 'commander';
 import ora from 'ora';
+import { createConfig } from '@reactant/core/config';
+import {
+  loadReactantPlatform,
+  getReactantPlatforms
+} from '@reactant/core/platform';
 import action from './action';
 import { handleError, ERR_NO_ACTION, ERR_NO_PLATFORM } from './errors';
-import { createConfig } from './config';
 import { version } from '../package';
-import { loadReactantPlatform, getReactantPlatforms } from './platform';
 
 const spinner = ora('loading config').start();
 
@@ -15,7 +18,8 @@ function getCliInfo() {
   let actions = [];
   let options = [];
   try {
-    const { config } = createConfig({});
+    const config = createConfig();
+    process.exit();
     _.each(getReactantPlatforms(config), platformName => {
       const platform = loadReactantPlatform(config, platformName);
       _.each(_.keys(platform.actions), action => {
