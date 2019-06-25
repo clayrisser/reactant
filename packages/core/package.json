@@ -1,0 +1,79 @@
+{
+  "name": "@reactant/core",
+  "version": "0.0.100",
+  "description": "reactant core",
+  "keywords": [
+    "@reactant/core",
+    "reactant",
+    "core",
+    "react"
+  ],
+  "homepage": "https://github.com/codejamninja/reactant/packages/core",
+  "bugs": {
+    "url": "https://github.com/codejamninja/reactant/packages/core/issues",
+    "email": "jam@codejam.ninja"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Jam Risser",
+    "email": "jam@codejam.ninja",
+    "url": "https://codejam.ninja"
+  },
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codejamninja/reactant/packages/core"
+  },
+  "scripts": {
+    "build": "npm run test && babel src -d lib --extensions \".ts,.tsx\" --source-maps inline && tsc -d --emitDeclarationOnly",
+    "clean": "git clean -fXd -e \\!node_modules -e \\!node_modules/**/* && jest --clearCache",
+    "clean:purge": "jest --clearCache && git clean -fXd",
+    "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
+    "lint": "npm run format && tsc --allowJs --noEmit && eslint --ext .ts,.tsx ./",
+    "lint:fix": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx --fix ./",
+    "prepublish": "npm run build",
+    "start": "babel-node src --extensions \".ts,.tsx\"",
+    "test": "npm run lint && jest"
+  },
+  "dependencies": {
+    "commander": "^2.20.0",
+    "core-js": "^3.1.4",
+    "cosmiconfig": "^5.2.1",
+    "js-info": "^0.3.0",
+    "lodash": "^4.17.11",
+    "merge-configuration": "^0.4.1",
+    "pkg-dir": "^4.2.0",
+    "ts-optchain.macro": "^1.1.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/cosmiconfig": "^5.0.3",
+    "@types/jest": "^24.0.15",
+    "@types/lodash": "^4.14.134",
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
+    "babel-preset-jam": "^0.4.1",
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb-typescript": "^4.0.0",
+    "eslint-config-jam": "^0.2.12",
+    "jest": "^24.8.0",
+    "tsc": "^1.20150623.0",
+    "typescript": "^3.5.2"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "eslintIgnore": [
+    "lib"
+  ],
+  "jest": {
+    "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
+    "verbose": true
+  }
+}
