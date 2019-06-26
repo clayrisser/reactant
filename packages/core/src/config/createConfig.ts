@@ -5,6 +5,7 @@ import path from 'path';
 import pkgDir from 'pkg-dir';
 import { environment } from 'js-info';
 import { oc } from 'ts-optchain.macro';
+import ConfigPorts from './ports';
 import defaultConfig from './defaultConfig';
 import { Config, Option, Options } from '../types';
 
@@ -15,7 +16,7 @@ export default function createConfig(
   const rootPath = pkgDir.sync(process.cwd()) || process.cwd();
   const pkg = require(path.resolve(rootPath, 'package.json'));
   options = sanitizeOptions(options);
-  const userConfig: Config = oc(
+  const userConfig: Partial<Config> = oc(
     cosmiconfig('reactant').searchSync(rootPath)
   ).config({});
   let config = mergeConfiguration<Config>(defaultConfig, userConfig);
@@ -23,13 +24,13 @@ export default function createConfig(
     config.platform = { config: () => ({}) }; // loadReactantPlatform(config.platform);
     config = mergeConfiguration(config, config.platform.config(config));
   }
-  const eslint: Config = oc(cosmiconfig('eslint').searchSync(rootPath)).config(
+  const eslint: object = oc(cosmiconfig('eslint').searchSync(rootPath)).config(
     {}
   );
-  const babel: Config = oc(cosmiconfig('babel').searchSync(rootPath)).config(
+  const babel: object = oc(cosmiconfig('babel').searchSync(rootPath)).config(
     {}
   );
-
+  const configPorts = new ConfigPorts(config);
   config = {
     ...config,
     action,
@@ -38,8 +39,8 @@ export default function createConfig(
     eslint,
     options,
     // paths: configPaths.paths,
-    // port: configPorts.basePort,
-    // ports: configPorts.ports,
+    port: configPorts.basePort,
+    ports: configPorts.ports,
     title: config.title || _.startCase(pkg.name),
     moduleName:
       config.moduleName || _.camelCase(config.title).replace(/_/g, '-'),
