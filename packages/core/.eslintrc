@@ -2,6 +2,11 @@
   "extends": ["jam/typescript/base"],
   "rules": {
     "global-require": "off",
-    "import/no-dynamic-require": "off"
+    "import/no-dynamic-require": "off",
+    "lines-between-class-members": [
+      "error",
+      "always",
+      { "exceptAfterSingleLine": true }
+    ]
   }
 }

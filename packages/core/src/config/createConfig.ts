@@ -11,7 +11,8 @@ import { Config, Option, Options } from '../types';
 
 export default function createConfig(
   action?: string,
-  options: Options = {}
+  options: Options = {},
+  customConfig: Partial<Config> = {}
 ): Config {
   const rootPath = pkgDir.sync(process.cwd()) || process.cwd();
   const pkg = require(path.resolve(rootPath, 'package.json'));
@@ -24,11 +25,14 @@ export default function createConfig(
     config.platform = { config: () => ({}) }; // loadReactantPlatform(config.platform);
     config = mergeConfiguration(config, config.platform.config(config));
   }
-  const eslint: object = oc(cosmiconfig('eslint').searchSync(rootPath)).config(
-    {}
+  config = mergeConfiguration(config, customConfig);
+  const eslint: object = mergeConfiguration(
+    oc(cosmiconfig('eslint').searchSync(rootPath)).config({}),
+    config.eslint
   );
-  const babel: object = oc(cosmiconfig('babel').searchSync(rootPath)).config(
-    {}
+  const babel: object = mergeConfiguration(
+    oc(cosmiconfig('babel').searchSync(rootPath)).config({}),
+    config.babel
   );
   const configPorts = new ConfigPorts(config);
   config = {

@@ -7,7 +7,7 @@ export interface Envs {
 }
 
 export interface Ports {
-  [key: string]: number;
+  [key: string]: number | boolean | null;
 }
 
 export interface Config {

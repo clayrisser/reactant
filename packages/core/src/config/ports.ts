@@ -20,9 +20,9 @@ export default class ConfigPorts {
   get ports(): Ports {
     if (this._ports) return this._ports;
     this._ports = Object.entries(this.config.ports || {}).reduce(
-      (ports: Ports, [key, port]: [string, number]) => {
+      (ports: Ports, [key, port]: [string, number | boolean | null]) => {
         ports[key] = this.resolve(
-          port || this.basePort + this.occupiedPorts.length
+          typeof port === 'number' ? port : this.basePort + 1
         );
         return ports;
       },
