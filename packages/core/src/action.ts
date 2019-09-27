@@ -18,3 +18,11 @@ export async function getActionNames(config: Config): Promise<Set<string>> {
   });
   return new Set(actionNames);
 }
+
+export async function getActions(
+  platformName: string,
+  config: Config
+): Promise<Actions> {
+  const platforms: Platforms = await getReactantPlatforms(config);
+  return platforms[platformName].actions;
+}
