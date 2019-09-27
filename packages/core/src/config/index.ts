@@ -7,4 +7,6 @@ export async function getConfig(): Promise<Config> {
 }
 
 export { defaultConfig };
+export * from './paths';
+export * from './ports';
 export * from './types';

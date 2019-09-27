@@ -4,14 +4,6 @@ import { Actions, Platforms } from './types';
 
 let _platforms: Platforms;
 
-export async function getPlatformActions(
-  platformName: string,
-  config: Config
-): Promise<Actions> {
-  const platforms: Platforms = await getReactantPlatforms(config);
-  return platforms[platformName].actions;
-}
-
 export async function getReactantPlatforms(config: Config): Promise<Platforms> {
   if (_platforms && Object.keys(_platforms).length) return _platforms;
   const { paths } = config;
@@ -48,4 +40,12 @@ export async function getReactantPlatforms(config: Config): Promise<Platforms> {
       return platforms;
     }, {});
   return _platforms;
+}
+
+export async function getPlatformActions(
+  platformName: string,
+  config: Config
+): Promise<Actions> {
+  const platforms: Platforms = await getReactantPlatforms(config);
+  return platforms[platformName].actions;
 }

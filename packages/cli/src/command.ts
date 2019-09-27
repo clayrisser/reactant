@@ -1,17 +1,22 @@
 import pkg from 'npm-pkg-json';
 import { Command as EcosystemCommand } from '@ecosystem/core';
-// import { flags } from '@oclif/command';
+import { Config } from '@reactant/core';
+import { flags } from '@oclif/command';
 
 export default class Command extends EcosystemCommand {
   static description: string = pkg.description;
 
-  static flags = {};
+  static flags = {
+    debug: flags.boolean({ char: 'd' })
+  };
 
   async run() {
-    // const { flags } = this.parse(Command.EcosystemCommand);
-    // const config = await Command.EcosystemCommand.ecosystem.getConfig<Config>();
+    const { flags } = this.parse(Command.EcosystemCommand);
+    const config = await Command.EcosystemCommand.ecosystem.getConfig<Config>();
     return {
-      runtimeConfig: {}
+      runtimeConfig: {
+        debug: flags.debug || config.debug
+      }
     };
   }
 }
