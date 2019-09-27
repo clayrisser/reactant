@@ -1,3 +1,3 @@
-import { Config } from '../types';
+import { Config } from './types';
 
-export default {} as Config;
+export default {} as Partial<Config>;

@@ -23,5 +23,9 @@
   "devDependencies": {
     "lerna": "^3.14.1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@types/core-js": "^2.5.2",
+    "core-js": "^3.2.1"
+  }
 }

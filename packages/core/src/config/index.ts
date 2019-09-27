@@ -1,3 +1,10 @@
-import createConfig from './createConfig';
+import { getConfig as getEcosystemConfig } from '@ecosystem/config';
+import defaultConfig from './defaultConfig';
+import { Config } from './types';
 
-export { createConfig };
+export async function getConfig(): Promise<Config> {
+  return getEcosystemConfig<Config>();
+}
+
+export { defaultConfig };
+export * from './types';

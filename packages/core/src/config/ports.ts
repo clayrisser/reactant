@@ -1,28 +1,41 @@
-import deasync from 'deasync';
 import detectPort from 'detect-port';
-import { Config, Ports } from '../types';
+import { reduce } from 'bluebird';
 
-const detectPortSync = deasync(detectPort);
+export default interface Ports {
+  [key: string]: number | boolean | null;
+}
 
-export default class ConfigPorts {
-  occupiedPorts: number[] = [];
+export class CalculatePorts {
+  occupiedPorts: Set<number> = new Set();
+
+  private basePort: number;
+
   private _basePort: number;
+
   private _ports: Ports;
 
-  constructor(private config: Config) {}
+  constructor(private ports: Ports = {}, basePort?: number) {
+    if (typeof basePort !== 'number' && !basePort) {
+      const keys = Object.keys(ports);
+      const basePort = keys.length ? ports[keys[0]] : null;
+      this.basePort = typeof basePort === 'number' ? basePort : 6001;
+    }
+  }
 
-  get basePort(): number {
+  async getBasePort(): Promise<number> {
     if (this._basePort) return this._basePort;
-    this._basePort = this.resolve(this.config.port);
+    this._basePort = await this.resolvePort(this.basePort);
     return this._basePort;
   }
 
-  get ports(): Ports {
+  async getPorts(): Promise<Ports> {
     if (this._ports) return this._ports;
-    this._ports = Object.entries(this.config.ports || {}).reduce(
-      (ports: Ports, [key, port]: [string, number | boolean | null]) => {
-        ports[key] = this.resolve(
-          typeof port === 'number' ? port : this.basePort + 1
+    this._ports = await reduce(
+      Object.entries(this.ports),
+      async (ports: Ports, [key, port]: [string, number | boolean | null]) => {
+        if (port === false) return ports;
+        ports[key] = await this.resolvePort(
+          typeof port === 'number' ? port : (await this.getBasePort()) + 1
         );
         return ports;
       },
@@ -31,10 +44,10 @@ export default class ConfigPorts {
     return this._ports;
   }
 
-  resolve(port = 6001): number {
-    port = detectPortSync(port);
-    if (this.occupiedPorts.includes(port)) return this.resolve(++port);
-    this.occupiedPorts.push(port);
+  async resolvePort(port: number): Promise<number> {
+    port = await detectPort(port);
+    if (this.occupiedPorts.has(port)) return this.resolvePort(++port);
+    this.occupiedPorts.add(port);
     return port;
   }
 }

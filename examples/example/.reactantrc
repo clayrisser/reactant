@@ -1,0 +1,18 @@
+name: some cool name
+
+port: 3000
+
+platforms:
+  - resolve: electron
+    options:
+      webpack: {}
+  - expo
+  - isomorphic-web
+  - react-gtk
+  - react-native
+  - web
+
+plugins:
+  - resolve: something
+    options: {}
+  - another-plugin
