@@ -1,17 +1,15 @@
 import path from 'path';
-import { Actions } from './action';
 import { Config } from './config';
+import { Actions, Platforms } from './types';
 
 let _platforms: Platforms;
 
-export interface Platform {
-  moduleName: string;
-  name: string;
-  actions: Actions;
-}
-
-export interface Platforms {
-  [key: string]: Platform;
+export async function getPlatformActions(
+  platformName: string,
+  config: Config
+): Promise<Actions> {
+  const platforms: Platforms = await getReactantPlatforms(config);
+  return platforms[platformName].actions;
 }
 
 export async function getReactantPlatforms(config: Config): Promise<Platforms> {

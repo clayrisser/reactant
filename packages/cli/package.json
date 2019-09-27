@@ -42,6 +42,7 @@
   "dependencies": {
     "@ecosystem/core": "^0.5.19",
     "@oclif/errors": "^1.2.2",
+    "@reactant/core": "^0.0.72",
     "npm-pkg-json": "^0.1.0",
     "ts-optchain.macro": "^1.1.5"
   },
