@@ -44,15 +44,20 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@ecosystem/core": "^0.5.19",
+    "@babel/polyfill": "^7.6.0",
+    "@ecosystem/config": "^0.5.23",
+    "@ecosystem/core": "^0.5.23",
     "@oclif/command": "^1.5.19",
     "@oclif/errors": "^1.2.2",
+    "@oclif/parser": "^3.8.4",
     "@reactant/core": "^0.0.103",
+    "err": "^2.1.11",
     "npm-pkg-json": "^0.1.0",
     "ts-optchain.macro": "^1.1.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
     "@babel/node": "^7.6.2",
     "@babel/preset-typescript": "^7.6.0",
     "@types/jest": "^24.0.18",

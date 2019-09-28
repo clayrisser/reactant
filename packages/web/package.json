@@ -1,14 +1,14 @@
 {
-  "name": "@reactant/core",
+  "name": "@reactant/web",
   "version": "0.0.103",
-  "description": "reactant core",
+  "description": "reactant platform for web",
   "keywords": [
-    "@reactant/core",
+    "@reactant/web",
     "reactant",
-    "core",
+    "web",
     "react"
   ],
-  "homepage": "https://github.com/codejamninja/reactant/packages/core",
+  "homepage": "https://github.com/codejamninja/reactant/packages/web",
   "bugs": {
     "url": "https://github.com/codejamninja/reactant/issues",
     "email": "jam@codejam.ninja"
@@ -40,31 +40,14 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@ecosystem/config": "^0.5.23",
-    "@ecosystem/core": "^0.5.23",
-    "@types/detect-port": "^1.1.0",
-    "bluebird": "^3.5.5",
-    "commander": "^3.0.2",
-    "core-js": "^3.2.1",
-    "cosmiconfig": "^5.2.1",
-    "deasync": "^0.1.15",
-    "detect-port": "^1.3.0",
-    "js-info": "^0.3.0",
-    "lodash": "^4.17.15",
-    "merge-configuration": "^0.4.1",
-    "pkg-dir": "^4.2.0",
-    "ts-optchain.macro": "^1.1.5"
+    "@reactant/core": "^0.0.103"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
     "@babel/core": "^7.6.2",
     "@babel/node": "^7.6.2",
     "@babel/preset-typescript": "^7.6.0",
-    "@types/bluebird": "^3.5.27",
-    "@types/cosmiconfig": "^5.0.3",
-    "@types/deasync": "^0.1.0",
     "@types/jest": "^24.0.18",
-    "@types/lodash": "^4.14.141",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",
     "babel-preset-jam": "^0.4.3",
@@ -84,5 +67,6 @@
   "jest": {
     "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
     "verbose": true
-  }
+  },
+  "reactantPlatform": "lib/platform.js"
 }

@@ -1,8 +1,10 @@
 import detectPort from 'detect-port';
 import { reduce } from 'bluebird';
 
+export type Port = number | boolean | null;
+
 export default interface Ports {
-  [key: string]: number | boolean | null;
+  [key: string]: Port;
 }
 
 export class CalculatePorts {
@@ -15,7 +17,9 @@ export class CalculatePorts {
   private _ports: Ports;
 
   constructor(private ports: Ports = {}, basePort?: number) {
-    if (typeof basePort !== 'number' && !basePort) {
+    if (typeof basePort === 'number') {
+      this.basePort = basePort;
+    } else {
       const keys = Object.keys(ports);
       const basePort = keys.length ? ports[keys[0]] : null;
       this.basePort = typeof basePort === 'number' ? basePort : 6001;
