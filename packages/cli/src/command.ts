@@ -7,7 +7,8 @@ export default class Command extends EcosystemCommand {
   static description: string = pkg.description;
 
   static flags = {
-    debug: flags.boolean({ char: 'd' })
+    debug: flags.boolean({ char: 'd' }),
+    platform: flags.string({ char: 'p', required: true })
   };
 
   async run() {
@@ -15,7 +16,8 @@ export default class Command extends EcosystemCommand {
     const config = await Command.EcosystemCommand.ecosystem.getConfig<Config>();
     return {
       runtimeConfig: {
-        debug: flags.debug || config.debug
+        debug: flags.debug || config.debug,
+        platform: flags.platform
       }
     };
   }

@@ -1,8 +1,14 @@
 import path from 'path';
 import { Config } from './config';
-import { Actions, Platforms } from './types';
+import { Platforms, Platform } from './types';
 
 let _platforms: Platforms;
+
+export function requireDefault<T = any>(moduleName: string): T {
+  const required = require(moduleName);
+  if (required.__esModule && required.default) return required.default;
+  return required;
+}
 
 export async function getReactantPlatforms(config: Config): Promise<Platforms> {
   if (_platforms && Object.keys(_platforms).length) return _platforms;
@@ -21,18 +27,20 @@ export async function getReactantPlatforms(config: Config): Promise<Platforms> {
     })
     .reduce((platforms: Platforms, platformName: string) => {
       const platform = {
-        moduleName: platformName,
-        ...require(path.resolve(
-          paths.root,
-          'node_modules',
-          platformName,
-          require(path.resolve(
+        ...requireDefault(
+          path.resolve(
             paths.root,
             'node_modules',
             platformName,
-            'package.json'
-          )).reactantPlatform
-        ))
+            require(path.resolve(
+              paths.root,
+              'node_modules',
+              platformName,
+              'package.json'
+            )).reactantPlatform
+          )
+        ),
+        moduleName: platformName
       };
       if (!platform.name) platform.name = platformName;
       else platforms[platformName] = platform;
@@ -42,10 +50,10 @@ export async function getReactantPlatforms(config: Config): Promise<Platforms> {
   return _platforms;
 }
 
-export async function getPlatformActions(
+export async function getReactantPlatform(
   platformName: string,
   config: Config
-): Promise<Actions> {
+): Promise<Platform> {
   const platforms: Platforms = await getReactantPlatforms(config);
-  return platforms[platformName].actions;
+  return platforms[platformName];
 }

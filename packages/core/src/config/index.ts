@@ -16,6 +16,10 @@ export async function postProcess<T = Config>(_config: T): Promise<T> {
     config.ports = ports;
     config._state.setPorts = true;
   }
+  if (!config._state.setPaths) {
+    config.paths.root = config.rootPath;
+    config._state.setPaths = true;
+  }
   return (config as unknown) as T;
 }
 
