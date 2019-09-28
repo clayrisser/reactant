@@ -20,9 +20,13 @@
     "url": "https://codejam.ninja"
   },
   "files": [
+    "bin.js",
     "lib"
   ],
   "main": "lib/index.js",
+  "bin": {
+    "reactant": "bin.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/codejamninja/reactant"
