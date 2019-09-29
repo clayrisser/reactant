@@ -1,10 +1,10 @@
 {
   "name": "example",
-  "version": "0.0.107",
+  "version": "0.0.108",
   "private": true,
   "dependencies": {
-    "@reactant/core": "^0.0.107",
-    "@reactant/web": "^0.0.107",
+    "@reactant/core": "^0.0.108",
+    "@reactant/web": "^0.0.108",
     "@types/jest": "24.0.18",
     "@types/node": "12.7.8",
     "@types/react": "16.9.3",
@@ -35,6 +35,6 @@
     ]
   },
   "devDependencies": {
-    "@reactant/cli": "^0.0.107"
+    "@reactant/cli": "^0.0.108"
   }
 }
