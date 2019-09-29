@@ -1,8 +1,8 @@
 import path from 'path';
 import { Config } from '@reactant/config';
-import { Platforms, Platform } from './types';
+import { CalculatedPlatforms, Platform, Platforms } from './types';
 
-let _platforms: Platforms;
+let _platforms: CalculatedPlatforms;
 
 export function requireDefault<T = any>(moduleName: string): T {
   const required = require(moduleName);
@@ -10,7 +10,9 @@ export function requireDefault<T = any>(moduleName: string): T {
   return required;
 }
 
-export async function getReactantPlatforms(config: Config): Promise<Platforms> {
+export async function getReactantPlatforms(
+  config: Config
+): Promise<CalculatedPlatforms> {
   if (_platforms && Object.keys(_platforms).length) return _platforms;
   const { paths } = config;
   const dependencyNames: string[] = Object.keys(
@@ -45,7 +47,7 @@ export async function getReactantPlatforms(config: Config): Promise<Platforms> {
       if (!platform.name) platform.name = platformName;
       else platforms[platformName] = platform;
       platforms[platform.name] = platform;
-      return platforms;
+      return platforms as CalculatedPlatforms;
     }, {});
   return _platforms;
 }

@@ -1,8 +1,8 @@
 import path from 'path';
 import { Config } from '@reactant/config';
-import { Plugins, Plugin } from './types';
+import { CalculatedPlugins, Plugins, Plugin } from './types';
 
-let _plugins: Plugins;
+let _plugins: CalculatedPlugins;
 
 export function requireDefault<T = any>(moduleName: string): T {
   const required = require(moduleName);
@@ -10,7 +10,9 @@ export function requireDefault<T = any>(moduleName: string): T {
   return required;
 }
 
-export async function getReactantPlugins(config: Config): Promise<Plugins> {
+export async function getReactantPlugins(
+  config: Config
+): Promise<CalculatedPlugins> {
   if (_plugins && Object.keys(_plugins).length) return _plugins;
   const { paths } = config;
   const dependencyNames: string[] = Object.keys(
@@ -45,7 +47,7 @@ export async function getReactantPlugins(config: Config): Promise<Plugins> {
       if (!platform.name) platform.name = platformName;
       else platforms[platformName] = platform;
       platforms[platform.name] = platform;
-      return platforms;
+      return platforms as CalculatedPlugins;
     }, {});
   return _plugins;
 }
