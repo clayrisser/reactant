@@ -41,7 +41,8 @@
   },
   "dependencies": {
     "@ecosystem/config": "^0.5.23",
-    "@ecosystem/core": "^0.5.23"
+    "@ecosystem/core": "^0.5.23",
+    "@reactant/config": "^0.0.106"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
@@ -68,5 +69,6 @@
   "jest": {
     "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
     "verbose": true
-  }
+  },
+  "gitHead": "848ac0937aca8536790b0e24317d30a10fcec33b"
 }

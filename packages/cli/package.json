@@ -53,6 +53,7 @@
     "@reactant/config": "^0.0.106",
     "@reactant/core": "^0.0.106",
     "@reactant/platform": "^0.0.106",
+    "@reactant/plugin": "^0.0.106",
     "err": "^2.1.11",
     "npm-pkg-json": "^0.1.0",
     "ts-optchain.macro": "^1.1.5"
@@ -82,5 +83,6 @@
   "jest": {
     "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
     "verbose": true
-  }
+  },
+  "gitHead": "848ac0937aca8536790b0e24317d30a10fcec33b"
 }

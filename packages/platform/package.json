@@ -67,5 +67,6 @@
   "jest": {
     "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
     "verbose": true
-  }
+  },
+  "gitHead": "848ac0937aca8536790b0e24317d30a10fcec33b"
 }
