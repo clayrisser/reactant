@@ -3,7 +3,7 @@ import { reduce } from 'bluebird';
 
 export type Port = number | boolean | null;
 
-export default interface Ports {
+export interface Ports {
   [key: string]: Port;
 }
 

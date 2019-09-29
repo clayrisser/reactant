@@ -1,15 +1,14 @@
 import Ecosystem from '@ecosystem/core';
+import { Actions, getReactantPlatform } from '@reactant/platform';
 import { createConfig } from '@ecosystem/config';
 import { handle as handleError } from '@oclif/errors/lib/handle';
 import { parse, flags } from '@oclif/parser';
 import {
-  Actions,
-  Config,
   defaultConfig,
-  getReactantPlatform,
+  Config,
   postProcess,
   preProcess
-} from '@reactant/core';
+} from '@reactant/config';
 import Command from './command';
 
 (async () => {

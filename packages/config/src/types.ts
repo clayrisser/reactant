@@ -1,6 +1,8 @@
 import { BaseConfig } from '@ecosystem/config';
 import { Paths } from './paths';
-import Ports from './ports';
+import { Ports } from './ports';
+
+export const CONFIG_STATE = Symbol('CONFIG_STATE');
 
 export interface ConfigState {
   setPaths: boolean;
@@ -9,9 +11,9 @@ export interface ConfigState {
 }
 
 export interface Config extends BaseConfig {
-  _state: ConfigState;
+  [CONFIG_STATE]: ConfigState;
+  [key: string]: any;
   basePort: number;
   paths: Paths;
   ports: Ports;
-  [key: string]: any;
 }
