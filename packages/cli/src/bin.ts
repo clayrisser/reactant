@@ -23,7 +23,7 @@ import Command from './command';
     const config = await createConfig<Config>(
       'reactant',
       defaultConfig,
-      {},
+      { platform: platformName },
       preProcess,
       postProcess
     );
@@ -31,7 +31,9 @@ import Command from './command';
       'reactant',
       defaultConfig,
       (await getReactantPlatform(platformName, config)).actions,
-      Command
+      Command,
+      preProcess,
+      postProcess
     );
     await ecosystem.run();
   } catch (err) {

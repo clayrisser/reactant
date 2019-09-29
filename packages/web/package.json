@@ -40,7 +40,8 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/platform": "^0.0.108"
+    "@reactant/platform": "^0.0.108",
+    "async-cross-spawn": "^0.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",

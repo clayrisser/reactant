@@ -14,14 +14,13 @@ export async function getReactantPlatforms(
   config: Config
 ): Promise<CalculatedPlatforms> {
   if (_platforms && Object.keys(_platforms).length) return _platforms;
-  const { paths } = config;
   const dependencyNames: string[] = Object.keys(
-    require(path.resolve(paths.root, 'package.json')).dependencies
+    require(path.resolve(config.rootPath, 'package.json')).dependencies
   );
   _platforms = dependencyNames
     .filter((dependencyName: string) => {
       return !!require(path.resolve(
-        paths.root,
+        config.rootPath,
         'node_modules',
         dependencyName,
         'package.json'
@@ -31,11 +30,11 @@ export async function getReactantPlatforms(
       const platform = {
         ...requireDefault(
           path.resolve(
-            paths.root,
+            config.rootPath,
             'node_modules',
             platformName,
             require(path.resolve(
-              paths.root,
+              config.rootPath,
               'node_modules',
               platformName,
               'package.json'

@@ -14,14 +14,13 @@ export async function getReactantPlugins(
   config: Config
 ): Promise<CalculatedPlugins> {
   if (_plugins && Object.keys(_plugins).length) return _plugins;
-  const { paths } = config;
   const dependencyNames: string[] = Object.keys(
-    require(path.resolve(paths.root, 'package.json')).dependencies
+    require(path.resolve(config.rootPath, 'package.json')).dependencies
   );
   _plugins = dependencyNames
     .filter((dependencyName: string) => {
       return !!require(path.resolve(
-        paths.root,
+        config.rootPath,
         'node_modules',
         dependencyName,
         'package.json'
@@ -31,11 +30,11 @@ export async function getReactantPlugins(
       const platform = {
         ...requireDefault(
           path.resolve(
-            paths.root,
+            config.rootPath,
             'node_modules',
             platformName,
             require(path.resolve(
-              paths.root,
+              config.rootPath,
               'node_modules',
               platformName,
               'package.json'

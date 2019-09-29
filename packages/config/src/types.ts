@@ -5,8 +5,8 @@ import { Ports } from './ports';
 export const CONFIG_STATE = Symbol('CONFIG_STATE');
 
 export interface ConfigState {
-  setPaths: boolean;
-  setPorts: boolean;
+  setPaths?: boolean;
+  setPorts?: boolean;
   [key: string]: any;
 }
 
@@ -15,5 +15,6 @@ export interface Config extends BaseConfig {
   [key: string]: any;
   basePort: number;
   paths: Paths;
+  platform: string;
   ports: Ports;
 }

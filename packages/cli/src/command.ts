@@ -17,7 +17,8 @@ export default class Command extends EcosystemCommand {
     return {
       runtimeConfig: {
         debug: flags.debug || config.debug,
-        platform: flags.platform
+        platform: flags.platform,
+        _ready: true
       }
     };
   }

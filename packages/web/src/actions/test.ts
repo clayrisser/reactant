@@ -1,8 +1,9 @@
 import { Config, Logger } from '@reactant/platform';
+import asyncCrossSpawn from 'async-cross-spawn';
 
 export default async function test(
-  config: Config,
-  logger: Logger
+  _config: Config,
+  _logger: Logger
 ): Promise<any> {
-  logger.info(config);
+  return asyncCrossSpawn('react-scripts', ['test'], { stdio: 'inherit' });
 }
