@@ -40,7 +40,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@ecosystem/core": "^0.5.23",
+    "@ecosystem/core": "^0.5.24",
     "@reactant/config": "^0.0.111",
     "ncp-promise": "^0.0.1"
   },

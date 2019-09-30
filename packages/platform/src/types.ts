@@ -1,5 +1,6 @@
 import { Config } from '@reactant/config';
 import { Logger } from '@ecosystem/core';
+import PlatformApi from './platformApi';
 
 export type PlatformOption = any;
 
@@ -25,7 +26,11 @@ export interface Platforms<TPlatform = Platform> {
 
 export type CalculatedPlatforms = Platforms<CalculatedPlatform>;
 
-export type Action = (config?: Config, logger?: Logger) => any;
+export type Action = (
+  config?: Config,
+  logger?: Logger,
+  platformApi?: PlatformApi
+) => any;
 
 export interface Actions {
   [key: string]: Action;

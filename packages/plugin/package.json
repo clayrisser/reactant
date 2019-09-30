@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@ecosystem/config": "^0.5.23",
-    "@ecosystem/core": "^0.5.23",
+    "@ecosystem/core": "^0.5.24",
     "@reactant/config": "^0.0.111"
   },
   "devDependencies": {
