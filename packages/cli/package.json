@@ -51,7 +51,6 @@
     "@oclif/errors": "^1.2.2",
     "@oclif/parser": "^3.8.4",
     "@reactant/config": "^0.0.110",
-    "@reactant/core": "^0.0.109",
     "@reactant/platform": "^0.0.110",
     "@reactant/plugin": "^0.0.110",
     "err": "^2.1.11",

@@ -2,11 +2,11 @@ import {
   createConfig as createEcosystemConfig,
   getConfig as getEcosystemConfig
 } from '@ecosystem/config';
-import { preAction } from '@reactant/platform';
 import defaultConfig from './defaultConfig';
 import { CalculatePaths } from './paths';
 import { CalculatePorts } from './ports';
 import { Config, CONFIG_STATE } from './types';
+import { preAction } from './action';
 
 export async function postProcess<T = Config>(_config: T): Promise<T> {
   const config: Config = (_config as unknown) as Config;
@@ -29,7 +29,6 @@ export async function postProcess<T = Config>(_config: T): Promise<T> {
     config[CONFIG_STATE].setPaths = true;
   }
   config._ready = false;
-  // @ts-ignore
   await preAction(config);
   return (config as unknown) as T;
 }
@@ -55,6 +54,7 @@ export async function createConfig(
 }
 
 export { defaultConfig };
+export * from './action';
 export * from './paths';
 export * from './ports';
 export * from './types';

@@ -66,4 +66,3 @@ export async function getReactantPlatform(
 }
 
 export * from './types';
-export * from './action';

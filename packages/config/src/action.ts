@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
-import { Config } from '@reactant/config';
 import { mapSeries } from 'bluebird';
+import { Config } from './types';
 
 export async function preAction(config: Config) {
   await mapSeries(Object.values(config.paths), async (path: string) => {
