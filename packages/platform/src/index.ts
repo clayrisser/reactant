@@ -1,14 +1,24 @@
-// import fs from 'fs-extra';
+import ncp from 'ncp-promise';
 import path from 'path';
-import { Config } from '@reactant/config';
+import { Config, getConfig } from '@reactant/config';
 import { CalculatedPlatforms, Platform, Platforms } from './types';
 
 let _platforms: CalculatedPlatforms;
 
-// export async function doSomething(config: Config) {
-//   const { paths, rootPath } = config;
-//   await fs.copy(rootPath, path.resolve(rootPath));
-// }
+export async function isolateBuild(config?: Config) {
+  if (!config) config = await getConfig();
+  const { paths, rootPath } = config;
+  await ncp(rootPath, path.resolve(rootPath, paths.build), {
+    filter: pathName => {
+      return !(
+        pathName.indexOf(path.resolve(rootPath, paths.tmp)) > -1 ||
+        pathName.indexOf(path.resolve(rootPath, paths.dist)) > -1 ||
+        pathName.indexOf(path.resolve(rootPath, paths.build)) > -1 ||
+        pathName.indexOf('/node_modules/') > -1
+      );
+    }
+  });
+}
 
 export function requireDefault<T = any>(moduleName: string): T {
   const required = require(moduleName);
