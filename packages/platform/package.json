@@ -41,13 +41,17 @@
   },
   "dependencies": {
     "@ecosystem/core": "^0.5.23",
-    "@reactant/config": "^0.0.109"
+    "@reactant/config": "^0.0.109",
+    "bluebird": "^3.5.5",
+    "fs-extra": "^8.1.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
     "@babel/core": "^7.6.2",
     "@babel/node": "^7.6.2",
     "@babel/preset-typescript": "^7.6.0",
+    "@types/bluebird": "^3.5.27",
+    "@types/fs-extra": "^8.0.0",
     "@types/jest": "^24.0.18",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",

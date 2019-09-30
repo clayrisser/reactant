@@ -1,7 +1,10 @@
 import path from 'path';
 
 export interface Paths {
-  root: string;
+  build: string;
+  dist: string;
+  platform: string;
+  tmp: string;
   [key: string]: string;
 }
 

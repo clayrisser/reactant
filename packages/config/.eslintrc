@@ -3,6 +3,10 @@
   "rules": {
     "global-require": "off",
     "import/no-dynamic-require": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_" }
+    ],
     "lines-between-class-members": [
       "error",
       "always",

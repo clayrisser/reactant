@@ -1,8 +1,14 @@
+// import fs from 'fs-extra';
 import path from 'path';
 import { Config } from '@reactant/config';
 import { CalculatedPlatforms, Platform, Platforms } from './types';
 
 let _platforms: CalculatedPlatforms;
+
+// export async function doSomething(config: Config) {
+//   const { paths, rootPath } = config;
+//   await fs.copy(rootPath, path.resolve(rootPath));
+// }
 
 export function requireDefault<T = any>(moduleName: string): T {
   const required = require(moduleName);
@@ -60,3 +66,4 @@ export async function getReactantPlatform(
 }
 
 export * from './types';
+export * from './action';
