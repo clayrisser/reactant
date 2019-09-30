@@ -1,6 +1,6 @@
 {
   "name": "@reactant/platform",
-  "version": "0.0.110",
+  "version": "0.0.111",
   "description": "reactant platform",
   "keywords": [
     "@reactant/platform",
@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@ecosystem/core": "^0.5.23",
-    "@reactant/config": "^0.0.110",
+    "@reactant/config": "^0.0.111",
     "fs-extra": "^8.1.0"
   },
   "devDependencies": {
