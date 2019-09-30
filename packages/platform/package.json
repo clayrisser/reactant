@@ -1,6 +1,6 @@
 {
   "name": "@reactant/platform",
-  "version": "0.0.111",
+  "version": "0.0.112",
   "description": "reactant platform",
   "keywords": [
     "@reactant/platform",
@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@ecosystem/core": "^0.5.24",
-    "@reactant/config": "^0.0.111",
+    "@reactant/config": "^0.0.112",
     "ncp-promise": "^0.0.1"
   },
   "devDependencies": {
