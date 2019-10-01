@@ -1,6 +1,6 @@
 {
   "name": "@reactant/web",
-  "version": "0.0.116",
+  "version": "0.0.117",
   "description": "reactant platform for web",
   "keywords": [
     "@reactant/web",
@@ -40,7 +40,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/platform": "^0.0.116"
+    "@reactant/platform": "^0.0.117"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
