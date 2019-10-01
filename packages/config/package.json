@@ -64,7 +64,7 @@
     "eslint-config-jam": "^0.2.20",
     "jest": "^24.9.0",
     "tsc": "^1.20150623.0",
-    "typescript": "^3.6.3"
+    "typescript": "next"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -76,5 +76,5 @@
     "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
     "verbose": true
   },
-  "gitHead": "848ac0937aca8536790b0e24317d30a10fcec33b"
+  "gitHead": "8cc2b737b1c2f3aa794714442f5e1880e1197353"
 }

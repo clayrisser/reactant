@@ -1,6 +1,7 @@
 import {
   createConfig as createEcosystemConfig,
-  getConfig as getEcosystemConfig
+  getConfig as getEcosystemConfig,
+  updateConfig as updateEcosystemConfig
 } from '@ecosystem/config';
 import defaultConfig from './defaultConfig';
 import { CalculatePaths } from './paths';
@@ -39,6 +40,10 @@ export async function preProcess<T = Config>(config: T): Promise<T> {
 
 export async function getConfig(): Promise<Config> {
   return getEcosystemConfig<Config>(postProcess);
+}
+
+export async function updateConfig(config: Config): Promise<Config> {
+  return updateEcosystemConfig<Config>(config, preProcess, postProcess);
 }
 
 export async function createConfig(
