@@ -32,6 +32,7 @@ import Command from './command';
       defaultConfig,
       (await getReactantPlatform(platformName, config)).actions,
       Command,
+      false,
       preProcess,
       postProcess,
       undefined,

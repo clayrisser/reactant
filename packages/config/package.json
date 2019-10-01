@@ -40,7 +40,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@ecosystem/config": "^0.5.23",
+    "@ecosystem/config": "^0.6.0",
     "@types/fs-extra": "^8.0.0",
     "bluebird": "^3.5.5",
     "core-js": "^3.2.1",

@@ -45,8 +45,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
-    "@ecosystem/config": "^0.5.23",
-    "@ecosystem/core": "^0.5.24",
+    "@ecosystem/config": "^0.6.0",
+    "@ecosystem/core": "^0.6.0",
     "@oclif/command": "^1.5.19",
     "@oclif/errors": "^1.2.2",
     "@oclif/parser": "^3.8.4",
