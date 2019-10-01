@@ -1,21 +1,44 @@
+import Err from 'err';
+import asyncCrossSpawn from 'async-cross-spawn';
 import fs from 'fs-extra';
 import ncp from 'ncp-promise';
 import path from 'path';
+import pkgDir from 'pkg-dir';
 import { Config, getConfig, updateConfig } from '@reactant/config';
+import { SpawnOptions } from 'child_process';
 
 export default class PlatformApi {
   config: Config;
 
-  async getConfig(): Promise<Config> {
+  getConfig(): Config {
     return getConfig();
   }
 
-  async updateConfig(config: Config): Promise<Config> {
+  updateConfig(config: Config): Config {
     return updateConfig(config);
   }
 
+  async spawn(
+    pkg: string,
+    bin: string,
+    args: string[] = [],
+    options?: SpawnOptions
+  ) {
+    options = {
+      stdio: 'inherit',
+      ...options
+    };
+    const pkgPath = await pkgDir(require.resolve(pkg));
+    if (!pkgPath) throw new Err(`package '${pkg}' not found`);
+    const command = path.resolve(
+      pkgPath,
+      require(`${pkg}/package.json`).bin[bin]
+    );
+    return asyncCrossSpawn(command, args, options);
+  }
+
   async templateCracoConfig(config?: Config) {
-    if (!config) config = await this.getConfig();
+    if (!config) config = this.getConfig();
     const { paths } = config;
     await fs.copy(
       path.resolve(__dirname, 'templates/craco.config.js'),
@@ -24,7 +47,7 @@ export default class PlatformApi {
   }
 
   async templateWebpackConfig(config?: Config) {
-    if (!config) config = await this.getConfig();
+    if (!config) config = this.getConfig();
     await this.templateCracoConfig(config);
     const { paths } = config;
     await fs.copy(
@@ -33,8 +56,8 @@ export default class PlatformApi {
     );
   }
 
-  async prepareBuild(config?: Config) {
-    if (!config) config = await this.getConfig();
+  async prepare(config?: Config) {
+    if (!config) config = this.getConfig();
     const { paths, rootPath } = config;
     await ncp(rootPath, path.resolve(rootPath, paths.build), {
       filter: pathName => {

@@ -1,9 +1,13 @@
-import { Config, Logger } from '@reactant/platform';
-import asyncCrossSpawn from 'async-cross-spawn';
+import { Config, Logger, PlatformApi } from '@reactant/platform';
 
 export default async function start(
-  _config: Config,
-  _logger: Logger
+  config: Config,
+  logger: Logger,
+  platformApi: PlatformApi
 ): Promise<any> {
-  return asyncCrossSpawn('react-scripts', ['start'], { stdio: 'inherit' });
+  logger.spinner.start('preparing start');
+  await platformApi.prepare(config);
+  await platformApi.templateCracoConfig(config);
+  logger.spinner.succeed('prepared start');
+  return platformApi.spawn('@craco/craco', 'craco', ['start']);
 }

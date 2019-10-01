@@ -1,9 +1,9 @@
-import { Config, Logger } from '@reactant/platform';
-import asyncCrossSpawn from 'async-cross-spawn';
+import { Config, Logger, PlatformApi } from '@reactant/platform';
 
 export default async function test(
   _config: Config,
-  _logger: Logger
+  _logger: Logger,
+  platformApi: PlatformApi
 ): Promise<any> {
-  return asyncCrossSpawn('react-scripts', ['test'], { stdio: 'inherit' });
+  return platformApi.spawn('@craco/craco', 'craco', ['test']);
 }
