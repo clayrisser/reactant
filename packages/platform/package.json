@@ -42,7 +42,7 @@
   "dependencies": {
     "@babel/core": "^7.6.2",
     "@craco/craco": "^5.5.0",
-    "@ecosystem/core": "^0.6.1",
+    "@ecosystem/core": "^0.6.6",
     "@reactant/config": "^0.0.115",
     "fs-extra": "^8.1.0",
     "merge-configuration": "^0.4.1",

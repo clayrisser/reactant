@@ -61,5 +61,4 @@ export async function getReactantPlatform(
 }
 
 export * from './types';
-// export * from './webpack';
 export { PlatformApi };

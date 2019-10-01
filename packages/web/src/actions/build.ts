@@ -7,7 +7,7 @@ export default async function build(
   platformApi: PlatformApi
 ): Promise<any> {
   logger.spinner.start('preparing build');
-  await platformApi.steps.prepareBuild(config);
+  await platformApi.prepareBuild(config);
   await platformApi.templateCracoConfig(config);
   logger.spinner.succeed('prepared build');
   return asyncCrossSpawn('react-scripts', ['build'], { stdio: 'inherit' });

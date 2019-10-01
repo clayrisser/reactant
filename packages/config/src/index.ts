@@ -50,11 +50,12 @@ export function preProcessSync<T = Config>(config: T): T {
 }
 
 export function getConfig(): Config {
-  return getEcosystemConfigSync<Config>(postProcessSync);
+  return getEcosystemConfigSync<Config>('reactant', postProcessSync);
 }
 
 export function updateConfig(config: Config): Config {
   return updateEcosystemConfigSync<Config>(
+    'reactant',
     config,
     preProcessSync,
     postProcessSync
