@@ -45,6 +45,7 @@
     "@ecosystem/core": "^0.6.1",
     "@reactant/config": "^0.0.115",
     "fs-extra": "^8.1.0",
+    "merge-configuration": "^0.4.1",
     "ncp-promise": "^0.0.1",
     "webpack": "^4.41.0"
   },

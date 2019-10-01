@@ -1,13 +1,14 @@
+import mergeConfiguration from 'merge-configuration';
 import { CracoConfig } from '@craco/craco';
-// import { getConfig } from '@reactant/config';
+import { getConfig } from '@reactant/config';
 
-async function overrideCracoConfig({
+function overrideCracoConfig({
   cracoConfig
 }: {
   cracoConfig: CracoConfig;
-}): Promise<CracoConfig> {
-  // const config = await getConfig();
-  return cracoConfig;
+}): CracoConfig {
+  const config = getConfig();
+  return mergeConfiguration<CracoConfig>(cracoConfig, config.craco);
 }
 
 module.exports = {
