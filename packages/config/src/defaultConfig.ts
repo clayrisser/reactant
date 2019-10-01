@@ -1,4 +1,4 @@
-import { Config, CONFIG_STATE } from './types';
+import { Config } from './types';
 
 export default {
   basePort: 6001,
@@ -9,7 +9,9 @@ export default {
     tmp: '.tmp'
   },
   ports: {},
-  [CONFIG_STATE]: {
+  _state: {
+    initialized: false,
+    ready: false,
     setPaths: false,
     setPorts: false
   }

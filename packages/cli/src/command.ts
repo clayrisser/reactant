@@ -13,12 +13,12 @@ export default class Command extends EcosystemCommand {
 
   async run() {
     const { flags } = this.parse(Command.EcosystemCommand);
-    const config = Command.EcosystemCommand.ecosystem.getConfigSync<Config>();
+    const config = await Command.EcosystemCommand.ecosystem.getConfig<Config>();
     return {
       runtimeConfig: {
         debug: flags.debug || config.debug,
         platform: flags.platform,
-        _ready: true
+        _state: { ready: true }
       }
     };
   }
