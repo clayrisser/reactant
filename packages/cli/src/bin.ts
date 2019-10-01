@@ -1,6 +1,6 @@
 import Ecosystem from '@ecosystem/core';
 import { Actions, getReactantPlatform, PlatformApi } from '@reactant/platform';
-import { createConfig } from '@ecosystem/config';
+import { createConfigSync } from '@ecosystem/config';
 import { handle as handleError } from '@oclif/errors/lib/handle';
 import { parse, flags } from '@oclif/parser';
 import {
@@ -20,7 +20,7 @@ import Command from './command';
       }
     });
     const platformName = output.flags.platform;
-    const config = await createConfig<Config>(
+    const config = createConfigSync<Config>(
       'reactant',
       defaultConfig,
       { platform: platformName },
@@ -32,7 +32,7 @@ import Command from './command';
       defaultConfig,
       (await getReactantPlatform(platformName, config)).actions,
       Command,
-      false,
+      true,
       preProcess,
       postProcess,
       undefined,
