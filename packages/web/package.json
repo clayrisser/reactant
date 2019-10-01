@@ -1,6 +1,6 @@
 {
   "name": "@reactant/web",
-  "version": "0.0.113",
+  "version": "0.0.114",
   "description": "reactant platform for web",
   "keywords": [
     "@reactant/web",
@@ -40,7 +40,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/platform": "^0.0.113",
+    "@reactant/platform": "^0.0.114",
     "async-cross-spawn": "^0.0.2"
   },
   "devDependencies": {
