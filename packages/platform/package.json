@@ -1,6 +1,6 @@
 {
   "name": "@reactant/platform",
-  "version": "0.0.117",
+  "version": "0.0.118",
   "description": "reactant platform",
   "keywords": [
     "@reactant/platform",
@@ -43,7 +43,7 @@
     "@babel/core": "^7.6.2",
     "@craco/craco": "^5.5.0",
     "@ecosystem/core": "^0.6.7",
-    "@reactant/config": "^0.0.117",
+    "@reactant/config": "^0.0.118",
     "async-cross-spawn": "^0.0.2",
     "err": "^2.1.11",
     "fs-extra": "^8.1.0",
