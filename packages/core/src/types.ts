@@ -135,6 +135,7 @@ export interface Config extends BaseConfig {
   basePort: number;
   craco: CracoConfig;
   cracoPlugins?: CracoPlugin[];
+  debug: boolean;
   devServer?: CracoDevServer;
   eslint?: CracoEslint;
   jest?: CracoJest;

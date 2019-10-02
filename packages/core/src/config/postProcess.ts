@@ -13,7 +13,7 @@ export function postProcessSync<T = Config>(_config: T): T {
 }
 
 export async function postProcess<T = Config>(_config: T): Promise<T> {
-  const config: Config = (_config as unknown) as Config;
+  let config: Config = (_config as unknown) as Config;
   if (!config._state.ready || config._state.initialized) {
     return postProcessSync<T>((config as unknown) as T);
   }
@@ -34,7 +34,8 @@ export async function postProcess<T = Config>(_config: T): Promise<T> {
     config.paths = calculatePaths.paths;
     config._state.setPaths = true;
   }
-  await preAction(config);
+  config = postProcessSync<Config>(config);
   config._state.initialized = true;
-  return postProcessSync<T>((config as unknown) as T);
+  await preAction(config);
+  return (config as unknown) as T;
 }
