@@ -1,12 +1,5 @@
 import path from 'path';
-
-export interface Paths {
-  build: string;
-  dist: string;
-  platform: string;
-  tmp: string;
-  [key: string]: string;
-}
+import { Paths } from '@reactant/types';
 
 export interface Vars {
   [key: string]: string;

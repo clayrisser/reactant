@@ -1,11 +1,6 @@
 import detectPort from 'detect-port';
+import { Ports } from '@reactant/types';
 import { reduce } from 'bluebird';
-
-export type Port = number | boolean | null;
-
-export interface Ports {
-  [key: string]: Port;
-}
 
 export class CalculatePorts {
   occupiedPorts: Set<number> = new Set();

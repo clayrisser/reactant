@@ -9,64 +9,20 @@ declare module '@craco/craco' {
     Configuration as WebpackConfig
   } from 'webpack';
 
-  export interface JestConfig {
-    [key: string]: any;
-  }
-  export interface EslintOptions {
-    [key: string]: any;
-  }
-  export interface EslintLoaderOptions {
-    [key: string]: any;
-  }
-  export interface CracoTypeScript {
-    enableTypeChecking?: boolean;
-  }
-  export interface CracoEslint {
-    enable?: boolean;
-    mode?: string;
-    configure?: EslintOptions | Function;
-    loaderOptions?: EslintLoaderOptions | Function;
-  }
-  export interface CracoBabel {
-    presets?: BabelPlugin[];
-    plugins?: BabelPlugin[];
-    loaderOptions?: BabelOptions | Function;
-  }
-  export interface CracoStyle {
-    modules?: object;
-    css?: object;
-    sass?: object;
-    postcss?: object;
-  }
-  export interface CracoWebpack {
-    alias?: object;
-    plugins?: CracoPlugin[];
-    configure?: WebpackConfig | Function;
-  }
-  export interface CracoJestBabel {
-    addPresets?: boolean;
-    addPlugins?: boolean;
-  }
-  export interface CracoJest {
-    babel?: CracoJestBabel;
-    configure?: JestConfig | Function;
-  }
-  export type Function = (...args: any[]) => any;
-  export type CracoDevServer = WebpackConfig | Function;
-  export interface CracoPlugin {
-    [key: string]: any;
-  }
-  export interface CracoConfig {
-    reactScriptsVersion?: string;
-    style?: CracoStyle;
-    babel?: CracoBabel;
-    eslint?: CracoEslint;
-    jest?: CracoJest;
-    typescript?: CracoTypeScript;
-    webpack?: CracoWebpack;
-    devServer?: CracoDevServer;
-    plugins?: CracoPlugin[];
-  }
+  export type JestConfig = import('@reactant/types').JestConfig;
+  export type EslintOptions = import('@reactant/types').EslintOptions;
+  export type EslintLoaderOptions = import('@reactant/types').EslintLoaderOptions;
+  export type CracoTypeScript = import('@reactant/types').CracoTypeScript;
+  export type CracoEslint = import('@reactant/types').CracoEslint;
+  export type CracoBabel = import('@reactant/types').CracoBabel;
+  export type CracoStyle = import('@reactant/types').CracoStyle;
+  export type CracoWebpack = import('@reactant/types').CracoWebpack;
+  export type CracoJestBabel = import('@reactant/types').CracoJestBabel;
+  export type CracoJest = import('@reactant/types').CracoJest;
+  export type Function = import('@reactant/types').Function;
+  export type CracoDevServer = import('@reactant/types').CracoDevServer;
+  export type CracoConfig = import('@reactant/types').CracoConfig;
+
   export interface ConfigError {
     message: string;
     githubRepo: string;

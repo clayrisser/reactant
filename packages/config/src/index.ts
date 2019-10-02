@@ -1,3 +1,4 @@
+import { Config } from '@reactant/types';
 import {
   createConfigSync as createEcosystemConfigSync,
   getConfigSync as getEcosystemConfigSync,
@@ -5,8 +6,6 @@ import {
   finishSync as ecosystemFinishSync
 } from '@ecosystem/config';
 import defaultConfig from './defaultConfig';
-import mapCraco from './mapCraco';
-import { Config } from './types';
 import { postProcessSync } from './postProcess';
 import { preProcessSync } from './preProcess';
 
@@ -53,10 +52,11 @@ export function finish() {
   return ecosystemFinishSync();
 }
 
-export { defaultConfig, mapCraco };
+export { defaultConfig };
 export * from './action';
+export * from './mapConfig';
 export * from './paths';
+export * from './platform';
 export * from './ports';
 export * from './postProcess';
 export * from './preProcess';
-export * from './types';

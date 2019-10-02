@@ -1,6 +1,6 @@
 {
   "name": "@reactant/plugin",
-  "version": "0.0.119",
+  "version": "0.0.120",
   "description": "reactant plugin",
   "keywords": [
     "@reactant/plugin",
@@ -42,7 +42,8 @@
   "dependencies": {
     "@ecosystem/config": "^0.6.7",
     "@ecosystem/core": "^0.6.7",
-    "@reactant/config": "^0.0.119"
+    "@reactant/config": "^0.0.119",
+    "@reactant/types": "^0.0.120"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
@@ -50,6 +51,7 @@
     "@babel/node": "^7.6.2",
     "@babel/preset-typescript": "^7.6.0",
     "@types/jest": "^24.0.18",
+    "@types/webpack": "^4.39.2",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",
     "babel-preset-jam": "^0.4.3",

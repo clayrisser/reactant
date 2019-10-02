@@ -1,12 +1,60 @@
 import { BaseConfig } from '@ecosystem/config';
 import { Configuration as WebpackConfig } from 'webpack';
-import { PlatformOptions } from '@reactant/platform';
+import { Logger } from '@ecosystem/core';
 import {
   TransformOptions as BabelOptions,
   PluginItem as BabelPlugin
 } from '@babel/core';
-import { Paths } from './paths';
-import { Ports } from './ports';
+
+export type PlatformApi = any;
+
+export type Action = (
+  config?: Config,
+  logger?: Logger,
+  platformApi?: PlatformApi
+) => any;
+
+export interface Actions {
+  [key: string]: Action;
+}
+
+export interface Platform {
+  actions: Actions;
+  defaultOptions?: Partial<PlatformOptions>;
+  name?: string;
+}
+
+export interface CalculatedPlatform extends Platform {
+  moduleName: string;
+  name: string;
+  options: PlatformOptions;
+}
+
+export interface Platforms<TPlatform = Platform> {
+  [key: string]: TPlatform;
+}
+
+export type CalculatedPlatforms = Platforms<CalculatedPlatform>;
+
+export type Port = number | boolean | null;
+
+export interface Ports {
+  [key: string]: Port;
+}
+
+export interface Paths {
+  build: string;
+  dist: string;
+  platform: string;
+  tmp: string;
+  [key: string]: string;
+}
+
+export type PlatformOption = any;
+
+export interface PlatformOptions {
+  [key: string]: PlatformOption;
+}
 
 export interface JestConfig {
   [key: string]: any;

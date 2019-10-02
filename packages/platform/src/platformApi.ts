@@ -4,8 +4,9 @@ import fs from 'fs-extra';
 import ncp from 'ncp-promise';
 import path from 'path';
 import pkgDir from 'pkg-dir';
-import { Config, getConfig, updateConfig } from '@reactant/config';
+import { Config } from '@reactant/types';
 import { SpawnOptions } from 'child_process';
+import { getConfig, updateConfig } from '@reactant/config';
 import { getLinked } from 'linked-deps';
 
 async function recursiveNodeModulesSymlink(

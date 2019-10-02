@@ -1,15 +1,15 @@
-# @reactant/core
+# @reactant/config
 
-[![GitHub stars](https://img.shields.io/github/stars/codejamninja/@reactant/core.svg?style=social&label=Stars)](https://github.com/codejamninja/reactant/packages/core)
+[![GitHub stars](https://img.shields.io/github/stars/codejamninja/@reactant/config.svg?style=social&label=Stars)](https://github.com/codejamninja/reactant/packages/config)
 
-> reactant core
+> reactant config
 
 Please ★ this repo if you found it useful ★ ★ ★
 
 ## Installation
 
 ```sh
-npm install --save @reactant/core
+npm install --save @reactant/config
 ```
 
 ## Dependencies
@@ -18,29 +18,29 @@ npm install --save @reactant/core
 
 ## Usage
 
-[Contribute](https://github.com/codejamninja/reactant/packages/core/blob/master/CONTRIBUTING.md) usage docs
+[Contribute](https://github.com/codejamninja/reactant/packages/config/blob/master/CONTRIBUTING.md) usage docs
 
 ## Support
 
-Submit an [issue](https://github.com/codejamninja/reactant/packages/core/issues/new)
+Submit an [issue](https://github.com/codejamninja/reactant/packages/config/issues/new)
 
 ## Screenshots
 
-[Contribute](https://github.com/codejamninja/reactant/packages/core/blob/master/CONTRIBUTING.md) a screenshot
+[Contribute](https://github.com/codejamninja/reactant/packages/config/blob/master/CONTRIBUTING.md) a screenshot
 
 ## Contributing
 
-Review the [guidelines for contributing](https://github.com/codejamninja/reactant/packages/core/blob/master/CONTRIBUTING.md)
+Review the [guidelines for contributing](https://github.com/codejamninja/reactant/packages/config/blob/master/CONTRIBUTING.md)
 
 ## License
 
-[MIT License](https://github.com/codejamninja/reactant/packages/core/blob/master/LICENSE)
+[MIT License](https://github.com/codejamninja/reactant/packages/config/blob/master/LICENSE)
 
 [Jam Risser](https://codejam.ninja) © 2019
 
 ## Changelog
 
-Review the [changelog](https://github.com/codejamninja/reactant/packages/core/blob/master/CHANGELOG.md)
+Review the [changelog](https://github.com/codejamninja/reactant/packages/config/blob/master/CHANGELOG.md)
 
 ## Credits
 

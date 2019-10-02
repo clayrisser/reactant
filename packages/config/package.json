@@ -1,6 +1,6 @@
 {
   "name": "@reactant/config",
-  "version": "0.0.119",
+  "version": "0.0.120",
   "description": "reactant config",
   "keywords": [
     "@reactant/config",
@@ -42,7 +42,7 @@
   "dependencies": {
     "@babel/core": "^7.6.2",
     "@ecosystem/config": "^0.6.7",
-    "@reactant/platform": "^0.0.119",
+    "@reactant/types": "^0.0.120",
     "@types/fs-extra": "^8.0.0",
     "bluebird": "^3.5.5",
     "core-js": "^3.2.1",

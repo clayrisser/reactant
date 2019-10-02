@@ -1,14 +1,13 @@
-import { getReactantPlatform } from '@reactant/platform';
+import { Config } from '@reactant/types';
 import { CalculatePaths } from './paths';
 import { CalculatePorts } from './ports';
-import { Config } from './types';
+import { getReactantPlatform } from './platform';
+import { mapCraco } from './mapConfig';
 import { preAction } from './action';
-import mapCraco from './mapCraco';
 
 export function postProcessSync<T = Config>(_config: T): T {
   const config: Config = (_config as unknown) as Config;
   config.craco = mapCraco(config);
-  // @ts-ignore
   config.platform = getReactantPlatform(config.platformName, config);
   return (config as unknown) as T;
 }

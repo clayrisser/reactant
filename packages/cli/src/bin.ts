@@ -2,15 +2,16 @@ import Ecosystem from '@ecosystem/core';
 import fs from 'fs-extra';
 import path from 'path';
 import pkgDir from 'pkg-dir';
-import { Actions, getReactantPlatform, PlatformApi } from '@reactant/platform';
+import { Config, Actions } from '@reactant/types';
+import { PlatformApi } from '@reactant/platform';
 import { createConfig, activate } from '@ecosystem/config';
 import { handle as handleError } from '@oclif/errors/lib/handle';
 import { parse, flags } from '@oclif/parser';
 import {
-  Config,
   defaultConfig,
   postProcess,
-  preProcess
+  preProcess,
+  getReactantPlatform
 } from '@reactant/config';
 import Command from './command';
 

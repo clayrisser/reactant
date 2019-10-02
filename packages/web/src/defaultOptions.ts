@@ -1,3 +1,3 @@
-import { PlatformOptions } from '@reactant/platform';
+import { PlatformOptions } from '@reactant/types';
 
 export default {} as Partial<PlatformOptions>;

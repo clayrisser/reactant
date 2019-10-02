@@ -1,6 +1,6 @@
-import { Config, CracoConfig } from './types';
+import { Config, CracoConfig, PlatformOptions } from '@reactant/types';
 
-export default function mapCraco(config: Config): CracoConfig {
+export function mapCraco(config: Config): CracoConfig {
   return {
     ...(config.reactScriptsVersion
       ? { reactScriptsVersion: config.reactScriptsVersion }
@@ -14,4 +14,8 @@ export default function mapCraco(config: Config): CracoConfig {
     ...(config.devServer ? { devServer: config.devServer } : {}),
     ...(config.cracoPlugins ? { plugins: config.cracoPlugins } : {})
   };
+}
+
+export function mapPlatform(config: Config): PlatformOptions {
+  return config.platform;
 }

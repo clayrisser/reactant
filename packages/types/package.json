@@ -1,14 +1,14 @@
 {
-  "name": "@reactant/web",
-  "version": "0.0.119",
-  "description": "reactant platform for web",
+  "name": "@reactant/types",
+  "version": "0.0.120",
+  "description": "reactant types",
   "keywords": [
-    "@reactant/web",
+    "@reactant/types",
     "reactant",
-    "web",
+    "types",
     "react"
   ],
-  "homepage": "https://github.com/codejamninja/reactant/packages/web",
+  "homepage": "https://github.com/codejamninja/reactant/packages/types",
   "bugs": {
     "url": "https://github.com/codejamninja/reactant/issues",
     "email": "jam@codejam.ninja"
@@ -40,14 +40,17 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/platform": "^0.0.120",
-    "@reactant/types": "^0.0.120"
+    "@babel/core": "^7.6.2",
+    "@ecosystem/config": "^0.6.7",
+    "@ecosystem/core": "^0.6.7",
+    "core-js": "^3.2.1",
+    "webpack": "^4.41.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
-    "@babel/core": "^7.6.2",
     "@babel/node": "^7.6.2",
     "@babel/preset-typescript": "^7.6.0",
+    "@types/core-js": "^2.5.2",
     "@types/jest": "^24.0.18",
     "@types/webpack": "^4.39.2",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
@@ -70,6 +73,5 @@
     "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
     "verbose": true
   },
-  "reactantPlatform": "lib/platform.js",
-  "gitHead": "848ac0937aca8536790b0e24317d30a10fcec33b"
+  "gitHead": "8cc2b737b1c2f3aa794714442f5e1880e1197353"
 }
