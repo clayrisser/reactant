@@ -1,10 +1,10 @@
 import path from 'path';
-import { Config, PlatformApi } from '@reactant/types';
+import { Config, Logger, PlatformApi } from '@reactant/platform';
 import clean from './clean';
 
 export default async function build(
   config: Config,
-  logger: any,
+  logger: Logger,
   platformApi: PlatformApi
 ): Promise<any> {
   await clean(config, logger, platformApi);

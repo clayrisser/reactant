@@ -1,6 +1,6 @@
 {
   "name": "@reactant/plugin",
-  "version": "0.0.120",
+  "version": "0.0.121",
   "description": "reactant plugin",
   "keywords": [
     "@reactant/plugin",
@@ -40,10 +40,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@ecosystem/config": "^0.6.7",
-    "@ecosystem/core": "^0.6.7",
-    "@reactant/config": "^0.0.119",
-    "@reactant/types": "^0.0.120"
+    "@reactant/core": "^0.0.121"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
@@ -51,7 +48,6 @@
     "@babel/node": "^7.6.2",
     "@babel/preset-typescript": "^7.6.0",
     "@types/jest": "^24.0.18",
-    "@types/webpack": "^4.39.2",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",
     "babel-preset-jam": "^0.4.3",
@@ -72,5 +68,5 @@
     "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
     "verbose": true
   },
-  "gitHead": "848ac0937aca8536790b0e24317d30a10fcec33b"
+  "gitHead": "ca4e5543a030605b853c0e429472dcde778a7c25"
 }

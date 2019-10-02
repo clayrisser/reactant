@@ -1,9 +1,9 @@
-import { Config } from '@reactant/types';
 import { CalculatePaths } from './paths';
 import { CalculatePorts } from './ports';
-import { getReactantPlatform } from './platform';
+import { Config } from '../types';
+import { getReactantPlatform } from '../platform';
 import { mapCraco } from './mapConfig';
-import { preAction } from './action';
+import { preAction } from '../action';
 
 export function postProcessSync<T = Config>(_config: T): T {
   const config: Config = (_config as unknown) as Config;

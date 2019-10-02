@@ -1,5 +1,5 @@
 import path from 'path';
-import { Paths } from '@reactant/types';
+import { Paths } from '../types';
 
 export interface Vars {
   [key: string]: string;

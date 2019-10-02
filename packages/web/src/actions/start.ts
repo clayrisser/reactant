@@ -1,8 +1,8 @@
-import { Config, PlatformApi } from '@reactant/types';
+import { Config, Logger, PlatformApi } from '@reactant/platform';
 
 export default async function start(
   config: Config,
-  logger: any,
+  logger: Logger,
   platformApi: PlatformApi
 ): Promise<any> {
   logger.spinner.start('preparing start');

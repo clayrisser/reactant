@@ -1,4 +1,4 @@
-import { Actions } from '@reactant/types';
+import { Actions } from '@reactant/platform';
 import build from './build';
 import clean from './clean';
 import start from './start';

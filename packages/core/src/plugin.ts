@@ -1,12 +1,7 @@
 import path from 'path';
-import {
-  Config,
-  CalculatedPlatforms,
-  Platform,
-  Platforms
-} from '@reactant/types';
+import { Config, CalculatedPlugins, Plugins, Plugin } from './types';
 
-let _platforms: CalculatedPlatforms;
+let _plugins: CalculatedPlugins;
 
 export function requireDefault<T = any>(moduleName: string): T {
   const required = require(moduleName);
@@ -14,21 +9,23 @@ export function requireDefault<T = any>(moduleName: string): T {
   return required;
 }
 
-export function getReactantPlatforms(config: Config): CalculatedPlatforms {
-  if (_platforms && Object.keys(_platforms).length) return _platforms;
+export async function getReactantPlugins(
+  config: Config
+): Promise<CalculatedPlugins> {
+  if (_plugins && Object.keys(_plugins).length) return _plugins;
   const dependencyNames: string[] = Object.keys(
     require(path.resolve(config.rootPath, 'package.json')).dependencies
   );
-  _platforms = dependencyNames
+  _plugins = dependencyNames
     .filter((dependencyName: string) => {
       return !!require(path.resolve(
         config.rootPath,
         'node_modules',
         dependencyName,
         'package.json'
-      )).reactantPlatform;
+      )).reactantPlugin;
     })
-    .reduce((platforms: Platforms, platformName: string) => {
+    .reduce((platforms: Plugins, platformName: string) => {
       const platform = {
         ...requireDefault(
           path.resolve(
@@ -40,7 +37,7 @@ export function getReactantPlatforms(config: Config): CalculatedPlatforms {
               'node_modules',
               platformName,
               'package.json'
-            )).reactantPlatform
+            )).reactantPlugin
           )
         ),
         moduleName: platformName
@@ -48,15 +45,15 @@ export function getReactantPlatforms(config: Config): CalculatedPlatforms {
       if (!platform.name) platform.name = platformName;
       else platforms[platformName] = platform;
       platforms[platform.name] = platform;
-      return platforms as CalculatedPlatforms;
+      return platforms as CalculatedPlugins;
     }, {});
-  return _platforms;
+  return _plugins;
 }
 
-export function getReactantPlatform(
+export async function getReactantPlugin(
   platformName: string,
   config: Config
-): Platform {
-  const platforms: Platforms = getReactantPlatforms(config);
+): Promise<Plugin> {
+  const platforms: Plugins = await getReactantPlugins(config);
   return platforms[platformName];
 }

@@ -1,6 +1,6 @@
 {
   "name": "@reactant/web",
-  "version": "0.0.120",
+  "version": "0.0.121",
   "description": "reactant platform for web",
   "keywords": [
     "@reactant/web",
@@ -40,8 +40,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/platform": "^0.0.120",
-    "@reactant/types": "^0.0.120"
+    "@reactant/platform": "^0.0.121"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
@@ -49,7 +48,6 @@
     "@babel/node": "^7.6.2",
     "@babel/preset-typescript": "^7.6.0",
     "@types/jest": "^24.0.18",
-    "@types/webpack": "^4.39.2",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",
     "babel-preset-jam": "^0.4.3",
@@ -71,5 +69,5 @@
     "verbose": true
   },
   "reactantPlatform": "lib/platform.js",
-  "gitHead": "848ac0937aca8536790b0e24317d30a10fcec33b"
+  "gitHead": "ca4e5543a030605b853c0e429472dcde778a7c25"
 }

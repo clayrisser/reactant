@@ -1,6 +1,6 @@
 {
   "name": "@reactant/platform",
-  "version": "0.0.120",
+  "version": "0.0.121",
   "description": "reactant platform",
   "keywords": [
     "@reactant/platform",
@@ -42,9 +42,9 @@
   "dependencies": {
     "@babel/core": "^7.6.2",
     "@craco/craco": "^5.5.0",
-    "@ecosystem/core": "^0.6.7",
-    "@reactant/config": "^0.0.120",
-    "@reactant/types": "^0.0.120",
+    "@reactant/config": "^0.0.121",
+    "@reactant/core": "^0.0.121",
+    "@types/webpack": "^4.39.2",
     "async-cross-spawn": "^0.0.2",
     "err": "^2.1.11",
     "fs-extra": "^8.1.0",
@@ -61,7 +61,6 @@
     "@types/fs-extra": "^8.0.0",
     "@types/jest": "^24.0.18",
     "@types/pkg-dir": "^2.0.1",
-    "@types/webpack": "^4.39.2",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",
     "babel-preset-jam": "^0.4.3",
@@ -82,5 +81,5 @@
     "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
     "verbose": true
   },
-  "gitHead": "848ac0937aca8536790b0e24317d30a10fcec33b"
+  "gitHead": "ca4e5543a030605b853c0e429472dcde778a7c25"
 }

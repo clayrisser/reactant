@@ -1,4 +1,4 @@
-import { Platform } from '@reactant/types';
+import { Platform } from '@reactant/platform';
 import defaultOptions from './defaultOptions';
 import actions from './actions';
 

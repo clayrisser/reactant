@@ -1,6 +1,6 @@
 import pkg from 'npm-pkg-json';
 import { Command as EcosystemCommand } from '@ecosystem/core';
-import { Config } from '@reactant/types';
+import { Config } from '@reactant/core';
 import { flags } from '@oclif/command';
 
 export default class Command extends EcosystemCommand {

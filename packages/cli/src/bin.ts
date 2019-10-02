@@ -2,17 +2,18 @@ import Ecosystem from '@ecosystem/core';
 import fs from 'fs-extra';
 import path from 'path';
 import pkgDir from 'pkg-dir';
-import { Config, Actions } from '@reactant/types';
 import { PlatformApi } from '@reactant/platform';
 import { createConfig, activate } from '@ecosystem/config';
 import { handle as handleError } from '@oclif/errors/lib/handle';
 import { parse, flags } from '@oclif/parser';
 import {
+  Actions,
+  Config,
   defaultConfig,
+  getReactantPlatform,
   postProcess,
-  preProcess,
-  getReactantPlatform
-} from '@reactant/config';
+  preProcess
+} from '@reactant/core';
 import Command from './command';
 
 async function resetConfig() {

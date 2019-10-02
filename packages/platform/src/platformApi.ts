@@ -4,10 +4,14 @@ import fs from 'fs-extra';
 import ncp from 'ncp-promise';
 import path from 'path';
 import pkgDir from 'pkg-dir';
-import { Config } from '@reactant/types';
 import { SpawnOptions } from 'child_process';
-import { getConfig, updateConfig } from '@reactant/config';
 import { getLinked } from 'linked-deps';
+import {
+  Config,
+  PlatformApi as IPlatformApi,
+  getConfig,
+  updateConfig
+} from '@reactant/core';
 
 async function recursiveNodeModulesSymlink(
   sourcePath: string,
@@ -55,7 +59,7 @@ async function recursiveNodeModulesSymlink(
   });
 }
 
-export default class PlatformApi {
+export default class PlatformApi implements IPlatformApi {
   config: Config;
 
   getConfig(): Config {

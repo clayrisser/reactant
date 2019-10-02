@@ -1,4 +1,4 @@
-import { Config } from '@reactant/types';
+import { Config } from '../types';
 
 export default {
   basePort: 6001,

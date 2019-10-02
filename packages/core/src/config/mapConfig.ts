@@ -1,4 +1,4 @@
-import { Config, CracoConfig, PlatformOptions } from '@reactant/types';
+import { Config, CracoConfig, PlatformOptions } from '../types';
 
 export function mapCraco(config: Config): CracoConfig {
   return {

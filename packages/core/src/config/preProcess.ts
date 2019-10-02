@@ -1,4 +1,4 @@
-import { Config } from '@reactant/types';
+import { Config } from '../types';
 
 export async function preProcess<T = Config>(config: T): Promise<T> {
   return config;
