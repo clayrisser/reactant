@@ -1,3 +1,4 @@
+import { getReactantPlatform } from '@reactant/platform';
 import { CalculatePaths } from './paths';
 import { CalculatePorts } from './ports';
 import { Config } from './types';
@@ -7,6 +8,7 @@ import mapCraco from './mapCraco';
 export function postProcessSync<T = Config>(_config: T): T {
   const config: Config = (_config as unknown) as Config;
   config.craco = mapCraco(config);
+  config.platform = getReactantPlatform(config.platformName, config);
   return (config as unknown) as T;
 }
 
@@ -27,7 +29,7 @@ export async function postProcess<T = Config>(_config: T): Promise<T> {
     const calculatePaths = new CalculatePaths(
       config.paths,
       config.rootPath,
-      config.platform
+      config.platformName
     );
     config.paths = calculatePaths.paths;
     config._state.setPaths = true;

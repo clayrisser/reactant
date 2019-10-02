@@ -39,14 +39,14 @@ async function resetConfig() {
     const config = await createConfig<Config>(
       'reactant',
       defaultConfig,
-      { platform: platformName },
+      { platformName },
       preProcess,
       postProcess
     );
     const ecosystem = new Ecosystem<Config, Actions>(
       'reactant',
       defaultConfig,
-      (await getReactantPlatform(platformName, config)).actions,
+      getReactantPlatform(platformName, config).actions,
       Command,
       false,
       preProcess,

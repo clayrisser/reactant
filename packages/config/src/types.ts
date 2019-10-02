@@ -1,9 +1,10 @@
 import { BaseConfig } from '@ecosystem/config';
+import { Configuration as WebpackConfig } from 'webpack';
+import { PlatformOptions } from '@reactant/platform';
 import {
   TransformOptions as BabelOptions,
   PluginItem as BabelPlugin
 } from '@babel/core';
-import { Configuration as WebpackConfig } from 'webpack';
 import { Paths } from './paths';
 import { Ports } from './ports';
 
@@ -80,12 +81,13 @@ export interface Config extends BaseConfig {
   babel?: CracoBabel;
   basePort: number;
   craco: CracoConfig;
+  cracoPlugins?: CracoPlugin[];
   devServer?: CracoDevServer;
   eslint?: CracoEslint;
   jest?: CracoJest;
   paths: Paths;
-  platform: string;
-  cracoPlugins?: CracoPlugin[];
+  platform: PlatformOptions;
+  platformName: string;
   ports: Ports;
   reactScriptsVersion?: string;
   style?: CracoStyle;

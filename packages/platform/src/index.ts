@@ -11,9 +11,7 @@ export function requireDefault<T = any>(moduleName: string): T {
   return required;
 }
 
-export async function getReactantPlatforms(
-  config: Config
-): Promise<CalculatedPlatforms> {
+export function getReactantPlatforms(config: Config): CalculatedPlatforms {
   if (_platforms && Object.keys(_platforms).length) return _platforms;
   const dependencyNames: string[] = Object.keys(
     require(path.resolve(config.rootPath, 'package.json')).dependencies
@@ -52,11 +50,11 @@ export async function getReactantPlatforms(
   return _platforms;
 }
 
-export async function getReactantPlatform(
+export function getReactantPlatform(
   platformName: string,
   config: Config
-): Promise<Platform> {
-  const platforms: Platforms = await getReactantPlatforms(config);
+): Platform {
+  const platforms: Platforms = getReactantPlatforms(config);
   return platforms[platformName];
 }
 
