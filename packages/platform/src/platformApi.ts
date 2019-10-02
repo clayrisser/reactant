@@ -6,6 +6,53 @@ import path from 'path';
 import pkgDir from 'pkg-dir';
 import { Config, getConfig, updateConfig } from '@reactant/config';
 import { SpawnOptions } from 'child_process';
+import { getLinked } from 'linked-deps';
+
+async function recursiveNodeModulesSymlink(
+  sourcePath: string,
+  targetPath: string
+): Promise<void> {
+  if (!(await fs.pathExists(path.resolve(sourcePath, 'node_modules')))) return;
+  await fs.mkdirs(path.resolve(targetPath, 'node_modules'));
+  await Promise.all(
+    (await fs.readdir(path.resolve(sourcePath, 'node_modules'))).map(
+      async (itemPath: string) => {
+        const fullSourcePath = path.resolve(
+          sourcePath,
+          'node_modules',
+          itemPath
+        );
+        const fullTargetPath = path.resolve(
+          targetPath,
+          'node_modules',
+          itemPath
+        );
+        if (itemPath[0] === '@') {
+          await fs.mkdirs(fullTargetPath);
+          await Promise.all(
+            (await fs.readdir(fullSourcePath)).map(async (item: string) => {
+              if (!(await fs.pathExists(path.resolve(fullTargetPath, item)))) {
+                await fs.symlink(
+                  path.resolve(fullSourcePath, item),
+                  path.resolve(fullTargetPath, item)
+                );
+                await recursiveNodeModulesSymlink(
+                  path.resolve(fullSourcePath, item),
+                  targetPath
+                );
+              }
+            })
+          );
+        } else if (!(await fs.pathExists(fullTargetPath))) {
+          await fs.symlink(fullSourcePath, fullTargetPath);
+          await recursiveNodeModulesSymlink(fullSourcePath, targetPath);
+        }
+      }
+    )
+  ).catch((err: Err) => {
+    if (err.code !== 'EEXIST') throw err;
+  });
+}
 
 export default class PlatformApi {
   config: Config;
@@ -56,6 +103,12 @@ export default class PlatformApi {
     );
   }
 
+  async copyDist(distPath: string, config?: Config) {
+    if (!config) config = this.getConfig();
+    const { paths } = config;
+    await fs.copy(distPath, paths.dist);
+  }
+
   async prepare(config?: Config) {
     if (!config) config = this.getConfig();
     const { paths, rootPath } = config;
@@ -70,5 +123,26 @@ export default class PlatformApi {
         );
       }
     });
+    const lerna = new Set(getLinked()).has('@reactant/cli');
+    if (!lerna) {
+      await fs.symlink(
+        path.resolve(rootPath, 'node_modules'),
+        path.resolve(paths.build, 'node_modules')
+      );
+    } else {
+      await recursiveNodeModulesSymlink(rootPath, paths.build);
+    }
+  }
+
+  async cleanPaths(additionalPaths: string[] = [], config?: Config) {
+    if (!config) config = this.getConfig();
+    const { paths } = config;
+    await Promise.all(
+      [paths.build, paths.dist, ...additionalPaths].map(
+        async (itemPath: string) => {
+          await fs.remove(itemPath);
+        }
+      )
+    );
   }
 }

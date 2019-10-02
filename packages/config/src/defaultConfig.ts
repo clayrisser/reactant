@@ -3,10 +3,9 @@ import { Config } from './types';
 export default {
   basePort: 6001,
   paths: {
-    build: '{platform}/build',
+    build: '{tmp}/build/{_platform}',
     dist: 'dist/{_platform}',
-    platform: '{tmp}/{_platform}',
-    tmp: '.tmp'
+    tmp: '.tmp/reactant'
   },
   ports: {},
   _state: {

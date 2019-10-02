@@ -1,7 +1,8 @@
 import {
   createConfigSync as createEcosystemConfigSync,
   getConfigSync as getEcosystemConfigSync,
-  updateConfigSync as updateEcosystemConfigSync
+  updateConfigSync as updateEcosystemConfigSync,
+  finishSync as ecosystemFinishSync
 } from '@ecosystem/config';
 import defaultConfig from './defaultConfig';
 import mapCraco from './mapCraco';
@@ -46,6 +47,10 @@ export function createConfig(runtimeConfig: Partial<Config> = {}): Config {
       postProcessSync
     )
   );
+}
+
+export function finish() {
+  return ecosystemFinishSync();
 }
 
 export { defaultConfig, mapCraco };

@@ -15,6 +15,7 @@
   },
   "scripts": {
     "build:web": "reactant build -p web",
+    "clean:web": "reactant clean -p web",
     "start:web": "reactant start -p web",
     "test:web": "reactant test -p web"
   },

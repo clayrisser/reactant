@@ -45,8 +45,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
-    "@ecosystem/config": "^0.6.6",
-    "@ecosystem/core": "^0.6.6",
+    "@ecosystem/config": "^0.6.7",
+    "@ecosystem/core": "^0.6.7",
     "@oclif/command": "^1.5.19",
     "@oclif/errors": "^1.2.2",
     "@oclif/parser": "^3.8.4",
@@ -54,7 +54,9 @@
     "@reactant/platform": "^0.0.117",
     "@reactant/plugin": "^0.0.117",
     "err": "^2.1.11",
+    "fs-extra": "^8.1.0",
     "npm-pkg-json": "^0.1.0",
+    "pkg-dir": "^4.2.0",
     "ts-optchain.macro": "^1.1.5"
   },
   "devDependencies": {
@@ -62,7 +64,9 @@
     "@babel/core": "^7.6.2",
     "@babel/node": "^7.6.2",
     "@babel/preset-typescript": "^7.6.0",
+    "@types/fs-extra": "^8.0.0",
     "@types/jest": "^24.0.18",
+    "@types/pkg-dir": "^2.0.1",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",
     "babel-preset-jam": "^0.4.3",
