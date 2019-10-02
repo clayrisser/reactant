@@ -1,6 +1,6 @@
 {
   "name": "@reactant/plugin",
-  "version": "0.0.118",
+  "version": "0.0.119",
   "description": "reactant plugin",
   "keywords": [
     "@reactant/plugin",
@@ -42,7 +42,7 @@
   "dependencies": {
     "@ecosystem/config": "^0.6.7",
     "@ecosystem/core": "^0.6.7",
-    "@reactant/config": "^0.0.118"
+    "@reactant/config": "^0.0.119"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
