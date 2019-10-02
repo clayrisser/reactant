@@ -8,6 +8,7 @@ import mapCraco from './mapCraco';
 export function postProcessSync<T = Config>(_config: T): T {
   const config: Config = (_config as unknown) as Config;
   config.craco = mapCraco(config);
+  // @ts-ignore
   config.platform = getReactantPlatform(config.platformName, config);
   return (config as unknown) as T;
 }
