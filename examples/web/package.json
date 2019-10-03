@@ -1,6 +1,6 @@
 {
   "name": "web",
-  "version": "0.0.126",
+  "version": "0.0.124",
   "private": true,
   "dependencies": {
     "@reactant/web": "^0.0.126",
@@ -11,7 +11,7 @@
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "react-scripts": "3.1.2",
-    "typescript": "beta"
+    "typescript": "3.6.3"
   },
   "scripts": {
     "build": "reactant build -p web",

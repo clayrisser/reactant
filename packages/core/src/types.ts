@@ -112,8 +112,20 @@ export interface CracoJest {
   configure?: JestConfig | Function;
 }
 
-export interface CracoPlugin {
+export interface CracoPluginOptions {
   [key: string]: any;
+}
+
+export interface CracoPlugin {
+  overrideCracoConfig?: Function;
+  overrideDevServerConfig?: Function;
+  overrideJestConfig?: Function;
+  overrideWebpackConfig?: Function;
+}
+
+export interface CracoPluginSettings {
+  plugin: CracoPlugin;
+  options?: CracoPluginOptions;
 }
 
 export interface CracoConfig {
@@ -125,7 +137,7 @@ export interface CracoConfig {
   typescript?: CracoTypeScript;
   webpack?: CracoWebpack;
   devServer?: CracoDevServer;
-  plugins?: CracoPlugin[];
+  plugins?: CracoPluginSettings[];
 }
 
 export interface ConfigState {
@@ -146,7 +158,7 @@ export interface Config extends BaseConfig {
   babel?: CracoBabel;
   basePort: number;
   craco: CracoConfig;
-  cracoPlugins?: CracoPlugin[];
+  cracoPlugins?: CracoPluginSettings[];
   debug: boolean;
   devServer?: CracoDevServer;
   eslint?: CracoEslint;
