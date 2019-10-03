@@ -41,8 +41,8 @@
   },
   "dependencies": {
     "@babel/core": "^7.6.2",
-    "@ecosystem/config": "^0.6.9",
-    "@ecosystem/core": "^0.6.9",
+    "@ecosystem/config": "^0.6.11",
+    "@ecosystem/core": "^0.6.11",
     "@types/webpack": "^4.39.2",
     "bluebird": "^3.5.5",
     "core-js": "^3.2.1",

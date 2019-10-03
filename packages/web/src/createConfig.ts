@@ -23,20 +23,25 @@ export default function createConfig(config: Config): Config {
     webpackConfig: WebpackConfig,
     { paths }: { paths: Paths }
   ): WebpackConfig => {
-    const srcPath = 'web';
-    paths.appIndexJs = path.resolve(config.rootPath, srcPath, 'index.tsx');
-    paths.appSrc = path.resolve(config.rootPath, srcPath);
-    paths.testsSetup = path.resolve(config.rootPath, srcPath, 'setupTests.js');
-    paths.appTypeDeclarations = path.resolve(
-      config.rootPath,
-      srcPath,
-      'react-app-env.d.ts'
-    );
-    paths.proxySetup = path.resolve(config.rootPath, srcPath, 'setupProxy.js');
-    webpackConfig.entry = [path.resolve(config.rootPath, srcPath, 'index.tsx')];
+    let webPath = path.resolve(config.rootPath, config.platformName);
+    let srcPath = path.resolve(config.rootPath, 'src');
+    if (config.action === 'build') {
+      webPath = path.resolve(
+        config.rootPath,
+        config.paths.build,
+        config.platformName
+      );
+      srcPath = path.resolve(config.rootPath, config.paths.build, 'src');
+    }
+    paths.appIndexJs = path.resolve(webPath, 'index.tsx');
+    paths.appSrc = webPath;
+    paths.testsSetup = path.resolve(webPath, 'setupTests.js');
+    paths.appTypeDeclarations = path.resolve(webPath, 'react-app-env.d.ts');
+    paths.proxySetup = path.resolve(webPath, 'setupProxy.js');
+    webpackConfig.entry = [path.resolve(webPath, 'index.tsx')];
     findJSRules(webpackConfig.module ? webpackConfig.module.rules : []).forEach(
       (rule: RuleSetRule) => {
-        rule.include = path.resolve(config.rootPath, srcPath);
+        rule.include = webPath;
       }
     );
     if (webpackConfig.resolve) {
@@ -44,11 +49,9 @@ export default function createConfig(config: Config): Config {
         const moduleScopePlugin = (plugin as unknown) as ModuleScopePlugin;
         if (
           moduleScopePlugin.appSrcs &&
-          moduleScopePlugin.appSrcs.includes(
-            path.resolve(config.rootPath, 'src')
-          )
+          moduleScopePlugin.appSrcs.includes(srcPath)
         ) {
-          moduleScopePlugin.appSrcs = [path.resolve(config.rootPath, srcPath)];
+          moduleScopePlugin.appSrcs = [webPath];
         }
       });
     }
