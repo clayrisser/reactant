@@ -44,17 +44,20 @@ export default function createConfig(config: Config): Config {
         rule.include = webPath;
       }
     );
-    if (webpackConfig.resolve) {
-      (webpackConfig.resolve.plugins || []).forEach((plugin: ResolvePlugin) => {
-        const moduleScopePlugin = (plugin as unknown) as ModuleScopePlugin;
-        if (
-          moduleScopePlugin.appSrcs &&
-          moduleScopePlugin.appSrcs.includes(srcPath)
-        ) {
-          moduleScopePlugin.appSrcs = [webPath];
-        }
-      });
-    }
+    if (!webpackConfig.resolve) webpackConfig.resolve = {};
+    (webpackConfig.resolve.plugins || []).forEach((plugin: ResolvePlugin) => {
+      const moduleScopePlugin = (plugin as unknown) as ModuleScopePlugin;
+      if (
+        moduleScopePlugin.appSrcs &&
+        moduleScopePlugin.appSrcs.includes(srcPath)
+      ) {
+        moduleScopePlugin.appSrcs = [webPath];
+      }
+    });
+    webpackConfig.resolve.alias = {
+      ...webpackConfig.resolve.alias,
+      '@reactant/src': srcPath
+    };
     if (config.debug) {
       console.log(
         '\n\n======== START WEBPACK ========\n',

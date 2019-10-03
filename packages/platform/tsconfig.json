@@ -6,6 +6,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "incremental": false,
+    "jsx": "react",
     "lib": ["ES2018", "ESNext.AsyncIterable"],
     "module": "CommonJS",
     "moduleResolution": "Node",

@@ -52,6 +52,7 @@
     "merge-configuration": "^0.4.1",
     "ncp-promise": "^0.0.1",
     "pkg-dir": "^4.2.0",
+    "react": "^16.10.1",
     "ts-optchain.macro": "^1.1.5",
     "webpack": "^4.41.0"
   },
@@ -62,12 +63,15 @@
     "@types/fs-extra": "^8.0.0",
     "@types/jest": "^24.0.18",
     "@types/pkg-dir": "^2.0.1",
+    "@types/react": "^16.9.4",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",
     "babel-preset-jam": "^0.4.3",
     "eslint": "^6.4.0",
     "eslint-config-airbnb-typescript": "^5.0.0",
     "eslint-config-jam": "^0.2.20",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.15.1",
     "jest": "^24.9.0",
     "tsc": "^1.20150623.0",
     "typescript": "beta"
