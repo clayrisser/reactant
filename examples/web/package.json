@@ -1,9 +1,9 @@
 {
   "name": "web",
-  "version": "0.0.127",
+  "version": "0.0.128",
   "private": true,
   "dependencies": {
-    "@reactant/web": "^0.0.127",
+    "@reactant/web": "^0.0.128",
     "@types/jest": "24.0.18",
     "@types/node": "12.7.8",
     "@types/react": "16.9.3",
@@ -35,6 +35,6 @@
     ]
   },
   "devDependencies": {
-    "@reactant/cli": "^0.0.127"
+    "@reactant/cli": "^0.0.128"
   }
 }
