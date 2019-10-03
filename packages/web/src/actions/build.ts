@@ -1,3 +1,4 @@
+import fs from 'fs-extra';
 import path from 'path';
 import { Config, Logger, PlatformApi } from '@reactant/platform';
 import clean from './clean';
@@ -8,11 +9,19 @@ export default async function build(
   platformApi: PlatformApi
 ): Promise<any> {
   const { paths } = config;
-  const cracoConfigPath = path.resolve(paths.tmp, 'craco.config.js');
+  const cracoConfigPath = path.resolve(paths.build, 'craco.config.js');
   await clean(config, logger, platformApi);
   logger.spinner.start('preparing build');
   await platformApi.prepareBuild(config);
   await platformApi.createCracoConfig(cracoConfigPath, config);
+  await fs.move(
+    path.resolve(paths.build, 'src'),
+    path.resolve(paths.build, '_src')
+  );
+  await fs.move(
+    path.resolve(paths.build, 'web'),
+    path.resolve(paths.build, 'src')
+  );
   logger.spinner.succeed('prepared build');
   await platformApi.spawn(
     '@craco/craco',

@@ -20,16 +20,24 @@ export interface Actions {
   [key: string]: Action;
 }
 
+export type ModifyConfigFunction = (
+  config: Config,
+  platformOptions?: PlatformOptions
+) => Config;
+
 export interface Platform {
   actions: Actions;
+  config?: Config | ModifyConfigFunction;
   defaultOptions?: Partial<PlatformOptions>;
   name?: string;
 }
 
 export interface CalculatedPlatform extends Platform {
+  defaultOptions: undefined;
   moduleName: string;
   name: string;
   options: PlatformOptions;
+  path: string;
 }
 
 export interface Platforms<TPlatform = Platform> {

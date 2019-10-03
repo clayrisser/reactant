@@ -32,26 +32,26 @@ export function getReactantPlatforms(config: Config): CalculatedPlatforms {
         'package.json'
       )).reactantPlatform;
     })
-    .reduce((platforms: Platforms, platformName: string) => {
+    .reduce((platforms: Platforms, moduleName: string) => {
+      const platformPath = path.resolve(
+        config.rootPath,
+        'node_modules',
+        moduleName,
+        require(path.resolve(
+          config.rootPath,
+          'node_modules',
+          moduleName,
+          'package.json'
+        )).reactantPlatform
+      );
       const platform: Platform & CalculatedPlatform = {
-        ...requireDefault(
-          path.resolve(
-            config.rootPath,
-            'node_modules',
-            platformName,
-            require(path.resolve(
-              config.rootPath,
-              'node_modules',
-              platformName,
-              'package.json'
-            )).reactantPlatform
-          )
-        ),
-        moduleName: platformName
+        ...requireDefault(platformPath),
+        moduleName,
+        path: platformPath
       };
-      if (!platform.name) platform.name = platformName;
-      else platforms[platformName] = platform;
-      platform.options = platform.defaultOptions as PlatformOptions;
+      if (!platform.name) platform.name = moduleName;
+      else platforms[moduleName] = platform;
+      platform.options = (platform.defaultOptions as unknown) as PlatformOptions;
       delete platform.defaultOptions;
       platforms[platform.name] = platform;
       return platforms as CalculatedPlatforms;

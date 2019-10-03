@@ -1,3 +1,4 @@
+import mergeConfiguration from 'merge-configuration';
 import { CalculatePaths } from './paths';
 import { CalculatePorts } from './ports';
 import { Config, CalculatedPlatform } from '../types';
@@ -13,13 +14,23 @@ export function postProcessSync<T = Config>(
   _config: T,
   initializing = false
 ): T {
-  const config: Config = (_config as unknown) as Config;
-  config.craco = mapCraco(config);
+  let config: Config = (_config as unknown) as Config;
   if (initializing || !_postConfigCache.platform) {
     const platform = getReactantPlatform(config.platformName, config);
     _postConfigCache.platform = platform;
   }
   config.platform = _postConfigCache.platform;
+  if (config.platform) {
+    if (typeof config.platform.config === 'function') {
+      config = config.platform.config(config, config.platform.options);
+    } else if (
+      config.platform.config &&
+      typeof config.platform.config === 'object'
+    ) {
+      config = mergeConfiguration<Config>(config, config.platform.config);
+    }
+  }
+  config.craco = mapCraco(config);
   return (config as unknown) as T;
 }
 

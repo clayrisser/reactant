@@ -57,7 +57,7 @@
     "eslint-config-jam": "^0.2.20",
     "jest": "^24.9.0",
     "tsc": "^1.20150623.0",
-    "typescript": "next"
+    "typescript": "beta"
   },
   "engines": {
     "node": ">=6.0.0"

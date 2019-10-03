@@ -1,9 +1,11 @@
 import { Platform } from '@reactant/platform';
-import defaultOptions from './defaultOptions';
 import actions from './actions';
+import createConfig from './createConfig';
+import defaultOptions from './defaultOptions';
 
 export default {
-  name: 'web',
   actions,
-  defaultOptions
+  config: createConfig,
+  defaultOptions,
+  name: 'web'
 } as Platform;
