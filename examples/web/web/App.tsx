@@ -1,5 +1,5 @@
 import React from 'react';
-import Reactant from '@reactant/web';
+import { Reactant } from '@reactant/web';
 
 export interface AppProps {}
 

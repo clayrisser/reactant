@@ -1,7 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 
-export interface AppProps {}
+export interface AppProps {
+  children?: ReactNode;
+}
 
-const App: FC<AppProps> = () => <h1>Hello, world!</h1>;
+const App: FC<AppProps> = props => <h1>{props.children}</h1>;
+
+App.defaultProps = {
+  children: 'Hello, reactant!'
+};
 
 export default App;

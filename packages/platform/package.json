@@ -20,6 +20,8 @@
     "url": "https://codejam.ninja"
   },
   "files": [
+    "Reactant.d.tsx",
+    "Reactant.js",
     "lib"
   ],
   "main": "lib/index.js",
