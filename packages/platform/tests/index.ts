@@ -1,4 +1,4 @@
-describe('@reactant/core', () => {
+describe('@reactant/platform', () => {
   it('should work', async () => {
     expect(true).toBe(true);
   });

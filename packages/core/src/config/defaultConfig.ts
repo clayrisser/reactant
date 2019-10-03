@@ -4,9 +4,9 @@ export default {
   basePort: 6001,
   debug: false,
   paths: {
-    build: '{tmp}/build/{_platform}',
+    build: '{tmp}/build',
     dist: 'dist/{_platform}',
-    tmp: '.tmp/reactant'
+    tmp: '.tmp/reactant/{_platform}/{_action}'
   },
   ports: {},
   _state: {

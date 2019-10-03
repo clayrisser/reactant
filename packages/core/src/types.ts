@@ -1,4 +1,4 @@
-import { BaseConfig } from '@ecosystem/config';
+import { Config as BaseConfig } from '@ecosystem/core';
 
 export type BabelOptions = import('@babel/core').TransformOptions;
 export type BabelPlugin = import('@babel/core').PluginItem;
@@ -159,8 +159,8 @@ export interface PlatformApi {
     args?: string[],
     options?: SpawnOptions
   ): Promise<string | import('child_process').ChildProcess>;
-  templateCracoConfig(config?: Config): Promise<void>;
-  templateWebpackConfig(config?: Config): Promise<void>;
+  createCracoConfig(parentPath?: string | null, config?: Config): Promise<void>;
+  createWebpackConfig(parentPath?: string, config?: Config): Promise<void>;
   copyDist(distPath: string, config?: Config): Promise<void>;
   prepare(config?: Config): Promise<void>;
   cleanPaths(additionalPaths?: string[], config?: Config): Promise<void>;

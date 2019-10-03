@@ -18,13 +18,10 @@ import Command from './command';
 
 async function resetConfig() {
   const rootPath = (await pkgDir(process.cwd())) || process.cwd();
-  await fs.remove(
-    path.resolve(
-      rootPath,
-      '.tmp/config',
-      require(path.resolve(rootPath, 'package.json')).name || 'some-config'
-    )
-  );
+  const name =
+    require(path.resolve(rootPath, 'package.json')).name || 'some-config';
+  await fs.remove(path.resolve(rootPath, '.tmp/config', name));
+  await fs.remove(path.resolve(rootPath, '.tmp/config', `${name}.json`));
 }
 
 (async () => {

@@ -4,14 +4,10 @@ import fs from 'fs-extra';
 import ncp from 'ncp-promise';
 import path from 'path';
 import pkgDir from 'pkg-dir';
+import { Config, getConfig, updateConfig } from '@reactant/core';
 import { SpawnOptions } from 'child_process';
 import { getLinked } from 'linked-deps';
-import {
-  Config,
-  PlatformApi as IPlatformApi,
-  getConfig,
-  updateConfig
-} from '@reactant/core';
+import { oc } from 'ts-optchain.macro';
 
 async function recursiveNodeModulesSymlink(
   sourcePath: string,
@@ -21,18 +17,10 @@ async function recursiveNodeModulesSymlink(
   await fs.mkdirs(path.resolve(targetPath, 'node_modules'));
   await Promise.all(
     (await fs.readdir(path.resolve(sourcePath, 'node_modules'))).map(
-      async (itemPath: string) => {
-        const fullSourcePath = path.resolve(
-          sourcePath,
-          'node_modules',
-          itemPath
-        );
-        const fullTargetPath = path.resolve(
-          targetPath,
-          'node_modules',
-          itemPath
-        );
-        if (itemPath[0] === '@') {
+      async (item: string) => {
+        const fullSourcePath = path.resolve(sourcePath, 'node_modules', item);
+        const fullTargetPath = path.resolve(targetPath, 'node_modules', item);
+        if (item[0] === '@') {
           await fs.mkdirs(fullTargetPath);
           await Promise.all(
             (await fs.readdir(fullSourcePath)).map(async (item: string) => {
@@ -41,11 +29,11 @@ async function recursiveNodeModulesSymlink(
                   path.resolve(fullSourcePath, item),
                   path.resolve(fullTargetPath, item)
                 );
-                await recursiveNodeModulesSymlink(
-                  path.resolve(fullSourcePath, item),
-                  targetPath
-                );
               }
+              await recursiveNodeModulesSymlink(
+                path.resolve(fullSourcePath, item),
+                targetPath
+              );
             })
           );
         } else if (!(await fs.pathExists(fullTargetPath))) {
@@ -59,7 +47,7 @@ async function recursiveNodeModulesSymlink(
   });
 }
 
-export default class PlatformApi implements IPlatformApi {
+export default class PlatformApi {
   config: Config;
 
   getConfig(): Config {
@@ -89,22 +77,38 @@ export default class PlatformApi implements IPlatformApi {
     return asyncCrossSpawn(command, args, options);
   }
 
-  async templateCracoConfig(config?: Config) {
+  async createCracoConfig(cracoConfigPath?: string | null, config?: Config) {
     if (!config) config = this.getConfig();
     const { paths } = config;
+    if (!cracoConfigPath) {
+      cracoConfigPath = path.resolve(paths.tmp, 'craco.config.js');
+    }
+    if (await fs.pathExists(cracoConfigPath)) await fs.unlink(cracoConfigPath);
     await fs.copy(
       path.resolve(__dirname, 'templates/craco.config.js'),
-      path.resolve(paths.build, 'craco.config.js')
+      cracoConfigPath
     );
   }
 
-  async templateWebpackConfig(config?: Config) {
+  async createWebpackConfig(
+    webpackConfigPath?: string | null,
+    config?: Config
+  ) {
     if (!config) config = this.getConfig();
-    await this.templateCracoConfig(config);
     const { paths } = config;
+    if (!webpackConfigPath) {
+      webpackConfigPath = path.resolve(paths.tmp, 'webpack.config.js');
+    }
+    await this.createCracoConfig(
+      oc(webpackConfigPath.match(/[^/]+$/))[0](paths.tmp),
+      config
+    );
+    if (await fs.pathExists(webpackConfigPath)) {
+      await fs.unlink(webpackConfigPath);
+    }
     await fs.copy(
       path.resolve(__dirname, 'templates/webpack.config.js'),
-      path.resolve(paths.build, 'webpack.config.js')
+      webpackConfigPath
     );
   }
 
@@ -114,7 +118,7 @@ export default class PlatformApi implements IPlatformApi {
     await fs.copy(distPath, paths.dist);
   }
 
-  async prepare(config?: Config) {
+  async prepareBuild(config?: Config) {
     if (!config) config = this.getConfig();
     const { paths, rootPath } = config;
     await ncp(rootPath, path.resolve(rootPath, paths.build), {
@@ -137,6 +141,13 @@ export default class PlatformApi implements IPlatformApi {
     } else {
       await recursiveNodeModulesSymlink(rootPath, paths.build);
     }
+  }
+
+  async prepareLocal(config?: Config) {
+    if (!config) config = this.getConfig();
+    const { rootPath } = config;
+    const lerna = new Set(getLinked()).has('@reactant/cli');
+    if (lerna) await recursiveNodeModulesSymlink(rootPath, rootPath);
   }
 
   async cleanPaths(additionalPaths: string[] = [], config?: Config) {

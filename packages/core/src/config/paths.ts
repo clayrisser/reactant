@@ -14,9 +14,14 @@ export class CalculatePaths {
 
   private unparsedPaths: Paths;
 
-  constructor(paths: Paths, private rootPath: string, platformName: string) {
+  constructor(
+    paths: Paths,
+    private rootPath: string,
+    platformName: string,
+    actionName: string
+  ) {
     this.unparsedPaths = paths;
-    this.vars = { ...paths, _platform: platformName };
+    this.vars = { ...paths, _platform: platformName, _action: actionName };
   }
 
   get paths(): Paths {

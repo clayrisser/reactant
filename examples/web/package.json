@@ -1,5 +1,5 @@
 {
-  "name": "example",
+  "name": "web",
   "version": "0.0.123",
   "private": true,
   "dependencies": {
@@ -14,10 +14,10 @@
     "typescript": "3.6.3"
   },
   "scripts": {
-    "build:web": "reactant build -p web",
-    "clean:web": "reactant clean -p web",
-    "start:web": "reactant start -p web",
-    "test:web": "reactant test -p web"
+    "build": "reactant build -p web",
+    "clean": "reactant clean -p web",
+    "start": "reactant start -p web",
+    "test": "reactant test -p web"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -1,3 +1,4 @@
+import path from 'path';
 import { Config, Logger, PlatformApi } from '@reactant/platform';
 
 export default async function start(
@@ -5,9 +6,15 @@ export default async function start(
   logger: Logger,
   platformApi: PlatformApi
 ): Promise<any> {
+  const { paths } = config;
+  const cracoConfigPath = path.resolve(paths.tmp, 'craco.config.js');
   logger.spinner.start('preparing start');
-  await platformApi.prepare(config);
-  await platformApi.templateCracoConfig(config);
+  await platformApi.prepareLocal(config);
+  await platformApi.createCracoConfig(cracoConfigPath, config);
   logger.spinner.succeed('prepared start');
-  return platformApi.spawn('@craco/craco', 'craco', ['start']);
+  return platformApi.spawn('@craco/craco', 'craco', [
+    'start',
+    '--config',
+    cracoConfigPath
+  ]);
 }

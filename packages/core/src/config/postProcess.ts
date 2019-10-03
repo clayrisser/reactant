@@ -29,7 +29,8 @@ export async function postProcess<T = Config>(_config: T): Promise<T> {
     const calculatePaths = new CalculatePaths(
       config.paths,
       config.rootPath,
-      config.platformName
+      config.platformName,
+      config.action
     );
     config.paths = calculatePaths.paths;
     config._state.setPaths = true;
