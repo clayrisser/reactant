@@ -41,7 +41,7 @@ export default function createConfig(config: Config): Config {
     webpackConfig.entry = [path.resolve(webPath, 'index.tsx')];
     findJSRules(webpackConfig.module ? webpackConfig.module.rules : []).forEach(
       (rule: RuleSetRule) => {
-        rule.include = webPath;
+        rule.include = [webPath, srcPath];
       }
     );
     if (!webpackConfig.resolve) webpackConfig.resolve = {};
@@ -51,7 +51,7 @@ export default function createConfig(config: Config): Config {
         moduleScopePlugin.appSrcs &&
         moduleScopePlugin.appSrcs.includes(srcPath)
       ) {
-        moduleScopePlugin.appSrcs = [webPath];
+        moduleScopePlugin.appSrcs = [webPath, srcPath];
       }
     });
     webpackConfig.resolve.alias = {

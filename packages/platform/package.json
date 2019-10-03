@@ -59,6 +59,7 @@
   "devDependencies": {
     "@babel/cli": "^7.6.2",
     "@babel/node": "^7.6.2",
+    "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.6.0",
     "@types/fs-extra": "^8.0.0",
     "@types/jest": "^24.0.18",
@@ -74,7 +75,7 @@
     "eslint-plugin-react": "^7.15.1",
     "jest": "^24.9.0",
     "tsc": "^1.20150623.0",
-    "typescript": "beta"
+    "typescript": "3.6.3"
   },
   "engines": {
     "node": ">=6.0.0"

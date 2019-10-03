@@ -1,8 +1,10 @@
 {
-  "extends": ["jam/typescript/base"],
+  "extends": ["jam/typescript"],
   "rules": {
     "global-require": "off",
     "import/no-dynamic-require": "off",
+    "import/no-unresolved": "off",
+    "react/jsx-props-no-spreading": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
       { "argsIgnorePattern": "^_" }
