@@ -128,6 +128,10 @@ export interface ConfigState {
   setPorts?: boolean;
 }
 
+export interface PlatformsOptions {
+  [key: string]: PlatformsOptions;
+}
+
 export interface Config extends BaseConfig {
   [key: string]: any;
   _state: ConfigState;
@@ -140,8 +144,9 @@ export interface Config extends BaseConfig {
   eslint?: CracoEslint;
   jest?: CracoJest;
   paths: Paths;
-  platform: PlatformOptions;
+  platform: CalculatedPlatform;
   platformName: string;
+  platforms: Partial<PlatformsOptions>;
   ports: Ports;
   reactScriptsVersion?: string;
   style?: CracoStyle;
@@ -151,18 +156,24 @@ export interface Config extends BaseConfig {
 
 export interface PlatformApi {
   config: Config;
-  getConfig(): Config;
-  updateConfig(config: Config): Config;
+  options: PlatformOptions;
   spawn(
     pkg: string,
     bin: string,
     args?: string[],
     options?: SpawnOptions
   ): Promise<string | import('child_process').ChildProcess>;
-  createCracoConfig(parentPath?: string | null, config?: Config): Promise<void>;
-  createWebpackConfig(parentPath?: string, config?: Config): Promise<void>;
+  createCracoConfig(
+    cracoConfigPath?: string | null,
+    config?: Config
+  ): Promise<void>;
+  createWebpackConfig(
+    webpackConfigPath?: string | null,
+    config?: Config
+  ): Promise<void>;
   copyDist(distPath: string, config?: Config): Promise<void>;
-  prepare(config?: Config): Promise<void>;
+  prepareBuild(config?: Config): Promise<void>;
+  prepareLocal(config?: Config): Promise<void>;
   cleanPaths(additionalPaths?: string[], config?: Config): Promise<void>;
 }
 

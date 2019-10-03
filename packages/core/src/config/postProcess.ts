@@ -1,14 +1,25 @@
 import { CalculatePaths } from './paths';
 import { CalculatePorts } from './ports';
-import { Config } from '../types';
+import { Config, CalculatedPlatform } from '../types';
 import { getReactantPlatform } from '../platform';
 import { mapCraco } from './mapConfig';
 import { preAction } from '../action';
 
-export function postProcessSync<T = Config>(_config: T): T {
+const _postConfigCache: { platform: CalculatedPlatform | null } = {
+  platform: null
+};
+
+export function postProcessSync<T = Config>(
+  _config: T,
+  initializing = false
+): T {
   const config: Config = (_config as unknown) as Config;
   config.craco = mapCraco(config);
-  config.platform = getReactantPlatform(config.platformName, config);
+  if (initializing || !_postConfigCache.platform) {
+    const platform = getReactantPlatform(config.platformName, config);
+    _postConfigCache.platform = platform;
+  }
+  config.platform = _postConfigCache.platform;
   return (config as unknown) as T;
 }
 
@@ -35,7 +46,7 @@ export async function postProcess<T = Config>(_config: T): Promise<T> {
     config.paths = calculatePaths.paths;
     config._state.setPaths = true;
   }
-  config = postProcessSync<Config>(config);
+  config = postProcessSync<Config>(config, true);
   config._state.initialized = true;
   await preAction(config);
   return (config as unknown) as T;

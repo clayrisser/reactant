@@ -1,5 +1,14 @@
+import mergeConfiguration from 'merge-configuration';
 import path from 'path';
-import { Config, CalculatedPlatforms, Platform, Platforms } from './types';
+import { oc } from 'ts-optchain.macro';
+import {
+  CalculatedPlatform,
+  CalculatedPlatforms,
+  Config,
+  Platform,
+  PlatformOptions,
+  Platforms
+} from './types';
 
 let _platforms: CalculatedPlatforms;
 
@@ -24,7 +33,7 @@ export function getReactantPlatforms(config: Config): CalculatedPlatforms {
       )).reactantPlatform;
     })
     .reduce((platforms: Platforms, platformName: string) => {
-      const platform = {
+      const platform: Platform & CalculatedPlatform = {
         ...requireDefault(
           path.resolve(
             config.rootPath,
@@ -42,6 +51,8 @@ export function getReactantPlatforms(config: Config): CalculatedPlatforms {
       };
       if (!platform.name) platform.name = platformName;
       else platforms[platformName] = platform;
+      platform.options = platform.defaultOptions as PlatformOptions;
+      delete platform.defaultOptions;
       platforms[platform.name] = platform;
       return platforms as CalculatedPlatforms;
     }, {});
@@ -51,7 +62,15 @@ export function getReactantPlatforms(config: Config): CalculatedPlatforms {
 export function getReactantPlatform(
   platformName: string,
   config: Config
-): Platform {
-  const platforms: Platforms = getReactantPlatforms(config);
-  return platforms[platformName];
+): CalculatedPlatform {
+  const userPlatformOptions = oc(config).platforms[platformName](
+    {} as PlatformOptions
+  );
+  const platforms = getReactantPlatforms(config);
+  const platform = platforms[platformName];
+  platform.options = mergeConfiguration<PlatformOptions>(
+    platform.options,
+    userPlatformOptions
+  );
+  return platform;
 }

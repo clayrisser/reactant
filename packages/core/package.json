@@ -49,6 +49,8 @@
     "detect-port": "^1.3.0",
     "err": "^2.1.11",
     "fs-extra": "^8.1.0",
+    "merge-configuration": "^0.4.1",
+    "ts-optchain.macro": "^1.1.5",
     "webpack": "^4.41.0"
   },
   "devDependencies": {

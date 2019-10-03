@@ -8,6 +8,7 @@ import { Config, getConfig, updateConfig } from '@reactant/core';
 import { SpawnOptions } from 'child_process';
 import { getLinked } from 'linked-deps';
 import { oc } from 'ts-optchain.macro';
+import { PlatformOptions } from './types';
 
 async function recursiveNodeModulesSymlink(
   sourcePath: string,
@@ -48,14 +49,16 @@ async function recursiveNodeModulesSymlink(
 }
 
 export default class PlatformApi {
-  config: Config;
-
-  getConfig(): Config {
+  get config(): Config {
     return getConfig();
   }
 
-  updateConfig(config: Config): Config {
-    return updateConfig(config);
+  set config(config: Config) {
+    updateConfig(config);
+  }
+
+  get options(): PlatformOptions {
+    return this.config.platform.options;
   }
 
   async spawn(
@@ -78,7 +81,7 @@ export default class PlatformApi {
   }
 
   async createCracoConfig(cracoConfigPath?: string | null, config?: Config) {
-    if (!config) config = this.getConfig();
+    if (!config) ({ config } = this);
     const { paths } = config;
     if (!cracoConfigPath) {
       cracoConfigPath = path.resolve(paths.tmp, 'craco.config.js');
@@ -94,7 +97,7 @@ export default class PlatformApi {
     webpackConfigPath?: string | null,
     config?: Config
   ) {
-    if (!config) config = this.getConfig();
+    if (!config) ({ config } = this);
     const { paths } = config;
     if (!webpackConfigPath) {
       webpackConfigPath = path.resolve(paths.tmp, 'webpack.config.js');
@@ -113,13 +116,13 @@ export default class PlatformApi {
   }
 
   async copyDist(distPath: string, config?: Config) {
-    if (!config) config = this.getConfig();
+    if (!config) ({ config } = this);
     const { paths } = config;
     await fs.copy(distPath, paths.dist);
   }
 
   async prepareBuild(config?: Config) {
-    if (!config) config = this.getConfig();
+    if (!config) ({ config } = this);
     const { paths, rootPath } = config;
     await ncp(rootPath, path.resolve(rootPath, paths.build), {
       filter: pathName => {
@@ -144,14 +147,14 @@ export default class PlatformApi {
   }
 
   async prepareLocal(config?: Config) {
-    if (!config) config = this.getConfig();
+    if (!config) ({ config } = this);
     const { rootPath } = config;
     const lerna = new Set(getLinked()).has('@reactant/cli');
     if (lerna) await recursiveNodeModulesSymlink(rootPath, rootPath);
   }
 
   async cleanPaths(additionalPaths: string[] = [], config?: Config) {
-    if (!config) config = this.getConfig();
+    if (!config) ({ config } = this);
     const { paths } = config;
     await Promise.all(
       [paths.build, paths.dist, ...additionalPaths].map(
