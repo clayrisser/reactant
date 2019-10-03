@@ -1,6 +1,6 @@
 {
   "name": "@reactant/cli",
-  "version": "0.0.124",
+  "version": "0.0.125",
   "description": "reactant cli",
   "keywords": [
     "@reactant/cli",
@@ -50,9 +50,9 @@
     "@oclif/command": "^1.5.19",
     "@oclif/errors": "^1.2.2",
     "@oclif/parser": "^3.8.4",
-    "@reactant/core": "^0.0.124",
-    "@reactant/platform": "^0.0.124",
-    "@reactant/plugin": "^0.0.124",
+    "@reactant/core": "^0.0.125",
+    "@reactant/platform": "^0.0.125",
+    "@reactant/plugin": "^0.0.125",
     "err": "^2.1.11",
     "fs-extra": "^8.1.0",
     "npm-pkg-json": "^0.1.0",
