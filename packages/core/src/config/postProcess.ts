@@ -1,16 +1,15 @@
 import mergeConfiguration from 'merge-configuration';
 import { CalculatePaths } from './paths';
 import { CalculatePorts } from './ports';
-import { getReactantPlatform } from '../platform';
-import { getReactantPlugins } from '../plugin';
+import { CalculatedPlatform, getReactantPlatform } from '../platform';
+import { Config } from '../types';
 import { mapCraco } from './mapConfig';
 import { preAction } from '../action';
 import {
-  Config,
-  CalculatedPlatform,
+  CalculatedPlugin,
   CalculatedPlugins,
-  CalculatedPlugin
-} from '../types';
+  getReactantPlugins
+} from '../plugin';
 
 const _postConfigCache: {
   platform: CalculatedPlatform | null;

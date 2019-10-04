@@ -1,4 +1,5 @@
-import { Config, CracoConfig, PlatformOptions } from '../types';
+import { Config, CracoConfig } from '../types';
+import { PlatformOptions } from '../platform';
 
 export function mapCraco(config: Config): CracoConfig {
   return {

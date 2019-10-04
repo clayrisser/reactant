@@ -1,50 +1,23 @@
 import { Config as BaseConfig } from '@ecosystem/core';
+import { CalculatedPlugins, PluginsOptions } from './plugin';
+import {
+  PlatformsOptions,
+  PlatformOptions,
+  CalculatedPlatform
+} from './platform';
 
 export type BabelOptions = import('@babel/core').TransformOptions;
 export type BabelPlugin = import('@babel/core').PluginItem;
-export type CalculatedPlatforms = Platforms<CalculatedPlatform>;
-export type CalculatedPlugins = Plugins<CalculatedPlugin>;
 export type CracoDevServer = WebpackConfig | Function;
 export type Function = (...args: any[]) => any;
 export type Logger = import('@ecosystem/core').Logger;
-export type PlatformOption = any;
-export type PluginOption = any;
 export type Port = number | boolean | null;
-export type SpawnOptions = import('child_process').SpawnOptions;
 export type WebpackConfig = import('webpack').Configuration;
-export type Action = (
-  config?: Config,
-  logger?: Logger,
-  platformApi?: PlatformApi
-) => any;
-
-export interface Actions {
-  [key: string]: Action;
-}
 
 export type ModifyConfigFunction = (
   config: Config,
   platformOptions?: PlatformOptions
 ) => Config;
-
-export interface Platform {
-  actions: Actions;
-  config?: Config | ModifyConfigFunction;
-  defaultOptions?: Partial<PlatformOptions>;
-  name?: string;
-}
-
-export interface CalculatedPlatform extends Platform {
-  defaultOptions: undefined;
-  moduleName: string;
-  name: string;
-  options: PlatformOptions;
-  path: string;
-}
-
-export interface Platforms<TPlatform = Platform> {
-  [key: string]: TPlatform;
-}
 
 export interface Ports {
   [key: string]: Port;
@@ -56,10 +29,6 @@ export interface Paths {
   platform: string;
   tmp: string;
   [key: string]: string;
-}
-
-export interface PlatformOptions {
-  [key: string]: PlatformOption;
 }
 
 export interface JestConfig {
@@ -150,14 +119,6 @@ export interface ConfigState {
   setPorts?: boolean;
 }
 
-export interface PlatformsOptions {
-  [key: string]: PlatformsOptions;
-}
-
-export interface PluginsOptions {
-  [key: string]: PluginsOptions;
-}
-
 export interface Config extends BaseConfig {
   [key: string]: any;
   _platform: CalculatedPlatform;
@@ -180,51 +141,4 @@ export interface Config extends BaseConfig {
   style?: CracoStyle;
   typescript?: CracoTypeScript;
   webpack?: CracoWebpack;
-}
-
-export interface PlatformApi {
-  config: Config;
-  options: PlatformOptions;
-  spawn(
-    pkg: string,
-    bin: string,
-    args?: string[],
-    options?: SpawnOptions
-  ): Promise<string | import('child_process').ChildProcess>;
-  createCracoConfig(
-    cracoConfigPath?: string | null,
-    config?: Config
-  ): Promise<void>;
-  createWebpackConfig(
-    webpackConfigPath?: string | null,
-    config?: Config
-  ): Promise<void>;
-  copyDist(distPath: string, config?: Config): Promise<void>;
-  prepareBuild(config?: Config): Promise<void>;
-  prepareLocal(config?: Config): Promise<void>;
-  cleanPaths(additionalPaths?: string[], config?: Config): Promise<void>;
-}
-
-export interface PluginOptions {
-  [key: string]: PluginOption;
-}
-
-export interface Plugin {
-  config?: Config | ModifyConfigFunction;
-  defaultOptions?: Partial<PluginOptions>;
-  name?: string;
-  supportedPlatforms?: string[];
-}
-
-export interface CalculatedPlugin extends Plugin {
-  defaultOptions: undefined;
-  moduleName: string;
-  name: string;
-  options: PluginOptions;
-  path: string;
-  supportedPlatforms: string[];
-}
-
-export interface Plugins<TPlugin = Plugin> {
-  [key: string]: TPlugin;
 }

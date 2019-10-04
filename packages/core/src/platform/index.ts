@@ -1,10 +1,10 @@
 import mergeConfiguration from 'merge-configuration';
 import path from 'path';
 import { oc } from 'ts-optchain.macro';
+import { Config } from '../types';
 import {
   CalculatedPlatform,
   CalculatedPlatforms,
-  Config,
   Platform,
   PlatformOptions,
   Platforms
@@ -49,10 +49,11 @@ export function getReactantPlatforms(config: Config): CalculatedPlatforms {
         moduleName,
         path: platformPath
       };
-      if (!platform.name) platform.name = moduleName;
-      else platforms[moduleName] = platform;
       platform.options = (platform.defaultOptions as unknown) as PlatformOptions;
       delete platform.defaultOptions;
+      if (!platform.name) platform.name = moduleName;
+      platform.origionalName = platform.name;
+      if (platform.options.name) platform.name = platform.options.name;
       platforms[platform.name] = platform;
       return platforms as CalculatedPlatforms;
     }, {});
@@ -74,3 +75,5 @@ export function getReactantPlatform(
   );
   return platform;
 }
+
+export * from './types';

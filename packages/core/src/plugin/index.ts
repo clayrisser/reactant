@@ -1,10 +1,10 @@
 import mergeConfiguration from 'merge-configuration';
 import path from 'path';
 import { oc } from 'ts-optchain.macro';
+import { Config } from '../types';
 import {
   CalculatedPlugin,
   CalculatedPlugins,
-  Config,
   Plugin,
   PluginOptions,
   Plugins
@@ -49,16 +49,24 @@ export function getReactantPlugins(config: Config): CalculatedPlugins {
         moduleName,
         path: pluginPath
       };
+      plugin.options = (plugin.defaultOptions as unknown) as PluginOptions;
+      delete plugin.defaultOptions;
+      if (plugin.options.supportedPlatforms) {
+        plugin.supportedPlatforms = [
+          ...plugin.supportedPlatforms,
+          ...plugin.options.supportedPlatforms
+        ];
+      }
       if (
+        !plugin.supportedPlatforms.includes(config._platform.moduleName) &&
         !plugin.supportedPlatforms.includes(config._platform.name) &&
-        !plugin.supportedPlatforms.includes(config._platform.moduleName)
+        !plugin.supportedPlatforms.includes(config._platform.origionalName)
       ) {
         return plugins as CalculatedPlugins;
       }
       if (!plugin.name) plugin.name = moduleName;
-      else plugins[moduleName] = plugin;
-      plugin.options = (plugin.defaultOptions as unknown) as PluginOptions;
-      delete plugin.defaultOptions;
+      plugin.origionalName = plugin.name;
+      if (plugin.options.name) plugin.name = plugin.options.name;
       plugins[plugin.name] = plugin;
       return plugins as CalculatedPlugins;
     }, {});
@@ -78,3 +86,5 @@ export function getReactantPlugin(
   );
   return plugin;
 }
+
+export * from './types';
