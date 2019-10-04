@@ -28,6 +28,7 @@ export function postProcessSync<T = Config>(
   if (initializing || !_postConfigCache.platform || !_postConfigCache.plugins) {
     const platform = getReactantPlatform(config.platformName, config);
     _postConfigCache.platform = platform;
+    config._platform = platform;
     const plugins = getReactantPlugins(config);
     _postConfigCache.plugins = plugins;
   }

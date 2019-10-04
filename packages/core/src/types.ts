@@ -213,6 +213,7 @@ export interface Plugin {
   config?: Config | ModifyConfigFunction;
   defaultOptions?: Partial<PluginOptions>;
   name?: string;
+  supportedPlatforms?: string[];
 }
 
 export interface CalculatedPlugin extends Plugin {
@@ -221,6 +222,7 @@ export interface CalculatedPlugin extends Plugin {
   name: string;
   options: PluginOptions;
   path: string;
+  supportedPlatforms: string[];
 }
 
 export interface Plugins<TPlugin = Plugin> {

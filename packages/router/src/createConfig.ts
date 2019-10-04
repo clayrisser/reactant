@@ -1,5 +1,5 @@
-// import { Config } from '@reactant/plugin';
+import { Config } from '@reactant/plugin';
 
-// export default function createConfig(config: Config): Config {
-//   return config;
-// }
+export default function createConfig(config: Config): Config {
+  return config;
+}

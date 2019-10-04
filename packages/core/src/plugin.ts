@@ -49,6 +49,12 @@ export function getReactantPlugins(config: Config): CalculatedPlugins {
         moduleName,
         path: pluginPath
       };
+      if (
+        !plugin.supportedPlatforms.includes(config._platform.name) &&
+        !plugin.supportedPlatforms.includes(config._platform.moduleName)
+      ) {
+        return plugins as CalculatedPlugins;
+      }
       if (!plugin.name) plugin.name = moduleName;
       else plugins[moduleName] = plugin;
       plugin.options = (plugin.defaultOptions as unknown) as PluginOptions;

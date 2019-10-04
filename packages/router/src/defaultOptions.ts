@@ -1,3 +1,3 @@
-// import { PluginOptions } from '@reactant/plugin';
+import { PluginOptions } from '@reactant/plugin';
 
-// export default {} as Partial<PluginOptions>;
+export default {} as Partial<PluginOptions>;
