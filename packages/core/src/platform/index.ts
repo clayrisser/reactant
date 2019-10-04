@@ -12,7 +12,7 @@ import {
 
 let _platforms: CalculatedPlatforms;
 
-export function requireDefault<T = any>(moduleName: string): T {
+function requireDefault<T = any>(moduleName: string): T {
   const required = require(moduleName);
   if (required.__esModule && required.default) return required.default;
   return required;
