@@ -1,6 +1,6 @@
 {
   "name": "@reactant/platform",
-  "version": "0.0.132",
+  "version": "0.0.133",
   "description": "reactant platform",
   "keywords": [
     "@reactant/platform",
@@ -44,8 +44,8 @@
   "dependencies": {
     "@babel/core": "^7.6.2",
     "@craco/craco": "^5.5.0",
-    "@reactant/config": "^0.0.132",
-    "@reactant/core": "^0.0.132",
+    "@reactant/config": "^0.0.133",
+    "@reactant/core": "^0.0.133",
     "@types/webpack": "^4.39.2",
     "async-cross-spawn": "^0.0.2",
     "err": "^2.1.11",
