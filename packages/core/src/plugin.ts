@@ -1,5 +1,14 @@
+import mergeConfiguration from 'merge-configuration';
 import path from 'path';
-import { Config, CalculatedPlugins, Plugins, Plugin } from './types';
+import { oc } from 'ts-optchain.macro';
+import {
+  CalculatedPlugin,
+  CalculatedPlugins,
+  Config,
+  Plugin,
+  PluginOptions,
+  Plugins
+} from './types';
 
 let _plugins: CalculatedPlugins;
 
@@ -9,9 +18,7 @@ export function requireDefault<T = any>(moduleName: string): T {
   return required;
 }
 
-export async function getReactantPlugins(
-  config: Config
-): Promise<CalculatedPlugins> {
+export function getReactantPlugins(config: Config): CalculatedPlugins {
   if (_plugins && Object.keys(_plugins).length) return _plugins;
   const dependencyNames: string[] = Object.keys(
     require(path.resolve(config.rootPath, 'package.json')).dependencies
@@ -25,35 +32,43 @@ export async function getReactantPlugins(
         'package.json'
       )).reactantPlugin;
     })
-    .reduce((platforms: Plugins, platformName: string) => {
-      const platform = {
-        ...requireDefault(
-          path.resolve(
-            config.rootPath,
-            'node_modules',
-            platformName,
-            require(path.resolve(
-              config.rootPath,
-              'node_modules',
-              platformName,
-              'package.json'
-            )).reactantPlugin
-          )
-        ),
-        moduleName: platformName
+    .reduce((plugins: Plugins, moduleName: string) => {
+      const pluginPath = path.resolve(
+        config.rootPath,
+        'node_modules',
+        moduleName,
+        require(path.resolve(
+          config.rootPath,
+          'node_modules',
+          moduleName,
+          'package.json'
+        )).reactantPlugin
+      );
+      const plugin: Plugin & CalculatedPlugin = {
+        ...requireDefault(pluginPath),
+        moduleName,
+        path: pluginPath
       };
-      if (!platform.name) platform.name = platformName;
-      else platforms[platformName] = platform;
-      platforms[platform.name] = platform;
-      return platforms as CalculatedPlugins;
+      if (!plugin.name) plugin.name = moduleName;
+      else plugins[moduleName] = plugin;
+      plugin.options = (plugin.defaultOptions as unknown) as PluginOptions;
+      delete plugin.defaultOptions;
+      plugins[plugin.name] = plugin;
+      return plugins as CalculatedPlugins;
     }, {});
   return _plugins;
 }
 
-export async function getReactantPlugin(
-  platformName: string,
+export function getReactantPlugin(
+  pluginName: string,
   config: Config
-): Promise<Plugin> {
-  const platforms: Plugins = await getReactantPlugins(config);
-  return platforms[platformName];
+): CalculatedPlugin {
+  const userPluginOptions = oc(config).plugins[pluginName]({} as PluginOptions);
+  const plugins = getReactantPlugins(config);
+  const plugin = plugins[pluginName];
+  plugin.options = mergeConfiguration<PluginOptions>(
+    plugin.options,
+    userPluginOptions
+  );
+  return plugin;
 }

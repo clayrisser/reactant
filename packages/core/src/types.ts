@@ -3,10 +3,12 @@ import { Config as BaseConfig } from '@ecosystem/core';
 export type BabelOptions = import('@babel/core').TransformOptions;
 export type BabelPlugin = import('@babel/core').PluginItem;
 export type CalculatedPlatforms = Platforms<CalculatedPlatform>;
+export type CalculatedPlugins = Plugins<CalculatedPlugin>;
 export type CracoDevServer = WebpackConfig | Function;
 export type Function = (...args: any[]) => any;
 export type Logger = import('@ecosystem/core').Logger;
 export type PlatformOption = any;
+export type PluginOption = any;
 export type Port = number | boolean | null;
 export type SpawnOptions = import('child_process').SpawnOptions;
 export type WebpackConfig = import('webpack').Configuration;
@@ -152,8 +154,14 @@ export interface PlatformsOptions {
   [key: string]: PlatformsOptions;
 }
 
+export interface PluginsOptions {
+  [key: string]: PluginsOptions;
+}
+
 export interface Config extends BaseConfig {
   [key: string]: any;
+  _platform: CalculatedPlatform;
+  _plugins: CalculatedPlugins;
   _state: ConfigState;
   babel?: CracoBabel;
   basePort: number;
@@ -164,9 +172,9 @@ export interface Config extends BaseConfig {
   eslint?: CracoEslint;
   jest?: CracoJest;
   paths: Paths;
-  platform: CalculatedPlatform;
   platformName: string;
   platforms: Partial<PlatformsOptions>;
+  plugins: Partial<PluginsOptions>;
   ports: Ports;
   reactScriptsVersion?: string;
   style?: CracoStyle;
@@ -197,25 +205,24 @@ export interface PlatformApi {
   cleanPaths(additionalPaths?: string[], config?: Config): Promise<void>;
 }
 
+export interface PluginOptions {
+  [key: string]: PluginOption;
+}
+
 export interface Plugin {
+  config?: Config | ModifyConfigFunction;
   defaultOptions?: Partial<PluginOptions>;
   name?: string;
 }
 
-export type PluginOption = any;
-
-export interface PluginOptions {
-  [key: string]: PluginOption;
+export interface CalculatedPlugin extends Plugin {
+  defaultOptions: undefined;
+  moduleName: string;
+  name: string;
+  options: PluginOptions;
+  path: string;
 }
 
 export interface Plugins<TPlugin = Plugin> {
   [key: string]: TPlugin;
 }
-
-export interface CalculatedPlugin extends Plugin {
-  moduleName: string;
-  name: string;
-  options: PluginOptions;
-}
-
-export type CalculatedPlugins = Plugins<CalculatedPlugin>;

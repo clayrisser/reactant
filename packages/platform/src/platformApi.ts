@@ -58,7 +58,7 @@ export default class PlatformApi {
   }
 
   get options(): PlatformOptions {
-    return this.config.platform.options;
+    return this.config._platform.options;
   }
 
   async spawn(

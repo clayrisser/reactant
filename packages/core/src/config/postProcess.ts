@@ -1,13 +1,23 @@
 import mergeConfiguration from 'merge-configuration';
 import { CalculatePaths } from './paths';
 import { CalculatePorts } from './ports';
-import { Config, CalculatedPlatform } from '../types';
 import { getReactantPlatform } from '../platform';
+import { getReactantPlugins } from '../plugin';
 import { mapCraco } from './mapConfig';
 import { preAction } from '../action';
+import {
+  Config,
+  CalculatedPlatform,
+  CalculatedPlugins,
+  CalculatedPlugin
+} from '../types';
 
-const _postConfigCache: { platform: CalculatedPlatform | null } = {
-  platform: null
+const _postConfigCache: {
+  platform: CalculatedPlatform | null;
+  plugins: CalculatedPlugins | null;
+} = {
+  platform: null,
+  plugins: null
 };
 
 export function postProcessSync<T = Config>(
@@ -15,21 +25,31 @@ export function postProcessSync<T = Config>(
   initializing = false
 ): T {
   let config: Config = (_config as unknown) as Config;
-  if (initializing || !_postConfigCache.platform) {
+  if (initializing || !_postConfigCache.platform || !_postConfigCache.plugins) {
     const platform = getReactantPlatform(config.platformName, config);
     _postConfigCache.platform = platform;
+    const plugins = getReactantPlugins(config);
+    _postConfigCache.plugins = plugins;
   }
-  config.platform = _postConfigCache.platform;
-  if (config.platform) {
-    if (typeof config.platform.config === 'function') {
-      config = config.platform.config(config, config.platform.options);
-    } else if (
-      config.platform.config &&
-      typeof config.platform.config === 'object'
-    ) {
-      config = mergeConfiguration<Config>(config, config.platform.config);
+  config._platform = _postConfigCache.platform;
+  config._plugins = _postConfigCache.plugins;
+  if (typeof config._platform.config === 'function') {
+    config = config._platform.config(config, config._platform.options);
+  } else if (
+    config._platform.config &&
+    typeof config._platform.config === 'object'
+  ) {
+    config = mergeConfiguration<Config>(config, config._platform.config);
+  }
+  Object.entries(config._plugins).forEach(
+    ([_pluginName, plugin]: [string, CalculatedPlugin]) => {
+      if (typeof plugin.config === 'function') {
+        config = plugin.config(config, config._platform.options);
+      } else if (config._platform.config && typeof plugin.config === 'object') {
+        config = mergeConfiguration<Config>(config, plugin.config);
+      }
     }
-  }
+  );
   config.craco = mapCraco(config);
   return (config as unknown) as T;
 }
