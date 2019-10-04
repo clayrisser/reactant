@@ -1,10 +1,10 @@
 {
   "name": "web",
-  "version": "0.0.134",
+  "version": "0.0.135",
   "private": true,
   "dependencies": {
-    "@reactant/router": "^0.0.134",
-    "@reactant/web": "^0.0.134",
+    "@reactant/router": "^0.0.135",
+    "@reactant/web": "^0.0.135",
     "@types/jest": "24.0.18",
     "@types/node": "12.7.8",
     "@types/react": "16.9.3",
@@ -36,6 +36,6 @@
     ]
   },
   "devDependencies": {
-    "@reactant/cli": "^0.0.134"
+    "@reactant/cli": "^0.0.135"
   }
 }
