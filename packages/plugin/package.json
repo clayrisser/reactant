@@ -1,6 +1,6 @@
 {
   "name": "@reactant/plugin",
-  "version": "0.0.136",
+  "version": "0.0.137",
   "description": "reactant plugin",
   "keywords": [
     "@reactant/plugin",
@@ -40,7 +40,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/core": "^0.0.136"
+    "@reactant/core": "^0.0.137"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
