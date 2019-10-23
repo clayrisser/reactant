@@ -13,8 +13,8 @@ export default async function start(
   await platformApi.createCracoConfig(cracoConfigPath, config);
   logger.spinner.succeed('prepared start');
   return platformApi.spawn('expo-cli', 'expo', [
-    'start',
-    '--config',
-    path.resolve(config.rootPath, config.platformName, 'app.json')
+    'start'
+    // '--config',
+    // path.resolve(config.rootPath, config.platformName, 'app.json')
   ]);
 }

@@ -69,6 +69,8 @@ export default class PlatformApi {
   ) {
     options = {
       stdio: 'inherit',
+      shell: true,
+      env: process.env,
       ...options
     };
     const pkgPath = await pkgDir(require.resolve(pkg));

@@ -24,3 +24,5 @@ yarn-error.log*
 .tmp
 dist
 react-app-env.d.ts
+/.expo
+/.expo-shared
