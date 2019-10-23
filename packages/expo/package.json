@@ -1,14 +1,14 @@
 {
-  "name": "@reactant/web",
+  "name": "@reactant/expo",
   "version": "0.0.138",
-  "description": "reactant platform for web",
+  "description": "reactant platform for expo",
   "keywords": [
-    "@reactant/web",
+    "@reactant/expo",
     "reactant",
-    "web",
+    "expo",
     "react"
   ],
-  "homepage": "https://github.com/codejamninja/reactant/packages/web",
+  "homepage": "https://github.com/codejamninja/reactant/packages/expo",
   "bugs": {
     "url": "https://github.com/codejamninja/reactant/issues",
     "email": "jam@codejam.ninja"
@@ -41,12 +41,14 @@
   },
   "dependencies": {
     "@reactant/platform": "^0.0.138",
-    "react-scripts": "^3.2.0",
+    "babel-preset-expo": "^7.1.0",
+    "expo": "^35.0.0",
+    "expo-cli": "^3.4.1",
     "webpack": "^4.41.0"
   },
   "peerDependencies": {
     "react": "^16.10.2",
-    "react-dom": "^16.10.1"
+    "react-native": "^0.61.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
