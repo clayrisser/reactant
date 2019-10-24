@@ -75,6 +75,7 @@
     "eslint-config-jam": "^0.2.20",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.15.1",
+    "expo-cli": "^3.4.1",
     "jest": "^24.9.0",
     "tsc": "^1.20150623.0",
     "typescript": "3.6.3"

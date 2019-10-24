@@ -1,6 +1,6 @@
 {
-  "name": "expo",
-  "main": "node_modules/expo/AppEntry.js",
+  "name": "_expo",
+  "main": "expo/index.js",
   "version": "0.0.138",
   "private": true,
   "dependencies": {

@@ -1,12 +1,10 @@
-// import { registerRootComponent } from 'expo';
-// import e from 'expo';
-// import { activateKeepAwake } from 'expo-keep-awake';
-// import App from './App';
+import { registerRootComponent } from 'expo/build/ExpoLazy';
+import { activateKeepAwake } from 'expo-keep-awake';
 
-// console.log('I AM HERE');
+import App from '../../expo/App';
 
-// if (__DEV__) activateKeepAwake();
+if (__DEV__) {
+  activateKeepAwake();
+}
 
-// console.error('App', registerRootComponent);
-
-// registerRootComponent(App);
+registerRootComponent(App);

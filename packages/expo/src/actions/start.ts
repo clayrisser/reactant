@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'fs-extra';
 import { Config, Logger, PlatformApi } from '@reactant/platform';
 
 export default async function start(
@@ -12,9 +13,14 @@ export default async function start(
   await platformApi.prepareLocal(config);
   await platformApi.createCracoConfig(cracoConfigPath, config);
   logger.spinner.succeed('prepared start');
+  await fs.copy(
+    path.resolve(config.rootPath, config.platformName, 'index.js'),
+    path.resolve(config.rootPath, 'node_modules/expo/AppEntry.js')
+  );
   return platformApi.spawn('expo-cli', 'expo', [
-    'start'
-    // '--config',
-    // path.resolve(config.rootPath, config.platformName, 'app.json')
+    'start',
+    '--config',
+    path.resolve(config.rootPath, config.platformName, 'app.json'),
+    '--clear'
   ]);
 }
