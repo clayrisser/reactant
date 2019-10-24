@@ -9,4 +9,4 @@ export function createWebpack() {
   return result;
 }
 
-module.exports = createWebpack();
+export default createWebpack();
