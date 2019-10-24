@@ -105,7 +105,10 @@ export default class PlatformApi {
       webpackConfigPath = path.resolve(paths.tmp, 'webpack.config.js');
     }
     await this.createCracoConfig(
-      oc(webpackConfigPath.match(/[^/]+$/))[0](paths.tmp),
+      path.resolve(
+        oc(webpackConfigPath.match(/^.+\//))[0](paths.tmp),
+        'craco.config.js'
+      ),
       config
     );
     if (await fs.pathExists(webpackConfigPath)) {
