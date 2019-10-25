@@ -23,5 +23,8 @@
   "devDependencies": {
     "lerna": "^3.14.1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@reactant/eslint": "^0.1.139"
+  }
 }

@@ -1,6 +1,6 @@
 {
-  "name": "@reactant/eslint",
-  "version": "0.1.139",
+  "name": "eslint-config-reactant",
+  "version": "0.1.140",
   "description": "reactant eslint",
   "keywords": [
     "reactant",
@@ -18,8 +18,9 @@
     "url": "https://codejam.ninja"
   },
   "files": [
-    "bin.js",
-    "lib"
+    "base.js",
+    "lib",
+    "typescript"
   ],
   "main": "lib/index.js",
   "bin": {

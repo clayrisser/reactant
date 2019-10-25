@@ -48,6 +48,7 @@
     "@oclif/errors": "^1.2.2",
     "@oclif/parser": "^3.8.4",
     "@reactant/core": "0.0.138",
+    "@reactant/eslint": "^0.1.139",
     "fs-extra": "^8.1.0",
     "pkg-dir": "^4.2.0"
   },
