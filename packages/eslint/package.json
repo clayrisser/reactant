@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-reactant",
-  "version": "0.1.140",
+  "version": "0.1.141",
   "description": "reactant eslint",
   "keywords": [
     "reactant",
@@ -40,6 +40,7 @@
     "test": "npm run lint:fix"
   },
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.5.0",
     "@typescript-eslint/parser": "^2.5.0",
     "babel-eslint": "^10.0.3",
     "core-js": "^3.3.3",
