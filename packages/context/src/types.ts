@@ -1,6 +1,8 @@
-import { Config } from '@reactant/config';
 import { Platform } from '@reactant/platform';
 import { Plugins } from '@reactant/plugin';
+
+// TODO
+export type Config = any;
 
 export interface Options {}
 

@@ -14,8 +14,9 @@ export function getContext(): Context {
 }
 
 export function syncContext(
-  callback: SyncContextCallback
+  callback?: SyncContextCallback
 ): Context | Promise<Context> {
+  if (!callback) return getContext() as Context;
   if (
     // eslint-disable-next-line no-undef,no-restricted-globals
     callback?.constructor?.name === 'AsyncFunction' ||

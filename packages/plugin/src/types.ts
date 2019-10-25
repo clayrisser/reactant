@@ -1,4 +1,5 @@
-import { Config } from '@reactant/config';
+// TODO
+export type Config = any;
 
 export interface Plugin {
   config: ModifyPluginConfigFunction;

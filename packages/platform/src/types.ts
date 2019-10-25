@@ -1,5 +1,7 @@
-import { Config } from '@reactant/config';
 import PlatformApi from './platformApi';
+
+// TODO
+export type Config = any;
 
 // TODO
 export type Context = any;

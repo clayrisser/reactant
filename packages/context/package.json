@@ -39,7 +39,6 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.6.0",
-    "@reactant/config": "^0.0.138",
     "@reactant/platform": "^0.0.138",
     "@reactant/plugin": "^0.0.138",
     "core-js": "^3.2.1"
