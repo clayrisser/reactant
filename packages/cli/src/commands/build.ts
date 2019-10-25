@@ -12,9 +12,8 @@ export default class Build extends Command {
   static args = [{ name: 'PLATFORM', required: true }];
 
   async run() {
-    const { args, flags } = this.parse(Build);
+    const { args } = this.parse(Build);
     // TODO
-    await build(args.PLATFORM, (flags as unknown) as Options);
-    return { args, flags };
+    return build(args.PLATFORM, ({} as unknown) as Options);
   }
 }

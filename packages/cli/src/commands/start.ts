@@ -12,9 +12,8 @@ export default class Start extends Command {
   static args = [{ name: 'PLATFORM', required: true }];
 
   async run() {
-    const { args, flags } = this.parse(Start);
+    const { args } = this.parse(Start);
     // TODO
-    await start(args.PLATFORM, (flags as unknown) as Options);
-    return { args, flags };
+    return start(args.PLATFORM, ({} as unknown) as Options);
   }
 }

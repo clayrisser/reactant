@@ -37,7 +37,7 @@
     "lint": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx ./",
     "lint:fix": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx --fix ./",
     "prepublish": "npm run build",
-    "start": "babel-node src --extensions \".ts,.tsx\"",
+    "start": "babel-node --extensions \".ts,.tsx\" src/bin",
     "test": "npm run lint:fix && jest --coverage",
     "test:watch": "npm run lint && jest --watch"
   },
@@ -78,7 +78,7 @@
   },
   "oclif": {
     "commands": "./lib/commands",
-    "bin": "tsdpm",
+    "bin": "reactant",
     "plugins": [
       "@oclif/plugin-help"
     ],

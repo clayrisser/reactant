@@ -12,6 +12,6 @@ export interface Context {
   plugins: Plugins;
 }
 
-export type SyncContextSyncCallback = (context: Context) => Context;
-
-export type SyncContextCallback = (context: Context) => Promise<Context>;
+export type SyncContextCallback = (
+  context: Context
+) => Context | Promise<Context>;

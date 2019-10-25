@@ -12,9 +12,8 @@ export default class Clean extends Command {
   static args = [{ name: 'PLATFORM', required: false }];
 
   async run() {
-    const { args, flags } = this.parse(Clean);
+    const { args } = this.parse(Clean);
     // TODO
-    await clean(args.PLATFORM, (flags as unknown) as Options);
-    return { args, flags };
+    return clean(args.PLATFORM, ({} as unknown) as Options);
   }
 }

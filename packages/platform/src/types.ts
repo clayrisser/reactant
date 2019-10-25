@@ -22,7 +22,7 @@ export interface Actions {
 
 export interface Platform {
   actions: Actions;
-  config: Config | ModifyPlatformConfigFunction;
+  config: ModifyPlatformConfigFunction;
   defaultOptions: Partial<PlatformOptions>;
   name: string;
 }

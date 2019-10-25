@@ -33,7 +33,7 @@
     "lint": "npm run format && tsc --allowJs --noEmit && eslint --ext .ts,.tsx ./",
     "lint:fix": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx --fix ./",
     "prepublish": "npm run build",
-    "start": "babel-node src --extensions \".ts,.tsx\"",
+    "start": "babel-node --extensions \".ts,.tsx\" src",
     "test": "npm run lint:fix && jest --coverage",
     "test:watch": "npm run lint && jest --watch"
   },
@@ -41,6 +41,7 @@
     "@reactant/context": "^0.0.138",
     "@reactant/platform": "^0.0.138",
     "@reactant/plugin": "^0.0.138",
+    "bluebird": "^3.7.1",
     "core-js": "^3.2.1"
   },
   "devDependencies": {
@@ -49,10 +50,11 @@
     "@babel/node": "^7.6.2",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-typescript": "^7.6.0",
+    "@types/bluebird": "^3.5.28",
     "@types/core-js": "^2.5.2",
     "@types/jest": "^24.0.18",
     "eslint": "^6.4.0",
-    "eslint-config-reactant": "^0.1.141",
+    "eslint-config-reactant": "^0.1.142",
     "jest": "^24.9.0",
     "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
     "typescript": "3.7.0-dev.20191021"

@@ -1,16 +1,18 @@
 import { Config } from '@reactant/config';
 
 export interface Plugin {
-  config: Config | ModifyPluginConfigFunction;
+  config: ModifyPluginConfigFunction;
   defaultOptions: Partial<PluginOptions>;
   name: string;
   supportedPlatforms: string[];
 }
+
 export interface Plugins {
   [key: string]: Plugin;
 }
 
 export type PluginOption = any;
+
 export interface PluginOptions {
   supportedPlatforms: string[];
   [key: string]: PluginOption;
