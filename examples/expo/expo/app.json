@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "some-expo",
-    "slug": "some-expo",
+    "name": "example-expo",
+    "slug": "example-expo",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./expo/assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./expo/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

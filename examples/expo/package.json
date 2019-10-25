@@ -1,45 +1,29 @@
 {
-  "name": "expo_",
+  "name": "example-expo",
   "main": "node_modules/expo/AppEntry.js",
   "version": "0.0.138",
   "private": true,
-  "dependencies": {
-    "@reactant/expo": "^0.0.138",
-    "@reactant/router": "^0.0.138",
-    "@types/jest": "24.0.18",
-    "@types/node": "12.7.8",
-    "expo": "^35.0.0",
-    "react": "16.8.3",
-    "react-dom": "16.8.3",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
-    "react-native-web": "^0.11.7"
-  },
   "scripts": {
     "build": "reactant build -p expo",
     "clean": "reactant clean -p expo",
     "start": "reactant start -p expo",
     "test": "reactant test -p expo"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "@reactant/expo": "^0.0.138",
+    "@reactant/router": "^0.0.138",
+    "expo": "^35.0.0",
+    "react": "16.8.3",
+    "react-dom": "16.8.3",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
+    "react-native-web": "^0.11.7"
   },
   "devDependencies": {
     "@reactant/cli": "^0.0.138",
     "@types/react": "^16.8.23",
     "@types/react-native": "^0.57.65",
-    "babel-preset-expo": "^7.1.0",
+    "@types/jest": "24.0.18",
+    "@types/node": "12.7.8",
     "core-js": "^3.2.1",
     "typescript": "^3.6.3"
   }

@@ -3,10 +3,8 @@
   "version": "0.0.138",
   "description": "reactant cli",
   "keywords": [
-    "@reactant/cli",
     "reactant",
-    "cli",
-    "react"
+    "cli"
   ],
   "homepage": "https://github.com/codejamninja/reactant/packages/cli",
   "bugs": {
@@ -32,11 +30,11 @@
     "url": "https://github.com/codejamninja/reactant"
   },
   "scripts": {
-    "build": "npm run test && babel src -d lib --extensions \".ts,.tsx\" --source-maps inline && tsc -d --emitDeclarationOnly",
+    "build": "npm run test && babel src -d lib --extensions \".ts,.tsx\" --source-maps inline && tsc -d --emitDeclarationOnly && oclif-dev manifest",
     "clean": "git clean -fXd -e \\!node_modules -e \\!node_modules/**/* && jest --clearCache",
     "clean:purge": "jest --clearCache && git clean -fXd",
     "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
-    "lint": "npm run format && tsc --allowJs --noEmit && eslint --ext .ts,.tsx ./",
+    "lint": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx ./",
     "lint:fix": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx --fix ./",
     "prepublish": "npm run build",
     "start": "babel-node src --extensions \".ts,.tsx\"",
@@ -45,37 +43,33 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
-    "@ecosystem/config": "^0.6.11",
-    "@ecosystem/core": "^0.6.11",
     "@oclif/command": "^1.5.19",
+    "@oclif/config": "^1.13.3",
     "@oclif/errors": "^1.2.2",
     "@oclif/parser": "^3.8.4",
-    "@reactant/core": "^0.0.138",
-    "@reactant/platform": "^0.0.138",
-    "@reactant/plugin": "^0.0.138",
-    "err": "^2.1.11",
+    "@reactant/core": "0.0.138",
     "fs-extra": "^8.1.0",
-    "npm-pkg-json": "^0.1.0",
-    "pkg-dir": "^4.2.0",
-    "ts-optchain.macro": "^1.1.5"
+    "pkg-dir": "^4.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.2",
-    "@babel/core": "^7.6.2",
-    "@babel/node": "^7.6.2",
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
     "@babel/preset-typescript": "^7.6.0",
-    "@types/fs-extra": "^8.0.0",
-    "@types/jest": "^24.0.18",
+    "@oclif/dev-cli": "^1.22.2",
+    "@types/fs-extra": "^8.0.1",
+    "@types/jest": "^24.0.19",
     "@types/pkg-dir": "^2.0.1",
-    "@typescript-eslint/eslint-plugin": "^2.3.1",
-    "@typescript-eslint/parser": "^2.3.1",
-    "babel-preset-jam": "^0.4.3",
-    "eslint": "^6.4.0",
-    "eslint-config-airbnb-typescript": "^5.0.0",
-    "eslint-config-jam": "^0.2.20",
+    "@typescript-eslint/eslint-plugin": "^2.5.0",
+    "@typescript-eslint/parser": "^2.5.0",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-typescript": "^6.0.0",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-import": "^2.18.2",
     "jest": "^24.9.0",
-    "tsc": "^1.20150623.0",
-    "typescript": "3.6.3"
+    "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
+    "typescript": "next"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -87,5 +81,14 @@
     "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
     "verbose": true
   },
-  "gitHead": "22c5b87fb5880ecc095e7ed0e79e0737813fb0a3"
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "tsdpm",
+    "plugins": [
+      "@oclif/plugin-help"
+    ],
+    "hooks": {
+      "init": "./lib/hooks/init"
+    }
+  }
 }
