@@ -1,6 +1,6 @@
 {
   "name": "@reactant/cli",
-  "version": "0.0.138",
+  "version": "0.0.139",
   "description": "reactant cli",
   "keywords": [
     "reactant",
@@ -49,6 +49,7 @@
     "@oclif/parser": "^3.8.4",
     "@reactant/core": "0.0.138",
     "@reactant/eslint": "^0.1.139",
+    "err": "^2.1.11",
     "fs-extra": "^8.1.0",
     "pkg-dir": "^4.2.0"
   },
@@ -65,12 +66,10 @@
     "@typescript-eslint/eslint-plugin": "^2.5.0",
     "@typescript-eslint/parser": "^2.5.0",
     "eslint": "^6.5.1",
-    "eslint-config-airbnb-typescript": "^6.0.0",
-    "eslint-config-prettier": "^6.4.0",
-    "eslint-plugin-import": "^2.18.2",
+    "eslint-config-reactant": "^0.1.140",
     "jest": "^24.9.0",
     "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
-    "typescript": "next"
+    "typescript": "3.7.0-dev.20191021"
   },
   "engines": {
     "node": ">=6.0.0"
