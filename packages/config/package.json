@@ -40,7 +40,6 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/core": "0.0.138",
     "core-js": "^3.3.3"
   },
   "devDependencies": {
