@@ -1,4 +1,5 @@
 import { Command } from '@oclif/command';
+import { Options } from '@reactant/context';
 import { start } from '@reactant/core';
 
 export default class Start extends Command {
@@ -12,7 +13,8 @@ export default class Start extends Command {
 
   async run() {
     const { args, flags } = this.parse(Start);
-    await start();
+    // TODO
+    await start(args.PLATFORM, (flags as unknown) as Options);
     return { args, flags };
   }
 }

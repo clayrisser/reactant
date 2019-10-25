@@ -1,4 +1,6 @@
 import { Command } from '@oclif/command';
+import { Options } from '@reactant/context';
+import { build } from '@reactant/core';
 
 export default class Build extends Command {
   static description = 'build platform';
@@ -11,6 +13,8 @@ export default class Build extends Command {
 
   async run() {
     const { args, flags } = this.parse(Build);
+    // TODO
+    await build(args.PLATFORM, (flags as unknown) as Options);
     return { args, flags };
   }
 }
