@@ -3,8 +3,8 @@ import { activateKeepAwake } from 'expo-keep-awake';
 
 import App from '../../expo/App';
 
-if (__DEV__) {
-  activateKeepAwake();
-}
+// if (__DEV__) {
+//   activateKeepAwake();
+// }
 
 registerRootComponent(App);

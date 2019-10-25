@@ -36,28 +36,25 @@
     "lint:fix": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx --fix ./",
     "prepublish": "npm run build",
     "start": "babel-node src --extensions \".ts,.tsx\"",
-    "test": "npm run lint && jest --coverage",
+    "test": "npm run lint:fix && jest --coverage",
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/core": "^0.0.138",
-    "core-js": "^3.2.1"
+    "@reactant/core": "0.0.138",
+    "core-js": "^3.3.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.2",
-    "@babel/node": "^7.6.2",
+    "@babel/cli": "^7.6.4",
+    "@babel/node": "^7.6.3",
     "@babel/preset-typescript": "^7.6.0",
     "@types/core-js": "^2.5.2",
-    "@types/jest": "^24.0.18",
-    "@typescript-eslint/eslint-plugin": "^2.3.1",
-    "@typescript-eslint/parser": "^2.3.1",
+    "@types/jest": "^24.0.19",
     "babel-preset-jam": "^0.4.3",
-    "eslint": "^6.4.0",
-    "eslint-config-airbnb-typescript": "^5.0.0",
-    "eslint-config-jam": "^0.2.20",
+    "eslint": "^6.5.1",
+    "eslint-config-reactant": "^0.1.141",
     "jest": "^24.9.0",
-    "tsc": "^1.20150623.0",
-    "typescript": "3.6.3"
+    "prettier": "^1.18.2",
+    "typescript": "^3.6.4"
   },
   "engines": {
     "node": ">=6.0.0"

@@ -1,4 +1,5 @@
 import { Command } from '@oclif/command';
+import { start } from '@reactant/core';
 
 export default class Start extends Command {
   static description = 'start platform';
@@ -11,6 +12,7 @@ export default class Start extends Command {
 
   async run() {
     const { args, flags } = this.parse(Start);
+    await start();
     return { args, flags };
   }
 }
