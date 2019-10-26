@@ -6,85 +6,82 @@ import pkgDir from 'pkg-dir';
 
 const rootPath = pkgDir.sync(process.cwd()) || process.cwd();
 
-export interface Context {
-  [key: string]: any;
-}
-
-export default class State {
-  _context: Context = {};
+export default class State<
+  T = {
+    [key: string]: any;
+  }
+> {
+  _state: T = {} as T;
 
   currentProcStarted = false;
 
   isMaster = false;
 
-  contextPath: string;
+  statePath: string;
 
-  constructor(public name = 'reactant') {
-    this.contextPath = path.resolve(rootPath, '.tmp', this.name, 'context');
-    if (this.currentProcStarted) return;
+  constructor(public name = 'state', public projectName = 'reactant') {
+    this.statePath = path.resolve(rootPath, '.tmp', this.projectName, 'state');
+    if (this.currentProcStarted) return this;
     this.currentProcStarted = true;
-    if (this.isStarted) return;
-    const contextPath = `${this.contextPath}.json`;
-    // TODO: ?
-    fs.mkdirsSync(this.contextPath);
-    fs.removeSync(`${this.contextPath}.json`);
-    fs.removeSync(this.contextPath);
+    if (this.isStarted) return this;
     this.isMaster = true;
+    const statePath = `${this.statePath}.json`;
+    fs.mkdirsSync(this.statePath);
+    fs.removeSync(statePath);
     fs.writeFile(
-      contextPath,
+      statePath,
       CircularJSON.stringify({ master: { pid: process.pid } })
     );
   }
 
   get isStarted() {
-    const contextPath = `${this.contextPath}.json`;
-    const payload = JSON.parse(fs.readFileSync(contextPath).toString());
-    if (
-      fs.existsSync(contextPath) &&
+    const statePath = `${this.statePath}.json`;
+    return (
+      fs.existsSync(statePath) &&
       this.processAlive(
-        // TODO: oc
-        payload && payload.master && payload.master.pid
-          ? payload.master.pid
-          : null
+        // eslint-disable-next-line no-undef
+        JSON.parse(fs.readFileSync(statePath).toString())?.master?.pid || null
       )
-    ) {
-      return true;
-    }
-    return false;
+    );
   }
 
-  get context() {
-    if (this.isMaster) return this._context || null;
-    const contextPath = path.resolve(this.contextPath, `${this.name}.json`);
-    if (!fs.pathExistsSync(contextPath)) return null;
-    return JSON.parse(fs.readFileSync(contextPath).toString()).context;
+  get state(): T {
+    if (this.isMaster) return this._state;
+    const statePath = path.resolve(this.statePath, `${this.name}.json`);
+    if (!fs.pathExistsSync(statePath)) throw new Error('failed to get state');
+    return JSON.parse(fs.readFileSync(statePath).toString()).state;
   }
 
-  set context(context: any) {
+  set state(state: T) {
     if (this.isStarted && !this.isMaster) {
-      throw new Error('must be master to set context');
+      throw new Error('must be master to set state');
     }
-    Object.keys(this._context).forEach(key => {
-      delete this._context[key];
+    Object.keys(this._state).forEach((key: string) => {
+      // @ts-ignore
+      delete this._state[key];
     });
-    Object.assign(this._context, context);
-    const contextPath = path.resolve(this.contextPath, `${this.name}.json`);
-    fs.mkdirsSync(this.contextPath);
+    Object.assign(this._state, state);
+    const statePath = path.resolve(this.statePath, `${this.name}.json`);
+    fs.mkdirsSync(this.statePath);
     fs.writeFileSync(
-      contextPath,
-      CircularJSON.stringify({ context, master: { pid: process.pid } })
+      statePath,
+      CircularJSON.stringify({ state, master: { pid: process.pid } })
     );
   }
 
   processAlive(pid: number) {
-    const { stdout } = crossSpawn.sync('find-process', [pid.toString()], {
-      stdio: 'pipe'
-    });
-    return !/No process found/.test(stdout ? stdout.toString() : '');
+    return !/No process found/.test(
+      (
+        crossSpawn.sync('find-process', [pid.toString()], {
+          stdio: 'pipe'
+          // eslint-disable-next-line no-undef
+        })?.stdout || ''
+      ).toString()
+    );
   }
 
   finish() {
-    fs.removeSync(`${this.contextPath}.json`);
-    fs.removeSync(this.contextPath);
+    fs.removeSync(`${this.statePath}.json`);
+    fs.removeSync(this.statePath);
   }
 }

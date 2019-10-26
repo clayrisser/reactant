@@ -1,17 +1,15 @@
-import State from './state'
+import State from './state';
 import { Context, SyncContextCallback } from './types';
 
-const state = new State<Partial<Context>>()
-
-export function setContext(context: Partial<Context>): Context {
-  // TODO
-  Object.assign(state.context, context);
-  return (state.context as unknown) as Context;
-}
+const state = new State<Partial<Context>>('context');
 
 export function getContext(): Context {
-  // TODO
-  return (state.context as unknown) as Context;
+  return (state.state as unknown) as Context;
+}
+
+export function setContext(context: Partial<Context>): Context {
+  state.state = context;
+  return getContext();
 }
 
 export function syncContext(
