@@ -6,6 +6,7 @@ export default async function start(
   options: Options = {}
 ): Promise<Context> {
   const context = await bootstrap(platform, options);
+  console.log('context', context);
   // TODO
   return context;
 }

@@ -24,7 +24,7 @@ export default async function bootstrap(
     context.config = await context.platform.config(context.config);
     return context;
   });
-  const context = await syncContext(async (context: Context) => {
+  return syncContext(async (context: Context) => {
     context.plugins = await loadPlugins(context);
     await mapSeries(
       Object.entries(context.plugins),
@@ -34,6 +34,4 @@ export default async function bootstrap(
     );
     return context;
   });
-  console.log('context', context);
-  return context;
 }
