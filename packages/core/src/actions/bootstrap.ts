@@ -1,6 +1,6 @@
 import { Context, Options, syncContext } from '@reactant/context';
 import { Plugin } from '@reactant/plugin';
-import { getConfig } from '@reactant/config';
+import { loadConfig } from '@reactant/config';
 import { mapSeries } from 'bluebird';
 import { loadPlatform } from '../platform';
 import { loadPlugins } from '../plugin';
@@ -16,7 +16,7 @@ export default async function bootstrap(
   });
   await syncContext(async (context: Context) => {
     // TODO 0
-    context.config = getConfig();
+    context.config = loadConfig();
     return context;
   });
   await syncContext(async (context: Context) => {

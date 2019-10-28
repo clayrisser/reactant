@@ -1,7 +1,11 @@
 import State from './state';
 import { Context, SyncContextCallback } from './types';
 
-const state = new State<Partial<Context>>('context');
+export function postprocess(context: Context): Context {
+  return context;
+}
+
+const state = new State<Partial<Context>>('context', postprocess);
 
 export function getContext(): Context {
   return (state.state as unknown) as Context;

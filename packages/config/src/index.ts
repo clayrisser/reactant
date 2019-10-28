@@ -7,7 +7,7 @@ import { Config } from './types';
 
 const rootPath = pkgDir.sync(process.cwd()) || process.cwd();
 
-export function loadUserConfig(): Partial<Config> {
+export function getUserConfig(): Partial<Config> {
   let userConfig: Partial<Config> = {};
   try {
     const payload = cosmiconfig('reactant').searchSync(rootPath);
@@ -24,11 +24,23 @@ export function loadUserConfig(): Partial<Config> {
 }
 
 export function loadConfig(): Config {
-  return mergeConfiguration<Config>(defaultConfig, loadUserConfig());
+  return mergeConfiguration<Config>(defaultConfig, getUserConfig());
 }
 
 export function getConfig(): Config {
   return (syncContext() as Context).config;
 }
+
+export function setConfig(config: Config, merge = true): Config {
+  syncContext((context: Context) => {
+    context.config = merge
+      ? mergeConfiguration<Config>(context.config, config)
+      : config;
+    return context.config;
+  });
+  return getConfig();
+}
+
+export default getConfig();
 
 export * from './types';

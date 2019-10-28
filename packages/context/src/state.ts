@@ -18,8 +18,9 @@ export default class State<
   isMaster = false;
 
   statePath: string;
+  projectName = 'reactant';
 
-  constructor(public name = 'state', public projectName = 'reactant') {
+  constructor(public name = 'state', public postprocess = (state: T) => state) {
     this.statePath = path.resolve(rootPath, '.tmp', this.projectName, 'state');
     if (this.currentProcStarted) return this;
     this.currentProcStarted = true;
