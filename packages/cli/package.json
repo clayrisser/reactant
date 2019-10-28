@@ -81,9 +81,6 @@
     "bin": "reactant",
     "plugins": [
       "@oclif/plugin-help"
-    ],
-    "hooks": {
-      "init": "./lib/hooks/init"
-    }
+    ]
   }
 }

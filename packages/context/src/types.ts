@@ -12,6 +12,7 @@ export interface Context {
   platform: Platform;
   platformName: string;
   plugins: Plugins;
+  state: { [key: string]: any };
 }
 
 export type SyncContextCallback = (

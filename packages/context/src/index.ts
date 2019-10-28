@@ -2,6 +2,7 @@ import State from './state';
 import { Context, SyncContextCallback } from './types';
 
 export function postprocess(context: Partial<Context>): Partial<Context> {
+  // TODO
   return context;
 }
 
@@ -14,6 +15,10 @@ export function getContext(): Context {
 export function setContext(context: Partial<Context>): Context {
   state.state = context;
   return getContext();
+}
+
+export function finish() {
+  return state.finish()
 }
 
 export function syncContext(

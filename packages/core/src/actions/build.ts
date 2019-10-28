@@ -1,4 +1,4 @@
-import { Context, Options } from '@reactant/context';
+import { Context, Options, finish } from '@reactant/context';
 import bootstrap from './bootstrap';
 
 export default async function build(
@@ -7,5 +7,13 @@ export default async function build(
 ): Promise<Context> {
   const context = await bootstrap(platform, options);
   // TODO
-  return context;
+  const logger = null;
+  const platformApi = null;
+  const result = await context.platform.actions.build(
+    context,
+    logger,
+    platformApi
+  );
+  finish();
+  return result;
 }

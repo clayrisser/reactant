@@ -2,7 +2,7 @@ import clone from 'lodash.clone';
 import mergeWith from 'lodash.mergewith';
 import uniq from 'lodash.uniq';
 
-export interface MergeConfigurationOptions {
+export interface MergeConfigOptions {
   _level: number;
   concat: boolean;
   dedup: boolean;
@@ -15,13 +15,13 @@ export type MergeModifier = <Config>(
   ...args: any[]
 ) => Partial<Config>;
 
-export default function mergeConfiguration<Config>(
+export default function mergeConfig<Config>(
   config: Config,
   modifier: Partial<Config> | MergeModifier,
-  partialOptions: Partial<MergeConfigurationOptions> = {},
+  partialOptions: Partial<MergeConfigOptions> = {},
   ...args: any[]
 ): Config {
-  const options: MergeConfigurationOptions = {
+  const options: MergeConfigOptions = {
     _level: 0,
     concat: true,
     dedup: true,
@@ -36,12 +36,7 @@ export default function mergeConfiguration<Config>(
     if (options._level > options.level) return (modifier as unknown) as Config;
     const modifiedConfig = modifier<Config>(config, ...args);
     if (options.mergeModifierFunction) {
-      return mergeConfiguration<Config>(
-        config,
-        modifiedConfig,
-        options,
-        ...args
-      );
+      return mergeConfig<Config>(config, modifiedConfig, options, ...args);
     }
     return modifiedConfig as Config;
   }
@@ -62,7 +57,7 @@ export default function mergeConfiguration<Config>(
   }
   if (typeof config === 'object') {
     return mergeWith(config, modifier, (oldValue: any, newValue: any): any => {
-      return mergeConfiguration(
+      return mergeConfig(
         oldValue,
         newValue,
         {
