@@ -25,7 +25,7 @@ export default function mergeConfig<Config>(
     _level: 0,
     concat: true,
     dedup: true,
-    level: -1,
+    level: 1,
     mergeModifierFunction: false,
     ...partialOptions
   };

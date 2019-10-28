@@ -42,7 +42,7 @@ export default class State<
       fs.existsSync(statePath) &&
       this.processAlive(
         // eslint-disable-next-line no-undef
-        JSON.parse(fs.readFileSync(statePath).toString())?.master?.pid || null
+        JSON.parse(fs.readFileSync(statePath).toString())?.master?.pid
       )
     );
   }
