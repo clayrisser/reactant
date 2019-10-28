@@ -10,7 +10,8 @@ export default async function start(
 ): Promise<Context> {
   const context = await bootstrap(platform, options);
   const platformApi = new PlatformApi(context, logger);
-  const result = await context.platform.actions.start(
+  // eslint-disable-next-line no-undef
+  const result = await context.platform?.actions.start(
     context,
     logger,
     platformApi

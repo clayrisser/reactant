@@ -47,16 +47,16 @@ export default class State<
     );
   }
 
-  get state(): T {
+  get state(): T | void {
     if (this.isMaster) return this._state;
     const statePath = path.resolve(this.statePath, `${this.name}.json`);
-    if (!fs.pathExistsSync(statePath)) throw new Error('failed to get state');
+    if (!fs.pathExistsSync(statePath)) return undefined;
     return this.postprocess(
       JSON.parse(fs.readFileSync(statePath).toString()).state
     );
   }
 
-  set state(state: T) {
+  set state(state: T | void) {
     if (this.isStarted && !this.isMaster) {
       throw new Error('must be master to set state');
     }
@@ -66,11 +66,15 @@ export default class State<
     });
     Object.assign(this._state, state);
     const statePath = path.resolve(this.statePath, `${this.name}.json`);
-    fs.mkdirsSync(this.statePath);
-    fs.writeFileSync(
-      statePath,
-      CircularJSON.stringify({ state, master: { pid: process.pid } })
-    );
+    if (typeof state === 'undefined') {
+      fs.unlinkSync(statePath);
+    } else {
+      fs.mkdirsSync(this.statePath);
+      fs.writeFileSync(
+        statePath,
+        CircularJSON.stringify({ state, master: { pid: process.pid } })
+      );
+    }
   }
 
   processAlive(pid: number) {

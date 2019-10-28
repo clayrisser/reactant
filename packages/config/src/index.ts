@@ -43,5 +43,5 @@ export function setConfig(config: Config, merge = true): Config {
 
 export default getConfig();
 
-export { mergeConfig };
+export { defaultConfig, mergeConfig };
 export * from './mergeConfig';

@@ -10,7 +10,8 @@ export default async function clean(
 ): Promise<Context> {
   const context = await bootstrap(platform, options);
   const platformApi = new PlatformApi(context, logger);
-  const result = await context.platform.actions.clean(
+  // eslint-disable-next-line no-undef
+  const result = await context.platform?.actions.clean(
     context,
     logger,
     platformApi

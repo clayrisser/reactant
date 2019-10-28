@@ -5,9 +5,9 @@ import { Plugins } from './plugin';
 export interface Options {}
 
 export interface Context {
-  config: Config;
+  config: Partial<Config>;
   options: Options;
-  platform: Platform;
+  platform?: Platform;
   platformName: string;
   plugins: Plugins;
   state: { [key: string]: any };
