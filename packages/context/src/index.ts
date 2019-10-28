@@ -1,7 +1,7 @@
 import State from './state';
 import { Context, SyncContextCallback } from './types';
 
-export function postprocess(context: Context): Context {
+export function postprocess(context: Partial<Context>): Partial<Context> {
   return context;
 }
 
@@ -29,7 +29,7 @@ export function syncContext(
     // eslint-disable-next-line no-async-promise-executor
     return new Promise(async (resolve, reject) => {
       try {
-        return setContext(await callback(getContext()));
+        return resolve(setContext(await callback(getContext())));
       } catch (err) {
         return reject(err);
       }

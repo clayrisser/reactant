@@ -18,6 +18,7 @@ export default class State<
   isMaster = false;
 
   statePath: string;
+
   projectName = 'reactant';
 
   constructor(public name = 'state', public postprocess = (state: T) => state) {
@@ -50,7 +51,9 @@ export default class State<
     if (this.isMaster) return this._state;
     const statePath = path.resolve(this.statePath, `${this.name}.json`);
     if (!fs.pathExistsSync(statePath)) throw new Error('failed to get state');
-    return JSON.parse(fs.readFileSync(statePath).toString()).state;
+    return this.postprocess(
+      JSON.parse(fs.readFileSync(statePath).toString()).state
+    );
   }
 
   set state(state: T) {
