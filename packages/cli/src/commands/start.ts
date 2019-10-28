@@ -1,5 +1,5 @@
 import { Command } from '@oclif/command';
-import { Options } from '@reactant/context';
+import { Options } from '@reactant/types';
 import { start } from '@reactant/core';
 
 export default class Start extends Command {

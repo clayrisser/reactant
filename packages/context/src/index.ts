@@ -1,5 +1,5 @@
+import { Context, SyncContextCallback } from '@reactant/types';
 import State from './state';
-import { Context, SyncContextCallback } from './types';
 
 export function postprocess(context: Partial<Context>): Partial<Context> {
   // TODO
@@ -18,7 +18,7 @@ export function setContext(context: Partial<Context>): Context {
 }
 
 export function finish() {
-  return state.finish()
+  return state.finish();
 }
 
 export function syncContext(
@@ -42,5 +42,3 @@ export function syncContext(
   }
   return setContext(callback(getContext()) as Context);
 }
-
-export * from './types';

@@ -1,7 +1,7 @@
-import { Context, Options, syncContext } from '@reactant/context';
-import { Plugin } from '@reactant/plugin';
+import { Config, Context, Options, Plugin } from '@reactant/types';
 import { loadConfig, mergeConfig } from '@reactant/config';
 import { mapSeries } from 'bluebird';
+import { syncContext } from '@reactant/context';
 import { loadPlatform } from '../platform';
 import { loadPlugins } from '../plugin';
 

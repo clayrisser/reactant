@@ -1,5 +1,4 @@
-// TODO
-export type Config = any;
+import { Config } from './config';
 
 export interface Plugin {
   config: ModifyPluginConfigFunction;

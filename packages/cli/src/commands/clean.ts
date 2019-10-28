@@ -1,5 +1,5 @@
 import { Command } from '@oclif/command';
-import { Options } from '@reactant/context';
+import { Options } from '@reactant/types';
 import { clean } from '@reactant/core';
 
 export default class Clean extends Command {

@@ -1,5 +1,4 @@
-import { Context } from '@reactant/context';
-import { Platform } from '@reactant/platform';
+import { Context, Platform } from '@reactant/types';
 
 export async function loadPlatform(_context: Context): Promise<Platform> {
   // TODO 1

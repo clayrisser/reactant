@@ -1,9 +1,9 @@
 import cosmiconfig from 'cosmiconfig';
 import pkgDir from 'pkg-dir';
-import { syncContext, Context } from '@reactant/context';
+import { Config, Context } from '@reactant/types';
+import { syncContext } from '@reactant/context';
 import defaultConfig from './defaultConfig';
 import mergeConfig from './mergeConfig';
-import { Config } from './types';
 
 const rootPath = pkgDir.sync(process.cwd()) || process.cwd();
 
@@ -43,4 +43,5 @@ export function setConfig(config: Config, merge = true): Config {
 
 export default getConfig();
 
-export * from './types';
+export { mergeConfig };
+export * from './mergeConfig';

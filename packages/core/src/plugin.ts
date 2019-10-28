@@ -1,5 +1,4 @@
-import { Context } from '@reactant/context';
-import { Plugin, Plugins } from '@reactant/plugin';
+import { Context, Plugin, Plugins } from '@reactant/types';
 
 export async function loadPlugins(_context: Context): Promise<Plugins> {
   // TODO 3

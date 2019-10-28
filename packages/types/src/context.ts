@@ -1,8 +1,6 @@
-import { Platform } from '@reactant/platform';
-import { Plugins } from '@reactant/plugin';
-
-// TODO
-export type Config = any;
+import { Config } from './config';
+import { Platform } from './platform';
+import { Plugins } from './plugin';
 
 export interface Options {}
 
@@ -13,6 +11,7 @@ export interface Context {
   platformName: string;
   plugins: Plugins;
   state: { [key: string]: any };
+  userConfig: Partial<Config>;
 }
 
 export type SyncContextCallback = (
