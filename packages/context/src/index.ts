@@ -2,12 +2,12 @@ import { Context, SyncContextCallback } from '@reactant/types';
 import defaultContext from './defaultContext';
 import State from './state';
 
-export function postprocess(context: Context): Context {
+function postprocess(context: Context): Context {
   // TODO
   return context;
 }
 
-export const state = new State<Context>('context', postprocess);
+const state = new State<Context>('context', postprocess);
 
 export function getContext(): Context {
   const context = state.state;
@@ -16,7 +16,7 @@ export function getContext(): Context {
 
 export function setContext(context: Context): Context {
   state.state = context;
-  return getContext() as Context;
+  return getContext();
 }
 
 export function finish() {
