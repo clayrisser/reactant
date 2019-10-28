@@ -1,6 +1,6 @@
 {
   "name": "@reactant/config",
-  "version": "0.0.138",
+  "version": "0.0.200",
   "description": "reactant config",
   "keywords": [
     "@reactant/config",
@@ -40,7 +40,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/context": "^0.0.138",
+    "@reactant/context": "^0.0.200",
     "core-js": "^3.3.3",
     "cosmiconfig": "^5.2.1",
     "lodash.clone": "^4.5.0",
