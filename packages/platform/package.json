@@ -1,6 +1,6 @@
 {
   "name": "@reactant/platform",
-  "version": "0.0.205",
+  "version": "0.0.206",
   "description": "reactant platform",
   "keywords": [
     "@reactant/platform",
@@ -42,7 +42,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/types": "^0.0.205",
+    "@reactant/types": "^0.0.206",
     "core-js": "^3.3.3"
   },
   "devDependencies": {
