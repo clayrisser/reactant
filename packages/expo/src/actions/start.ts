@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'fs-extra';
 import { Context, Logger, PlatformApi } from '@reactant/platform';
 
 export default async function start(
@@ -6,15 +7,13 @@ export default async function start(
   logger: Logger,
   platformApi: PlatformApi
 ): Promise<any> {
-  // const cracoConfigPath = path.resolve(config.rootPath, 'craco.config.js');
   logger.spinner.start('preparing start');
-  // await platformApi.prepareLocal(config);
-  // await platformApi.createCracoConfig(cracoConfigPath, config);
+  await platformApi.createBabelConfig({ rootPath: true });
   logger.spinner.succeed('prepared start');
-  // await fs.copy(
-  //   path.resolve(config.rootPath, config.platformName, 'index.js'),
-  //   path.resolve(config.rootPath, 'node_modules/expo/AppEntry.js')
-  // );
+  await fs.copy(
+    path.resolve(context.paths.root, context.platformName, 'index.js'),
+    path.resolve(context.paths.root, 'node_modules/expo/AppEntry.js')
+  );
   logger.spinner.succeed('started');
   return platformApi.spawn('expo-cli', 'expo', [
     'start',

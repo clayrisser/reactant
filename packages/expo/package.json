@@ -44,7 +44,8 @@
     "babel-preset-expo": "^7.1.0",
     "core-js": "^3.3.3",
     "expo": "^35.0.0",
-    "expo-cli": "^3.4.1"
+    "expo-cli": "^3.4.1",
+    "fs-extra": "^8.1.0"
   },
   "peerDependencies": {
     "react": "^16.10.2",
@@ -56,6 +57,7 @@
     "@babel/node": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.6.0",
+    "@types/fs-extra": "^8.0.1",
     "@types/jest": "^24.0.18",
     "eslint": "^6.4.0",
     "eslint-config-reactant": "^0.1.141",

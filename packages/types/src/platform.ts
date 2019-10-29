@@ -3,6 +3,10 @@ import { Config } from './config';
 import { Context } from './context';
 import { Logger } from './core';
 
+export interface CreateConfigOptions {
+  rootPath?: boolean;
+}
+
 export interface TPlatformApi {
   context: Context;
   logger: Logger;
@@ -12,6 +16,8 @@ export interface TPlatformApi {
     args?: string[],
     options?: SpawnOptions
   ): Promise<string | ChildProcess>;
+  createWebpackConfig(options?: CreateConfigOptions): Promise<void>;
+  createBabelConfig(options?: CreateConfigOptions): Promise<void>;
 }
 
 export type PlatformOption = any;

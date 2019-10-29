@@ -22,5 +22,8 @@ export type SyncContextCallback = (
 export type Path = string;
 
 export interface Paths {
+  build: Path;
   root: Path;
+  tmp: Path;
+  [key: string]: Path;
 }
