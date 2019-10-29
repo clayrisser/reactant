@@ -1,9 +1,8 @@
 import cosmiconfig from 'cosmiconfig';
 import pkgDir from 'pkg-dir';
 import { Config, Context } from '@reactant/types';
-import { syncContext } from '@reactant/context';
+import { getContext, merge, syncContext } from '@reactant/context';
 import defaultConfig from './defaultConfig';
-import mergeConfig from './mergeConfig';
 
 const rootPath = pkgDir.sync(process.cwd()) || process.cwd();
 
@@ -24,17 +23,17 @@ export function getUserConfig(): Partial<Config> {
 }
 
 export function loadConfig(): Config {
-  return mergeConfig<Config>(defaultConfig, getUserConfig());
+  return merge<Config>(defaultConfig, getUserConfig());
 }
 
 export function getConfig(): Config {
-  return (syncContext() as Context).config;
+  return (getContext() as Context).config;
 }
 
-export function setConfig(config: Config, merge = true): Config {
+export function setConfig(config: Config, mergeConfig = true): Config {
   syncContext((context: Context) => {
-    context.config = merge
-      ? mergeConfig<Config>(context.config, config)
+    context.config = mergeConfig
+      ? merge<Config>(context.config, config)
       : config;
     return context;
   });
@@ -42,6 +41,4 @@ export function setConfig(config: Config, merge = true): Config {
 }
 
 export default getConfig();
-
-export { defaultConfig, mergeConfig };
-export * from './mergeConfig';
+export { defaultConfig };

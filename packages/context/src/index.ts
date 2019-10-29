@@ -1,6 +1,8 @@
 import { Context, SyncContextCallback } from '@reactant/types';
-import defaultContext from './defaultContext';
 import State from './state';
+import bootstrap from './bootstrap';
+import defaultContext from './defaultContext';
+import merge from './merge';
 
 function postprocess(context: Context): Context {
   // TODO
@@ -45,3 +47,7 @@ export function syncContext(
   }
   return setContext(callback(context) as Context);
 }
+
+export { bootstrap, defaultContext, merge };
+export * from './platform';
+export * from './plugin';
