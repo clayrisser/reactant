@@ -1,3 +1,6 @@
 {
-  "extends": ["reactant/typescript/base"]
+  "extends": ["reactant/typescript/base"],
+  "rules": {
+    "no-undef": "off"
+  }
 }

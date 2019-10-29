@@ -18,7 +18,11 @@ export interface PluginOptions {
   [key: string]: PluginOption;
 }
 
+export interface PluginsOptions {
+  [key: string]: PluginOptions;
+}
+
 export type ModifyPluginConfigFunction = (
-  config: Config,
+  config: Partial<Config>,
   pluginOptions?: PluginOptions
-) => Config;
+) => Partial<Config>;

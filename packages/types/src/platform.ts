@@ -10,6 +10,10 @@ export interface PlatformOptions {
   [key: string]: PlatformOption;
 }
 
+export interface PlatformsOptions {
+  [key: string]: PlatformOptions;
+}
+
 export type Action = (
   context?: Context,
   logger?: Logger,
@@ -27,7 +31,21 @@ export interface Platform {
   name: string;
 }
 
+export interface LoadedPlatform {
+  actions: Actions;
+  config: ModifyPlatformConfigFunction;
+  moduleName: string;
+  name: string;
+  options: PlatformOptions;
+  origionalName: string;
+  path: string;
+}
+
+export interface LoadedPlatforms {
+  [key: string]: LoadedPlatform;
+}
+
 export type ModifyPlatformConfigFunction = (
-  config: Config,
+  config: Partial<Config>,
   platformOptions?: PlatformOptions
-) => Config;
+) => Partial<Config>;

@@ -1,13 +1,14 @@
 import { Config } from './config';
-import { Platform } from './platform';
+import { LoadedPlatform } from './platform';
 import { Plugins } from './plugin';
 
 export interface Options {}
 
 export interface Context {
-  config: Partial<Config>;
+  config?: Config;
   options: Options;
-  platform?: Platform;
+  paths: Paths;
+  platform?: LoadedPlatform;
   platformName: string;
   plugins: Plugins;
   state: { [key: string]: any };
@@ -17,3 +18,9 @@ export interface Context {
 export type SyncContextCallback = (
   context: Context
 ) => Context | Promise<Context>;
+
+export type Path = string;
+
+export interface Paths {
+  root: Path;
+}

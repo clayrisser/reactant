@@ -27,13 +27,13 @@ export function loadConfig(): Config {
 }
 
 export function getConfig(): Config {
-  return (getContext() as Context).config;
+  return (getContext() as Context).config || defaultConfig;
 }
 
 export function setConfig(config: Config, mergeConfig = true): Config {
   syncContext((context: Context) => {
     context.config = mergeConfig
-      ? merge<Config>(context.config, config)
+      ? merge<Config>(context.config || defaultConfig, config)
       : config;
     return context;
   });

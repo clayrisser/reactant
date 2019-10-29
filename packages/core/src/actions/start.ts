@@ -11,7 +11,13 @@ export default async function start(
   const context = bootstrap(defaultContext, loadConfig(), platform, options);
   const platformApi = new PlatformApi(context, logger);
   // eslint-disable-next-line no-undef
-  const result = await context.platform?.actions.start(
+  if (!context.platform?.actions?.start) {
+    throw new Error(
+      `platform '${context.platformName}' missing action 'start'`
+    );
+  }
+  // eslint-disable-next-line no-undef
+  const result = await context.platform.actions.start(
     context,
     logger,
     platformApi

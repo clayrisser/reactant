@@ -11,6 +11,12 @@ export default async function build(
   const context = bootstrap(defaultContext, loadConfig(), platform, options);
   const platformApi = new PlatformApi(context, logger);
   // eslint-disable-next-line no-undef
+  if (!context.platform?.actions?.start) {
+    throw new Error(
+      `platform '${context.platformName}' missing action 'build'`
+    );
+  }
+  // eslint-disable-next-line no-undef
   const result = await context.platform?.actions.build(
     context,
     logger,

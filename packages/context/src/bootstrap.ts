@@ -1,29 +1,41 @@
 import { Config, Context, Options, Plugin } from '@reactant/types';
 import merge from './merge';
-import { loadPlatform } from './platform';
+import { getPlatform } from './platform';
 import { loadPlugins } from './plugin';
 
 export default function bootstrap(
   context: Context,
-  config: Config,
+  initialConfig: Partial<Config>,
   platformName?: string,
-  options: Options = {}
+  options?: Options
 ): Context {
   if (options) context.options = options;
   if (platformName) context.platformName = platformName;
-  context.config = config;
-  context.platform = loadPlatform(context);
+  let config = initialConfig;
+  config.platform = config?.platforms?.[context.platformName] || {};
+  context.platform = getPlatform(
+    context.platformName,
+    context.paths.root,
+    config.platform
+  );
+  if (typeof context.platform?.config === 'function') {
+    config = context.platform.config(config);
+  } else {
+    config = merge<Partial<Config>>(config, context.platform?.config || {});
+  }
+  // TODO
   context.plugins = loadPlugins(context);
   Object.entries(context.plugins).forEach(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     ([_pluginName, plugin]: [string, Plugin]) => {
       if (typeof plugin.config === 'function') {
-        context.config = plugin.config(context.config);
+        config = plugin.config(config);
       } else {
-        context.config = merge<Partial<Config>>(context.config, plugin.config);
+        config = merge<Partial<Config>>(config, plugin.config);
       }
     }
   );
-  context.config = merge<Partial<Config>>(context.config, config);
+  config = merge<Partial<Config>>(config, initialConfig);
+  context.config = config as Config;
   return context;
 }
