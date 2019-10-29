@@ -1,12 +1,26 @@
+import path from 'path';
 import { Context, Logger, PlatformApi } from '@reactant/platform';
 
 export default async function start(
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _context: Context,
+  context: Context,
   logger: Logger,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _platformApi: PlatformApi
+  platformApi: PlatformApi
 ): Promise<any> {
-  logger.spinner.start('starting');
+  // const cracoConfigPath = path.resolve(config.rootPath, 'craco.config.js');
+  logger.spinner.start('preparing start');
+  // await platformApi.prepareLocal(config);
+  // await platformApi.createCracoConfig(cracoConfigPath, config);
+  logger.spinner.succeed('prepared start');
+  // await fs.copy(
+  //   path.resolve(config.rootPath, config.platformName, 'index.js'),
+  //   path.resolve(config.rootPath, 'node_modules/expo/AppEntry.js')
+  // );
   logger.spinner.succeed('started');
+  return platformApi.spawn('expo-cli', 'expo', [
+    'start',
+    '--config',
+    path.resolve(context.paths.root, context.platformName, 'app.json'),
+    '--web',
+    '--clear'
+  ]);
 }

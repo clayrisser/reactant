@@ -43,7 +43,9 @@
   },
   "dependencies": {
     "@reactant/types": "^0.0.206",
-    "core-js": "^3.3.3"
+    "core-js": "^3.3.3",
+    "cross-spawn": "^7.0.1",
+    "pkg-dir": "^4.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
@@ -51,6 +53,7 @@
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "@babel/preset-typescript": "^7.6.0",
+    "@types/cross-spawn": "^6.0.1",
     "@types/jest": "^24.0.18",
     "eslint": "^6.4.0",
     "eslint-config-reactant": "^0.1.141",

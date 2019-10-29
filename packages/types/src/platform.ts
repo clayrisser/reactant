@@ -1,9 +1,17 @@
+import { ChildProcess, SpawnOptions } from 'child_process';
 import { Config } from './config';
 import { Context } from './context';
 import { Logger } from './core';
 
-export default class PlatformApi {
-  constructor(public context: Context, public logger: Logger) {}
+export interface TPlatformApi {
+  context: Context;
+  logger: Logger;
+  spawn(
+    pkg: string,
+    bin: string,
+    args?: string[],
+    options?: SpawnOptions
+  ): Promise<string | ChildProcess>;
 }
 
 export type PlatformOption = any;
@@ -19,7 +27,7 @@ export interface PlatformsOptions {
 export type Action = (
   context: Context,
   logger: Logger,
-  platformApi: PlatformApi
+  platformApi: TPlatformApi
 ) => Promise<any>;
 
 export interface Actions {

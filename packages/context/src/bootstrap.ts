@@ -1,5 +1,6 @@
 import { Config, Context, Options, Plugin } from '@reactant/types';
 import merge from './merge';
+// import { CalculatePaths } from './paths';
 import { getPlatform } from './platform';
 import { loadPlugins } from './plugin';
 
@@ -43,3 +44,11 @@ export default function bootstrap(
   context.config = config as Config;
   return context;
 }
+
+// const calculatePaths = new CalculatePaths(
+//   config.paths,
+//   config.rootPath,
+//   config.platformName,
+//   config.action
+// );
+// config.paths = calculatePaths.paths;
