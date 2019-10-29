@@ -5,6 +5,7 @@ import { Plugins } from './plugin';
 export interface Options {}
 
 export interface Context {
+  action: string;
   config?: Config;
   options: Options;
   paths: Paths;
@@ -23,6 +24,7 @@ export type Path = string;
 
 export interface Paths {
   build: Path;
+  dist: Path;
   root: Path;
   tmp: Path;
   [key: string]: Path;

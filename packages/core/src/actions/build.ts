@@ -8,7 +8,13 @@ export default async function build(
   platform: string,
   options: Options = {}
 ): Promise<Context> {
-  const context = bootstrap(defaultContext, loadConfig(), platform, options);
+  const context = bootstrap(
+    defaultContext,
+    loadConfig(),
+    platform,
+    'build',
+    options
+  );
   const platformApi = new PlatformApi(context, logger);
   // eslint-disable-next-line no-undef
   if (!context.platform?.actions?.start) {

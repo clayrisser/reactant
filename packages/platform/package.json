@@ -42,6 +42,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
+    "@reactant/config": "^0.0.208",
     "@reactant/types": "^0.0.208",
     "core-js": "^3.3.3",
     "cross-spawn": "^7.0.1",
@@ -52,6 +53,7 @@
   "devDependencies": {
     "@babel/cli": "^7.6.2",
     "@babel/node": "^7.6.2",
+    "@babel/plugin-proposal-optional-chaining": "^7.6.0",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "@babel/preset-typescript": "^7.6.0",

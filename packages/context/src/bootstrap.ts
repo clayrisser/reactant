@@ -1,17 +1,30 @@
+import path from 'path';
+import pkgDir from 'pkg-dir';
 import { Config, Context, Options, Plugin } from '@reactant/types';
 import merge from './merge';
-// import { CalculatePaths } from './paths';
+import { CalculatePaths } from './paths';
 import { getPlatform } from './platform';
 import { loadPlugins } from './plugin';
+
+const rootPath = pkgDir.sync(process.cwd()) || process.cwd();
 
 export default function bootstrap(
   context: Context,
   initialConfig: Partial<Config>,
   platformName?: string,
+  action: string = '',
   options?: Options
 ): Context {
   if (options) context.options = options;
   if (platformName) context.platformName = platformName;
+  context.action = action;
+  const calculatePaths = new CalculatePaths(
+    context.paths,
+    rootPath,
+    context.platformName,
+    context.action
+  );
+  context.paths = calculatePaths.paths;
   let config = initialConfig;
   config.platform = config?.platforms?.[context.platformName] || {};
   const platform = getPlatform(
@@ -44,11 +57,3 @@ export default function bootstrap(
   context.config = config as Config;
   return context;
 }
-
-// const calculatePaths = new CalculatePaths(
-//   config.paths,
-//   config.rootPath,
-//   config.platformName,
-//   config.action
-// );
-// config.paths = calculatePaths.paths;
