@@ -4,10 +4,10 @@
   "version": "0.0.205",
   "private": true,
   "scripts": {
-    "build": "reactant build -p expo",
-    "clean": "reactant clean -p expo",
-    "start": "reactant start -p expo",
-    "test": "reactant test -p expo"
+    "build": "reactant build expo",
+    "clean": "reactant clean expo",
+    "start": "reactant start expo",
+    "test": "reactant test expo"
   },
   "dependencies": {
     "@reactant/expo": "^0.0.205",
@@ -20,7 +20,7 @@
     "react-native-web": "^0.11.7"
   },
   "devDependencies": {
-    "@reactant/cli": "^0.0.138",
+    "@reactant/cli": "^0.0.205",
     "@types/jest": "24.0.18",
     "@types/node": "12.7.8",
     "@types/react": "^16.8.23",

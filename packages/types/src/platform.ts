@@ -2,7 +2,9 @@ import { Config } from './config';
 import { Context } from './context';
 import { Logger } from './core';
 
-export interface PlatformApi {}
+export default class PlatformApi {
+  constructor(public context: Context, public logger: Logger) {}
+}
 
 export type PlatformOption = any;
 
@@ -15,10 +17,10 @@ export interface PlatformsOptions {
 }
 
 export type Action = (
-  context?: Context,
-  logger?: Logger,
-  platformApi?: PlatformApi
-) => any;
+  context: Context,
+  logger: Logger,
+  platformApi: PlatformApi
+) => Promise<any>;
 
 export interface Actions {
   [key: string]: Action;
