@@ -19,13 +19,20 @@ export default class PlatformApi implements TPlatformApi {
       env: process.env,
       ...(options || {})
     };
-    // eslint-disable-next-line import/no-dynamic-require,global-require
-    const pkgPath = await pkgDir(require.resolve(pkg));
+    const pkgPath = await pkgDir(
+      // eslint-disable-next-line import/no-dynamic-require,global-require
+      require.resolve(pkg, {
+        paths: [
+          path.resolve((await pkgDir(__dirname)) || __dirname, 'node_modules'),
+          path.resolve(this.context.paths.root, 'node_modules')
+        ]
+      })
+    );
     if (!pkgPath) throw new Error(`package '${pkg}' not found`);
     const command = path.resolve(
       pkgPath,
       // eslint-disable-next-line import/no-dynamic-require,global-require
-      require(`${pkg}/package.json`).bin[bin]
+      require(path.resolve(pkgPath, 'package.json')).bin[bin]
     );
     return new Promise((resolve, reject) => {
       const ps = crossSpawn(command, args, options);

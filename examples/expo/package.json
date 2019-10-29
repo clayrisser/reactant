@@ -25,6 +25,7 @@
     "@types/node": "12.7.8",
     "@types/react": "^16.8.23",
     "@types/react-native": "^0.57.65",
+    "expo-cli": "^3.4.1",
     "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
     "typescript": "3.7.0-dev.20191021"
   }
