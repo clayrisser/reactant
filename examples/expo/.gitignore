@@ -26,5 +26,5 @@ dist
 react-app-env.d.ts
 /.expo
 /.expo-shared
-/craco.config.js
 /webpack.config.js
+/babel.config.js

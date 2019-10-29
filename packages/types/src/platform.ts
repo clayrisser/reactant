@@ -10,14 +10,15 @@ export interface CreateConfigOptions {
 export interface TPlatformApi {
   context: Context;
   logger: Logger;
+  prepareLocal(): Promise<void>;
+  createWebpackConfig(options?: CreateConfigOptions): Promise<void>;
+  createBabelConfig(options?: CreateConfigOptions): Promise<void>;
   spawn(
     pkg: string,
     bin: string,
     args?: string[],
     options?: SpawnOptions
   ): Promise<string | ChildProcess>;
-  createWebpackConfig(options?: CreateConfigOptions): Promise<void>;
-  createBabelConfig(options?: CreateConfigOptions): Promise<void>;
 }
 
 export type PlatformOption = any;

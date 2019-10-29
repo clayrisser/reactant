@@ -1,6 +1,6 @@
-import config from '@reactant/config';
+import { getConfig } from '@reactant/config';
 
 export default function createWebpackConfig() {
   // eslint-disable-next-line no-undef
-  return config?.webpack || {};
+  return getConfig()?.webpack || {};
 }
