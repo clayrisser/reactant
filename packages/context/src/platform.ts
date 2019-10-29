@@ -62,9 +62,10 @@ export function getPlatform(
   platformName: string,
   rootPath: string,
   platformOptions: PlatformOptions = {}
-): LoadedPlatform {
+): LoadedPlatform | null {
   const platforms = getPlatforms(rootPath);
   const platform = platforms[platformName];
+  if (!platform) return null;
   platform.options = merge<PlatformOptions>(
     platform.options,
     platformOptions || {}

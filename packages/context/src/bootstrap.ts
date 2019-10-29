@@ -13,11 +13,15 @@ export default function bootstrap(
   if (platformName) context.platformName = platformName;
   let config = initialConfig;
   config.platform = config?.platforms?.[context.platformName] || {};
-  context.platform = getPlatform(
+  const platform = getPlatform(
     context.platformName,
     context.paths.root,
     config.platform
   );
+  if (!platform) {
+    throw new Error(`platform '${context.platformName}' not installed`);
+  }
+  context.platform = platform;
   if (typeof context.platform?.config === 'function') {
     config = context.platform.config(config);
   } else {

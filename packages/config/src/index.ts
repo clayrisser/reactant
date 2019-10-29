@@ -42,3 +42,4 @@ export function setConfig(config: Config, mergeConfig = true): Config {
 
 export default getConfig();
 export { defaultConfig };
+export * from '@reactant/types/lib/config';
