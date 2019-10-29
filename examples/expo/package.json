@@ -1,7 +1,7 @@
 {
   "name": "example-expo",
   "main": "node_modules/expo/AppEntry.js",
-  "version": "0.0.204",
+  "version": "0.0.205",
   "private": true,
   "scripts": {
     "build": "reactant build -p expo",
@@ -10,8 +10,8 @@
     "test": "reactant test -p expo"
   },
   "dependencies": {
-    "@reactant/expo": "^0.0.204",
-    "@reactant/router": "^0.0.204",
+    "@reactant/expo": "^0.0.205",
+    "@reactant/router": "^0.0.205",
     "core-js": "^3.3.3",
     "expo": "^35.0.0",
     "react": "16.8.3",

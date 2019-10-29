@@ -1,6 +1,6 @@
 {
   "name": "@reactant/expo",
-  "version": "0.0.204",
+  "version": "0.0.205",
   "description": "reactant platform for expo",
   "keywords": [
     "@reactant/expo",
@@ -43,9 +43,9 @@
     "@babel/core": "^7.6.2",
     "@craco/craco": "^5.5.0",
     "@expo/webpack-config": "^0.8.0",
-    "@reactant/config": "^0.0.204",
-    "@reactant/core": "^0.0.204",
-    "@reactant/platform": "^0.0.204",
+    "@reactant/config": "^0.0.205",
+    "@reactant/core": "^0.0.205",
+    "@reactant/platform": "^0.0.205",
     "babel-preset-expo": "^7.1.0",
     "core-js": "^3.3.3",
     "deasync": "^0.1.15",
