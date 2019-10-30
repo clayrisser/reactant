@@ -78,9 +78,24 @@ export default class State<
   }
 
   processAlive(pid: number) {
+    const pkgPath =
+      pkgDir.sync(
+        // eslint-disable-next-line import/no-dynamic-require,global-require
+        require.resolve('find-process', {
+          paths: [
+            path.resolve(pkgDir.sync(__dirname) || __dirname, 'node_modules'),
+            path.resolve(rootPath, 'node_modules')
+          ]
+        })
+      ) || path.resolve(rootPath, 'node_modules');
+    const bin = path.resolve(
+      pkgPath,
+      // eslint-disable-next-line import/no-dynamic-require,global-require
+      require(path.resolve(pkgPath, 'package.json')).bin['find-process']
+    );
     return !/No process found/.test(
       (
-        crossSpawn.sync('find-process', [pid.toString()], {
+        crossSpawn.sync('node', [bin, pid.toString()], {
           stdio: 'pipe'
           // eslint-disable-next-line no-undef
         })?.stdout || ''

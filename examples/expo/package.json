@@ -16,11 +16,12 @@
     "expo": "^35.0.0",
     "react": "16.8.3",
     "react-dom": "16.8.3",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
+    "react-native": "git+https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
     "react-native-web": "^0.11.7"
   },
   "devDependencies": {
     "@reactant/cli": "^0.0.210",
+    "@reactant/platform": "^0.0.210",
     "@types/jest": "24.0.18",
     "@types/node": "12.7.8",
     "@types/react": "^16.8.23",
