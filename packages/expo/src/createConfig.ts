@@ -1,6 +1,10 @@
-import { Config } from '@reactant/platform';
+import path from 'path';
+import { Config, Context } from '@reactant/platform';
 
-export default function createConfig(config: Partial<Config>): Partial<Config> {
+export default function createConfig(
+  config: Partial<Config>,
+  context: Context
+): Partial<Config> {
   if (!config.babel) config.babel = {};
   if (!config.babel.presets) config.babel.presets = [];
   config.babel.presets.push('expo');
@@ -8,8 +12,8 @@ export default function createConfig(config: Partial<Config>): Partial<Config> {
   config.babel.plugins.push([
     'module-resolver',
     {
-      root: ['./src'],
-      alias: { '~': './src' }
+      root: [path.resolve(context.paths.root, 'src')],
+      alias: { '~': path.resolve(context.paths.root, 'src') }
     }
   ]);
   return config;

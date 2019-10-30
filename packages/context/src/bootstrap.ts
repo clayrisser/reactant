@@ -55,7 +55,11 @@ export default function bootstrap(
     }
     context.platform = platform;
     if (typeof context.platform?.config === 'function') {
-      config = context.platform.config(config);
+      config = context.platform.config(
+        config,
+        context,
+        context.platform.options
+      );
     } else {
       config = merge<Partial<Config>>(config, context.platform?.config || {});
     }
@@ -65,7 +69,7 @@ export default function bootstrap(
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       ([_pluginName, plugin]: [string, Plugin]) => {
         if (typeof plugin.config === 'function') {
-          config = plugin.config(config);
+          config = plugin.config(config, context);
         } else {
           config = merge<Partial<Config>>(config, plugin.config);
         }

@@ -1,4 +1,5 @@
 import { Config } from './config';
+import { Context } from './context';
 
 export interface Plugin {
   config: ModifyPluginConfigFunction;
@@ -24,5 +25,5 @@ export interface PluginsOptions {
 
 export type ModifyPluginConfigFunction = (
   config: Partial<Config>,
-  pluginOptions?: PluginOptions
+  context?: Partial<Context>
 ) => Partial<Config>;
