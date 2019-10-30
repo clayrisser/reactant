@@ -6,6 +6,7 @@
   "scripts": {
     "build": "reactant build expo",
     "clean": "reactant clean expo",
+    "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
     "start": "reactant start expo",
     "test": "reactant test expo"
   },
