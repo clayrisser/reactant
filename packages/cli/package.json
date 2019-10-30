@@ -1,6 +1,6 @@
 {
   "name": "@reactant/cli",
-  "version": "0.0.212",
+  "version": "0.0.213",
   "description": "reactant cli",
   "keywords": [
     "reactant",
@@ -47,8 +47,8 @@
     "@oclif/config": "^1.13.3",
     "@oclif/errors": "^1.2.2",
     "@oclif/parser": "^3.8.4",
-    "@reactant/core": "^0.0.212",
-    "@reactant/types": "^0.0.212",
+    "@reactant/core": "^0.0.213",
+    "@reactant/types": "^0.0.213",
     "core-js": "^3.3.3"
   },
   "devDependencies": {
