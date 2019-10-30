@@ -6,7 +6,7 @@ import logger from '../logger';
 
 export default async function build(
   platform: string,
-  options: Options = {}
+  options?: Options
 ): Promise<Context> {
   const context = bootstrap(loadConfig(), platform, 'build', options);
   const platformApi = new PlatformApi(context, logger);

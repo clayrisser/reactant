@@ -1,4 +1,4 @@
-import { Command } from '@oclif/command';
+import { Command, flags } from '@oclif/command';
 import { Options } from '@reactant/types';
 import { build } from '@reactant/core';
 
@@ -7,13 +7,19 @@ export default class Build extends Command {
 
   static examples = ['$ reactant build ios'];
 
-  static flags = {};
+  static flags = {
+    config: flags.string({ char: 'c', required: false }),
+    debug: flags.boolean({ char: 'd', required: false })
+  };
 
   static args = [{ name: 'PLATFORM', required: true }];
 
   async run() {
-    const { args } = this.parse(Build);
-    // TODO
-    return build(args.PLATFORM, ({} as unknown) as Options);
+    const { args, flags } = this.parse(Build);
+    const options: Options = {
+      config: JSON.parse(flags.config || '{}'),
+      debug: !!flags.debug
+    };
+    return build(args.PLATFORM, options);
   }
 }

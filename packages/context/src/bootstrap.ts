@@ -31,7 +31,10 @@ export default function bootstrap(
   options?: Options
 ): Context {
   return syncContext((context: Context) => {
-    if (options) context.options = options;
+    if (options) {
+      context.options = options;
+      context.debug = options.debug;
+    }
     if (platformName) context.platformName = platformName;
     context.action = action;
     if (state.isMaster) {
@@ -39,7 +42,8 @@ export default function bootstrap(
     } else {
       context = childBootstrap(context);
     }
-    let config = initialConfig;
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    let config = merge<Partial<Config>>(initialConfig, options?.config || {});
     config.platform = config?.platforms?.[context.platformName] || {};
     const platform = getPlatform(
       context.platformName,

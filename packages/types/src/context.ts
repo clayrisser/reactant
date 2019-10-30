@@ -2,11 +2,15 @@ import { Config } from './config';
 import { LoadedPlatform } from './platform';
 import { Plugins } from './plugin';
 
-export interface Options {}
+export interface Options {
+  config: Partial<Config>;
+  debug: boolean;
+}
 
 export interface Context {
   action: string;
   config?: Config;
+  debug: boolean;
   options: Options;
   paths: Paths;
   platform?: LoadedPlatform;
