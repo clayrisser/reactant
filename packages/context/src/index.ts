@@ -9,7 +9,7 @@ function postprocess(context: Context): Context {
   return context;
 }
 
-const state = new State<Context>('context', postprocess);
+export const state = new State<Context>('context', postprocess);
 
 export function getContext(): Context {
   const context = state.state;

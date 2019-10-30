@@ -11,7 +11,7 @@ export default class State<
     [key: string]: any;
   }
 > {
-  _state: T = {} as T;
+  _state: T;
 
   currentProcStarted = false;
 
@@ -60,6 +60,7 @@ export default class State<
     if (this.isStarted && !this.isMaster) {
       throw new Error('must be master to set state');
     }
+    if (typeof this._state === 'undefined') this._state = {} as T;
     Object.keys(this._state).forEach((key: string) => {
       // @ts-ignore
       delete this._state[key];

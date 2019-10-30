@@ -34,7 +34,7 @@ export default function merge<Config>(
   config = clone(config);
   if (typeof modifier === 'function') {
     if (options._level > options.level) return (modifier as unknown) as Config;
-    const modifiedConfig = modifier<Config>(config, ...args);
+    const modifiedConfig = modifier<Config>(config || {}, ...args);
     if (options.mergeModifierFunction) {
       return merge<Config>(config, modifiedConfig, options, ...args);
     }
