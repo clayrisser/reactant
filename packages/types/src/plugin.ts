@@ -2,11 +2,11 @@ import { Config } from './config';
 import { Context } from './context';
 
 export interface Plugin {
-  config: ModifyPluginConfigFunction;
-  defaultOptions: Partial<PluginOptions>;
-  disabledPlatforms: string[] | Set<string>;
-  name: string;
-  supportedPlatforms: string[] | Set<string>;
+  config?: ModifyPluginConfigFunction;
+  defaultOptions?: Partial<PluginOptions>;
+  disabledPlatforms?: string[] | Set<string>;
+  name?: string;
+  supportedPlatforms?: string[] | Set<string>;
 }
 
 export interface LoadedPlugin {
@@ -15,7 +15,6 @@ export interface LoadedPlugin {
   moduleName: string;
   name: string;
   options: PluginOptions;
-  origionalName: string;
   path: string;
   supportedPlatforms: Set<string>;
 }

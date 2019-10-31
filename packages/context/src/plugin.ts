@@ -1,5 +1,7 @@
 import path from 'path';
 import {
+  Config,
+  Context,
   LoadedPlugin,
   LoadedPlugins,
   Plugin,
@@ -41,19 +43,20 @@ export function getPlugins(rootPath: string): LoadedPlugins {
       );
       const requiredPlugin: Plugin = requireDefault<Plugin>(pluginPath);
       const plugin: LoadedPlugin = {
-        config: requiredPlugin.config,
-        disabledPlatforms: new Set(requiredPlugin.disabledPlatforms),
+        config:
+          requiredPlugin.config ||
+          ((
+            config: Partial<Config>,
+            _context: Context,
+            _options: PluginOptions
+          ) => config),
+        disabledPlatforms: new Set(requiredPlugin.disabledPlatforms || []),
         moduleName,
-        name: requiredPlugin.name,
-        options: requiredPlugin.defaultOptions,
-        origionalName: requiredPlugin.name,
+        name: requiredPlugin.name || moduleName,
+        options: requiredPlugin.defaultOptions || {},
         path: pluginPath,
-        supportedPlatforms: new Set(requiredPlugin.supportedPlatforms)
+        supportedPlatforms: new Set(requiredPlugin.supportedPlatforms || [])
       };
-      if (!plugin.name) plugin.name = moduleName;
-      plugin.origionalName = plugin.name;
-      if (plugin.options.name) plugin.name = plugin.options.name;
-      plugins[plugin.name] = plugin;
       return plugins;
     }, {});
   return _plugins;

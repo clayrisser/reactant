@@ -42,10 +42,10 @@ export interface Actions {
 }
 
 export interface Platform {
-  actions: Actions;
-  config: ModifyPlatformConfigFunction;
-  defaultOptions: Partial<PlatformOptions>;
-  name: string;
+  actions?: Actions;
+  config?: ModifyPlatformConfigFunction;
+  defaultOptions?: Partial<PlatformOptions>;
+  name?: string;
 }
 
 export interface LoadedPlatform {

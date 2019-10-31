@@ -1,5 +1,7 @@
 import path from 'path';
 import {
+  Config,
+  Context,
   LoadedPlatform,
   LoadedPlatforms,
   Platform,
@@ -45,19 +47,23 @@ export function getPlatforms(
       );
       const requiredPlatform: Platform = requireDefault<Platform>(platformPath);
       const platform: LoadedPlatform = {
-        actions: requiredPlatform.actions,
-        config: requiredPlatform.config,
+        actions: requiredPlatform.actions || {},
+        config:
+          requiredPlatform.config ||
+          ((
+            config: Partial<Config>,
+            _context: Context,
+            _options: PlatformOptions
+          ) => config),
         moduleName,
-        name: requiredPlatform.name,
+        name: requiredPlatform.name || moduleName,
         options: merge<PlatformOptions>(
-          requiredPlatform.defaultOptions,
+          requiredPlatform.defaultOptions || {},
           platformsOptions[requiredPlatform.name || moduleName]
         ),
-        origionalName: requiredPlatform.name,
+        origionalName: requiredPlatform.name || moduleName,
         path: platformPath
       };
-      if (!platform.name) platform.name = moduleName;
-      platform.origionalName = platform.name;
       // eslint-disable-next-line no-restricted-globals
       if (platform.options?.name) platform.name = platform.options.name;
       platforms[platform.name] = platform;
