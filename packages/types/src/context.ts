@@ -1,6 +1,6 @@
 import { Config } from './config';
 import { LoadedPlatform } from './platform';
-import { Plugins } from './plugin';
+import { LoadedPlugins } from './plugin';
 
 export interface Options {
   config: Partial<Config>;
@@ -15,7 +15,7 @@ export interface Context {
   paths: Paths;
   platform?: LoadedPlatform;
   platformName: string;
-  plugins: Plugins;
+  plugins: LoadedPlugins;
   state: { [key: string]: any };
   userConfig: Partial<Config>;
 }

@@ -1,10 +1,10 @@
-import { Context, Plugins } from '@reactant/types';
+import { Context, LoadedPlugins } from '@reactant/types';
 
 const context: Context = {
   action: '',
   debug: false,
   platformName: '',
-  plugins: {} as Plugins,
+  plugins: {} as LoadedPlugins,
   state: {},
   userConfig: {},
   options: {

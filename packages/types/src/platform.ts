@@ -65,5 +65,5 @@ export interface LoadedPlatforms {
 export type ModifyPlatformConfigFunction = (
   config: Partial<Config>,
   context: Context,
-  platformOptions?: PlatformOptions
+  options: PlatformOptions
 ) => Partial<Config>;

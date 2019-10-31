@@ -8,6 +8,20 @@ export interface Plugin {
   supportedPlatforms: string[];
 }
 
+export interface LoadedPlugin {
+  config: ModifyPluginConfigFunction;
+  moduleName: string;
+  name: string;
+  options: PluginOptions;
+  origionalName: string;
+  path: string;
+  supportedPlatforms: string[];
+}
+
+export interface LoadedPlugins {
+  [key: string]: LoadedPlugin;
+}
+
 export interface Plugins {
   [key: string]: Plugin;
 }
@@ -15,7 +29,6 @@ export interface Plugins {
 export type PluginOption = any;
 
 export interface PluginOptions {
-  supportedPlatforms: string[];
   [key: string]: PluginOption;
 }
 
@@ -25,5 +38,6 @@ export interface PluginsOptions {
 
 export type ModifyPluginConfigFunction = (
   config: Partial<Config>,
-  context?: Partial<Context>
+  context: Context,
+  options: PluginOptions
 ) => Partial<Config>;

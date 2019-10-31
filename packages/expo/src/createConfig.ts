@@ -1,9 +1,10 @@
 import path from 'path';
-import { Config, Context } from '@reactant/platform';
+import { Config, Context, PlatformOptions } from '@reactant/platform';
 
 export default function createConfig(
   config: Partial<Config>,
-  context: Context
+  context: Context,
+  _options: PlatformOptions
 ): Partial<Config> {
   if (!config.babel) config.babel = {};
   if (!config.babel.presets) config.babel.presets = [];

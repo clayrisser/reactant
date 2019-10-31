@@ -1,10 +1,16 @@
 import path from 'path';
 import pkgDir from 'pkg-dir';
-import { Config, Context, Options, Plugin } from '@reactant/types';
+import {
+  Config,
+  Context,
+  LoadedPlugin,
+  Options,
+  PluginOptions
+} from '@reactant/types';
 import merge from './merge';
 import { CalculatePaths } from './paths';
 import { getPlatform } from './platform';
-import { loadPlugins } from './plugin';
+import { getPlugins } from './plugin';
 import { state, syncContext } from '.';
 
 const rootPath = pkgDir.sync(process.cwd()) || process.cwd();
@@ -63,13 +69,16 @@ export default function bootstrap(
     } else {
       config = merge<Partial<Config>>(config, context.platform?.config || {});
     }
-    // TODO
-    context.plugins = loadPlugins(context);
+    context.plugins = getPlugins(context.paths.root);
     Object.entries(context.plugins).forEach(
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      ([_pluginName, plugin]: [string, Plugin]) => {
+      ([pluginName, plugin]: [string, LoadedPlugin]) => {
+        plugin.options = merge<PluginOptions>(
+          plugin.options,
+          config.plugins?.[pluginName] || {}
+        );
         if (typeof plugin.config === 'function') {
-          config = plugin.config(config, context);
+          config = plugin.config(config, context, plugin.options);
         } else {
           config = merge<Partial<Config>>(config, plugin.config);
         }

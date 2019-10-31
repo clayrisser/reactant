@@ -1,10 +1,10 @@
+import path from 'path';
 import {
   LoadedPlatform,
   LoadedPlatforms,
   Platform,
   PlatformOptions
 } from '@reactant/types';
-import path from 'path';
 import merge from './merge';
 import { requireDefault } from './util';
 
