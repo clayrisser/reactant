@@ -1,9 +1,0 @@
-plugins:
-  router:
-    supportedPlatforms:
-      - web
-      - something
-
-platforms:
-  '@reactant/web':
-    name: hello

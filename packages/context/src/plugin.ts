@@ -42,12 +42,13 @@ export function getPlugins(rootPath: string): LoadedPlugins {
       const requiredPlugin: Plugin = requireDefault<Plugin>(pluginPath);
       const plugin: LoadedPlugin = {
         config: requiredPlugin.config,
+        disabledPlatforms: new Set(requiredPlugin.disabledPlatforms),
         moduleName,
         name: requiredPlugin.name,
         options: requiredPlugin.defaultOptions,
         origionalName: requiredPlugin.name,
         path: pluginPath,
-        supportedPlatforms: requiredPlugin.supportedPlatforms
+        supportedPlatforms: new Set(requiredPlugin.supportedPlatforms)
       };
       if (!plugin.name) plugin.name = moduleName;
       plugin.origionalName = plugin.name;

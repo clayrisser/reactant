@@ -1,3 +1,4 @@
+import util from 'util';
 import { Context, Logger } from '@reactant/types';
 import { finish } from '@reactant/context';
 import build from './build';
@@ -11,7 +12,11 @@ export async function preProcess(
   if (context.debug) {
     logger.debug(
       '\n======== START CONTEXT ========\n',
-      context,
+      util.inspect(context, {
+        colors: true,
+        showHidden: true,
+        depth: null
+      }),
       '\n========= END CONTEXT =========\n'
     );
   }

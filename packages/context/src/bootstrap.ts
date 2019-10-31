@@ -49,11 +49,16 @@ export default function bootstrap(
     }
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     let config = merge<Partial<Config>>(initialConfig, options?.config || {});
-    config.platform = config?.platforms?.[context.platformName] || {};
+    const platformOrigionalName =
+      Object.keys(config?.platforms || {}).find((key: string) => {
+        const platform = config.platforms?.[key] || {};
+        return platform.name === context.platformName;
+      }) || context.platformName;
+    const platformOptions = config?.platforms?.[platformOrigionalName] || {};
     const platform = getPlatform(
-      context.platformName,
+      platformOrigionalName,
       context.paths.root,
-      config.platform
+      platformOptions
     );
     if (!platform) {
       throw new Error(`platform '${context.platformName}' not installed`);
@@ -76,10 +81,25 @@ export default function bootstrap(
           plugin.options,
           config.plugins?.[pluginName] || {}
         );
-        if (typeof plugin.config === 'function') {
-          config = plugin.config(config, context, plugin.options);
+        plugin.supportedPlatforms = new Set([
+          ...plugin.supportedPlatforms,
+          ...(plugin.options?.supportedPlatforms || [])
+        ]);
+        plugin.disabledPlatforms = new Set([
+          ...plugin.disabledPlatforms,
+          ...(plugin.options?.disabledPlatforms || [])
+        ]);
+        if (
+          plugin.supportedPlatforms.has(context.platformName) &&
+          !plugin.disabledPlatforms.has(context.platformName)
+        ) {
+          if (typeof plugin.config === 'function') {
+            config = plugin.config(config, context, plugin.options);
+          } else {
+            config = merge<Partial<Config>>(config, plugin.config);
+          }
         } else {
-          config = merge<Partial<Config>>(config, plugin.config);
+          delete context.plugins[pluginName];
         }
       }
     );
