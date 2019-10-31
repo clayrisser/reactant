@@ -1,4 +1,3 @@
-import path from 'path';
 import pkgDir from 'pkg-dir';
 import {
   Config,
@@ -86,6 +85,7 @@ export default function bootstrap(
     );
     config = merge<Partial<Config>>(config, initialConfig);
     context.config = config as Config;
+    if (context.debug) context.logLevel = 'silly';
     if (state.isMaster) context.state.ready = true;
     return context;
   }) as Context;

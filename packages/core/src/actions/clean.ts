@@ -1,14 +1,17 @@
 import { Context, Options } from '@reactant/types';
 import { PlatformApi } from '@reactant/platform';
+import { bootstrap } from '@reactant/context';
 import { loadConfig } from '@reactant/config';
-import { bootstrap, finish } from '@reactant/context';
-import logger from '../logger';
+import Logger from '../logger';
+import { preProcess, postProcess } from '.';
 
 export default async function clean(
   platform: string,
   options?: Options
 ): Promise<Context> {
   const context = bootstrap(loadConfig(), platform, 'clean', options);
+  const logger = new Logger(context.logLevel);
+  await preProcess(context, logger);
   const platformApi = new PlatformApi(context, logger);
   // eslint-disable-next-line no-undef
   if (!context.platform?.actions?.start) {
@@ -22,6 +25,6 @@ export default async function clean(
     logger,
     platformApi
   );
-  finish();
+  await postProcess(context, logger);
   return result;
 }

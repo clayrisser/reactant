@@ -11,6 +11,7 @@ export interface Context {
   action: string;
   config?: Config;
   debug: boolean;
+  logLevel: string | number;
   options: Options;
   paths: Paths;
   platform?: LoadedPlatform;

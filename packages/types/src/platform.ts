@@ -23,7 +23,7 @@ export interface TPlatformApi {
 
 export type PlatformOption = any;
 
-export interface PlatformOptions {
+export interface PlatformOptions<T = any> {
   [key: string]: PlatformOption;
 }
 
