@@ -1,3 +1,5 @@
 import { PlatformOptions } from '@reactant/platform';
 
-export default {} as Partial<PlatformOptions>;
+const defaultOptions: Partial<PlatformOptions> = {};
+
+export default defaultOptions;
