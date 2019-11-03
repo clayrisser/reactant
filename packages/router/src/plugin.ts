@@ -6,7 +6,7 @@ const plugin: Plugin = {
   config: createConfig,
   defaultOptions,
   name: 'router',
-  supportedPlatforms: ['expo', 'web']
+  supportedPlatforms: ['android', 'expo', 'ios', 'web']
 };
 
 export default plugin;

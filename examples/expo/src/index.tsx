@@ -1,15 +1,29 @@
 import React, { FC, ReactNode } from 'react';
-import { View, Text } from 'react-native';
-/* import { Route, Switch, Router, Link } from '@reactant/router'; */
+import { Route, Switch, Router, Link } from '@reactant/router';
+import { Text } from 'react-native';
 
 export interface AppProps {
   children?: ReactNode;
 }
 
 const App: FC<AppProps> = (props: AppProps) => (
-  <View>
-    <Text>{props.children}</Text>
-  </View>
+  <Router>
+    <Link to="/about">About</Link>
+    <Link to="/users">Users</Link>
+    <Link to="/">Home</Link>
+    {props.children}
+    <Switch>
+      <Route path="/about">
+        <Text>About</Text>
+      </Route>
+      <Route path="/users">
+        <Text>Users</Text>
+      </Route>
+      <Route path="/">
+        <Text>Home</Text>
+      </Route>
+    </Switch>
+  </Router>
 );
 
 App.defaultProps = {
@@ -17,22 +31,3 @@ App.defaultProps = {
 };
 
 export default App;
-
-/*
- * <Router>
- * <Link to="/about">About</Link>
- * <Link to="/users">Users</Link>
- * <Link to="/">Home</Link>
- * {this.props.children}
- * <Switch>
- * <Route path="/about">
- * About
- * </Route>
- * <Route path="/users">
- * Users
- * </Route>
- * <Route path="/">
- * Home
- * </Route>
- * </Switch>
- * </Router> */

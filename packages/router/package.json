@@ -41,16 +41,18 @@
   },
   "dependencies": {
     "@reactant/plugin": "^0.0.220",
-    "react": "^16.10.2"
+    "history": "^4.10.1",
+    "react": "^16.11.0",
+    "react-router": "^5.1.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
     "@babel/node": "^7.6.2",
+    "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.6.0",
     "@types/jest": "^24.0.18",
     "@types/react": "^16.9.4",
-    "babel-preset-jam": "^0.4.3",
     "eslint": "^6.4.0",
     "eslint-config-reactant": "^0.1.141",
     "jest": "^24.9.0",
@@ -71,6 +73,8 @@
   "gitHead": "df0ae3e534e8a7ce637107a8626d68c58e461bb1",
   "optionalDependencies": {
     "@types/react-router-dom": "^5.1.0",
-    "react-router-dom": "^5.1.2"
+    "@types/react-router-native": "^5.1.0",
+    "react-router-dom": "^5.1.2",
+    "react-router-native": "^5.1.2"
   }
 }

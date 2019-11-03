@@ -18,7 +18,8 @@
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
-    "react-native-web": "^0.11.7"
+    "react-native-web": "^0.11.7",
+    "react-router-native": "^5.1.2"
   },
   "devDependencies": {
     "@reactant/cli": "^0.0.220",
@@ -27,6 +28,7 @@
     "@types/node": "12.7.8",
     "@types/react": "^16.8.23",
     "@types/react-native": "^0.57.65",
+    "@types/react-router-native": "^5.1.0",
     "expo-cli": "^3.4.1",
     "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
     "typescript": "3.7.0-dev.20191021"
