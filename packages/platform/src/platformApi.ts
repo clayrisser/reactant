@@ -63,7 +63,7 @@ export default class PlatformApi implements TPlatformApi {
   }
 
   async spawn(
-    pkg: string,
+    pkg: string | null,
     bin: string,
     args: string[] = [],
     options?: SpawnOptions
@@ -74,21 +74,27 @@ export default class PlatformApi implements TPlatformApi {
       env: process.env,
       ...(options || {})
     };
-    const pkgPath = await pkgDir(
-      // eslint-disable-next-line import/no-dynamic-require,global-require
-      require.resolve(pkg, {
-        paths: [
-          path.resolve((await pkgDir(__dirname)) || __dirname, 'node_modules'),
-          path.resolve(this.context.paths.root, 'node_modules')
-        ]
-      })
-    );
-    if (!pkgPath) throw new Error(`package '${pkg}' not found`);
-    const command = path.resolve(
-      pkgPath,
-      // eslint-disable-next-line import/no-dynamic-require,global-require
-      require(path.resolve(pkgPath, 'package.json')).bin[bin]
-    );
+    let command = bin;
+    if (pkg) {
+      const pkgPath = await pkgDir(
+        // eslint-disable-next-line import/no-dynamic-require,global-require
+        require.resolve(pkg, {
+          paths: [
+            path.resolve(
+              (await pkgDir(__dirname)) || __dirname,
+              'node_modules'
+            ),
+            path.resolve(this.context.paths.root, 'node_modules')
+          ]
+        })
+      );
+      if (!pkgPath) throw new Error(`package '${pkg}' not found`);
+      command = path.resolve(
+        pkgPath,
+        // eslint-disable-next-line import/no-dynamic-require,global-require
+        require(path.resolve(pkgPath, 'package.json')).bin[bin]
+      );
+    }
     return new Promise((resolve, reject) => {
       const ps = crossSpawn(command, args, options);
       let result: string | ChildProcess = ps;

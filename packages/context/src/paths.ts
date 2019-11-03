@@ -67,6 +67,7 @@ export class CalculatePaths {
       this.rootPath,
       this.preResolve(configPath)
     );
+    if (this.rootPath === resolvedPath) return this.rootPath;
     return resolvedPath.substr(this.rootPath.length + 1);
   }
 }

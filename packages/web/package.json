@@ -1,0 +1,82 @@
+{
+  "name": "@reactant/web",
+  "version": "0.0.221",
+  "description": "reactant platform for web",
+  "keywords": [
+    "@reactant/web",
+    "react",
+    "reactant",
+    "web"
+  ],
+  "homepage": "https://github.com/codejamninja/reactant/packages/web",
+  "bugs": {
+    "url": "https://github.com/codejamninja/reactant/issues",
+    "email": "jam@codejam.ninja"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Jam Risser",
+    "email": "jam@codejam.ninja",
+    "url": "https://codejam.ninja"
+  },
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codejamninja/reactant"
+  },
+  "scripts": {
+    "build": "npm run test && babel src -d lib --extensions \".ts,.tsx\" --source-maps inline && tsc -d --emitDeclarationOnly",
+    "clean": "git clean -fXd -e \\!node_modules -e \\!node_modules/**/* && jest --clearCache",
+    "clean:purge": "jest --clearCache && git clean -fXd",
+    "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
+    "lint": "npm run format && tsc --allowJs --noEmit && eslint --ext .ts,.tsx ./",
+    "lint:fix": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx --fix ./",
+    "prepublish": "npm run build",
+    "start": "babel-node src --extensions \".ts,.tsx\"",
+    "test": "npm run lint:fix && jest --coverage",
+    "test:watch": "npm run lint && jest --watch"
+  },
+  "dependencies": {
+    "@babel/preset-env": "^7.6.3",
+    "@craco/craco": "^5.6.1",
+    "@reactant/context": "^0.0.221",
+    "@reactant/platform": "^0.0.221",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "core-js": "^3.3.3",
+    "fs-extra": "^8.1.0",
+    "react": "^16.11.0"
+  },
+  "peerDependencies": {
+    "react": "^16.10.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/node": "^7.6.2",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.6.0",
+    "@types/fs-extra": "^8.0.1",
+    "@types/jest": "^24.0.18",
+    "@types/react": "^16.9.11",
+    "eslint": "^6.4.0",
+    "eslint-config-reactant": "^0.1.141",
+    "jest": "^24.9.0",
+    "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
+    "typescript": "3.7.0-dev.20191021"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "eslintIgnore": [
+    "lib"
+  ],
+  "jest": {
+    "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
+    "verbose": true
+  },
+  "reactantPlatform": "lib/platform.js",
+  "gitHead": "df0ae3e534e8a7ce637107a8626d68c58e461bb1"
+}
