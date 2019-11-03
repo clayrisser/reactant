@@ -1,6 +1,6 @@
 {
   "name": "@reactant/router",
-  "version": "0.0.220",
+  "version": "0.0.221",
   "description": "reactant platform for router",
   "keywords": [
     "@reactant/router",
@@ -40,7 +40,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/plugin": "^0.0.220",
+    "@reactant/plugin": "^0.0.221",
     "history": "^4.10.1",
     "react": "^16.11.0",
     "react-router": "^5.1.2"
