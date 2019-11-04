@@ -1,8 +1,36 @@
 import path from 'path';
+import util from 'util';
 import { CracoConfig } from '@craco/craco';
 import { Paths } from '@reactant/platform';
-import { getContext } from '@reactant/context';
-import { WebpackConfig } from '../types';
+import { getContext, merge } from '@reactant/context';
+import {
+  Configuration as WebpackConfig,
+  ResolvePlugin,
+  RuleSetRule
+} from 'webpack';
+
+interface ModuleScopePlugin {
+  appSrcs: string[];
+}
+
+function updatePaths(paths: Paths, webPath: string) {
+  paths.appIndexJs = path.resolve(webPath, 'index.tsx');
+  paths.appSrc = webPath;
+  paths.testsSetup = path.resolve(webPath, 'setupTests.js');
+  paths.appTypeDeclarations = path.resolve(webPath, 'react-app-env.d.ts');
+  paths.proxySetup = path.resolve(webPath, 'setupProxy.js');
+}
+
+function findJSRules(rules: RuleSetRule[]): RuleSetRule[] {
+  return rules.reduce((rules: RuleSetRule[], rule: RuleSetRule) => {
+    if (rule.test && rule.test.toString().indexOf('js|mjs|jsx|ts|tsx')) {
+      rules.push(rule);
+    } else if (rule.oneOf) {
+      rules = [...rules, ...findJSRules(rule.oneOf)];
+    }
+    return rules;
+  }, []);
+}
 
 function overrideCracoConfig({
   cracoConfig
@@ -10,11 +38,12 @@ function overrideCracoConfig({
   cracoConfig: CracoConfig;
 }): CracoConfig {
   const context = getContext();
+  if (!cracoConfig.webpack) cracoConfig.webpack = {};
   cracoConfig.webpack.configure = (
     webpackConfig: WebpackConfig,
     { paths }: { paths: Paths }
   ): WebpackConfig => {
-    let webPath = path.resolve(context.paths.root, config.platformName);
+    let webPath = path.resolve(context.paths.root, context.platformName);
     let srcPath = path.resolve(context.paths.root, 'src');
     if (context.action === 'build') {
       webPath = path.resolve(
@@ -56,7 +85,11 @@ function overrideCracoConfig({
         '\n========= END WEBPACK =========\n\n'
       );
     }
-    webpackConfig = merge<WebpackConfig>(webpackConfig, context.config.webpack);
+    webpackConfig = merge<WebpackConfig>(
+      webpackConfig,
+      // eslint-disable-next-line no-undef
+      context.config?.webpack || {}
+    );
     return webpackConfig;
   };
   return cracoConfig;

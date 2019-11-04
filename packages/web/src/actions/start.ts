@@ -1,4 +1,3 @@
-import fs from 'fs-extra';
 import { Context, Logger, PlatformApi } from '@reactant/platform';
 import createCracoConfig from '../createCracoConfig';
 

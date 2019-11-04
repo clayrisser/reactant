@@ -1,22 +1,30 @@
 {
-  "name": "example-web",
-  "main": "lib/index.js",
+  "name": "example-all",
   "version": "0.0.221",
   "private": true,
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "build": "reactant build web",
-    "clean": "reactant clean web",
+    "build:expo": "reactant build expo",
+    "build:web": "reactant build web",
+    "clean:expo": "reactant clean expo",
+    "clean:web": "reactant clean web",
     "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
-    "start": "reactant start web",
-    "test": "reactant test web"
+    "start:expo": "reactant start expo",
+    "start:web": "reactant start web",
+    "test:expo": "reactant test expo",
+    "test:web": "reactant test web"
   },
   "dependencies": {
+    "@reactant/expo": "^0.0.221",
     "@reactant/router": "^0.0.221",
     "@reactant/web": "^0.0.221",
     "core-js": "^3.3.3",
     "react": "16.8.3",
     "react-dom": "16.8.3",
-    "react-router-dom": "^5.1.2"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
+    "react-native-web": "^0.11.7",
+    "react-router-dom": "^5.1.2",
+    "react-router-native": "^5.1.2"
   },
   "devDependencies": {
     "@craco/craco": "5.5.0",
@@ -27,7 +35,11 @@
     "@types/node": "12.7.8",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.9.3",
+    "@types/react-native": "^0.57.65",
     "@types/react-router-dom": "^5.1.2",
+    "@types/react-router-native": "^5.1.0",
+    "expo": "^35.0.0",
+    "expo-cli": "^3.4.1",
     "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
     "react-scripts": "^3.2.0",
     "typescript": "3.7.0-dev.20191021"
