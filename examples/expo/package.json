@@ -1,7 +1,7 @@
 {
   "name": "example-expo",
   "main": "node_modules/expo/AppEntry.js",
-  "version": "0.0.222",
+  "version": "0.0.223",
   "private": true,
   "scripts": {
     "build": "reactant build expo",
@@ -11,8 +11,8 @@
     "test": "reactant test expo"
   },
   "dependencies": {
-    "@reactant/expo": "0.0.222",
-    "@reactant/router": "0.0.222",
+    "@reactant/expo": "^0.0.223",
+    "@reactant/router": "^0.0.223",
     "core-js": "^3.3.6",
     "expo": "^35.0.1",
     "react": "^16.11.0",
@@ -22,8 +22,8 @@
     "react-router-native": "^5.1.2"
   },
   "devDependencies": {
-    "@reactant/cli": "0.0.222",
-    "@reactant/platform": "0.0.222",
+    "@reactant/cli": "^0.0.223",
+    "@reactant/platform": "^0.0.223",
     "@types/jest": "^24.0.21",
     "@types/node": "^12.12.5",
     "@types/react": "^16.9.11",
