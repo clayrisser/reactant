@@ -11,26 +11,26 @@
     "test": "reactant test web"
   },
   "dependencies": {
-    "@reactant/router": "^0.0.222",
-    "@reactant/web": "^0.0.222",
-    "core-js": "^3.3.3",
-    "react": "16.8.3",
-    "react-dom": "16.8.3",
+    "@reactant/router": "0.0.222",
+    "@reactant/web": "0.0.222",
+    "core-js": "^3.3.6",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
-    "@craco/craco": "5.5.0",
-    "@reactant/cli": "^0.0.222",
-    "@reactant/context": "^0.0.222",
-    "@reactant/platform": "^0.0.222",
-    "@types/jest": "24.0.18",
-    "@types/node": "12.7.8",
-    "@types/react": "^16.8.23",
+    "@craco/craco": "^5.6.1",
+    "@reactant/cli": "0.0.222",
+    "@reactant/context": "0.0.222",
+    "@reactant/platform": "0.0.222",
+    "@types/jest": "^24.0.21",
+    "@types/node": "^12.12.5",
+    "@types/react": "^16.9.11",
     "@types/react-dom": "^16.9.3",
     "@types/react-router-dom": "^5.1.2",
     "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
     "react-scripts": "^3.2.0",
-    "typescript": "3.7.0-dev.20191021"
+    "typescript": "3.7.1-rc"
   },
   "browserslist": {
     "production": [

@@ -40,7 +40,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/plugin": "^0.0.222",
+    "@reactant/plugin": "0.0.222",
     "history": "^4.10.1",
     "react": "^16.11.0",
     "react-router": "^5.1.2"
@@ -50,21 +50,21 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.2",
-    "@babel/node": "^7.6.2",
+    "@babel/cli": "^7.6.4",
+    "@babel/node": "^7.6.3",
     "@babel/preset-env": "^7.6.3",
-    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-react": "^7.6.3",
     "@babel/preset-typescript": "^7.6.0",
-    "@types/jest": "^24.0.18",
-    "@types/react": "^16.9.4",
+    "@types/jest": "^24.0.21",
+    "@types/react": "^16.9.11",
     "@types/react-dom": "^16.9.3",
     "@types/react-native": "^0.60.22",
-    "eslint": "^6.4.0",
-    "eslint-config-reactant": "^0.1.141",
+    "eslint": "^6.6.0",
+    "eslint-config-reactant": "^0.1.143",
     "jest": "^24.9.0",
     "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
     "react-dom": "^16.11.0",
-    "typescript": "3.7.0-dev.20191021"
+    "typescript": "3.7.1-rc"
   },
   "engines": {
     "node": ">=6.0.0"

@@ -38,29 +38,29 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/config": "^0.0.222",
-    "@reactant/context": "^0.0.222",
-    "@reactant/platform": "^0.0.222",
-    "@reactant/plugin": "^0.0.222",
-    "@reactant/types": "^0.0.222",
-    "core-js": "^3.2.1",
+    "@reactant/config": "0.0.222",
+    "@reactant/context": "0.0.222",
+    "@reactant/platform": "0.0.222",
+    "@reactant/plugin": "0.0.222",
+    "@reactant/types": "0.0.222",
+    "core-js": "^3.3.6",
     "ora": "^4.0.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.2",
-    "@babel/core": "^7.6.2",
-    "@babel/node": "^7.6.2",
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
     "@babel/plugin-proposal-optional-chaining": "^7.6.0",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-typescript": "^7.6.0",
     "@types/core-js": "^2.5.2",
-    "@types/jest": "^24.0.18",
+    "@types/jest": "^24.0.21",
     "@types/ora": "^3.2.0",
-    "eslint": "^6.4.0",
-    "eslint-config-reactant": "^0.1.142",
+    "eslint": "^6.6.0",
+    "eslint-config-reactant": "^0.1.143",
     "jest": "^24.9.0",
     "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
-    "typescript": "3.7.0-dev.20191021"
+    "typescript": "3.7.1-rc"
   },
   "engines": {
     "node": ">=6.0.0"

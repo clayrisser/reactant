@@ -11,26 +11,26 @@
     "test": "reactant test expo"
   },
   "dependencies": {
-    "@reactant/expo": "^0.0.222",
-    "@reactant/router": "^0.0.222",
-    "core-js": "^3.3.3",
-    "expo": "^35.0.0",
-    "react": "16.8.3",
-    "react-dom": "16.8.3",
+    "@reactant/expo": "0.0.222",
+    "@reactant/router": "0.0.222",
+    "core-js": "^3.3.6",
+    "expo": "^35.0.1",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
     "react-native-web": "^0.11.7",
     "react-router-native": "^5.1.2"
   },
   "devDependencies": {
-    "@reactant/cli": "^0.0.222",
-    "@reactant/platform": "^0.0.222",
-    "@types/jest": "24.0.18",
-    "@types/node": "12.7.8",
-    "@types/react": "^16.8.23",
-    "@types/react-native": "^0.57.65",
+    "@reactant/cli": "0.0.222",
+    "@reactant/platform": "0.0.222",
+    "@types/jest": "^24.0.21",
+    "@types/node": "^12.12.5",
+    "@types/react": "^16.9.11",
+    "@types/react-native": "^0.60.22",
     "@types/react-router-native": "^5.1.0",
     "expo-cli": "^3.4.1",
     "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
-    "typescript": "3.7.0-dev.20191021"
+    "typescript": "3.7.1-rc"
   }
 }

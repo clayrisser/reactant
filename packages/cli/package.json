@@ -47,9 +47,9 @@
     "@oclif/config": "^1.13.3",
     "@oclif/errors": "^1.2.2",
     "@oclif/parser": "^3.8.4",
-    "@reactant/core": "^0.0.222",
-    "@reactant/types": "^0.0.222",
-    "core-js": "^3.3.3"
+    "@reactant/core": "0.0.222",
+    "@reactant/types": "0.0.222",
+    "core-js": "^3.3.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",
@@ -59,12 +59,12 @@
     "@babel/preset-typescript": "^7.6.0",
     "@oclif/dev-cli": "^1.22.2",
     "@types/core-js": "^2.5.2",
-    "@types/jest": "^24.0.19",
-    "eslint": "^6.5.1",
-    "eslint-config-reactant": "^0.1.141",
+    "@types/jest": "^24.0.21",
+    "eslint": "^6.6.0",
+    "eslint-config-reactant": "^0.1.143",
     "jest": "^24.9.0",
     "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
-    "typescript": "3.7.0-dev.20191021"
+    "typescript": "3.7.1-rc"
   },
   "engines": {
     "node": ">=6.0.0"

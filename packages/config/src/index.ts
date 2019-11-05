@@ -1,6 +1,6 @@
-import cosmiconfig from 'cosmiconfig';
 import pkgDir from 'pkg-dir';
 import { Config, Context } from '@reactant/types';
+import { cosmiconfigSync } from 'cosmiconfig';
 import { getContext, merge, syncContext } from '@reactant/context';
 import defaultConfig from './defaultConfig';
 
@@ -9,7 +9,7 @@ const rootPath = pkgDir.sync(process.cwd()) || process.cwd();
 export function getUserConfig(): Partial<Config> {
   let userConfig: Partial<Config> = {};
   try {
-    const payload = cosmiconfig('reactant').searchSync(rootPath);
+    const payload = cosmiconfigSync('reactant').search(rootPath);
     // TODO
     userConfig = (payload && payload.config ? payload.config : {}) as Partial<
       Config

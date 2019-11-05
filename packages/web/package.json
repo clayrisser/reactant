@@ -42,12 +42,12 @@
   "dependencies": {
     "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
-    "@craco/craco": "5.5.0",
-    "@reactant/context": "^0.0.222",
-    "@reactant/platform": "^0.0.222",
+    "@craco/craco": "^5.6.1",
+    "@reactant/context": "0.0.222",
+    "@reactant/platform": "0.0.222",
     "@types/webpack": "^4.39.8",
     "babel-plugin-module-resolver": "^3.2.0",
-    "core-js": "^3.3.3",
+    "core-js": "^3.3.6",
     "fs-extra": "^8.1.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
@@ -58,20 +58,20 @@
     "react-dom": "^16.11.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.2",
-    "@babel/node": "^7.6.2",
+    "@babel/cli": "^7.6.4",
+    "@babel/node": "^7.6.3",
     "@babel/plugin-proposal-optional-chaining": "^7.6.0",
-    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-react": "^7.6.3",
     "@babel/preset-typescript": "^7.6.0",
     "@types/fs-extra": "^8.0.1",
-    "@types/jest": "^24.0.18",
+    "@types/jest": "^24.0.21",
     "@types/react": "^16.9.11",
     "@types/react-dom": "^16.9.3",
-    "eslint": "^6.4.0",
-    "eslint-config-reactant": "^0.1.141",
+    "eslint": "^6.6.0",
+    "eslint-config-reactant": "^0.1.143",
     "jest": "^24.9.0",
     "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
-    "typescript": "3.7.0-dev.20191021"
+    "typescript": "3.7.1-rc"
   },
   "engines": {
     "node": ">=6.0.0"
