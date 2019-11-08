@@ -1,0 +1,93 @@
+{
+  "name": "@reactant/redux",
+  "version": "0.0.223",
+  "description": "reactant platform for redux",
+  "keywords": [
+    "@reactant/redux",
+    "reactant",
+    "redux",
+    "react"
+  ],
+  "homepage": "https://github.com/codejamninja/reactant/packages/redux",
+  "bugs": {
+    "url": "https://github.com/codejamninja/reactant/issues",
+    "email": "jam@codejam.ninja"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Jam Risser",
+    "email": "jam@codejam.ninja",
+    "url": "https://codejam.ninja"
+  },
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codejamninja/reactant"
+  },
+  "scripts": {
+    "build": "npm run test && babel src -d lib --extensions \".ts,.tsx\" --source-maps inline && tsc -d --emitDeclarationOnly",
+    "clean": "git clean -fXd -e \\!node_modules -e \\!node_modules/**/* && jest --clearCache",
+    "clean:purge": "jest --clearCache && git clean -fXd",
+    "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
+    "lint": "npm run format && tsc --allowJs --noEmit && eslint --ext .ts,.tsx ./",
+    "lint:fix": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx --fix ./",
+    "prepublish": "npm run build",
+    "start": "babel-node src --extensions \".ts,.tsx\"",
+    "test": "npm run lint:fix && jest --coverage",
+    "test:watch": "npm run lint && jest --watch"
+  },
+  "dependencies": {
+    "@reactant/plugin": "^0.0.223",
+    "@types/react-redux": "^7.1.5",
+    "@types/redux": "^3.6.0",
+    "@types/redux-thunk": "^2.1.0",
+    "history": "^4.10.1",
+    "react": "^16.11.0",
+    "react-router": "^5.1.2"
+  },
+  "peerDependencies": {
+    "react": "^16.11.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "@babel/preset-typescript": "^7.6.0",
+    "@types/jest": "^24.0.21",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.3",
+    "@types/react-native": "^0.60.22",
+    "eslint": "^6.6.0",
+    "eslint-config-reactant": "^0.1.143",
+    "jest": "^24.9.0",
+    "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
+    "react-dom": "^16.11.0",
+    "react-redux": "^7.1.3",
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0",
+    "typescript": "3.7.1-rc"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "eslintIgnore": [
+    "lib"
+  ],
+  "jest": {
+    "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
+    "verbose": true
+  },
+  "reactantPlugin": "lib/plugin.js",
+  "gitHead": "ca01be340be4decc31a6bd10e9d1788562f7fe85",
+  "optionalDependencies": {
+    "@types/react-router-dom": "^5.1.0",
+    "@types/react-router-native": "^5.1.0",
+    "react-router-dom": "^5.1.2",
+    "react-router-native": "^5.1.2"
+  }
+}
