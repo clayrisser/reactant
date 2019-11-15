@@ -1,6 +1,6 @@
 import path from 'path';
 import util from 'util';
-import { CracoConfig } from '@craco/craco';
+import { CracoConfig, CracoBabel } from '@craco/craco';
 import { Paths } from '@reactant/platform';
 import { getContext, merge } from '@reactant/context';
 import {
@@ -92,6 +92,12 @@ function overrideCracoConfig({
     );
     return webpackConfig;
   };
+  cracoConfig.babel = merge<CracoBabel>(
+    cracoConfig.babel || {},
+    // eslint-disable-next-line no-undef
+    context.config?.babel
+  );
+  // eslint-ignore-next-line
   return cracoConfig;
 }
 

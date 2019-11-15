@@ -12,15 +12,9 @@ const App: FC<AppProps> = (props: AppProps) => (
     <Link to="/">Home</Link>
     {props.children}
     <Switch>
-      <Route path="/about">
-        About
-      </Route>
-      <Route path="/users">
-        Users
-      </Route>
-      <Route path="/">
-        Home
-      </Route>
+      <Route path="/about">About</Route>
+      <Route path="/users">Users</Route>
+      <Route path="/">Home</Route>
     </Switch>
   </Router>
 );
