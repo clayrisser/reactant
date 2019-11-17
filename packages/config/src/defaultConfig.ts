@@ -1,3 +1,5 @@
 import { Config } from '@reactant/types';
 
-export default {} as Config;
+export default {
+  global: {}
+} as Config;

@@ -57,6 +57,7 @@ export function getPlugins(rootPath: string): LoadedPlugins {
         path: pluginPath,
         supportedPlatforms: new Set(requiredPlugin.supportedPlatforms || [])
       };
+      plugins[plugin.name] = plugin;
       return plugins;
     }, {});
   return _plugins;

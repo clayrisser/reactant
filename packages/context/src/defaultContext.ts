@@ -7,7 +7,6 @@ const context: Context = {
   platformName: '',
   plugins: {} as LoadedPlugins,
   state: {},
-  userConfig: {},
   options: {
     config: {},
     debug: false

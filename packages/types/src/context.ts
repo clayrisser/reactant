@@ -18,7 +18,6 @@ export interface Context {
   platformName: string;
   plugins: LoadedPlugins;
   state: { [key: string]: any };
-  userConfig: Partial<Config>;
 }
 
 export type SyncContextCallback = (

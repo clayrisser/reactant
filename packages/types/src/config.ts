@@ -11,8 +11,13 @@ export type BabelConfig = any;
 
 export type BabelConfigModifier = (babelConfig: BabelConfig) => BabelConfig;
 
+export type GlobalConfig = {
+  [key: string]: any;
+};
+
 export interface Config {
   babel?: BabelConfigModifier | BabelConfig;
+  global: GlobalConfig;
   platform: PlatformOptions;
   platforms: PlatformsOptions;
   plugins: PluginsOptions;
