@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "@reactant/config": "^0.0.225",
+    "@reactant/context": "^0.0.225",
     "@reactant/types": "^0.0.225",
     "core-js": "^3.3.6",
     "cross-spawn": "^7.0.1",

@@ -1,5 +1,6 @@
 import PlatformReactant from '@reactant/platform/Reactant';
 import React, { FC } from 'react';
+import { options } from '@reactant/platform';
 
 export interface ReactantProps {
   [key: string]: any;
