@@ -5,7 +5,7 @@ const isNode = new Function(
   'try{return this===global}catch(e){return false}'
 )();
 
-function getOptions(): PluginOptions {
+export function getOptions(pluginName: string): PluginOptions {
   if (isNode) {
     // eslint-disable-next-line no-eval
     const { getContext } = eval("require('@reactant/context')");
@@ -13,13 +13,11 @@ function getOptions(): PluginOptions {
   }
   try {
     // eslint-disable-next-line global-require
-    const options: PluginOptions = require('../../../../.tmp/reactant/plugins');
-    if (options) return options;
+    const options: PluginOptions = require('../../../../.tmp/reactant/plugins.json');
+    if (options) return options[pluginName] || {};
     // eslint-disable-next-line no-empty
   } catch (err) {}
   return {};
 }
-
-export const options = getOptions();
 
 export * from '@reactant/types';

@@ -2,9 +2,8 @@ import CircularJSON from 'circular-json';
 import fs from 'fs-extra';
 import path from 'path';
 import util from 'util';
-import { Context, Logger, LoadedPlugin } from '@reactant/types';
+import { Context, Logger, LoadedPlugin, PluginOptions } from '@reactant/types';
 import { finish } from '@reactant/context';
-import { mapSeries } from 'bluebird';
 import build from './build';
 import clean from './clean';
 import start from './start';
@@ -26,7 +25,7 @@ export async function cleanup(context: Context, _logger: Logger) {
     // eslint-disable-next-line no-empty
   } catch (err) {}
   try {
-    await fs.remove(path.resolve(context.paths.reactant, 'plugins'));
+    await fs.unlink(path.resolve(context.paths.reactant, 'plugins.json'));
     // eslint-disable-next-line no-empty
   } catch (err) {}
 }
@@ -49,9 +48,7 @@ export async function preProcess(
     );
   }
   if (await fs.pathExists(path.resolve(__dirname, '../../../../lerna.json'))) {
-    await fs.mkdirs(
-      path.resolve(__dirname, '../../../../../.tmp/reactant/plugins')
-    );
+    await fs.mkdirs(path.resolve(__dirname, '../../../../../.tmp/reactant'));
     await fs.writeFile(
       path.resolve(__dirname, '../../../../../.tmp/reactant/config.json'),
       CircularJSON.stringify(context.config)
@@ -60,21 +57,22 @@ export async function preProcess(
       path.resolve(__dirname, '../../../../../.tmp/reactant/platform.json'),
       CircularJSON.stringify(context.platform?.options || {})
     );
-    await mapSeries(
-      Object.entries<LoadedPlugin>(context.plugins),
-      async ([pluginName, plugin]: [string, LoadedPlugin]) => {
-        await fs.writeFile(
-          path.resolve(
-            __dirname,
-            '../../../../../.tmp/reactant/plugins',
-            `${pluginName}.json`
-          ),
-          CircularJSON.stringify(plugin.options || {})
-        );
-      }
+    await fs.writeFile(
+      path.resolve(__dirname, '../../../../../.tmp/reactant/plugins.json'),
+      CircularJSON.stringify(
+        Object.entries(context.plugins || {}).reduce(
+          (
+            plugins: { [key: string]: PluginOptions },
+            [pluginName, plugin]: [string, LoadedPlugin]
+          ) => {
+            plugins[pluginName] = plugin.options;
+            return plugins;
+          },
+          {}
+        )
+      )
     );
   }
-  await fs.mkdirs(path.resolve(context.paths.reactant, 'plugins'));
   await fs.writeFile(
     path.resolve(context.paths.reactant, 'config.json'),
     CircularJSON.stringify(context.config)
@@ -83,14 +81,20 @@ export async function preProcess(
     path.resolve(context.paths.reactant, 'platform.json'),
     CircularJSON.stringify(context.platform?.options || {})
   );
-  await mapSeries(
-    Object.entries<LoadedPlugin>(context.plugins),
-    async ([pluginName, plugin]: [string, LoadedPlugin]) => {
-      await fs.writeFile(
-        path.resolve(context.paths.reactant, 'plugins', `${pluginName}.json`),
-        CircularJSON.stringify(plugin.options || {})
-      );
-    }
+  await fs.writeFile(
+    path.resolve(context.paths.reactant, 'plugins.json'),
+    CircularJSON.stringify(
+      Object.entries(context.plugins || {}).reduce(
+        (
+          plugins: { [key: string]: PluginOptions },
+          [pluginName, plugin]: [string, LoadedPlugin]
+        ) => {
+          plugins[pluginName] = plugin.options || {};
+          return plugins;
+        },
+        {}
+      )
+    )
   );
   return context;
 }
