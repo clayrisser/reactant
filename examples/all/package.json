@@ -1,6 +1,6 @@
 {
   "name": "example-all",
-  "version": "0.0.227",
+  "version": "0.0.228",
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -15,9 +15,9 @@
     "test:web": "reactant test web"
   },
   "dependencies": {
-    "@reactant/expo": "^0.0.227",
-    "@reactant/router": "^0.0.227",
-    "@reactant/web": "^0.0.227",
+    "@reactant/expo": "^0.0.228",
+    "@reactant/router": "^0.0.228",
+    "@reactant/web": "^0.0.228",
     "core-js": "^3.3.6",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
@@ -28,9 +28,9 @@
   },
   "devDependencies": {
     "@craco/craco": "^5.6.1",
-    "@reactant/cli": "^0.0.227",
-    "@reactant/context": "^0.0.227",
-    "@reactant/platform": "^0.0.227",
+    "@reactant/cli": "^0.0.228",
+    "@reactant/context": "^0.0.228",
+    "@reactant/platform": "^0.0.228",
     "@types/jest": "^24.0.21",
     "@types/node": "^12.12.5",
     "@types/react": "^16.9.11",
