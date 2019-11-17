@@ -22,6 +22,8 @@ export default class State<
   projectName = 'reactant';
 
   constructor(public name = 'state', public postprocess = (state: T) => state) {
+    process.on('SIGINT', () => this.finish());
+    process.on('SIGTERM', () => this.finish());
     this.statePath = path.resolve(rootPath, '.tmp', this.projectName, 'state');
     if (this.currentProcStarted) return this;
     this.currentProcStarted = true;
@@ -105,7 +107,13 @@ export default class State<
   }
 
   finish() {
-    fs.removeSync(`${this.statePath}.json`);
-    fs.removeSync(this.statePath);
+    try {
+      fs.removeSync(`${this.statePath}.json`);
+      // eslint-disable-next-line no-empty
+    } catch (err) {}
+    try {
+      fs.removeSync(this.statePath);
+      // eslint-disable-next-line no-empty
+    } catch (err) {}
   }
 }

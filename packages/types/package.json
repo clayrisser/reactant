@@ -38,7 +38,10 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "core-js": "^3.3.6"
+    "@babel/core": "^7.6.4",
+    "@types/webpack": "^4.39.8",
+    "core-js": "^3.3.6",
+    "webpack": "^4.41.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",

@@ -1,5 +1,4 @@
 import { Config, Context } from '@reactant/types';
-import { getContext, merge, syncContext } from '@reactant/context';
 import defaultConfig from './defaultConfig';
 
 // eslint-disable-next-line no-new-func
@@ -22,27 +21,42 @@ export function getUserConfig(): Partial<Config> {
     >;
   } catch (err) {
     if (err.name !== 'YAMLException') throw err;
-    // eslint-disable-next-line import/no-dynamic-require,global-require
-    userConfig = require(err.mark.name);
+    // eslint-disable-next-line import/no-dynamic-require,global-require,no-eval
+    userConfig = eval(`require(${err.mark.name})`);
   }
   return userConfig;
 }
 
 export function loadConfig(): Config {
   if (!isNode) throw new Error('only node can load config');
-  return merge<Config>(defaultConfig, getUserConfig());
+  // eslint-disable-next-line no-eval
+  const { merge } = eval("require('@reactant/context')");
+  return merge(defaultConfig, getUserConfig());
 }
 
 export function getConfig(): Config {
-  if (isNode) return (getContext() as Context).config || defaultConfig;
+  if (isNode) {
+    // eslint-disable-next-line no-eval
+    const { getContext } = eval("require('@reactant/context')");
+    return (getContext() as Context).config || defaultConfig;
+  }
+  try {
+    // eslint-disable-next-line global-require
+    const config: Config = require('../../../../.tmp/reactant/config.json');
+    if (config) return config;
+    // eslint-disable-next-line no-empty
+  } catch (err) {}
   if (window.__REACTANT__?.config) return window.__REACTANT__.config;
   return { ...defaultConfig };
 }
 
 export function setConfig(config: Config, mergeConfig = true): Config {
+  if (!isNode) throw new Error('only node can set config');
+  // eslint-disable-next-line no-eval
+  const { merge, syncContext } = eval("require('@reactant/context')");
   syncContext((context: Context) => {
     context.config = mergeConfig
-      ? merge<Config>(context.config || defaultConfig, config)
+      ? merge(context.config || defaultConfig, config)
       : config;
     return context;
   });

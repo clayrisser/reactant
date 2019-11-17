@@ -43,7 +43,9 @@
     "@reactant/platform": "^0.0.224",
     "@reactant/plugin": "^0.0.224",
     "@reactant/types": "^0.0.224",
+    "circular-json": "^0.5.9",
     "core-js": "^3.3.6",
+    "fs-extra": "^8.1.0",
     "ora": "^4.0.2"
   },
   "devDependencies": {
@@ -53,7 +55,9 @@
     "@babel/plugin-proposal-optional-chaining": "^7.6.0",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-typescript": "^7.6.0",
+    "@types/circular-json": "^0.4.0",
     "@types/core-js": "^2.5.2",
+    "@types/fs-extra": "^8.0.1",
     "@types/jest": "^24.0.21",
     "@types/ora": "^3.2.0",
     "eslint": "^6.6.0",

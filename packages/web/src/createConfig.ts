@@ -15,7 +15,6 @@ export default function createConfig(
     {
       root: [path.resolve(context.paths.root, 'src')],
       alias: {
-        '@reactant/config': path.resolve(context.paths.tmp, 'config.json'),
         '~': path.resolve(context.paths.root, 'src')
       }
     }

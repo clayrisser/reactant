@@ -1,5 +1,8 @@
 import React, { FC, ReactNode } from 'react';
 import { Route, Switch, Router, Link } from '@reactant/router';
+import config from '@reactant/config';
+
+console.log('C', config);
 
 export interface AppProps {
   children?: ReactNode;

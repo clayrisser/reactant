@@ -30,6 +30,7 @@ export type Path = string;
 export interface Paths {
   build: Path;
   dist: Path;
+  reactant: Path;
   root: Path;
   tmp: Path;
   [key: string]: Path;

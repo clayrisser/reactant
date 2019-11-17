@@ -15,8 +15,9 @@ const context: Context = {
   paths: {
     build: '{tmp}/build',
     dist: 'dist/{_platform}',
+    reactant: '.tmp/reactant',
     root: '.',
-    tmp: '.tmp/reactant/{_platform}/{_action}'
+    tmp: '{reactant}/{_platform}/{_action}'
   }
 };
 
