@@ -81,7 +81,7 @@
     "verbose": true
   },
   "reactantPlugin": "lib/plugin.js",
-  "gitHead": "ca01be340be4decc31a6bd10e9d1788562f7fe85",
+  "gitHead": "f7c177494b376f6cbe201bed6a3cf541d297727a",
   "optionalDependencies": {
     "@types/react-router-dom": "^5.1.0",
     "@types/react-router-native": "^5.1.0",
