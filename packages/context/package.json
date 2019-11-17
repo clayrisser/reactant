@@ -1,6 +1,6 @@
 {
   "name": "@reactant/context",
-  "version": "0.0.225",
+  "version": "0.0.226",
   "description": "reactant context",
   "keywords": [
     "reactant",
@@ -38,7 +38,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/types": "^0.0.225",
+    "@reactant/types": "^0.0.226",
     "circular-json": "^0.5.9",
     "core-js": "^3.3.6",
     "cross-spawn": "^7.0.1",
