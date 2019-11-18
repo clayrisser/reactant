@@ -11,6 +11,7 @@
     "test": "reactant test expo"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.6.3",
     "@reactant/expo": "^0.0.228",
     "@reactant/redux": "^0.0.228",
     "@reactant/router": "^0.0.228",
@@ -20,7 +21,8 @@
     "react-dom": "^16.11.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
     "react-native-web": "^0.11.7",
-    "react-router-native": "^5.1.2"
+    "react-router-native": "^5.1.2",
+    "redux-observable": "^1.2.0"
   },
   "devDependencies": {
     "@reactant/cli": "^0.0.228",
@@ -35,7 +37,6 @@
     "babel-plugin-module-resolver": "^3.2.0",
     "expo-cli": "^3.4.1",
     "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
-    "redux-observable": "^1.2.0",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "typescript": "3.7.1-rc"
