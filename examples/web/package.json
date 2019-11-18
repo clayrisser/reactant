@@ -11,6 +11,7 @@
     "test": "reactant test web"
   },
   "dependencies": {
+    "@reactant/redux": "^0.0.228",
     "@reactant/router": "^0.0.228",
     "@reactant/web": "^0.0.228",
     "core-js": "^3.3.6",
@@ -33,6 +34,9 @@
     "babel-plugin-module-resolver": "^3.2.0",
     "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
     "react-scripts": "^3.2.0",
+    "redux-observable": "^1.2.0",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
     "typescript": "3.7.1-rc"
   },
   "browserslist": {
