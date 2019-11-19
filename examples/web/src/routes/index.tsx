@@ -1,8 +1,8 @@
 import React, { FC, ReactNode } from 'react';
 import { Path, Route, Router, Switch, Link } from '@reactant/router';
-import { storeContext } from '@reactant/redux/thunk';
 import { connect } from '@reactant/redux';
 import { push } from '@reactant/router/redux';
+import { storeContext } from '@reactant/redux/thunk';
 
 export interface RoutesProps {
   children?: ReactNode;

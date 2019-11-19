@@ -21,8 +21,8 @@
   },
   "files": [
     "lib",
-    "react.js",
-    "react.ts"
+    "redux.js",
+    "redux.ts"
   ],
   "main": "lib/index.js",
   "repository": {

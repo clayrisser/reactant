@@ -7,3 +7,4 @@ export { Link, withProvider };
 
 // eslint-disable-next-line import/no-unresolved
 export * from './Link';
+export * from 'connected-react-router';
