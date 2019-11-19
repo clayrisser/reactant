@@ -70,10 +70,6 @@ function overrideCracoConfig({
         moduleScopePlugin.appSrcs = [webPath, srcPath];
       }
     });
-    webpackConfig.resolve.alias = {
-      ...webpackConfig.resolve.alias,
-      '~': srcPath
-    };
     if (context.debug) {
       console.log(
         '\n\n======== START WEBPACK ========\n',

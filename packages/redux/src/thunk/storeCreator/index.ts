@@ -71,12 +71,20 @@ export default class StoreCreator {
     const reducer = this.persist
       ? persistReducer(this.persist, reducers)
       : reducers;
-    const composeEnhancers = composeWithDevTools(this.options.devTools || {});
+    const composeEnhancers = this.options.devTools
+      ? composeWithDevTools(
+          typeof this.options.devTools === 'object' ? this.options.devTools : {}
+        )
+      : null;
     this.store = reduxCreateStore(
       reducer,
       this.defaultState,
-      // @ts-ignore
-      composeEnhancers(applyMiddleware(...middleware))
+      composeEnhancers
+        ? composeEnhancers(
+            // @ts-ignore
+            applyMiddleware(...middleware)
+          )
+        : applyMiddleware(...middleware)
     );
     if (this.persist) this.persistor = persistStore(this.store);
   }

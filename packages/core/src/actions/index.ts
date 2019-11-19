@@ -11,6 +11,12 @@ import start from './start';
 export async function cleanup(context: Context, _logger: Logger) {
   if (await fs.pathExists(path.resolve(__dirname, '../../../../lerna.json'))) {
     await fs.remove(path.resolve(__dirname, '../../../../../.tmp'));
+    await fs.remove(
+      path.resolve(__dirname, '../../../../packages/.tmp/reactant')
+    );
+    await fs.remove(
+      path.resolve(__dirname, '../../../../packages/redux/.tmp/reactant')
+    );
   }
   try {
     await fs.remove(context.paths.tmp);
@@ -47,32 +53,6 @@ export async function preProcess(
       '\n========= END CONTEXT =========\n'
     );
   }
-  if (await fs.pathExists(path.resolve(__dirname, '../../../../lerna.json'))) {
-    await fs.mkdirs(path.resolve(__dirname, '../../../../../.tmp/reactant'));
-    await fs.writeFile(
-      path.resolve(__dirname, '../../../../../.tmp/reactant/config.json'),
-      CircularJSON.stringify(context.config)
-    );
-    await fs.writeFile(
-      path.resolve(__dirname, '../../../../../.tmp/reactant/platform.json'),
-      CircularJSON.stringify(context.platform?.options || {})
-    );
-    await fs.writeFile(
-      path.resolve(__dirname, '../../../../../.tmp/reactant/plugins.json'),
-      CircularJSON.stringify(
-        Object.entries(context.plugins || {}).reduce(
-          (
-            plugins: { [key: string]: PluginOptions },
-            [pluginName, plugin]: [string, LoadedPlugin]
-          ) => {
-            plugins[pluginName] = plugin.options;
-            return plugins;
-          },
-          {}
-        )
-      )
-    );
-  }
   await fs.writeFile(
     path.resolve(context.paths.reactant, 'config.json'),
     CircularJSON.stringify(context.config)
@@ -96,6 +76,27 @@ export async function preProcess(
       )
     )
   );
+  if (await fs.pathExists(path.resolve(__dirname, '../../../../lerna.json'))) {
+    await fs.remove(path.resolve(__dirname, '../../../../../.tmp'));
+    await fs.remove(
+      path.resolve(__dirname, '../../../../packages/.tmp/reactant')
+    );
+    await fs.remove(
+      path.resolve(__dirname, '../../../../packages/redux/.tmp/reactant')
+    );
+    await fs.ensureSymlink(
+      context.paths.reactant,
+      path.resolve(__dirname, '../../../../../.tmp/reactant')
+    );
+    await fs.ensureSymlink(
+      context.paths.reactant,
+      path.resolve(__dirname, '../../../../packages/.tmp/reactant')
+    );
+    await fs.ensureSymlink(
+      context.paths.reactant,
+      path.resolve(__dirname, '../../../../packages/redux/.tmp/reactant')
+    );
+  }
   return context;
 }
 

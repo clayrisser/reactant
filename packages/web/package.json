@@ -47,15 +47,12 @@
     "@reactant/platform": "^0.0.229",
     "@types/webpack": "^4.39.8",
     "babel-plugin-macros": "^2.6.1",
-    "babel-plugin-module-resolver": "^3.2.0",
     "core-js": "^3.3.6",
     "fs-extra": "^8.1.0",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
     "webpack": "^4.41.2"
   },
   "peerDependencies": {
-    "react": "^16.10.2",
+    "react": "^16.11.0",
     "react-dom": "^16.11.0"
   },
   "devDependencies": {
@@ -72,6 +69,8 @@
     "eslint-config-reactant": "^0.1.143",
     "jest": "^24.9.0",
     "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
     "typescript": "3.7.1-rc"
   },
   "engines": {

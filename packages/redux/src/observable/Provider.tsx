@@ -1,18 +1,20 @@
-import React, { FC } from 'react';
-import { PersistGate, PersistGateProps } from 'redux-persist/integration/react';
+import React, { Context, FC, ReactNode } from 'react';
+import { Action, AnyAction, Middleware, Store } from 'redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { Persistor } from 'redux-persist';
-import { Middleware, Store } from 'redux';
-import {
-  Provider as ReduxProvider,
-  ProviderProps as ReduxProviderProps
-} from 'react-redux';
+import { Provider as ReduxProvider, ReactReduxContextValue } from 'react-redux';
 import StoreCreator from './storeCreator';
 
-export interface ProviderProps extends PersistGateProps, ReduxProviderProps {
+export interface ProviderProps<A extends Action = AnyAction> {
+  children?: ReactNode | ((bootstrapped: boolean) => ReactNode);
+  context?: Context<ReactReduxContextValue>;
   defaultState?: object;
+  loading?: ReactNode;
   middleware?: Middleware[];
+  onBeforeLift?(): void | Promise<void>;
   options?: object;
-  [key: string]: any;
+  persistor?: Persistor;
+  store?: Store<any, A>;
 }
 
 const Provider: FC<ProviderProps> = (props: ProviderProps) => {
