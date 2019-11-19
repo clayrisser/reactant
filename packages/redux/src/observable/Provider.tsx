@@ -4,16 +4,18 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Persistor } from 'redux-persist';
 import { Provider as ReduxProvider, ReactReduxContextValue } from 'react-redux';
 import StoreCreator from './storeCreator';
+import { Reducers } from '../types';
 
 export interface ProviderProps<A extends Action = AnyAction> {
   children?: ReactNode | ((bootstrapped: boolean) => ReactNode);
   context?: Context<ReactReduxContextValue>;
   defaultState?: object;
   loading?: ReactNode;
-  middleware?: Middleware[];
+  middlewares?: Middleware[];
   onBeforeLift?(): void | Promise<void>;
   options?: object;
   persistor?: Persistor;
+  reducers?: Reducers;
   store?: Store<any, A>;
 }
 
@@ -26,8 +28,9 @@ const Provider: FC<ProviderProps> = (props: ProviderProps) => {
   } else {
     const storeCreator = new StoreCreator(
       props.options,
+      props.reducers,
       props.defaultState,
-      props.middleware
+      props.middlewares
     );
     store = storeCreator.store;
     persistor = storeCreator.persistor;

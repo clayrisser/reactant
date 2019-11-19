@@ -5,19 +5,22 @@ import { createEpicMiddleware } from 'redux-observable';
 import { getOptions, PluginOptions } from '@reactant/plugin';
 import { persistStore, persistReducer, Persistor } from 'redux-persist';
 import {
-  createStore as reduxCreateStore,
-  applyMiddleware,
+  Middleware,
+  Reducer,
   Store,
-  Middleware
+  applyMiddleware,
+  combineReducers,
+  createStore as reduxCreateStore
 } from 'redux';
 // @ts-ignore
 import reducers from '~/reducers';
 import storage from './storage';
+import { Reducers } from '../../types';
 
 export default class StoreCreator {
   defaultState: object;
 
-  middleware: Middleware[];
+  middlewares: Middleware[];
 
   options: PluginOptions;
 
@@ -27,14 +30,18 @@ export default class StoreCreator {
 
   store: Store;
 
+  reducers: Reducers;
+
   constructor(
     options: PluginOptions = {},
+    customReducers: Reducers = {},
     defaultState = {},
-    middleware: Middleware[] = []
+    middlewares: Middleware[] = []
   ) {
     this.options = { ...getOptions('redux'), ...options };
+    this.reducers = { ...reducers, ...customReducers };
     const epicMiddleware = createEpicMiddleware();
-    this.middleware = [epicMiddleware, ...middleware];
+    this.middlewares = [epicMiddleware, ...middlewares];
     this.defaultState = {
       ...(this.options.defaultState || {}),
       ...defaultState
@@ -69,15 +76,23 @@ export default class StoreCreator {
       }
       this.persist = { ...this.persist, ...persistOptions };
     }
-    const reducer = this.persist
-      ? persistReducer(this.persist, reducers)
-      : reducers;
-    const composeEnhancers = composeWithDevTools(this.options.devTools || {});
+    const reducer: Reducer = this.persist
+      ? persistReducer(this.persist, combineReducers(this.reducers))
+      : combineReducers(this.reducers);
+    const composeEnhancers = this.options.devTools
+      ? composeWithDevTools(
+          typeof this.options.devTools === 'object' ? this.options.devTools : {}
+        )
+      : null;
     this.store = reduxCreateStore(
       reducer,
       this.defaultState,
-      // @ts-ignore
-      composeEnhancers(applyMiddleware(...middleware))
+      composeEnhancers
+        ? composeEnhancers(
+            // @ts-ignore
+            applyMiddleware(...this.middlewares)
+          )
+        : applyMiddleware(...this.middlewares)
     );
     if (this.persist) this.persistor = persistStore(this.store);
   }

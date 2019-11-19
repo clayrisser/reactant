@@ -1,6 +1,7 @@
 import { Options } from 'react-redux';
+import { Provider, ProviderProps } from './types';
 
-export { Options };
+export { Options, Provider, ProviderProps };
 
 export * from 'react-redux';
 export * from 'redux';
