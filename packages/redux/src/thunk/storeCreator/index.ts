@@ -28,9 +28,9 @@ export default class StoreCreator {
 
   persistor?: Persistor;
 
-  store: Store;
-
   reducers: Reducers;
+
+  store: Store;
 
   constructor(
     options: PluginOptions = {},

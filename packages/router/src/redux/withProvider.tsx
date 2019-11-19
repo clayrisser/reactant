@@ -10,7 +10,7 @@ import {
   connectRouter,
   routerMiddleware
 } from 'connected-react-router';
-import history from './history';
+import history from '../history';
 
 export interface UnknownProps {
   [key: string]: any;
@@ -37,3 +37,5 @@ export default function withProvider(
     );
   };
 }
+
+export * from 'connected-react-router';

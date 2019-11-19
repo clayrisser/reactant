@@ -1,27 +1,10 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 import { Provider, storeContext } from '@reactant/redux/thunk';
-import { Route, Switch, Router, Link, withProvider } from '@reactant/router';
+import { withProvider } from '@reactant/router/redux';
+import Routes from './routes';
 
-export interface AppProps {
-  children?: ReactNode;
-}
+export interface AppProps {}
 
-const App: FC<AppProps> = (props: AppProps) => (
-  <Router>
-    <Link to="/about">About</Link>
-    <Link to="/users">Users</Link>
-    <Link to="/">Home</Link>
-    {props.children}
-    <Switch>
-      <Route path="/about">About</Route>
-      <Route path="/users">Users</Route>
-      <Route path="/">Home</Route>
-    </Switch>
-  </Router>
-);
-
-App.defaultProps = {
-  children: 'Hello, reactant!'
-};
+const App: FC<AppProps> = (_props: AppProps) => <Routes />;
 
 export default withProvider(Provider, storeContext)(App);

@@ -7,7 +7,7 @@
     "experimentalDecorators": true,
     "incremental": false,
     "jsx": "react",
-    "lib": ["ES2018", "ESNext.AsyncIterable"],
+    "lib": ["esnext"],
     "module": "CommonJS",
     "moduleResolution": "Node",
     "outDir": "lib",
