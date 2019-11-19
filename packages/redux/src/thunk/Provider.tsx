@@ -1,10 +1,14 @@
-import React, { Context, FC, ReactNode } from 'react';
+import React, { FC, Context, ReactNode, createContext } from 'react';
 import { Action, AnyAction, Middleware, Store } from 'redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Persistor } from 'redux-persist';
 import { Provider as ReduxProvider, ReactReduxContextValue } from 'react-redux';
 import StoreCreator from './storeCreator';
 import { Reducers } from '../types';
+
+export const storeContext = createContext<ReactReduxContextValue>(
+  (null as unknown) as ReactReduxContextValue
+);
 
 export interface ProviderProps<A extends Action = AnyAction> {
   children?: ReactNode | ((bootstrapped: boolean) => ReactNode);
@@ -21,7 +25,7 @@ export interface ProviderProps<A extends Action = AnyAction> {
 
 const Provider: FC<ProviderProps> = (props: ProviderProps) => {
   let store: Store;
-  let persistor: Persistor | undefined;
+  let persistor: Persistor | void;
   if (props.store) {
     store = props.store;
     persistor = props.persistor;
@@ -37,7 +41,7 @@ const Provider: FC<ProviderProps> = (props: ProviderProps) => {
   }
   if (persistor) {
     return (
-      <ReduxProvider store={store} context={props.context}>
+      <ReduxProvider store={store} context={storeContext}>
         <PersistGate
           loading={props.loading}
           persistor={persistor}
@@ -49,7 +53,7 @@ const Provider: FC<ProviderProps> = (props: ProviderProps) => {
     );
   }
   return (
-    <ReduxProvider store={store} context={props.context}>
+    <ReduxProvider store={store} context={storeContext}>
       {props.children}
     </ReduxProvider>
   );

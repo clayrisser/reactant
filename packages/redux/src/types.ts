@@ -1,10 +1,14 @@
-import { Context, FC, ReactNode } from 'react';
 import { Action, AnyAction, Middleware, Reducer, Store } from 'redux';
+import { Context, FC, ReactNode } from 'react';
 import { Persistor } from 'redux-persist';
 import { ReactReduxContextValue } from 'react-redux';
 
 export interface Reducers {
   [key: string]: Reducer;
+}
+
+export interface ProviderContext {
+  store: Store;
 }
 
 export interface ProviderProps<A extends Action = AnyAction> {
@@ -19,4 +23,9 @@ export interface ProviderProps<A extends Action = AnyAction> {
   reducers?: Reducers;
   store?: Store<any, A>;
 }
+
+export type StoreContext = React.Context<
+  ReactReduxContextValue<any, AnyAction>
+>;
+
 export type Provider = FC<ProviderProps>;

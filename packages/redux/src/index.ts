@@ -1,7 +1,12 @@
 import { Options } from 'react-redux';
-import { Provider, ProviderProps } from './types';
+import {
+  Provider,
+  ProviderContext,
+  ProviderProps,
+  StoreContext
+} from './types';
 
-export { Options, Provider, ProviderProps };
+export { Options, Provider, ProviderContext, ProviderProps, StoreContext };
 
 export * from 'react-redux';
 export * from 'redux';

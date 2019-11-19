@@ -1,7 +1,3 @@
-import { combineReducers } from '@reactant/redux';
-
-const reducers = combineReducers({
+export default {
   hello: (f = {}) => f
-});
-
-export default reducers;
+};

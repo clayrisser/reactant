@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import connectProvider from './connectProvider';
+import withProvider from './withProvider';
 
-export { connectProvider };
+export { withProvider };
 export * from './router';
