@@ -1,10 +1,8 @@
-/* import Link from '@reactant/router/Link'; */
 import React, { FC, ReactNode } from 'react';
-import { Route, Switch, Router, Link } from '@reactant/router';
+import { Path, Route, Router, Switch, Link } from '@reactant/router';
 import { storeContext } from '@reactant/redux/thunk';
 import { connect } from '@reactant/redux';
-import { Path } from '@reactant/router';
-import { push } from '@reactant/router/lib/withProvider';
+import { push } from '@reactant/router/redux';
 
 export interface RoutesProps {
   children?: ReactNode;

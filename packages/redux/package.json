@@ -90,7 +90,7 @@
     "verbose": true
   },
   "reactantPlugin": "lib/plugin.js",
-  "gitHead": "f7c177494b376f6cbe201bed6a3cf541d297727a",
+  "gitHead": "7687a46b0697e755d335f4b3ef7d29816d7772cb",
   "optionalDependencies": {
     "@types/react-router-dom": "^5.1.0",
     "@types/react-router-native": "^5.1.0",

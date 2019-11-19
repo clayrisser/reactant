@@ -6,6 +6,4 @@ import Link from './Link';
 export { Link, withProvider };
 
 // eslint-disable-next-line import/no-unresolved
-export * from './Provider';
-// eslint-disable-next-line import/no-unresolved
 export * from './Link';
