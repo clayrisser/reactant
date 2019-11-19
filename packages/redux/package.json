@@ -1,6 +1,6 @@
 {
   "name": "@reactant/redux",
-  "version": "0.0.230",
+  "version": "0.0.231",
   "description": "reactant platform for redux",
   "keywords": [
     "@reactant/redux",
@@ -44,7 +44,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/plugin": "^0.0.230",
+    "@reactant/plugin": "^0.0.231",
     "react": "^16.11.0",
     "react-redux": "^7.1.3",
     "redux": "^4.0.4",
