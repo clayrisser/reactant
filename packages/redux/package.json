@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "@reactant/plugin": "^0.0.234",
+    "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-redux": "^7.1.3",
     "redux": "^4.0.4",

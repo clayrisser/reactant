@@ -1,5 +1,5 @@
 import { Action, AnyAction, Middleware, Reducer, Store } from 'redux';
-import { Context, FC, ReactNode } from 'react';
+import { Context, ReactNode } from 'react';
 import { Persistor } from 'redux-persist';
 import { ReactReduxContextValue } from 'react-redux';
 
@@ -28,4 +28,4 @@ export type StoreContext = React.Context<
   ReactReduxContextValue<any, AnyAction>
 >;
 
-export type Provider = FC<ProviderProps>;
+export type Provider = any;

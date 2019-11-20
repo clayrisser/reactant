@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { FC, ReactNode } from 'react';
 import { Path, Route, Router, Switch, Link } from '@reactant/router';
 import { connect } from '@reactant/redux';
@@ -29,6 +30,10 @@ const Routes: FC<RoutesProps> = (props: RoutesProps) => {
       </Switch>
     </Router>
   );
+};
+
+Routes.contextTypes = {
+  store: PropTypes.object.isRequired
 };
 
 Routes.defaultProps = {

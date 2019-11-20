@@ -1,4 +1,5 @@
-import React, { FC, Context, ReactNode, createContext } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component, Context, ReactNode, createContext } from 'react';
 import { Action, AnyAction, Middleware, Store } from 'redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Persistor } from 'redux-persist';
@@ -23,40 +24,59 @@ export interface ProviderProps<A extends Action = AnyAction> {
   store?: Store<any, A>;
 }
 
-const Provider: FC<ProviderProps> = (props: ProviderProps) => {
-  let store: Store;
-  let persistor: Persistor | void;
-  if (props.store) {
-    store = props.store;
-    persistor = props.persistor;
-  } else {
-    const storeCreator = new StoreCreator(
-      props.options,
-      props.reducers,
-      props.defaultState,
-      props.middlewares
-    );
-    store = storeCreator.store;
-    persistor = storeCreator.persistor;
+class Provider extends Component<ProviderProps> {
+  store: Store;
+
+  persistor?: Persistor;
+
+  // eslint-disable-next-line react/static-property-placement
+  static childContextTypes = {
+    store: PropTypes.object.isRequired
+  };
+
+  constructor(props: ProviderProps) {
+    super(props);
+    if (props.store) {
+      this.store = props.store;
+      this.persistor = props.persistor;
+    } else {
+      const storeCreator = new StoreCreator(
+        props.options,
+        props.reducers,
+        props.defaultState,
+        props.middlewares
+      );
+      this.store = storeCreator.store;
+      this.persistor = storeCreator.persistor;
+    }
   }
-  if (persistor) {
+
+  getChildContext() {
+    return {
+      store: this.store
+    };
+  }
+
+  render() {
+    if (this.persistor) {
+      return (
+        <ReduxProvider store={this.store} context={storeContext}>
+          <PersistGate
+            loading={this.props.loading}
+            persistor={this.persistor}
+            onBeforeLift={this.props.onBeforeLift}
+          >
+            {this.props.children}
+          </PersistGate>
+        </ReduxProvider>
+      );
+    }
     return (
-      <ReduxProvider store={store} context={storeContext}>
-        <PersistGate
-          loading={props.loading}
-          persistor={persistor}
-          onBeforeLift={props.onBeforeLift}
-        >
-          {props.children}
-        </PersistGate>
+      <ReduxProvider store={this.store} context={storeContext}>
+        {this.props.children}
       </ReduxProvider>
     );
   }
-  return (
-    <ReduxProvider store={store} context={storeContext}>
-      {props.children}
-    </ReduxProvider>
-  );
-};
+}
 
 export default Provider;

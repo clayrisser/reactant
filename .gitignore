@@ -2,11 +2,13 @@
 *.pid
 *.seed
 *~
+.DS_Store
 .\#*
 .grunt
 .lock-wscript
 .node_repl_history
 .npm
+.tmp
 /.idea
 /.tmp
 /.vscode
@@ -20,4 +22,3 @@ npm-debug.log*
 package-lock.json
 pids
 yarn.lock
-.DS_Store
