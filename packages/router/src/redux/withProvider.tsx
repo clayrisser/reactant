@@ -20,10 +20,16 @@ export default function withProvider(
   return (App: FC | typeof Component) => {
     return (props: UnknownProps) => (
       <ReduxProvider
-        reducers={{ router: connectRouter(history) as Reducer }}
-        middlewares={[routerMiddleware(history)]}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...providerProps}
+        reducers={{
+          router: connectRouter(history) as Reducer,
+          ...(providerProps?.reducers || {})
+        }}
+        middlewares={[
+          ...(providerProps?.middlewares || []),
+          routerMiddleware(history)
+        ]}
       >
         <ConnectedRouter history={history} context={storeContext}>
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}
