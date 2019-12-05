@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "incremental": false,
+    "jsx": "react",
+    "lib": ["esnext"],
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "outDir": "lib",
+    "resolveJsonModule": true,
+    "rootDir": "src",
+    "sourceMap": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "target": "ESNext"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules/**"]
+}
