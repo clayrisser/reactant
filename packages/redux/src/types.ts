@@ -18,6 +18,7 @@ export interface ProviderProps<A extends Action = AnyAction> {
   loading?: ReactNode;
   middlewares?: Middleware[];
   onBeforeLift?(): void | Promise<void>;
+  onReady?(store: Store, persistor?: Persistor): any;
   options?: object;
   persistor?: Persistor;
   reducers?: Reducers;
