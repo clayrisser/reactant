@@ -7,7 +7,3 @@ import {
 } from './types';
 
 export { Options, Provider, ProviderContext, ProviderProps, StoreContext };
-
-export * from 'react-redux';
-export * from 'redux';
-export * from 'redux-devtools-extension';

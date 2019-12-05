@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { FC, ReactNode } from 'react';
 import { Path, Route, Router, Switch, Link } from '@reactant/router';
-import { connect } from '@reactant/redux';
+import { connect } from 'react-redux';
 import { push } from '@reactant/router/redux';
 import { storeContext } from '@reactant/redux/thunk';
 

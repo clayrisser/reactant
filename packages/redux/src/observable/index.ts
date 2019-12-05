@@ -6,8 +6,3 @@ import storeCreator from './storeCreator';
 import withProvider from './withProvider';
 
 export { Options, Provider, storeContext, storeCreator, withProvider };
-
-export * from 'react-redux';
-export * from 'redux';
-export * from 'redux-devtools-extension';
-export * from 'redux-observable';
