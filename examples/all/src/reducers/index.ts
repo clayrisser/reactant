@@ -1,4 +1,4 @@
-import { combineReducers } from '@reactant/redux';
+import { combineReducers } from 'redux';
 
 const reducers = combineReducers({
   hello: (f = {}) => f
