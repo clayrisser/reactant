@@ -25,6 +25,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@reactant/eslint": "^0.1.139"
+    "@reactant/eslint": "^0.1.139",
+    "@types/reflexbox": "^4.0.0"
   }
 }

@@ -1,0 +1,6 @@
+{
+  "extends": ["reactant/typescript"],
+  "rules": {
+    "import/no-extraneous-dependencies": "off"
+  }
+}
