@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { CallHistoryMethodAction, push } from 'connected-react-router';
 import { LocationState, Path } from 'history';
-import { connect } from '@reactant/redux';
+import { connect } from 'react-redux';
 // eslint-disable-next-line import/no-unresolved
 import View from './View';
 

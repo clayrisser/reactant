@@ -1,10 +1,6 @@
 import React, { Component, FC } from 'react';
-import {
-  Provider,
-  ProviderProps,
-  Reducer,
-  StoreContext
-} from '@reactant/redux';
+import { Provider, ProviderProps, StoreContext } from '@reactant/redux';
+import { Reducer } from 'redux';
 import {
   ConnectedRouter,
   connectRouter,
