@@ -1,6 +1,6 @@
 {
   "name": "@reactant/reflexbox",
-  "version": "0.0.238",
+  "version": "0.0.239",
   "description": "reactant platform for reflexbox",
   "keywords": [
     "@reactant/reflexbox",
@@ -28,8 +28,8 @@
     "url": "https://github.com/codejamninja/reactant"
   },
   "dependencies": {
-    "@reactant/config": "^0.0.238",
-    "@reactant/plugin": "^0.0.238"
+    "@reactant/config": "^0.0.239",
+    "@reactant/plugin": "^0.0.239"
   },
   "peerDependencies": {
     "@types/react-native": "^0.60.22",
