@@ -1,7 +1,7 @@
 {
   "name": "@reactant/redux",
   "version": "0.0.240",
-  "description": "reactant platform for redux",
+  "description": "reactant plugin for redux",
   "keywords": [
     "@reactant/redux",
     "reactant",

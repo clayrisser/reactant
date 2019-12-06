@@ -1,7 +1,7 @@
 {
   "name": "@reactant/rebass",
   "version": "0.0.240",
-  "description": "reactant platform for rebass",
+  "description": "reactant plugin for rebass",
   "keywords": [
     "@reactant/rebass",
     "reactant",

@@ -1,7 +1,7 @@
 {
   "name": "@reactant/router",
   "version": "0.0.240",
-  "description": "reactant platform for router",
+  "description": "reactant plugin for router",
   "keywords": [
     "@reactant/router",
     "reactant",

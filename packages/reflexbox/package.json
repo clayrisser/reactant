@@ -1,7 +1,7 @@
 {
   "name": "@reactant/reflexbox",
   "version": "0.0.240",
-  "description": "reactant platform for reflexbox",
+  "description": "reactant plugin for reflexbox",
   "keywords": [
     "@reactant/reflexbox",
     "reactant",
