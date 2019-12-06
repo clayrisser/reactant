@@ -82,5 +82,5 @@
     "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
     "verbose": true
   },
-  "gitHead": "7687a46b0697e755d335f4b3ef7d29816d7772cb"
+  "gitHead": "85bad1fde6860375d7bb38a9c4fb793452fb8d1c"
 }
