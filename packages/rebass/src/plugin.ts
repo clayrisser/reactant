@@ -6,7 +6,7 @@ const plugin: Plugin = {
   config: createConfig,
   defaultOptions,
   name: 'rebass',
-  supportedPlatforms: ['web']
+  supportedPlatforms: ['web', 'ios', 'android', 'expo']
 };
 
 export default plugin;

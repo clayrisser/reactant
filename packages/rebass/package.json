@@ -1,6 +1,6 @@
 {
   "name": "@reactant/rebass",
-  "version": "0.0.236",
+  "version": "0.0.238",
   "description": "reactant platform for rebass",
   "keywords": [
     "@reactant/rebass",
@@ -20,9 +20,7 @@
     "url": "https://codejam.ninja"
   },
   "files": [
-    "lib",
-    "redux.js",
-    "redux.ts"
+    "lib"
   ],
   "main": "lib/index.js",
   "repository": {
@@ -42,22 +40,14 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/config": "^0.0.236",
-    "@reactant/plugin": "^0.0.236",
-    "@types/rebass": "^4.0.3",
-    "history": "^4.10.1",
-    "react-router": "^5.1.2",
-    "rebass": "^4.0.7",
-    "rebass-native": "^2.2.1"
+    "@reactant/config": "^0.0.238",
+    "@reactant/plugin": "^0.0.238"
   },
   "peerDependencies": {
-    "@reactant/redux": "^0.0.230",
     "@types/react-native": "^0.60.22",
-    "@types/react-redux": "^7.1.5",
-    "connected-react-router": "^6.6.0",
+    "@types/rebass": "^4.0.3",
     "react": "^16.11.0",
-    "react-redux": "^7.1.3",
-    "redux": "^4.0.4"
+    "rebass": "^4.0.7"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",
@@ -66,20 +56,18 @@
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "@babel/preset-typescript": "^7.6.0",
-    "@reactant/redux": "^0.0.236",
     "@types/jest": "^24.0.21",
     "@types/react": "^16.9.11",
     "@types/react-native": "^0.60.22",
-    "@types/react-redux": "^7.1.5",
-    "connected-react-router": "^6.6.0",
+    "@types/rebass": "^4.0.3",
     "eslint": "^6.6.0",
     "eslint-config-reactant": "^0.1.143",
     "jest": "^24.9.0",
     "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
     "react": "^16.11.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
-    "react-redux": "^7.1.3",
-    "redux": "^4.0.4",
+    "rebass": "^4.0.7",
+    "rebass-native": "^2.2.1",
     "typescript": "3.7.1-rc"
   },
   "engines": {
@@ -95,9 +83,6 @@
   "reactantPlugin": "lib/plugin.js",
   "gitHead": "7687a46b0697e755d335f4b3ef7d29816d7772cb",
   "optionalDependencies": {
-    "@types/react-router-dom": "^5.1.0",
-    "@types/react-router-native": "^5.1.0",
-    "react-router-dom": "^5.1.2",
-    "react-router-native": "^5.1.2"
+    "rebass-native": "^2.2.1"
   }
 }
