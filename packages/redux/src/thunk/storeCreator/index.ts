@@ -13,6 +13,7 @@ import {
   createStore as reduxCreateStore
 } from 'redux';
 // @ts-ignore
+// eslint-disable-next-line import/extensions
 import reducers from '~/reducers';
 import storage from './storage';
 import { Reducers } from '../../types';

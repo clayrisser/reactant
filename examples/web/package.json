@@ -8,6 +8,7 @@
     "clean": "reactant clean web",
     "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
     "start": "reactant start web",
+    "storybook": "reactant storybook web",
     "test": "reactant test web"
   },
   "dependencies": {
@@ -26,6 +27,7 @@
     "@reactant/config": "^0.0.241",
     "@reactant/context": "^0.0.241",
     "@reactant/platform": "^0.0.241",
+    "@storybook/react": "^5.2.8",
     "@types/jest": "^24.0.21",
     "@types/node": "^12.12.5",
     "@types/react": "^16.9.11",

@@ -7,6 +7,7 @@ import { finish } from '@reactant/context';
 import build from './build';
 import clean from './clean';
 import start from './start';
+import storybook from './storybook';
 
 export async function cleanup(context: Context, _logger: Logger) {
   if (await fs.pathExists(path.resolve(__dirname, '../../../../lerna.json'))) {
@@ -109,4 +110,4 @@ export async function postProcess(
   return context;
 }
 
-export { build, clean, start };
+export { build, clean, start, storybook };

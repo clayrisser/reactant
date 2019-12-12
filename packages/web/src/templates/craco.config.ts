@@ -71,6 +71,7 @@ function overrideCracoConfig({
       }
     });
     if (context.debug) {
+      // eslint-disable-next-line no-console
       console.log(
         '\n\n======== START WEBPACK ========\n',
         util.inspect(webpackConfig, {

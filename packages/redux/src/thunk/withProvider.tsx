@@ -1,5 +1,5 @@
 import React, { Component, FC } from 'react';
-// eslint-disable-next-line import/no-unresolved
+// eslint-disable-next-line import/no-unresolved,import/extensions
 import Provider, { ProviderProps } from './Provider';
 
 export interface UnknownProps {

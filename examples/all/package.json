@@ -11,6 +11,8 @@
     "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
     "start:expo": "reactant start expo",
     "start:web": "reactant start web",
+    "storybook:expo": "reactant storybook expo",
+    "storybook:web": "reactant storybook web",
     "test:expo": "reactant test expo",
     "test:web": "reactant test web"
   },

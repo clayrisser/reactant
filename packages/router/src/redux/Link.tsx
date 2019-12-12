@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from 'react';
 import { CallHistoryMethodAction, push } from 'connected-react-router';
 import { LocationState, Path } from 'history';
 import { connect } from 'react-redux';
-// eslint-disable-next-line import/no-unresolved
+// eslint-disable-next-line import/no-unresolved,import/extensions
 import View from './View';
 
 export interface LinkProps {

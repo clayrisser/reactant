@@ -8,6 +8,7 @@
     "clean": "reactant clean expo",
     "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
     "start": "reactant start expo",
+    "storybook": "reactant storybook expo",
     "test": "reactant test expo"
   },
   "dependencies": {
