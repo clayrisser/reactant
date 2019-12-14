@@ -6,7 +6,8 @@
         "corejs": 3,
         "useBuiltIns": "usage",
         "targets": {
-          "node": "6"
+          "node": "4",
+          "browsers": ["defaults"]
         }
       }
     ],
@@ -14,7 +15,8 @@
     "@babel/preset-react"
   ],
   "plugins": [
-    "@babel/plugin-proposal-class-properties",
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
     "@babel/plugin-proposal-optional-chaining",
     "babel-plugin-typescript-to-proptypes"
   ]

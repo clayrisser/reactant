@@ -17,6 +17,7 @@
     "lint": "lerna run lint",
     "lint:fix": "lerna run lint:fix",
     "ls": "lerna ls",
+    "postinstall": "npm run bootstrap",
     "publish": "lerna publish",
     "test": "lerna run test"
   },

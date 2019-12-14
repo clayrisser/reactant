@@ -40,7 +40,9 @@
   "devDependencies": {
     "@babel/cli": "^7.6.4",
     "@babel/node": "^7.6.3",
-    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-decorators": "^7.7.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.6.0",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "@babel/preset-typescript": "^7.6.0",
@@ -48,6 +50,7 @@
     "@types/react": "^16.9.11",
     "@types/react-native": "^0.60.22",
     "@types/reflexbox": "^4.0.0",
+    "babel-plugin-typescript-to-proptypes": "^1.1.0",
     "eslint": "^6.6.0",
     "eslint-config-reactant": "^0.1.143",
     "jest": "^24.9.0",
