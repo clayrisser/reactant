@@ -6,8 +6,7 @@
         "corejs": 3,
         "useBuiltIns": "usage",
         "targets": {
-          "node": "4",
-          "browsers": ["defaults"]
+          "node": "6"
         }
       }
     ],

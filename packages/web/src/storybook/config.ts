@@ -1,14 +1,16 @@
+import context from '@reactant/context';
 import path from 'path';
 import { configure } from '@storybook/react';
-import { getContext } from '@reactant/context';
 
-const { paths } = getContext();
+const { paths } = context;
 
-configure(
-  require.context(
-    path.resolve(paths.root, 'src'),
-    true,
-    /\.stories\.(j|t)sx?$/
-  ),
-  module
-);
+if (typeof require?.context === 'function') {
+  configure(
+    require.context(
+      path.resolve(paths.root, 'src'),
+      true,
+      /\.stories\.(j|t)sx?$/
+    ),
+    module
+  );
+}

@@ -25,7 +25,7 @@
     "@craco/craco": "5.5.0",
     "@reactant/cli": "^0.0.242",
     "@reactant/config": "^0.0.242",
-    "@reactant/context": "^0.0.242",
+    "@reactant/context": "^0.0.243",
     "@reactant/platform": "^0.0.242",
     "@storybook/react": "^5.2.8",
     "@types/jest": "^24.0.21",

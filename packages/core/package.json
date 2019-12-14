@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@reactant/config": "^0.0.242",
-    "@reactant/context": "^0.0.242",
+    "@reactant/context": "^0.0.243",
     "@reactant/platform": "^0.0.242",
     "@reactant/plugin": "^0.0.242",
     "@reactant/types": "^0.0.242",

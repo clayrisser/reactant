@@ -36,7 +36,7 @@
   "devDependencies": {
     "@craco/craco": "^5.6.1",
     "@reactant/cli": "^0.0.242",
-    "@reactant/context": "^0.0.242",
+    "@reactant/context": "^0.0.243",
     "@reactant/platform": "^0.0.242",
     "@types/jest": "^24.0.21",
     "@types/node": "^12.12.5",
