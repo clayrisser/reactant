@@ -1,7 +1,7 @@
 {
   "name": "example-web",
   "main": "lib/index.js",
-  "version": "0.0.244",
+  "version": "0.0.245",
   "private": true,
   "scripts": {
     "build": "reactant build web",
@@ -12,9 +12,9 @@
     "test": "reactant test web"
   },
   "dependencies": {
-    "@reactant/redux": "^0.0.244",
-    "@reactant/router": "^0.0.244",
-    "@reactant/web": "^0.0.244",
+    "@reactant/redux": "^0.0.245",
+    "@reactant/router": "^0.0.245",
+    "@reactant/web": "^0.0.245",
     "core-js": "^3.3.6",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
@@ -23,9 +23,9 @@
   },
   "devDependencies": {
     "@craco/craco": "5.5.0",
-    "@reactant/cli": "^0.0.244",
-    "@reactant/config": "^0.0.244",
-    "@reactant/context": "^0.0.244",
+    "@reactant/cli": "^0.0.245",
+    "@reactant/config": "^0.0.245",
+    "@reactant/context": "^0.0.245",
     "@storybook/react": "^5.2.8",
     "@types/jest": "^24.0.21",
     "@types/node": "^12.12.5",

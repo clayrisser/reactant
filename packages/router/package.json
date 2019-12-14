@@ -1,6 +1,6 @@
 {
   "name": "@reactant/router",
-  "version": "0.0.244",
+  "version": "0.0.245",
   "description": "reactant plugin for router",
   "keywords": [
     "@reactant/router",
@@ -42,8 +42,8 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/config": "^0.0.244",
-    "@reactant/plugin": "^0.0.244",
+    "@reactant/config": "^0.0.245",
+    "@reactant/plugin": "^0.0.245",
     "history": "^4.10.1",
     "react-router": "^5.1.2"
   },
@@ -65,7 +65,7 @@
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "@babel/preset-typescript": "^7.6.0",
-    "@reactant/redux": "^0.0.244",
+    "@reactant/redux": "^0.0.245",
     "@types/jest": "^24.0.21",
     "@types/react": "^16.9.11",
     "@types/react-native": "^0.60.22",
