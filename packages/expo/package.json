@@ -40,14 +40,13 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/platform": "^0.0.249",
-    "babel-plugin-macros": "^2.6.1",
-    "babel-plugin-module-resolver": "^3.2.0",
-    "babel-plugin-typescript-to-proptypes": "^1.1.0",
-    "babel-preset-expo": "^7.1.0",
-    "core-js": "^3.3.6",
-    "expo": "^35.0.1",
-    "expo-cli": "^3.4.1",
+    "@reactant/platform": "0.0.249",
+    "babel-plugin-macros": "^2.8.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "babel-preset-expo": "^8.0.0",
+    "core-js": "^3.5.0",
+    "expo": "^36.0.0",
+    "expo-cli": "^3.11.1",
     "fs-extra": "^8.1.0"
   },
   "peerDependencies": {
@@ -55,24 +54,24 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.4",
-    "@babel/core": "^7.6.4",
-    "@babel/node": "^7.6.3",
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
+    "@babel/node": "^7.7.4",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-decorators": "^7.7.4",
-    "@babel/plugin-proposal-optional-chaining": "^7.6.0",
-    "@babel/preset-react": "^7.6.3",
-    "@babel/preset-typescript": "^7.6.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.7.5",
+    "@babel/preset-react": "^7.7.4",
+    "@babel/preset-typescript": "^7.7.4",
     "@types/fs-extra": "^8.0.1",
-    "@types/jest": "^24.0.21",
-    "@types/react": "^16.9.11",
+    "@types/jest": "^24.0.23",
+    "@types/react": "^16.9.16",
     "babel-plugin-typescript-to-proptypes": "^1.1.0",
-    "eslint": "^6.6.0",
-    "eslint-config-reactant": "^0.1.143",
+    "eslint": "^6.7.2",
+    "eslint-config-reactant": "^0.1.144",
     "jest": "^24.9.0",
-    "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
-    "react": "^16.11.0",
-    "typescript": "3.7.1-rc"
+    "prettier": "^1.19.1",
+    "react": "^16.12.0",
+    "typescript": "^3.7.3"
   },
   "engines": {
     "node": ">=6.0.0"

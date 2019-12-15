@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-reactant",
-  "version": "0.1.143",
+  "version": "0.1.144",
   "description": "reactant eslint",
   "keywords": [
     "reactant",
@@ -37,25 +37,25 @@
     "test": "npm run lint:fix"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.6.1",
-    "@typescript-eslint/parser": "^2.6.1",
+    "@typescript-eslint/eslint-plugin": "^2.11.0",
+    "@typescript-eslint/parser": "^2.11.0",
     "babel-eslint": "^10.0.3",
-    "core-js": "^3.3.6",
+    "core-js": "^3.5.0",
     "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-airbnb-typescript": "^6.0.0",
-    "eslint-config-prettier": "^6.5.0",
-    "eslint-plugin-import": "^2.18.2",
+    "eslint-config-airbnb-typescript": "^6.3.1",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.16.0",
-    "eslint-plugin-react-hooks": "^2.2.0",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
     "fs-extra": "^8.1.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.4",
-    "@babel/core": "^7.6.4",
-    "@babel/preset-env": "^7.6.3",
-    "eslint": "^6.6.0",
-    "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2"
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "eslint": "^6.7.2",
+    "prettier": "^1.19.1"
   },
   "engines": {
     "node": ">=6.0.0"

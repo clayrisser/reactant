@@ -40,8 +40,8 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/config": "^0.0.249",
-    "@reactant/plugin": "^0.0.249"
+    "@reactant/config": "0.0.249",
+    "@reactant/plugin": "0.0.249"
   },
   "peerDependencies": {
     "@types/react-native": "^0.60.22",
@@ -50,28 +50,28 @@
     "rebass": "^4.0.7"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.4",
-    "@babel/node": "^7.6.3",
+    "@babel/cli": "^7.7.5",
+    "@babel/node": "^7.7.4",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-decorators": "^7.7.4",
-    "@babel/plugin-proposal-optional-chaining": "^7.6.0",
-    "@babel/preset-env": "^7.6.3",
-    "@babel/preset-react": "^7.6.3",
-    "@babel/preset-typescript": "^7.6.0",
-    "@types/jest": "^24.0.21",
-    "@types/react": "^16.9.11",
-    "@types/react-native": "^0.60.22",
+    "@babel/plugin-proposal-optional-chaining": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-react": "^7.7.4",
+    "@babel/preset-typescript": "^7.7.4",
+    "@types/jest": "^24.0.23",
+    "@types/react": "^16.9.16",
+    "@types/react-native": "^0.60.25",
     "@types/rebass": "^4.0.3",
     "babel-plugin-typescript-to-proptypes": "^1.1.0",
-    "eslint": "^6.6.0",
-    "eslint-config-reactant": "^0.1.143",
+    "eslint": "^6.7.2",
+    "eslint-config-reactant": "^0.1.144",
     "jest": "^24.9.0",
-    "prettier": "git+https://github.com/fisker/prettier.git#typescript-37-attempt-2",
-    "react": "^16.11.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
+    "prettier": "^1.19.1",
+    "react": "^16.12.0",
+    "react-native": "^0.61.5",
     "rebass": "^4.0.7",
     "rebass-native": "^2.2.1",
-    "typescript": "3.7.1-rc"
+    "typescript": "^3.7.3"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -85,7 +85,5 @@
   },
   "reactantPlugin": "lib/plugin.js",
   "gitHead": "fd897dcf083926e75998d08797a7ca5940255de1",
-  "optionalDependencies": {
-    "rebass-native": "^2.2.1"
-  }
+  "optionalDependencies": {}
 }
