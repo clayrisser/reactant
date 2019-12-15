@@ -1,6 +1,6 @@
 {
   "name": "@reactant/core",
-  "version": "0.0.249",
+  "version": "0.0.250",
   "description": "reactant core",
   "keywords": [
     "reactant",
@@ -38,11 +38,11 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/config": "0.0.249",
-    "@reactant/context": "0.0.249",
-    "@reactant/platform": "0.0.249",
-    "@reactant/plugin": "0.0.249",
-    "@reactant/types": "0.0.249",
+    "@reactant/config": "^0.0.250",
+    "@reactant/context": "^0.0.250",
+    "@reactant/platform": "^0.0.250",
+    "@reactant/plugin": "^0.0.250",
+    "@reactant/types": "^0.0.250",
     "circular-json": "^0.5.9",
     "core-js": "^3.5.0",
     "fs-extra": "^8.1.0",
