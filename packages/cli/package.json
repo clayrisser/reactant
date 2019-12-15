@@ -50,9 +50,7 @@
     "@oclif/parser": "^3.8.4",
     "@reactant/core": "^0.0.247",
     "@reactant/types": "^0.0.247",
-    "core-js": "^3.3.6",
-    "fs-extra": "^8.1.0",
-    "pkg-dir": "^4.2.0"
+    "core-js": "^3.3.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",
@@ -65,9 +63,7 @@
     "@babel/preset-typescript": "^7.6.0",
     "@oclif/dev-cli": "^1.22.2",
     "@types/core-js": "^2.5.2",
-    "@types/fs-extra": "^8.0.1",
     "@types/jest": "^24.0.21",
-    "@types/pkg-dir": "^2.0.1",
     "eslint": "^6.6.0",
     "eslint-config-reactant": "^0.1.143",
     "jest": "^24.9.0",

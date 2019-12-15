@@ -13,7 +13,7 @@
     "format": "lerna run format",
     "keycloak": "cd example/keycloak && docker-compose up",
     "lerna": "lerna",
-    "link": "lerna link",
+    "link": "lerna link && cd packages/core && node lib/link",
     "lint": "lerna run lint",
     "lint:fix": "lerna run lint:fix",
     "ls": "lerna ls",
