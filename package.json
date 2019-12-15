@@ -18,7 +18,7 @@
     "lint:fix": "lerna run lint:fix",
     "ls": "lerna ls",
     "postinstall": "npm run bootstrap",
-    "publish": "lerna publish",
+    "publish": "lerna publish --ignore-prepublish",
     "test": "lerna run test"
   },
   "devDependencies": {
