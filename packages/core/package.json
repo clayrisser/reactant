@@ -25,9 +25,6 @@
     "type": "git",
     "url": "https://github.com/codejamninja/reactant"
   },
-  "bin": {
-    "reactant-link": "lib/link.js"
-  },
   "scripts": {
     "build": "npm run test && babel src -d lib --extensions \".ts,.tsx\" --source-maps inline && tsc -d --emitDeclarationOnly",
     "clean": "git clean -fXd -e \\!node_modules -e \\!node_modules/**/* && jest --clearCache",
@@ -49,7 +46,6 @@
     "circular-json": "^0.5.9",
     "core-js": "^3.3.6",
     "fs-extra": "^8.1.0",
-    "npm-pkg-json": "^0.1.0",
     "ora": "^4.0.2"
   },
   "devDependencies": {
