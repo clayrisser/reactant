@@ -4,7 +4,7 @@
   "version": "0.0.248",
   "private": true,
   "scripts": {
-    "build": "reactant build expo",
+    "build": "echo",
     "clean": "reactant clean expo",
     "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
     "start": "reactant start expo",
