@@ -19,7 +19,7 @@
     "lint:fix": "lerna run --parallel lint:fix",
     "ls": "lerna ls",
     "postinstall": "npm run bootstrap",
-    "publish": "npm run build && lerna publish --scope @reactant\\/* --ignore-prepublish",
+    "publish": "npm run build && lerna publish --ignore-prepublish",
     "test": "lerna run --scope @reactant\\/* --parallel test"
   },
   "devDependencies": {
