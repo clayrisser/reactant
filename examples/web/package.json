@@ -18,15 +18,15 @@
     "core-js": "^3.5.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-redux": "^7.1.3",
+    "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
-    "redux-observable": "^1.2.0"
+    "redux": "^4.0.4",
+    "redux-observable": "^1.2.0",
+    "reflexbox": "^4.0.6"
   },
   "devDependencies": {
-    "@craco/craco": "^5.6.2",
     "@reactant/cli": "^0.0.250",
-    "@reactant/config": "^0.0.250",
-    "@reactant/context": "^0.0.250",
-    "@storybook/react": "^5.2.8",
     "@types/jest": "^24.0.23",
     "@types/node": "^12.12.17",
     "@types/react": "^16.9.16",
@@ -34,14 +34,10 @@
     "@types/react-redux": "^7.1.5",
     "@types/react-router-dom": "^5.1.3",
     "@types/redux": "^3.6.0",
-    "babel-plugin-macros": "^2.8.0",
-    "babel-plugin-module-resolver": "^4.0.0",
-    "connected-react-router": "^6.6.1",
+    "@types/redux": "^3.6.0",
+    "@types/redux-thunk": "^2.1.0",
+    "@types/reflexbox": "^4.0.0",
     "prettier": "^1.19.1",
-    "react-redux": "^7.1.3",
-    "react-scripts": "^3.3.0",
-    "redux": "^4.0.4",
-    "redux-thunk": "^2.3.0",
     "typescript": "^3.7.3"
   },
   "browserslist": {

@@ -40,14 +40,21 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/config": "^0.0.250",
     "@reactant/plugin": "^0.0.250"
   },
   "peerDependencies": {
-    "@types/react-native": "^0.60.22",
-    "@types/rebass": "^4.0.3",
-    "react": "^16.11.0",
+    "react": "^16.12.0",
     "rebass": "^4.0.7"
+  },
+  "optionalDependencies": {
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
+    "@types/react-native": "^0.60.25",
+    "@types/rebass": "^4.0.3",
+    "react-dom": "^16.12.0",
+    "react-native": "^0.61.5",
+    "rebass-native": "^2.2.1",
+    "typescript": "^3.7.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",
@@ -60,6 +67,7 @@
     "@babel/preset-typescript": "^7.7.4",
     "@types/jest": "^24.0.23",
     "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
     "@types/react-native": "^0.60.25",
     "@types/rebass": "^4.0.3",
     "babel-plugin-typescript-to-proptypes": "^1.1.0",
@@ -68,6 +76,7 @@
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "react-native": "^0.61.5",
     "rebass": "^4.0.7",
     "rebass-native": "^2.2.1",
