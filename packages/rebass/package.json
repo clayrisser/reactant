@@ -1,6 +1,6 @@
 {
   "name": "@reactant/rebass",
-  "version": "0.0.257",
+  "version": "0.0.258",
   "description": "reactant plugin for rebass",
   "keywords": [
     "@reactant/rebass",
@@ -40,7 +40,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/plugin": "^0.0.257"
+    "@reactant/plugin": "^0.0.258"
   },
   "peerDependencies": {
     "react": "^16.12.0",
