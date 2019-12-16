@@ -1,6 +1,6 @@
 {
   "name": "@reactant/router",
-  "version": "0.0.252",
+  "version": "0.0.253",
   "description": "reactant plugin for router",
   "keywords": [
     "@reactant/router",
@@ -42,7 +42,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/plugin": "^0.0.252",
+    "@reactant/plugin": "^0.0.253",
     "history": "^4.10.1"
   },
   "peerDependencies": {
@@ -50,7 +50,7 @@
     "react-router": "^5.1.2"
   },
   "optionalDependencies": {
-    "@reactant/redux": "^0.0.252",
+    "@reactant/redux": "^0.0.253",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
     "@types/react-native": "^0.60.25",
