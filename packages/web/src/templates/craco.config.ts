@@ -1,5 +1,6 @@
 import path from 'path';
 import util from 'util';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { CracoConfig, CracoBabel } from '@craco/craco';
 import { Paths } from '@reactant/platform';
 import { getContext, merge } from '@reactant/context';
@@ -51,6 +52,8 @@ function overrideCracoConfig({
       buildPath = path.resolve(context.paths.root, context.paths.build);
       if (!webpackConfig.output) webpackConfig.output = {};
       webpackConfig.output.path = buildPath;
+      if (!webpackConfig.plugins) webpackConfig.plugins = [];
+      webpackConfig.plugins.push(new BundleAnalyzerPlugin());
     }
     updatePaths(paths, webPath, buildPath);
     webpackConfig.entry = [path.resolve(webPath, 'index.tsx')];
