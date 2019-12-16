@@ -25,6 +25,6 @@ export default async function build(
     logger,
     platformApi
   );
-  await postProcess(context, logger);
+  await postProcess(context, logger, platformApi);
   return result;
 }

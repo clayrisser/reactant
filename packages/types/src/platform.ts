@@ -3,6 +3,10 @@ import { Config } from './config';
 import { Context } from './context';
 import { Logger } from './core';
 
+export interface ProcessMap {
+  [key: number]: ChildProcess;
+}
+
 export interface CreateConfigOptions {
   rootPath?: boolean;
 }
@@ -10,6 +14,7 @@ export interface CreateConfigOptions {
 export interface TPlatformApi {
   context: Context;
   logger: Logger;
+  processes: ProcessMap;
   prepareLocal(): Promise<void>;
   createWebpackConfig(options?: CreateConfigOptions): Promise<void>;
   createBabelConfig(options?: CreateConfigOptions): Promise<void>;

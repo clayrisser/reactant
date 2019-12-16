@@ -2,7 +2,9 @@ import CircularJSON from 'circular-json';
 import fs from 'fs-extra';
 import path from 'path';
 import util from 'util';
+import { ChildProcess } from 'child_process';
 import { Context, Logger, LoadedPlugin, PluginOptions } from '@reactant/types';
+import { PlatformApi } from '@reactant/platform';
 import { finish } from '@reactant/context';
 import build from './build';
 import clean from './clean';
@@ -103,8 +105,10 @@ export async function preProcess(
 
 export async function postProcess(
   context: Context,
-  logger: Logger
+  logger: Logger,
+  platformApi: PlatformApi
 ): Promise<Context> {
+  Object.values(platformApi.processes).forEach((ps: ChildProcess) => ps.kill());
   await cleanup(context, logger);
   finish();
   return context;

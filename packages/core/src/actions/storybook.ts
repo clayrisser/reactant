@@ -25,6 +25,6 @@ export default async function storybook(
     logger,
     platformApi
   );
-  await postProcess(context, logger);
+  await postProcess(context, logger, platformApi);
   return result;
 }
