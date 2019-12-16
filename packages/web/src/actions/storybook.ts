@@ -8,9 +8,7 @@ export default async function storybook(
   platformApi: PlatformApi
 ): Promise<any> {
   const storybookPath = path.resolve(context.paths.tmp, 'storybook');
-  await fs.mkdirs(storybookPath);
-  await fs.remove(storybookPath);
-  await fs.copy(path.resolve(__dirname, 'storybook'), storybookPath);
+  await fs.copy(path.resolve(__dirname, '../storybook'), storybookPath);
   return platformApi.spawn('@storybook/react', 'start-storybook', [
     '-c',
     storybookPath

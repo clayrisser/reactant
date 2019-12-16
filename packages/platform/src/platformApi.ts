@@ -53,7 +53,7 @@ async function recursiveNodeModulesSymlink(
 export default class PlatformApi implements TPlatformApi {
   constructor(public context: Context, public logger: Logger) {}
 
-  processes: ProcessMap;
+  processes: ProcessMap = {};
 
   async prepareLocal() {
     const lerna = new Set(getLinked()).has('@reactant/cli');
