@@ -51,5 +51,6 @@ export function syncContext(
 export { bootstrap, defaultContext, merge };
 export * from './platform';
 export * from './plugin';
+export * from './processes';
 export * from '@reactant/types/lib/context';
 export default getContext();

@@ -3,6 +3,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import pkgDir from 'pkg-dir';
 import { SpawnOptions, ChildProcess } from 'child_process';
+import { processes } from '@reactant/context';
 import {
   Context,
   Logger,
@@ -10,7 +11,6 @@ import {
   CreateConfigOptions
 } from '@reactant/types';
 import { getLinked } from 'linked-deps';
-import { ProcessMap } from './types';
 
 async function recursiveNodeModulesSymlink(
   sourcePath: string,
@@ -52,8 +52,6 @@ async function recursiveNodeModulesSymlink(
 
 export default class PlatformApi implements TPlatformApi {
   constructor(public context: Context, public logger: Logger) {}
-
-  processes: ProcessMap = {};
 
   async prepareLocal() {
     const lerna = new Set(getLinked()).has('@reactant/cli');
@@ -100,7 +98,7 @@ export default class PlatformApi implements TPlatformApi {
     }
     return new Promise((resolve, reject) => {
       const ps = crossSpawn(command, args, options);
-      this.processes[ps.pid] = ps;
+      processes[ps.pid] = ps;
       let result: string | ChildProcess = ps;
       if (ps.stdout && ps.stderr) {
         result = '';

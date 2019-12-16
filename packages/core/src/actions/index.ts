@@ -4,14 +4,15 @@ import path from 'path';
 import util from 'util';
 import { ChildProcess } from 'child_process';
 import { Context, Logger, LoadedPlugin, PluginOptions } from '@reactant/types';
-import { PlatformApi } from '@reactant/platform';
-import { finish } from '@reactant/context';
+import { finish, processes } from '@reactant/context';
+
 import build from './build';
 import clean from './clean';
 import start from './start';
 import storybook from './storybook';
 
 export async function cleanup(context: Context, _logger: Logger) {
+  Object.values(processes).forEach((ps: ChildProcess) => ps.kill());
   if (await fs.pathExists(path.resolve(__dirname, '../../../../lerna.json'))) {
     await fs.remove(path.resolve(__dirname, '../../../../../.tmp'));
     await fs.remove(
@@ -105,10 +106,8 @@ export async function preProcess(
 
 export async function postProcess(
   context: Context,
-  logger: Logger,
-  platformApi: PlatformApi
+  logger: Logger
 ): Promise<Context> {
-  Object.values(platformApi.processes).forEach((ps: ChildProcess) => ps.kill());
   await cleanup(context, logger);
   finish();
   return context;

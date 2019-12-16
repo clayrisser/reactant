@@ -25,6 +25,6 @@ export default async function clean(
     logger,
     platformApi
   );
-  await postProcess(context, logger, platformApi);
+  await postProcess(context, logger);
   return result;
 }

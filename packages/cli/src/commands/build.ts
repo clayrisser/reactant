@@ -9,7 +9,8 @@ export default class Build extends Command {
 
   static flags = {
     config: flags.string({ char: 'c', required: false }),
-    debug: flags.boolean({ char: 'd', required: false })
+    debug: flags.boolean({ char: 'd', required: false }),
+    docker: flags.boolean({ required: false })
   };
 
   static args = [{ name: 'PLATFORM', required: true }];
@@ -18,7 +19,8 @@ export default class Build extends Command {
     const { args, flags } = this.parse(Build);
     const options: Options = {
       config: JSON.parse(flags.config || '{}'),
-      debug: !!flags.debug
+      debug: !!flags.debug,
+      docker: !!flags.docker
     };
     return build(args.PLATFORM, options);
   }

@@ -7,14 +7,11 @@ import {
 } from '@reactant/types';
 import createBabelConfig from './createBabelConfig';
 import createWebpackConfig from './createWebpackConfig';
-import { ProcessMap } from './types';
 
 class PlatformApi implements TPlatformApi {
   constructor(public context: Context, public logger: Logger) {
     throw new Error('only node can use platform api');
   }
-
-  processes: ProcessMap;
 
   // eslint-disable-next-line no-empty-function,@typescript-eslint/no-empty-function
   async prepareLocal(): Promise<void> {}
@@ -62,5 +59,5 @@ function getOptions(): PlatformOptions {
 
 export const options = getOptions();
 
-export { PlatformApi, createBabelConfig, createWebpackConfig, ProcessMap };
+export { PlatformApi, createBabelConfig, createWebpackConfig };
 export * from '@reactant/types';

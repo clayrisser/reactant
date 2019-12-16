@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  build:
+    image: ${REACTANT_IMAGE}:latest
+    build:
+      args:
+        MAINTAINER: ${REACTANT_MAINTAINER}
+        IMAGE: ${REACTANT_IMAGE}:latest
+      context: .
+  major:
+    extends: build
+    image: ${REACTANT_IMAGE}:${REACTANT_MAJOR}
+    build:
+      args:
+        IMAGE: ${REACTANT_IMAGE}:${REACTANT_MAJOR}
+  minor:
+    extends: build
+    image: ${REACTANT_IMAGE}:${REACTANT_MAJOR}.${REACTANT_MINOR}
+    build:
+      args:
+        IMAGE: ${REACTANT_IMAGE}:${REACTANT_MAJOR}.${REACTANT_MINOR}
+  patch:
+    extends: build
+    image: ${REACTANT_IMAGE}:${REACTANT_MAJOR}.${REACTANT_MINOR}.${REACTANT_PATCH}
+    build:
+      args:
+        IMAGE: ${REACTANT_IMAGE}:${REACTANT_MAJOR}.${REACTANT_MINOR}.${REACTANT_PATCH}
