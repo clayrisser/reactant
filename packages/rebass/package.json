@@ -43,16 +43,14 @@
     "@reactant/plugin": "^0.0.258"
   },
   "peerDependencies": {
-    "react": "^16.12.0",
-    "rebass": "^4.0.7"
-  },
-  "optionalDependencies": {
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
     "@types/react-native": "^0.60.25",
     "@types/rebass": "^4.0.3",
+    "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-native": "^0.61.5",
+    "rebass": "^4.0.7",
     "rebass-native": "^2.2.1",
     "typescript": "^3.7.3"
   },

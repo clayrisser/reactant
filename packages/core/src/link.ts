@@ -123,6 +123,7 @@ if (fs.pathExistsSync(path.resolve(rootPath, 'lerna.json'))) {
             !exampleDependenciesNames.includes(dependencyName) &&
             !fs.existsSync(exampleDependencyPath)
           ) {
+            // eslint-disable-next-line no-console
             console.log(`${dependencyPath} -> ${exampleDependencyPath}`);
             fs.mkdirsSync(exampleDependencyPath);
             fs.removeSync(exampleDependencyPath);
