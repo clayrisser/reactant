@@ -1,7 +1,7 @@
 {
   "name": "example-web",
   "main": "lib/index.js",
-  "version": "0.0.254",
+  "version": "0.0.255",
   "private": true,
   "scripts": {
     "build": "echo",
@@ -12,9 +12,9 @@
     "test": "reactant test web"
   },
   "dependencies": {
-    "@reactant/redux": "^0.0.254",
-    "@reactant/router": "^0.0.254",
-    "@reactant/web": "^0.0.254",
+    "@reactant/redux": "^0.0.255",
+    "@reactant/router": "^0.0.255",
+    "@reactant/web": "^0.0.255",
     "core-js": "^3.5.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -26,7 +26,7 @@
     "reflexbox": "^4.0.6"
   },
   "devDependencies": {
-    "@reactant/cli": "^0.0.254",
+    "@reactant/cli": "^0.0.255",
     "@types/jest": "^24.0.23",
     "@types/node": "^12.12.17",
     "@types/react": "^16.9.16",
