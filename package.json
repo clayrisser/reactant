@@ -8,7 +8,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --ignore-prepublish && npm run link && npm run build",
     "bootstrap:hoist": "lerna bootstrap --hoist && npm run link",
-    "build": "lerna run --parallel build",
+    "build": "lerna run --scope @reactant\\/* --parallel build",
     "clean": "lerna clean -y && git clean -fXd -e \\!node_modules -e \\!node_modules/**/*",
     "clean:purge": "git clean -fXd",
     "format": "lerna run --parallel format",
@@ -19,8 +19,8 @@
     "lint:fix": "lerna run --parallel lint:fix",
     "ls": "lerna ls",
     "postinstall": "npm run bootstrap",
-    "publish": "npm run build && lerna publish --ignore-prepublish",
-    "test": "lerna run --parallel test"
+    "publish": "npm run build && lerna publish --scope @reactant\\/* --ignore-prepublish",
+    "test": "lerna run --scope @reactant\\/* --parallel test"
   },
   "devDependencies": {
     "lerna": "^3.14.1"

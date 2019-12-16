@@ -13,12 +13,13 @@ interface ModuleScopePlugin {
   appSrcs: string[];
 }
 
-function updatePaths(paths: Paths, webPath: string) {
+function updatePaths(paths: Paths, webPath: string, buildPath: string | null) {
+  if (buildPath) paths.appBuild = buildPath;
   paths.appIndexJs = path.resolve(webPath, 'index.tsx');
   paths.appSrc = webPath;
-  paths.testsSetup = path.resolve(webPath, 'setupTests.js');
   paths.appTypeDeclarations = path.resolve(webPath, 'react-app-env.d.ts');
   paths.proxySetup = path.resolve(webPath, 'setupProxy.js');
+  paths.testsSetup = path.resolve(webPath, 'setupTests.js');
 }
 
 function findJSRules(rules: RuleSetRule[]): RuleSetRule[] {
@@ -43,17 +44,15 @@ function overrideCracoConfig({
     webpackConfig: WebpackConfig,
     { paths }: { paths: Paths }
   ): WebpackConfig => {
-    let webPath = path.resolve(context.paths.root, context.platformName);
-    let srcPath = path.resolve(context.paths.root, 'src');
+    const webPath = path.resolve(context.paths.root, context.platformName);
+    const srcPath = path.resolve(context.paths.root, 'src');
+    let buildPath = null;
     if (context.action === 'build') {
-      webPath = path.resolve(
-        context.paths.root,
-        context.paths.build,
-        context.platformName
-      );
-      srcPath = path.resolve(context.paths.root, context.paths.build, 'src');
+      buildPath = path.resolve(context.paths.root, context.paths.build);
+      if (!webpackConfig.output) webpackConfig.output = {};
+      webpackConfig.output.path = buildPath;
     }
-    updatePaths(paths, webPath);
+    updatePaths(paths, webPath, buildPath);
     webpackConfig.entry = [path.resolve(webPath, 'index.tsx')];
     findJSRules(webpackConfig.module ? webpackConfig.module.rules : []).forEach(
       (rule: RuleSetRule) => {
