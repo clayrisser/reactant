@@ -55,7 +55,24 @@ function getDependenciesMap(): DependenciesMap {
         })
       )!;
       // eslint-disable-next-line no-empty
-    } catch (_err) {}
+    } catch (_err) {
+      const packagePath = packageNames.reduce(
+        (packagePath: string, packageName: string) => {
+          packagePath = path.resolve(
+            packagesPath,
+            packageName,
+            'node_modules',
+            dependency
+          );
+          if (packagePath.length || fs.existsSync(packagePath)) {
+            return packagePath;
+          }
+          return '';
+        },
+        ''
+      );
+      if (packagePath.length) dependencies[dependency] = packagePath;
+    }
     return dependencies;
   }, {});
 }
