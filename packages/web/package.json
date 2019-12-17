@@ -20,8 +20,6 @@
     "url": "https://codejam.ninja"
   },
   "files": [
-    "Dockerfile",
-    "docker-build.yaml",
     "lib"
   ],
   "main": "lib/index.js",
@@ -30,7 +28,7 @@
     "url": "https://github.com/codejamninja/reactant"
   },
   "scripts": {
-    "build": "npm run test && babel src -d lib --extensions \".ts,.tsx\" --source-maps inline && tsc -d --emitDeclarationOnly",
+    "build": "npm run test && babel src -d lib --extensions \".ts,.tsx\" --source-maps inline && tsc -d --emitDeclarationOnly && cp -r src/docker lib",
     "clean": "git clean -fXd -e \\!node_modules -e \\!node_modules/**/* && jest --clearCache",
     "clean:purge": "jest --clearCache && git clean -fXd",
     "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
@@ -55,7 +53,7 @@
     "core-js": "^3.5.0",
     "fs-extra": "^8.1.0",
     "react-docgen-typescript-loader": "^3.6.0",
-    "webpack": "^4.41.2",
+    "webpack": "^4.41.3",
     "webpack-bundle-analyzer": "^3.6.0",
     "which": "^2.0.2"
   },

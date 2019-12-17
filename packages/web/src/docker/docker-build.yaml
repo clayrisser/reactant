@@ -4,10 +4,12 @@ services:
   build:
     image: ${REACTANT_IMAGE}:latest
     build:
+      context: ${REACTANT_ROOT}
+      dockerfile: ${REACTANT_DOCKERFILE}
       args:
-        MAINTAINER: ${REACTANT_MAINTAINER}
         IMAGE: ${REACTANT_IMAGE}:latest
-      context: .
+        MAINTAINER: ${REACTANT_MAINTAINER}
+        PLATFORM: ${REACTANT_PLATFORM}
   major:
     extends: build
     image: ${REACTANT_IMAGE}:${REACTANT_MAJOR}

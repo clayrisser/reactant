@@ -11,6 +11,16 @@ export default async function build(
 ): Promise<any> {
   logger.spinner.start('preparing build');
   if (context.options.docker) {
+    const dockerPath = path.resolve(context.paths.tmp, 'docker');
+    await fs.mkdirs(dockerPath);
+    await fs.copy(
+      path.resolve(__dirname, '../docker/entrypoint.sh'),
+      path.resolve(dockerPath, 'entrypoint.sh')
+    );
+    await fs.copy(
+      path.resolve(__dirname, '../docker/nginx.conf'),
+      path.resolve(dockerPath, 'nginx.conf')
+    );
     const pkg = await fs.readJson(
       path.resolve(context.paths.root, 'package.json')
     );
@@ -23,15 +33,17 @@ export default async function build(
     await platformApi.spawn(
       null,
       await which('docker-compose'),
-      ['-f', path.resolve(__dirname, '../../docker-build.yaml'), 'build'],
+      ['-f', path.resolve(__dirname, '../docker/docker-build.yaml'), 'build'],
       {
-        cwd: context.paths.root,
         env: {
+          REACTANT_DOCKERFILE: path.resolve(__dirname, '../docker/Dockerfile'),
           REACTANT_IMAGE: pkg.name,
           REACTANT_MAINTAINER: maintainer,
           REACTANT_MAJOR: major,
           REACTANT_MINOR: minor,
-          REACTANT_PATCH: patch
+          REACTANT_PATCH: patch,
+          REACTANT_PLATFORM: context.platformName,
+          REACTANT_ROOT: context.paths.root
         }
       }
     );
