@@ -3,6 +3,7 @@ declare module '@craco/craco' {
     TransformOptions as BabelOptions,
     PluginItem as BabelPlugin
   } from '@babel/core';
+  // eslint-disable-next-line import/no-extraneous-dependencies
   import {
     Rule as WebpackRule,
     Loader as WebpackLoader,

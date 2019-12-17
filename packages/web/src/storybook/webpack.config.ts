@@ -1,4 +1,5 @@
 import CircularJSON from 'circular-json';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Configuration as WebpackConfig } from 'webpack';
 import { getContext } from '@reactant/context';
 

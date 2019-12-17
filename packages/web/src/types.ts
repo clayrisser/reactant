@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Configuration as WebpackConfig } from 'webpack';
 
 type BabelOptions = import('@babel/core').TransformOptions;

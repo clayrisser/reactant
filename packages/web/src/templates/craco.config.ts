@@ -4,6 +4,7 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { CracoConfig, CracoBabel } from '@craco/craco';
 import { Paths } from '@reactant/platform';
 import { getContext, merge } from '@reactant/context';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import {
   Configuration as WebpackConfig,
   ResolvePlugin,

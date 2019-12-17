@@ -13,7 +13,7 @@ WORKDIR /tmp/app
 COPY package.json .
 RUN npm install
 COPY . /tmp/app
-RUN npm run build
+RUN SKIP_PREFLIGHT_CHECK=true npm run build
 
 FROM nginx:1.17.6-alpine
 
