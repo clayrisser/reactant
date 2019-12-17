@@ -5,14 +5,13 @@ import util from 'util';
 import { ChildProcess } from 'child_process';
 import { Context, Logger, LoadedPlugin, PluginOptions } from '@reactant/types';
 import { finish, processes } from '@reactant/context';
-
 import build from './build';
 import clean from './clean';
 import start from './start';
 import storybook from './storybook';
 
 export async function cleanup(context: Context, _logger: Logger) {
-  Object.values(processes).forEach((ps: ChildProcess) => ps.kill());
+  Object.values(processes).map((ps: ChildProcess) => ps.kill('SIGKILL'));
   if (await fs.pathExists(path.resolve(__dirname, '../../../../lerna.json'))) {
     await fs.remove(path.resolve(__dirname, '../../../../../.tmp'));
     await fs.remove(
@@ -38,6 +37,8 @@ export async function cleanup(context: Context, _logger: Logger) {
     await fs.unlink(path.resolve(context.paths.reactant, 'plugins.json'));
     // eslint-disable-next-line no-empty
   } catch (err) {}
+  finish();
+  process.exit();
 }
 
 export async function preProcess(

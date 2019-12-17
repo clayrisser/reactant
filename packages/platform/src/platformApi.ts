@@ -2,6 +2,7 @@ import crossSpawn from 'cross-spawn';
 import fs from 'fs-extra';
 import path from 'path';
 import pkgDir from 'pkg-dir';
+import which from 'which';
 import { SpawnOptions, ChildProcess } from 'child_process';
 import { processes } from '@reactant/context';
 import {
@@ -71,7 +72,6 @@ export default class PlatformApi implements TPlatformApi {
   ): Promise<string | ChildProcess> {
     options = {
       stdio: 'inherit',
-      shell: true,
       env: process.env,
       ...(options || {})
     };
@@ -95,6 +95,8 @@ export default class PlatformApi implements TPlatformApi {
         // eslint-disable-next-line import/no-dynamic-require,global-require
         require(path.resolve(pkgPath, 'package.json')).bin[bin]
       );
+    } else if (process.platform !== 'win32') {
+      command = await which(command);
     }
     return new Promise((resolve, reject) => {
       const ps = crossSpawn(command, args, options);

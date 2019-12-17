@@ -1,6 +1,5 @@
 import fs from 'fs-extra';
 import path from 'path';
-import which from 'which';
 import { Context, Logger, PlatformApi } from '@reactant/platform';
 import createCracoConfig from '../createCracoConfig';
 
@@ -32,7 +31,7 @@ export default async function build(
     logger.spinner.succeed('prepared build');
     await platformApi.spawn(
       null,
-      await which('docker-compose'),
+      'docker-compose',
       ['-f', path.resolve(__dirname, '../docker/docker-build.yaml'), 'build'],
       {
         env: {
