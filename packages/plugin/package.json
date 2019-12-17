@@ -1,6 +1,6 @@
 {
   "name": "@reactant/plugin",
-  "version": "0.0.261",
+  "version": "0.0.262",
   "description": "reactant plugin",
   "keywords": [
     "@reactant/plugin",
@@ -40,8 +40,8 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/context": "^0.0.261",
-    "@reactant/types": "^0.0.261",
+    "@reactant/context": "^0.0.262",
+    "@reactant/types": "^0.0.262",
     "core-js": "^3.5.0"
   },
   "devDependencies": {
