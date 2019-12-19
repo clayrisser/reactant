@@ -8,6 +8,7 @@ export default class Build extends Command {
   static examples = ['$ reactant build ios'];
 
   static flags = {
+    analyze: flags.boolean({ char: 'a', required: false }),
     config: flags.string({ char: 'c', required: false }),
     debug: flags.boolean({ char: 'd', required: false }),
     docker: flags.boolean({ required: false })
@@ -18,6 +19,7 @@ export default class Build extends Command {
   async run() {
     const { args, flags } = this.parse(Build);
     const options: Options = {
+      analyze: !!flags.analyze,
       config: JSON.parse(flags.config || '{}'),
       debug: !!flags.debug,
       docker: !!flags.docker

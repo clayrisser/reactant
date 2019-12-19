@@ -1,3 +1,4 @@
+import execa from 'execa';
 import fs from 'fs-extra';
 import path from 'path';
 import { Context, Logger, PlatformApi } from '@reactant/platform';
@@ -46,18 +47,57 @@ export default async function build(
         }
       }
     );
+    logger.spinner.succeed('built');
   } else {
     const cracoConfigPath = await createCracoConfig(context);
-    await fs.mkdirs(context.paths.dist);
-    await fs.remove(context.paths.dist);
     logger.spinner.succeed('prepared build');
+    const finalizeBuild = async () => {
+      logger.spinner.start('finalizing build');
+      await fs.mkdirs(context.paths.dist);
+      await fs.remove(context.paths.dist);
+      await fs.move(context.paths.build, context.paths.dist);
+      logger.spinner.succeed('built');
+    };
+    if (context.options.analyze) {
+      let handleFileChangedCount = 0;
+      const handleFileChanged = async () => {
+        if (handleFileChangedCount < 1) {
+          handleFileChangedCount++;
+          return;
+        }
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        await finalizeBuild();
+        fs.unwatchFile(
+          path.resolve(context.paths.build, 'index.html'),
+          handleFileChanged
+        );
+      };
+      fs.watchFile(
+        path.resolve(context.paths.build, 'index.html'),
+        handleFileChanged
+      );
+      const cleanup = async () => {
+        try {
+          fs.watchFile(
+            path.resolve(context.paths.build, 'index.html'),
+            handleFileChanged
+          );
+          const pid = Number(
+            (await execa('fuser', ['8888/tcp'])).stdout.split(' ')[1] || 0
+          );
+          if (pid) process.kill(pid, 'SIGKILL');
+        } catch (err) {
+          console.error(err);
+        }
+      };
+      process.on('SIGINT', cleanup);
+      process.on('SIGTERM', cleanup);
+    }
     await platformApi.spawn('@craco/craco', 'craco', [
       'build',
       '--config',
       cracoConfigPath
     ]);
-    logger.spinner.start('finalizing build');
-    await fs.move(context.paths.build, context.paths.dist);
+    if (!context.options.analyze) await finalizeBuild();
   }
-  logger.spinner.succeed('built');
 }

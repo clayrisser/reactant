@@ -54,7 +54,9 @@ function overrideCracoConfig({
       if (!webpackConfig.output) webpackConfig.output = {};
       webpackConfig.output.path = buildPath;
       if (!webpackConfig.plugins) webpackConfig.plugins = [];
-      webpackConfig.plugins.push(new BundleAnalyzerPlugin());
+      if (context.options.analyze) {
+        webpackConfig.plugins.push(new BundleAnalyzerPlugin());
+      }
     }
     updatePaths(paths, webPath, buildPath);
     webpackConfig.entry = [path.resolve(webPath, 'index.tsx')];

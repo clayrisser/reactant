@@ -47,22 +47,21 @@ function getDependenciesMap(): DependenciesMap {
     )
   ].reduce((dependencies: DependenciesMap, dependency: string) => {
     try {
-      dependencies[dependency] = pkgDir.sync(
-        require.resolve(dependency, {
-          paths: packageNames.map((packageName: string) =>
-            path.resolve(packagesPath, packageName, 'node_modules')
-          )
-        })
-      )!;
+      dependencies[dependency] = fs.realpathSync(
+        pkgDir.sync(
+          require.resolve(dependency, {
+            paths: packageNames.map((packageName: string) =>
+              path.resolve(packagesPath, packageName, 'node_modules')
+            )
+          })
+        )!
+      );
       // eslint-disable-next-line no-empty
     } catch (_err) {
       const packagePath = packageNames.reduce(
         (packagePath: string, packageName: string) => {
-          packagePath = path.resolve(
-            packagesPath,
-            packageName,
-            'node_modules',
-            dependency
+          packagePath = fs.realpathSync(
+            path.resolve(packagesPath, packageName, 'node_modules', dependency)
           );
           if (packagePath.length || fs.existsSync(packagePath)) {
             return packagePath;

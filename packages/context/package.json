@@ -67,6 +67,7 @@
     "@types/lodash.mergewith": "^4.6.6",
     "@types/lodash.uniq": "^4.5.6",
     "@types/pkg-dir": "^2.0.1",
+    "@types/webpack": "^4.41.0",
     "eslint": "^6.7.2",
     "eslint-config-reactant": "^0.1.144",
     "jest": "^24.9.0",

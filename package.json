@@ -6,7 +6,7 @@
     "packages"
   ],
   "scripts": {
-    "bootstrap": "lerna bootstrap --ignore-prepublish && npm run link && npm run build",
+    "bootstrap": "lerna bootstrap --ignore-prepublish && npm run build && npm run link",
     "bootstrap:hoist": "lerna bootstrap --hoist && npm run link",
     "build": "lerna run --scope @reactant\\/* --parallel build",
     "clean": "lerna clean -y && git clean -fXd -e \\!node_modules -e \\!node_modules/**/*",

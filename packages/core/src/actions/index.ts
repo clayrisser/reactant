@@ -11,6 +11,8 @@ import start from './start';
 import storybook from './storybook';
 
 export async function cleanup(context: Context, _logger: Logger) {
+  Object.values(processes).map((ps: ChildProcess) => ps.kill('SIGINT'));
+  await new Promise(resolve => setTimeout(resolve, 5000));
   Object.values(processes).map((ps: ChildProcess) => ps.kill('SIGKILL'));
   if (await fs.pathExists(path.resolve(__dirname, '../../../../lerna.json'))) {
     await fs.remove(path.resolve(__dirname, '../../../../../.tmp'));

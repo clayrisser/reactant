@@ -56,6 +56,7 @@
     "@types/core-js": "^2.5.2",
     "@types/cosmiconfig": "^6.0.0",
     "@types/jest": "^24.0.23",
+    "@types/webpack": "^4.41.0",
     "babel-preset-jam": "^0.4.3",
     "eslint": "^6.7.2",
     "eslint-config-reactant": "^0.1.144",
