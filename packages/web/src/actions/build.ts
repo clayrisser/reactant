@@ -47,7 +47,6 @@ export default async function build(
         }
       }
     );
-    logger.spinner.succeed('built');
   } else {
     const cracoConfigPath = await createCracoConfig(context);
     logger.spinner.succeed('prepared build');
