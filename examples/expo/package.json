@@ -1,7 +1,7 @@
 {
   "name": "example-expo",
   "main": "node_modules/expo/AppEntry.js",
-  "version": "0.0.266",
+  "version": "0.0.267",
   "private": true,
   "scripts": {
     "build": "reactant build web",
@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.7.1",
-    "@reactant/expo": "^0.0.266",
-    "@reactant/redux": "^0.0.266",
-    "@reactant/router": "^0.0.266",
+    "@reactant/expo": "^0.0.267",
+    "@reactant/redux": "^0.0.267",
+    "@reactant/router": "^0.0.267",
     "core-js": "^3.5.0",
     "expo": "^36.0.0",
     "react": "^16.12.0",
@@ -28,9 +28,9 @@
     "redux-observable": "^1.2.0"
   },
   "devDependencies": {
-    "@reactant/cli": "^0.0.266",
-    "@reactant/config": "^0.0.266",
-    "@reactant/platform": "^0.0.266",
+    "@reactant/cli": "^0.0.267",
+    "@reactant/config": "^0.0.267",
+    "@reactant/platform": "^0.0.267",
     "@types/jest": "^24.0.23",
     "@types/node": "^12.12.17",
     "@types/react": "^16.9.16",
