@@ -14,7 +14,7 @@
   "dependencies": {
     "@reactant/redux": "^0.0.268",
     "@reactant/router": "^0.0.268",
-    "@reactant/web": "^0.0.268",
+    "@reactant/web": "^0.0.269",
     "connected-react-router": "^6.6.1",
     "core-js": "^3.5.0",
     "react": "^16.12.0",
