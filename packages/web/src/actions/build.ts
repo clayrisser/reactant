@@ -92,6 +92,7 @@ export default async function build(
       process.on('SIGINT', cleanup);
       process.on('SIGTERM', cleanup);
     }
+    console.log(context);
     await platformApi.spawn('@craco/craco', 'craco', [
       'build',
       '--config',
