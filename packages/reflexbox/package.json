@@ -1,6 +1,6 @@
 {
   "name": "@reactant/reflexbox",
-  "version": "0.0.268",
+  "version": "0.0.271",
   "description": "reactant plugin for reflexbox",
   "keywords": [
     "@reactant/reflexbox",
@@ -41,7 +41,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/plugin": "^0.0.268"
+    "@reactant/plugin": "^0.0.271"
   },
   "peerDependencies": {
     "@types/react": "^16.9.17",
