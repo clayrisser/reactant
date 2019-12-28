@@ -47,22 +47,22 @@
     "pkg-dir": "^4.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.5",
-    "@babel/node": "^7.7.4",
+    "@babel/cli": "^7.7.7",
+    "@babel/node": "^7.7.7",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-decorators": "^7.7.4",
     "@babel/plugin-proposal-optional-chaining": "^7.7.5",
-    "@babel/preset-typescript": "^7.7.4",
+    "@babel/preset-typescript": "^7.7.7",
     "@types/core-js": "^2.5.2",
     "@types/cosmiconfig": "^6.0.0",
-    "@types/jest": "^24.0.23",
+    "@types/jest": "^24.0.25",
     "@types/webpack": "^4.41.0",
     "babel-preset-jam": "^0.4.3",
     "eslint": "^6.7.2",
     "eslint-config-reactant": "^0.1.144",
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
-    "typescript": "^3.7.3"
+    "typescript": "^3.7.4"
   },
   "engines": {
     "node": ">=6.0.0"

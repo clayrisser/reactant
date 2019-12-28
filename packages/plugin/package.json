@@ -45,15 +45,15 @@
     "core-js": "^3.5.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.5",
-    "@babel/core": "^7.7.5",
-    "@babel/node": "^7.7.4",
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/node": "^7.7.7",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-decorators": "^7.7.4",
     "@babel/plugin-proposal-optional-chaining": "^7.7.5",
     "@babel/preset-react": "^7.7.4",
-    "@babel/preset-typescript": "^7.7.4",
-    "@types/jest": "^24.0.23",
+    "@babel/preset-typescript": "^7.7.7",
+    "@types/jest": "^24.0.25",
     "@types/webpack": "^4.41.0",
     "babel-plugin-typescript-to-proptypes": "^1.1.0",
     "babel-preset-jam": "^0.4.3",
@@ -61,7 +61,7 @@
     "eslint-config-reactant": "^0.1.144",
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
-    "typescript": "^3.7.3"
+    "typescript": "^3.7.4"
   },
   "engines": {
     "node": ">=6.0.0"

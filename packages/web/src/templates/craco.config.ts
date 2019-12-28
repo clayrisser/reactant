@@ -41,16 +41,15 @@ function overrideCracoConfig({
   cracoConfig: CracoConfig;
 }): CracoConfig {
   const context = getContext();
+  console.log('context', context);
   if (!cracoConfig.webpack) cracoConfig.webpack = {};
   cracoConfig.webpack.configure = (
     webpackConfig: WebpackConfig,
     { paths }: { paths: Paths }
   ): WebpackConfig => {
-    console.log(1);
     const webPath = path.resolve(context.paths.root, context.platformName);
     const srcPath = path.resolve(context.paths.root, 'src');
     let buildPath = null;
-    console.log(2);
     if (context.action === 'build') {
       buildPath = path.resolve(context.paths.root, context.paths.build);
       if (!webpackConfig.output) webpackConfig.output = {};
@@ -60,7 +59,6 @@ function overrideCracoConfig({
         webpackConfig.plugins.push(new BundleAnalyzerPlugin());
       }
     }
-    console.log(3);
     updatePaths(paths, webPath, buildPath);
     webpackConfig.entry = [path.resolve(webPath, 'index.tsx')];
     findJSRules(webpackConfig.module ? webpackConfig.module.rules : []).forEach(
@@ -68,16 +66,6 @@ function overrideCracoConfig({
         rule.include = [webPath, srcPath];
       }
     );
-    console.log(
-      '\n\n======== START CONTEXT ========\n',
-      util.inspect(context, {
-        colors: true,
-        showHidden: true,
-        depth: null
-      }),
-      '\n========= END CONTEXT =========\n\n'
-    );
-    console.log(4);
     if (!webpackConfig.resolve) webpackConfig.resolve = {};
     (webpackConfig.resolve.plugins || []).forEach((plugin: ResolvePlugin) => {
       const moduleScopePlugin = (plugin as unknown) as ModuleScopePlugin;
@@ -88,20 +76,18 @@ function overrideCracoConfig({
         moduleScopePlugin.appSrcs = [webPath, srcPath];
       }
     });
-    console.log(5);
-    // if (context.debug) {
-    // eslint-disable-next-line no-console
-    console.log(
-      '\n\n======== START WEBPACK ========\n',
-      util.inspect(webpackConfig, {
-        colors: true,
-        showHidden: true,
-        depth: null
-      }),
-      '\n========= END WEBPACK =========\n\n'
-    );
-    // }
-    console.log(6);
+    if (context.debug) {
+      // eslint-disable-next-line no-console
+      console.log(
+        '\n\n======== START WEBPACK ========\n',
+        util.inspect(webpackConfig, {
+          colors: true,
+          showHidden: true,
+          depth: null
+        }),
+        '\n========= END WEBPACK =========\n\n'
+      );
+    }
     webpackConfig = merge<WebpackConfig>(
       webpackConfig,
       // eslint-disable-next-line no-undef

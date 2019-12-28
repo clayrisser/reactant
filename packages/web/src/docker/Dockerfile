@@ -5,7 +5,8 @@ WORKDIR /tmp/app
 COPY package.json .
 RUN npm install
 COPY . /tmp/app
-RUN SKIP_PREFLIGHT_CHECK=true npm run build --debug
+RUN SKIP_PREFLIGHT_CHECK=true npm run build -- --debug
+RUN echo "-------------\n" && ls .tmp
 
 FROM nginx:1.17.6-alpine
 

@@ -1,4 +1,5 @@
 {
+  "skipLibCheck": true,
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "declaration": true,
@@ -8,16 +9,16 @@
     "incremental": false,
     "jsx": "react",
     "lib": ["esnext"],
-    "module": "CommonJS",
-    "moduleResolution": "Node",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "outDir": "lib",
     "resolveJsonModule": true,
     "rootDir": "src",
     "sourceMap": true,
     "strict": true,
     "strictPropertyInitialization": false,
-    "target": "ESNext"
+    "target": "esnext"
   },
   "include": ["src"],
-  "exclude": ["node_modules/**"]
+  "exclude": ["node_modules"]
 }
