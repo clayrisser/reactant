@@ -80,7 +80,7 @@
     "@types/webpack": "^4.41.0",
     "babel-plugin-typescript-to-proptypes": "^1.1.0",
     "connected-react-router": "^6.6.1",
-    "eslint": "^6.7.2",
+    "eslint": "^6.8.0",
     "eslint-config-reactant": "^0.1.144",
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
