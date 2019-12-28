@@ -41,7 +41,6 @@ function overrideCracoConfig({
   cracoConfig: CracoConfig;
 }): CracoConfig {
   const context = getContext();
-  console.log('context', context);
   if (!cracoConfig.webpack) cracoConfig.webpack = {};
   cracoConfig.webpack.configure = (
     webpackConfig: WebpackConfig,

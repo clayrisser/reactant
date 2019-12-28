@@ -17,7 +17,16 @@
     "sourceMap": true,
     "strict": true,
     "strictPropertyInitialization": false,
-    "target": "esnext"
+    "target": "esnext",
+    "types": [
+      "react",
+      "react-native",
+      "jest",
+      "react-dom",
+      "react-redux",
+      "react-router-dom",
+      "react-router-native"
+    ]
   },
   "include": ["src"],
   "exclude": ["node_modules"]

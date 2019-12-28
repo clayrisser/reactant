@@ -38,7 +38,6 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@types/webpack": "^4.41.0",
     "core-js": "^3.6.1"
   },
   "devDependencies": {
