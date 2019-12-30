@@ -50,8 +50,14 @@ export default class State<
   }
 
   get state(): T | void {
+    console.log('isMaster', this.isMaster);
     if (this.isMaster) return this._state;
     const statePath = path.resolve(this.statePath, `${this.name}.json`);
+    console.log('statePath', statePath);
+    console.log('----------------');
+    console.log(fs.readJsonSync(statePath));
+    console.log('---------------');
+    console.log('PATH EXISTS', !fs.pathExistsSync(statePath));
     if (!fs.pathExistsSync(statePath)) return undefined;
     return this.postprocess(
       JSON.parse(fs.readFileSync(statePath).toString()).state
