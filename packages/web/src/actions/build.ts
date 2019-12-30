@@ -27,6 +27,12 @@ export default async function build(
       path.resolve(context.paths.root, '.tmp/reactant/state.json')
     )
   );
+  console.log(
+    path.resolve(context.paths.root, '.tmp/reactant/state/context.json'),
+    await fs.readJson(
+      path.resolve(context.paths.root, '.tmp/reactant/state/context.json')
+    )
+  );
   logger.spinner.start('preparing build');
   if (context.options.docker) {
     const dockerPath = path.resolve(context.paths.tmp, 'docker');
