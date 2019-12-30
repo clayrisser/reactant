@@ -1,6 +1,6 @@
 {
   "name": "@reactant/expo",
-  "version": "0.0.274",
+  "version": "0.0.275",
   "description": "reactant platform for expo",
   "keywords": [
     "@reactant/expo",
@@ -41,7 +41,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/platform": "^0.0.274",
+    "@reactant/platform": "^0.0.275",
     "babel-plugin-macros": "^2.8.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-preset-expo": "^8.0.0",
