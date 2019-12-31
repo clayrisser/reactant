@@ -104,24 +104,34 @@ export default class State<
         })?.stdout || ''
       ).toString()
     );
-    console.log(
-      (
-        crossSpawn.sync('ps', ['-A'], {
-          stdio: 'pipe'
-          // eslint-disable-next-line no-undef
-        })?.stdout || ''
+    const pids = (
+      crossSpawn.sync('ps', ['-A'], {
+        stdio: 'pipe'
+        // eslint-disable-next-line no-undef
+      })?.stdout || ''
+    )
+      .toString()
+      .split('\n')
+      .reduce((pids: number[], line: string) => {
+        const match = Number(
+          line.match(/(\d+) [^\s]+ +\d+:\d+(:\d+)? [^\s]+/)?.[1] || -1
+        );
+        if (match >= 0) pids.push(match);
+        return pids;
+      }, []);
+    console.log('pids', pids);
+    if (
+      !/No process found/.test(
+        (
+          crossSpawn.sync('node', [bin, pid.toString()], {
+            stdio: 'pipe'
+            // eslint-disable-next-line no-undef
+          })?.stdout || ''
+        ).toString()
       )
-        .toString()
-        .match(/(\d+) [^\s]+ +\d+:\d+(:\d+)? [^\s]+/gm)
-    );
-    return !/No process found/.test(
-      (
-        crossSpawn.sync('node', [bin, pid.toString()], {
-          stdio: 'pipe'
-          // eslint-disable-next-line no-undef
-        })?.stdout || ''
-      ).toString()
-    );
+    ) {
+      return true;
+    }
   }
 
   finish() {
