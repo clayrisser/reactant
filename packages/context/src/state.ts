@@ -104,22 +104,25 @@ export default class State<
         })?.stdout || ''
       ).toString()
     );
-    const pids = (
-      crossSpawn.sync('ps', ['-A'], {
-        stdio: 'pipe'
-        // eslint-disable-next-line no-undef
-      })?.stdout || ''
-    )
-      .toString()
-      .split('\n')
-      .reduce((pids: number[], line: string) => {
-        const match = Number(
-          line.match(/(\d+) [^\s]+ +\d+:\d+(:\d+)? [^\s]+/)?.[1] || -1
-        );
-        if (match >= 0) pids.push(match);
-        return pids;
-      }, []);
-    console.log('pids', pids);
+    try {
+      const pids = (
+        crossSpawn.sync('ps', ['-A'], {
+          stdio: 'pipe'
+          // eslint-disable-next-line no-undef
+        })?.stdout || ''
+      )
+        .toString()
+        .split('\n')
+        .reduce((pids: Set<number>, line: string) => {
+          const match = Number(
+            line.match(/(\d+) [^\s]+ +\d+:\d+(:\d+)? [^\s]+/)?.[1] || -1
+          );
+          if (match >= 0) pids.add(match);
+          return pids;
+        }, new Set());
+      console.log('pids', pids);
+      if (pids.has(pid)) return true;
+    } catch (err) {}
     if (
       !/No process found/.test(
         (
@@ -132,6 +135,7 @@ export default class State<
     ) {
       return true;
     }
+    return false;
   }
 
   finish() {
