@@ -28,3 +28,4 @@ react-app-env.d.ts
 /.expo-shared
 /webpack.config.js
 /babel.config.js
+.docker

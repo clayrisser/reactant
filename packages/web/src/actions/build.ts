@@ -11,7 +11,8 @@ export default async function build(
 ): Promise<any> {
   logger.spinner.start('preparing build');
   if (context.options.docker) {
-    const dockerPath = path.resolve(context.paths.tmp, 'docker');
+    const dockerPath = path.resolve(context.paths.root, '.docker');
+    await fs.remove(dockerPath);
     await fs.mkdirs(dockerPath);
     await fs.copy(
       path.resolve(__dirname, '../docker/entrypoint.sh'),
