@@ -1,6 +1,6 @@
 {
   "name": "@reactant/platform",
-  "version": "0.0.278",
+  "version": "0.0.279",
   "description": "reactant platform",
   "keywords": [
     "@reactant/platform",
@@ -42,9 +42,9 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/config": "^0.0.278",
-    "@reactant/context": "^0.0.278",
-    "@reactant/types": "^0.0.278",
+    "@reactant/config": "^0.0.279",
+    "@reactant/context": "^0.0.279",
+    "@reactant/types": "^0.0.279",
     "core-js": "^3.6.1",
     "cross-spawn": "^7.0.1",
     "fs-extra": "^8.1.0",
