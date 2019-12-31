@@ -25,14 +25,8 @@ export default class State<
     process.on('SIGINT', () => this.finish());
     process.on('SIGTERM', () => this.finish());
     this.statePath = path.resolve(rootPath, '.tmp', this.projectName, 'state');
-    console.log(
-      process.pid,
-      'this.currentProcStarted',
-      this.currentProcStarted
-    );
     if (this.currentProcStarted) return this;
     this.currentProcStarted = true;
-    console.log(process.pid, 'this.isStarted', this.isStarted);
     if (this.isStarted) return this;
     this.isMaster = true;
     const statePath = `${this.statePath}.json`;
@@ -56,14 +50,8 @@ export default class State<
   }
 
   get state(): T | void {
-    console.log('isMaster', process.pid, this.isMaster);
     if (this.isMaster) return this._state;
     const statePath = path.resolve(this.statePath, `${this.name}.json`);
-    console.log('statePath', statePath);
-    console.log('----------------');
-    console.log(fs.readJsonSync(statePath));
-    console.log('---------------');
-    console.log('PATH EXISTS', !fs.pathExistsSync(statePath));
     if (!fs.pathExistsSync(statePath)) return undefined;
     return this.postprocess(
       JSON.parse(fs.readFileSync(statePath).toString()).state
@@ -108,22 +96,15 @@ export default class State<
       // eslint-disable-next-line import/no-dynamic-require,global-require
       require(path.resolve(pkgPath, 'package.json')).bin['find-process']
     );
-    console.log('node', bin, pid.toString());
     console.log(
       (
-        crossSpawn.sync('node', [bin, pid.toString()], {
+        crossSpawn.sync('ps', ['-A'], {
           stdio: 'pipe'
           // eslint-disable-next-line no-undef
         })?.stdout || ''
-      ).toString()
-    );
-    console.log(
-      (
-        crossSpawn.sync('ps', ['all', '-A'], {
-          stdio: 'pipe'
-          // eslint-disable-next-line no-undef
-        })?.stdout || ''
-      ).toString()
+      )
+        .toString()
+        .match(/(\d+) \? +\d+:\d+:\d+ .+/gm)
     );
     return !/No process found/.test(
       (
