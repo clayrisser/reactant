@@ -108,6 +108,15 @@ export default class State<
       // eslint-disable-next-line import/no-dynamic-require,global-require
       require(path.resolve(pkgPath, 'package.json')).bin['find-process']
     );
+    console.log('node', bin, pid.toString());
+    console.log(
+      (
+        crossSpawn.sync('node', [bin, pid.toString()], {
+          stdio: 'pipe'
+          // eslint-disable-next-line no-undef
+        })?.stdout || ''
+      ).toString()
+    );
     return !/No process found/.test(
       (
         crossSpawn.sync('node', [bin, pid.toString()], {
