@@ -122,7 +122,9 @@ export default class State<
         }, new Set());
       console.log('pids', pids);
       if (pids.has(pid)) return true;
-    } catch (err) {}
+    } catch (err) {
+      // eslint-disable-next-line no-empty
+    }
     if (
       !/No process found/.test(
         (
