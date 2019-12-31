@@ -104,6 +104,16 @@ export default class State<
         })?.stdout || ''
       ).toString()
     );
+    console.log(
+      (
+        crossSpawn.sync('ps', ['-A'], {
+          stdio: 'pipe'
+          // eslint-disable-next-line no-undef
+        })?.stdout || ''
+      )
+        .toString()
+        .match(/(\d+) [^\s]+ +\d+:\d+(:\d+)? [^\s]+/gm)
+    );
     return !/No process found/.test(
       (
         crossSpawn.sync('node', [bin, pid.toString()], {
