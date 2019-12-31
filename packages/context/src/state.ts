@@ -102,9 +102,7 @@ export default class State<
           stdio: 'pipe'
           // eslint-disable-next-line no-undef
         })?.stdout || ''
-      )
-        .toString()
-        .match(/(\d+) \? +\d+:\d+:\d+ .+/gm)
+      ).toString()
     );
     return !/No process found/.test(
       (
