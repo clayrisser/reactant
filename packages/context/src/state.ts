@@ -117,6 +117,14 @@ export default class State<
         })?.stdout || ''
       ).toString()
     );
+    console.log(
+      (
+        crossSpawn.sync('ps', ['all', '-A'], {
+          stdio: 'pipe'
+          // eslint-disable-next-line no-undef
+        })?.stdout || ''
+      ).toString()
+    );
     return !/No process found/.test(
       (
         crossSpawn.sync('node', [bin, pid.toString()], {
