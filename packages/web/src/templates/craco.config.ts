@@ -1,4 +1,3 @@
-import fs from 'fs-extra';
 import path from 'path';
 import util from 'util';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
@@ -41,22 +40,7 @@ function overrideCracoConfig({
 }: {
   cracoConfig: CracoConfig;
 }): CracoConfig {
-  console.log('before');
-  console.log(
-    path.resolve('/tmp/app', '.tmp/reactant/state/context.json'),
-    fs.readJsonSync(
-      path.resolve('/tmp/app', '.tmp/reactant/state/context.json')
-    )
-  );
   const context = getContext();
-  console.log('after');
-  console.log(
-    path.resolve(context.paths.root, '.tmp/reactant/state/context.json'),
-    fs.readJsonSync(
-      path.resolve(context.paths.root, '.tmp/reactant/state/context.json')
-    )
-  );
-  console.log('CONTEXT', context);
   if (!cracoConfig.webpack) cracoConfig.webpack = {};
   cracoConfig.webpack.configure = (
     webpackConfig: WebpackConfig,
@@ -93,7 +77,7 @@ function overrideCracoConfig({
     });
     if (context.debug) {
       // eslint-disable-next-line no-console
-      console.log(
+      console.info(
         '\n\n======== START WEBPACK ========\n',
         util.inspect(webpackConfig, {
           colors: true,

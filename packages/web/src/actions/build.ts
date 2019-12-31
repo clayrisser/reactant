@@ -9,30 +9,6 @@ export default async function build(
   logger: Logger,
   platformApi: PlatformApi
 ): Promise<any> {
-  console.log(
-    context.paths.root,
-    await fs.readdir(path.resolve(context.paths.root))
-  );
-  console.log(
-    path.resolve(context.paths.root, '.tmp'),
-    await fs.readdir(path.resolve(context.paths.root, '.tmp'))
-  );
-  console.log(
-    path.resolve(context.paths.root, '.tmp/reactant'),
-    await fs.readdir(path.resolve(context.paths.root, '.tmp/reactant'))
-  );
-  console.log(
-    path.resolve(context.paths.root, '.tmp/reactant/state.json'),
-    await fs.readJson(
-      path.resolve(context.paths.root, '.tmp/reactant/state.json')
-    )
-  );
-  console.log(
-    path.resolve(context.paths.root, '.tmp/reactant/state/context.json'),
-    await fs.readJson(
-      path.resolve(context.paths.root, '.tmp/reactant/state/context.json')
-    )
-  );
   logger.spinner.start('preparing build');
   if (context.options.docker) {
     const dockerPath = path.resolve(context.paths.tmp, 'docker');

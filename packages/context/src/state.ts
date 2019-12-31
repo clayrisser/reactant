@@ -96,14 +96,6 @@ export default class State<
       // eslint-disable-next-line import/no-dynamic-require,global-require
       require(path.resolve(pkgPath, 'package.json')).bin['find-process']
     );
-    console.log(
-      (
-        crossSpawn.sync('ps', ['-A'], {
-          stdio: 'pipe'
-          // eslint-disable-next-line no-undef
-        })?.stdout || ''
-      ).toString()
-    );
     try {
       const pids = (
         crossSpawn.sync('ps', ['-A'], {
@@ -120,7 +112,6 @@ export default class State<
           if (match >= 0) pids.add(match);
           return pids;
         }, new Set());
-      console.log('pids', pids);
       if (pids.has(pid)) return true;
     } catch (err) {
       // eslint-disable-next-line no-empty
