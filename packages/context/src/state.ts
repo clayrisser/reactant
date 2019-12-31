@@ -25,8 +25,14 @@ export default class State<
     process.on('SIGINT', () => this.finish());
     process.on('SIGTERM', () => this.finish());
     this.statePath = path.resolve(rootPath, '.tmp', this.projectName, 'state');
+    console.log(
+      process.pid,
+      'this.currentProcStarted',
+      this.currentProcStarted
+    );
     if (this.currentProcStarted) return this;
     this.currentProcStarted = true;
+    console.log(process.pid, 'this.isStarted', this.isStarted);
     if (this.isStarted) return this;
     this.isMaster = true;
     const statePath = `${this.statePath}.json`;
@@ -50,7 +56,7 @@ export default class State<
   }
 
   get state(): T | void {
-    console.log('isMaster', this.isMaster);
+    console.log('isMaster', process.pid, this.isMaster);
     if (this.isMaster) return this._state;
     const statePath = path.resolve(this.statePath, `${this.name}.json`);
     console.log('statePath', statePath);
