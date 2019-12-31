@@ -1,6 +1,6 @@
 {
   "name": "@reactant/router",
-  "version": "0.0.279",
+  "version": "0.0.280",
   "description": "reactant plugin for router",
   "keywords": [
     "@reactant/router",
@@ -43,7 +43,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/plugin": "^0.0.279",
+    "@reactant/plugin": "^0.0.280",
     "history": "^4.10.1"
   },
   "peerDependencies": {
@@ -70,7 +70,7 @@
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-react": "^7.7.4",
     "@babel/preset-typescript": "^7.7.7",
-    "@reactant/redux": "^0.0.279",
+    "@reactant/redux": "^0.0.280",
     "@types/jest": "^24.0.25",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
