@@ -37,6 +37,7 @@
     "lint": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx ./",
     "lint:fix": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx --fix ./",
     "postinstall": "sh -c 'babel-node --extensions \".ts,.tsx\" src/link 2>/dev/null || true'",
+    "prepare": "sh prepare.sh",
     "prepublish": "npm run build",
     "start": "babel-node --extensions \".ts,.tsx\" src/bin",
     "test": "npm run lint:fix && jest --coverage",
