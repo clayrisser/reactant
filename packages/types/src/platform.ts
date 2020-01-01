@@ -24,6 +24,7 @@ export interface TPlatformApi {
 export type PlatformOption = any;
 
 export interface PlatformOptions<T = any> {
+  _T: T; // use T to fix warning (should be removed)
   [key: string]: PlatformOption;
 }
 
@@ -38,7 +39,11 @@ export type Action = (
 ) => Promise<any>;
 
 export interface Actions {
-  [key: string]: Action;
+  build: Action;
+  clean: Action;
+  start: Action;
+  storybook: Action;
+  test: Action;
 }
 
 export interface Platform {

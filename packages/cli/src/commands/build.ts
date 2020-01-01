@@ -7,6 +7,8 @@ export default class Build extends Command {
 
   static examples = ['$ reactant build ios'];
 
+  static strict = false;
+
   static flags = {
     analyze: flags.boolean({ char: 'a', required: false }),
     config: flags.string({ char: 'c', required: false }),

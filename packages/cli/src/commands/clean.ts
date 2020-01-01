@@ -7,6 +7,8 @@ export default class Clean extends Command {
 
   static examples = ['$ reactant clean ios'];
 
+  static strict = false;
+
   static flags = {
     config: flags.string({ char: 'c', required: false }),
     debug: flags.boolean({ char: 'd', required: false })

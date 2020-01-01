@@ -9,6 +9,7 @@ import build from './build';
 import clean from './clean';
 import start from './start';
 import storybook from './storybook';
+import test from './test';
 
 export async function cleanup(context: Context, _logger: Logger) {
   Object.values(processes).map((ps: ChildProcess) => ps.kill('SIGINT'));
@@ -116,4 +117,4 @@ export async function postProcess(
   return context;
 }
 
-export { build, clean, start, storybook };
+export { build, clean, start, storybook, test };

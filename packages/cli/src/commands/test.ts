@@ -1,11 +1,11 @@
 import { Command, flags } from '@oclif/command';
 import { Options } from '@reactant/types';
-import { start } from '@reactant/core';
+import { test } from '@reactant/core';
 
-export default class Start extends Command {
-  static description = 'start platform';
+export default class Test extends Command {
+  static description = 'test platform';
 
-  static examples = ['$ reactant start ios'];
+  static examples = ['$ reactant test ios'];
 
   static strict = false;
 
@@ -17,11 +17,11 @@ export default class Start extends Command {
   static args = [{ name: 'PLATFORM', required: true }];
 
   async run() {
-    const { args, flags } = this.parse(Start);
+    const { args, flags } = this.parse(Test);
     const options: Options = {
       config: JSON.parse(flags.config || '{}'),
       debug: !!flags.debug
     };
-    return start(args.PLATFORM, options);
+    return test(args.PLATFORM, options);
   }
 }
