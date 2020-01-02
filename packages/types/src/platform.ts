@@ -24,7 +24,7 @@ export interface TPlatformApi {
 export type PlatformOption = any;
 
 export interface PlatformOptions<T = any> {
-  _T: T; // use T to fix warning (should be removed)
+  _T?: T; // use T to fix warning (should be removed)
   [key: string]: PlatformOption;
 }
 

@@ -50,7 +50,7 @@
     "@oclif/errors": "^1.2.2",
     "@oclif/parser": "^3.8.4",
     "@reactant/core": "^0.0.284",
-    "@reactant/types": "^0.0.284",
+    "@reactant/types": "0.0.285",
     "core-js": "^3.6.1"
   },
   "devDependencies": {

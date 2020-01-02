@@ -19,7 +19,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.7.1",
     "@reactant/expo": "^0.0.284",
-    "@reactant/redux": "^0.0.284",
+    "@reactant/redux": "0.0.284",
     "@reactant/router": "^0.0.284",
     "@reactant/web": "^0.0.284",
     "core-js": "^3.6.1",
