@@ -64,6 +64,7 @@ export default function bootstrap(
       throw new Error(`platform '${context.platformName}' not installed`);
     }
     context.platform = platform;
+    context.envs = { ...context.envs, ...(platform.options.envs || {}) };
     if (typeof context.platform?.config === 'function') {
       config = context.platform.config(
         config,
@@ -81,6 +82,7 @@ export default function bootstrap(
           plugin.options,
           config.plugins?.[pluginName] || {}
         );
+        context.envs = { ...context.envs, ...(plugin.options.envs || {}) };
         plugin.supportedPlatforms = new Set([
           ...plugin.supportedPlatforms,
           ...(plugin.options?.supportedPlatforms || [])

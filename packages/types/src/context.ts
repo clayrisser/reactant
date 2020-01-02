@@ -2,6 +2,10 @@ import { Config } from './config';
 import { LoadedPlatform } from './platform';
 import { LoadedPlugins } from './plugin';
 
+export interface Envs {
+  [key: string]: string;
+}
+
 export interface Options {
   analyze?: boolean;
   args: string[];
@@ -14,6 +18,7 @@ export interface Context {
   action: string;
   config?: Config;
   debug: boolean;
+  envs: Envs;
   logLevel: string | number;
   options: Options;
   paths: Paths;

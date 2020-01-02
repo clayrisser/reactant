@@ -1,5 +1,6 @@
 import { PlatformOptions, PlatformsOptions } from './platform';
 import { PluginsOptions } from './plugin';
+import { Envs } from './context';
 
 export type WebpackConfig = any;
 
@@ -17,6 +18,7 @@ export type GlobalConfig = {
 
 export interface Config {
   babel?: BabelConfigModifier | BabelConfig;
+  envs: Envs;
   global: GlobalConfig;
   platform: PlatformOptions;
   platforms: PlatformsOptions;

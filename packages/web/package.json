@@ -50,6 +50,7 @@
     "@types/webpack": "^4.41.0",
     "awesome-typescript-loader": "^5.2.1",
     "babel-plugin-macros": "^2.8.0",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "circular-json": "^0.5.9",
     "core-js": "^3.6.1",
     "execa": "^4.0.0",

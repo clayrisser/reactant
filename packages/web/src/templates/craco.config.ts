@@ -94,11 +94,21 @@ function overrideCracoConfig({
     );
     return webpackConfig;
   };
+  context.config?.babel.plugins.push([
+    'transform-inline-environment-variables',
+    {
+      include: Object.keys(context.envs)
+    }
+  ]);
   cracoConfig.babel = merge<CracoBabel>(
     cracoConfig.babel || {},
     // eslint-disable-next-line no-undef
     context.config?.babel
   );
+  process.env = {
+    ...process.env,
+    ...context.envs
+  };
   // eslint-ignore-next-line
   return cracoConfig;
 }
