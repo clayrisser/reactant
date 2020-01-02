@@ -1,6 +1,6 @@
 {
   "name": "@reactant/config",
-  "version": "0.0.291",
+  "version": "0.0.292",
   "description": "reactant config",
   "keywords": [
     "@reactant/config",
@@ -41,8 +41,8 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/context": "^0.0.291",
-    "@reactant/types": "^0.0.291",
+    "@reactant/context": "^0.0.292",
+    "@reactant/types": "^0.0.292",
     "core-js": "^3.6.1",
     "cosmiconfig": "^6.0.0",
     "pkg-dir": "^4.2.0"
