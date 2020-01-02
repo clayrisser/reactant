@@ -12,7 +12,7 @@
     "test": "reactant test web"
   },
   "dependencies": {
-    "@reactant/redux": "^0.0.288",
+    "@reactant/redux": "0.0.288",
     "@reactant/router": "^0.0.288",
     "@reactant/web": "^0.0.288",
     "connected-react-router": "^6.6.1",

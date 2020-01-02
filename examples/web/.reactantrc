@@ -1,0 +1,4 @@
+platforms:
+  web:
+    envs:
+      HELLO: world

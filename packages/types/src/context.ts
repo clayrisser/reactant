@@ -3,7 +3,7 @@ import { LoadedPlatform } from './platform';
 import { LoadedPlugins } from './plugin';
 
 export interface Envs {
-  [key: string]: string;
+  [key: string]: string | null;
 }
 
 export interface Options {

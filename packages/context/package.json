@@ -39,7 +39,7 @@
     "test:watch": "npm run lint && jest --watch"
   },
   "dependencies": {
-    "@reactant/types": "^0.0.288",
+    "@reactant/types": "0.0.289",
     "circular-json": "^0.5.9",
     "core-js": "^3.6.1",
     "cross-spawn": "^7.0.1",

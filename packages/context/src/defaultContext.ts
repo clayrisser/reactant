@@ -3,6 +3,7 @@ import { Context, LoadedPlugins } from '@reactant/types';
 const context: Context = {
   action: '',
   debug: false,
+  envs: {},
   logLevel: 'info',
   platformName: '',
   plugins: {} as LoadedPlugins,

@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@reactant/context": "^0.0.288",
-    "@reactant/types": "^0.0.288",
+    "@reactant/types": "0.0.289",
     "core-js": "^3.6.1"
   },
   "devDependencies": {
