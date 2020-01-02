@@ -2,6 +2,7 @@ import pkgDir from 'pkg-dir';
 import {
   Config,
   Context,
+  ContextEnvs,
   Envs,
   LoadedPlugin,
   Options,
@@ -17,7 +18,7 @@ const rootPath = pkgDir.sync(process.cwd()) || process.cwd();
 
 export function loadEnvs(envs: Envs) {
   return Object.entries(envs).reduce(
-    (envs: Envs, [key, env]: [string, string]) => {
+    (envs: Envs, [key, env]: [string, string | null]) => {
       if (!env) envs[key] = process.env[key] || '';
       return envs;
     },
@@ -75,7 +76,10 @@ export default function bootstrap(
       throw new Error(`platform '${context.platformName}' not installed`);
     }
     context.platform = platform;
-    context.envs = { ...context.envs, ...loadEnvs(platform.options.envs) };
+    context.envs = {
+      ...context.envs,
+      ...(loadEnvs(platform.options.envs) as ContextEnvs)
+    };
     if (typeof context.platform?.config === 'function') {
       config = context.platform.config(
         config,
@@ -93,7 +97,10 @@ export default function bootstrap(
           plugin.options,
           config.plugins?.[pluginName] || {}
         );
-        context.envs = { ...context.envs, ...loadEnvs(plugin.options.envs) };
+        context.envs = {
+          ...context.envs,
+          ...(loadEnvs(plugin.options.envs) as ContextEnvs)
+        };
         plugin.supportedPlatforms = new Set([
           ...plugin.supportedPlatforms,
           ...(plugin.options?.supportedPlatforms || [])

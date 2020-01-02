@@ -2,8 +2,8 @@ import { Config } from './config';
 import { LoadedPlatform } from './platform';
 import { LoadedPlugins } from './plugin';
 
-export interface Envs {
-  [key: string]: string | null;
+export interface ContextEnvs {
+  [key: string]: string;
 }
 
 export interface Options {
@@ -18,7 +18,7 @@ export interface Context {
   action: string;
   config?: Config;
   debug: boolean;
-  envs: Envs;
+  envs: ContextEnvs;
   logLevel: string | number;
   options: Options;
   paths: Paths;

@@ -1,6 +1,9 @@
 import { PlatformOptions, PlatformsOptions } from './platform';
 import { PluginsOptions } from './plugin';
-import { Envs } from './context';
+
+export interface Envs {
+  [key: string]: string | null;
+}
 
 export type WebpackConfig = any;
 
