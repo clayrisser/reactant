@@ -4,6 +4,7 @@ import { LoadedPlugins } from './plugin';
 
 export interface Options {
   analyze?: boolean;
+  args: string[];
   config: Partial<Config>;
   debug: boolean;
   docker?: boolean;

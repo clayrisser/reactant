@@ -1,6 +1,7 @@
 import { Command, flags } from '@oclif/command';
 import { Options } from '@reactant/types';
 import { build } from '@reactant/core';
+import { getArgs } from '../util';
 
 export default class Build extends Command {
   static description = 'build platform';
@@ -22,6 +23,7 @@ export default class Build extends Command {
     const { args, flags } = this.parse(Build);
     const options: Options = {
       analyze: !!flags.analyze,
+      args: getArgs(this.argv, Build),
       config: JSON.parse(flags.config || '{}'),
       debug: !!flags.debug,
       docker: !!flags.docker

@@ -1,6 +1,7 @@
 import { Command, flags } from '@oclif/command';
 import { Options } from '@reactant/types';
 import { start } from '@reactant/core';
+import { getArgs } from '../util';
 
 export default class Start extends Command {
   static description = 'start platform';
@@ -19,6 +20,7 @@ export default class Start extends Command {
   async run() {
     const { args, flags } = this.parse(Start);
     const options: Options = {
+      args: getArgs(this.argv, Start),
       config: JSON.parse(flags.config || '{}'),
       debug: !!flags.debug
     };

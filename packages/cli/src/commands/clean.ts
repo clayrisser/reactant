@@ -1,6 +1,7 @@
 import { Command, flags } from '@oclif/command';
 import { Options } from '@reactant/types';
 import { clean } from '@reactant/core';
+import { getArgs } from '../util';
 
 export default class Clean extends Command {
   static description = 'clean platform';
@@ -19,6 +20,7 @@ export default class Clean extends Command {
   async run() {
     const { args, flags } = this.parse(Clean);
     const options: Options = {
+      args: getArgs(this.argv, Clean),
       config: JSON.parse(flags.config || '{}'),
       debug: !!flags.debug
     };

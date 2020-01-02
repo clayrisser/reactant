@@ -48,6 +48,7 @@ export default async function build(
         }
       }
     );
+    await fs.remove(dockerPath);
   } else {
     const cracoConfigPath = await createCracoConfig(context);
     logger.spinner.succeed('prepared build');
