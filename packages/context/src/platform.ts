@@ -1,5 +1,6 @@
 import path from 'path';
 import {
+  Actions,
   Config,
   Context,
   LoadedPlatform,
@@ -47,7 +48,7 @@ export function getPlatforms(
       );
       const requiredPlatform: Platform = requireDefault<Platform>(platformPath);
       const platform: LoadedPlatform = {
-        actions: requiredPlatform.actions || {},
+        actions: requiredPlatform.actions as Actions,
         config:
           requiredPlatform.config ||
           ((

@@ -8,6 +8,7 @@ const context: Context = {
   plugins: {} as LoadedPlugins,
   state: {},
   options: {
+    args: [],
     config: {},
     debug: false
   },
