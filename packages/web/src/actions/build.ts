@@ -1,7 +1,7 @@
 import execa from 'execa';
 import fs from 'fs-extra';
 import path from 'path';
-import { Context, Logger, PlatformApi } from '@reactant/platform';
+import { Context, Logger, PlatformApi, getOptions } from '@reactant/platform';
 import createCracoConfig from '../createCracoConfig';
 
 export default async function build(
@@ -10,6 +10,7 @@ export default async function build(
   platformApi: PlatformApi
 ): Promise<any> {
   logger.spinner.start('preparing build');
+  const options = getOptions();
   if (context.options.docker) {
     const dockerPath = path.resolve(context.paths.root, '.docker');
     await fs.remove(dockerPath);
@@ -38,7 +39,7 @@ export default async function build(
       {
         env: {
           REACTANT_DOCKERFILE: path.resolve(__dirname, '../docker/Dockerfile'),
-          REACTANT_IMAGE: pkg.name,
+          REACTANT_IMAGE: options.image || pkg.name,
           REACTANT_MAINTAINER: maintainer,
           REACTANT_MAJOR: major,
           REACTANT_MINOR: minor,

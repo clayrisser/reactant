@@ -42,7 +42,7 @@ if (isNode) {
   PlatformApi = eval("require('./platformApi')").default;
 }
 
-function getOptions(): PlatformOptions {
+export function getOptions(): PlatformOptions {
   if (isNode) {
     // eslint-disable-next-line no-eval
     const { getContext } = eval("require('@reactant/context')");
@@ -56,8 +56,6 @@ function getOptions(): PlatformOptions {
   } catch (err) {}
   return {};
 }
-
-export const options = getOptions();
 
 export { PlatformApi, createBabelConfig, createWebpackConfig };
 export * from '@reactant/types';
