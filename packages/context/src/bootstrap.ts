@@ -16,10 +16,15 @@ import { state, syncContext } from '.';
 
 const rootPath = pkgDir.sync(process.cwd()) || process.cwd();
 
-export function loadEnvs(envs: Envs) {
+export function loadEnvs(envs?: Envs): ContextEnvs {
+  if (!envs) return {};
   return Object.entries(envs).reduce(
-    (envs: Envs, [key, env]: [string, string | null]) => {
-      if (!env) envs[key] = process.env[key] || '';
+    (envs: ContextEnvs, [key, env]: [string, string | null]) => {
+      if (process.env[key]) {
+        envs[key] = process.env[key] || '';
+      } else {
+        envs[key] = env || '';
+      }
       return envs;
     },
     {}
@@ -59,6 +64,7 @@ export default function bootstrap(
     } else {
       context = childBootstrap(context);
     }
+    context.envs = loadEnvs(initialConfig.envs);
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     let config = merge<Partial<Config>>(initialConfig, options?.config || {});
     const platformOrigionalName =
@@ -76,10 +82,10 @@ export default function bootstrap(
       throw new Error(`platform '${context.platformName}' not installed`);
     }
     context.platform = platform;
-    context.envs = {
+    context.envs = loadEnvs({
       ...context.envs,
-      ...(loadEnvs(platform.options.envs) as ContextEnvs)
-    };
+      ...platform.options.envs
+    });
     if (typeof context.platform?.config === 'function') {
       config = context.platform.config(
         config,
@@ -97,10 +103,10 @@ export default function bootstrap(
           plugin.options,
           config.plugins?.[pluginName] || {}
         );
-        context.envs = {
+        context.envs = loadEnvs({
           ...context.envs,
-          ...(loadEnvs(plugin.options.envs) as ContextEnvs)
-        };
+          ...plugin.options.envs
+        });
         plugin.supportedPlatforms = new Set([
           ...plugin.supportedPlatforms,
           ...(plugin.options?.supportedPlatforms || [])

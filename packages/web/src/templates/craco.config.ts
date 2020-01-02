@@ -109,6 +109,9 @@ function overrideCracoConfig({
     ...process.env,
     ...context.envs
   };
+  Object.entries(process.env).forEach(
+    ([key, env]: [string, string | undefined]) => (process.env[key] = env)
+  );
   // eslint-ignore-next-line
   return cracoConfig;
 }
