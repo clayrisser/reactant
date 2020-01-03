@@ -64,7 +64,6 @@ export default function bootstrap(
     } else {
       context = childBootstrap(context);
     }
-    context.envs = loadEnvs(initialConfig.envs);
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     let config = merge<Partial<Config>>(initialConfig, options?.config || {});
     const platformOrigionalName =
@@ -83,7 +82,7 @@ export default function bootstrap(
     }
     context.platform = platform;
     context.envs = loadEnvs({
-      ...context.envs,
+      ...initialConfig.envs,
       ...platform.options.envs
     });
     if (typeof context.platform?.config === 'function') {
@@ -103,10 +102,6 @@ export default function bootstrap(
           plugin.options,
           config.plugins?.[pluginName] || {}
         );
-        context.envs = loadEnvs({
-          ...context.envs,
-          ...plugin.options.envs
-        });
         plugin.supportedPlatforms = new Set([
           ...plugin.supportedPlatforms,
           ...(plugin.options?.supportedPlatforms || [])

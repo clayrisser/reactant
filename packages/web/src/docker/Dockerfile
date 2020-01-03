@@ -10,8 +10,12 @@ RUN SKIP_PREFLIGHT_CHECK=true npm run build
 FROM nginx:1.17.6-alpine
 
 RUN apk add --no-cache \
+  bash \
   nginx \
   tini
+RUN wget -O /usr/local/bin/confd \
+  https://github.com/kelseyhightower/confd/releases/download/v0.16.0/confd-0.16.0-linux-amd64 && \
+  chmod +x /usr/local/bin/confd
 
 ARG PLATFORM=web
 
@@ -25,7 +29,7 @@ WORKDIR /opt/app
 
 EXPOSE 3000
 
-ENTRYPOINT ["tini", "--", "/usr/local/sbin/entrypoint.sh"]
+ENTRYPOINT ["tini", "--", "bash", "/usr/local/sbin/entrypoint.sh"]
 
 ARG IMAGE=""
 ARG  MAINTAINER=""
