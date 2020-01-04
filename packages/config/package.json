@@ -20,7 +20,9 @@
     "url": "https://codejam.ninja"
   },
   "files": [
-    "lib"
+    "lib",
+    "node.js",
+    "node.ts"
   ],
   "main": "lib/index.js",
   "repository": {

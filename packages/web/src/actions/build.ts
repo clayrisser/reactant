@@ -13,6 +13,10 @@ export default async function build(
   const options = getOptions();
   if (context.options.docker) {
     const dockerPath = path.resolve(context.paths.root, '.docker');
+    let preparePath = path.resolve(context.paths.root, 'docker/prepare.sh');
+    if (!(await fs.pathExists(preparePath))) {
+      preparePath = path.resolve(__dirname, '../docker/prepare.sh');
+    }
     await fs.remove(dockerPath);
     await fs.mkdirs(dockerPath);
     await fs.copy(
@@ -22,6 +26,10 @@ export default async function build(
     await fs.copy(
       path.resolve(__dirname, '../docker/nginx.conf'),
       path.resolve(dockerPath, 'nginx.conf')
+    );
+    await fs.copy(
+      preparePath,
+      path.resolve(dockerPath, 'custom-entrypoint.sh')
     );
     const pkg = await fs.readJson(
       path.resolve(context.paths.root, 'package.json')
@@ -39,10 +47,11 @@ export default async function build(
       {
         env: {
           REACTANT_DOCKERFILE: path.resolve(__dirname, '../docker/Dockerfile'),
-          REACTANT_IMAGE: options.image || pkg.name,
+          REACTANT_IMAGE: options.docker.image || pkg.name,
           REACTANT_MAINTAINER: maintainer,
           REACTANT_MAJOR: major,
           REACTANT_MINOR: minor,
+          REACTANT_PACKAGES: options.docker.packages.join(''),
           REACTANT_PATCH: patch,
           REACTANT_PLATFORM: context.platformName,
           REACTANT_ROOT: context.paths.root
@@ -54,11 +63,9 @@ export default async function build(
     const cracoConfigPath = await createCracoConfig(context);
     logger.spinner.succeed('prepared build');
     const finalizeBuild = async () => {
-      logger.spinner.start('finalizing build');
       await fs.mkdirs(context.paths.dist);
       await fs.remove(context.paths.dist);
       await fs.move(context.paths.build, context.paths.dist);
-      logger.spinner.succeed('built');
     };
     if (context.options.analyze) {
       let handleFileChangedCount = 0;

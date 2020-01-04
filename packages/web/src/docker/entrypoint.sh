@@ -14,7 +14,7 @@ dest = "$dest"
 EOF
 confd -onetime -backend env
 done
-
+sh /usr/local/sbin/prepare
 echo "port listening on 3000"
 
 exec /usr/sbin/nginx -g "daemon off;$@"

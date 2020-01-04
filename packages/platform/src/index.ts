@@ -45,7 +45,7 @@ if (isNode) {
 export function getOptions(): PlatformOptions {
   if (isNode) {
     // eslint-disable-next-line no-eval
-    const { getContext } = eval("require('@reactant/context')");
+    const getContext = eval("require('@reactant/context')").default;
     return (getContext() as Context).platform?.options || {};
   }
   try {
@@ -54,7 +54,10 @@ export function getOptions(): PlatformOptions {
     if (options) return options;
     // eslint-disable-next-line no-empty
   } catch (err) {}
-  return {};
+  if (window.__REACTANT__?.platformOptions) {
+    return window.__REACTANT__.platformOptions;
+  }
+  return (null as unknown) as PlatformOptions;
 }
 
 export { PlatformApi, createBabelConfig, createWebpackConfig };

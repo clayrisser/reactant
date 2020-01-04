@@ -4,14 +4,22 @@ import path from 'path';
 import util from 'util';
 import { ChildProcess } from 'child_process';
 import { Context, Logger, LoadedPlugin, PluginOptions } from '@reactant/types';
-import { finish, processes } from '@reactant/context';
+import {
+  finish,
+  processes,
+  sanitizeContext,
+  sanitizeJsonString
+} from '@reactant/context/node';
+import { sanitizeConfig } from '@reactant/config';
 import build from './build';
 import clean from './clean';
 import start from './start';
 import storybook from './storybook';
 import test from './test';
 
-export async function cleanup(context: Context, _logger: Logger) {
+export async function cleanup(context: Context, logger: Logger) {
+  logger.info('cleaning up ophaned processes');
+  logger.info('please wait for this process to safely shutdown');
   Object.values(processes).map((ps: ChildProcess) => ps.kill('SIGINT'));
   await new Promise(resolve => setTimeout(resolve, 5000));
   Object.values(processes).map((ps: ChildProcess) => ps.kill('SIGKILL'));
@@ -30,6 +38,10 @@ export async function cleanup(context: Context, _logger: Logger) {
   } catch (err) {}
   try {
     await fs.unlink(path.resolve(context.paths.reactant, 'config.json'));
+    // eslint-disable-next-line no-empty
+  } catch (err) {}
+  try {
+    await fs.unlink(path.resolve(context.paths.reactant, 'context.json'));
     // eslint-disable-next-line no-empty
   } catch (err) {}
   try {
@@ -61,27 +73,37 @@ export async function preProcess(
       '\n========= END CONTEXT =========\n'
     );
   }
-  await fs.writeFile(
+  await fs.writeJson(
     path.resolve(context.paths.reactant, 'config.json'),
-    CircularJSON.stringify(context.config)
+    context.config ? sanitizeConfig(context.config, context.paths.root) : null
   );
-  await fs.writeFile(
+  await fs.writeJson(
+    path.resolve(context.paths.reactant, 'context.json'),
+    sanitizeContext(context)
+  );
+  await fs.writeJson(
     path.resolve(context.paths.reactant, 'platform.json'),
-    CircularJSON.stringify(context.platform?.options || {})
+    sanitizeJsonString(
+      CircularJSON.stringify(context.platform?.options || {}),
+      context.paths.root
+    )
   );
-  await fs.writeFile(
+  await fs.writeJson(
     path.resolve(context.paths.reactant, 'plugins.json'),
-    CircularJSON.stringify(
-      Object.entries(context.plugins || {}).reduce(
-        (
-          plugins: { [key: string]: PluginOptions },
-          [pluginName, plugin]: [string, LoadedPlugin]
-        ) => {
-          plugins[pluginName] = plugin.options || {};
-          return plugins;
-        },
-        {}
-      )
+    sanitizeJsonString(
+      CircularJSON.stringify(
+        Object.entries(context.plugins || {}).reduce(
+          (
+            plugins: { [key: string]: PluginOptions },
+            [pluginName, plugin]: [string, LoadedPlugin]
+          ) => {
+            plugins[pluginName] = plugin.options || {};
+            return plugins;
+          },
+          {}
+        )
+      ),
+      context.paths.root
     )
   );
   if (await fs.pathExists(path.resolve(__dirname, '../../../../lerna.json'))) {

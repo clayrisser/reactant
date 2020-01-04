@@ -18,7 +18,5 @@ export default async function test(
   logger.spinner.succeed('prepared test');
   logger.spinner.succeed('tested');
   await platformApi.spawn('@craco/craco', 'craco', ['test']);
-  logger.spinner.start('finalizing');
   await fs.writeJson(pkgPath, pkg, { spaces: 2 });
-  logger.spinner.succeed('finalized');
 }

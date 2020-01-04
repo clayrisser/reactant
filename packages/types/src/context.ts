@@ -1,6 +1,6 @@
 import { Config } from './config';
-import { LoadedPlatform } from './platform';
-import { LoadedPlugins } from './plugin';
+import { LoadedPlatform, PlatformOptions } from './platform';
+import { LoadedPlugins, PluginsOptions } from './plugin';
 
 export interface ContextEnvs {
   [key: string]: string;
@@ -41,4 +41,14 @@ export interface Paths {
   root: Path;
   tmp: Path;
   [key: string]: Path;
+}
+
+export class GlobalReactant {
+  config?: Config;
+
+  context?: Context;
+
+  platformOptions?: PlatformOptions;
+
+  pluginsOptions?: PluginsOptions;
 }

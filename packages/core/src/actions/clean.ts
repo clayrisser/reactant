@@ -1,7 +1,7 @@
 import { Context, Options } from '@reactant/types';
 import { PlatformApi } from '@reactant/platform';
-import { bootstrap } from '@reactant/context';
-import { loadConfig } from '@reactant/config';
+import { bootstrap } from '@reactant/context/node';
+import { loadConfig } from '@reactant/config/node';
 import Logger from '../logger';
 import { preProcess, postProcess } from '.';
 

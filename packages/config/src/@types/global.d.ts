@@ -1,7 +1,9 @@
-import { Config } from '@reactant/types';
+import { Config, Context } from '@reactant/types';
 
 declare class GlobalReactant {
   config?: Config;
+
+  context?: Context;
 }
 
 declare global {

@@ -4,7 +4,7 @@ import path from 'path';
 import pkgDir from 'pkg-dir';
 import which from 'which';
 import { SpawnOptions, ChildProcess } from 'child_process';
-import { processes } from '@reactant/context';
+import { processes } from '@reactant/context/node';
 import {
   Context,
   Logger,

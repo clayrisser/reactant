@@ -9,6 +9,7 @@ services:
       args:
         IMAGE: ${REACTANT_IMAGE}:latest
         MAINTAINER: ${REACTANT_MAINTAINER}
+        PACKAGES: ${REACTANT_PACKAGES}
         PLATFORM: ${REACTANT_PLATFORM}
   major:
     extends: build

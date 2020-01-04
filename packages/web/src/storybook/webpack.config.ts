@@ -1,7 +1,6 @@
-import CircularJSON from 'circular-json';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Configuration as WebpackConfig } from 'webpack';
-import { getContext } from '@reactant/context';
+import getContext from '@reactant/context';
 
 const context = getContext();
 
@@ -36,13 +35,6 @@ module.exports = ({ config }: { config: WebpackConfig }) => {
       fs: 'empty',
       ...config.node
     };
-    if (!config.externals) config.externals = {};
-    if (typeof config.externals === 'object') {
-      config.externals = {
-        '@reactant/context': CircularJSON.stringify(context),
-        ...config.externals
-      };
-    }
   }
   return config;
 };

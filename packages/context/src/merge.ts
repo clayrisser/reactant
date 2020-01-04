@@ -1,19 +1,7 @@
 import clone from 'lodash.clone';
 import mergeWith from 'lodash.mergewith';
 import uniq from 'lodash.uniq';
-
-export interface MergeOptions {
-  _level: number;
-  concat: boolean;
-  dedup: boolean;
-  level: number;
-  mergeModifierFunction: boolean;
-}
-
-export type MergeModifier = <Config>(
-  config: Partial<Config>,
-  ...args: any[]
-) => Partial<Config>;
+import { MergeModifier, MergeOptions } from './types';
 
 export default function merge<Config>(
   config: Config,

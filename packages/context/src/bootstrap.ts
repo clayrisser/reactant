@@ -12,7 +12,7 @@ import merge from './merge';
 import { CalculatePaths } from './paths';
 import { getPlatform } from './platform';
 import { getPlugins } from './plugin';
-import { state, syncContext } from '.';
+import { state, syncContext } from './node';
 
 const rootPath = pkgDir.sync(process.cwd()) || process.cwd();
 

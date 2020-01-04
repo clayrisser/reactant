@@ -8,7 +8,7 @@ import {
   PluginOptions
 } from '@reactant/types';
 import merge from './merge';
-import { requireDefault } from './util';
+import { requireDefault } from './node';
 
 let _plugins: LoadedPlugins;
 

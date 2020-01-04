@@ -6,16 +6,16 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "incremental": false,
-    "lib": ["ES2018", "ESNext.AsyncIterable"],
-    "module": "CommonJS",
-    "moduleResolution": "Node",
+    "lib": ["esnext", "dom"],
+    "module": "commonjs",
+    "moduleResolution": "node",
     "outDir": "lib",
     "resolveJsonModule": true,
     "rootDir": "src",
     "sourceMap": true,
     "strict": true,
     "strictPropertyInitialization": false,
-    "target": "ESNext"
+    "target": "esnext"
   },
   "include": ["src"],
   "exclude": ["node_modules/**"]
