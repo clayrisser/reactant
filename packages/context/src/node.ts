@@ -64,10 +64,8 @@ export function sanitizeJsonString(json: string, rootPath: string): string {
 }
 
 export function sanitizeConfig(config: Config, rootPath?: string): Config {
-  console.log('rootPath', rootPath);
   let configString = CircularJSON.stringify(config);
   if (rootPath) configString = sanitizeJsonString(configString, rootPath);
-  console.log('configString', configString);
   const sanitizedConfig: Config = JSON.parse(configString);
   return sanitizedConfig;
 }

@@ -1,9 +1,9 @@
 import React from 'react';
-/* import context from '@reactant/context'; */
+import getConfig from '@reactant/config';
+import getContext from '@reactant/context';
 
-/* console.log(context); */
-// @ts-ignore
-/* console.log(context()); */
+console.log(getContext());
+console.log(getConfig());
 
 export default { title: 'Button' };
 
@@ -16,6 +16,3 @@ export const withEmoji = () => (
     </span>
   </button>
 );
-
-// @ts-ignore
-console.log(__REACTANT__);

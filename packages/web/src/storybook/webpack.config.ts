@@ -1,6 +1,8 @@
+import fs from 'fs-extra';
+import getContext from '@reactant/context';
+import path from 'path';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Configuration as WebpackConfig } from 'webpack';
-import getContext from '@reactant/context';
 
 const context = getContext();
 
@@ -29,6 +31,17 @@ module.exports = ({ config }: { config: WebpackConfig }) => {
     });
     if (!config.resolve) config.resolve = {};
     config.resolve.extensions?.push('.jsx', '.ts', '.tsx');
+    if (!config.resolve) config.resolve = {};
+    if (!config.resolve.alias) config.resolve.alias = {};
+    const configAliasPath = path.resolve(
+      context.paths.root,
+      'storybook/config.ts'
+    );
+    if (fs.pathExistsSync(configAliasPath)) {
+      config.resolve.alias[
+        '@reactant/web/lib/alias/storybook/config'
+      ] = configAliasPath;
+    }
     if (!config.node) config.node = {};
     config.node = {
       child_process: 'empty',

@@ -4,13 +4,13 @@ import path from 'path';
 import util from 'util';
 import { ChildProcess } from 'child_process';
 import { Context, Logger, LoadedPlugin, PluginOptions } from '@reactant/types';
+import { sanitizeConfig } from '@reactant/config';
 import {
   finish,
   processes,
   sanitizeContext,
   sanitizeJsonString
 } from '@reactant/context/node';
-import { sanitizeConfig } from '@reactant/config';
 import build from './build';
 import clean from './clean';
 import start from './start';

@@ -8,7 +8,7 @@ const isNode = new Function(
 
 export default function getConfig(): Config {
   // eslint-disable-next-line no-eval
-  if (isNode) eval("require('./node')").default();
+  if (isNode) return eval("require('./node')").default();
   try {
     // eslint-disable-next-line global-require
     const config: Config = require('../../../../.tmp/reactant/config.json');
@@ -21,13 +21,13 @@ export default function getConfig(): Config {
 
 export function setConfig(config: Config, mergeConfig = true): Config {
   // eslint-disable-next-line no-eval
-  if (isNode) eval("require('./node')").setConfig(config, mergeConfig);
+  if (isNode) return eval("require('./node')").setConfig(config, mergeConfig);
   throw NOT_NODE_ERROR;
 }
 
 export function sanitizeConfig(config: Config, rootPath?: string): Config {
   // eslint-disable-next-line no-eval
-  if (isNode) eval("require('./node')").sanitizeConfig(config, rootPath);
+  if (isNode) return eval("require('./node')").sanitizeConfig(config, rootPath);
   return config;
 }
 
