@@ -21,9 +21,9 @@ RUN wget -O /usr/local/bin/confd \
 
 ARG PLATFORM=web
 
-COPY .docker/entrypoint.sh /usr/local/sbin/entrypoint.sh
+COPY .docker/entrypoint.sh /usr/local/sbin/entrypoint
 COPY .docker/nginx.conf /etc/nginx/conf.d/default.conf
-COPY .docker/prepare.sh /usr/local/sbin/prepare.sh
+COPY .docker/prepare.sh /usr/local/sbin/prepare
 COPY --from=0 /tmp/app/dist/${PLATFORM} /opt/app
 
 RUN chmod +x /usr/local/sbin/entrypoint && \

@@ -27,10 +27,7 @@ export default async function build(
       path.resolve(__dirname, '../docker/nginx.conf'),
       path.resolve(dockerPath, 'nginx.conf')
     );
-    await fs.copy(
-      preparePath,
-      path.resolve(dockerPath, 'custom-entrypoint.sh')
-    );
+    await fs.copy(preparePath, path.resolve(dockerPath, 'prepare.sh'));
     const pkg = await fs.readJson(
       path.resolve(context.paths.root, 'package.json')
     );
