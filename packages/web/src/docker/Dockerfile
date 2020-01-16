@@ -1,5 +1,8 @@
 FROM node:12.13.1-alpine3.10
 
+RUN apk add --no-cache \
+  make
+
 WORKDIR /tmp/app
 
 COPY package.json .
