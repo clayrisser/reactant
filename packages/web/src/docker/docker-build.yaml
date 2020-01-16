@@ -7,6 +7,7 @@ services:
       context: ${REACTANT_ROOT}
       dockerfile: ${REACTANT_DOCKERFILE}
       args:
+        BUILD_PACKAGES: ${REACTANT_BUILD_PACKAGES}
         IMAGE: ${REACTANT_IMAGE}:latest
         MAINTAINER: ${REACTANT_MAINTAINER}
         PACKAGES: ${REACTANT_PACKAGES}

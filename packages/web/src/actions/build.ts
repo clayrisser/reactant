@@ -43,12 +43,13 @@ export default async function build(
       ['-f', path.resolve(__dirname, '../docker/docker-build.yaml'), 'build'],
       {
         env: {
+          REACTANT_BUILD_PACKAGES: options.docker.buildPackages.join(' '),
           REACTANT_DOCKERFILE: path.resolve(__dirname, '../docker/Dockerfile'),
           REACTANT_IMAGE: options.docker.image || pkg.name,
           REACTANT_MAINTAINER: maintainer,
           REACTANT_MAJOR: major,
           REACTANT_MINOR: minor,
-          REACTANT_PACKAGES: options.docker.packages.join(''),
+          REACTANT_PACKAGES: options.docker.packages.join(' '),
           REACTANT_PATCH: patch,
           REACTANT_PLATFORM: context.platformName,
           REACTANT_ROOT: context.paths.root
