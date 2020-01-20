@@ -1,19 +1,22 @@
 #!/bin/sh
 
 mkdir -p /etc/confd/conf.d
-for i in `find . -type f -name "*.js"`; do
-  src=${i#?}.tmpl
-  dest=$i
+i=0
+for value in `find . -type f -name "*.js"`; do
+  src=${value#?}.tmpl
+  dest=$value
   template=/etc/confd/templates$src
   mkdir -p $template && rm -r $template
   mv $dest $template
-  cat <<EOF > /etc/confd/conf.d/app.toml
+  cat <<EOF > /etc/confd/conf.d/$i.toml
 [template]
 src = "$src"
 dest = "$dest"
 EOF
-confd -onetime -backend env
+  i=$((i=i+1))
 done
+confd -onetime -backend env
+
 sh /usr/local/sbin/prepare
 echo "port listening on 3000"
 
