@@ -1,8 +1,6 @@
 FROM node:12.13.1-alpine3.10
 
 RUN apk add --no-cache \
-  libgtop \
-  make \
   ${BUILD_PACKAGES}
 
 WORKDIR /tmp/app

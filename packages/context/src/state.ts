@@ -1,11 +1,11 @@
 import CircularJSON from 'circular-json';
-import LibGTop from 'libgtop';
+// import LibGTop from 'libgtop';
 import crossSpawn from 'cross-spawn';
 import fs from 'fs-extra';
 import path from 'path';
 import pkgDir from 'pkg-dir';
 
-const libGTop = new LibGTop();
+// const libGTop = new LibGTop();
 const rootPath = pkgDir.sync(process.cwd()) || process.cwd();
 
 export default class State<
@@ -83,11 +83,11 @@ export default class State<
   }
 
   processAlive(pid: number) {
-    try {
-      return libGTop.proclist.includes(pid);
-    } catch (err) {
-      // eslint-disable-next-line no-empty
-    }
+    // try {
+    //   return libGTop.proclist.includes(pid);
+    // } catch (err) {
+    //   // eslint-disable-next-line no-empty
+    // }
     const pkgPath =
       pkgDir.sync(
         // eslint-disable-next-line import/no-dynamic-require,global-require
