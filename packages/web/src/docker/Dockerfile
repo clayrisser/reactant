@@ -6,11 +6,10 @@ RUN apk add --no-cache \
 WORKDIR /tmp/app
 
 COPY package.json .
-RUN npm install && \
-  mkdir -p node_modules/.tmp/make/install && \
-  touch -e node_modules/.tmp/make/install/.modified
-
+RUN npm install
 COPY . /tmp/app
+RUN mkdir -p node_modules/.tmp/make/install && \
+  touch -e node_modules/.tmp/make/install/.modified
 RUN SKIP_PREFLIGHT_CHECK=true npm run build
 
 FROM nginx:1.17.6-alpine
