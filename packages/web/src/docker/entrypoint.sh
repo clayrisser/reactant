@@ -2,7 +2,7 @@
 
 mkdir -p /etc/confd/conf.d
 i=0
-for value in `find . -type f -name "*.js"`; do
+for value in `find . -type f -name "main.*.js"`; do
   src=${value#?}.tmpl
   dest=$value
   template=/etc/confd/templates$src
