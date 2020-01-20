@@ -6,7 +6,10 @@ RUN apk add --no-cache \
 WORKDIR /tmp/app
 
 COPY package.json .
-RUN npm install
+RUN npm install && \
+  mkdir -p node_modules/.tmp/make/install && \
+  touch -e node_modules/.tmp/make/install/.modified
+
 COPY . /tmp/app
 RUN SKIP_PREFLIGHT_CHECK=true npm run build
 
