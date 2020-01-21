@@ -1,6 +1,6 @@
 {
   "name": "@reactant/expo",
-  "version": "0.0.306",
+  "version": "0.0.307",
   "description": "reactant platform for expo",
   "keywords": [
     "@reactant/expo",
@@ -40,7 +40,7 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/platform": "^0.0.306",
+    "@reactant/platform": "^0.0.307",
     "babel-plugin-macros": "^2.8.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-preset-expo": "^8.0.0",
