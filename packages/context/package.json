@@ -46,7 +46,7 @@
     "cross-spawn": "^7.0.1",
     "find-process": "^1.4.3",
     "fs-extra": "^8.1.0",
-    "gnumake": "^0.0.18",
+    "gnumake": "0.0.19",
     "lodash.clone": "^4.5.0",
     "lodash.mergewith": "^4.6.2",
     "lodash.uniq": "^4.5.0",

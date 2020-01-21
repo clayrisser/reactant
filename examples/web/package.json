@@ -12,7 +12,7 @@
     "test": "reactant test web"
   },
   "dependencies": {
-    "@reactant/redux": "^0.0.305",
+    "@reactant/redux": "0.0.305",
     "@reactant/router": "^0.0.305",
     "@reactant/web": "^0.0.305",
     "connected-react-router": "^6.6.1",
@@ -28,7 +28,7 @@
     "reflexbox": "^4.0.6"
   },
   "devDependencies": {
-    "@reactant/cli": "^0.0.305",
+    "@reactant/cli": "0.0.305",
     "@types/jest": "^24.0.25",
     "@types/node": "^13.1.1",
     "@types/react": "^16.9.17",

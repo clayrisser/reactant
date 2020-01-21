@@ -14,7 +14,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.7.1",
     "@reactant/expo": "^0.0.305",
-    "@reactant/redux": "^0.0.305",
+    "@reactant/redux": "0.0.305",
     "@reactant/router": "^0.0.305",
     "core-js": "^3.6.1",
     "expo": "^36.0.2",
@@ -28,7 +28,7 @@
     "redux-observable": "^1.2.0"
   },
   "devDependencies": {
-    "@reactant/cli": "^0.0.305",
+    "@reactant/cli": "0.0.305",
     "@reactant/config": "^0.0.305",
     "@reactant/platform": "^0.0.305",
     "@types/jest": "^24.0.25",

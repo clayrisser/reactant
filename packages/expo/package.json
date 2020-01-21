@@ -48,7 +48,7 @@
     "expo": "^36.0.2",
     "expo-cli": "^3.11.3",
     "fs-extra": "^8.1.0",
-    "gnumake": "^0.0.18"
+    "gnumake": "0.0.19"
   },
   "peerDependencies": {
     "@types/react": "^16.9.17",

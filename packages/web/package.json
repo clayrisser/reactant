@@ -54,7 +54,7 @@
     "core-js": "^3.6.1",
     "execa": "^4.0.0",
     "fs-extra": "^8.1.0",
-    "gnumake": "^0.0.18",
+    "gnumake": "0.0.19",
     "react-docgen-typescript-loader": "^3.6.0",
     "webpack-bundle-analyzer": "^3.6.0"
   },

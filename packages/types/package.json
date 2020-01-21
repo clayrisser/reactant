@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.1",
-    "gnumake": "^0.0.18"
+    "gnumake": "0.0.19"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",
