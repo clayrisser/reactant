@@ -1,6 +1,6 @@
 {
   "name": "@reactant/rebass",
-  "version": "0.0.303",
+  "version": "0.0.304",
   "description": "reactant plugin for rebass",
   "keywords": [
     "@reactant/rebass",
@@ -40,7 +40,7 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/plugin": "^0.0.303",
+    "@reactant/plugin": "^0.0.304",
     "gnumake": "^0.0.18"
   },
   "peerDependencies": {

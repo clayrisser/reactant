@@ -1,6 +1,6 @@
 {
   "name": "@reactant/context",
-  "version": "0.0.303",
+  "version": "0.0.304",
   "description": "reactant context",
   "keywords": [
     "reactant",
@@ -40,7 +40,7 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/types": "^0.0.303",
+    "@reactant/types": "^0.0.304",
     "circular-json": "^0.5.9",
     "core-js": "^3.6.1",
     "cross-spawn": "^7.0.1",
