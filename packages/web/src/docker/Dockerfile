@@ -8,8 +8,6 @@ WORKDIR /tmp/app
 COPY package.json .
 RUN npm install
 COPY . /tmp/app
-RUN mkdir -p node_modules/.tmp/make/install && \
-  touch -m node_modules/.tmp/make/install/.modified
 RUN SKIP_PREFLIGHT_CHECK=true npm run build
 
 FROM nginx:1.17.6-alpine
