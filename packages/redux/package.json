@@ -1,6 +1,6 @@
 {
   "name": "@reactant/redux",
-  "version": "0.0.305",
+  "version": "0.0.306",
   "description": "reactant plugin for redux",
   "keywords": [
     "@reactant/redux",
@@ -44,7 +44,7 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/plugin": "^0.0.305",
+    "@reactant/plugin": "^0.0.306",
     "gnumake": "0.0.19",
     "prop-types": "^15.7.2",
     "redux-devtools-extension": "^2.13.8",
