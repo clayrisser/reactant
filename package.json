@@ -10,8 +10,7 @@
     "bootstrap:hoist": "lerna bootstrap --hoist && npm run link",
     "bootstrap:parallel": "lerna bootstrap --ignore-prepublish && npm run build && npm run link",
     "build": "lerna run --scope @reactant\\/* --parallel build",
-    "clean": "lerna clean -y && git clean -fXd -e \\!node_modules -e \\!node_modules/**/*",
-    "clean:purge": "git clean -fXd",
+    "clean": "lerna clean -y",
     "format": "lerna run --parallel format",
     "keycloak": "cd example/keycloak && docker-compose up",
     "lerna": "lerna",
@@ -21,6 +20,7 @@
     "ls": "lerna ls",
     "postinstall": "npm run bootstrap:parallel",
     "publish": "npm run build && lerna publish --ignore-prepublish",
+    "purge": "git clean -fXd",
     "test": "lerna run --scope @reactant\\/* --parallel test"
   },
   "devDependencies": {

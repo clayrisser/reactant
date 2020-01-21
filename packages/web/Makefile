@@ -15,21 +15,20 @@ install: .make/install
 		pnpm install || (yarn --version >/dev/null 2>&1 && \
 		yarn || \
 		npm install)"
-	@mkdir -p .make && touch -m .make/install
 
 .PHONY: prepare
 prepare:
-	@mkdir -p .make && touch -m .make/install
 	@sh prepare.sh
-	@$(MAKE) -s build
+	@mkdir -p .make && touch -m .make/install
 
 .PHONY: build
-build: lib
-lib: .make/test-cache $(shell git ls-files)
+build: .make/build
+.make/build: .make/test-cache $(shell git ls-files)
 	-@rm -rf lib || true
 	@babel src -d lib --extensions ".ts,.tsx" --source-maps inline
 	@tsc -d --emitDeclarationOnly
 	@cp -r src/docker lib
+	@mkdir -p .make && touch -m .make/build
 
 .PHONY: format
 format: install
