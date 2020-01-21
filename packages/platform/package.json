@@ -1,6 +1,6 @@
 {
   "name": "@reactant/platform",
-  "version": "0.0.304",
+  "version": "0.0.305",
   "description": "reactant platform",
   "keywords": [
     "@reactant/platform",
@@ -42,9 +42,9 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/config": "^0.0.304",
-    "@reactant/context": "^0.0.304",
-    "@reactant/types": "^0.0.304",
+    "@reactant/config": "^0.0.305",
+    "@reactant/context": "^0.0.305",
+    "@reactant/types": "^0.0.305",
     "core-js": "^3.6.1",
     "cross-spawn": "^7.0.1",
     "fs-extra": "^8.1.0",
