@@ -26,17 +26,16 @@
     "url": "https://github.com/codejamninja/reactant"
   },
   "scripts": {
-    "build": "npm run test && babel src -d lib --extensions \".ts,.tsx\" --source-maps inline && tsc -d --emitDeclarationOnly",
-    "clean": "git clean -fXd -e \\!node_modules -e \\!node_modules/**/* && jest --clearCache",
-    "clean:purge": "jest --clearCache && git clean -fXd",
-    "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
-    "lint": "npm run format && tsc --allowJs --noEmit && eslint --ext .ts,.tsx ./",
-    "lint:fix": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx --fix ./",
-    "prepare": "sh prepare.sh",
-    "prepublish": "npm run build",
-    "start": "babel-node --extensions \".ts,.tsx\" src",
-    "test": "npm run lint:fix && jest --coverage",
-    "test:watch": "npm run lint && jest --watch"
+    "make": "make --version",
+    "build": "make -s build",
+    "clean": "make -s clean",
+    "format": "make -s format",
+    "lint": "make -s lint",
+    "prepare": "make -s prepare",
+    "purge": "make -s purge",
+    "start": "make -s start",
+    "test": "make -s test",
+    "test:watch": "make -s test-watch"
   },
   "dependencies": {
     "@reactant/config": "^0.0.303",
@@ -47,6 +46,7 @@
     "circular-json": "^0.5.9",
     "core-js": "^3.6.1",
     "fs-extra": "^8.1.0",
+    "gnumake": "^0.0.18",
     "ora": "^4.0.3",
     "pkg-dir": "^4.2.0"
   },
@@ -66,6 +66,7 @@
     "@types/ora": "^3.2.0",
     "@types/pkg-dir": "^2.0.1",
     "@types/webpack": "^4.41.0",
+    "cspell": "^4.0.44",
     "eslint": "^6.8.0",
     "eslint-config-reactant": "^0.1.144",
     "jest": "^24.9.0",
