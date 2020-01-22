@@ -1,6 +1,6 @@
 {
   "name": "@reactant/reflexbox",
-  "version": "0.0.307",
+  "version": "0.0.308",
   "description": "reactant plugin for reflexbox",
   "keywords": [
     "@reactant/reflexbox",
@@ -40,7 +40,7 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/plugin": "^0.0.307",
+    "@reactant/plugin": "^0.0.308",
     "gnumake": "0.0.19"
   },
   "peerDependencies": {

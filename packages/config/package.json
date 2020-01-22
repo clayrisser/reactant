@@ -1,6 +1,6 @@
 {
   "name": "@reactant/config",
-  "version": "0.0.307",
+  "version": "0.0.308",
   "description": "reactant config",
   "keywords": [
     "@reactant/config",
@@ -42,8 +42,8 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/context": "^0.0.307",
-    "@reactant/types": "^0.0.307",
+    "@reactant/context": "^0.0.308",
+    "@reactant/types": "^0.0.308",
     "core-js": "^3.6.1",
     "cosmiconfig": "^6.0.0",
     "gnumake": "0.0.19",

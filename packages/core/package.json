@@ -1,6 +1,6 @@
 {
   "name": "@reactant/core",
-  "version": "0.0.307",
+  "version": "0.0.308",
   "description": "reactant core",
   "keywords": [
     "reactant",
@@ -38,11 +38,11 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/config": "^0.0.307",
-    "@reactant/context": "^0.0.307",
-    "@reactant/platform": "^0.0.307",
-    "@reactant/plugin": "^0.0.307",
-    "@reactant/types": "^0.0.307",
+    "@reactant/config": "^0.0.308",
+    "@reactant/context": "^0.0.308",
+    "@reactant/platform": "^0.0.308",
+    "@reactant/plugin": "^0.0.308",
+    "@reactant/types": "^0.0.308",
     "circular-json": "^0.5.9",
     "core-js": "^3.6.1",
     "fs-extra": "^8.1.0",
