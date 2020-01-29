@@ -12,9 +12,9 @@
     "test": "reactant test web"
   },
   "dependencies": {
-    "@reactant/redux": "workspace:^0.0.308",
-    "@reactant/router": "workspace:^0.0.308",
-    "@reactant/web": "workspace:^0.0.308",
+    "@reactant/redux": "workspace:^0.0.10",
+    "@reactant/router": "workspace:^0.0.10",
+    "@reactant/web": "workspace:^0.0.10",
     "connected-react-router": "^6.6.1",
     "core-js": "^3.6.4",
     "prop-types": "^15.7.2",
@@ -30,9 +30,9 @@
   },
   "devDependencies": {
     "@craco/craco": "^5.6.3",
-    "@reactant/cli": "workspace:^0.0.308",
-    "@reactant/config": "workspace:^0.0.308",
-    "@reactant/context": "workspace:^0.0.308",
+    "@reactant/cli": "workspace:^0.0.10",
+    "@reactant/config": "workspace:^0.0.10",
+    "@reactant/context": "workspace:^0.0.10",
     "@types/jest": "^25.1.0",
     "@types/node": "^13.5.1",
     "@types/prop-types": "^15.7.3",
