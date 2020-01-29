@@ -104,7 +104,7 @@ function getExamplesMap() {
   );
 }
 
-if (fs.pathExistsSync(path.resolve(rootPath, 'lerna.json'))) {
+if (fs.pathExistsSync(path.resolve(rootPath, 'pnpm-workspace.yaml'))) {
   const examplesMap = getExamplesMap();
   const dependenciesMap = getDependenciesMap();
   Object.entries(examplesMap).forEach(

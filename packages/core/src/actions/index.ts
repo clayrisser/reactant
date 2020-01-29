@@ -23,7 +23,11 @@ export async function cleanup(context: Context, logger: Logger) {
   Object.values(processes).map((ps: ChildProcess) => ps.kill('SIGINT'));
   await new Promise(resolve => setTimeout(resolve, 5000));
   Object.values(processes).map((ps: ChildProcess) => ps.kill('SIGKILL'));
-  if (await fs.pathExists(path.resolve(__dirname, '../../../../lerna.json'))) {
+  if (
+    await fs.pathExists(
+      path.resolve(__dirname, '../../../../pnpm-workspace.yaml')
+    )
+  ) {
     await fs.remove(path.resolve(__dirname, '../../../../../.tmp'));
     await fs.remove(
       path.resolve(__dirname, '../../../../packages/.tmp/reactant')
@@ -106,7 +110,11 @@ export async function preProcess(
       context.paths.root
     )
   );
-  if (await fs.pathExists(path.resolve(__dirname, '../../../../lerna.json'))) {
+  if (
+    await fs.pathExists(
+      path.resolve(__dirname, '../../../../pnpm-workspace.yaml')
+    )
+  ) {
     await fs.remove(path.resolve(__dirname, '../../../../../.tmp'));
     await fs.remove(
       path.resolve(__dirname, '../../../../packages/.tmp/reactant')
