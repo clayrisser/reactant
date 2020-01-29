@@ -10,7 +10,7 @@
     "build": "npm run exec -- build",
     "clean": "npm run exec -- clean",
     "exec": "pnpm recursive --workspace-concurrency=Infinity run --filter={packages}",
-    "publish": "npm run build && lerna publish --ignore-prepublish",
+    "publish": "pnpm -r publish --filter={packages} --access=public",
     "purge": "git clean -fXd",
     "update": "pnpm -r update -L"
   },
