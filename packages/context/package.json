@@ -69,6 +69,7 @@
     "@types/lodash.clone": "^4.5.6",
     "@types/lodash.mergewith": "^4.6.6",
     "@types/lodash.uniq": "^4.5.6",
+    "@types/node": "^13.5.1",
     "@types/pkg-dir": "^2.0.1",
     "@types/webpack": "^4.41.0",
     "cspell": "^4.0.44",

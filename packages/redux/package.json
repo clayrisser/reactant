@@ -61,6 +61,7 @@
     "redux": "^4.0.5",
     "redux-observable": "^1.2.0",
     "redux-thunk": "^2.3.0",
+    "rxjs": "^6.5.4",
     "typescript": "^3.7.4"
   },
   "devDependencies": {
@@ -74,6 +75,8 @@
     "@babel/preset-typescript": "^7.7.7",
     "@react-native-community/async-storage": "^1.7.1",
     "@types/jest": "^24.0.25",
+    "@types/node": "^13.5.1",
+    "@types/prop-types": "^15.7.3",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
     "@types/react-redux": "^7.1.5",
@@ -91,6 +94,7 @@
     "redux": "^4.0.5",
     "redux-observable": "^1.2.0",
     "redux-thunk": "^2.3.0",
+    "rxjs": "^6.5.4",
     "typescript": "^3.7.4"
   },
   "engines": {

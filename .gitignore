@@ -8,6 +8,7 @@
 .lock-wscript
 .node_repl_history
 .npm
+.tern-port
 .tmp
 /.idea
 /.tmp
@@ -21,5 +22,5 @@ node_modules
 npm-debug.log*
 package-lock.json
 pids
+pnpm-lock.yaml
 yarn.lock
-.tern-port

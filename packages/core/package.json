@@ -63,6 +63,7 @@
     "@types/core-js": "^2.5.2",
     "@types/fs-extra": "^8.0.1",
     "@types/jest": "^24.0.25",
+    "@types/node": "^13.5.1",
     "@types/ora": "^3.2.0",
     "@types/pkg-dir": "^2.0.1",
     "@types/webpack": "^4.41.0",

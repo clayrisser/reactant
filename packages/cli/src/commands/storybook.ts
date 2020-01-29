@@ -10,7 +10,7 @@ export default class Storybook extends Command {
 
   static strict = false;
 
-  static flags = {
+  static flags: flags.Input<any> = {
     config: flags.string({ char: 'c', required: false }),
     debug: flags.boolean({ char: 'd', required: false })
   };

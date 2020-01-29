@@ -10,7 +10,7 @@ export default class Build extends Command {
 
   static strict = false;
 
-  static flags = {
+  static flags: flags.Input<any> = {
     analyze: flags.boolean({ char: 'a', required: false }),
     config: flags.string({ char: 'c', required: false }),
     debug: flags.boolean({ char: 'd', required: false }),

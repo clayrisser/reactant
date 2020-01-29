@@ -6,29 +6,15 @@
     "packages"
   ],
   "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "bootstrap:hoist": "lerna bootstrap --hoist && npm run link",
-    "bootstrap:parallel": "lerna bootstrap --ignore-prepublish && npm run build && npm run link",
     "build": "lerna run --scope @reactant\\/* --parallel build",
     "clean": "lerna clean -y",
     "format": "lerna run --parallel format",
-    "keycloak": "cd example/keycloak && docker-compose up",
     "lerna": "lerna",
-    "link": "lerna link && cd packages/core && node lib/link",
-    "lint": "lerna run --parallel lint",
-    "lint:fix": "lerna run --parallel lint:fix",
-    "ls": "lerna ls",
-    "postinstall": "npm run bootstrap:parallel",
     "publish": "npm run build && lerna publish --ignore-prepublish",
-    "purge": "git clean -fXd",
-    "test": "lerna run --scope @reactant\\/* --parallel test"
-  },
-  "devDependencies": {
-    "lerna": "^3.14.1"
+    "purge": "git clean -fXd"
   },
   "license": "MIT",
-  "dependencies": {
-    "@reactant/eslint": "^0.1.139",
-    "@types/reflexbox": "^4.0.0"
+  "devDependencies": {
+    "lerna": "^3.20.2"
   }
 }
