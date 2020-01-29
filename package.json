@@ -6,15 +6,16 @@
     "packages"
   ],
   "scripts": {
-    "build": "lerna run --scope @reactant\\/* --parallel build",
-    "clean": "lerna clean -y",
-    "format": "lerna run --parallel format",
-    "lerna": "lerna",
+    "bootstrap": "pnpm install",
+    "build": "npm run exec -- build",
+    "clean": "npm run exec -- clean",
+    "exec": "pnpm recursive --workspace-concurrency=Infinity run --filter={packages}",
     "publish": "npm run build && lerna publish --ignore-prepublish",
-    "purge": "git clean -fXd"
+    "purge": "git clean -fXd",
+    "update": "pnpm -r update -L"
   },
   "license": "MIT",
   "devDependencies": {
-    "lerna": "^3.20.2"
+    "pnpm": "^4.8.0"
   }
 }
