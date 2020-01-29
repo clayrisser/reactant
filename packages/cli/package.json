@@ -86,10 +86,7 @@
   },
   "oclif": {
     "commands": "./lib/commands",
-    "bin": "reactant",
-    "plugins": [
-      "@oclif/plugin-help"
-    ]
+    "bin": "reactant"
   },
   "gitHead": "55ce13f8a11b23f03127281b53de7876dca13176"
 }

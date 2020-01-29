@@ -1,4 +1,4 @@
-import { ChildProcess, SpawnOptions } from 'child_process';
+import { ExecaReturnValue, Options as ExecaOptions } from 'execa';
 import { Config } from './config';
 import { Context } from './context';
 import { Logger } from './core';
@@ -17,8 +17,8 @@ export interface TPlatformApi {
     pkg: string | null,
     bin: string,
     args?: string[],
-    options?: SpawnOptions
-  ): Promise<string | ChildProcess>;
+    options?: ExecaOptions
+  ): Promise<ExecaReturnValue<string>>;
 }
 
 export type PlatformOption = any;

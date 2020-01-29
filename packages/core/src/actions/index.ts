@@ -2,12 +2,10 @@ import CircularJSON from 'circular-json';
 import fs from 'fs-extra';
 import path from 'path';
 import util from 'util';
-import { ChildProcess } from 'child_process';
 import { Context, Logger, LoadedPlugin, PluginOptions } from '@reactant/types';
 import { sanitizeConfig } from '@reactant/config';
 import {
   finish,
-  processes,
   sanitizeContext,
   sanitizeJsonString
 } from '@reactant/context/node';
@@ -17,43 +15,38 @@ import start from './start';
 import storybook from './storybook';
 import test from './test';
 
-export async function cleanup(context: Context, logger: Logger) {
-  logger.info('cleaning up ophaned processes');
-  logger.info('please wait for this process to safely shutdown');
-  Object.values(processes).map((ps: ChildProcess) => ps.kill('SIGINT'));
-  await new Promise(resolve => setTimeout(resolve, 5000));
-  Object.values(processes).map((ps: ChildProcess) => ps.kill('SIGKILL'));
+export function cleanup(context: Context, logger: Logger) {
   if (
-    await fs.pathExists(
+    fs.pathExistsSync(
       path.resolve(__dirname, '../../../../pnpm-workspace.yaml')
     )
   ) {
-    await fs.remove(path.resolve(__dirname, '../../../../../.tmp'));
-    await fs.remove(
+    fs.removeSync(path.resolve(__dirname, '../../../../../.tmp'));
+    fs.removeSync(
       path.resolve(__dirname, '../../../../packages/.tmp/reactant')
     );
-    await fs.remove(
+    fs.removeSync(
       path.resolve(__dirname, '../../../../packages/redux/.tmp/reactant')
     );
   }
   try {
-    await fs.remove(context.paths.tmp);
+    fs.removeSync(context.paths.tmp);
     // eslint-disable-next-line no-empty
   } catch (err) {}
   try {
-    await fs.unlink(path.resolve(context.paths.reactant, 'config.json'));
+    fs.unlinkSync(path.resolve(context.paths.reactant, 'config.json'));
     // eslint-disable-next-line no-empty
   } catch (err) {}
   try {
-    await fs.unlink(path.resolve(context.paths.reactant, 'context.json'));
+    fs.unlinkSync(path.resolve(context.paths.reactant, 'context.json'));
     // eslint-disable-next-line no-empty
   } catch (err) {}
   try {
-    await fs.unlink(path.resolve(context.paths.reactant, 'platform.json'));
+    fs.unlinkSync(path.resolve(context.paths.reactant, 'platform.json'));
     // eslint-disable-next-line no-empty
   } catch (err) {}
   try {
-    await fs.unlink(path.resolve(context.paths.reactant, 'plugins.json'));
+    fs.unlinkSync(path.resolve(context.paths.reactant, 'plugins.json'));
     // eslint-disable-next-line no-empty
   } catch (err) {}
   finish();
@@ -142,7 +135,7 @@ export async function postProcess(
   context: Context,
   logger: Logger
 ): Promise<Context> {
-  await cleanup(context, logger);
+  cleanup(context, logger);
   finish();
   return context;
 }

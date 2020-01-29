@@ -30,7 +30,6 @@
   },
   "devDependencies": {
     "@craco/craco": "^5.6.3",
-    "@oclif/plugin-help": "^2.2.3",
     "@reactant/cli": "workspace:^0.0.308",
     "@reactant/config": "workspace:^0.0.308",
     "@reactant/context": "workspace:^0.0.308",
