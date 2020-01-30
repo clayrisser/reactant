@@ -1,4 +1,4 @@
-import CircularJSON from 'circular-json';
+import { stringify } from 'flatted';
 // import LibGTop from 'libgtop';
 import crossSpawn from 'cross-spawn';
 import fs from 'fs-extra';
@@ -34,10 +34,7 @@ export default class State<
     const statePath = `${this.statePath}.json`;
     fs.mkdirsSync(this.statePath);
     fs.removeSync(statePath);
-    fs.writeFile(
-      statePath,
-      CircularJSON.stringify({ master: { pid: process.pid } })
-    );
+    fs.writeFile(statePath, stringify({ master: { pid: process.pid } }));
   }
 
   get isStarted() {
@@ -77,7 +74,7 @@ export default class State<
       fs.mkdirsSync(this.statePath);
       fs.writeFileSync(
         statePath,
-        CircularJSON.stringify({ state, master: { pid: process.pid } })
+        stringify({ state, master: { pid: process.pid } })
       );
     }
   }

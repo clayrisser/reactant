@@ -59,7 +59,6 @@
     "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
     "@types/core-js": "^2.5.2",
-    "@types/cosmiconfig": "^6.0.0",
     "@types/jest": "^25.1.0",
     "@types/node": "^13.5.1",
     "@types/webpack": "^4.41.3",

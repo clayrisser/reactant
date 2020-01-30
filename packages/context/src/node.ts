@@ -1,4 +1,4 @@
-import CircularJSON from 'circular-json';
+import { stringify } from 'flatted';
 import { Config, Context, SyncContextCallback } from '@reactant/types';
 import State from './state';
 import bootstrap from './bootstrap';
@@ -64,7 +64,7 @@ export function sanitizeJsonString(json: string, rootPath: string): string {
 }
 
 export function sanitizeConfig(config: Config, rootPath?: string): Config {
-  let configString = CircularJSON.stringify(config);
+  let configString = stringify(config);
   if (rootPath) configString = sanitizeJsonString(configString, rootPath);
   const sanitizedConfig: Config = JSON.parse(configString);
   return sanitizedConfig;
@@ -72,7 +72,7 @@ export function sanitizeConfig(config: Config, rootPath?: string): Config {
 
 export function sanitizeContext(context: Context): Context {
   const contextString = sanitizeJsonString(
-    CircularJSON.stringify(context),
+    stringify(context),
     context.paths.root
   );
   const sanitizedContext: Context = JSON.parse(contextString);

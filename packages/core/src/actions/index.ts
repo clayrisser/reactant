@@ -1,9 +1,9 @@
-import CircularJSON from 'circular-json';
 import fs from 'fs-extra';
 import path from 'path';
 import util from 'util';
 import { Context, Logger, LoadedPlugin, PluginOptions } from '@reactant/types';
 import { sanitizeConfig } from '@reactant/config';
+import { stringify } from 'flatted';
 import {
   finish,
   sanitizeContext,
@@ -15,7 +15,7 @@ import start from './start';
 import storybook from './storybook';
 import test from './test';
 
-export function cleanup(context: Context, logger: Logger) {
+export function cleanup(context: Context, _logger: Logger) {
   if (
     fs.pathExistsSync(
       path.resolve(__dirname, '../../../../pnpm-workspace.yaml')
@@ -81,14 +81,14 @@ export async function preProcess(
   await fs.writeJson(
     path.resolve(context.paths.reactant, 'platform.json'),
     sanitizeJsonString(
-      CircularJSON.stringify(context.platform?.options || {}),
+      stringify(context.platform?.options || {}),
       context.paths.root
     )
   );
   await fs.writeJson(
     path.resolve(context.paths.reactant, 'plugins.json'),
     sanitizeJsonString(
-      CircularJSON.stringify(
+      stringify(
         Object.entries(context.plugins || {}).reduce(
           (
             plugins: { [key: string]: PluginOptions },
