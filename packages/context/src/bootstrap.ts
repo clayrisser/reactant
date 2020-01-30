@@ -50,7 +50,9 @@ export default function bootstrap(
   initialConfig: Partial<Config>,
   platformName?: string,
   action: string = '',
-  options?: Options
+  options?: Options,
+  preBootstrap: (context: Context) => Context = (context: Context) => context,
+  postBootstrap: (context: Context) => Context = (context: Context) => context
 ): Context {
   return syncContext((context: Context) => {
     if (options) {
@@ -85,6 +87,7 @@ export default function bootstrap(
       ...initialConfig.envs,
       ...platform.options.envs
     });
+    context = preBootstrap(context);
     if (typeof context.platform?.config === 'function') {
       config = context.platform.config(
         config,
@@ -127,6 +130,7 @@ export default function bootstrap(
     config = merge<Partial<Config>>(config, initialConfig);
     context.config = config as Config;
     if (context.debug) context.logLevel = 'silly';
+    context = postBootstrap(context);
     if (state.isMaster) context.state.ready = true;
     return context;
   }) as Context;

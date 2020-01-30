@@ -3,13 +3,20 @@ import { PlatformApi } from '@reactant/platform';
 import { bootstrap } from '@reactant/context/node';
 import { loadConfig } from '@reactant/config/node';
 import Logger from '../logger';
-import { preProcess, postProcess } from '.';
+import { preBootstrap, postBootstrap, postProcess, preProcess } from '../hooks';
 
 export default async function clean(
   platform: string,
   options?: Options
 ): Promise<Context> {
-  const context = bootstrap(loadConfig(), platform, 'clean', options);
+  const context = bootstrap(
+    loadConfig(),
+    platform,
+    'clean',
+    options,
+    preBootstrap,
+    postBootstrap
+  );
   const logger = new Logger(context.logLevel);
   await preProcess(context, logger);
   const platformApi = new PlatformApi(context, logger);
