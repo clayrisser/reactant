@@ -1,6 +1,6 @@
 {
   "name": "@reactant/cli",
-  "version": "0.0.10",
+  "version": "0.0.311",
   "description": "reactant cli",
   "keywords": [
     "reactant",
@@ -47,8 +47,8 @@
     "@oclif/config": "^1.13.3",
     "@oclif/errors": "^1.2.2",
     "@oclif/parser": "^3.8.4",
-    "@reactant/core": "workspace:^0.0.10",
-    "@reactant/types": "workspace:^0.0.10",
+    "@reactant/core": "workspace:^0.0.311",
+    "@reactant/types": "workspace:^0.0.311",
     "core-js": "^3.6.4",
     "gnumake": "^0.1.0"
   },

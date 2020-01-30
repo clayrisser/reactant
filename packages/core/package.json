@@ -1,6 +1,6 @@
 {
   "name": "@reactant/core",
-  "version": "0.0.10",
+  "version": "0.0.311",
   "description": "reactant core",
   "keywords": [
     "reactant",
@@ -38,11 +38,11 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/config": "workspace:^0.0.10",
-    "@reactant/context": "workspace:^0.0.10",
-    "@reactant/platform": "workspace:^0.0.10",
-    "@reactant/plugin": "workspace:^0.0.309",
-    "@reactant/types": "workspace:^0.0.10",
+    "@reactant/config": "workspace:^0.0.311",
+    "@reactant/context": "workspace:^0.0.311",
+    "@reactant/platform": "workspace:^0.0.311",
+    "@reactant/plugin": "workspace:^0.0.311",
+    "@reactant/types": "workspace:^0.0.311",
     "babel-plugin-macros": "^2.8.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "core-js": "^3.6.4",
