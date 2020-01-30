@@ -61,6 +61,17 @@ export default async function preProcess(
       )
     )
   );
+  await fs.writeJson(
+    path.resolve(context.paths.reactant, 'tsconfig.reactant.json'),
+    {
+      compilerOptions: {
+        baseUrl: '../..',
+        paths: {
+          '*': ['web/node_modules/*']
+        }
+      }
+    }
+  );
   if (
     await fs.pathExists(
       path.resolve(__dirname, '../../../../pnpm-workspace.yaml')

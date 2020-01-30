@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.paths.json",
+  "extends": "./.tmp/reactant/tsconfig.reactant.json",
   "compilerOptions": {
     "target": "es5",
     "lib": [
