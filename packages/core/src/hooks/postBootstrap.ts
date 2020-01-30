@@ -1,5 +1,40 @@
+import fs from 'fs-extra';
 import path from 'path';
 import { Context } from '@reactant/types';
+
+export interface AliasedModules {
+  [key: string]: string;
+}
+
+export function getModules(modulesPath: string, prefix = ''): string[] {
+  return fs
+    .readdirSync(modulesPath)
+    .filter((moduleName: string) =>
+      fs
+        .lstatSync(fs.realpathSync(path.resolve(modulesPath, moduleName)))
+        .isDirectory()
+    )
+    .reduce((moduleNames: string[], moduleName: string) => {
+      if (!prefix.length && moduleName[0] === '@') {
+        moduleNames = moduleNames.concat(
+          getModules(path.resolve(modulesPath, moduleName), moduleName)
+        );
+      } else {
+        moduleNames.push(moduleName);
+      }
+      return moduleNames;
+    }, []);
+}
+
+export function getAliasedModules(modulesPath: string): AliasedModules {
+  return getModules(modulesPath).reduce(
+    (aliasedModules: AliasedModules, moduleName: string) => {
+      aliasedModules[moduleName] = path.resolve(modulesPath, moduleName);
+      return aliasedModules;
+    },
+    {}
+  );
+}
 
 export default function postBootstrap(context: Context): Context {
   const config = context.config!;
@@ -28,9 +63,16 @@ export default function postBootstrap(context: Context): Context {
     config.babel.plugins.push([
       'module-resolver',
       {
-        root: [
-          path.resolve(context.paths.root, context.platformName, 'node_modules')
-        ]
+        alias: {
+          '~': path.resolve(context.paths.root, 'src'),
+          ...getAliasedModules(
+            path.resolve(
+              context.paths.root,
+              context.platformName,
+              'node_modules'
+            )
+          )
+        }
       }
     ]);
   }

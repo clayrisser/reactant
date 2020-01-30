@@ -4,7 +4,10 @@ import { withProvider } from '@reactant/router/redux';
 import context from '@reactant/context';
 import config from '@reactant/config';
 import Routes from './routes';
+// @ts-ignore
+import merge from 'merge-configuration';
 
+console.log('mErge', merge);
 console.log('context', context());
 console.log('config', config());
 
