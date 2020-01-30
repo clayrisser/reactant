@@ -7,6 +7,7 @@ export interface AliasedModules {
 }
 
 export function getModules(modulesPath: string, prefix = ''): string[] {
+  if (!fs.pathExistsSync(modulesPath)) return [];
   return fs
     .readdirSync(modulesPath)
     .filter((moduleName: string) =>
