@@ -43,6 +43,7 @@
     "@types/reflexbox": "^4.0.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-macros": "^2.8.0",
+    "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "prettier": "^1.19.1",
     "react-scripts": "^3.3.0",

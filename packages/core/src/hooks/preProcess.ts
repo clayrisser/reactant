@@ -2,9 +2,9 @@ import fs from 'fs-extra';
 import path from 'path';
 import util from 'util';
 import { Context, Logger, LoadedPlugin, PluginOptions } from '@reactant/types';
+import { parse, stringify } from 'flatted';
 import { sanitizeConfig } from '@reactant/config';
 import { sanitizeContext, sanitizeJsonString } from '@reactant/context/node';
-import { stringify } from 'flatted';
 import cleanup from './cleanup';
 
 export default async function preProcess(
@@ -34,27 +34,31 @@ export default async function preProcess(
   );
   await fs.writeJson(
     path.resolve(context.paths.reactant, 'platform.json'),
-    sanitizeJsonString(
-      stringify(context.platform?.options || {}),
-      context.paths.root
+    parse(
+      sanitizeJsonString(
+        stringify(context.platform?.options || {}),
+        context.paths.root
+      )
     )
   );
   await fs.writeJson(
     path.resolve(context.paths.reactant, 'plugins.json'),
-    sanitizeJsonString(
-      stringify(
-        Object.entries(context.plugins || {}).reduce(
-          (
-            plugins: { [key: string]: PluginOptions },
-            [pluginName, plugin]: [string, LoadedPlugin]
-          ) => {
-            plugins[pluginName] = plugin.options || {};
-            return plugins;
-          },
-          {}
-        )
-      ),
-      context.paths.root
+    parse(
+      sanitizeJsonString(
+        stringify(
+          Object.entries(context.plugins || {}).reduce(
+            (
+              plugins: { [key: string]: PluginOptions },
+              [pluginName, plugin]: [string, LoadedPlugin]
+            ) => {
+              plugins[pluginName] = plugin.options || {};
+              return plugins;
+            },
+            {}
+          )
+        ),
+        context.paths.root
+      )
     )
   );
   if (

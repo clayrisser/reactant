@@ -1,4 +1,4 @@
-import { stringify } from 'flatted';
+import { parse, stringify } from 'flatted';
 import { Config, Context, SyncContextCallback } from '@reactant/types';
 import State from './state';
 import bootstrap from './bootstrap';
@@ -66,7 +66,7 @@ export function sanitizeJsonString(json: string, rootPath: string): string {
 export function sanitizeConfig(config: Config, rootPath?: string): Config {
   let configString = stringify(config);
   if (rootPath) configString = sanitizeJsonString(configString, rootPath);
-  const sanitizedConfig: Config = JSON.parse(configString);
+  const sanitizedConfig: Config = parse(configString);
   return sanitizedConfig;
 }
 
@@ -75,7 +75,7 @@ export function sanitizeContext(context: Context): Context {
     stringify(context),
     context.paths.root
   );
-  const sanitizedContext: Context = JSON.parse(contextString);
+  const sanitizedContext: Context = parse(contextString);
   sanitizedContext.paths.root = '.';
   if (context.config) {
     sanitizedContext.config = sanitizeConfig(

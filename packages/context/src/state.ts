@@ -1,4 +1,4 @@
-import { stringify } from 'flatted';
+import { parse, stringify } from 'flatted';
 // import LibGTop from 'libgtop';
 import crossSpawn from 'cross-spawn';
 import fs from 'fs-extra';
@@ -43,7 +43,7 @@ export default class State<
       fs.existsSync(statePath) &&
       this.processAlive(
         // eslint-disable-next-line no-undef
-        JSON.parse(fs.readFileSync(statePath).toString())?.master?.pid
+        parse(fs.readFileSync(statePath).toString())?.master?.pid
       )
     );
   }
@@ -52,9 +52,7 @@ export default class State<
     if (this.isMaster) return this._state;
     const statePath = path.resolve(this.statePath, `${this.name}.json`);
     if (!fs.pathExistsSync(statePath)) return undefined;
-    return this.postprocess(
-      JSON.parse(fs.readFileSync(statePath).toString()).state
-    );
+    return this.postprocess(parse(fs.readFileSync(statePath).toString()).state);
   }
 
   set state(state: T | void) {
