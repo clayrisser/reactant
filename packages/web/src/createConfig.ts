@@ -6,18 +6,6 @@ export default function createConfig(
   context: Context,
   _options: PlatformOptions
 ): Partial<Config> {
-  if (!config.babel) config.babel = {};
-  if (!config.babel.presets) config.babel.presets = [];
-  if (!config.babel.plugins) config.babel.plugins = [];
-  config.babel.plugins.push('macros');
-  config.babel.plugins.push([
-    'module-resolver',
-    {
-      root: [
-        path.resolve(context.paths.root, context.platformName, 'node_modules')
-      ]
-    }
-  ]);
   if (!config.webpack) config.webpack = {};
   if (!config.webpack.resolve) config.webpack.resolve = {};
   if (!config.webpack.resolve.alias) config.webpack.resolve.alias = {};

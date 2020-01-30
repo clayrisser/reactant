@@ -1,9 +1,9 @@
+import getContext, { merge } from '@reactant/context';
 import path from 'path';
 import util from 'util';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { CracoConfig, CracoBabel } from '@craco/craco';
 import { Paths } from '@reactant/platform';
-import getContext, { merge } from '@reactant/context';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {
   Configuration as WebpackConfig,
@@ -109,10 +109,6 @@ function overrideCracoConfig({
     ...process.env,
     ...context.envs
   };
-  Object.entries(process.env).forEach(
-    ([key, env]: [string, string | undefined]) => (process.env[key] = env)
-  );
-  // eslint-ignore-next-line
   return cracoConfig;
 }
 
