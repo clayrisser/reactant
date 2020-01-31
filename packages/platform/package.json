@@ -1,6 +1,6 @@
 {
   "name": "@reactant/platform",
-  "version": "0.0.312",
+  "version": "0.0.313",
   "description": "reactant platform",
   "keywords": [
     "@reactant/platform",
@@ -42,9 +42,9 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/config": "workspace:^0.0.312",
-    "@reactant/context": "workspace:^0.0.312",
-    "@reactant/types": "workspace:^0.0.312",
+    "@reactant/config": "workspace:^0.0.313",
+    "@reactant/context": "workspace:^0.0.313",
+    "@reactant/types": "workspace:^0.0.313",
     "core-js": "^3.6.4",
     "execa": "^4.0.0",
     "fs-extra": "^8.1.0",

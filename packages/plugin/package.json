@@ -1,6 +1,6 @@
 {
   "name": "@reactant/plugin",
-  "version": "0.0.312",
+  "version": "0.0.313",
   "description": "reactant plugin",
   "keywords": [
     "@reactant/plugin",
@@ -40,8 +40,8 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/context": "workspace:^0.0.312",
-    "@reactant/types": "workspace:^0.0.312",
+    "@reactant/context": "workspace:^0.0.313",
+    "@reactant/types": "workspace:^0.0.313",
     "core-js": "^3.6.4",
     "gnumake": "^0.1.0"
   },
