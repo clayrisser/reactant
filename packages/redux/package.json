@@ -1,6 +1,6 @@
 {
   "name": "@reactant/redux",
-  "version": "0.0.311",
+  "version": "0.0.312",
   "description": "reactant plugin for redux",
   "keywords": [
     "@reactant/redux",
@@ -44,7 +44,7 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/plugin": "workspace:^0.0.311",
+    "@reactant/plugin": "workspace:^0.0.312",
     "gnumake": "^0.1.0",
     "prop-types": "^15.7.2",
     "redux-devtools-extension": "^2.13.8",
@@ -75,7 +75,7 @@
     "@babel/preset-typescript": "^7.8.3",
     "@react-native-community/async-storage": "^1.7.1",
     "@types/jest": "^25.1.1",
-    "@types/node": "^13.5.2",
+    "@types/node": "^13.5.3",
     "@types/prop-types": "^15.7.3",
     "@types/react": "^16.9.19",
     "@types/react-dom": "^16.9.5",

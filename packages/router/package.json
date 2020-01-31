@@ -1,6 +1,6 @@
 {
   "name": "@reactant/router",
-  "version": "0.0.311",
+  "version": "0.0.312",
   "description": "reactant plugin for router",
   "keywords": [
     "@reactant/router",
@@ -42,7 +42,7 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/plugin": "workspace:^0.0.311",
+    "@reactant/plugin": "workspace:^0.0.312",
     "gnumake": "^0.1.0",
     "history": "^4.10.1"
   },
@@ -70,10 +70,10 @@
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
-    "@reactant/redux": "workspace:^0.0.311",
+    "@reactant/redux": "workspace:^0.0.312",
     "@types/history": "^4.7.4",
     "@types/jest": "^25.1.1",
-    "@types/node": "^13.5.2",
+    "@types/node": "^13.5.3",
     "@types/react": "^16.9.19",
     "@types/react-dom": "^16.9.5",
     "@types/react-native": "^0.61.8",
