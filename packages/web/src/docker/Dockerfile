@@ -6,7 +6,8 @@ RUN apk add --no-cache \
 WORKDIR /tmp/app
 
 COPY package.json .
-RUN npm install
+RUN sed -i 's/workspace://g' package.json && \
+  npm install
 COPY . /tmp/app
 RUN SKIP_PREFLIGHT_CHECK=true npm run build
 

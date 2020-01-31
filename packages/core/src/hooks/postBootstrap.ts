@@ -10,10 +10,12 @@ export function getModules(modulesPath: string, prefix = ''): string[] {
   if (!fs.pathExistsSync(modulesPath)) return [];
   return fs
     .readdirSync(modulesPath)
-    .filter((moduleName: string) =>
-      fs
-        .lstatSync(fs.realpathSync(path.resolve(modulesPath, moduleName)))
-        .isDirectory()
+    .filter(
+      (moduleName: string) =>
+        fs.pathExistsSync(path.resolve(modulesPath, moduleName)) &&
+        fs
+          .lstatSync(fs.realpathSync(path.resolve(modulesPath, moduleName)))
+          .isDirectory()
     )
     .reduce((moduleNames: string[], moduleName: string) => {
       if (!prefix.length && moduleName[0] === '@') {
