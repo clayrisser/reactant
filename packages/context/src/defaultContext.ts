@@ -5,7 +5,9 @@ const context: Context = {
   debug: false,
   envs: {},
   logLevel: 'info',
+  platform: null,
   platformName: '',
+  platformNames: [],
   plugins: {} as LoadedPlugins,
   state: {},
   options: {

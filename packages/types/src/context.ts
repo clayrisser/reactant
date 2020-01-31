@@ -22,8 +22,9 @@ export interface Context {
   logLevel: string | number;
   options: Options;
   paths: Paths;
-  platform?: LoadedPlatform;
+  platform: LoadedPlatform | null;
   platformName: string;
+  platformNames: string[];
   plugins: LoadedPlugins;
   state: { [key: string]: any };
 }

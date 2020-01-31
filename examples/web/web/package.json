@@ -1,0 +1,12 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.tsx",
+  "scripts": {},
+  "author": "Jam Risser <jam@codejam.ninja>",
+  "license": "MIT",
+  "dependencies": {
+    "react-dom": "^16.12.0"
+  }
+}

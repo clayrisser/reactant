@@ -60,7 +60,7 @@ export function getPlatforms(
         name: requiredPlatform.name || moduleName,
         options: merge<PlatformOptions>(
           requiredPlatform.defaultOptions || {},
-          platformsOptions[requiredPlatform.name || moduleName]
+          platformsOptions[requiredPlatform.name || moduleName] || {}
         ),
         origionalName: requiredPlatform.name || moduleName,
         path: platformPath
@@ -74,10 +74,11 @@ export function getPlatforms(
 }
 
 export function getPlatform(
-  platformName: string,
+  platformName: string | undefined,
   rootPath: string,
   platformOptions: PlatformOptions = {}
 ): LoadedPlatform | null {
+  if (!platformName) return null;
   const platforms = getPlatforms(rootPath, { [platformName]: platformOptions });
   const platform = platforms[platformOptions.name || platformName];
   if (!platform) return null;

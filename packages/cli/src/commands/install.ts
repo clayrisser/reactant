@@ -15,7 +15,7 @@ export default class Start extends Command {
     debug: flags.boolean({ char: 'd', required: false })
   };
 
-  static args = [{ name: 'PLATFORM', required: true }];
+  static args = [{ name: 'PLATFORM', required: false }];
 
   async run() {
     const { args, flags } = this.parse(Start);

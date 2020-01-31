@@ -7,6 +7,7 @@
     "build": "reactant build web",
     "clean": "reactant clean web",
     "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
+    "install": "reactant install",
     "reactant": "reactant",
     "start": "reactant start web",
     "storybook": "reactant storybook web",

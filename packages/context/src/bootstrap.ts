@@ -10,7 +10,7 @@ import {
 } from '@reactant/types';
 import merge from './merge';
 import { CalculatePaths } from './paths';
-import { getPlatform } from './platform';
+import { getPlatform, getPlatforms } from './platform';
 import { getPlugins } from './plugin';
 import { state, syncContext } from './node';
 
@@ -79,13 +79,14 @@ export default function bootstrap(
       context.paths.root,
       platformOptions
     );
-    if (!platform) {
+    context.platformNames = Object.keys(getPlatforms(context.paths.root));
+    if (context.platformName && !platform) {
       throw new Error(`platform '${context.platformName}' not installed`);
     }
     context.platform = platform;
     context.envs = loadEnvs({
       ...initialConfig.envs,
-      ...platform.options.envs
+      ...(platform?.options.envs || {})
     });
     context = preBootstrap(context);
     if (typeof context.platform?.config === 'function') {

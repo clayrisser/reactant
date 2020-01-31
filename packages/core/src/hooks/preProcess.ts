@@ -69,7 +69,8 @@ export default async function preProcess(
         paths: {
           '*': ['web/node_modules/*']
         }
-      }
+      },
+      include: ['src', ...context.platformNames]
     }
   );
   if (
