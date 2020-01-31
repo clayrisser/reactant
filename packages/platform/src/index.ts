@@ -50,7 +50,7 @@ export function getOptions(): PlatformOptions {
   }
   try {
     // eslint-disable-next-line global-require
-    const options: PlatformOptions = require('../../../../.tmp/reactant/platform.json');
+    const options: PlatformOptions = require('../../../.tmp/reactant/platform.json');
     if (options) return options;
     // eslint-disable-next-line no-empty
   } catch (err) {}

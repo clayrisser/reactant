@@ -37,13 +37,7 @@ export default function cleanup(context: Context, _logger: Logger) {
       path.resolve(__dirname, '../../../../pnpm-workspace.yaml')
     )
   ) {
-    fs.removeSync(path.resolve(__dirname, '../../../../../.tmp'));
-    fs.removeSync(
-      path.resolve(__dirname, '../../../../packages/.tmp/reactant')
-    );
-    fs.removeSync(
-      path.resolve(__dirname, '../../../../packages/redux/.tmp/reactant')
-    );
+    fs.removeSync(path.resolve(__dirname, '../../../../.tmp'));
   }
   try {
     fs.removeSync(context.paths.tmp);

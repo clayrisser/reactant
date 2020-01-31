@@ -26,7 +26,12 @@ export default class State<
   constructor(public name = 'state', public postprocess = (state: T) => state) {
     process.on('SIGINT', () => this.finish());
     process.on('SIGTERM', () => this.finish());
-    this.statePath = path.resolve(rootPath, '.tmp', this.projectName, 'state');
+    this.statePath = path.resolve(
+      rootPath,
+      'node_modules/.tmp',
+      this.projectName,
+      'state'
+    );
     if (this.currentProcStarted) return this;
     this.currentProcStarted = true;
     if (this.isStarted) return this;

@@ -78,24 +78,10 @@ export default async function preProcess(
       path.resolve(__dirname, '../../../../pnpm-workspace.yaml')
     )
   ) {
-    await fs.remove(path.resolve(__dirname, '../../../../../.tmp'));
-    await fs.remove(
-      path.resolve(__dirname, '../../../../packages/.tmp/reactant')
-    );
-    await fs.remove(
-      path.resolve(__dirname, '../../../../packages/redux/.tmp/reactant')
-    );
+    await fs.remove(path.resolve(__dirname, '../../../../.tmp'));
     await fs.ensureSymlink(
       context.paths.reactant,
-      path.resolve(__dirname, '../../../../../.tmp/reactant')
-    );
-    await fs.ensureSymlink(
-      context.paths.reactant,
-      path.resolve(__dirname, '../../../../packages/.tmp/reactant')
-    );
-    await fs.ensureSymlink(
-      context.paths.reactant,
-      path.resolve(__dirname, '../../../../packages/redux/.tmp/reactant')
+      path.resolve(__dirname, '../../../../.tmp/reactant')
     );
   }
   return context;

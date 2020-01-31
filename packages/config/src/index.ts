@@ -11,7 +11,7 @@ export default function getConfig(): Config {
   if (isNode) return eval("require('./node')").default();
   try {
     // eslint-disable-next-line global-require
-    const config: Config = require('../../../../.tmp/reactant/config.json');
+    const config: Config = require('../../../.tmp/reactant/config.json');
     if (config) return config;
     // eslint-disable-next-line no-empty
   } catch (err) {}

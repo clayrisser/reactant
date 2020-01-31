@@ -13,7 +13,7 @@ export function getOptions(pluginName: string): PluginOptions {
   }
   try {
     // eslint-disable-next-line global-require
-    const options: PluginOptions = require('../../../../.tmp/reactant/plugins.json');
+    const options: PluginOptions = require('../../../.tmp/reactant/plugins.json');
     if (options) return options[pluginName] || {};
     // eslint-disable-next-line no-empty
   } catch (err) {}

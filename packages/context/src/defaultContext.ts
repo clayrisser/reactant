@@ -18,7 +18,7 @@ const context: Context = {
   paths: {
     build: '{tmp}/build',
     dist: 'dist/{_platform}',
-    reactant: '.tmp/reactant',
+    reactant: 'node_modules/.tmp/reactant',
     root: '.',
     tmp: '{reactant}/{_platform}/{_action}'
   }

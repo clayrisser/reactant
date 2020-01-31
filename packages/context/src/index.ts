@@ -53,7 +53,7 @@ export default function getContext(): Context {
   if (isNode) return eval("require('./node')").default();
   try {
     // eslint-disable-next-line global-require
-    const context: Context = require('../../../../.tmp/reactant/context.json');
+    const context: Context = require('../../../.tmp/reactant/context.json');
     if (context) return context;
     // eslint-disable-next-line no-empty
   } catch (err) {}
