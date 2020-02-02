@@ -1,6 +1,6 @@
 {
   "name": "@reactant/types",
-  "version": "0.0.313",
+  "version": "0.0.314",
   "description": "reactant types",
   "keywords": [
     "reactant",
@@ -53,7 +53,7 @@
     "@babel/preset-typescript": "^7.8.3",
     "@types/core-js": "^2.5.2",
     "@types/jest": "^25.1.1",
-    "@types/webpack": "^4.41.3",
+    "@types/webpack": "^4.41.4",
     "cspell": "^4.0.46",
     "eslint": "^6.8.0",
     "eslint-config-reactant": "^0.1.144",
