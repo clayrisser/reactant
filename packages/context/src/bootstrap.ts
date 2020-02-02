@@ -36,7 +36,8 @@ export function masterBootstrap(context: Context): Context {
     context.paths,
     rootPath,
     context.platformName,
-    context.action
+    context.action,
+    context.masterPid
   );
   context.paths = calculatePaths.paths;
   return context;
@@ -55,6 +56,7 @@ export default function bootstrap(
   postBootstrap: (context: Context) => Context = (context: Context) => context
 ): Context {
   return syncContext((context: Context) => {
+    context.masterPid = state.masterPid;
     if (options) {
       context.options = options;
       context.debug = options.debug;

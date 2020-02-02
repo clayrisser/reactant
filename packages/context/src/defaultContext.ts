@@ -5,6 +5,7 @@ const context: Context = {
   debug: false,
   envs: {},
   logLevel: 'info',
+  masterPid: 0,
   platform: null,
   platformName: '',
   platformNames: [],
@@ -20,7 +21,7 @@ const context: Context = {
     dist: 'dist/{_platform}',
     reactant: 'node_modules/.tmp/reactant',
     root: '.',
-    tmp: '{reactant}/{_platform}/{_action}'
+    tmp: '{reactant}/{_masterPid}/{_platform}/{_action}'
   }
 };
 

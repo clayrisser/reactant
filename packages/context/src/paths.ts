@@ -18,10 +18,16 @@ export class CalculatePaths {
     paths: Paths,
     private rootPath: string,
     platformName: string,
-    actionName: string
+    actionName: string,
+    masterPid: number
   ) {
     this.unparsedPaths = paths;
-    this.vars = { ...paths, _platform: platformName, _action: actionName };
+    this.vars = {
+      ...paths,
+      _action: actionName,
+      _masterPid: masterPid.toString(),
+      _platform: platformName
+    };
   }
 
   get paths(): Paths {

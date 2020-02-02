@@ -20,6 +20,7 @@ export interface Context {
   debug: boolean;
   envs: ContextEnvs;
   logLevel: string | number;
+  masterPid: number;
   options: Options;
   paths: Paths;
   platform: LoadedPlatform | null;

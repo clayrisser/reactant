@@ -70,7 +70,12 @@ export default async function preProcess(
           '*': ['web/node_modules/*']
         }
       },
-      include: ['src', ...context.platformNames]
+      include: [
+        '../../../src',
+        ...context.platformNames.map(
+          (platformName: string) => `../../../${platformName}`
+        )
+      ]
     }
   );
   if (
