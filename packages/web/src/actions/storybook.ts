@@ -12,6 +12,7 @@ export default async function storybook(
   await fs.copy(path.resolve(__dirname, '../storybook'), storybookPath);
   logger.spinner.succeed('prepared storybook');
   return platformApi.spawn('@storybook/react', 'start-storybook', [
+    ...(context.debug ? ['--debug-webpack'] : []),
     '-c',
     storybookPath
   ]);

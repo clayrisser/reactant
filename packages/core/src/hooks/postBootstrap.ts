@@ -111,8 +111,12 @@ export default function postBootstrap(context: Context): Context {
     ]);
   }
   config.babel.include = [
-    ...(config.babel.include || []),
-    ...context.includePaths
+    ...new Set([
+      ...(config.babel.include || []),
+      ...context.includePaths,
+      path.resolve(context.paths.root, 'src'),
+      path.resolve(context.paths.root, context.platformName)
+    ])
   ];
   context.config = config;
   return context;

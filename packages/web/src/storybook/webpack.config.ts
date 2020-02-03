@@ -13,7 +13,7 @@ module.exports = ({ config }: { config: WebpackConfig }) => {
   };
   if (config) {
     config.module?.rules.push({
-      test: /\.tsx?$/,
+      test: /\.(j|t)sx?$/,
       include: [
         path.resolve(context.paths.root, context.platformName),
         path.resolve(context.paths.root, 'src'),
