@@ -38,7 +38,6 @@ export default async function build(
         : `${pkg.author.name} <${pkg.author.email}>`) || '';
     logger.spinner.succeed('prepared build');
     await platformApi.spawn(
-      null,
       'docker-compose',
       ['-f', path.resolve(__dirname, '../docker/docker-build.yaml'), 'build'],
       {
@@ -100,11 +99,10 @@ export default async function build(
       process.on('SIGINT', cleanup);
       process.on('SIGTERM', cleanup);
     }
-    await platformApi.spawn('@craco/craco', 'craco', [
-      'build',
-      '--config',
-      cracoConfigPath
-    ]);
+    await platformApi.spawn(
+      ['@craco/craco', 'craco'],
+      ['build', '--config', cracoConfigPath]
+    );
     if (!context.options.analyze) await finalizeBuild();
   }
 }

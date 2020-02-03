@@ -14,8 +14,7 @@ export interface TPlatformApi {
   createWebpackConfig(options?: CreateConfigOptions): Promise<void>;
   createBabelConfig(options?: CreateConfigOptions): Promise<void>;
   spawn(
-    pkg: string | null,
-    bin: string,
+    bin: string | string[],
     args?: string[],
     options?: ExecaOptions
   ): Promise<ExecaReturnValue<string>>;

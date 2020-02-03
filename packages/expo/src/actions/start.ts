@@ -16,11 +16,14 @@ export default async function start(
   );
   logger.spinner.succeed('prepared start');
   logger.spinner.succeed('started');
-  return platformApi.spawn('expo-cli', 'expo', [
-    'start',
-    '--config',
-    path.resolve(context.paths.root, context.platformName, 'app.json'),
-    '--web',
-    '--clear'
-  ]);
+  return platformApi.spawn(
+    ['expo-cli', 'expo'],
+    [
+      'start',
+      '--config',
+      path.resolve(context.paths.root, context.platformName, 'app.json'),
+      '--web',
+      '--clear'
+    ]
+  );
 }

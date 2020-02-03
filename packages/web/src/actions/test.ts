@@ -17,6 +17,6 @@ export default async function test(
   delete pkg.cracoConfig;
   logger.spinner.succeed('prepared test');
   logger.spinner.succeed('tested');
-  await platformApi.spawn('@craco/craco', 'craco', ['test']);
+  await platformApi.spawn(['@craco/craco', 'craco'], ['test']);
   await fs.writeJson(pkgPath, pkg, { spaces: 2 });
 }

@@ -1,8 +1,7 @@
-import execa, { ExecaReturnValue, Options as ExecaOptions } from 'execa';
+import Helpers from '@reactant/helpers';
+import { ExecaReturnValue, Options as ExecaOptions } from 'execa';
 import fs from 'fs-extra';
 import path from 'path';
-import pkgDir from 'pkg-dir';
-import which from 'which';
 import {
   Context,
   Logger,
@@ -11,47 +10,22 @@ import {
 } from '@reactant/types';
 
 export default class PlatformApi implements TPlatformApi {
-  constructor(public context: Context, public logger: Logger) {}
+  public helpers: Helpers;
+
+  constructor(public context: Context, public logger: Logger) {
+    this.helpers = new Helpers(context);
+  }
 
   async prepareLocal() {
     // noop
   }
 
   async spawn(
-    pkg: string | null,
-    bin: string,
+    bin: string | string[],
     args: string[] = [],
     options?: ExecaOptions
   ): Promise<ExecaReturnValue<string>> {
-    options = {
-      stdio: 'inherit',
-      env: process.env,
-      ...(options || {})
-    };
-    let command = bin;
-    if (pkg) {
-      const pkgPath = await pkgDir(
-        // eslint-disable-next-line import/no-dynamic-require,global-require
-        require.resolve(pkg, {
-          paths: [
-            path.resolve(
-              (await pkgDir(__dirname)) || __dirname,
-              'node_modules'
-            ),
-            path.resolve(this.context.paths.root, 'node_modules')
-          ]
-        })
-      );
-      if (!pkgPath) throw new Error(`package '${pkg}' not found`);
-      command = path.resolve(
-        pkgPath,
-        // eslint-disable-next-line import/no-dynamic-require,global-require
-        require(path.resolve(pkgPath, 'package.json')).bin[bin]
-      );
-    } else if (process.platform !== 'win32') {
-      command = await which(command);
-    }
-    return execa(command, args, options);
+    return this.helpers.spawn(bin, args, options);
   }
 
   async createWebpackConfig(options: CreateConfigOptions = {}) {

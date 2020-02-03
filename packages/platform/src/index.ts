@@ -23,8 +23,7 @@ class PlatformApi implements TPlatformApi {
   async createBabelConfig(_options?: CreateConfigOptions): Promise<void> {}
 
   async spawn(
-    _pkg: string | null,
-    _bin: string,
+    _bin: string | string[],
     _args?: string[],
     _options?: any
     // eslint-disable-next-line no-empty-function,@typescript-eslint/no-empty-function

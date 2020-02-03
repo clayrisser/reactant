@@ -15,13 +15,16 @@ export default async function build(
     path.resolve(context.paths.root, 'node_modules/expo/AppEntry.js')
   );
   logger.spinner.succeed('builded');
-  await platformApi.spawn('expo-cli', 'expo', [
-    'build',
-    '--config',
-    path.resolve(context.paths.root, context.platformName, 'app.json'),
-    '--web',
-    '--clear'
-  ]);
+  await platformApi.spawn(
+    ['expo-cli', 'expo'],
+    [
+      'build',
+      '--config',
+      path.resolve(context.paths.root, context.platformName, 'app.json'),
+      '--web',
+      '--clear'
+    ]
+  );
   logger.spinner.start('finishing build');
   await fs.rename(
     path.resolve(context.paths.root, context.paths.build),
