@@ -50,6 +50,7 @@
     "flatted": "^2.0.1",
     "fs-extra": "^8.1.0",
     "gnumake": "^0.1.0",
+    "node-pstree": "^0.0.8",
     "ora": "^4.0.3",
     "pkg-dir": "^4.2.0"
   },

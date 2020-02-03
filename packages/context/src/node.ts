@@ -77,7 +77,6 @@ export function sanitizeContext(context: Context): Context {
   );
   const sanitizedContext: Context = parse(contextString);
   sanitizedContext.paths.root = '.';
-  sanitizedContext.masterPid = 0;
   if (context.config) {
     sanitizedContext.config = sanitizeConfig(
       context.config,

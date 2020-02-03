@@ -21,7 +21,7 @@ const context: Context = {
     dist: 'dist/{_platform}',
     reactant: 'node_modules/.tmp/reactant',
     root: '.',
-    tmp: '{reactant}/{_masterPid}/{_platform}/{_action}'
+    tmp: '{reactant}/{_masterPid}'
   }
 };
 

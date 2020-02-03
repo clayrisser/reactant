@@ -50,7 +50,7 @@
     "lodash.clone": "^4.5.0",
     "lodash.mergewith": "^4.6.2",
     "lodash.uniq": "^4.5.0",
-    "node-pstree": "^0.0.4",
+    "node-pstree": "^0.0.8",
     "pkg-dir": "^4.2.0"
   },
   "devDependencies": {

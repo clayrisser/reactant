@@ -35,12 +35,9 @@ export default class State<
       rootPath,
       'node_modules/.tmp',
       this.projectName,
-      'state'
+      this.masterPid.toString()
     );
-    this.statePath = path.resolve(
-      this.stateDir,
-      `${this.masterPid.toString()}.json`
-    );
+    this.statePath = path.resolve(this.stateDir, 'state.json');
     if (this.currentProcStarted) return this;
     this.currentProcStarted = true;
     if (this.isStarted) return this;

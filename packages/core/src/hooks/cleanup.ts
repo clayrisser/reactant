@@ -1,37 +1,28 @@
-import execa from 'execa';
 import fs from 'fs-extra';
 import path from 'path';
+import psTree, { ProcNode } from 'node-pstree';
 import { Context, Logger } from '@reactant/types';
 import { finish } from '@reactant/context/node';
 
-export function killOrphanedProcesses(search: string) {
+export function killOrphanedProcesses(pid = process.pid) {
   try {
-    execa
-      .sync('ps', ['all', '-A'], { stdio: 'pipe' })
-      .stdout.split('\n')
-      .filter((result: string) => result.indexOf(search) > -1)
-      .forEach((result: string) => {
-        const pidItems = result
-          .replace(/\s+/, ' ')
-          .split(' ')
-          .filter((pidItem: string) => pidItem.length);
-        const pid = Number(pidItems?.[2]);
-        try {
-          process.kill(pid, 'SIGKILL');
-        } catch (err) {
-          console.warn(`failed to kill pid '${pid}'`);
-        }
-      });
+    (psTree(pid)?.children || []).forEach((procNode: ProcNode) => {
+      try {
+        killOrphanedProcesses(procNode.pid);
+        if (psTree(procNode.pid)) process.kill(procNode.pid, 'SIGKILL');
+      } catch (err) {
+        console.warn(`failed to kill pid '${procNode.pid}'`);
+      }
+    });
   } catch (err) {
+    console.log(err);
     console.warn('failed to kill orphaned processes');
   }
 }
 
 export default function cleanup(context: Context, _logger: Logger) {
-  killOrphanedProcesses(path.resolve(context.paths.tmp, 'storybook'));
-  killOrphanedProcesses(
-    'node_modules/fork-ts-checker-webpack-plugin/lib/service.js'
-  );
+  killOrphanedProcesses();
+  fs.removeSync(path.resolve(context.paths.root, context.paths.tmp));
   if (
     fs.pathExistsSync(
       path.resolve(__dirname, '../../../../pnpm-workspace.yaml')
