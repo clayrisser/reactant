@@ -1,7 +1,7 @@
 {
   "name": "reactant-web",
   "main": "lib/index.js",
-  "version": "0.0.308",
+  "version": "0.0.315",
   "private": true,
   "scripts": {
     "build": "reactant build web",
@@ -14,9 +14,9 @@
     "test": "reactant test web"
   },
   "dependencies": {
-    "@reactant/redux": "workspace:^0.0.314",
-    "@reactant/router": "workspace:^0.0.314",
-    "@reactant/web": "workspace:^0.0.314",
+    "@reactant/redux": "workspace:^0.0.315",
+    "@reactant/router": "workspace:^0.0.315",
+    "@reactant/web": "workspace:^0.0.315",
     "connected-react-router": "^6.6.1",
     "core-js": "^3.6.4",
     "prop-types": "^15.7.2",
@@ -33,9 +33,9 @@
   "devDependencies": {
     "@babel/preset-env": "^7.8.4",
     "@craco/craco": "^5.6.3",
-    "@reactant/cli": "workspace:^0.0.314",
-    "@reactant/config": "workspace:^0.0.314",
-    "@reactant/context": "workspace:^0.0.314",
+    "@reactant/cli": "workspace:^0.0.315",
+    "@reactant/config": "workspace:^0.0.315",
+    "@reactant/context": "workspace:^0.0.315",
     "@storybook/react": "^5.3.10",
     "@types/jest": "^25.1.1",
     "@types/node": "^13.7.0",
