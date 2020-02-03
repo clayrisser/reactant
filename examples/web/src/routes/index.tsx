@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { FC, ReactNode } from 'react';
-import { Path, Route, Router, Switch, Link } from '@reactant/router';
+import { Path, Route, Router, Switch, Link } from 'react-router-shim';
 import { connect } from 'react-redux';
-import { push } from '@reactant/router/redux';
+import { push } from 'react-router-shim/redux';
 import { storeContext } from '@reactant/redux/thunk';
 
 export interface RoutesProps {

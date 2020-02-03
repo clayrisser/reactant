@@ -20,7 +20,6 @@
     "@react-native-community/async-storage": "^1.7.1",
     "@reactant/expo": "workspace:^0.0.315",
     "@reactant/redux": "workspace:^0.0.315",
-    "@reactant/router": "workspace:^0.0.315",
     "@reactant/web": "workspace:^0.0.315",
     "core-js": "^3.6.4",
     "react": "^16.12.0",

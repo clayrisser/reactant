@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { Provider, storeContext } from '@reactant/redux/thunk';
-import { withProvider } from '@reactant/router/redux';
-import context from '@reactant/context';
 import config from '@reactant/config';
+import context from '@reactant/context';
+import { Provider, storeContext } from '@reactant/redux/thunk';
+import { withProvider } from 'react-router-shim/redux';
 import Routes from './routes';
 
 console.log('context', context());

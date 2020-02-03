@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@reactant/redux": "workspace:^0.0.315",
-    "@reactant/router": "workspace:^0.0.315",
     "@reactant/web": "workspace:^0.0.315",
     "connected-react-router": "^6.6.1",
     "core-js": "^3.6.4",
@@ -25,6 +24,7 @@
     "react-redux": "^7.1.3",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
+    "react-router-shim": "^0.0.1",
     "redux": "^4.0.5",
     "redux-observable": "^1.2.0",
     "redux-thunk": "^2.3.0",
