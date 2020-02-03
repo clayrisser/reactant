@@ -15,3 +15,7 @@ export interface Logger {
   spinner: Spinner;
   warn(message?: any, ...optionalParams: any[]): any;
 }
+
+export interface Status {
+  version: string;
+}

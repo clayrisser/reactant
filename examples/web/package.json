@@ -10,6 +10,7 @@
     "install": "reactant install",
     "reactant": "reactant",
     "start": "reactant start web",
+    "status": "reactant status",
     "storybook": "reactant storybook web",
     "test": "reactant test web"
   },
