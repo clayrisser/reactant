@@ -1,15 +1,20 @@
+import Sigar from 'node-sigar';
 import fs from 'fs-extra';
 import path from 'path';
 import psTree, { ProcNode } from 'node-pstree';
 import { Context, Logger } from '@reactant/types';
 import { finish } from '@reactant/context/node';
 
+const sigar = new Sigar();
+
 export function killOrphanedProcesses(pid = process.pid) {
   try {
     (psTree(pid)?.children || []).forEach((procNode: ProcNode) => {
       try {
         killOrphanedProcesses(procNode.pid);
-        if (psTree(procNode.pid)) process.kill(procNode.pid, 'SIGKILL');
+        if (sigar.procList.includes(procNode.pid)) {
+          process.kill(procNode.pid, 'SIGKILL');
+        }
       } catch (err) {
         console.warn(`failed to kill pid '${procNode.pid}'`);
       }

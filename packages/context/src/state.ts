@@ -1,4 +1,4 @@
-import crossSpawn from 'cross-spawn';
+import Sigar from 'node-sigar';
 import fs from 'fs-extra';
 import path from 'path';
 import pkgDir from 'pkg-dir';
@@ -6,6 +6,7 @@ import psTree, { ProcNode } from 'node-pstree';
 import { parse, stringify } from 'flatted';
 
 const rootPath = pkgDir.sync(process.cwd()) || process.cwd();
+const sigar = new Sigar();
 
 export default class State<
   T = {
@@ -100,54 +101,7 @@ export default class State<
   }
 
   processAlive(pid: number) {
-    const pkgPath =
-      pkgDir.sync(
-        // eslint-disable-next-line import/no-dynamic-require,global-require
-        require.resolve('find-process', {
-          paths: [
-            path.resolve(pkgDir.sync(__dirname) || __dirname, 'node_modules'),
-            path.resolve(rootPath, 'node_modules')
-          ]
-        })
-      ) || path.resolve(rootPath, 'node_modules');
-    const bin = path.resolve(
-      pkgPath,
-      // eslint-disable-next-line import/no-dynamic-require,global-require
-      require(path.resolve(pkgPath, 'package.json')).bin['find-process']
-    );
-    try {
-      const pids = (
-        crossSpawn.sync('ps', ['-A'], {
-          stdio: 'pipe'
-          // eslint-disable-next-line no-undef
-        })?.stdout || ''
-      )
-        .toString()
-        .split('\n')
-        .reduce((pids: Set<number>, line: string) => {
-          const match = Number(
-            line.match(/(\d+) [^\s]+ +\d+:\d+(:\d+)? [^\s]+/)?.[1] || -1
-          );
-          if (match >= 0) pids.add(match);
-          return pids;
-        }, new Set());
-      if (pids.has(pid)) return true;
-    } catch (err) {
-      // eslint-disable-next-line no-empty
-    }
-    if (
-      !/No process found/.test(
-        (
-          crossSpawn.sync('node', [bin, pid.toString()], {
-            stdio: 'pipe'
-            // eslint-disable-next-line no-undef
-          })?.stdout || ''
-        ).toString()
-      )
-    ) {
-      return true;
-    }
-    return false;
+    return sigar.procList.includes(pid);
   }
 
   finish() {
