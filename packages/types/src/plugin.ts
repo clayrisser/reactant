@@ -1,7 +1,28 @@
-import { Config } from './config';
-import { Context } from './context';
+import { ExecaReturnValue, Options as ExecaOptions } from 'execa';
+import { Context, Config, Logger } from '.';
+
+export interface TPluginApi {
+  context: Context;
+  logger: Logger;
+  spawn(
+    bin: string | string[],
+    args?: string[],
+    options?: ExecaOptions
+  ): Promise<ExecaReturnValue<string>>;
+}
+
+export type PluginAction = (
+  context: Context,
+  logger: Logger,
+  platformApi: TPluginApi
+) => Promise<any>;
+
+export interface PluginActions {
+  [key: string]: PluginAction;
+}
 
 export interface Plugin {
+  actions?: PluginActions;
   config?: ModifyPluginConfigFunction;
   defaultOptions?: Partial<PluginOptions>;
   disabledPlatforms?: string[] | Set<string>;
@@ -10,6 +31,7 @@ export interface Plugin {
 }
 
 export interface LoadedPlugin {
+  actions: PluginActions;
   config: ModifyPluginConfigFunction;
   disabledPlatforms: Set<string>;
   moduleName: string;

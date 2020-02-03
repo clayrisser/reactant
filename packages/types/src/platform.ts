@@ -1,7 +1,11 @@
 import { ExecaReturnValue, Options as ExecaOptions } from 'execa';
-import { Config } from './config';
-import { Context } from './context';
-import { Logger } from './core';
+import { Context, Config, Logger } from '.';
+
+export type PlatformAction = (
+  context: Context,
+  logger: Logger,
+  platformApi: TPlatformApi
+) => Promise<any>;
 
 export interface CreateConfigOptions {
   rootPath?: boolean;
@@ -31,29 +35,24 @@ export interface PlatformsOptions {
   [key: string]: PlatformOptions;
 }
 
-export type Action = (
-  context: Context,
-  logger: Logger,
-  platformApi: TPlatformApi
-) => Promise<any>;
-
-export interface Actions {
-  build: Action;
-  clean: Action;
-  start: Action;
-  storybook: Action;
-  test: Action;
+export interface PlatformActions {
+  build: PlatformAction;
+  clean: PlatformAction;
+  start: PlatformAction;
+  storybook: PlatformAction;
+  test: PlatformAction;
+  [key: string]: PlatformAction;
 }
 
 export interface Platform {
-  actions?: Actions;
+  actions?: PlatformActions;
   config?: ModifyPlatformConfigFunction;
   defaultOptions?: Partial<PlatformOptions>;
   name?: string;
 }
 
 export interface LoadedPlatform {
-  actions: Actions;
+  actions: PlatformActions;
   config: ModifyPlatformConfigFunction;
   moduleName: string;
   name: string;

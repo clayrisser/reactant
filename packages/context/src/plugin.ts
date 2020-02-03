@@ -43,19 +43,20 @@ export function getPlugins(rootPath: string): LoadedPlugins {
       );
       const requiredPlugin: Plugin = requireDefault<Plugin>(pluginPath);
       const plugin: LoadedPlugin = {
+        actions: requiredPlugin.actions || {},
+        disabledPlatforms: new Set(requiredPlugin.disabledPlatforms || []),
+        moduleName,
+        name: requiredPlugin.name || moduleName,
+        options: requiredPlugin.defaultOptions || {},
+        path: pluginPath,
+        supportedPlatforms: new Set(requiredPlugin.supportedPlatforms || []),
         config:
           requiredPlugin.config ||
           ((
             config: Partial<Config>,
             _context: Context,
             _options: PluginOptions
-          ) => config),
-        disabledPlatforms: new Set(requiredPlugin.disabledPlatforms || []),
-        moduleName,
-        name: requiredPlugin.name || moduleName,
-        options: requiredPlugin.defaultOptions || {},
-        path: pluginPath,
-        supportedPlatforms: new Set(requiredPlugin.supportedPlatforms || [])
+          ) => config)
       };
       plugins[plugin.name] = plugin;
       return plugins;

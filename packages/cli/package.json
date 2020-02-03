@@ -47,6 +47,8 @@
     "@oclif/config": "^1.13.3",
     "@oclif/errors": "^1.2.2",
     "@oclif/parser": "^3.8.4",
+    "@reactant/config": "workspace:^0.0.316",
+    "@reactant/context": "workspace:^0.0.316",
     "@reactant/core": "workspace:^0.0.316",
     "@reactant/types": "workspace:^0.0.316",
     "core-js": "^3.6.4",
@@ -86,7 +88,10 @@
   },
   "oclif": {
     "commands": "./lib/commands",
-    "bin": "reactant"
+    "bin": "reactant",
+    "hooks": {
+      "init": "./lib/hooks/init"
+    }
   },
   "gitHead": "55ce13f8a11b23f03127281b53de7876dca13176"
 }

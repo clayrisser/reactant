@@ -117,8 +117,9 @@ export default function bootstrap(
           ...(plugin.options?.disabledPlatforms || [])
         ]);
         if (
-          plugin.supportedPlatforms.has(context.platformName) &&
-          !plugin.disabledPlatforms.has(context.platformName)
+          !context.platformName ||
+          (plugin.supportedPlatforms.has(context.platformName) &&
+            !plugin.disabledPlatforms.has(context.platformName))
         ) {
           if (typeof plugin.config === 'function') {
             config = plugin.config(config, context, plugin.options);

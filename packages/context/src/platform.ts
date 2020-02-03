@@ -1,11 +1,11 @@
 import path from 'path';
 import {
-  Actions,
   Config,
   Context,
   LoadedPlatform,
   LoadedPlatforms,
   Platform,
+  PlatformActions,
   PlatformOptions,
   PlatformsOptions
 } from '@reactant/types';
@@ -48,7 +48,7 @@ export function getPlatforms(
       );
       const requiredPlatform: Platform = requireDefault<Platform>(platformPath);
       const platform: LoadedPlatform = {
-        actions: requiredPlatform.actions as Actions,
+        actions: requiredPlatform.actions as PlatformActions,
         config:
           requiredPlatform.config ||
           ((
