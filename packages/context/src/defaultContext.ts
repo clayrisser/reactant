@@ -4,6 +4,7 @@ const context: Context = {
   action: '',
   debug: false,
   envs: {},
+  includePaths: [],
   logLevel: 'info',
   masterPid: 0,
   platform: null,

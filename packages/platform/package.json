@@ -22,9 +22,11 @@
   "files": [
     "Reactant.js",
     "Reactant.ts",
+    "es",
     "lib"
   ],
   "main": "lib/index.js",
+  "module": "es/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/codejamninja/reactant"

@@ -15,7 +15,6 @@ export function killOrphanedProcesses(pid = process.pid) {
       }
     });
   } catch (err) {
-    console.log(err);
     console.warn('failed to kill orphaned processes');
   }
 }
@@ -32,22 +31,6 @@ export default function cleanup(context: Context, _logger: Logger) {
   }
   try {
     fs.removeSync(context.paths.tmp);
-    // eslint-disable-next-line no-empty
-  } catch (err) {}
-  try {
-    fs.unlinkSync(path.resolve(context.paths.reactant, 'config.json'));
-    // eslint-disable-next-line no-empty
-  } catch (err) {}
-  try {
-    fs.unlinkSync(path.resolve(context.paths.reactant, 'context.json'));
-    // eslint-disable-next-line no-empty
-  } catch (err) {}
-  try {
-    fs.unlinkSync(path.resolve(context.paths.reactant, 'platform.json'));
-    // eslint-disable-next-line no-empty
-  } catch (err) {}
-  try {
-    fs.unlinkSync(path.resolve(context.paths.reactant, 'plugins.json'));
     // eslint-disable-next-line no-empty
   } catch (err) {}
   finish();

@@ -48,14 +48,21 @@ export function getOptions(): PlatformOptions {
     const getContext = eval("require('@reactant/context')").default;
     return (getContext() as Context).platform?.options || {};
   }
-  try {
-    // eslint-disable-next-line global-require
-    const options: PlatformOptions = require('../../../.tmp/reactant/platform.json');
-    if (options) return options;
-    // eslint-disable-next-line no-empty
-  } catch (err) {}
-  if (window.__REACTANT__?.platformOptions) {
-    return window.__REACTANT__.platformOptions;
+  // try {
+  //   // eslint-disable-next-line global-require
+  //   const options: PlatformOptions = require('@reactant/_platform');
+  //   if (options) return options;
+  //   // eslint-disable-next-line no-empty
+  // } catch (err) {}
+  // try {
+  //   // eslint-disable-next-line global-require
+  //   const options: PlatformOptions = require('../../../.tmp/reactant/platform.json');
+  //   if (options) return options;
+  //   // eslint-disable-next-line no-empty
+  // } catch (err) {}
+  const g = window || global || {};
+  if (g.__REACTANT__?.platformOptions) {
+    return g.__REACTANT__.platformOptions;
   }
   return (null as unknown) as PlatformOptions;
 }

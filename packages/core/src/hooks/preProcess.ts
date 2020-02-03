@@ -25,15 +25,15 @@ export default async function preProcess(
     );
   }
   await fs.writeJson(
-    path.resolve(context.paths.reactant, 'config.json'),
+    path.resolve(context.paths.root, context.paths.tmp, 'config.json'),
     context.config ? sanitizeConfig(context.config, context.paths.root) : null
   );
   await fs.writeJson(
-    path.resolve(context.paths.reactant, 'context.json'),
+    path.resolve(context.paths.root, context.paths.tmp, 'context.json'),
     sanitizeContext(context)
   );
   await fs.writeJson(
-    path.resolve(context.paths.reactant, 'platform.json'),
+    path.resolve(context.paths.root, context.paths.tmp, 'platform.json'),
     parse(
       sanitizeJsonString(
         stringify(context.platform?.options || {}),
@@ -42,7 +42,7 @@ export default async function preProcess(
     )
   );
   await fs.writeJson(
-    path.resolve(context.paths.reactant, 'plugins.json'),
+    path.resolve(context.paths.root, context.paths.tmp, 'plugins.json'),
     parse(
       sanitizeJsonString(
         stringify(
@@ -61,6 +61,7 @@ export default async function preProcess(
       )
     )
   );
+
   await fs.writeJson(
     path.resolve(context.paths.reactant, 'tsconfig.reactant.json'),
     {

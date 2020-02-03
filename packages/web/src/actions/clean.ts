@@ -5,7 +5,7 @@ export default async function clean(
   logger: Logger,
   platformApi: PlatformApi
 ): Promise<any> {
-  logger.spinner.start('cleaning');
+  logger.spinner.info('cleaning');
   await platformApi.spawn(null, 'git', [
     'clean',
     '-fXd',

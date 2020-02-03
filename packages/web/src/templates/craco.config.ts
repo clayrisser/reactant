@@ -62,7 +62,8 @@ function overrideCracoConfig({
     webpackConfig.entry = [path.resolve(webPath, 'index.tsx')];
     findJSRules(webpackConfig.module ? webpackConfig.module.rules : []).forEach(
       (rule: RuleSetRule) => {
-        rule.include = [webPath, srcPath];
+        rule.include = [webPath, srcPath, ...context.includePaths];
+        console.log('INCLUDING', rule.include);
       }
     );
     if (!webpackConfig.resolve) webpackConfig.resolve = {};
@@ -109,6 +110,10 @@ function overrideCracoConfig({
     ...process.env,
     ...context.envs
   };
+  // @ts-ignore
+  console.log(cracoConfig.babel.plugins?.[1]?.[1]);
+  // @ts-ignore
+  console.log('include', cracoConfig.babel.include);
   return cracoConfig;
 }
 

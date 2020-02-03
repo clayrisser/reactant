@@ -19,6 +19,7 @@ export interface Context {
   config?: Config;
   debug: boolean;
   envs: ContextEnvs;
+  includePaths: string[];
   logLevel: string | number;
   masterPid: number;
   options: Options;
