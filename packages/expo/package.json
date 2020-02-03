@@ -1,6 +1,6 @@
 {
   "name": "@reactant/expo",
-  "version": "0.0.316",
+  "version": "0.0.317",
   "description": "reactant platform for expo",
   "keywords": [
     "@reactant/expo",
@@ -40,13 +40,13 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/platform": "workspace:^0.0.316",
+    "@reactant/platform": "workspace:^0.0.317",
     "babel-plugin-macros": "^2.8.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-preset-expo": "^8.0.0",
     "core-js": "^3.6.4",
     "expo": "^36.0.2",
-    "expo-cli": "^3.11.7",
+    "expo-cli": "^3.11.9",
     "fs-extra": "^8.1.0",
     "gnumake": "^0.1.0"
   },

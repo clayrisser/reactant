@@ -1,7 +1,7 @@
 {
   "name": "reactant",
   "description": "write once . . . render everywhere",
-  "version": "0.0.316",
+  "version": "0.0.317",
   "files": [
     "packages"
   ],
@@ -16,6 +16,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "pnpm": "^4.9.0"
+    "pnpm": "^4.9.1"
   }
 }

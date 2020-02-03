@@ -1,6 +1,6 @@
 {
   "name": "@reactant/cli",
-  "version": "0.0.316",
+  "version": "0.0.317",
   "description": "reactant cli",
   "keywords": [
     "reactant",
@@ -47,12 +47,12 @@
     "@oclif/config": "^1.13.3",
     "@oclif/errors": "^1.2.2",
     "@oclif/parser": "^3.8.4",
-    "@reactant/config": "workspace:^0.0.316",
-    "@reactant/context": "workspace:^0.0.316",
-    "@reactant/core": "workspace:^0.0.316",
-    "@reactant/platform": "workspace:^0.0.316",
-    "@reactant/plugin": "workspace:^0.0.316",
-    "@reactant/types": "workspace:^0.0.316",
+    "@reactant/config": "workspace:^0.0.317",
+    "@reactant/context": "workspace:^0.0.317",
+    "@reactant/core": "workspace:^0.0.317",
+    "@reactant/platform": "workspace:^0.0.317",
+    "@reactant/plugin": "workspace:^0.0.317",
+    "@reactant/types": "workspace:^0.0.317",
     "core-js": "^3.6.4",
     "fs-extra": "^8.1.0",
     "gnumake": "^0.1.0"
