@@ -7,14 +7,32 @@ import { Configuration as WebpackConfig } from 'webpack';
 const context = getContext();
 
 module.exports = ({ config }: { config: WebpackConfig }) => {
+  process.env = {
+    ...process.env,
+    ...context.envs
+  };
   if (config) {
     config.module?.rules.push({
       test: /\.tsx?$/,
+      include: [
+        path.resolve(context.paths.root, context.platformName),
+        path.resolve(context.paths.root, 'src'),
+        ...context.includePaths
+      ],
       use: [
         {
           loader: require.resolve('babel-loader'),
           options: {
             ...(context.config?.babel || {}),
+            plugins: [
+              [
+                'transform-inline-environment-variables',
+                {
+                  include: Object.keys(context.envs)
+                }
+              ],
+              ...(context.config?.babel?.plugins || [])
+            ],
             presets: [
               ...new Set([
                 'react-app',

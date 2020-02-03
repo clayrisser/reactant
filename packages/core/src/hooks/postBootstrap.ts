@@ -8,10 +8,6 @@ export interface AliasedModules {
 }
 
 export function getIncludePaths(context: Context): string[] {
-  // const coreReactantModulesPath = path.resolve(
-  //   context.paths.root,
-  //   'node_modules/@reactant'
-  // );
   return [
     path.resolve(
       fs.realpathSync(pkgDir.sync(require.resolve('@reactant/config'))!),
@@ -31,46 +27,6 @@ export function getIncludePaths(context: Context): string[] {
     ),
     path.resolve(context.paths.root, context.paths.tmp)
   ];
-  //   ...new Set(
-  //     ([
-  //       path.resolve(
-  //         fs.realpathSync(pkgDir.sync(require.resolve('@reactant/plugin'))!),
-  //         'lib/index.js'
-  //       ),
-  //       path.resolve(
-  //         fs.realpathSync(pkgDir.sync(require.resolve('@reactant/platform'))!),
-  //         'lib/index.js'
-  //       ),
-  //       path.resolve(
-  //         fs.realpathSync(pkgDir.sync(require.resolve('@reactant/config'))!),
-  //         'lib/index.js'
-  //       )
-
-  //       ...[pkgDir.sync(context.platform?.path)].filter(
-  //         (modulePath?: string) => !!modulePath?.length
-  //       ),
-  //       ...Object.values(context.plugins)
-  //         .map((plugin: LoadedPlugin) => pkgDir.sync(plugin.path))
-  //         .filter((modulePath?: string) => !!modulePath?.length),
-  //       ...fs
-  //         .readdirSync(coreReactantModulesPath)
-  //         .filter((modulePath: string) => {
-  //           return fs
-  //             .lstatSync(
-  //               fs.realpathSync(
-  //                 path.resolve(coreReactantModulesPath, modulePath)
-  //               )
-  //             )
-  //             .isDirectory();
-  //         })
-  //     ] as string[]).map((modulePath: string) =>
-  //       path.resolve(
-  //         fs.realpathSync(path.resolve(coreReactantModulesPath, modulePath)),
-  //         'lib/index.js'
-  //       )
-  //     )
-  //   )
-  // ];
 }
 
 export function getModules(modulesPath: string, prefix = ''): string[] {

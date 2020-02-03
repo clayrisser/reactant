@@ -36,8 +36,6 @@
     "@reactant/cli": "workspace:^0.0.314",
     "@reactant/config": "workspace:^0.0.314",
     "@reactant/context": "workspace:^0.0.314",
-    "@reactant/platform": "workspace:^0.0.314",
-    "@reactant/plugin": "workspace:^0.0.314",
     "@storybook/react": "^5.3.10",
     "@types/jest": "^25.1.1",
     "@types/node": "^13.7.0",

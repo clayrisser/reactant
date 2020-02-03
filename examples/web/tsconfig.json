@@ -2,10 +2,7 @@
   "extends": "./node_modules/.tmp/reactant/tsconfig.reactant.json",
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "esnext"
-    ],
+    "lib": ["dom", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
