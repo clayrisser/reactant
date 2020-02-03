@@ -1,6 +1,6 @@
 {
   "name": "@reactant/helpers",
-  "version": "0.0.315",
+  "version": "0.0.316",
   "description": "reactant helpers",
   "keywords": [
     "reactant",
@@ -38,7 +38,7 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/types": "workspace:^0.0.315",
+    "@reactant/types": "workspace:^0.0.316",
     "babel-plugin-macros": "^2.8.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "core-js": "^3.6.4",
