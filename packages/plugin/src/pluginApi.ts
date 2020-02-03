@@ -6,10 +6,10 @@ import {
   Context,
   CreateConfigOptions,
   Logger,
-  TPlatformApi
+  TPluginApi
 } from '@reactant/types';
 
-export default class PlatformApi implements TPlatformApi {
+export default class PluginApi implements TPluginApi {
   public helpers: Helpers;
 
   constructor(public context: Context, public logger: Logger) {

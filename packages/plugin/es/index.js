@@ -1,4 +1,4 @@
-import { getOptions as libGetOptions } from '../lib';
+import { getOptions as libGetOptions, PluginApi } from '../lib';
 
 export function getOptions(pluginName) {
   try {
@@ -18,3 +18,5 @@ export function getOptions(pluginName) {
   }
   return null;
 }
+
+export { PluginApi };

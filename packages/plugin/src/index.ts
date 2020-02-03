@@ -1,9 +1,37 @@
-import { Context, PluginOptions, PluginsOptions } from '@reactant/types';
+import {
+  Context,
+  Logger,
+  PluginOptions,
+  PluginsOptions,
+  TPluginApi
+} from '@reactant/types';
+
+class PluginApi implements TPluginApi {
+  constructor(public context: Context, public logger: Logger) {
+    throw new Error('only node can use plugin api');
+  }
+
+  // eslint-disable-next-line no-empty-function,@typescript-eslint/no-empty-function
+  async prepareLocal(): Promise<void> {}
+
+  async spawn(
+    _bin: string | string[],
+    _args?: string[],
+    _options?: any
+    // eslint-disable-next-line no-empty-function,@typescript-eslint/no-empty-function
+  ): Promise<any> {}
+}
 
 // eslint-disable-next-line no-new-func
 const isNode = new Function(
   'try{return this===global}catch(e){return false}'
 )();
+
+if (isNode) {
+  // @ts-ignore
+  // eslint-disable-next-line no-class-assign,no-eval
+  PluginApi = eval("require('./pluginApi')").default;
+}
 
 export function getOptions(pluginName: string): PluginOptions {
   if (isNode) {
@@ -31,3 +59,4 @@ export function getOptions(pluginName: string): PluginOptions {
 }
 
 export * from '@reactant/types';
+export { PluginApi };

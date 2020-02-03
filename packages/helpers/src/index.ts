@@ -16,8 +16,7 @@ export default class Helpers {
       if (bin.length < 2) {
         throw new Error('missing pkg and bin');
       }
-      pkg = bin[0];
-      bin = bin[1];
+      [pkg, bin] = bin;
     }
     options = {
       stdio: 'inherit',

@@ -84,6 +84,7 @@ export default class State<
   }
 
   set state(state: T | undefined) {
+    state = { ...(state || ({} as T)) };
     if (this.isStarted && !this.isMaster) {
       throw new Error('must be master to set state');
     }
