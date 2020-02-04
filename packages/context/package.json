@@ -1,6 +1,6 @@
 {
   "name": "@reactant/context",
-  "version": "0.0.318",
+  "version": "0.0.319",
   "description": "reactant context",
   "keywords": [
     "reactant",
@@ -42,7 +42,7 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/types": "workspace:^0.0.318",
+    "@reactant/types": "workspace:^0.0.319",
     "core-js": "^3.6.4",
     "find-process": "^1.4.3",
     "flatted": "^2.0.1",

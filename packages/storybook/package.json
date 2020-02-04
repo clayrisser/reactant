@@ -1,6 +1,6 @@
 {
   "name": "@reactant/storybook",
-  "version": "0.0.318",
+  "version": "0.0.319",
   "description": "reactant plugin for storybook",
   "keywords": [
     "@reactant/storybook",
@@ -40,8 +40,8 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/context": "workspace:^0.0.318",
-    "@reactant/plugin": "workspace:^0.0.318",
+    "@reactant/context": "workspace:^0.0.319",
+    "@reactant/plugin": "workspace:^0.0.319",
     "@storybook/react": "^5.3.11",
     "fs-extra": "^8.1.0",
     "gnumake": "^0.1.0"

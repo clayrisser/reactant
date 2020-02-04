@@ -1,6 +1,6 @@
 {
   "name": "@reactant/web",
-  "version": "0.0.318",
+  "version": "0.0.319",
   "description": "reactant platform for web",
   "keywords": [
     "@reactant/web",
@@ -43,8 +43,8 @@
     "@babel/core": "^7.8.4",
     "@babel/preset-env": "^7.8.4",
     "@craco/craco": "^5.6.3",
-    "@reactant/context": "workspace:^0.0.318",
-    "@reactant/platform": "workspace:^0.0.318",
+    "@reactant/context": "workspace:^0.0.319",
+    "@reactant/platform": "workspace:^0.0.319",
     "@types/webpack": "^4.41.4",
     "awesome-typescript-loader": "^5.2.1",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
