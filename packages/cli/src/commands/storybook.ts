@@ -2,6 +2,7 @@ import { Command, flags } from '@oclif/command';
 import { Options } from '@reactant/types';
 import { storybook } from '@reactant/core';
 import { getArgs } from '../util';
+import { registerActions } from '../actions';
 
 export default class Storybook extends Command {
   static description = 'storybook platform';
@@ -24,6 +25,7 @@ export default class Storybook extends Command {
       config: JSON.parse(flags.config || '{}'),
       debug: !!flags.debug
     };
-    return storybook(args.PLATFORM, options);
+    const [pluginActions] = registerActions();
+    return storybook(args.PLATFORM, options, pluginActions);
   }
 }

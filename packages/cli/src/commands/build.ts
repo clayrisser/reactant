@@ -2,6 +2,7 @@ import { Command, flags } from '@oclif/command';
 import { Options } from '@reactant/types';
 import { build } from '@reactant/core';
 import { getArgs } from '../util';
+import { registerActions } from '../actions';
 
 export default class Build extends Command {
   static description = 'build platform';
@@ -28,6 +29,7 @@ export default class Build extends Command {
       debug: !!flags.debug,
       docker: !!flags.docker
     };
-    return build(args.PLATFORM, options);
+    const [pluginActions] = registerActions();
+    return build(args.PLATFORM, options, pluginActions);
   }
 }

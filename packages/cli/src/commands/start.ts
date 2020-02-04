@@ -2,6 +2,7 @@ import { Command, flags } from '@oclif/command';
 import { Options } from '@reactant/types';
 import { start } from '@reactant/core';
 import { getArgs } from '../util';
+import { registerActions } from '../actions';
 
 export default class Start extends Command {
   static description = 'start platform';
@@ -24,6 +25,7 @@ export default class Start extends Command {
       config: JSON.parse(flags.config || '{}'),
       debug: !!flags.debug
     };
-    return start(args.PLATFORM, options);
+    const [pluginActions] = registerActions();
+    return start(args.PLATFORM, options, pluginActions);
   }
 }

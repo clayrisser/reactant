@@ -2,6 +2,7 @@ import { Command, flags } from '@oclif/command';
 import { Options } from '@reactant/types';
 import { clean } from '@reactant/core';
 import { getArgs } from '../util';
+import { registerActions } from '../actions';
 
 export default class Clean extends Command {
   static description = 'clean platform';
@@ -24,6 +25,7 @@ export default class Clean extends Command {
       config: JSON.parse(flags.config || '{}'),
       debug: !!flags.debug
     };
-    return clean(args.PLATFORM, options);
+    const [pluginActions] = registerActions();
+    return clean(args.PLATFORM, options, pluginActions);
   }
 }

@@ -1,4 +1,4 @@
-import { ActionResult, Options } from '@reactant/types';
+import { ActionResult, Options, PluginAction } from '@reactant/types';
 import { PlatformApi } from '@reactant/platform';
 import { bootstrap } from '@reactant/context/node';
 import { loadConfig } from '@reactant/config/node';
@@ -8,7 +8,8 @@ import { preBootstrap, postBootstrap, postProcess } from '../hooks';
 
 export default async function start(
   platform: string,
-  options?: Options
+  options?: Options,
+  pluginActions: PluginAction[] = []
 ): Promise<ActionResult> {
   const context = bootstrap(
     loadConfig(),
@@ -25,7 +26,7 @@ export default async function start(
       `platform '${context.platformName}' missing action 'start'`
     );
   }
-  await runActions(context, logger, []);
+  await runActions(context, logger, pluginActions);
   await context.platform.actions.start(context, logger, platformApi);
   postProcess(context, logger);
   return null;
