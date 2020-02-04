@@ -16,10 +16,12 @@ export function killOrphanedProcesses(pid = process.pid) {
           process.kill(procNode.pid, 'SIGKILL');
         }
       } catch (err) {
+        // eslint-disable-next-line no-console
         console.warn(`failed to kill pid '${procNode.pid}'`);
       }
     });
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.warn('failed to kill orphaned processes');
   }
 }

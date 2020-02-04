@@ -1,17 +1,18 @@
 import execa from 'execa';
 import fs from 'fs-extra';
 import path from 'path';
-import { Context, Options } from '@reactant/types';
+import { ActionResult, Options } from '@reactant/types';
 import { bootstrap } from '@reactant/context/node';
 import { loadConfig } from '@reactant/config/node';
+import { where } from '@reactant/helpers';
 import Logger from '../logger';
-import where from '../where';
-import { preBootstrap, postBootstrap, postProcess, preProcess } from '../hooks';
+import runActions from '.';
+import { preBootstrap, postBootstrap, postProcess } from '../hooks';
 
 export default async function install(
   platformName?: string,
   options?: Options
-): Promise<Context> {
+): Promise<ActionResult> {
   const context = bootstrap(
     loadConfig(),
     platformName,
@@ -21,7 +22,7 @@ export default async function install(
     postBootstrap
   );
   const logger = new Logger(context.logLevel);
-  await preProcess(context, logger);
+  await runActions(context, logger, []);
   let command = (await where('pnpm')) || '';
   if (!command?.length) command = (await where('yarn')) || '';
   if (!command?.length) command = (await where('npm')) || '';
@@ -53,6 +54,6 @@ export default async function install(
       cwd: path.resolve(context.paths.root, context.platformName)
     });
   }
-  await postProcess(context, logger);
-  return context;
+  postProcess(context, logger);
+  return null;
 }

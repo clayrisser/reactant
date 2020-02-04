@@ -3,9 +3,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import { Command } from '@oclif/command';
 import { Hook, Plugin, Command as ConfigCommand } from '@oclif/config';
-import { Logger } from '@reactant/core';
-import { PlatformApi } from '@reactant/platform';
-import { PluginApi } from '@reactant/plugin';
+import { Logger, runActions } from '@reactant/core';
 import { bootstrap } from '@reactant/context/node';
 import { loadConfig } from '@reactant/config/node';
 import {
@@ -15,13 +13,12 @@ import {
   PluginAction
 } from '@reactant/types';
 
+const platformActions: PlatformAction[] = [];
+const pluginActions: PluginAction[] = [];
+
 export function createDynamicPlugin(
   hookContext: Hook.Context,
   commandName: string,
-  {
-    pluginAction,
-    platformAction
-  }: { pluginAction?: PluginAction; platformAction?: PlatformAction },
   context: Context
 ): Plugin {
   class DynamicPlugin extends Plugin {
@@ -38,8 +35,6 @@ export function createDynamicPlugin(
     }
 
     get commands(): ConfigCommand.Plugin[] {
-      const logger = new Logger(context.logLevel);
-
       const cmd = class extends Command {
         static id = commandName;
 
@@ -48,14 +43,8 @@ export function createDynamicPlugin(
         }
 
         async run() {
-          if (pluginAction) {
-            const pluginApi = new PluginApi(context, logger);
-            return pluginAction(context, logger, pluginApi);
-          }
-          if (platformAction) {
-            const platformApi = new PlatformApi(context, logger);
-            return platformAction(context, logger, platformApi);
-          }
+          const logger = new Logger(context.logLevel);
+          await runActions(context, logger, pluginActions, platformActions);
         }
       };
       // @ts-ignore
@@ -68,7 +57,7 @@ export function createDynamicPlugin(
 // eslint-disable-next-line func-names
 const hook: Hook<'init'> = async function() {
   const commandsPath = path.resolve(__dirname, '../commands');
-  const ignoreActions = new Set(
+  const ignorePlatformActions = new Set(
     fs
       .readdirSync(commandsPath)
       .filter(
@@ -78,6 +67,8 @@ const hook: Hook<'init'> = async function() {
       )
       .map(fileName => fileName.substr(0, fileName.length - 3))
   );
+  const registeredActionNames: Set<string> = new Set(ignorePlatformActions);
+
   const context = bootstrap(
     loadConfig(),
     process.argv?.[3],
@@ -93,10 +84,11 @@ const hook: Hook<'init'> = async function() {
   if (context.platform) {
     Object.entries(context.platform.actions).forEach(
       ([actionName, platformAction]: [string, PlatformAction]) => {
-        if (!ignoreActions.has(actionName)) {
-          ignoreActions.add(actionName);
+        if (!registeredActionNames.has(actionName)) {
+          platformActions.push(platformAction);
+          registeredActionNames.add(actionName);
           this.config.plugins.push(
-            createDynamicPlugin(this, actionName, { platformAction }, context)
+            createDynamicPlugin(this, actionName, context)
           );
         }
       }
@@ -105,10 +97,13 @@ const hook: Hook<'init'> = async function() {
   Object.values(context.plugins).forEach((plugin: LoadedPlugin) => {
     Object.entries(plugin.actions).forEach(
       ([actionName, pluginAction]: [string, PluginAction]) => {
-        if (!ignoreActions.has(actionName)) {
-          ignoreActions.add(actionName);
+        if (true /* valid action */) {
+          pluginActions.push(pluginAction);
+        }
+        if (!registeredActionNames.has(actionName)) {
+          registeredActionNames.add(actionName);
           this.config.plugins.push(
-            createDynamicPlugin(this, actionName, { pluginAction }, context)
+            createDynamicPlugin(this, actionName, context)
           );
         }
       }

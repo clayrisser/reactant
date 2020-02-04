@@ -1,11 +1,11 @@
 import { ExecaReturnValue, Options as ExecaOptions } from 'execa';
-import { Context, Config, Logger } from '.';
+import { ActionResult, Context, Config, Logger } from '.';
 
 export type PlatformAction = (
   context: Context,
   logger: Logger,
   platformApi: TPlatformApi
-) => Promise<any>;
+) => Promise<ActionResult>;
 
 export interface CreateConfigOptions {
   rootPath?: boolean;

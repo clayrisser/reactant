@@ -40,6 +40,7 @@
   "dependencies": {
     "@reactant/config": "workspace:^0.0.317",
     "@reactant/context": "workspace:^0.0.317",
+    "@reactant/helpers": "workspace:^0.0.317",
     "@reactant/platform": "workspace:^0.0.317",
     "@reactant/plugin": "workspace:^0.0.317",
     "@reactant/types": "workspace:^0.0.317",

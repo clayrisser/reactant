@@ -1,10 +1,7 @@
 import { Context, Logger } from '@reactant/types';
 import cleanup from './cleanup';
 
-export default async function postProcess(
-  context: Context,
-  logger: Logger
-): Promise<Context> {
+export default function postProcess(context: Context, logger: Logger): Context {
   cleanup(context, logger);
   return context;
 }

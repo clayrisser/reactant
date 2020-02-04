@@ -1,13 +1,15 @@
-import { Context, Options, Status } from '@reactant/types';
+import { ActionResult, Options, Status } from '@reactant/types';
 import { bootstrap } from '@reactant/context/node';
 import { loadConfig } from '@reactant/config/node';
 import Logger from '../logger';
-import { preBootstrap, postBootstrap, postProcess, preProcess } from '../hooks';
+import runActions from '.';
+import { preBootstrap, postBootstrap, postProcess } from '../hooks';
 
 export default async function status(
   platform: string,
   options?: Options
-): Promise<Context> {
+): Promise<ActionResult> {
+  // eslint-disable-next-line global-require
   const pkg = require('../../package.json');
   const context = bootstrap(
     loadConfig(),
@@ -18,11 +20,11 @@ export default async function status(
     postBootstrap
   );
   const logger = new Logger(context.logLevel);
-  await preProcess(context, logger);
+  await runActions(context, logger, []);
   const status: Status = {
     version: pkg.version
   };
   logger.info(status);
-  await postProcess(context, logger);
-  return context;
+  postProcess(context, logger);
+  return null;
 }

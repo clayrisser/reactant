@@ -1,5 +1,5 @@
 import { ExecaReturnValue, Options as ExecaOptions } from 'execa';
-import { Context, Config, Logger } from '.';
+import { ActionResult, Context, Config, Logger } from '.';
 
 export interface TPluginApi {
   context: Context;
@@ -15,7 +15,7 @@ export type PluginAction = (
   context: Context,
   logger: Logger,
   platformApi: TPluginApi
-) => Promise<any>;
+) => Promise<ActionResult>;
 
 export interface PluginActions {
   [key: string]: PluginAction;
