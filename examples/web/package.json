@@ -38,7 +38,7 @@
     "@reactant/config": "workspace:^0.0.318",
     "@reactant/context": "workspace:^0.0.318",
     "@reactant/storybook": "workspace:^0.0.318",
-    "@storybook/react": "^5.3.10",
+    "@storybook/react": "^5.3.11",
     "@types/jest": "^25.1.1",
     "@types/node": "^13.7.0",
     "@types/prop-types": "^15.7.3",
