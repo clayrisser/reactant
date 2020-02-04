@@ -1,14 +1,14 @@
 {
-  "name": "@reactant/web",
+  "name": "@reactant/storybook",
   "version": "0.0.318",
-  "description": "reactant platform for web",
+  "description": "reactant plugin for storybook",
   "keywords": [
-    "@reactant/web",
-    "react",
+    "@reactant/storybook",
     "reactant",
-    "web"
+    "storybook",
+    "react"
   ],
-  "homepage": "https://github.com/codejamninja/reactant/packages/web",
+  "homepage": "https://github.com/codejamninja/reactant/packages/storybook",
   "bugs": {
     "url": "https://github.com/codejamninja/reactant/issues",
     "email": "jam@codejam.ninja"
@@ -40,46 +40,35 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
-    "@craco/craco": "^5.6.3",
     "@reactant/context": "workspace:^0.0.318",
-    "@reactant/platform": "workspace:^0.0.318",
-    "@types/webpack": "^4.41.4",
-    "awesome-typescript-loader": "^5.2.1",
-    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
-    "core-js": "^3.6.4",
-    "execa": "^4.0.0",
+    "@reactant/plugin": "workspace:^0.0.318",
+    "@storybook/react": "^5.3.11",
     "fs-extra": "^8.1.0",
-    "gnumake": "^0.1.0",
-    "react-docgen-typescript-loader": "^3.6.0",
-    "webpack-bundle-analyzer": "^3.6.0"
+    "gnumake": "^0.1.0"
   },
   "peerDependencies": {
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
-    "babel-loader": "^8.0.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-scripts": "^3.3.0",
+    "react-native": "^0.61.5",
     "typescript": "^3.7.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
+    "@babel/node": "^7.8.4",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-decorators": "^7.8.3",
     "@babel/plugin-proposal-optional-chaining": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
-    "@types/babel__core": "^7.1.3",
     "@types/fs-extra": "^8.0.1",
     "@types/jest": "^25.1.1",
     "@types/node": "^13.7.0",
     "@types/react": "^16.9.19",
     "@types/react-dom": "^16.9.5",
-    "@types/webpack": "^4.41.3",
-    "@types/webpack-bundle-analyzer": "^2.13.3",
-    "babel-loader": "^8.0.6",
+    "@types/webpack": "^4.41.4",
     "babel-plugin-typescript-to-proptypes": "^1.2.1",
     "cspell": "^4.0.46",
     "eslint": "^6.8.0",
@@ -88,9 +77,8 @@
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-scripts": "^3.3.1",
-    "typescript": "^3.7.5",
-    "webpack": "^4.41.5"
+    "react-native": "^0.61.5",
+    "typescript": "^3.7.5"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -102,6 +90,6 @@
     "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
     "verbose": true
   },
-  "reactantPlatform": "lib/platform.js",
+  "reactantPlugin": "lib/plugin.js",
   "gitHead": "55ce13f8a11b23f03127281b53de7876dca13176"
 }

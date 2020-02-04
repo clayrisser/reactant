@@ -8,11 +8,10 @@ import clean from './clean';
 import install from './install';
 import start from './start';
 import status from './status';
-import storybook from './storybook';
 import test from './test';
 import { preProcess, postProcess } from '../hooks';
 
-export { build, clean, install, start, status, storybook, test };
+export { build, clean, install, start, status, test };
 
 export default async function runActions(
   context: Context,

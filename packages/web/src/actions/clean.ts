@@ -15,4 +15,5 @@ export default async function clean(
     '!node_modules/**/*'
   ]);
   logger.spinner.succeed('cleaned');
+  return null;
 }

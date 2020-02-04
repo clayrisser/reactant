@@ -19,4 +19,5 @@ export default async function test(
   logger.spinner.succeed('tested');
   await platformApi.spawn(['@craco/craco', 'craco'], ['test']);
   await fs.writeJson(pkgPath, pkg, { spaces: 2 });
+  return null;
 }

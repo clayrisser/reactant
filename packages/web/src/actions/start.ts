@@ -10,8 +10,9 @@ export default async function start(
   const cracoConfigPath = await createCracoConfig(context);
   logger.spinner.succeed('prepared start');
   logger.spinner.succeed('started');
-  return platformApi.spawn(
+  await platformApi.spawn(
     ['@craco/craco', 'craco'],
     ['start', '--config', cracoConfigPath]
   );
+  return null;
 }

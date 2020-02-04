@@ -69,7 +69,7 @@ export default async function build(
       const handleFileChanged = async () => {
         if (handleFileChangedCount < 1) {
           handleFileChangedCount++;
-          return;
+          return null;
         }
         await new Promise(resolve => setTimeout(resolve, 3000));
         await finalizeBuild();
@@ -104,5 +104,6 @@ export default async function build(
       ['build', '--config', cracoConfigPath]
     );
     if (!context.options.analyze) await finalizeBuild();
+    return null;
   }
 }
