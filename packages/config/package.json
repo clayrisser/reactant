@@ -1,6 +1,6 @@
 {
   "name": "@reactant/config",
-  "version": "0.0.319",
+  "version": "0.0.320",
   "description": "reactant config",
   "keywords": [
     "@reactant/config",
@@ -44,8 +44,8 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/context": "workspace:^0.0.319",
-    "@reactant/types": "workspace:^0.0.319",
+    "@reactant/context": "workspace:^0.0.320",
+    "@reactant/types": "workspace:^0.0.320",
     "core-js": "^3.6.4",
     "cosmiconfig": "^6.0.0",
     "gnumake": "^0.1.0",
@@ -61,9 +61,9 @@
     "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
     "@types/core-js": "^2.5.2",
-    "@types/jest": "^25.1.1",
+    "@types/jest": "^25.1.2",
     "@types/node": "^13.7.0",
-    "@types/webpack": "^4.41.4",
+    "@types/webpack": "^4.41.5",
     "babel-preset-jam": "^0.4.3",
     "cspell": "^4.0.46",
     "eslint": "^6.8.0",

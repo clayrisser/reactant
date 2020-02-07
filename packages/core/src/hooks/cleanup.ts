@@ -28,18 +28,20 @@ export function killOrphanedProcesses(pid = process.pid) {
 
 export default function cleanup(context: Context, _logger: Logger) {
   killOrphanedProcesses();
-  fs.removeSync(path.resolve(context.paths.root, context.paths.tmp));
-  if (
-    fs.pathExistsSync(
-      path.resolve(__dirname, '../../../../pnpm-workspace.yaml')
-    )
-  ) {
-    fs.removeSync(path.resolve(__dirname, '../../../../.tmp'));
+  if (!context.debug) {
+    fs.removeSync(path.resolve(context.paths.root, context.paths.tmp));
+    if (
+      fs.pathExistsSync(
+        path.resolve(__dirname, '../../../../pnpm-workspace.yaml')
+      )
+    ) {
+      fs.removeSync(path.resolve(__dirname, '../../../../.tmp'));
+    }
+    try {
+      fs.removeSync(context.paths.tmp);
+      // eslint-disable-next-line no-empty
+    } catch (err) {}
   }
-  try {
-    fs.removeSync(context.paths.tmp);
-    // eslint-disable-next-line no-empty
-  } catch (err) {}
   finish();
   process.exit();
 }

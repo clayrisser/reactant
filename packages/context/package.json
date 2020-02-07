@@ -1,6 +1,6 @@
 {
   "name": "@reactant/context",
-  "version": "0.0.319",
+  "version": "0.0.320",
   "description": "reactant context",
   "keywords": [
     "reactant",
@@ -42,7 +42,7 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/types": "workspace:^0.0.319",
+    "@reactant/types": "workspace:^0.0.320",
     "core-js": "^3.6.4",
     "find-process": "^1.4.3",
     "flatted": "^2.0.1",
@@ -66,12 +66,12 @@
     "@babel/preset-typescript": "^7.8.3",
     "@types/core-js": "^2.5.2",
     "@types/fs-extra": "^8.0.1",
-    "@types/jest": "^25.1.1",
+    "@types/jest": "^25.1.2",
     "@types/lodash.clone": "^4.5.6",
     "@types/lodash.mergewith": "^4.6.6",
     "@types/lodash.uniq": "^4.5.6",
     "@types/node": "^13.7.0",
-    "@types/webpack": "^4.41.4",
+    "@types/webpack": "^4.41.5",
     "cspell": "^4.0.46",
     "eslint": "^6.8.0",
     "eslint-config-reactant": "^0.1.144",
