@@ -7,12 +7,13 @@
   ],
   "scripts": {
     "bootstrap": "pnpm install",
-    "build": "npm run exec -- build",
-    "clean": "npm run exec -- clean",
+    "build": "pnpm run exec -- build",
+    "clean": "pnpm run exec -- clean",
     "exec": "pnpm recursive --workspace-concurrency=Infinity run --filter={packages}",
     "publish": "pnpm -r publish --filter={packages} --access=public",
     "purge": "git clean -fXd",
-    "update": "pnpm -r update -L"
+    "update": "pnpm -r update -L",
+    "version": "pnpm run exec -- pnpm version patch --git=false"
   },
   "license": "MIT",
   "devDependencies": {
