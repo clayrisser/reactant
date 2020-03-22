@@ -13,7 +13,7 @@
     "publish": "pnpm -r publish --filter={packages} --access=public",
     "purge": "git clean -fXd",
     "update": "pnpm -r update -L",
-    "version": "pnpm run exec -- pnpm version patch --git=false"
+    "version": "pnpm run exec -- pnpm version patch --git=false || true"
   },
   "license": "MIT",
   "devDependencies": {
