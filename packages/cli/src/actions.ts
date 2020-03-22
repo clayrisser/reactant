@@ -44,7 +44,7 @@ export function registerActions(
           fs.pathExistsSync(path.resolve(commandsPath, fileName)) &&
           fileName.substr(fileName.length - 3) === '.js'
       )
-      .map(fileName => fileName.substr(0, fileName.length - 3))
+      .map((fileName) => fileName.substr(0, fileName.length - 3))
   );
   const registeredActionNames: Set<string> = new Set(ignorePlatformActions);
   if (context.platform) {

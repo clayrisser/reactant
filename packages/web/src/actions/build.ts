@@ -71,7 +71,7 @@ export default async function build(
           handleFileChangedCount++;
           return null;
         }
-        await new Promise(resolve => setTimeout(resolve, 3000));
+        await new Promise((resolve) => setTimeout(resolve, 3000));
         await finalizeBuild();
         fs.unwatchFile(
           path.resolve(context.paths.build, 'index.html'),

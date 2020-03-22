@@ -47,7 +47,7 @@ export function createDynamicPlugin(
 }
 
 // eslint-disable-next-line func-names
-const hook: Hook<'init'> = async function() {
+const hook: Hook<'init'> = async function () {
   [pluginActions, platformActions] = registerActions(
     (actionName: string, context: Context) => {
       this.config.plugins.push(createDynamicPlugin(this, actionName, context));

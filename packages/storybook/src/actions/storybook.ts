@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import { ActionResult, Context, Logger, TPluginApi } from '@reactant/plugin';
 
-export default async function(
+export default async function (
   context: Context,
   logger: Logger,
   pluginApi: TPluginApi
