@@ -16,8 +16,8 @@ let registered = false;
 function getContext() {
   return bootstrap(
     loadConfig(),
-    process.argv?.[3],
-    process.argv?.[2],
+    process.argv?.slice(3).find((arg: string) => arg.length && arg[0] !== '-'),
+    process.argv?.slice(2).find((arg: string) => arg.length && arg[0] !== '-'),
     {
       args: [],
       config: {},
