@@ -1,6 +1,6 @@
 {
   "name": "@reactant/types",
-  "version": "0.0.320",
+  "version": "0.0.321",
   "description": "reactant types",
   "keywords": [
     "reactant",
@@ -26,11 +26,12 @@
     "url": "https://github.com/codejamninja/reactant"
   },
   "scripts": {
-    "make": "make --version",
     "build": "make -s build",
     "clean": "make -s clean",
     "format": "make -s format",
+    "inc": "npm version patch --git=false 2>/dev/null || true",
     "lint": "make -s lint",
+    "make": "make --version",
     "prepare": "make -s prepare",
     "purge": "make -s purge",
     "start": "make -s start",

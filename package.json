@@ -10,10 +10,10 @@
     "build": "pnpm run exec -- build",
     "clean": "pnpm run exec -- clean",
     "exec": "pnpm recursive --workspace-concurrency=Infinity run --filter={packages}",
+    "inc": "pnpm run exec -- inc",
     "publish": "pnpm -r publish --filter={packages} --access=public",
     "purge": "git clean -fXd",
-    "update": "pnpm -r update -L",
-    "version": "pnpm run exec -- 'pnpm version patch --git=false || true'"
+    "update": "pnpm -r update -L"
   },
   "license": "MIT",
   "devDependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "@reactant/storybook",
-  "version": "0.0.320",
+  "version": "0.0.321",
   "description": "reactant plugin for storybook",
   "keywords": [
     "@reactant/storybook",
@@ -28,11 +28,12 @@
     "url": "https://github.com/codejamninja/reactant"
   },
   "scripts": {
-    "make": "make --version",
     "build": "make -s build",
     "clean": "make -s clean",
     "format": "make -s format",
+    "inc": "npm version patch --git=false 2>/dev/null || true",
     "lint": "make -s lint",
+    "make": "make --version",
     "prepare": "make -s prepare",
     "purge": "make -s purge",
     "start": "make -s start",
@@ -40,8 +41,8 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/context": "workspace:^0.0.320",
-    "@reactant/plugin": "workspace:^0.0.320",
+    "@reactant/context": "workspace:*",
+    "@reactant/plugin": "workspace:*",
     "@storybook/react": "^5.3.17",
     "fs-extra": "^9.0.0",
     "gnumake": "^0.1.0"

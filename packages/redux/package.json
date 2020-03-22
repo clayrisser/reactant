@@ -1,6 +1,6 @@
 {
   "name": "@reactant/redux",
-  "version": "0.0.320",
+  "version": "0.0.321",
   "description": "reactant plugin for redux",
   "keywords": [
     "@reactant/redux",
@@ -32,11 +32,12 @@
     "url": "https://github.com/codejamninja/reactant"
   },
   "scripts": {
-    "make": "make --version",
     "build": "make -s build",
     "clean": "make -s clean",
     "format": "make -s format",
+    "inc": "npm version patch --git=false 2>/dev/null || true",
     "lint": "make -s lint",
+    "make": "make --version",
     "prepare": "make -s prepare",
     "purge": "make -s purge",
     "start": "make -s start",
@@ -44,7 +45,7 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/plugin": "workspace:^0.0.320",
+    "@reactant/plugin": "workspace:*",
     "gnumake": "^0.1.0",
     "prop-types": "^15.7.2",
     "redux-devtools-extension": "^2.13.8",

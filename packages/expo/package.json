@@ -1,6 +1,6 @@
 {
   "name": "@reactant/expo",
-  "version": "0.0.320",
+  "version": "0.0.321",
   "description": "reactant platform for expo",
   "keywords": [
     "@reactant/expo",
@@ -28,11 +28,12 @@
     "url": "https://github.com/codejamninja/reactant"
   },
   "scripts": {
-    "make": "make --version",
     "build": "make -s build",
     "clean": "make -s clean",
     "format": "make -s format",
+    "inc": "npm version patch --git=false 2>/dev/null || true",
     "lint": "make -s lint",
+    "make": "make --version",
     "prepare": "make -s prepare",
     "purge": "make -s purge",
     "start": "make -s start",
@@ -40,7 +41,7 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/platform": "workspace:^0.0.320",
+    "@reactant/platform": "workspace:*",
     "babel-plugin-macros": "^2.8.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-preset-expo": "^8.0.0",

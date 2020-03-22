@@ -1,6 +1,6 @@
 {
   "name": "@reactant/platform",
-  "version": "0.0.320",
+  "version": "0.0.321",
   "description": "reactant platform",
   "keywords": [
     "@reactant/platform",
@@ -32,11 +32,12 @@
     "url": "https://github.com/codejamninja/reactant"
   },
   "scripts": {
-    "make": "make --version",
     "build": "make -s build",
     "clean": "make -s clean",
     "format": "make -s format",
+    "inc": "npm version patch --git=false 2>/dev/null || true",
     "lint": "make -s lint",
+    "make": "make --version",
     "prepare": "make -s prepare",
     "purge": "make -s purge",
     "start": "make -s start",
@@ -44,10 +45,10 @@
     "test:watch": "make -s test-watch"
   },
   "dependencies": {
-    "@reactant/config": "workspace:^0.0.320",
-    "@reactant/context": "workspace:^0.0.320",
-    "@reactant/helpers": "workspace:^0.0.320",
-    "@reactant/types": "workspace:^0.0.320",
+    "@reactant/config": "workspace:*",
+    "@reactant/context": "workspace:*",
+    "@reactant/helpers": "workspace:*",
+    "@reactant/types": "workspace:*",
     "core-js": "^3.6.4",
     "execa": "^4.0.0",
     "fs-extra": "^9.0.0",

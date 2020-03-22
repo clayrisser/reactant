@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.8.1",
-    "@reactant/expo": "workspace:^0.0.320",
-    "@reactant/redux": "workspace:^0.0.320",
+    "@reactant/expo": "workspace:*",
+    "@reactant/redux": "workspace:*",
     "core-js": "^3.6.4",
     "expo": "^36.0.2",
     "react": "^16.13.1",
@@ -27,9 +27,9 @@
     "redux-observable": "^1.2.0"
   },
   "devDependencies": {
-    "@reactant/cli": "workspace:^0.0.320",
-    "@reactant/config": "workspace:^0.0.320",
-    "@reactant/platform": "workspace:^0.0.320",
+    "@reactant/cli": "workspace:*",
+    "@reactant/config": "workspace:*",
+    "@reactant/platform": "workspace:*",
     "@types/jest": "^25.1.4",
     "@types/node": "^13.9.2",
     "@types/react": "^16.9.25",
