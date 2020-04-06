@@ -25,7 +25,9 @@ export default async function install(
   );
   const logger = new Logger(context.logLevel);
   await runActions(context, logger, pluginActions);
-  let command = (await where('pnpm')) || '';
+  let command =
+    (await where(context.config?.preferredPackageManager || '')) || '';
+  if (!command?.length) command = (await where('pnpm')) || '';
   if (!command?.length) command = (await where('yarn')) || '';
   if (!command?.length) command = (await where('npm')) || '';
   if (!command?.length) {

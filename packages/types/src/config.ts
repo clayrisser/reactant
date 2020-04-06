@@ -26,5 +26,6 @@ export interface Config {
   platform: PlatformOptions;
   platforms: PlatformsOptions;
   plugins: PluginsOptions;
+  preferredPackageManager: string;
   webpack?: WebpackConfigModifier | WebpackConfig;
 }

@@ -1,5 +1,6 @@
 import { Config } from '@reactant/types';
 
 export default {
-  global: {}
+  global: {},
+  preferredPackageManager: 'pnpm'
 } as Config;
