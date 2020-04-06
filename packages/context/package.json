@@ -1,6 +1,6 @@
 {
   "name": "@reactant/context",
-  "version": "0.0.324",
+  "version": "0.0.325",
   "description": "reactant context",
   "keywords": [
     "reactant",
@@ -46,7 +46,7 @@
     "@reactant/types": "workspace:*",
     "core-js": "^3.6.4",
     "find-process": "^1.4.3",
-    "flatted": "^2.0.1",
+    "flatted": "^2.0.2",
     "fs-extra": "^9.0.0",
     "gnumake": "^0.1.0",
     "lodash.clone": "^4.5.0",
@@ -67,18 +67,18 @@
     "@babel/preset-typescript": "^7.9.0",
     "@types/core-js": "^2.5.3",
     "@types/fs-extra": "^8.1.0",
-    "@types/jest": "^25.1.4",
+    "@types/jest": "^25.2.1",
     "@types/lodash.clone": "^4.5.6",
     "@types/lodash.mergewith": "^4.6.6",
     "@types/lodash.uniq": "^4.5.6",
-    "@types/node": "^13.9.2",
-    "@types/webpack": "^4.41.8",
+    "@types/node": "^13.11.0",
+    "@types/webpack": "^4.41.10",
     "cspell": "^4.0.55",
     "eslint": "^6.8.0",
     "eslint-config-reactant": "^0.1.144",
-    "jest": "^25.1.0",
+    "jest": "^25.2.7",
     "jest-sonar-reporter": "^2.0.0",
-    "prettier": "^2.0.1",
+    "prettier": "^2.0.4",
     "typescript": "^3.8.3"
   },
   "engines": {
@@ -90,6 +90,11 @@
   "jest": {
     "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
     "verbose": true
+  },
+  "jestSonar": {
+    "reportPath": "node_modules/.tmp/reports",
+    "reportFile": "test-report.xml",
+    "indent": 4
   },
   "gitHead": "55ce13f8a11b23f03127281b53de7876dca13176"
 }

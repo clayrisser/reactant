@@ -1,6 +1,6 @@
 {
   "name": "@reactant/types",
-  "version": "0.0.324",
+  "version": "0.0.325",
   "description": "reactant types",
   "keywords": [
     "reactant",
@@ -53,16 +53,16 @@
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-typescript": "^7.9.0",
     "@types/core-js": "^2.5.3",
-    "@types/jest": "^25.1.4",
-    "@types/webpack": "^4.41.8",
+    "@types/jest": "^25.2.1",
+    "@types/webpack": "^4.41.10",
     "cspell": "^4.0.55",
     "eslint": "^6.8.0",
     "eslint-config-reactant": "^0.1.144",
-    "jest": "^25.1.0",
+    "jest": "^25.2.7",
     "jest-sonar-reporter": "^2.0.0",
-    "prettier": "^2.0.1",
+    "prettier": "^2.0.4",
     "typescript": "^3.8.3",
-    "webpack": "^4.42.0"
+    "webpack": "^4.42.1"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -73,6 +73,11 @@
   "jest": {
     "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
     "verbose": true
+  },
+  "jestSonar": {
+    "reportPath": "node_modules/.tmp/reports",
+    "reportFile": "test-report.xml",
+    "indent": 4
   },
   "gitHead": "55ce13f8a11b23f03127281b53de7876dca13176"
 }

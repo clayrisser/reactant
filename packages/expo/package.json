@@ -1,6 +1,6 @@
 {
   "name": "@reactant/expo",
-  "version": "0.0.324",
+  "version": "0.0.325",
   "description": "reactant platform for expo",
   "keywords": [
     "@reactant/expo",
@@ -44,10 +44,10 @@
     "@reactant/platform": "workspace:*",
     "babel-plugin-macros": "^2.8.0",
     "babel-plugin-module-resolver": "^4.0.0",
-    "babel-preset-expo": "^8.0.0",
+    "babel-preset-expo": "^8.1.0",
     "core-js": "^3.6.4",
-    "expo": "^36.0.2",
-    "expo-cli": "^3.15.5",
+    "expo": "^37.0.5",
+    "expo-cli": "^3.17.16",
     "fs-extra": "^9.0.0",
     "gnumake": "^0.1.0"
   },
@@ -66,23 +66,23 @@
     "@babel/plugin-proposal-decorators": "^7.8.3",
     "@babel/plugin-proposal-optional-chaining": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
-    "@babel/preset-react": "^7.9.1",
+    "@babel/preset-react": "^7.9.4",
     "@babel/preset-typescript": "^7.9.0",
     "@types/fs-extra": "^8.1.0",
-    "@types/jest": "^25.1.4",
-    "@types/node": "^13.9.2",
-    "@types/react": "^16.9.25",
-    "@types/react-native": "^0.61.23",
-    "@types/webpack": "^4.41.8",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.11.0",
+    "@types/react": "^16.9.32",
+    "@types/react-native": "^0.62.1",
+    "@types/webpack": "^4.41.10",
     "babel-plugin-typescript-to-proptypes": "^1.3.2",
     "cspell": "^4.0.55",
     "eslint": "^6.8.0",
     "eslint-config-reactant": "^0.1.144",
-    "jest": "^25.1.0",
+    "jest": "^25.2.7",
     "jest-sonar-reporter": "^2.0.0",
-    "prettier": "^2.0.1",
+    "prettier": "^2.0.4",
     "react": "^16.13.1",
-    "react-native": "^0.61.5",
+    "react-native": "^0.62.1",
     "typescript": "^3.8.3"
   },
   "engines": {
@@ -94,6 +94,11 @@
   "jest": {
     "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
     "verbose": true
+  },
+  "jestSonar": {
+    "reportPath": "node_modules/.tmp/reports",
+    "reportFile": "test-report.xml",
+    "indent": 4
   },
   "reactantPlatform": "lib/platform.js",
   "gitHead": "55ce13f8a11b23f03127281b53de7876dca13176"

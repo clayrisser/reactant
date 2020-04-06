@@ -1,6 +1,6 @@
 {
   "name": "@reactant/generator",
-  "version": "0.0.324",
+  "version": "0.0.325",
   "description": "yeoman generator for typescript node modules",
   "keywords": [
     "yeoman-generator",
@@ -32,18 +32,18 @@
     "generator-github-project": "^0.2.11",
     "idempotent-babel-polyfill": "^7.4.4",
     "lodash": "^4.17.15",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.4",
     "yeoman-generator": "^4.7.2",
     "yo-base-prompts": "^0.1.8",
     "yo-option-or-prompt": "^0.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.7",
+    "@babel/core": "^7.9.0",
     "@babel/node": "^7.8.7",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-decorators": "^7.8.3",
-    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
-    "@babel/preset-env": "^7.8.7",
+    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
     "eslint-config-jam": "^0.2.20",
@@ -58,6 +58,11 @@
   "homepage": "https://github.com/codejamninja/generator-node-module-typescript",
   "license": "MIT",
   "repository": "https://github.com/codejamninja/generator-node-module-typescript",
+  "jestSonar": {
+    "reportPath": "node_modules/.tmp/reports",
+    "reportFile": "test-report.xml",
+    "indent": 4
+  },
   "eslintIgnore": [
     "generators",
     "demo"

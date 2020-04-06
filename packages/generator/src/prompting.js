@@ -13,7 +13,7 @@ export default async function prompting(yo) {
     license,
     name,
     repository,
-    version
+    version,
   } = await yoBasePrompts.prompt({
     authorEmail: true,
     authorName: true,
@@ -25,7 +25,7 @@ export default async function prompting(yo) {
     license: true,
     name: true,
     repository: true,
-    version: true
+    version: true,
   });
   const keywords = [name];
   for (;;) {
@@ -33,8 +33,8 @@ export default async function prompting(yo) {
       {
         type: 'input',
         name: 'keyword',
-        message: 'Keyword:'
-      }
+        message: 'Keyword:',
+      },
     ]);
     if (keyword === '') break;
     keywords.push(keyword);
@@ -44,20 +44,20 @@ export default async function prompting(yo) {
       type: 'confirm',
       name: 'bin',
       message: 'Project is a bin',
-      default: false
+      default: false,
     },
     {
       type: 'confirm',
       name: 'lock',
       message: 'Support package-lock.json',
-      default: false
+      default: false,
     },
     {
       type: 'confirm',
       name: 'install',
       message: 'Install dependencies',
-      default: true
-    }
+      default: true,
+    },
   ]);
   yo.answers = {
     authorEmail,
@@ -74,7 +74,7 @@ export default async function prompting(yo) {
     license,
     name,
     repository,
-    version
+    version,
   };
   if (
     (
@@ -83,14 +83,14 @@ export default async function prompting(yo) {
           type: 'confirm',
           name: 'generatorGithubProject',
           message: 'Generator GitHub Project:',
-          default: true
-        }
+          default: true,
+        },
       ])
     ).generatorGithubProject
   ) {
     yo.composeWith(require.resolve('generator-github-project'), {
       ...yo.answers,
-      template: 'minimal'
+      template: 'minimal',
     });
   }
   yo.context = { ...yo.context, ...yo.answers };

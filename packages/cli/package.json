@@ -1,6 +1,6 @@
 {
   "name": "@reactant/cli",
-  "version": "0.0.324",
+  "version": "0.0.325",
   "description": "reactant cli",
   "keywords": [
     "reactant",
@@ -68,15 +68,15 @@
     "@oclif/dev-cli": "^1.22.2",
     "@types/core-js": "^2.5.3",
     "@types/fs-extra": "^8.1.0",
-    "@types/jest": "^25.1.4",
-    "@types/node": "^13.9.2",
-    "@types/webpack": "^4.41.8",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.11.0",
+    "@types/webpack": "^4.41.10",
     "cspell": "^4.0.55",
     "eslint": "^6.8.0",
     "eslint-config-reactant": "^0.1.144",
-    "jest": "^25.1.0",
+    "jest": "^25.2.7",
     "jest-sonar-reporter": "^2.0.0",
-    "prettier": "^2.0.1",
+    "prettier": "^2.0.4",
     "regenerator-runtime": "^0.13.5",
     "typescript": "^3.8.3"
   },
@@ -96,6 +96,11 @@
     "hooks": {
       "init": "./lib/hooks/init"
     }
+  },
+  "jestSonar": {
+    "reportPath": "node_modules/.tmp/reports",
+    "reportFile": "test-report.xml",
+    "indent": 4
   },
   "gitHead": "55ce13f8a11b23f03127281b53de7876dca13176"
 }

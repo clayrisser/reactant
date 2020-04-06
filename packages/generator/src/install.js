@@ -7,6 +7,6 @@ export default async function install(yo) {
   return yo.installDependencies({
     npm: true,
     bower: false,
-    yarn: false
+    yarn: false,
   });
 }
