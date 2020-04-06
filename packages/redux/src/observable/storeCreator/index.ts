@@ -10,7 +10,7 @@ import {
   Store,
   applyMiddleware,
   combineReducers,
-  createStore as reduxCreateStore
+  createStore as reduxCreateStore,
 } from 'redux';
 // @ts-ignore
 // eslint-disable-next-line import/extensions
@@ -45,7 +45,7 @@ export default class StoreCreator {
     this.middlewares = [epicMiddleware, ...middlewares];
     this.defaultState = {
       ...(this.options.defaultState || {}),
-      ...defaultState
+      ...defaultState,
     };
     const whitelist = [...new Set(this.options.whitelist || [])];
     const blacklist = [...new Set(this.options.blacklist || [])];
@@ -54,7 +54,7 @@ export default class StoreCreator {
       key: 'root',
       stateReconciler: autoMergeLevel1,
       storage,
-      [filterRedux]: filterRedux === 'whitelist' ? whitelist : blacklist
+      [filterRedux]: filterRedux === 'whitelist' ? whitelist : blacklist,
     };
     if (this.options.persist === 'local') {
       this.persist.storage = storage;

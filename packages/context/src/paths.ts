@@ -26,7 +26,7 @@ export class CalculatePaths {
       ...paths,
       _action: actionName,
       _masterPid: masterPid.toString(),
-      _platform: platformName
+      _platform: platformName,
     };
   }
 

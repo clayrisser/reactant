@@ -23,7 +23,7 @@ export default async function start(
       '--config',
       path.resolve(context.paths.root, context.platformName, 'app.json'),
       '--web',
-      '--clear'
+      '--clear',
     ]
   );
 }

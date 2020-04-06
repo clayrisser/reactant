@@ -65,7 +65,7 @@ export default async function install(
   await fs.copy(pkgPath, pkgBackupPath);
   await execa(command, ['install'], {
     stdio: 'inherit',
-    cwd: context.paths.root
+    cwd: context.paths.root,
   });
   await fs.remove(pkgPath);
   await fs.rename(pkgBackupPath, pkgPath);

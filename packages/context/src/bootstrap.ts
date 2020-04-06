@@ -6,7 +6,7 @@ import {
   Envs,
   LoadedPlugin,
   Options,
-  PluginOptions
+  PluginOptions,
 } from '@reactant/types';
 import merge from './merge';
 import { CalculatePaths } from './paths';
@@ -88,7 +88,7 @@ export default function bootstrap(
     context.platform = platform;
     context.envs = loadEnvs({
       ...initialConfig.envs,
-      ...(platform?.options.envs || {})
+      ...(platform?.options.envs || {}),
     });
     context = preBootstrap(context);
     if (typeof context.platform?.config === 'function') {
@@ -110,11 +110,11 @@ export default function bootstrap(
         );
         plugin.supportedPlatforms = new Set([
           ...plugin.supportedPlatforms,
-          ...(plugin.options?.supportedPlatforms || [])
+          ...(plugin.options?.supportedPlatforms || []),
         ]);
         plugin.disabledPlatforms = new Set([
           ...plugin.disabledPlatforms,
-          ...(plugin.options?.disabledPlatforms || [])
+          ...(plugin.options?.disabledPlatforms || []),
         ]);
         if (
           !context.platformName ||

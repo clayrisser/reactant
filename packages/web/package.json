@@ -28,17 +28,19 @@
     "url": "https://github.com/codejamninja/reactant"
   },
   "scripts": {
-    "build": "make -s build",
-    "clean": "make -s clean",
-    "format": "make -s format",
+    "build": "make build",
+    "clean": "make clean",
+    "coverage": "make coverage",
+    "format": "make format",
     "inc": "npm version patch --git=false 2>/dev/null || true",
-    "lint": "make -s lint",
+    "lint": "make lint",
     "make": "make --version",
-    "prepare": "make -s prepare",
-    "purge": "make -s purge",
-    "start": "make -s start",
-    "test": "make -s test",
-    "test:watch": "make -s test-watch"
+    "prepare": "make prepare",
+    "purge": "make purge",
+    "start": "make start",
+    "test": "make test",
+    "test:ui": "make test-ui",
+    "test:watch": "make test-watch"
   },
   "dependencies": {
     "@babel/core": "^7.9.0",
@@ -86,6 +88,7 @@
     "eslint": "^6.8.0",
     "eslint-config-reactant": "^0.1.144",
     "jest": "^25.1.0",
+    "jest-sonar-reporter": "^2.0.0",
     "prettier": "^2.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

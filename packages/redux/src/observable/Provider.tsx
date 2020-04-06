@@ -32,7 +32,7 @@ class Provider extends Component<ProviderProps> {
 
   // eslint-disable-next-line react/static-property-placement
   static childContextTypes = {
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
   };
 
   constructor(props: ProviderProps) {
@@ -55,7 +55,7 @@ class Provider extends Component<ProviderProps> {
 
   getChildContext() {
     return {
-      store: this.store
+      store: this.store,
     };
   }
 

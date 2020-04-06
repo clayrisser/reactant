@@ -13,7 +13,7 @@ export default class Clean extends Command {
 
   static flags: flags.Input<any> = {
     config: flags.string({ char: 'c', required: false }),
-    debug: flags.boolean({ char: 'd', required: false })
+    debug: flags.boolean({ char: 'd', required: false }),
   };
 
   static args = [{ name: 'PLATFORM', required: false }];
@@ -23,7 +23,7 @@ export default class Clean extends Command {
     const options: Options = {
       args: getArgs(this.argv, Clean),
       config: JSON.parse(flags.config || '{}'),
-      debug: !!flags.debug
+      debug: !!flags.debug,
     };
     const [pluginActions] = registerActions();
     return clean(args.PLATFORM, options, pluginActions);

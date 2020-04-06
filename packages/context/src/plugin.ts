@@ -5,7 +5,7 @@ import {
   LoadedPlugin,
   LoadedPlugins,
   Plugin,
-  PluginOptions
+  PluginOptions,
 } from '@reactant/types';
 import merge from './merge';
 import { requireDefault } from './node';
@@ -18,7 +18,7 @@ export function getPlugins(rootPath: string): LoadedPlugins {
     // eslint-disable-next-line global-require,import/no-dynamic-require
     ...require(path.resolve(rootPath, 'package.json')).dependencies,
     // eslint-disable-next-line global-require,import/no-dynamic-require
-    ...require(path.resolve(rootPath, 'package.json')).devDependencies
+    ...require(path.resolve(rootPath, 'package.json')).devDependencies,
   });
   _plugins = dependencyNames
     .filter((dependencyName: string) => {
@@ -58,7 +58,7 @@ export function getPlugins(rootPath: string): LoadedPlugins {
             config: Partial<Config>,
             _context: Context,
             _options: PluginOptions
-          ) => config)
+          ) => config),
       };
       plugins[plugin.name] = plugin;
       return plugins;

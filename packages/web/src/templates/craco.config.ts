@@ -8,7 +8,7 @@ import { Paths } from '@reactant/platform';
 import {
   Configuration as WebpackConfig,
   ResolvePlugin,
-  RuleSetRule
+  RuleSetRule,
 } from 'webpack';
 
 interface ModuleScopePlugin {
@@ -36,7 +36,7 @@ function findJSRules(rules: RuleSetRule[]): RuleSetRule[] {
 }
 
 function overrideCracoConfig({
-  cracoConfig
+  cracoConfig,
 }: {
   cracoConfig: CracoConfig;
 }): CracoConfig {
@@ -82,7 +82,7 @@ function overrideCracoConfig({
         util.inspect(webpackConfig, {
           colors: true,
           showHidden: true,
-          depth: null
+          depth: null,
         }),
         '\n========= END WEBPACK =========\n\n'
       );
@@ -97,8 +97,8 @@ function overrideCracoConfig({
   context.config?.babel.plugins.push([
     'transform-inline-environment-variables',
     {
-      include: Object.keys(context.envs)
-    }
+      include: Object.keys(context.envs),
+    },
   ]);
   cracoConfig.babel = merge<CracoBabel>(
     cracoConfig.babel || {},
@@ -107,7 +107,7 @@ function overrideCracoConfig({
   );
   process.env = {
     ...process.env,
-    ...context.envs
+    ...context.envs,
   };
   return cracoConfig;
 }
@@ -116,8 +116,8 @@ module.exports = {
   plugins: [
     {
       plugin: {
-        overrideCracoConfig
-      }
-    }
-  ]
+        overrideCracoConfig,
+      },
+    },
+  ],
 } as CracoConfig;

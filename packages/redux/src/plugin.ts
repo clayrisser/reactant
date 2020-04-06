@@ -6,7 +6,7 @@ const plugin: Plugin = {
   config: createConfig,
   defaultOptions,
   name: 'redux',
-  supportedPlatforms: ['android', 'expo', 'ios', 'web']
+  supportedPlatforms: ['android', 'expo', 'ios', 'web'],
 };
 
 export default plugin;

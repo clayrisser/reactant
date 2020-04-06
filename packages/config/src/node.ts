@@ -1,7 +1,7 @@
 import getContext, {
   merge,
   sanitizeConfig as contextSanitizeConfig,
-  syncContext
+  syncContext,
 } from '@reactant/context/node';
 import pkgDir from 'pkg-dir';
 import { Config, Context } from '@reactant/types';

@@ -12,7 +12,7 @@ export default class Logger {
         warn: 2,
         info: 3,
         debug: 4,
-        silly: 5
+        silly: 5,
       } as { [key: string]: number })[level];
     })(level);
   }

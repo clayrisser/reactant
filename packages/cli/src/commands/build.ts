@@ -15,7 +15,7 @@ export default class Build extends Command {
     analyze: flags.boolean({ char: 'a', required: false }),
     config: flags.string({ char: 'c', required: false }),
     debug: flags.boolean({ char: 'd', required: false }),
-    docker: flags.boolean({ required: false })
+    docker: flags.boolean({ required: false }),
   };
 
   static args = [{ name: 'PLATFORM', required: true }];
@@ -27,7 +27,7 @@ export default class Build extends Command {
       args: getArgs(this.argv, Build),
       config: JSON.parse(flags.config || '{}'),
       debug: !!flags.debug,
-      docker: !!flags.docker
+      docker: !!flags.docker,
     };
     const [pluginActions] = registerActions();
     return build(args.PLATFORM, options, pluginActions);

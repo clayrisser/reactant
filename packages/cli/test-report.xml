@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="/home/codejamninja/Projects/reactant/packages/cli/tests/index.ts">
+    <testCase name="@reactant/cli should work" duration="1"/>
+  </file>
+</testExecutions>

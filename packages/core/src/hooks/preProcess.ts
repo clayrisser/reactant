@@ -19,7 +19,7 @@ export default async function preProcess(
       util.inspect(context, {
         colors: true,
         showHidden: true,
-        depth: null
+        depth: null,
       }),
       '\n========= END CONTEXT =========\n'
     );
@@ -68,15 +68,15 @@ export default async function preProcess(
       compilerOptions: {
         baseUrl: '../..',
         paths: {
-          '*': ['web/node_modules/*']
-        }
+          '*': ['web/node_modules/*'],
+        },
       },
       include: [
         '../../../src',
         ...context.platformNames.map(
           (platformName: string) => `../../../${platformName}`
-        )
-      ]
+        ),
+      ],
     }
   );
   if (

@@ -8,16 +8,14 @@
     "incremental": false,
     "jsx": "react",
     "lib": ["dom", "esnext"],
-    "module": "CommonJS",
-    "moduleResolution": "Node",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "outDir": "lib",
     "resolveJsonModule": true,
-    "rootDir": "src",
     "sourceMap": true,
     "strict": true,
     "strictPropertyInitialization": false,
-    "target": "ESNext"
+    "target": "esnext"
   },
-  "include": ["src"],
-  "exclude": ["node_modules/**"]
+  "include": ["src", "tests"]
 }

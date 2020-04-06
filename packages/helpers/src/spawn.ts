@@ -19,7 +19,7 @@ export default async function spawn(
   options = {
     stdio: 'inherit',
     env: process.env,
-    ...(options || {})
+    ...(options || {}),
   };
   let command = bin;
   if (pkg) {
@@ -28,8 +28,8 @@ export default async function spawn(
       require.resolve(pkg, {
         paths: [
           path.resolve((await pkgDir(__dirname)) || __dirname, 'node_modules'),
-          path.resolve(rootPath, 'node_modules')
-        ]
+          path.resolve(rootPath, 'node_modules'),
+        ],
       })
     );
     if (!pkgPath) throw new Error(`package '${pkg}' not found`);

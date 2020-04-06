@@ -6,7 +6,7 @@ import {
   Context,
   CreateConfigOptions,
   Logger,
-  TPluginApi
+  TPluginApi,
 } from '@reactant/types';
 
 export default class PluginApi implements TPluginApi {
@@ -31,7 +31,7 @@ export default class PluginApi implements TPluginApi {
   async createWebpackConfig(options: CreateConfigOptions = {}) {
     options = {
       rootPath: false,
-      ...options
+      ...options,
     };
     const { paths } = this.context;
     const webpackConfigPath = path.resolve(
@@ -50,7 +50,7 @@ export default class PluginApi implements TPluginApi {
   async createBabelConfig(options: CreateConfigOptions = {}) {
     options = {
       rootPath: false,
-      ...options
+      ...options,
     };
     const { paths } = this.context;
     const babelConfigPath = path.resolve(

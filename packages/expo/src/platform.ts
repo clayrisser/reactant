@@ -7,7 +7,7 @@ const platform: Platform = {
   actions,
   config: createConfig,
   defaultOptions,
-  name: 'expo'
+  name: 'expo',
 };
 
 export default platform;

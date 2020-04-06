@@ -23,7 +23,7 @@ export default async function status(
   const logger = new Logger(context.logLevel);
   await runActions(context, logger, pluginActions);
   const status: Status = {
-    version: pkg.version
+    version: pkg.version,
   };
   logger.info(status);
   postProcess(context, logger);

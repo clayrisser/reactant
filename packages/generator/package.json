@@ -1,0 +1,65 @@
+{
+  "name": "@reactant/generator",
+  "version": "0.0.324",
+  "description": "yeoman generator for typescript node modules",
+  "keywords": [
+    "yeoman-generator",
+    "generator",
+    "yo",
+    "yeoman"
+  ],
+  "main": "generators/app/index.js",
+  "files": [
+    "generators"
+  ],
+  "scripts": {
+    "build": "make -s build",
+    "clean": "make -s clean",
+    "coverage": "make -s coverage",
+    "format": "make -s format",
+    "inc": "npm version patch --git=false 2>/dev/null || true",
+    "lint": "make -s lint",
+    "make": "make --version",
+    "prepare": "make -s prepare",
+    "purge": "make -s purge",
+    "start": "make -s start",
+    "test": "make -s test",
+    "test:ui": "make -s test-ui",
+    "test:watch": "make -s test-watch"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "generator-github-project": "^0.2.11",
+    "idempotent-babel-polyfill": "^7.4.4",
+    "lodash": "^4.17.15",
+    "prettier": "^1.19.1",
+    "yeoman-generator": "^4.7.2",
+    "yo-base-prompts": "^0.1.8",
+    "yo-option-or-prompt": "^0.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
+    "@babel/preset-env": "^7.8.7",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-jam": "^0.2.20",
+    "jest-sonar-reporter": "^2.0.0",
+    "yo": "^3.1.1"
+  },
+  "author": {
+    "name": "Jam Risser",
+    "email": "jam@codejam.ninja",
+    "url": "https://codejam.ninja"
+  },
+  "homepage": "https://github.com/codejamninja/generator-node-module-typescript",
+  "license": "MIT",
+  "repository": "https://github.com/codejamninja/generator-node-module-typescript",
+  "eslintIgnore": [
+    "generators",
+    "demo"
+  ]
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="/home/codejamninja/Projects/reactant/packages/plugin/tests/index.ts">
+    <testCase name="@reactant/plugin should work" duration="2"/>
+  </file>
+</testExecutions>

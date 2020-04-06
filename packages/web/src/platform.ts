@@ -7,7 +7,7 @@ const platform: Platform = {
   actions,
   config: createConfig,
   defaultOptions,
-  name: 'web'
+  name: 'web',
 };
 
 export default platform;

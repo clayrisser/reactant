@@ -15,7 +15,7 @@ export default function merge<Config>(
     dedup: true,
     level: 1,
     mergeModifierFunction: false,
-    ...partialOptions
+    ...partialOptions,
   };
   if (config === null) return (modifier as unknown) as Config;
   if (modifier === null) return (config as unknown) as Config;
@@ -50,7 +50,7 @@ export default function merge<Config>(
         newValue,
         {
           ...options,
-          _level: ++options._level
+          _level: ++options._level,
         },
         ...args
       );
