@@ -4,6 +4,7 @@ import path from 'path';
 import { ActionResult, Options, PluginAction } from '@reactant/types';
 import { bootstrap } from '@reactant/context/node';
 import { loadConfig } from '@reactant/config/node';
+import { merge } from '@reactant/context';
 import { where } from '@reactant/helpers';
 import Logger from '../logger';
 import runActions from '.';
@@ -30,31 +31,42 @@ export default async function install(
   if (!command?.length) {
     throw new Error("please install 'pnpm', 'yarn' or 'npm'");
   }
+  const pkgPath = path.resolve(context.paths.root, 'package.json');
+  const pkgBackupPath = path.resolve(
+    context.paths.root,
+    'package.json.reactant_backup'
+  );
+  let pkg = await fs.readJson(pkgPath);
   if (!platformName) {
     await Promise.all(
       context.platformNames.map(async (platformName: string) => {
-        if (
-          !(await fs.pathExists(
-            path.resolve(
-              context.paths.root,
-              context.platformName,
-              'node_modules'
-            )
-          ))
-        ) {
-          await execa(command, ['install'], {
-            stdio: 'inherit',
-            cwd: path.resolve(context.paths.root, platformName)
-          });
+        const platformPkgPath = path.resolve(
+          context.paths.root,
+          platformName,
+          'package.json'
+        );
+        if (await fs.pathExists(platformPkgPath)) {
+          pkg = merge(pkg, await fs.readJson(platformPkgPath));
         }
       })
     );
   } else {
-    await execa(command, ['install'], {
-      stdio: 'inherit',
-      cwd: path.resolve(context.paths.root, context.platformName)
-    });
+    const platformPkgPath = path.resolve(
+      context.paths.root,
+      context.platformName,
+      'package.json'
+    );
+    if (await fs.pathExists(platformPkgPath)) {
+      pkg = merge(pkg, await fs.readJson(platformPkgPath));
+    }
   }
+  await fs.copy(pkgPath, pkgBackupPath);
+  await execa(command, ['install'], {
+    stdio: 'inherit',
+    cwd: context.paths.root
+  });
+  await fs.remove(pkgPath);
+  await fs.rename(pkgBackupPath, pkgPath);
   postProcess(context, logger);
   return null;
 }
