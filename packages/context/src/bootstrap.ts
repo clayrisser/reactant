@@ -56,6 +56,7 @@ export default function bootstrap(
   postBootstrap: (context: Context) => Context = (context: Context) => context
 ): Context {
   return syncContext((context: Context) => {
+    context = preBootstrap(context);
     context.masterPid = state.masterPid;
     if (options) {
       context.options = options;
@@ -90,7 +91,6 @@ export default function bootstrap(
       ...initialConfig.envs,
       ...(platform?.options.envs || {}),
     });
-    context = preBootstrap(context);
     if (typeof context.platform?.config === 'function') {
       config = context.platform.config(
         config,

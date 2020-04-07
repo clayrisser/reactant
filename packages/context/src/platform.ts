@@ -1,3 +1,4 @@
+import fs from 'fs-extra';
 import path from 'path';
 import {
   Config,
@@ -29,12 +30,14 @@ export function getPlatforms(
   _platforms = dependencyNames
     .filter((dependencyName: string) => {
       // eslint-disable-next-line global-require,import/no-dynamic-require
-      return !!require(path.resolve(
+      const pkgPath = path.resolve(
         rootPath,
         'node_modules',
         dependencyName,
         'package.json'
-      )).reactantPlatform;
+      );
+      if (!fs.pathExistsSync(pkgPath)) return false;
+      return !!require(pkgPath).reactantPlatform;
     })
     .reduce((platforms: LoadedPlatforms, moduleName: string) => {
       const platformPath = path.resolve(

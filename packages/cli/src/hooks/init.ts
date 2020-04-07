@@ -52,11 +52,12 @@ export function createDynamicPlugin(
 // eslint-disable-next-line func-names
 const hook: Hook<'init'> = async function () {
   if (
-    !(await fs.pathExists(
+    !fs.pathExistsSync(
       path.resolve(pkgDir.sync(process.cwd()) || process.cwd(), 'package.json')
-    ))
+    )
   ) {
-    throw new Error('must run reactant from inside project');
+    process.stdout.write('must run inside a reactant project\n');
+    process.exit();
   }
   [pluginActions, platformActions] = registerActions(
     (actionName: string, context: Context) => {

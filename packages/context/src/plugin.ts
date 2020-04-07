@@ -1,3 +1,4 @@
+import fs from 'fs-extra';
 import path from 'path';
 import {
   Config,
@@ -23,13 +24,15 @@ export function getPlugins(rootPath: string): LoadedPlugins {
   });
   _plugins = dependencyNames
     .filter((dependencyName: string) => {
-      // eslint-disable-next-line global-require,import/no-dynamic-require
-      return !!require(path.resolve(
+      const pkgPath = path.resolve(
         rootPath,
         'node_modules',
         dependencyName,
         'package.json'
-      )).reactantPlugin;
+      );
+      if (!fs.pathExistsSync(pkgPath)) return false;
+      // eslint-disable-next-line global-require,import/no-dynamic-require
+      return !!require(pkgPath).reactantPlugin;
     })
     .reduce((plugins: LoadedPlugins, moduleName: string) => {
       const pluginPath = path.resolve(

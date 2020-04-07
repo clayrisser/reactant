@@ -58,8 +58,20 @@ export default async function install(
       context.platformName,
       'package.json'
     );
+    const platformPkg = await fs.readJson(platformPkgPath);
     if (await fs.pathExists(platformPkgPath)) {
-      pkg = merge(pkg, await fs.readJson(platformPkgPath));
+      pkg.dependancies = merge(
+        pkg.dependencies || {},
+        platformPkg.dependencies || {}
+      );
+      pkg.devDependencies = merge(
+        pkg.devDependencies || {},
+        platformPkg.devDependencies || {}
+      );
+      pkg.peerDependencies = merge(
+        pkg.peerDependencies || {},
+        platformPkg.peerDependencies || {}
+      );
     }
   }
   await fs.copy(pkgPath, pkgBackupPath);
@@ -67,6 +79,7 @@ export default async function install(
     stdio: 'inherit',
     cwd: context.paths.root,
   });
+  if (context.debug) logger.debug(pkg);
   await fs.remove(pkgPath);
   await fs.rename(pkgBackupPath, pkgPath);
   postProcess(context, logger);
