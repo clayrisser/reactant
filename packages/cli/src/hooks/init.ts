@@ -1,4 +1,7 @@
 // eslint-disable-next-line max-classes-per-file
+import fs from 'fs-extra';
+import path from 'path';
+import pkgDir from 'pkg-dir';
 import { Command } from '@oclif/command';
 import { Context, PluginAction, PlatformAction } from '@reactant/types';
 import { Hook, Plugin, Command as ConfigCommand } from '@oclif/config';
@@ -48,6 +51,13 @@ export function createDynamicPlugin(
 
 // eslint-disable-next-line func-names
 const hook: Hook<'init'> = async function () {
+  if (
+    !(await fs.pathExists(
+      path.resolve(pkgDir.sync(process.cwd()) || process.cwd(), 'package.json')
+    ))
+  ) {
+    throw new Error('must run reactant from inside project');
+  }
   [pluginActions, platformActions] = registerActions(
     (actionName: string, context: Context) => {
       this.config.plugins.push(createDynamicPlugin(this, actionName, context));

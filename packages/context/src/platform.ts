@@ -19,11 +19,12 @@ export function getPlatforms(
   platformsOptions: PlatformsOptions = {}
 ): LoadedPlatforms {
   if (_platforms && Object.keys(_platforms).length) return _platforms;
+  const pkgPath = path.resolve(rootPath, 'package.json');
   const dependencyNames: string[] = Object.keys({
     // eslint-disable-next-line global-require,import/no-dynamic-require
-    ...require(path.resolve(rootPath, 'package.json')).dependencies,
+    ...require(pkgPath).dependencies,
     // eslint-disable-next-line global-require,import/no-dynamic-require
-    ...require(path.resolve(rootPath, 'package.json')).devDependencies,
+    ...require(pkgPath).devDependencies,
   });
   _platforms = dependencyNames
     .filter((dependencyName: string) => {

@@ -1,6 +1,6 @@
 {
   "name": "@reactant/cli",
-  "version": "0.0.326",
+  "version": "0.0.327",
   "description": "reactant cli",
   "keywords": [
     "reactant",
@@ -54,7 +54,8 @@
     "@reactant/types": "workspace:*",
     "core-js": "^3.6.4",
     "fs-extra": "^9.0.0",
-    "gnumake": "^0.1.0"
+    "gnumake": "^0.1.0",
+    "pkg-dir": "^4.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

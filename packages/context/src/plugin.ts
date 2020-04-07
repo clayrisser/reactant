@@ -14,11 +14,12 @@ let _plugins: LoadedPlugins;
 
 export function getPlugins(rootPath: string): LoadedPlugins {
   if (_plugins && Object.keys(_plugins).length) return _plugins;
+  const pkgPath = path.resolve(rootPath, 'package.json');
   const dependencyNames: string[] = Object.keys({
     // eslint-disable-next-line global-require,import/no-dynamic-require
-    ...require(path.resolve(rootPath, 'package.json')).dependencies,
+    ...require(pkgPath).dependencies,
     // eslint-disable-next-line global-require,import/no-dynamic-require
-    ...require(path.resolve(rootPath, 'package.json')).devDependencies,
+    ...require(pkgPath).devDependencies,
   });
   _plugins = dependencyNames
     .filter((dependencyName: string) => {
