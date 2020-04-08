@@ -4,8 +4,8 @@ import path from 'path';
 import pkgDir from 'pkg-dir';
 
 export default async function configuring(yo) {
-  yo.destinationRoot(yo.answers.destination);
-  if (yo.answers.platform.includes('web')) {
+  yo.destinationRoot(yo.context.destination);
+  if (yo.context.platforms.includes('web')) {
     const modulePath = path.resolve(__dirname, '../..');
     const templatePath = path.resolve(
       modulePath,
@@ -22,13 +22,13 @@ export default async function configuring(yo) {
         `alias npm=true && yarn=true && node ${path.resolve(
           pkgDir.sync(require.resolve('create-react-app')),
           'index.js'
-        )} ${yo.answers.name} --typescript`
+        )} ${yo.context.name} --typescript`
       ],
       {
         cwd: tmpPath,
         stdio: 'inherit'
       }
     );
-    await fs.rename(path.resolve(tmpPath, yo.answers.name), templatePath);
+    await fs.rename(path.resolve(tmpPath, yo.context.name), templatePath);
   }
 }

@@ -17,13 +17,9 @@
     "url": "<%= authorUrl %>"
   },
   "files": [
-    "lib"<% if (bin) { %>,
-    "bin"<% } %>
+    "lib"
   ],
-  "main": "lib/index.js",<% if (bin) { %>
-  "bin": {
-    "<%= name %>": "bin/<%= name %>.js"
-  },<% } %>
+  "main": "lib/index.js",
   "repository": {
     "type" : "git",
     "url" : "<%= repository %>"

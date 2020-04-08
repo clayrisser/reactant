@@ -1,28 +1,5 @@
-/*
-  ├── package.json
-  ├── public
-  │   ├── favicon.ico
-  │   ├── index.html
-  │   ├── logo192.png
-  │   ├── logo512.png
-  │   ├── manifest.json
-  │   └── robots.txt
-  ├── README.md
-  ├── src
-  │   ├── App.css
-  │   ├── App.test.tsx
-  │   ├── App.tsx
-  │   ├── index.css
-  │   ├── index.tsx
-  │   ├── logo.svg
-  │   ├── react-app-env.d.ts
-  │   ├── serviceWorker.ts
-  │   └── setupTests.ts
-  ├── tsconfig.json
-  */
-
 export default async function writing(yo) {
-  if (yo.context.platform.includes('web')) {
+  if (yo.context.platforms.includes('web')) {
     yo.fs.copy(
       yo.templatePath('template/web/public'),
       yo.destinationPath('public')
@@ -40,7 +17,6 @@ export default async function writing(yo) {
       yo.destinationPath('web/package.json')
     );
   }
-
   yo.fs.copyTpl(
     yo.templatePath('template/shared/src/**'),
     yo.destinationPath('src'),
@@ -65,9 +41,10 @@ export default async function writing(yo) {
     yo.templatePath('template/shared/_dockerignore'),
     yo.destinationPath('.dockerignore')
   );
-  yo.fs.copy(
+  yo.fs.copyTpl(
     yo.templatePath('template/shared/Makefile'),
-    yo.destinationPath('Makefile')
+    yo.destinationPath('Makefile'),
+    yo.context
   );
   yo.fs.copy(
     yo.templatePath('template/shared/prepare.sh'),

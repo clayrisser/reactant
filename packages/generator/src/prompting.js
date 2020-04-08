@@ -27,15 +27,25 @@ export default async function prompting(yo) {
     repository: true,
     version: true
   });
-  const { platform } = await yo.optionOrPrompt([
+  const { platforms, plugins } = await yo.optionOrPrompt([
     {
       type: 'checkbox',
-      name: 'platform',
-      message: 'Platform:',
+      name: 'platforms',
+      message: 'Platforms:',
       default: [],
       choices: [
         { name: 'web', value: 'web' },
         { name: 'expo', value: 'expo' }
+      ]
+    },
+    {
+      type: 'checkbox',
+      name: 'plugins',
+      message: 'Plugins:',
+      default: ['storybook'],
+      choices: [
+        { name: 'redux', value: 'redux' },
+        { name: 'storybook', value: 'storybook' }
       ]
     }
   ]);
@@ -69,7 +79,6 @@ export default async function prompting(yo) {
     authorEmail,
     authorName,
     authorUrl,
-    bin,
     description,
     destination,
     githubUsername,
@@ -79,7 +88,8 @@ export default async function prompting(yo) {
     license,
     lock,
     name,
-    platform,
+    platforms,
+    plugins,
     repository,
     version
   };
