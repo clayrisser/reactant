@@ -2,6 +2,18 @@ import YoBasePrompts from 'yo-base-prompts';
 
 export default async function prompting(yo) {
   const yoBasePrompts = new YoBasePrompts(yo);
+  const { platform } = await yo.optionOrPrompt([
+    {
+      type: 'checkbox',
+      name: 'platform',
+      message: 'Platform:',
+      default: [],
+      choices: [
+        { name: 'web', value: 'web' },
+        { name: 'expo', value: 'expo' },
+      ],
+    },
+  ]);
   const {
     authorEmail,
     authorName,
@@ -64,7 +76,6 @@ export default async function prompting(yo) {
     authorName,
     authorUrl,
     bin,
-    lock,
     description,
     destination,
     githubUsername,
@@ -72,7 +83,9 @@ export default async function prompting(yo) {
     install,
     keywords,
     license,
+    lock,
     name,
+    platform,
     repository,
     version,
   };
