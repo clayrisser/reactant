@@ -5,15 +5,19 @@ export default async function writing(yo) {
       yo.destinationPath('public')
     );
     yo.fs.copy(
-      yo.templatePath('template/shared/web'),
-      yo.destinationPath('web')
-    );
-    yo.fs.copy(
       yo.templatePath('template/web/src/serviceWorker.ts'),
       yo.destinationPath('web/serviceWorker.ts')
     );
     yo.fs.copy(
-      yo.templatePath('template/web/package.json'),
+      yo.templatePath('template/shared/web/index.tsx'),
+      yo.destinationPath('web/index.tsx')
+    );
+    yo.fs.copy(
+      yo.templatePath('template/shared/web/App.tsx'),
+      yo.destinationPath('web/App.tsx')
+    );
+    yo.fs.copyTpl(
+      yo.templatePath('template/shared/web/_package.json'),
       yo.destinationPath('web/package.json')
     );
   }

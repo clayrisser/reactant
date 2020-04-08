@@ -38,9 +38,9 @@
     "test": "make -s test"
   },
   "dependencies": {
-    "@reactant/redux": "^0.0.342",
-    "@reactant/web": "^0.0.342",
-    "core-js": "^3.6.4"
+    "core-js": "^3.6.4",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -51,11 +51,13 @@
     "@babel/plugin-proposal-optional-chaining": "^7.8.3",
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-typescript": "^7.8.3",
-    "@reactant/cli": "^0.0.342",
-    "@reactant/config": "^0.0.342",
-    "@reactant/context": "^0.0.342",
-    "@reactant/storybook": "^0.0.342",
+    "@reactant/cli": "^<%= reactantVersion %>",
+    "@reactant/config": "^<%= reactantVersion %>",
+    "@reactant/context": "^<%= reactantVersion %>",
     "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.2",
+    "@types/prop-types": "^15.7.3",
+    "@types/react": "^16.9.25",
     "@typescript-eslint/eslint-plugin": "^2.23.0",
     "@typescript-eslint/parser": "^2.23.0",
     "cspell": "^4.0.55",
@@ -77,5 +79,13 @@
   "jest": {
     "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
     "verbose": true
+  },
+  "browserslist": {
+    "production": [">0.2%", "not dead", "not op_mini all"],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

@@ -58,8 +58,8 @@ export default async function install(
       context.platformName,
       'package.json'
     );
-    const platformPkg = await fs.readJson(platformPkgPath);
     if (await fs.pathExists(platformPkgPath)) {
+      const platformPkg = await fs.readJson(platformPkgPath);
       pkg.dependancies = merge(
         pkg.dependencies || {},
         platformPkg.dependencies || {}
@@ -74,7 +74,8 @@ export default async function install(
       );
     }
   }
-  await fs.copy(pkgPath, pkgBackupPath);
+  await fs.rename(pkgPath, pkgBackupPath);
+  await fs.writeJson(pkgPath, pkg);
   await execa(command, ['install'], {
     stdio: 'inherit',
     cwd: context.paths.root,

@@ -1,4 +1,5 @@
 import YoBasePrompts from 'yo-base-prompts';
+import pkg from '../../package.json';
 
 export default async function prompting(yo) {
   const yoBasePrompts = new YoBasePrompts(yo);
@@ -13,7 +14,7 @@ export default async function prompting(yo) {
     license,
     name,
     repository,
-    version
+    version,
   } = await yoBasePrompts.prompt({
     authorEmail: true,
     authorName: true,
@@ -25,7 +26,7 @@ export default async function prompting(yo) {
     license: true,
     name: true,
     repository: true,
-    version: true
+    version: true,
   });
   const { platforms, plugins } = await yo.optionOrPrompt([
     {
@@ -35,8 +36,8 @@ export default async function prompting(yo) {
       default: [],
       choices: [
         { name: 'web', value: 'web' },
-        { name: 'expo', value: 'expo' }
-      ]
+        { name: 'expo', value: 'expo' },
+      ],
     },
     {
       type: 'checkbox',
@@ -45,9 +46,9 @@ export default async function prompting(yo) {
       default: ['storybook'],
       choices: [
         { name: 'redux', value: 'redux' },
-        { name: 'storybook', value: 'storybook' }
-      ]
-    }
+        { name: 'storybook', value: 'storybook' },
+      ],
+    },
   ]);
   const keywords = [name];
   for (;;) {
@@ -55,8 +56,8 @@ export default async function prompting(yo) {
       {
         type: 'input',
         name: 'keyword',
-        message: 'Keyword:'
-      }
+        message: 'Keyword:',
+      },
     ]);
     if (keyword === '') break;
     keywords.push(keyword);
@@ -66,14 +67,14 @@ export default async function prompting(yo) {
       type: 'confirm',
       name: 'lock',
       message: 'Support package-lock.json',
-      default: false
+      default: false,
     },
     {
       type: 'confirm',
       name: 'install',
       message: 'Install dependencies',
-      default: true
-    }
+      default: true,
+    },
   ]);
   yo.answers = {
     authorEmail,
@@ -90,8 +91,9 @@ export default async function prompting(yo) {
     name,
     platforms,
     plugins,
+    reactantVersion: pkg.version,
     repository,
-    version
+    version,
   };
   if (
     (
@@ -100,14 +102,14 @@ export default async function prompting(yo) {
           type: 'confirm',
           name: 'generatorGithubProject',
           message: 'Generator GitHub Project:',
-          default: true
-        }
+          default: true,
+        },
       ])
     ).generatorGithubProject
   ) {
     yo.composeWith(require.resolve('generator-github-project'), {
       ...yo.answers,
-      template: 'minimal'
+      template: 'minimal',
     });
   }
   yo.context = { ...yo.context, ...yo.answers };

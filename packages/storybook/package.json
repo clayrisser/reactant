@@ -1,6 +1,6 @@
 {
   "name": "@reactant/storybook",
-  "version": "0.0.343",
+  "version": "0.0.346",
   "description": "reactant plugin for storybook",
   "keywords": [
     "@reactant/storybook",
@@ -61,7 +61,7 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-decorators": "^7.8.3",
     "@babel/plugin-proposal-optional-chaining": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
     "@babel/preset-typescript": "^7.9.0",
     "@types/fs-extra": "^8.1.0",
@@ -74,12 +74,12 @@
     "cspell": "^4.0.55",
     "eslint": "^6.8.0",
     "eslint-config-reactant": "^0.1.144",
-    "jest": "^25.2.7",
+    "jest": "^25.3.0",
     "jest-sonar-reporter": "^2.0.0",
     "prettier": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-native": "^0.62.1",
+    "react-native": "^0.62.2",
     "typescript": "^3.8.3"
   },
   "engines": {

@@ -19,7 +19,7 @@
     "expo": "^37.0.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-native": "^0.62.1",
+    "react-native": "^0.62.2",
     "react-native-web": "^0.12.2",
     "react-redux": "^7.2.0",
     "react-router-native": "^5.1.2",
