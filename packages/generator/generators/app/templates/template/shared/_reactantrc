@@ -1,0 +1,6 @@
+platforms:
+  web:
+    docker:
+      image: hello/world
+      packages:
+        - curl

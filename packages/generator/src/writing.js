@@ -1,24 +1,69 @@
+/*
+  ├── package.json
+  ├── public
+  │   ├── favicon.ico
+  │   ├── index.html
+  │   ├── logo192.png
+  │   ├── logo512.png
+  │   ├── manifest.json
+  │   └── robots.txt
+  ├── README.md
+  ├── src
+  │   ├── App.css
+  │   ├── App.test.tsx
+  │   ├── App.tsx
+  │   ├── index.css
+  │   ├── index.tsx
+  │   ├── logo.svg
+  │   ├── react-app-env.d.ts
+  │   ├── serviceWorker.ts
+  │   └── setupTests.ts
+  ├── tsconfig.json
+  */
+
 export default async function writing(yo) {
+  if (yo.context.platform.includes('web')) {
+    yo.fs.copy(
+      yo.templatePath('template/web/public'),
+      yo.destinationPath('public')
+    );
+    yo.fs.copy(
+      yo.templatePath('template/shared/web'),
+      yo.destinationPath('web')
+    );
+    yo.fs.copy(
+      yo.templatePath('template/web/src/serviceWorker.ts'),
+      yo.destinationPath('web/serviceWorker.ts')
+    );
+    yo.fs.copy(
+      yo.templatePath('template/web/package.json'),
+      yo.destinationPath('web/package.json')
+    );
+  }
+
   yo.fs.copyTpl(
     yo.templatePath('template/shared/src/**'),
     yo.destinationPath('src'),
     yo.context
   );
-  if (yo.context.bin) {
-    yo.fs.copy(
-      yo.templatePath('template/shared/bin'),
-      yo.destinationPath('bin')
-    );
-  }
   if (!yo.context.lock) {
     yo.fs.copy(
       yo.templatePath('template/shared/_npmrc'),
       yo.destinationPath('.npmrc')
     );
   }
+  yo.fs.copyTpl(
+    yo.templatePath('template/shared/_reactantrc'),
+    yo.destinationPath('.reactantrc'),
+    yo.context
+  );
   yo.fs.copy(
     yo.templatePath('template/shared/_eslintrc'),
     yo.destinationPath('.eslintrc')
+  );
+  yo.fs.copy(
+    yo.templatePath('template/shared/_dockerignore'),
+    yo.destinationPath('.dockerignore')
   );
   yo.fs.copy(
     yo.templatePath('template/shared/Makefile'),
@@ -60,7 +105,7 @@ export default async function writing(yo) {
     yo.context
   );
   yo.fs.copy(
-    yo.templatePath('template/shared/tests_eslintrc'),
+    yo.templatePath('template/shared/tests/_eslintrc'),
     yo.destinationPath('tests/.eslintrc')
   );
 }
