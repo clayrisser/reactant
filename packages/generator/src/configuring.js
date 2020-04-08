@@ -18,7 +18,7 @@ export default async function configuring(yo) {
           'configuring (make sure you have a good internet connection)'
         ),
       15000
-    )
+    ),
   ];
   yo.destinationRoot(yo.context.destination);
   if (yo.context.platforms.includes('web')) {
@@ -38,11 +38,11 @@ export default async function configuring(yo) {
         `alias npm=true && yarn=true && node ${path.resolve(
           pkgDir.sync(require.resolve('create-react-app')),
           'index.js'
-        )} ${yo.context.name} --typescript`
+        )} ${yo.context.name} --typescript`,
       ],
       {
         cwd: tmpPath,
-        stdio: 'pipe'
+        stdio: 'pipe',
       }
     );
     await fs.rename(path.resolve(tmpPath, yo.context.name), templatePath);
