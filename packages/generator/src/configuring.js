@@ -6,7 +6,20 @@ import pkgDir from 'pkg-dir';
 
 export default async function configuring(yo) {
   const spinner = ora('configuring').start();
-  setTimeout(() => spinner.start('configuring (may take a few moments)'), 3000);
+  const timeouts = [
+    setTimeout(
+      () => spinner.start('configuring (may take a few moments)'),
+      5000
+    ),
+    setTimeout(() => spinner.start('configuring (please be patient)'), 10000),
+    setTimeout(
+      () =>
+        spinner.start(
+          'configuring (make sure you have a good internet connection)'
+        ),
+      15000
+    )
+  ];
   yo.destinationRoot(yo.context.destination);
   if (yo.context.platforms.includes('web')) {
     const modulePath = path.resolve(__dirname, '../..');
@@ -25,14 +38,15 @@ export default async function configuring(yo) {
         `alias npm=true && yarn=true && node ${path.resolve(
           pkgDir.sync(require.resolve('create-react-app')),
           'index.js'
-        )} ${yo.context.name} --typescript`,
+        )} ${yo.context.name} --typescript`
       ],
       {
         cwd: tmpPath,
-        stdio: 'pipe',
+        stdio: 'pipe'
       }
     );
     await fs.rename(path.resolve(tmpPath, yo.context.name), templatePath);
-    spinner.finish('configured');
+    timeouts.map(clearTimeout);
+    spinner.succeed('configured');
   }
 }
