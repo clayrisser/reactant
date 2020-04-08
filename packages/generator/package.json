@@ -1,6 +1,6 @@
 {
   "name": "generator-reactant",
-  "version": "0.0.335",
+  "version": "0.0.337",
   "description": "yeoman generator for reactant",
   "keywords": [
     "yeoman-generator",
@@ -35,8 +35,6 @@
     "generator-github-project": "^0.2.11",
     "idempotent-babel-polyfill": "^7.4.4",
     "lodash": "^4.17.15",
-    "merge-dirs": "^0.2.1",
-    "merge-trees": "^2.0.0",
     "prettier": "^2.0.4",
     "yeoman-generator": "^4.7.2",
     "yo-base-prompts": "^0.1.8",
