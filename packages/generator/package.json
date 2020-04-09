@@ -1,6 +1,6 @@
 {
   "name": "generator-reactant",
-  "version": "0.0.361",
+  "version": "0.0.363",
   "description": "yeoman generator for reactant",
   "keywords": [
     "yeoman-generator",
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@babel/cli": "^7.8.4",
-    "core-js": "^3.6.4",
+    "core-js": "^3.6.5",
     "create-react-app": "^3.4.1",
     "execa": "^4.0.0",
     "fs-extra": "^9.0.0",
@@ -39,7 +39,7 @@
     "ora": "^4.0.3",
     "pkg-dir": "^4.2.0",
     "prettier": "^2.0.4",
-    "yeoman-generator": "^4.7.2",
+    "yeoman-generator": "^4.8.0",
     "yo-base-prompts": "^0.1.8",
     "yo-option-or-prompt": "^0.2.0"
   },

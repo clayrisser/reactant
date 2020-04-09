@@ -48,7 +48,7 @@ export default async function install(
     pkg.peerDependencies = {};
     await installDependencies(pkg, context, logger);
     await fs.writeFile(installedPath, '');
-    await new Promise((r) => setTimeout(r, 1000));
+    await new Promise((r) => setTimeout(r, 300));
   }
   const pkg: Pkg = await fs.readJson(pkgPath);
   if (!platformName) {

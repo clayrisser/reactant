@@ -1,6 +1,6 @@
 {
   "name": "@reactant/web",
-  "version": "0.0.361",
+  "version": "0.0.363",
   "description": "reactant platform for web",
   "keywords": [
     "@reactant/web",
@@ -51,7 +51,7 @@
     "@types/webpack": "^4.41.10",
     "awesome-typescript-loader": "^5.2.1",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
-    "core-js": "^3.6.4",
+    "core-js": "^3.6.5",
     "execa": "^4.0.0",
     "fs-extra": "^9.0.0",
     "gnumake": "^0.1.0",
@@ -65,7 +65,8 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "^3.3.0",
-    "typescript": "^3.7.4"
+    "typescript": "^3.7.4",
+    "webpack": "4.42.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -77,8 +78,8 @@
     "@types/babel__core": "^7.1.7",
     "@types/fs-extra": "^8.1.0",
     "@types/jest": "^25.2.1",
-    "@types/node": "^13.11.0",
-    "@types/react": "^16.9.32",
+    "@types/node": "^13.11.1",
+    "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
     "@types/webpack": "^4.41.3",
     "@types/webpack-bundle-analyzer": "^2.13.3",
@@ -94,7 +95,7 @@
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
     "typescript": "^3.8.3",
-    "webpack": "^4.42.1"
+    "webpack": "4.42.0"
   },
   "engines": {
     "node": ">=6.0.0"

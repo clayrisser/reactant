@@ -1,6 +1,6 @@
 {
   "name": "@reactant/types",
-  "version": "0.0.361",
+  "version": "0.0.363",
   "description": "reactant types",
   "keywords": [
     "reactant",
@@ -39,7 +39,7 @@
     "test:watch": "make test-watch"
   },
   "dependencies": {
-    "core-js": "^3.6.4",
+    "core-js": "^3.6.5",
     "execa": "^4.0.0",
     "gnumake": "^0.1.0"
   },
@@ -62,7 +62,7 @@
     "jest-sonar-reporter": "^2.0.0",
     "prettier": "^2.0.4",
     "typescript": "^3.8.3",
-    "webpack": "^4.42.1"
+    "webpack": "4.42.0"
   },
   "engines": {
     "node": ">=6.0.0"

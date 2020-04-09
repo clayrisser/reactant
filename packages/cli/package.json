@@ -1,6 +1,6 @@
 {
   "name": "@reactant/cli",
-  "version": "0.0.361",
+  "version": "0.0.363",
   "description": "reactant cli",
   "keywords": [
     "reactant",
@@ -52,7 +52,7 @@
     "@reactant/context": "workspace:*",
     "@reactant/core": "workspace:*",
     "@reactant/types": "workspace:*",
-    "core-js": "^3.6.4",
+    "core-js": "^3.6.5",
     "fs-extra": "^9.0.0",
     "gnumake": "^0.1.0",
     "pkg-dir": "^4.2.0"
@@ -71,7 +71,7 @@
     "@types/core-js": "^2.5.3",
     "@types/fs-extra": "^8.1.0",
     "@types/jest": "^25.2.1",
-    "@types/node": "^13.11.0",
+    "@types/node": "^13.11.1",
     "@types/webpack": "^4.41.10",
     "cspell": "^4.0.55",
     "eslint": "^6.8.0",

@@ -1,6 +1,6 @@
 {
   "name": "@reactant/core",
-  "version": "0.0.361",
+  "version": "0.0.363",
   "description": "reactant core",
   "keywords": [
     "reactant",
@@ -47,7 +47,7 @@
     "@reactant/types": "workspace:*",
     "babel-plugin-macros": "^2.8.0",
     "babel-plugin-module-resolver": "^4.0.0",
-    "core-js": "^3.6.4",
+    "core-js": "^3.6.5",
     "execa": "^4.0.0",
     "flatted": "^2.0.2",
     "fs-extra": "^9.0.0",
@@ -69,7 +69,7 @@
     "@types/core-js": "^2.5.3",
     "@types/fs-extra": "^8.1.0",
     "@types/jest": "^25.2.1",
-    "@types/node": "^13.11.0",
+    "@types/node": "^13.11.1",
     "@types/webpack": "^4.41.10",
     "cspell": "^4.0.55",
     "eslint": "^6.8.0",
