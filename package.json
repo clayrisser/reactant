@@ -1,7 +1,7 @@
 {
   "name": "reactant",
   "description": "write once . . . render everywhere",
-  "version": "0.0.356",
+  "version": "0.0.361",
   "files": [
     "packages"
   ],
@@ -10,8 +10,8 @@
     "build": "pnpm run exec -- build",
     "clean": "pnpm run exec -- clean",
     "exec": "pnpm recursive --workspace-concurrency=Infinity run --filter={packages}",
-    "inc": "npm version patch --git=false 2>/dev/null || true && pnpm run exec -- inc",
-    "publish": "pnpm -r publish --filter={packages} --access=public",
+    "inc": "npm version patch --git=false 2>/dev/null || true && pnpm run exec -- inc && pnpm install -f",
+    "publish": "npm run inc && npm run build && pnpm -r publish --filter={packages} --access=public",
     "purge": "git clean -fXd",
     "update": "pnpm -r update -L"
   },

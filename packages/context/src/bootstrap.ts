@@ -83,7 +83,7 @@ export default function bootstrap(
       platformOptions
     );
     context.platformNames = Object.keys(getPlatforms(context.paths.root));
-    if (context.platformName && !platform) {
+    if (context.platformName && !platform && action !== 'install') {
       throw new Error(`platform '${context.platformName}' not installed`);
     }
     context.platform = platform;

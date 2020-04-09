@@ -48,6 +48,7 @@ export default async function install(
     pkg.peerDependencies = {};
     await installDependencies(pkg, context, logger);
     await fs.writeFile(installedPath, '');
+    await new Promise((r) => setTimeout(r, 1000));
   }
   const pkg: Pkg = await fs.readJson(pkgPath);
   if (!platformName) {
@@ -95,7 +96,7 @@ export function mergeDependencies(pkg: Pkg, newPkg: Partial<Pkg>): Pkg {
 
 export function getReactantDependencies(dependencies: Dependencies) {
   return Object.entries(dependencies).reduce(
-    (dependencies: Dependencies, [version, dependency]: [string, string]) => {
+    (dependencies: Dependencies, [dependency, version]: [string, string]) => {
       if (dependency.substr(0, 10) === '@reactant/') {
         dependencies[dependency] = version;
       }
@@ -125,11 +126,11 @@ export async function installDependencies(
   );
   await fs.rename(pkgPath, pkgBackupPath);
   await fs.writeJson(pkgPath, pkg, { spaces: 2 });
+  if (context.debug) logger.debug(pkg);
   await execa(command, ['install'], {
     stdio: 'inherit',
     cwd: context.paths.root,
   });
-  if (context.debug) logger.debug(pkg);
   await fs.remove(pkgPath);
   await fs.rename(pkgBackupPath, pkgPath);
 }
