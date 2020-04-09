@@ -26,7 +26,7 @@ export default async function install(
   options?: Options,
   pluginActions: PluginAction[] = []
 ): Promise<ActionResult> {
-  const context = bootstrap(
+  let context = bootstrap(
     loadConfig(),
     platformName,
     'install',
@@ -48,7 +48,14 @@ export default async function install(
     pkg.peerDependencies = {};
     await installDependencies(pkg, context, logger);
     await fs.writeFile(installedPath, '');
-    await new Promise((r) => setTimeout(r, 300));
+    context = bootstrap(
+      loadConfig(),
+      platformName,
+      'install',
+      options,
+      preBootstrap,
+      postBootstrap
+    );
   }
   const pkg: Pkg = await fs.readJson(pkgPath);
   if (!platformName) {

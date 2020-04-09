@@ -10,19 +10,19 @@ export interface AliasedModules {
 export function getIncludePaths(context: Context): string[] {
   return [
     path.resolve(
-      fs.realpathSync(pkgDir.sync(require.resolve('@reactant/config'))!),
+      pkgDir.sync(require.resolve('@reactant/config'))!,
       'es/index.js'
     ),
     path.resolve(
-      fs.realpathSync(pkgDir.sync(require.resolve('@reactant/context'))!),
+      pkgDir.sync(require.resolve('@reactant/context'))!,
       'es/index.js'
     ),
     path.resolve(
-      fs.realpathSync(pkgDir.sync(require.resolve('@reactant/platform'))!),
+      pkgDir.sync(require.resolve('@reactant/platform'))!,
       'es/index.js'
     ),
     path.resolve(
-      fs.realpathSync(pkgDir.sync(require.resolve('@reactant/plugin'))!),
+      pkgDir.sync(require.resolve('@reactant/plugin'))!,
       'es/index.js'
     ),
     path.resolve(context.paths.root, context.paths.tmp),

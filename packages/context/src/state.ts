@@ -32,12 +32,20 @@ export default class State<
   constructor(public name = 'state', public postprocess = (state: T) => state) {
     process.on('SIGINT', () => this.finish());
     process.on('SIGTERM', () => this.finish());
-    this.stateDir = path.resolve(
-      rootPath,
-      'node_modules/.tmp',
-      this.projectName,
-      this.masterPid.toString()
-    );
+    if (fs.pathExistsSync(path.resolve(rootPath, 'package.json'))) {
+      this.stateDir = path.resolve(
+        rootPath,
+        'node_modules/.tmp',
+        this.projectName,
+        this.masterPid.toString()
+      );
+    } else {
+      this.stateDir = path.resolve(
+        '/tmp',
+        this.projectName,
+        this.masterPid.toString()
+      );
+    }
     this.statePath = path.resolve(this.stateDir, 'state.json');
     if (this.currentProcStarted) return this;
     this.currentProcStarted = true;

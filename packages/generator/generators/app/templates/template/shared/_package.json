@@ -67,7 +67,7 @@
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.1",
     "gnumake": "^0.1.0",
-    "jest": "^25.1.0",
+    "jest": "24.9.0",
     "prettier": "^1.19.1",
     "typescript": "^3.8.3"
   },
