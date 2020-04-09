@@ -10,15 +10,15 @@ import Logger from '../logger';
 import runActions from '.';
 import { preBootstrap, postBootstrap, postProcess } from '../hooks';
 
-export interface Dependancies {
+export interface Dependencies {
   [key: string]: string;
 }
 
 export interface Pkg {
-  dependancies?: Dependancies;
-  devDependancies?: Dependancies;
+  dependencies?: Dependencies;
+  devDependencies?: Dependencies;
   name: string;
-  peerDependancies?: Dependancies;
+  peerDependencies?: Dependencies;
 }
 
 export default async function install(
@@ -37,36 +37,19 @@ export default async function install(
   const logger = new Logger(context.logLevel);
   await runActions(context, logger, pluginActions);
   const pkgPath = path.resolve(context.paths.root, 'package.json');
-  if (
-    !(await fs.pathExists(path.resolve(context.paths.root, 'node_modules')))
-  ) {
-    const pkg = await fs.readJson(pkgPath);
-    pkg.dependancies = Object.entries(
-      (pkg?.dependancies || {}) as Dependancies
-    ).reduce(
-      (dependancies: Dependancies, [version, dependancy]: [string, string]) => {
-        if (dependancy.substr(0, 10) === '@reactant/') {
-          dependancies[dependancy] = version;
-        }
-        return dependancies;
-      },
-      {}
-    );
-    pkg.devDependancies = Object.entries(
-      (pkg?.devDependancies || {}) as Dependancies
-    ).reduce(
-      (dependancies: Dependancies, [version, dependancy]: [string, string]) => {
-        if (dependancy.substr(0, 10) === '@reactant/') {
-          dependancies[dependancy] = version;
-        }
-        return dependancies;
-      },
-      {}
-    );
+  const installedPath = path.resolve(
+    context.paths.root,
+    'node_modules/.tmp/reactant/installed'
+  );
+  if (!(await fs.pathExists(installedPath))) {
+    const pkg: Pkg = await fs.readJson(pkgPath);
+    pkg.dependencies = getReactantDependencies(pkg.dependencies || {});
+    pkg.devDependencies = getReactantDependencies(pkg.devDependencies || {});
     pkg.peerDependencies = {};
-    await installDependancies(pkg, context, logger);
+    await installDependencies(pkg, context, logger);
+    await fs.writeFile(installedPath, '');
   }
-  let pkg = await fs.readJson(pkgPath);
+  const pkg: Pkg = await fs.readJson(pkgPath);
   if (!platformName) {
     await Promise.all(
       context.platformNames.map(async (platformName: string) => {
@@ -76,7 +59,8 @@ export default async function install(
           'package.json'
         );
         if (await fs.pathExists(platformPkgPath)) {
-          pkg = merge(pkg, await fs.readJson(platformPkgPath));
+          const platformPkg: Pkg = await fs.readJson(platformPkgPath);
+          mergeDependencies(pkg, platformPkg);
         }
       })
     );
@@ -88,26 +72,40 @@ export default async function install(
     );
     if (await fs.pathExists(platformPkgPath)) {
       const platformPkg = await fs.readJson(platformPkgPath);
-      pkg.dependancies = merge(
-        pkg.dependencies || {},
-        platformPkg.dependencies || {}
-      );
-      pkg.devDependencies = merge(
-        pkg.devDependencies || {},
-        platformPkg.devDependencies || {}
-      );
-      pkg.peerDependencies = merge(
-        pkg.peerDependencies || {},
-        platformPkg.peerDependencies || {}
-      );
+      mergeDependencies(pkg, platformPkg);
     }
   }
-  await installDependancies(pkg, context, logger);
+  await installDependencies(pkg, context, logger);
   postProcess(context, logger);
   return null;
 }
 
-export async function installDependancies(
+export function mergeDependencies(pkg: Pkg, newPkg: Partial<Pkg>): Pkg {
+  pkg.dependencies = merge(pkg.dependencies || {}, newPkg.dependencies || {});
+  pkg.devDependencies = merge(
+    pkg.devDependencies || {},
+    newPkg.devDependencies || {}
+  );
+  pkg.peerDependencies = merge(
+    pkg.peerDependencies || {},
+    newPkg.peerDependencies || {}
+  );
+  return pkg;
+}
+
+export function getReactantDependencies(dependencies: Dependencies) {
+  return Object.entries(dependencies).reduce(
+    (dependencies: Dependencies, [version, dependency]: [string, string]) => {
+      if (dependency.substr(0, 10) === '@reactant/') {
+        dependencies[dependency] = version;
+      }
+      return dependencies;
+    },
+    {}
+  );
+}
+
+export async function installDependencies(
   pkg: Pkg,
   context: Context,
   logger: Logger
@@ -125,7 +123,6 @@ export async function installDependancies(
     context.paths.root,
     'package.json.reactant_backup'
   );
-
   await fs.rename(pkgPath, pkgBackupPath);
   await fs.writeJson(pkgPath, pkg, { spaces: 2 });
   await execa(command, ['install'], {
