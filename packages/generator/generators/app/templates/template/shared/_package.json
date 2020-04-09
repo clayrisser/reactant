@@ -38,6 +38,7 @@
     "test": "make -s test"
   },
   "dependencies": {
+    "@reactant/web": "<%= reactantVersion %>",
     "core-js": "^3.6.4",
     "prop-types": "^15.7.2",
     "react": "^16.13.1"
