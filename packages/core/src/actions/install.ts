@@ -130,7 +130,7 @@ export async function installDependancies(
   await fs.writeJson(pkgPath, pkg, { spaces: 2 });
   await execa(command, ['install'], {
     stdio: 'inherit',
-    cwd: context.paths.root
+    cwd: context.paths.root,
   });
   if (context.debug) logger.debug(pkg);
   await fs.remove(pkgPath);
