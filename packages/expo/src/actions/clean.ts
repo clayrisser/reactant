@@ -1,7 +1,7 @@
 import { Context, Logger, PlatformApi } from '@reactant/platform';
 
 export default async function clean(
-  context: Context,
+  _context: Context,
   logger: Logger,
   platformApi: PlatformApi
 ): Promise<any> {

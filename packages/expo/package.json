@@ -47,7 +47,6 @@
     "babel-preset-expo": "^8.1.0",
     "core-js": "^3.6.5",
     "expo": "^37.0.6",
-    "expo-cli": "^3.17.21",
     "fs-extra": "^9.0.0",
     "gnumake": "^0.1.0"
   },

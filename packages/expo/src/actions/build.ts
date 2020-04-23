@@ -16,12 +16,11 @@ export default async function build(
   );
   logger.spinner.succeed('builded');
   await platformApi.spawn(
-    ['expo-cli', 'expo'],
+    ['expo', 'expo'],
     [
       'build',
       '--config',
       path.resolve(context.paths.root, context.platformName, 'app.json'),
-      '--web',
       '--clear'
     ]
   );

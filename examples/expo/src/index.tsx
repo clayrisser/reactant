@@ -1,36 +1,14 @@
 import React, { FC, ReactNode } from 'react';
-import { Provider } from '@reactant/redux/thunk';
-import { Route, Switch, Router, Link } from '@reactant/router';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 
 export interface AppProps {
   children?: ReactNode;
 }
 
-const App: FC<AppProps> = (props: AppProps) => (
-  <Provider>
-    <Router>
-      <Link to="/about">About</Link>
-      <Link to="/users">Users</Link>
-      <Link to="/">Home</Link>
-      {props.children}
-      <Switch>
-        <Route path="/about">
-          <Text>About</Text>
-        </Route>
-        <Route path="/users">
-          <Text>Users</Text>
-        </Route>
-        <Route path="/">
-          <Text>Home</Text>
-        </Route>
-      </Switch>
-    </Router>
-  </Provider>
+const App: FC<AppProps> = (_props: AppProps) => (
+  <View>
+    <Text>Open up App.tsx to start working on your app!</Text>
+  </View>
 );
-
-App.defaultProps = {
-  children: 'Hello, reactant!'
-};
 
 export default App;

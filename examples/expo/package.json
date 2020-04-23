@@ -38,6 +38,7 @@
     "@types/react-router-native": "^5.1.0",
     "babel-plugin-macros": "^2.8.0",
     "babel-plugin-module-resolver": "^4.0.0",
+    "babel-preset-expo": "^8.1.0",
     "expo-cli": "^3.17.21",
     "prettier": "^2.0.4",
     "redux-persist": "^6.0.0",
