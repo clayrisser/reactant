@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-reactant",
-  "version": "0.1.368",
+  "version": "0.1.369",
   "description": "reactant eslint",
   "keywords": [
     "reactant",
@@ -31,6 +31,7 @@
     "build": "npm run test && babel src -d lib",
     "clean": "git clean -fXd -e \\!node_modules -e \\!node_modules/**/*",
     "format": "prettier --write ./src/**/*.js",
+    "inc": "npm version patch --git=false 2>/dev/null || true",
     "lint": "npm run format && eslint ./",
     "lint:fix": "npm run format && eslint --fix ./",
     "prepublish": "npm run clean && npm run build",

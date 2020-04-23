@@ -1,7 +1,8 @@
 {
   "name": "reactant",
   "description": "write once . . . render everywhere",
-  "version": "0.0.368",
+  "version": "0.0.369",
+  "private": true,
   "files": [
     "packages"
   ],
