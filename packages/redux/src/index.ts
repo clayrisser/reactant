@@ -3,7 +3,7 @@ import {
   Provider,
   ProviderContext,
   ProviderProps,
-  StoreContext,
+  StoreContext
 } from './types';
 
 export { Options, Provider, ProviderContext, ProviderProps, StoreContext };

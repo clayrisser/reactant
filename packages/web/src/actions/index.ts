@@ -8,5 +8,5 @@ export default {
   build,
   clean,
   start,
-  test,
+  test
 } as PlatformActions;

@@ -17,7 +17,7 @@ ifeq ($(shell git --version >/dev/null 2>&1 && echo true || echo false), true)
 	GIT = git
 endif
 
-PLATFORM=<%= platforms.length ? platforms[0] : web %>
+PLATFORM=<%- platforms.length ? platforms[0] : web %>
 
 .EXPORT_ALL_VARIABLES:
 

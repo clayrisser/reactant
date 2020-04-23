@@ -1,13 +1,13 @@
 declare module '@craco/craco' {
   import {
     TransformOptions as BabelOptions,
-    PluginItem as BabelPlugin,
+    PluginItem as BabelPlugin
   } from '@babel/core';
   // eslint-disable-next-line import/no-extraneous-dependencies
   import {
     Rule as WebpackRule,
     Loader as WebpackLoader,
-    Configuration as WebpackConfig,
+    Configuration as WebpackConfig
   } from 'webpack';
 
   export type CracoBabel = import('../types').CracoBabel;

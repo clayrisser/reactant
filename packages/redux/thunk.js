@@ -1,4 +1,4 @@
 Object.defineProperty(exports, '__esModule', {
-  value: true,
+  value: true
 });
 module.exports = require('./lib/thunk');

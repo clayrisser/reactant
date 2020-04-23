@@ -25,7 +25,7 @@ all: build
 .PHONY: install
 install: node_modules
 node_modules: package.json
-	@$(NPM) install
+	# @$(NPM) install
 
 .PHONY: prepare
 prepare:

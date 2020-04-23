@@ -2,7 +2,7 @@ import execa from 'execa';
 
 export default async function install(yo) {
   await execa('git', ['init'], {
-    cwd: yo.destinationPath(''),
+    cwd: yo.destinationPath('')
   });
   const installChar = yo.options.install
     ? yo.options.install[0].toLowerCase()
@@ -12,6 +12,6 @@ export default async function install(yo) {
   }
   await execa('reactant', ['install'], {
     cwd: yo.destinationPath(''),
-    stdio: 'inherit',
+    stdio: 'inherit'
   });
 }

@@ -18,9 +18,9 @@ export default function createConfig(
       alias: {
         react: path.resolve(context.paths.root, 'node_modules/react'),
         'react-dom': path.resolve(context.paths.root, 'node_modules/react-dom'),
-        '~': path.resolve(context.paths.root, 'src'),
-      },
-    },
+        '~': path.resolve(context.paths.root, 'src')
+      }
+    }
   ]);
   return config;
 }

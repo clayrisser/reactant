@@ -8,7 +8,7 @@ export default async function createCracoConfig(
 ): Promise<string> {
   options = {
     rootPath: false,
-    ...options,
+    ...options
   };
   const { paths } = context;
   const cracoConfigPath = path.resolve(

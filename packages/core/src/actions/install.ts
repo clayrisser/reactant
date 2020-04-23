@@ -136,7 +136,7 @@ export async function installDependencies(
   if (context.debug) logger.debug(pkg);
   await execa(command, ['install'], {
     stdio: 'inherit',
-    cwd: context.paths.root,
+    cwd: context.paths.root
   });
   await fs.remove(pkgPath);
   await fs.rename(pkgBackupPath, pkgPath);

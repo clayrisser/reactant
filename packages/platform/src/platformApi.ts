@@ -6,7 +6,7 @@ import {
   Context,
   CreateConfigOptions,
   Logger,
-  TPlatformApi,
+  TPlatformApi
 } from '@reactant/types';
 
 export default class PlatformApi implements TPlatformApi {
@@ -31,7 +31,7 @@ export default class PlatformApi implements TPlatformApi {
   async createWebpackConfig(options: CreateConfigOptions = {}) {
     options = {
       rootPath: false,
-      ...options,
+      ...options
     };
     const { paths } = this.context;
     const webpackConfigPath = path.resolve(
@@ -50,7 +50,7 @@ export default class PlatformApi implements TPlatformApi {
   async createBabelConfig(options: CreateConfigOptions = {}) {
     options = {
       rootPath: false,
-      ...options,
+      ...options
     };
     const { paths } = this.context;
     const babelConfigPath = path.resolve(

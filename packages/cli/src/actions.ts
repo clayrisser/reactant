@@ -6,7 +6,7 @@ import {
   Context,
   LoadedPlugin,
   PlatformAction,
-  PluginAction,
+  PluginAction
 } from '@reactant/types';
 
 const platformActions: PlatformAction[] = [];
@@ -21,7 +21,7 @@ function getContext() {
     {
       args: [],
       config: {},
-      debug: false,
+      debug: false
     },
     (c: Context): Context => c,
     (c: Context): Context => c

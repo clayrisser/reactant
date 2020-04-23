@@ -1,20 +1,20 @@
 {
-  "name": "<%= name %>",
-  "version": "<%= version %>",
-  "description": "<%= description %>",<% if (keywords && keywords.length) { %>
+  "name": "<%- name %>",
+  "version": "<%- version %>",
+  "description": "<%- description %>",<% if (keywords && keywords.length) { %>
   "keywords": [<% for (var i = 0; i < keywords.length; i++) { %>
-    "<%= keywords[i] %>"<%= i < keywords.length - 1 ? ',' : '' %><% } %>
+    "<%- keywords[i] %>"<%- i < keywords.length - 1 ? ',' : '' %><% } %>
   ],<% } %>
-  "homepage": "<%= homepage %>",
+  "homepage": "<%- homepage %>",
   "bugs": {
-    "url": "<%= repository %>/issues",
-    "email": "<%= authorEmail %>"
+    "url": "<%- repository %>/issues",
+    "email": "<%- authorEmail %>"
   },
-  "license": "<%= license %>",
+  "license": "<%- license %>",
   "author": {
-    "name": "<%= authorName %>",
-    "email": "<%= authorEmail %>",
-    "url": "<%= authorUrl %>"
+    "name": "<%- authorName %>",
+    "email": "<%- authorEmail %>",
+    "url": "<%- authorUrl %>"
   },
   "files": [
     "lib"
@@ -22,7 +22,7 @@
   "main": "lib/index.js",
   "repository": {
     "type" : "git",
-    "url" : "<%= repository %>"
+    "url" : "<%- repository %>"
   },
   "scripts": {
     "build": "make -s build",
@@ -38,7 +38,7 @@
     "test": "make -s test"
   },
   "dependencies": {
-    "@reactant/web": "<%= reactantVersion %>",
+    "@reactant/web": "<%- reactantVersion %>",
     "core-js": "^3.6.4",
     "prop-types": "^15.7.2",
     "react": "^16.13.1"
@@ -52,9 +52,9 @@
     "@babel/plugin-proposal-optional-chaining": "^7.8.3",
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-typescript": "^7.8.3",
-    "@reactant/cli": "^<%= reactantVersion %>",
-    "@reactant/config": "^<%= reactantVersion %>",
-    "@reactant/context": "^<%= reactantVersion %>",
+    "@reactant/cli": "^<%- reactantVersion %>",
+    "@reactant/config": "^<%- reactantVersion %>",
+    "@reactant/context": "^<%- reactantVersion %>",
     "@types/jest": "^25.1.4",
     "@types/node": "^13.9.2",
     "@types/prop-types": "^15.7.3",
@@ -65,6 +65,7 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb-typescript": "^7.0.0",
     "eslint-config-prettier": "^6.10.0",
+    "eslint-config-reactant": "^<%- reactantVersion %>",
     "eslint-plugin-import": "^2.20.1",
     "gnumake": "^0.1.0",
     "jest": "24.9.0",

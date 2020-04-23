@@ -9,7 +9,7 @@ const context = getContext();
 module.exports = ({ config }: { config: WebpackConfig }) => {
   process.env = {
     ...process.env,
-    ...context.envs,
+    ...context.envs
   };
   if (config) {
     config.module?.rules.push({
@@ -17,7 +17,7 @@ module.exports = ({ config }: { config: WebpackConfig }) => {
       include: [
         path.resolve(context.paths.root, context.platformName),
         path.resolve(context.paths.root, 'src'),
-        ...context.includePaths,
+        ...context.includePaths
       ],
       use: [
         {
@@ -28,24 +28,24 @@ module.exports = ({ config }: { config: WebpackConfig }) => {
               [
                 'transform-inline-environment-variables',
                 {
-                  include: Object.keys(context.envs),
-                },
+                  include: Object.keys(context.envs)
+                }
               ],
-              ...(context.config?.babel?.plugins || []),
+              ...(context.config?.babel?.plugins || [])
             ],
             presets: [
               ...new Set([
                 'react-app',
-                ...(context.config?.babel?.presets || []),
-              ]),
+                ...(context.config?.babel?.presets || [])
+              ])
             ],
-            babelrc: false,
-          },
+            babelrc: false
+          }
         },
         {
-          loader: require.resolve('react-docgen-typescript-loader'),
-        },
-      ],
+          loader: require.resolve('react-docgen-typescript-loader')
+        }
+      ]
     });
     if (!config.resolve) config.resolve = {};
     config.resolve.extensions?.push('.jsx', '.ts', '.tsx');
@@ -64,7 +64,7 @@ module.exports = ({ config }: { config: WebpackConfig }) => {
     config.node = {
       child_process: 'empty',
       fs: 'empty',
-      ...config.node,
+      ...config.node
     };
   }
   return config;

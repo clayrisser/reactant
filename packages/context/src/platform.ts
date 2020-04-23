@@ -8,7 +8,7 @@ import {
   Platform,
   PlatformActions,
   PlatformOptions,
-  PlatformsOptions,
+  PlatformsOptions
 } from '@reactant/types';
 import merge from './merge';
 import { requireDefault } from './node';
@@ -25,7 +25,7 @@ export function getPlatforms(
     // eslint-disable-next-line global-require,import/no-dynamic-require
     ...require(pkgPath).dependencies,
     // eslint-disable-next-line global-require,import/no-dynamic-require
-    ...require(pkgPath).devDependencies,
+    ...require(pkgPath).devDependencies
   });
   _platforms = dependencyNames
     .filter((dependencyName: string) => {
@@ -69,7 +69,7 @@ export function getPlatforms(
           platformsOptions[requiredPlatform.name || moduleName] || {}
         ),
         origionalName: requiredPlatform.name || moduleName,
-        path: platformPath,
+        path: platformPath
       };
       // eslint-disable-next-line no-restricted-globals
       if (platform.options?.name) platform.name = platform.options.name;

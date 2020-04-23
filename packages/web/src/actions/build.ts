@@ -51,8 +51,8 @@ export default async function build(
           REACTANT_PACKAGES: options.docker.packages.join(' '),
           REACTANT_PATCH: patch,
           REACTANT_PLATFORM: context.platformName,
-          REACTANT_ROOT: context.paths.root,
-        },
+          REACTANT_ROOT: context.paths.root
+        }
       }
     );
     await fs.remove(dockerPath);

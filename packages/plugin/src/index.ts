@@ -3,7 +3,7 @@ import {
   Logger,
   PluginOptions,
   PluginsOptions,
-  TPluginApi,
+  TPluginApi
 } from '@reactant/types';
 
 class PluginApi implements TPluginApi {

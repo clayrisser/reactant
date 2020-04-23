@@ -2,7 +2,7 @@ import {
   PlatformApi,
   createBabelConfig,
   createWebpackConfig,
-  getOptions as libGetOptions,
+  getOptions as libGetOptions
 } from '../lib';
 
 export function getOptions() {

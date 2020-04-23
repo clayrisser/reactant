@@ -1,6 +1,6 @@
 {
   "name": "@reactant/helpers",
-  "version": "0.0.367",
+  "version": "0.0.368",
   "description": "reactant helpers",
   "keywords": [
     "reactant",
@@ -65,7 +65,7 @@
     "@types/node": "^13.11.1",
     "cspell": "^4.0.55",
     "eslint": "^6.8.0",
-    "eslint-config-reactant": "^0.1.144",
+    "eslint-config-reactant": "workspace:*",
     "jest": "^25.3.0",
     "jest-sonar-reporter": "^2.0.0",
     "prettier": "^2.0.4",

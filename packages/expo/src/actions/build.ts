@@ -22,7 +22,7 @@ export default async function build(
       '--config',
       path.resolve(context.paths.root, context.platformName, 'app.json'),
       '--web',
-      '--clear',
+      '--clear'
     ]
   );
   logger.spinner.start('finishing build');

@@ -4,9 +4,9 @@ const defaultOptions: Partial<PlatformOptions> = {
   docker: {
     buildPackages: [],
     image: null,
-    packages: [],
+    packages: []
   },
-  envs: {},
+  envs: {}
 };
 
 export default defaultOptions;

@@ -3,7 +3,7 @@ import {
   CreateConfigOptions,
   Logger,
   PlatformOptions,
-  TPlatformApi,
+  TPlatformApi
 } from '@reactant/types';
 import createBabelConfig from './createBabelConfig';
 import createWebpackConfig from './createWebpackConfig';

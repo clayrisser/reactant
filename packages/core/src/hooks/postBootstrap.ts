@@ -25,7 +25,7 @@ export function getIncludePaths(context: Context): string[] {
       pkgDir.sync(require.resolve('@reactant/plugin'))!,
       'es/index.js'
     ),
-    path.resolve(context.paths.root, context.paths.tmp),
+    path.resolve(context.paths.root, context.paths.tmp)
   ];
 }
 
@@ -105,9 +105,9 @@ export default function postBootstrap(context: Context): Context {
               context.platformName,
               'node_modules'
             )
-          ),
-        },
-      },
+          )
+        }
+      }
     ]);
   }
   config.babel.include = [
@@ -115,8 +115,8 @@ export default function postBootstrap(context: Context): Context {
       ...(config.babel.include || []),
       ...context.includePaths,
       path.resolve(context.paths.root, 'src'),
-      path.resolve(context.paths.root, context.platformName),
-    ]),
+      path.resolve(context.paths.root, context.platformName)
+    ])
   ];
   context.config = config;
   return context;

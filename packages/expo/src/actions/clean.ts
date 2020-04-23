@@ -11,7 +11,7 @@ export default async function clean(
     '-e',
     '!node_modules',
     '-e',
-    '!node_modules/**/*',
+    '!node_modules/**/*'
   ]);
   logger.spinner.succeed('cleaned');
 }

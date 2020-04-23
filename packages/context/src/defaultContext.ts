@@ -15,15 +15,15 @@ const context: Context = {
   options: {
     args: [],
     config: {},
-    debug: false,
+    debug: false
   },
   paths: {
     build: '{tmp}/build',
     dist: 'dist/{_platform}',
     reactant: 'node_modules/.tmp/reactant',
     root: '.',
-    tmp: '{reactant}/{_masterPid}',
-  },
+    tmp: '{reactant}/{_masterPid}'
+  }
 };
 
 export default context;
