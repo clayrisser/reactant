@@ -1,0 +1,22 @@
+{
+  "expo": {
+    "name": "<%- name %>",
+    "slug": "<%- name %>",
+    "platforms": ["ios", "android", "web"],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./expo/assets/icon.png",
+    "splash": {
+      "image": "./expo/assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}

@@ -19,7 +19,7 @@
   "files": [
     "lib"
   ],
-  "main": "lib/index.js",
+  "main": "node_modules/expo/AppEntry.js",
   "repository": {
     "type" : "git",
     "url" : "<%- repository %>"
@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@reactant/web": "<%- reactantVersion %>",
+    "@reactant/expo": "<%- reactantVersion %>",
     "core-js": "^3.6.4",
     "prop-types": "^15.7.2",
     "react": "^16.13.1"

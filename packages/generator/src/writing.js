@@ -22,6 +22,34 @@ export default async function writing(yo) {
       yo.context
     );
   }
+  if (yo.context.platforms.includes('expo')) {
+    yo.fs.copy(
+      yo.templatePath('template/shared/expo/assets'),
+      yo.destinationPath('expo/assets')
+    );
+    yo.fs.copy(
+      yo.templatePath('template/shared/expo/index.js'),
+      yo.destinationPath('expo/index.js')
+    );
+    yo.fs.copy(
+      yo.templatePath('template/shared/expo/App.tsx'),
+      yo.destinationPath('expo/App.tsx')
+    );
+    yo.fs.copy(
+      yo.templatePath('template/shared/expo/config.js'),
+      yo.destinationPath('expo/config.js')
+    );
+    yo.fs.copyTpl(
+      yo.templatePath('template/shared/expo/app.json'),
+      yo.destinationPath('expo/app.json'),
+      yo.context
+    );
+    yo.fs.copyTpl(
+      yo.templatePath('template/shared/expo/_package.json'),
+      yo.destinationPath('expo/package.json'),
+      yo.context
+    );
+  }
   yo.fs.copyTpl(
     yo.templatePath('template/shared/src/**'),
     yo.destinationPath('src'),

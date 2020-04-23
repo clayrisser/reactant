@@ -1,0 +1,13 @@
+{
+  "name": "expo",
+  "version": "<%- version %>",
+  "private": true,
+  "dependencies": {
+    "expo": "^37.0.6",
+    "react-native": "^0.62.2",
+    "react-native-web": "^0.12.2"
+  },
+  "devDependencies": {
+    "babel-preset-expo": "^8.1.0"
+  }
+}
