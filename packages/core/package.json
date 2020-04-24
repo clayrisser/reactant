@@ -1,6 +1,6 @@
 {
   "name": "@reactant/core",
-  "version": "0.0.370",
+  "version": "0.0.380",
   "description": "reactant core",
   "keywords": [
     "reactant",
@@ -54,8 +54,7 @@
     "gnumake": "^0.1.0",
     "node-pstree": "^0.0.9",
     "node-sigar": "^0.0.7",
-    "ora": "^4.0.3",
-    "pkg-dir": "^4.2.0"
+    "ora": "^4.0.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

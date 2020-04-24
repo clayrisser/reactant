@@ -1,6 +1,6 @@
 {
   "name": "@reactant/platform",
-  "version": "0.0.370",
+  "version": "0.0.380",
   "description": "reactant platform",
   "keywords": [
     "@reactant/platform",
@@ -23,7 +23,8 @@
     "Reactant.js",
     "Reactant.ts",
     "es",
-    "lib"
+    "lib",
+    "ts"
   ],
   "main": "lib/index.js",
   "module": "es/index.js",

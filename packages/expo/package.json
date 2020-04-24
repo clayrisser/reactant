@@ -1,6 +1,6 @@
 {
   "name": "@reactant/expo",
-  "version": "0.0.370",
+  "version": "0.0.380",
   "description": "reactant platform for expo",
   "keywords": [
     "@reactant/expo",
@@ -20,9 +20,10 @@
     "url": "https://codejam.ninja"
   },
   "files": [
-    "lib"
+    "lib",
+    "ts"
   ],
-  "main": "lib/index.js",
+  "main": "ts/index.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/codejamninja/reactant"

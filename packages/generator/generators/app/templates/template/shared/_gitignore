@@ -78,4 +78,5 @@ typings/
 package-lock.json<% } %>
 yarn.lock
 tsconfig.tsbuildinfo
-pnpm-lock.yaml
+pnpm-lock.yaml<% if (platforms.includes('expo')) { %>
+/.expo<% } %>

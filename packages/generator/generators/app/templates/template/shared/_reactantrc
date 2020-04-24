@@ -1,6 +1,4 @@
-platforms:
-  web:
-    docker:
-      image: hello/world
-      packages:
-        - curl
+<% if (platforms.includes('expo')) { %>preferredPackageManager: yarn
+<% } %>
+platforms:<% for (var i = 0; i < platforms.length; i++) { var platform = platforms[i]; %>
+  <%- platform %><% } %>

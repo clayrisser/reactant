@@ -35,10 +35,6 @@ export default async function writing(yo) {
       yo.templatePath('template/shared/expo/App.tsx'),
       yo.destinationPath('expo/App.tsx')
     );
-    yo.fs.copy(
-      yo.templatePath('template/shared/expo/config.js'),
-      yo.destinationPath('expo/config.js')
-    );
     yo.fs.copyTpl(
       yo.templatePath('template/shared/expo/app.json'),
       yo.destinationPath('expo/app.json'),

@@ -17,5 +17,5 @@
     "strictPropertyInitialization": false,
     "target": "esnext"
   },
-  "include": ["src", "tests"]
+  "include": ["src", "tests", "ts"]
 }

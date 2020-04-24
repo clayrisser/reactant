@@ -37,9 +37,8 @@
     "start": "make -s start",
     "test": "make -s test"
   },
-  "dependencies": {
-    "@reactant/web": "<%- reactantVersion %>",
-    "@reactant/expo": "<%- reactantVersion %>",
+  "dependencies": {<% for (var i = 0; i < platforms.length; i++) { var platform = platforms[i]; %>
+    "@reactant/<%- platform %>": "<%- reactantVersion %>",<% } %>
     "core-js": "^3.6.4",
     "prop-types": "^15.7.2",
     "react": "^16.13.1"

@@ -1,3 +1,4 @@
+import fs from 'fs-extra';
 import path from 'path';
 import { Config, Context, PlatformOptions } from '@reactant/platform';
 
@@ -6,19 +7,35 @@ export default function createConfig(
   context: Context,
   _options: PlatformOptions
 ): Partial<Config> {
+  const { paths } = context;
+  config.include?.push(
+    path.resolve(paths.root, 'node_modules/@expo'),
+    path.resolve(paths.root, 'node_modules/@reactant/expo/ts'),
+    path.resolve(paths.root, 'node_modules/expo'),
+    path.resolve(paths.root, 'node_modules/react-native')
+  );
   if (!config.babel) config.babel = {};
   if (!config.babel.presets) config.babel.presets = [];
-  config.babel.presets.push('expo');
+  config.babel.presets.push('babel-preset-expo');
   if (!config.babel.plugins) config.babel.plugins = [];
-  config.babel.plugins.push('macros');
   config.babel.plugins.push([
-    'module-resolver',
+    'babel-plugin-module-resolver',
     {
-      root: [path.resolve(context.paths.root, 'src')],
       alias: {
-        react: path.resolve(context.paths.root, 'node_modules/react'),
-        'react-dom': path.resolve(context.paths.root, 'node_modules/react-dom'),
-        '~': path.resolve(context.paths.root, 'src')
+        ...(fs.pathExistsSync(
+          path.resolve(context.paths.root, 'node_modules/react-dom')
+        )
+          ? {
+              'react-dom': path.resolve(
+                context.paths.root,
+                'node_modules/react-dom'
+              )
+            }
+          : {}),
+        'react-native': path.resolve(
+          context.paths.root,
+          'node_modules/react-native'
+        )
       }
     }
   ]);

@@ -23,6 +23,7 @@ export interface Config {
   babel?: BabelConfigModifier | BabelConfig;
   envs: Envs;
   global: GlobalConfig;
+  include: string[];
   platform: PlatformOptions;
   platforms: PlatformsOptions;
   plugins: PluginsOptions;
