@@ -9,6 +9,12 @@ const isNode = new Function(
 export default function getConfig(): Config {
   // eslint-disable-next-line no-eval
   if (isNode) return eval("require('./node')").default();
+  try {
+    // eslint-disable-next-line global-require
+    const config = require('@reactant/_config');
+    if (config) return config;
+    // eslint-disable-next-line no-empty
+  } catch (err) {}
   // try {
   //   // eslint-disable-next-line global-require
   //   const config: Config = require('@reactant/_config');

@@ -6,7 +6,7 @@ export interface ReactantProps {
 
 const Reactant: FC<ReactantProps> = (props: ReactantProps) => {
   // eslint-disable-next-line global-require
-  let SharedSrc = require('../../../..');
+  let SharedSrc = require('~');
   if (SharedSrc.__esModule && SharedSrc.default) SharedSrc = SharedSrc.default;
   // eslint-disable-next-line react/jsx-props-no-spreading
   return <SharedSrc {...props} />;

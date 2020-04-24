@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+import fs, { Dirent } from 'fs-extra';
 import path from 'path';
 import { Config, Context, PlatformOptions } from '@reactant/platform';
 
@@ -9,7 +9,9 @@ export default function createConfig(
 ): Partial<Config> {
   const { paths } = context;
   config.include?.push(
+    ...getExpoPaths(context),
     path.resolve(paths.root, 'node_modules/@expo'),
+    path.resolve(paths.root, 'node_modules/@unimodules'),
     path.resolve(paths.root, 'node_modules/@reactant/expo/ts'),
     path.resolve(paths.root, 'node_modules/expo'),
     path.resolve(paths.root, 'node_modules/react-native')
@@ -40,4 +42,23 @@ export default function createConfig(
     }
   ]);
   return config;
+}
+
+export function getExpoPaths(context: Context): string[] {
+  return fs
+    .readdirSync(path.resolve(context.paths.root, 'node_modules'), {
+      withFileTypes: true
+    })
+    .filter((dirent: Dirent) => dirent.isDirectory())
+    .reduce((expoPaths: string[], dirent: Dirent) => {
+      if (
+        dirent.name.substr(0, 5) === 'expo-' ||
+        dirent.name.substr(0, 11) === 'unimodules-'
+      ) {
+        expoPaths.push(
+          path.resolve(context.paths.root, 'node_modules', dirent.name)
+        );
+      }
+      return expoPaths;
+    }, []);
 }

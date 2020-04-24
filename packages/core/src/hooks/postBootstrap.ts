@@ -19,6 +19,14 @@ export function getIncludePaths(context: Context): string[] {
     ),
     path.resolve(
       context.paths.root,
+      'node_modules/@reactant/config/lib/index.js'
+    ),
+    path.resolve(
+      context.paths.root,
+      'node_modules/@reactant/context/lib/index.js'
+    ),
+    path.resolve(
+      context.paths.root,
       'node_modules/@reactant/platform/es/index.js'
     ),
     path.resolve(

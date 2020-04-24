@@ -51,6 +51,12 @@ export function sanitizeContext(context: Context): Context {
 export default function getContext(): Context {
   // eslint-disable-next-line no-eval
   if (isNode) return eval("require('./node')").default();
+  try {
+    // eslint-disable-next-line global-require
+    const context = require('@reactant/_context');
+    if (context) return context;
+    // eslint-disable-next-line no-empty
+  } catch (err) {}
   // try {
   //   // eslint-disable-next-line global-require
   //   const context: Context = require('@reactant/_context');
