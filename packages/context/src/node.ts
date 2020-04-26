@@ -88,6 +88,7 @@ export function sanitizeContext(context: Context): Context {
 }
 
 export { bootstrap, defaultContext, merge };
+export * from './pkg';
 export * from './platform';
 export * from './plugin';
 export * from './processes';

@@ -2,6 +2,17 @@ import { Config } from './config';
 import { LoadedPlatform, PlatformOptions } from './platform';
 import { LoadedPlugins, PluginsOptions } from './plugin';
 
+export interface Dependencies {
+  [key: string]: string;
+}
+
+export interface Pkg {
+  dependencies?: Dependencies;
+  devDependencies?: Dependencies;
+  name: string;
+  peerDependencies?: Dependencies;
+}
+
 export interface ContextEnvs {
   [key: string]: string;
 }
@@ -24,6 +35,7 @@ export interface Context {
   masterPid: number;
   options: Options;
   paths: Paths;
+  pkg: Pkg;
   platform: LoadedPlatform | null;
   platformName: string;
   platformNames: string[];

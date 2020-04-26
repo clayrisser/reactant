@@ -11,7 +11,7 @@ import {
   PlatformsOptions
 } from '@reactant/types';
 import merge from './merge';
-import { requireDefault } from './node';
+import { requireDefault, getPkg } from './node';
 
 let _platforms: LoadedPlatforms;
 
@@ -20,12 +20,10 @@ export function getPlatforms(
   platformsOptions: PlatformsOptions = {}
 ): LoadedPlatforms {
   if (_platforms && Object.keys(_platforms).length) return _platforms;
-  const pkgPath = path.resolve(rootPath, 'package.json');
+  const pkg = getPkg(rootPath);
   const dependencyNames: string[] = Object.keys({
-    // eslint-disable-next-line global-require,import/no-dynamic-require
-    ...require(pkgPath).dependencies,
-    // eslint-disable-next-line global-require,import/no-dynamic-require
-    ...require(pkgPath).devDependencies
+    ...pkg.dependencies,
+    ...pkg.devDependencies
   });
   _platforms = dependencyNames
     .filter((dependencyName: string) => {

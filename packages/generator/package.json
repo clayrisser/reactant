@@ -1,6 +1,6 @@
 {
   "name": "generator-reactant",
-  "version": "0.0.383",
+  "version": "0.0.389",
   "description": "yeoman generator for reactant",
   "keywords": [
     "yeoman-generator",
@@ -38,8 +38,8 @@
     "lodash": "^4.17.15",
     "ora": "^4.0.3",
     "pkg-dir": "^4.2.0",
-    "prettier": "^2.0.4",
-    "yeoman-generator": "^4.8.0",
+    "prettier": "^2.0.5",
+    "yeoman-generator": "^4.9.0",
     "yo-base-prompts": "^0.1.8",
     "yo-option-or-prompt": "^0.2.0"
   },

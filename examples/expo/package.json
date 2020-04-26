@@ -16,7 +16,7 @@
     "@reactant/expo": "workspace:*",
     "@reactant/redux": "workspace:*",
     "core-js": "^3.6.5",
-    "expo": "^37.0.6",
+    "expo": "^37.0.8",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-native": "^0.62.2",
@@ -40,7 +40,7 @@
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-preset-expo": "^8.1.0",
     "expo-cli": "^3.17.21",
-    "prettier": "^2.0.4",
+    "prettier": "^2.0.5",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "typescript": "^3.8.3"

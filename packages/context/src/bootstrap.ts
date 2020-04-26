@@ -12,7 +12,7 @@ import merge from './merge';
 import { CalculatePaths } from './paths';
 import { getPlatform, getPlatforms } from './platform';
 import { getPlugins } from './plugin';
-import { state, syncContext } from './node';
+import { state, syncContext, getPkg } from './node';
 
 const rootPath = pkgDir.sync(process.cwd()) || process.cwd();
 
@@ -69,6 +69,7 @@ export default function bootstrap(
     } else {
       context = childBootstrap(context);
     }
+    context.pkg = getPkg(context.paths.root, platformName);
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     let config = merge<Partial<Config>>(initialConfig, options?.config || {});
     const platformOrigionalName =

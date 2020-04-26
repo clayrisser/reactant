@@ -1,6 +1,6 @@
 {
   "name": "@reactant/plugin",
-  "version": "0.0.383",
+  "version": "0.0.389",
   "description": "reactant plugin",
   "keywords": [
     "@reactant/plugin",
@@ -72,7 +72,7 @@
     "eslint-config-reactant": "workspace:*",
     "jest": "^25.3.0",
     "jest-sonar-reporter": "^2.0.0",
-    "prettier": "^2.0.4",
+    "prettier": "^2.0.5",
     "typescript": "^3.8.3"
   },
   "engines": {

@@ -1,6 +1,6 @@
 {
   "name": "@reactant/redux",
-  "version": "0.0.383",
+  "version": "0.0.389",
   "description": "reactant plugin for redux",
   "keywords": [
     "@reactant/redux",
@@ -88,7 +88,7 @@
     "eslint-config-reactant": "workspace:*",
     "jest": "^25.3.0",
     "jest-sonar-reporter": "^2.0.0",
-    "prettier": "^2.0.4",
+    "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-native": "^0.62.2",

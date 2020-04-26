@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-reactant",
-  "version": "0.1.383",
+  "version": "0.0.389",
   "description": "reactant eslint",
   "keywords": [
     "reactant",
@@ -43,20 +43,20 @@
     "babel-eslint": "^10.0.3",
     "core-js": "^3.5.0",
     "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-airbnb-typescript": "^6.3.1",
+    "eslint-config-airbnb-typescript": "^7.2.1",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.17.0",
-    "eslint-plugin-react-hooks": "^2.3.0",
-    "fs-extra": "^8.1.0"
+    "eslint-plugin-react-hooks": "^3.0.0",
+    "fs-extra": "^9.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",
     "@babel/preset-env": "^7.7.6",
     "eslint": "^6.7.2",
-    "prettier": "^1.19.1"
+    "prettier": "^2.0.5"
   },
   "engines": {
     "node": ">=6.0.0"

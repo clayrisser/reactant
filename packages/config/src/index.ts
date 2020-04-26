@@ -15,18 +15,6 @@ export default function getConfig(): Config {
     if (config) return config;
     // eslint-disable-next-line no-empty
   } catch (err) {}
-  // try {
-  //   // eslint-disable-next-line global-require
-  //   const config: Config = require('@reactant/_config');
-  //   if (config) return config;
-  //   // eslint-disable-next-line no-empty
-  // } catch (err) {}
-  // try {
-  //   // eslint-disable-next-line global-require
-  //   const config: Config = require('../../../.tmp/reactant/config.json');
-  //   if (config) return config;
-  //   // eslint-disable-next-line no-empty
-  // } catch (err) {}
   const g = window || global || {};
   if (g.__REACTANT__?.config) return g.__REACTANT__.config;
   return (null as unknown) as Config;

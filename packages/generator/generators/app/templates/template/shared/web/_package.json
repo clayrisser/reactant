@@ -3,6 +3,7 @@
   "version": "<%- version %>",
   "private": true,
   "dependencies": {
+    "@reactant/web": "^<%- reactantVersion %>",
     "react-dom": "^16.13.1"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import { Context, LoadedPlugins } from '@reactant/types';
+import { Context, LoadedPlugins, Pkg } from '@reactant/types';
 
 const context: Context = {
   action: '',
@@ -7,6 +7,7 @@ const context: Context = {
   includePaths: [],
   logLevel: 'info',
   masterPid: 0,
+  pkg: (null as unknown) as Pkg,
   platform: null,
   platformName: '',
   platformNames: [],

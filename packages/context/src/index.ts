@@ -57,18 +57,6 @@ export default function getContext(): Context {
     if (context) return context;
     // eslint-disable-next-line no-empty
   } catch (err) {}
-  // try {
-  //   // eslint-disable-next-line global-require
-  //   const context: Context = require('@reactant/_context');
-  //   if (context) return context;
-  //   // eslint-disable-next-line no-empty
-  // } catch (err) {}
-  // try {
-  //   // eslint-disable-next-line global-require
-  //   const context: Context = require('../../../.tmp/reactant/context.json');
-  //   if (context) return context;
-  //   // eslint-disable-next-line no-empty
-  // } catch (err) {}
   if (window.__REACTANT__?.context) return window.__REACTANT__.context;
   return (null as unknown) as Context;
 }

@@ -1,6 +1,6 @@
 {
   "name": "@reactant/expo",
-  "version": "0.0.383",
+  "version": "0.0.389",
   "description": "reactant platform for expo",
   "keywords": [
     "@reactant/expo",
@@ -47,9 +47,11 @@
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-preset-expo": "^8.1.0",
     "core-js": "^3.6.5",
-    "expo": "^37.0.6",
+    "expo": "^37.0.8",
     "fs-extra": "^9.0.0",
-    "gnumake": "^0.1.0"
+    "gnumake": "^0.1.0",
+    "metro": "^0.59.0",
+    "mod-inline": "^0.0.3"
   },
   "peerDependencies": {
     "@types/react": "^16.9.17",
@@ -80,7 +82,6 @@
     "eslint-config-reactant": "workspace:*",
     "jest": "^25.3.0",
     "jest-sonar-reporter": "^2.0.0",
-    "prettier": "^2.0.4",
     "react": "^16.13.1",
     "react-native": "^0.62.2",
     "typescript": "^3.8.3"
