@@ -6,11 +6,8 @@ const GET_FILE_HASH = / {4}if \(!sha1\) {\n {6}return getFileHash\(resolvedPath\
 const GET_SHA1_FUNC = / {2}getSha1\(filename\) {((\n {4}.*|\n)+)+ {2}}/;
 const IF_SHA1 = / {4}if \(!sha1\) {/;
 
-(async () => {
-  const dependencyGraphPath = path.resolve(
-    __dirname,
-    '../node_modules/metro/src/node-haste/DependencyGraph.js'
-  );
+async function patch(dependencyGraphPath: string) {
+  if (!(await fs.pathExists(dependencyGraphPath))) return;
   const content = (await fs.readFile(dependencyGraphPath)).toString();
   const patched = !!modInline.isolate(
     modInline.isolate(content, GET_SHA1_FUNC),
@@ -30,4 +27,14 @@ const IF_SHA1 = / {4}if \(!sha1\) {/;
       }`
   );
   await fs.writeFile(dependencyGraphPath, patchedContent);
-})();
+}
+
+patch(
+  path.resolve(__dirname, '../../../metro/src/node-haste/DependencyGraph.js')
+);
+patch(
+  path.resolve(
+    __dirname,
+    '../node_modules/metro/src/node-haste/DependencyGraph.js'
+  )
+);

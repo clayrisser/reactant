@@ -1,6 +1,6 @@
 {
   "name": "@reactant/expo",
-  "version": "0.0.389",
+  "version": "0.0.392",
   "description": "reactant platform for expo",
   "keywords": [
     "@reactant/expo",
@@ -33,6 +33,7 @@
     "clean": "make -s clean",
     "format": "make -s format",
     "inc": "npm version patch --git=false 2>/dev/null || true",
+    "install": "node lib/install || true",
     "lint": "make -s lint",
     "make": "make --version",
     "prepare": "make -s prepare",
