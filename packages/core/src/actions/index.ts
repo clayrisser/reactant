@@ -1,7 +1,6 @@
 import { Context, Logger, PlatformAction, PluginAction } from '@reactant/types';
-import { PlatformApi } from '@reactant/platform';
-import { PluginApi } from '@reactant/plugin';
-import { mapSeries } from '@reactant/helpers';
+import { Api, mapSeries } from '@reactant/helpers';
+
 import { setContext } from '@reactant/context';
 import build from './build';
 import clean from './clean';
@@ -21,9 +20,9 @@ export default async function runActions(
 ) {
   await preProcess(context, logger);
   if (pluginActions.length) {
-    const pluginApi = new PluginApi(context, logger);
+    const api = new Api(context, logger);
     await mapSeries(pluginActions, async (pluginAction: PluginAction) => {
-      const newContext = await pluginAction(context, logger, pluginApi);
+      const newContext = await pluginAction(context, logger, api);
       if (newContext === false) postProcess(context, logger);
       if (
         typeof newContext === 'object' &&
@@ -34,9 +33,9 @@ export default async function runActions(
     });
   }
   if (platformActions?.length) {
-    const platformApi = new PlatformApi(context, logger);
+    const api = new Api(context, logger);
     await mapSeries(platformActions, async (platformAction: PlatformAction) => {
-      const newContext = await platformAction(context, logger, platformApi);
+      const newContext = await platformAction(context, logger, api);
       if (newContext === false) postProcess(context, logger);
       if (
         typeof newContext === 'object' &&

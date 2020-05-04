@@ -1,6 +1,6 @@
 {
   "name": "@reactant/storybook",
-  "version": "0.0.392",
+  "version": "0.0.393",
   "description": "reactant plugin for storybook",
   "keywords": [
     "@reactant/storybook",
@@ -45,7 +45,7 @@
     "@reactant/plugin": "workspace:*",
     "@storybook/react": "^5.3.18",
     "fs-extra": "^9.0.0",
-    "gnumake": "^0.1.0"
+    "gnumake": "^0.3.3"
   },
   "peerDependencies": {
     "@types/react": "^16.9.17",
@@ -54,6 +54,9 @@
     "react-dom": "^16.12.0",
     "react-native": "^0.61.5",
     "typescript": "^3.7.4"
+  },
+  "optionalDependencies": {
+    "@storybook/react-native": "^5.3.18"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -74,7 +77,7 @@
     "cspell": "^4.0.55",
     "eslint": "^6.8.0",
     "eslint-config-reactant": "workspace:*",
-    "jest": "^25.3.0",
+    "jest": "^25.5.4",
     "jest-sonar-reporter": "^2.0.0",
     "prettier": "^2.0.5",
     "react": "^16.13.1",

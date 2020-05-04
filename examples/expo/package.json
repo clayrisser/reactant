@@ -1,48 +1,102 @@
 {
-  "name": "example-expo",
+  "name": "expo",
+  "version": "0.0.1",
+  "description": "reactant expo example",
+  "keywords": [
+    "expo"
+  ],
+  "homepage": "https://github.com/codejamninja/expo",
+  "bugs": {
+    "url": "https://github.com/codejamninja/expo/issues",
+    "email": "jam@codejam.ninja"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Jam Risser",
+    "email": "jam@codejam.ninja",
+    "url": "https://codejam.ninja"
+  },
+  "files": [
+    "lib"
+  ],
   "main": "node_modules/expo/AppEntry.js",
-  "version": "0.0.320",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codejamninja/expo"
+  },
   "scripts": {
-    "build": "reactant build web",
-    "clean": "reactant clean expo",
-    "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
-    "start": "reactant start expo",
-    "storybook": "reactant storybook expo",
-    "test": "reactant test expo"
+    "build": "make -s build",
+    "clean": "make -s clean",
+    "format": "make -s format",
+    "lint": "make -s lint",
+    "make": "make --version",
+    "prepare": "make -s prepare",
+    "purge": "make -s purge",
+    "report": "make -s report",
+    "spellcheck": "make -s spellcheck",
+    "start": "make -s start",
+    "test": "make -s test"
   },
   "dependencies": {
-    "@react-native-community/async-storage": "^1.9.0",
-    "@reactant/expo": "workspace:*",
-    "@reactant/redux": "workspace:*",
-    "core-js": "^3.6.5",
-    "expo": "^37.0.8",
+    "@reactant/expo": "^0.0.392",
+    "core-js": "^3.6.4",
+    "expo": "^37.0.6",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-native": "^0.62.2",
-    "react-native-web": "^0.12.2",
-    "react-redux": "^7.2.0",
-    "react-router-native": "^5.1.2",
-    "redux": "^4.0.5",
-    "redux-observable": "^1.2.0"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
+    "react-native-web": "^0.12.2"
   },
   "devDependencies": {
-    "@reactant/cli": "workspace:*",
-    "@reactant/config": "workspace:*",
-    "@reactant/platform": "workspace:*",
-    "@types/jest": "^25.2.1",
-    "@types/node": "^13.11.1",
-    "@types/react": "^16.9.34",
-    "@types/react-native": "^0.62.2",
-    "@types/react-redux": "^7.1.7",
-    "@types/react-router-native": "^5.1.0",
-    "babel-plugin-macros": "^2.8.0",
-    "babel-plugin-module-resolver": "^4.0.0",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-typescript": "^7.8.3",
+    "@reactant/cli": "^0.0.392",
+    "@reactant/config": "^0.0.392",
+    "@reactant/context": "^0.0.392",
+    "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.2",
+    "@types/prop-types": "^15.7.3",
+    "@types/react": "^16.9.25",
+    "@types/react-native": "0.61.4",
+    "@typescript-eslint/eslint-plugin": "^2.23.0",
+    "@typescript-eslint/parser": "^2.23.0",
     "babel-preset-expo": "^8.1.0",
-    "expo-cli": "^3.17.21",
+    "cspell": "^4.0.55",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^7.0.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-config-reactant": "^0.0.392",
+    "eslint-plugin-import": "^2.20.1",
+    "gnumake": "^0.3.3",
+    "jest": "25.5.4",
     "prettier": "^2.0.5",
-    "redux-persist": "^6.0.0",
-    "redux-thunk": "^2.3.0",
     "typescript": "^3.8.3"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "eslintIgnore": [
+    "lib"
+  ],
+  "jest": {
+    "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
+    "verbose": true
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

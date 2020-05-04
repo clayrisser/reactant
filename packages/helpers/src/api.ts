@@ -1,15 +1,10 @@
-import Helpers from '@reactant/helpers';
 import fs from 'fs-extra';
 import path from 'path';
+import { Context, CreateConfigOptions, Logger } from '@reactant/types';
 import { ExecaReturnValue, Options as ExecaOptions } from 'execa';
-import {
-  Context,
-  CreateConfigOptions,
-  Logger,
-  TPluginApi
-} from '@reactant/types';
+import Helpers from '.';
 
-export default class PluginApi implements TPluginApi {
+export default class Api {
   public helpers: Helpers;
 
   constructor(public context: Context, public logger: Logger) {

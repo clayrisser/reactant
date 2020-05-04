@@ -1,0 +1,4 @@
+preferredPackageManager: yarn
+
+platforms:
+  expo

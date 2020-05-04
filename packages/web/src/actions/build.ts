@@ -1,13 +1,13 @@
 import execa from 'execa';
 import fs from 'fs-extra';
 import path from 'path';
-import { Context, Logger, PlatformApi, getOptions } from '@reactant/platform';
+import { Context, Logger, Api, getOptions } from '@reactant/platform';
 import createCracoConfig from '../createCracoConfig';
 
 export default async function build(
   context: Context,
   logger: Logger,
-  platformApi: PlatformApi
+  api: Api
 ): Promise<any> {
   logger.spinner.start('preparing build');
   const options = getOptions();
@@ -37,7 +37,7 @@ export default async function build(
         ? pkg.author
         : `${pkg.author.name} <${pkg.author.email}>`) || '';
     logger.spinner.succeed('prepared build');
-    await platformApi.spawn(
+    await api.spawn(
       'docker-compose',
       ['-f', path.resolve(__dirname, '../docker/docker-build.yaml'), 'build'],
       {
@@ -99,7 +99,7 @@ export default async function build(
       process.on('SIGINT', cleanup);
       process.on('SIGTERM', cleanup);
     }
-    await platformApi.spawn(
+    await api.spawn(
       ['@craco/craco', 'craco'],
       ['build', '--config', cracoConfigPath]
     );

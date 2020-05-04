@@ -1,45 +1,11 @@
-import {
-  Context,
-  CreateConfigOptions,
-  Logger,
-  PlatformOptions,
-  TPlatformApi
-} from '@reactant/types';
+import { Context, PlatformOptions } from '@reactant/types';
 import createBabelConfig from './createBabelConfig';
 import createWebpackConfig from './createWebpackConfig';
-
-class PlatformApi implements TPlatformApi {
-  constructor(public context: Context, public logger: Logger) {
-    throw new Error('only node can use platform api');
-  }
-
-  // eslint-disable-next-line no-empty-function,@typescript-eslint/no-empty-function
-  async prepareLocal(): Promise<void> {}
-
-  // eslint-disable-next-line no-empty-function,@typescript-eslint/no-empty-function
-  async createWebpackConfig(_options?: CreateConfigOptions): Promise<void> {}
-
-  // eslint-disable-next-line no-empty-function,@typescript-eslint/no-empty-function
-  async createBabelConfig(_options?: CreateConfigOptions): Promise<void> {}
-
-  async spawn(
-    _bin: string | string[],
-    _args?: string[],
-    _options?: any
-    // eslint-disable-next-line no-empty-function,@typescript-eslint/no-empty-function
-  ): Promise<any> {}
-}
 
 // eslint-disable-next-line no-new-func
 const isNode = new Function(
   'try{return this===global}catch(e){return false}'
 )();
-
-if (isNode) {
-  // @ts-ignore
-  // eslint-disable-next-line no-class-assign,no-eval
-  PlatformApi = eval("require('./platformApi')").default;
-}
 
 export function getOptions(): PlatformOptions {
   if (isNode) {
@@ -66,5 +32,5 @@ export function getOptions(): PlatformOptions {
   return (null as unknown) as PlatformOptions;
 }
 
-export { PlatformApi, createBabelConfig, createWebpackConfig };
+export { createBabelConfig, createWebpackConfig };
 export * from '@reactant/types';

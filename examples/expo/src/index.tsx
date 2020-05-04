@@ -1,14 +1,12 @@
-import React, { FC, ReactNode } from 'react';
-import { Text, View } from 'react-native';
+import React, { FC } from 'react';
+import config from '@reactant/config';
+import context from '@reactant/context';
 
-export interface AppProps {
-  children?: ReactNode;
-}
+console.log('context', context());
+console.log('config', config());
 
-const App: FC<AppProps> = (_props: AppProps) => (
-  <View>
-    <Text>Open up App.tsx to start working on your app!</Text>
-  </View>
-);
+export interface AppProps {}
+
+const App: FC<AppProps> = (_props: AppProps) => <>Hello, world</>;
 
 export default App;

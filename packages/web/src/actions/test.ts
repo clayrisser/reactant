@@ -1,12 +1,12 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { Context, Logger, PlatformApi } from '@reactant/platform';
+import { Context, Logger, Api } from '@reactant/platform';
 import createCracoConfig from '../createCracoConfig';
 
 export default async function test(
   context: Context,
   logger: Logger,
-  platformApi: PlatformApi
+  api: Api
 ): Promise<any> {
   logger.spinner.start('preparing test');
   const cracoConfigPath = await createCracoConfig(context);
@@ -17,7 +17,7 @@ export default async function test(
   delete pkg.cracoConfig;
   logger.spinner.succeed('prepared test');
   logger.spinner.succeed('tested');
-  await platformApi.spawn(['@craco/craco', 'craco'], ['test']);
+  await api.spawn(['@craco/craco', 'craco'], ['test']);
   await fs.writeJson(pkgPath, pkg, { spaces: 2 });
   return null;
 }

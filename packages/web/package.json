@@ -1,6 +1,6 @@
 {
   "name": "@reactant/web",
-  "version": "0.0.392",
+  "version": "0.0.393",
   "description": "reactant platform for web",
   "keywords": [
     "@reactant/web",
@@ -54,7 +54,7 @@
     "core-js": "^3.6.5",
     "execa": "^4.0.0",
     "fs-extra": "^9.0.0",
-    "gnumake": "^0.1.0",
+    "gnumake": "^0.3.3",
     "react-docgen-typescript-loader": "^3.7.2",
     "webpack-bundle-analyzer": "^3.6.1"
   },
@@ -88,7 +88,7 @@
     "cspell": "^4.0.55",
     "eslint": "^6.8.0",
     "eslint-config-reactant": "workspace:*",
-    "jest": "^25.3.0",
+    "jest": "^25.5.4",
     "jest-sonar-reporter": "^2.0.0",
     "prettier": "^2.0.5",
     "react": "^16.13.1",

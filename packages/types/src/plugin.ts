@@ -1,20 +1,9 @@
-import { ExecaReturnValue, Options as ExecaOptions } from 'execa';
-import { ActionResult, Context, Config, Logger } from '.';
-
-export interface TPluginApi {
-  context: Context;
-  logger: Logger;
-  spawn(
-    bin: string | string[],
-    args?: string[],
-    options?: ExecaOptions
-  ): Promise<ExecaReturnValue<string>>;
-}
+import { ActionResult, Api, Context, Config, Logger } from '.';
 
 export type PluginAction = (
   context: Context,
   logger: Logger,
-  platformApi: TPluginApi
+  platformApi: Api
 ) => Promise<ActionResult>;
 
 export interface PluginActions {

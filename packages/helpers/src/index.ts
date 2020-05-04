@@ -1,5 +1,6 @@
 import { Context } from '@reactant/types';
 import { Options as ExecaOptions, ExecaReturnValue } from 'execa';
+import Api from './api';
 import mapSeries from './mapSeries';
 import spawn from './spawn';
 import where from './where';
@@ -31,4 +32,4 @@ export default class Helpers {
   }
 }
 
-export { mapSeries, spawn, where };
+export { mapSeries, spawn, where, Api };

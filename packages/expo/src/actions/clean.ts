@@ -1,11 +1,11 @@
-import { Context, Logger, PlatformApi } from '@reactant/platform';
+import { Context, Logger, Api } from '@reactant/platform';
 
 export default async function clean(
   _context: Context,
   logger: Logger,
-  platformApi: PlatformApi
+  api: Api
 ): Promise<any> {
-  await platformApi.spawn('git', [
+  await api.spawn('git', [
     'clean',
     '-fXd',
     '-e',

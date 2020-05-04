@@ -1,6 +1,6 @@
 {
   "name": "@reactant/config",
-  "version": "0.0.392",
+  "version": "0.0.393",
   "description": "reactant config",
   "keywords": [
     "@reactant/config",
@@ -49,7 +49,7 @@
     "@reactant/types": "workspace:*",
     "core-js": "^3.6.5",
     "cosmiconfig": "^6.0.0",
-    "gnumake": "^0.1.0",
+    "gnumake": "^0.3.3",
     "pkg-dir": "^4.2.0"
   },
   "devDependencies": {
@@ -69,7 +69,7 @@
     "cspell": "^4.0.55",
     "eslint": "^6.8.0",
     "eslint-config-reactant": "workspace:*",
-    "jest": "^25.3.0",
+    "jest": "^25.5.4",
     "jest-sonar-reporter": "^2.0.0",
     "prettier": "^2.0.5",
     "typescript": "^3.8.3"

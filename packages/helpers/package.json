@@ -1,6 +1,6 @@
 {
   "name": "@reactant/helpers",
-  "version": "0.0.392",
+  "version": "0.0.393",
   "description": "reactant helpers",
   "keywords": [
     "reactant",
@@ -46,7 +46,7 @@
     "execa": "^4.0.0",
     "flatted": "^2.0.2",
     "fs-extra": "^9.0.0",
-    "gnumake": "^0.1.0",
+    "gnumake": "^0.3.3",
     "node-pstree": "^0.0.9",
     "ora": "^4.0.3",
     "pkg-dir": "^4.2.0"
@@ -61,12 +61,13 @@
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-typescript": "^7.9.0",
     "@types/core-js": "^2.5.3",
+    "@types/fs-extra": "^8.1.0",
     "@types/jest": "^25.2.1",
     "@types/node": "^13.11.1",
     "cspell": "^4.0.55",
     "eslint": "^6.8.0",
     "eslint-config-reactant": "workspace:*",
-    "jest": "^25.3.0",
+    "jest": "^25.5.4",
     "jest-sonar-reporter": "^2.0.0",
     "prettier": "^2.0.5",
     "typescript": "^3.8.3"

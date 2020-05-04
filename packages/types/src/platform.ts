@@ -1,27 +1,13 @@
-import { ExecaReturnValue, Options as ExecaOptions } from 'execa';
-import { ActionResult, Context, Config, Logger } from '.';
+import { ActionResult, Api, Context, Config, Logger } from '.';
 
 export type PlatformAction = (
   context: Context,
   logger: Logger,
-  platformApi: TPlatformApi
+  api: Api
 ) => Promise<ActionResult>;
 
 export interface CreateConfigOptions {
   rootPath?: boolean;
-}
-
-export interface TPlatformApi {
-  context: Context;
-  logger: Logger;
-  prepareLocal(): Promise<void>;
-  createWebpackConfig(options?: CreateConfigOptions): Promise<void>;
-  createBabelConfig(options?: CreateConfigOptions): Promise<void>;
-  spawn(
-    bin: string | string[],
-    args?: string[],
-    options?: ExecaOptions
-  ): Promise<ExecaReturnValue<string>>;
 }
 
 export type PlatformOption = any;
