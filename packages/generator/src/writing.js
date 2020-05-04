@@ -102,8 +102,8 @@ export default async function writing(yo) {
     yo.destinationPath('tsconfig.json')
   );
   yo.fs.copyTpl(
-    yo.templatePath('template/shared/tests'),
-    yo.destinationPath('tests'),
+    yo.templatePath('template/shared/tests/index.ts'),
+    yo.destinationPath('tests/index.ts'),
     yo.context
   );
   yo.fs.copy(

@@ -5,6 +5,7 @@ import {
   Context,
   LoadedPlugin,
   LoadedPlugins,
+  Pkg,
   Plugin,
   PluginOptions
 } from '@reactant/types';
@@ -13,14 +14,11 @@ import { requireDefault } from './node';
 
 let _plugins: LoadedPlugins;
 
-export function getPlugins(rootPath: string): LoadedPlugins {
+export function getPlugins(rootPath: string, pkg: Pkg): LoadedPlugins {
   if (_plugins && Object.keys(_plugins).length) return _plugins;
-  const pkgPath = path.resolve(rootPath, 'package.json');
   const dependencyNames: string[] = Object.keys({
-    // eslint-disable-next-line global-require,import/no-dynamic-require
-    ...require(pkgPath).dependencies,
-    // eslint-disable-next-line global-require,import/no-dynamic-require
-    ...require(pkgPath).devDependencies
+    ...pkg.dependencies,
+    ...pkg.devDependencies
   });
   _plugins = dependencyNames
     .filter((dependencyName: string) => {
@@ -73,9 +71,10 @@ export function getPlugins(rootPath: string): LoadedPlugins {
 export function getPlugin(
   pluginName: string,
   rootPath: string,
-  pluginOptions: PluginOptions = {}
+  pluginOptions: PluginOptions = {},
+  pkg: Pkg
 ): LoadedPlugin | null {
-  const plugins = getPlugins(rootPath);
+  const plugins = getPlugins(rootPath, pkg);
   const plugin = plugins[pluginName];
   if (!plugin) return null;
   plugin.options = merge<PluginOptions>(plugin.options, pluginOptions || {});

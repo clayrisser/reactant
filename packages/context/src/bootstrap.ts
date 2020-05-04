@@ -81,9 +81,12 @@ export default function bootstrap(
     const platform = getPlatform(
       platformOrigionalName,
       context.paths.root,
-      platformOptions
+      platformOptions,
+      context.pkg
     );
-    context.platformNames = Object.keys(getPlatforms(context.paths.root));
+    context.platformNames = Object.keys(
+      getPlatforms(context.paths.root, {}, context.pkg)
+    );
     if (context.platformName && !platform && action !== 'install') {
       throw new Error(`platform '${context.platformName}' not installed`);
     }
@@ -101,7 +104,7 @@ export default function bootstrap(
     } else {
       config = merge<Partial<Config>>(config, context.platform?.config || {});
     }
-    context.plugins = getPlugins(context.paths.root);
+    context.plugins = getPlugins(context.paths.root, context.pkg);
     Object.entries(context.plugins).forEach(
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       ([pluginName, plugin]: [string, LoadedPlugin]) => {

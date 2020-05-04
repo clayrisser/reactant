@@ -1,5 +1,3 @@
-import fs from 'fs-extra';
-import path from 'path';
 import { ActionResult, Options, PluginAction } from '@reactant/types';
 import { Api } from '@reactant/helpers';
 import { bootstrap } from '@reactant/context/node';
@@ -26,16 +24,6 @@ export default async function start(
   if (!context.platform?.actions?.start) {
     throw new Error(
       `platform '${context.platformName}' missing action 'start'`
-    );
-  }
-  const platformReactantBackupPath = path.resolve(
-    context.platform.path,
-    'lib/Reactant.backup.js'
-  );
-  if (await fs.pathExists(platformReactantBackupPath)) {
-    await fs.rename(
-      platformReactantBackupPath,
-      path.resolve(context.platform.path, 'lib/Reactant.js')
     );
   }
   await runActions(context, logger, pluginActions);

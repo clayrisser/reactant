@@ -8,7 +8,7 @@ const plugin: Plugin = {
   config: createConfig,
   defaultOptions,
   name: 'storybook',
-  supportedPlatforms: ['web']
+  supportedPlatforms: ['expo', 'web']
 };
 
 export default plugin;

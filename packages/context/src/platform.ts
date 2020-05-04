@@ -5,22 +5,23 @@ import {
   Context,
   LoadedPlatform,
   LoadedPlatforms,
+  Pkg,
   Platform,
   PlatformActions,
   PlatformOptions,
   PlatformsOptions
 } from '@reactant/types';
 import merge from './merge';
-import { requireDefault, getPkg } from './node';
+import { requireDefault } from './node';
 
 let _platforms: LoadedPlatforms;
 
 export function getPlatforms(
   rootPath: string,
-  platformsOptions: PlatformsOptions = {}
+  platformsOptions: PlatformsOptions = {},
+  pkg: Pkg
 ): LoadedPlatforms {
   if (_platforms && Object.keys(_platforms).length) return _platforms;
-  const pkg = getPkg(rootPath);
   const dependencyNames: string[] = Object.keys({
     ...pkg.dependencies,
     ...pkg.devDependencies
@@ -80,10 +81,15 @@ export function getPlatforms(
 export function getPlatform(
   platformName: string | undefined,
   rootPath: string,
-  platformOptions: PlatformOptions = {}
+  platformOptions: PlatformOptions = {},
+  pkg: Pkg
 ): LoadedPlatform | null {
   if (!platformName) return null;
-  const platforms = getPlatforms(rootPath, { [platformName]: platformOptions });
+  const platforms = getPlatforms(
+    rootPath,
+    { [platformName]: platformOptions },
+    pkg
+  );
   const platform = platforms[platformOptions.name || platformName];
   if (!platform) return null;
   platform.options = merge<PlatformOptions>(

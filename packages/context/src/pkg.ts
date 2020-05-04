@@ -23,7 +23,6 @@ export function getPkg(rootPath: string, platformName?: string): Pkg {
         }
         return platformPkgPaths;
       }, []);
-
     platformPkgPaths.map((platformPkgPath: string) => {
       if (fs.pathExistsSync(platformPkgPath)) {
         const platformPkg: Pkg = fs.readJsonSync(platformPkgPath);

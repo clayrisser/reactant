@@ -46,7 +46,7 @@ export default async function configuring(yo) {
       }
     );
     await fs.rename(path.resolve(tmpPath, yo.context.name), templatePath);
-    timeouts.map(clearTimeout);
   }
+  timeouts.map(clearTimeout);
   spinner.succeed('configured');
 }

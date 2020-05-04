@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
+import pkgDir from 'pkg-dir';
 import util from 'util';
 import { Context, Logger, LoadedPlugin, PluginOptions } from '@reactant/types';
 import { parse, stringify } from 'flatted';
@@ -61,7 +62,6 @@ export default async function preProcess(
       )
     )
   );
-
   await fs.writeJson(
     path.resolve(context.paths.reactant, 'tsconfig.reactant.json'),
     {
@@ -88,6 +88,16 @@ export default async function preProcess(
     await fs.ensureSymlink(
       context.paths.reactant,
       path.resolve(__dirname, '../../../../.tmp/reactant')
+    );
+  }
+  const platformReactantBackupPath = path.resolve(
+    (await pkgDir(context.platform?.path))!,
+    'lib/Reactant.backup.js'
+  );
+  if (await fs.pathExists(platformReactantBackupPath)) {
+    await fs.rename(
+      platformReactantBackupPath,
+      path.resolve((await pkgDir(context.platform?.path))!, 'lib/Reactant.js')
     );
   }
   return context;

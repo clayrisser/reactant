@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
+import pkgDir from 'pkg-dir';
 import { ActionResult, Context, Logger, Api } from '@reactant/plugin';
 
 export default async function (
@@ -10,11 +11,11 @@ export default async function (
   logger.spinner.start('preparing storybook');
   if (context.platformName === 'expo') {
     const platformReactantPath = path.resolve(
-      context.platform?.path!,
+      (await pkgDir(context.platform?.path))!,
       'lib/Reactant.js'
     );
     const platformReactantPathBackup = path.resolve(
-      context.platform?.path!,
+      (await pkgDir(context.platform?.path))!,
       'lib/Reactant.backup.js'
     );
     if (!(await fs.pathExists(platformReactantPathBackup))) {
@@ -51,6 +52,5 @@ export default async function (
     ['@storybook/react', 'start-storybook'],
     [...(context.debug ? ['--debug-webpack'] : []), '-c', storybookPath]
   );
-
   return null;
 }
