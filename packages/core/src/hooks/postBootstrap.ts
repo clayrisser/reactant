@@ -33,7 +33,10 @@ export function getIncludePaths(context: Context): string[] {
       context.paths.root,
       'node_modules/@reactant/plugin/es/index.js'
     ),
-    path.resolve(context.paths.root, 'node_modules/@reactant/platform/ts'),
+    path.resolve(
+      context.paths.root,
+      'node_modules/@reactant/platform/lib/Reactant.js'
+    ),
     path.resolve(context.paths.root, context.paths.tmp)
   ];
 }

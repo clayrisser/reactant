@@ -12,7 +12,7 @@ export default function createConfig(
     ...getExpoPaths(context),
     path.resolve(paths.root, 'node_modules/@expo'),
     path.resolve(paths.root, 'node_modules/@unimodules'),
-    path.resolve(paths.root, 'node_modules/@reactant/expo/ts'),
+    path.resolve(paths.root, 'node_modules/@reactant/expo/lib/Reactant.js'),
     path.resolve(paths.root, 'node_modules/expo'),
     path.resolve(paths.root, 'node_modules/react-native')
   );

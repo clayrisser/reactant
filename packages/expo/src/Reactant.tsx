@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import PlatformReactant from '@reactant/platform/ts/Reactant';
+import PlatformReactant from '@reactant/platform/Reactant';
 
 export interface ReactantProps {
   [key: string]: any;
