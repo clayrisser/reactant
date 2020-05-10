@@ -23,15 +23,27 @@ export default async function spawn(
   };
   let command = bin;
   if (pkg) {
-    const pkgPath = await pkgDir(
-      // eslint-disable-next-line import/no-dynamic-require,global-require
-      require.resolve(pkg, {
-        paths: [
-          path.resolve((await pkgDir(__dirname)) || __dirname, 'node_modules'),
-          path.resolve(rootPath, 'node_modules')
-        ]
-      })
-    );
+    let pkgPath: string | undefined;
+    try {
+      pkgPath = await pkgDir(
+        // eslint-disable-next-line import/no-dynamic-require,global-require
+        require.resolve(pkg, {
+          paths: [
+            path.resolve(
+              (await pkgDir(__dirname)) || __dirname,
+              'node_modules'
+            ),
+            path.resolve(rootPath, 'node_modules')
+          ]
+        })
+      );
+    } catch (err) {
+      pkgPath = path.resolve(
+        (await pkgDir(process.cwd())) || process.cwd(),
+        'node_modules',
+        pkg
+      );
+    }
     if (!pkgPath) throw new Error(`package '${pkg}' not found`);
     command = path.resolve(
       pkgPath,

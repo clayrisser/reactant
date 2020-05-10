@@ -3,12 +3,17 @@ import path from 'path';
 import { Context, CreateConfigOptions, Logger } from '@reactant/types';
 import { ExecaReturnValue, Options as ExecaOptions } from 'execa';
 import Helpers from '.';
+import where from './where';
 
 export default class Api {
   public helpers: Helpers;
 
   constructor(public context: Context, public logger: Logger) {
     this.helpers = new Helpers(context);
+  }
+
+  where(program: string): Promise<string | null> {
+    return where(program);
   }
 
   async prepareLocal() {

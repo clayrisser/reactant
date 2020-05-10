@@ -10,6 +10,8 @@ export default async function (
 ): Promise<ActionResult> {
   logger.spinner.start('preparing storybook');
   if (context.platformName === 'expo') {
+    const storybookPath = path.resolve(context.paths.tmp, 'storybook');
+    await fs.copy(path.resolve(__dirname, '../storybookNative'), storybookPath);
     const platformReactantPath = path.resolve(
       (await pkgDir(context.platform?.path))!,
       'lib/Reactant.js'
@@ -33,16 +35,25 @@ export default async function (
     );
     logger.spinner.succeed('prepared storybook');
     logger.spinner.succeed('started');
-    await api.spawn(
-      ['expo', 'expo'],
-      [
-        'start',
-        '--config',
-        path.resolve(context.paths.root, context.platformName, 'app.json'),
-        // '--web',
-        '--clear'
-      ]
-    );
+    if (await api.where('adb')) {
+      await api.spawn('adb', ['reverse', 'tcp:7007', 'tcp:7007']);
+    }
+    await Promise.all([
+      api.spawn(
+        ['expo', 'expo'],
+        [
+          'start',
+          '--config',
+          path.resolve(context.paths.root, context.platformName, 'app.json'),
+          // '--web',
+          '--clear'
+        ]
+      ),
+      api.spawn(
+        ['@storybook/react-native-server', 'start-storybook'],
+        [...(context.debug ? ['--debug-webpack'] : []), '-c', storybookPath]
+      )
+    ]);
     return null;
   }
   const storybookPath = path.resolve(context.paths.tmp, 'storybook');

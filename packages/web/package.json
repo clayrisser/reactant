@@ -1,6 +1,6 @@
 {
   "name": "@reactant/web",
-  "version": "0.0.402",
+  "version": "0.0.406",
   "description": "reactant platform for web",
   "keywords": [
     "@reactant/web",
@@ -46,16 +46,19 @@
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
     "@craco/craco": "^5.6.4",
+    "@hot-loader/react-dom": "^16.8.6",
     "@reactant/context": "workspace:*",
     "@reactant/platform": "workspace:*",
     "@types/webpack": "^4.41.10",
     "awesome-typescript-loader": "^5.2.1",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "core-js": "^3.6.5",
+    "craco-plugin-react-hot-reload": "^0.1.0",
     "execa": "^4.0.1",
     "fs-extra": "^9.0.0",
     "gnumake": "^0.3.3",
     "react-docgen-typescript-loader": "^3.7.2",
+    "react-hot-loader": "^4.12.21",
     "webpack-bundle-analyzer": "^3.6.1"
   },
   "peerDependencies": {

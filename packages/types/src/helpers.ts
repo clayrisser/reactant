@@ -12,4 +12,5 @@ export interface Api {
     args?: string[],
     options?: ExecaOptions
   ): Promise<ExecaReturnValue<string>>;
+  where(program: string): Promise<string | null>;
 }

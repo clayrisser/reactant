@@ -1,5 +1,6 @@
 import PlatformReactant from '@reactant/platform/Reactant';
 import React, { FC } from 'react';
+import { hot } from 'react-hot-loader';
 
 export interface ReactantProps {
   [key: string]: any;
@@ -10,4 +11,4 @@ const Reactant: FC<ReactantProps> = (props: ReactantProps) => (
   <PlatformReactant {...props} />
 );
 
-export default Reactant;
+export default hot(module)(Reactant);

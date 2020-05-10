@@ -13,10 +13,6 @@ export default function createConfig(
     context.paths.root,
     'node_modules/react'
   );
-  config.webpack.resolve.alias['react-dom'] = path.resolve(
-    context.paths.root,
-    'node_modules/react-dom'
-  );
   config.webpack.resolve.alias['~'] = path.resolve(context.paths.root, 'src');
   return config;
 }

@@ -1,5 +1,6 @@
 import getContext, { merge } from '@reactant/context';
 import path from 'path';
+import cracoPluginReactHotReload from 'craco-plugin-react-hot-reload';
 import util from 'util';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { CracoConfig, CracoBabel } from '@craco/craco';
@@ -35,11 +36,15 @@ function findJSRules(rules: RuleSetRule[]): RuleSetRule[] {
   }, []);
 }
 
-function overrideCracoConfig({
-  cracoConfig
-}: {
+function overrideCracoConfig(args: {
   cracoConfig: CracoConfig;
+  context: {
+    env: string;
+    paths: string[];
+  };
 }): CracoConfig {
+  const { cracoConfig } = args;
+  const cracoContext = args.context;
   const context = getContext();
   if (!cracoConfig.webpack) cracoConfig.webpack = {};
   cracoConfig.webpack.configure = (
@@ -66,6 +71,13 @@ function overrideCracoConfig({
       }
     );
     if (!webpackConfig.resolve) webpackConfig.resolve = {};
+    if (!webpackConfig.resolve.alias) webpackConfig.resolve.alias = {};
+    if (cracoContext.env === 'development') {
+      webpackConfig.resolve.alias['react-dom'] = path.resolve(
+        context.paths.root,
+        'node_modules/react-dom'
+      );
+    }
     (webpackConfig.resolve.plugins || []).forEach((plugin: ResolvePlugin) => {
       const moduleScopePlugin = (plugin as unknown) as ModuleScopePlugin;
       if (
@@ -75,6 +87,18 @@ function overrideCracoConfig({
         moduleScopePlugin.appSrcs = [webPath, srcPath];
       }
     });
+    webpackConfig = merge<WebpackConfig>(
+      webpackConfig,
+      // eslint-disable-next-line no-undef
+      context.config?.webpack || {}
+    );
+    if (typeof webpackConfig.entry === 'string') {
+      webpackConfig.entry = [webpackConfig.entry];
+    }
+    ((webpackConfig.entry as unknown) as string[]).unshift(
+      'react-hot-loader/patch'
+    );
+
     if (context.debug) {
       // eslint-disable-next-line no-console
       console.info(
@@ -87,11 +111,6 @@ function overrideCracoConfig({
         '\n========= END WEBPACK =========\n\n'
       );
     }
-    webpackConfig = merge<WebpackConfig>(
-      webpackConfig,
-      // eslint-disable-next-line no-undef
-      context.config?.webpack || {}
-    );
     return webpackConfig;
   };
   context.config?.babel.plugins.push([
@@ -114,6 +133,7 @@ function overrideCracoConfig({
 
 module.exports = {
   plugins: [
+    { plugin: cracoPluginReactHotReload },
     {
       plugin: {
         overrideCracoConfig
