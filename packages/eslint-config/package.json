@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-reactant",
-  "version": "0.0.400",
+  "version": "0.0.402",
   "description": "reactant eslint",
   "keywords": [
     "reactant",
@@ -38,8 +38,8 @@
     "test": "npm run lint:fix"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.11.0",
-    "@typescript-eslint/parser": "^2.11.0",
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "@typescript-eslint/parser": "^2.31.0",
     "babel-eslint": "^10.0.3",
     "core-js": "^3.5.0",
     "eslint-config-airbnb": "^18.0.1",
@@ -55,7 +55,7 @@
     "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",
     "@babel/preset-env": "^7.7.6",
-    "eslint": "^6.7.2",
+    "eslint": "^7.0.0",
     "prettier": "^2.0.5"
   },
   "engines": {

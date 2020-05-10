@@ -1,6 +1,6 @@
 {
   "name": "generator-reactant",
-  "version": "0.0.400",
+  "version": "0.0.402",
   "description": "yeoman generator for reactant",
   "keywords": [
     "yeoman-generator",
@@ -31,7 +31,7 @@
     "@babel/cli": "^7.8.4",
     "core-js": "^3.6.5",
     "create-react-app": "^3.4.1",
-    "execa": "^4.0.0",
+    "execa": "^4.0.1",
     "fs-extra": "^9.0.0",
     "generator-github-project": "^0.2.11",
     "idempotent-babel-polyfill": "^7.4.4",
@@ -51,7 +51,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.0.0",
     "eslint-config-jam": "^0.2.20",
     "jest-sonar-reporter": "^2.0.0",
     "yo": "^3.1.1"

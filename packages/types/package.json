@@ -1,6 +1,6 @@
 {
   "name": "@reactant/types",
-  "version": "0.0.400",
+  "version": "0.0.402",
   "description": "reactant types",
   "keywords": [
     "reactant",
@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "execa": "^4.0.0",
+    "execa": "^4.0.1",
     "gnumake": "^0.3.3"
   },
   "devDependencies": {
@@ -55,8 +55,8 @@
     "@types/core-js": "^2.5.3",
     "@types/jest": "^25.2.1",
     "@types/webpack": "^4.41.10",
-    "cspell": "^4.0.55",
-    "eslint": "^6.8.0",
+    "cspell": "^4.0.61",
+    "eslint": "^7.0.0",
     "eslint-config-reactant": "workspace:*",
     "jest": "^25.5.4",
     "jest-sonar-reporter": "^2.0.0",
